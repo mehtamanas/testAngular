@@ -1,0 +1,334 @@
+<div class="main-content new-user-container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="title">Add New Contact</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+        <div class="row">
+            <label>Add Contact Picture</label>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                
+                <div class="btn btn-primary"><input type="file" nv-file-select="" uploader="uploader"></div>
+                <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                    <div class="panel-body image-upload-panel">
+                        <div class="row" ng-hide="uploader.queue.length">
+                            <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:50%">
+                                <span class="page-center">Drag And Drop your file here</span>
+                            </div>
+                            <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                        </div>
+                        <div class="row" ng-show="uploader.queue.length">
+                            <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                <div ng-show="uploader.isHTML5"
+                                     ng-thumb="{ file: item._file, height: 200 }"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div>
+        
+        <div class="progress" ng-show="showProgress">
+            <div class="progress-bar" role="progressbar"
+                 ng-style="{ 'width': uploader.progress + '%' }"></div>
+        </div>
+    </div>
+    
+    <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+          data-ng-submit="addNewUser(newForm.$valid)">
+        
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group"
+                     data-ng-class="{
+                            'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
+                            'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
+                        }">
+                    <div class="col-xs-12">
+                        <label>First Name</label>
+                        <label class="label-group">
+                            <input type="text" autofocus name="firstName" class="form-control"
+                                   placeholder="First Name"
+                                   data-ng-model="params.first_name"
+                                   minlength="1"
+                                   maxlength="40"
+                                   alphabets-only
+                                   input-focus
+                                   required
+                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+
+                        </label>
+                        <div class="text-danger"
+                             data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
+                            {{ 'Please enter alphabets only' | translate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group"
+                     data-ng-class="{
+                            'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
+                            'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
+                        }">
+                    <div class="col-xs-12">
+                        <label>Last Name</label>
+                        <label class="label-group">
+                            <input type="text" name="lastName" class="form-control"
+                                   placeholder="Last Name"
+                                   data-ng-model="params.last_name"
+                                   minlength="1"
+                                   maxlength="50"
+                                   alphabets-only
+                                   input-focus
+                                   required
+                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                        </label>
+                        <div class="text-danger"
+                             data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
+                            {{ 'Please enter alphabets only' | translate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus,
+                    'has-success': newForm.phone_no.$valid && !newForm.phone_no.$pristine && !newForm.phone_no.$focus
+                }">
+            <div class="col-xs-12">
+                <label>Phone No</label>
+                <label class="label-group">
+                    <input type="text" name="phone_no" class="form-control"
+                           placeholder="Phone Number"
+                           data-ng-model="params.contact_element_info_phone"
+                           minlength="10"
+                           maxlength="10"
+                           input-focus
+                           ng-pattern="/^[1-9]{1}[0-9]{9}$/"
+                           required />
+                </label>
+                <div class="text-danger"
+                     data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
+                    {{ 'Please enter valid Phone Number' | translate }}
+                </div>
+            </div>
+         </div>
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
+                    'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
+                }">
+            <div class="col-xs-12">
+                <label>Email Address</label>
+                <label class="label-group">
+                    <input type="email" name="email" class="form-control"
+                           placeholder="Email Address"
+                           data-ng-model="params.contact_element_info_email"
+                           minlength="1"
+                           maxlength="30"
+                           input-focus
+                          ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
+                           required />
+                </label>
+                <div class="text-danger"
+                     data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
+                    {{ 'Please enter valid email' | translate }}
+                </div>
+            </div>
+
+
+            
+        </div>
+
+
+        <div class="row">
+            
+            <div class="col-sm-6">
+                <label>Assign To</label>
+                <select ng-model="user1"  ng-change="selectuser()"
+                        class="dropdown form-control" required>
+                    <option value="" selected>Select User</option>
+                    <option ng-repeat="User in users"
+                            value="{{User.id}}">
+                        {{User.first_name}}
+                    </option>
+                    
+                </select>
+            </div>
+
+
+
+            
+
+            
+            <div class="col-sm-6">
+                <label>Add To Project</label>
+                <select ng-model="project1" ng-change="selectproject()"
+                        class="dropdown form-control" required>
+                    <option value="" selected>Select Project</option>
+                <option ng-repeat="project in projects"
+                        value="{{project.id}}">
+                    {{project.name}}
+                </option>
+
+                </select>
+            </div>
+
+        </div>
+        <h4>Address</h4>
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus,
+                    'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
+                }">
+            <div class="col-xs-12">
+                <label class="label-group">
+                    <input type="text" name="Address" class="form-control"
+                           placeholder="Address Line"
+                           data-ng-model="params.street_1"
+                           minlength="5"
+                           maxlength="50"
+                           input-focus
+                           
+                           required />
+                </label>
+                <div class="text-danger"
+                     data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
+                    {{ 'Please enter valid address' | translate }}
+                </div>
+            </div>
+        </div>
+
+        
+            
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <label>State</label>
+               
+                    <select ng-model="state1"  ng-change="selectstate()" class="dropdown form-control" required>
+                        <option value="" selected>-- Choose state --</option>
+                        <option ng-repeat="state in states"
+                                value="{{state.state_id}}">
+                            {{state.state_name}}
+                        </option>
+                    </select>
+
+                    
+                </div>
+
+                <!--<div class="col-sm-4">
+                    <select ng-model="city" class="dropdown form-control" required>
+                        <option value="" selected>-- Choose City --</option>
+                        <option ng-repeat="city in cities"
+                                value="{{city.city_id}}">
+                            {{city.city_name}}
+                        </option>
+                    </select>
+
+                </div>-->
+
+
+                <div class="col-sm-4">
+                    
+                    <!--<div class="form-group">-->
+                        <label>City</label>
+
+                      <select ng-change="selectcity()" ng-model="city1" class="dropdown form-control" required>
+                            <option value="" selected>-- Choose City --</option>
+                            <option ng-repeat="city in cities"
+                                    value="{{city.city_id}}">
+                                {{city.city_name}}
+                            </option>
+                        </select>
+
+
+                    <!--</div>-->
+                </div>
+
+
+                <div class="col-sm-4">
+                    <div class="form-group"
+                         data-ng-class="{
+                    'has-error' : newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus,
+                    'has-success': newForm.Pin.$valid && !newForm.Pin.$pristine && !newForm.Pin.$focus
+                }">
+                        <div class="col-xs-12">
+                            <label>Pin</label>
+                            <label class="label-group">
+                                <input type="text" name="Pin" class="form-control"
+                                       placeholder="Pin"
+                                       data-ng-model="params.zip_code"
+                                       minlength="1"
+                                       maxlength="7"
+                                       input-focus
+                                       ng-pattern="/^[0-9]{1,7}$/"
+                                       required />
+                            </label>
+                            <div class="text-danger"
+                                 data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
+                                {{ 'Please enter valid pin' | translate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div>
+            
+            <button type="submit" class="btn  btn-default" ng-click="showProgress=true;uploader.uploadAll()"
+                    ng-disabled="!uploader.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Save
+            </button>
+            <!--<button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()"
+                    ng-disabled="!uploader.isUploading">
+                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+            </button>-->
+            <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
+            <!--<button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()"
+                    ng-disabled="!uploader.queue.length">
+                <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>-->
+            <button class="btn  btn-default" type="button" ng-click="reset()">Remove</button>
+        </div>
+        
+
+    <!--<div class="row">
+            <div class="row actions-btn">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <button class="btn  btn-default" type="submit" >Save</button>
+                            <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button> 
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row actions-btn">
+                <div class="col-xs-10 col-sm-10">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            
+           </div>
+        </div>-->
+</form>
+</div>

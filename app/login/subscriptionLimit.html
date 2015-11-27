@@ -1,0 +1,297 @@
+﻿<script>
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
+        $(".nav li").on("click", function () {
+            $(".nav").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
+
+
+</script>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true" ng-click="menuCollapsed = ! menuCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                <button nb-left-menu type="button" class="navbar-toggle navbar-left"
+                        data-ng-hide="!isAuthenticated || currentState == 'loggedIn.modules.inventory'">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-align-right"></i>
+                </button>
+                <img class="normal-logo" src="assets/icons/logo/normal-logo.png" data-ng-if="!isAuthenticated">
+                <img class="blue-logo" src="assets/icons/logo/blue-logo.png" data-ng-if="isAuthenticated">
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" collapse="menuCollapsed">
+            <ul class="nav navbar-nav navbar-right" data-ng-if="!isAuthenticated">
+                <li>
+                    <a href="http://www.dwellar.com/" target="_blank">Home</a>
+                </li>
+                <li data-ng-class="{ 'active' : currentState == 'guest.login' }">
+                    <a ui-sref="guest.login">Login</a>
+                </li>
+                <li data-ng-class="{ 'active' : currentState == 'guest.signup_free_account' || currentState == 'guest.signup' }">
+                    <a ui-sref="guest.signup_free_account">Sign up</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" data-ng-if="isAuthenticated">
+                <li><a>Welcome Dwellar</a></li>
+                <li class="sidebar-bread-crumb"><a>|</a></li>
+                <li><a href="" data-ng-click="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+ 
+<section id="content">
+    <div class="container">
+
+        <h2>Select Plan</h2>
+
+        <div class="plan-wrap">
+            <div class="plan-sec">
+
+                <div class="plan-header clearfix">
+                    <div class="pull-left plan-h01">
+                        <span>FEATURES</span>
+                    </div>
+
+
+                  <div class="pull-left plan-h02">
+                        <ul ng-repeat="item2 in subscriptions2">
+                            <div class="h01">{{item2.Subscription_Name}}</div>
+                            <div class="h02">
+                                <img src="images/symbol1.png" alt="" />
+                                <span class="plan-title">
+                                    {{item2.Price}}
+                                </span>
+                            </div>
+
+                            <a href="#" ng-click="addPersonalInfo2()" class="h03">Get Started Now</a>
+                        </ul>
+                    </div>
+
+                    <div class="pull-left plan-h02">
+                        <ul ng-repeat="item4 in subscriptionList4">
+                            <div class="h01">{{item4.Subscription_Name}}</div>
+                            <div class="h02">
+                                <img src="images/symbol1.png" alt="" />
+                                <span class="plan-title">
+                                    {{item4.Price}}
+                                </span>
+                            </div>
+
+                            <a href="#" ng-click="addPersonalInfo4()" class="h03">BUY4 NOW</a>
+                        </ul>
+                    </div>
+                    
+                    <div class="pull-left plan-h02">
+                      
+                        <ul ng-repeat="item3 in subscriptionList3">
+                            <div class="h01">{{item3.Subscription_Name}}</div>
+                            <div class="h02">
+                                <img src="images/symbol1.png" alt="" />
+                                <span class="plan-title">
+                                    {{item3.Price}}
+                                </span>
+                                <!--<span class="plan-duration plan-duration2">/month</span>-->
+
+                            </div>
+                            <!--<a ui-sref="signup_free_account" class="h03">BUY NOW</a>-->
+                            <a href="#" ng-click="addPersonalInfo3()" class="h03">BUY3 NOW</a>
+                            <!--<a ui-sref="subscriptionLimit">Create Account</a>-->
+                        </ul>
+                    </div>
+
+                  
+                    <!--<div class="pull-left plan-h02 plan-h02-last">
+                        <div class="h01">Enterprise</div>
+                        <div class="h02">
+                            <img src="images/symbol1.png" alt="" />
+                            <span class="plan-title">50000</span>
+                            <span class="plan-duration plan-duration2">/month</span>
+                        </div>
+                        <a href="#" ng-click="addPersonalInfo3()" class="h03">BUY3 NOW</a>
+                        
+                    </div>-->
+
+                
+
+                    <div class="pull-left plan-h02">
+                        <ul ng-repeat="item1 in subscriptionList1">
+                            <div class="h01">{{item1.Subscription_Name}}</div>
+                            <div class="h02">
+                                <img src="images/symbol1.png" alt="" />
+                                <span class="plan-title">
+                                    {{item1.Price}}
+                                </span>
+                                <!--<span class="plan-duration plan-duration2">/month</span>-->
+                            </div>
+                            <!--<a ui-sref="signup_free_account" class="h03">BUY NOW</a>-->
+                            <a href="#" ng-click="addPersonalInfo1()" class="h03">Click To Connect</a>
+                            <!--<a ui-sref="subscriptionLimit">Create Account</a>-->
+                        </ul>
+                    </div>
+
+                </div><!-- plan-header ended -->
+
+                <div class="plan-content">
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Multiple Listing</div>
+                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Create Team</div>
+                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">MLS Listing</div>
+                        <div class="pull-left plan-c02">&nbsp;</div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Campaing Management</div>
+                        <div class="pull-left plan-c02">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Builder Directory</div>
+                        <div class="pull-left plan-c02">&nbsp;</div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Data and Analytics</div>
+                        <div class="pull-left plan-c02">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Social listening and analysis</div>
+                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Content marketing</div>
+                        <div class="pull-left plan-c02">&nbsp;</div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Predictive Intelligence</div>
+                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                    <div class="plan-row clearfix">
+                        <div class="pull-left plan-c01">Lead tracking</div>
+                        <div class="pull-left plan-c02">&nbsp;</div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03">&nbsp;</div>
+                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
+                    </div>
+                </div><!-- plan-content ended -->
+
+            </div><!-- plan-sec ended -->
+        </div><!-- plan-wrap ended -->
+
+    </div>
+</section><!-- content ended -->
+
+<div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="footer-content">
+            <div class="logo">
+                <img src="assets/icons/bottom-logo.png">
+            </div>
+            <div class="copyright">
+                Copyrights Dwellar @ 2015
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div>
+    <div class="weather">
+                        
+      <div class="col-md-11 closed_main">
+          <div class="closed_sales">
+             <span class="sales_title">Subscription Module Limit</span>
+          </div>
+       <div class="col-md-11 closed_main1">
+                                        <div class="col-md-3 sales_center">
+                                            <div class="sales_center1">
+                                                <h4 class="sale_h4">Subscription1<br /><br /></h4>
+                                            </div>
+                                            <div class="info_div">
+                                                <ul ng-repeat="item in subscriptions">
+                                                    <li ng-repeat="(key, val) in item">
+                                                        {{val}}
+                                                   </li>
+                                                </ul>
+                                                <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+                                                      data-ng-submit="addPersonalInfo1(newForm.$valid)">
+                                                    <button class="btn organization-btn" type="submit">Buy Subscription</button>
+                                                </form>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 sales_web">
+                                            <div class="sales_center1">
+                                                <h4 class="sale_h4">Subscription2<br /><br /></h4>
+                                            </div>
+
+                                            <div class="info_div">
+                                                <ul ng-repeat="item in subscriptionList">
+                                                    <li ng-repeat="(key, val) in item">
+
+                                                        {{val}}
+
+                                                    </li>
+                                                </ul>
+                                                <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+                                                      data-ng-submit="addPersonalInfo2(newForm.$valid)">
+                                                    
+                                                    <button class="btn organization-btn" type="submit">Buy Subscription</button>
+                                                    </form>
+</div>
+
+                                        </div>
+                                    </div>
+         
+      </div>
+   </div>
+
+</div>-->
+
+

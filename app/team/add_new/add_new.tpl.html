@@ -1,0 +1,59 @@
+<div class="main-content project add-new">
+    <h3>Project Details</h3>
+
+    <form name="addNewForm" novalidate
+          data-ng-submit="addNew(addNewForm.$valid)"
+          autocomplete="off"
+          class="form-horizontal">
+
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid),
+                    'has-success': addNewForm.name.$valid && !addNewForm.name.$pristine
+                 }">
+            <div class="col-xs-12">
+                <label class="control-label">Team Name</label>
+                <label class="label-group">
+                    <input type="text" name="name" class="form-control" 
+                           placeholder="Team Name"
+                           data-ng-model="params.name"
+                           minlength="1"
+                           maxlength="100"
+                           alphabets-only
+                           required />
+                </label>
+
+
+                <div class="text-danger"
+                     data-ng-if="addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus">
+                    {{ 'Please enter Team name' | translate }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : addNewForm.description.$invalid && (!addNewForm.description.$pristine || showValid),
+                    'has-success': addNewForm.description.$valid && !addNewForm.description.$pristine
+                 }">
+            <div class="col-xs-12">
+                <label class="control-label">Team Description</label>
+                <label class="label-group">
+                    <textarea class="form-control" cols="83" rows="10" name="description" 
+                              placeholder="Project Description"
+                              data-ng-model="params.description"
+                              alphabets-only
+                              input-focus
+                              required></textarea>
+                </label>
+                <div class="text-danger"
+                     data-ng-if="addNewForm.description.$invalid && (!addNewForm.description.$pristine || showValid) && !addNewForm.description.$focus">
+                    {{'Please enter Team Desc.' | translate }}
+                </div>
+            </div>
+        </div>
+
+
+        <button class="btn organization-btn" type="submit">Save</button>
+    </form>
+</div>
+

@@ -1,0 +1,682 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="property-header">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="property-title">Project Details</h2>
+                </div>
+                <button class="btn btn-default login-btn" ng-click="openAddPopup()">Add New Project</button>
+            </div>
+        </div>
+    </div>
+    <div class="property-content">
+        <div class="content-inner property-inner">
+            <div class="div_head_pad">
+                <!--<span class="tab_head">
+                    {{detail.name}} &nbsp;<a href="#" class="edit_pad">
+                        <img src="assets/images/edit.png" />
+                    </a>
+                </span>-->
+                <br /><span class="tab_sub_head" ng-bind="name" ></span>
+                <div class="row div_pad2 tab_strip_content">
+                    <div class="col-sm-10 common_tabstrip li_style" kendo-tab-strip>
+                        <ul class="tab_back tabs_pipe">
+                            <li class="k-state-active">ESSENTIAL</li>
+                            <li>USERS</li>
+                            <li>TEAMS</li>
+                            <li>PROPERTYLIST</li>
+                            <li>PEOPLE</li>
+                            <li>TASKS</li>
+                            <li>FLOOR TYPE</li>
+                            <li>TOWER TYPE</li>
+                            <li>UNIT TYPE</li>
+                            <li>WING TYPE</li>
+                            <!--<li class="dropdown dropdown_menu dropdown_color">
+                <span class="dropdown-toggle" data-toggle="dropdown">
+                    MORE <i class="fa fa-angle-down dropdown_arrow"></i>
+                </span>
+                <ul class="dropdown-menu menu_dropdown">
+                    <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> Account Setting</a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+                </ul>
+            </li>-->
+                        </ul>
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div class="tab_style">
+                                <div class="div_pad">
+                                    <span class="tab_content_head">Project</span><br />
+
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <h4 ng-bind="name">: NAME</h4>
+                                            <h4 ng-bind="description">:Description</h4>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="UserGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="TeamsGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="PropertyListGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="PeopleGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="TaskGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div style="padding: 1em">
+                                <div class="properties-list">
+                                    <div class="add-images-title">
+                                        Add Floor Type
+                                        <a href="#" class="add-images-btn"
+                                           ng-click="openNewFloorPopup()"></a>
+                                    </div>
+                                    <div class="properties-bx-wrap">
+                                        <div class="properties-bx" ng-repeat="image in images2D">
+                                            <div class="properties-bx-inner">
+                                                <div class="properties-img">
+                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
+                                                </div>
+                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- properties-bx-wrap ended -->
+                                </div>
+                            </div>
+                            <div class="tab_style">
+                                <div class="div_pad">
+                                    <span class="tab_content_head">AREA</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Build-up Area</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.built_up_area}}
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Carpet Area</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">COST</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Agreement Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.agreement_cost}} K Per
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Total Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.total_cost}} Cr
+                                                        (negotiable)
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">ROOMS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bed Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bath_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bath Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pad2">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/kitchen.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Kitchen</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/guest_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Guest Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">OTHERS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date }}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-10 col-sm-10">
+                                            <img class="pull-left size_in_1024" src="assets/images/lift.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Lift</span><br />
+                                                <span class="tab_data_sub"><b>Available</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/power_backup.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Power Backup</span><br />
+                                                <span class="tab_data_sub"><b>Yes</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pad2">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/water_supply.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Water Supply</span><br />
+                                                <span class="tab_data_sub"><b>Municipal Water</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024"
+                                                 src="assets/images/gated_community.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Gated Community</span><br />
+                                                <span class="tab_data_sub"><b>Yes</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div style="padding: 1em">
+                                <div class="properties-list">
+                                    <div class="add-images-title">
+                                        Add Tower Type
+                                        <a href="#" class="add-images-btn"
+                                           ng-click="openNewTowerPopup()"></a>
+                                    </div>
+                                    <div class="properties-bx-wrap">
+                                        <div class="properties-bx" ng-repeat="image in images2D">
+                                            <div class="properties-bx-inner">
+                                                <div class="properties-img">
+                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
+                                                </div>
+                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- properties-bx-wrap ended -->
+                                </div>
+                            </div>
+                            <div class="tab_style">
+                                <div class="div_pad">
+                                    <span class="tab_content_head">AREA</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Build-up Area</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.built_up_area}}
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Carpet Area</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">COST</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Agreement Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.agreement_cost}} K Per
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Total Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.total_cost}} Cr
+                                                        (negotiable)
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">ROOMS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bed Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bath_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bath Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pad2">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/kitchen.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Kitchen</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/guest_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Guest Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">OTHERS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date }}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-10 col-sm-10">
+                                            <img class="pull-left size_in_1024" src="assets/images/lift.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Lift</span><br />
+                                                <span class="tab_data_sub"><b>Available</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/power_backup.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Power Backup</span><br />
+                                                <span class="tab_data_sub"><b>Yes</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pad2">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/water_supply.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Water Supply</span><br />
+                                                <span class="tab_data_sub"><b>Municipal Water</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024"
+                                                 src="assets/images/gated_community.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Gated Community</span><br />
+                                                <span class="tab_data_sub"><b>Yes</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div style="padding: 1em">
+                                <div class="properties-list">
+                                    <div class="add-images-title">
+                                        Add Unit Type
+                                        <a href="#" class="add-images-btn"
+                                           ng-click="openNewUnitPopup()"></a>
+                                    </div>
+                                    <div class="properties-bx-wrap">
+                                        <div class="properties-bx" ng-repeat="image in images2D">
+                                            <div class="properties-bx-inner">
+                                                <div class="properties-img">
+                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
+                                                </div>
+                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- properties-bx-wrap ended -->
+                                </div>
+                            </div>
+                            <div class="tab_style">
+                                <div class="div_pad">
+                                    <span class="tab_content_head">AREA</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Build-up Area</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.built_up_area}}
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Carpet Area</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">COST</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Agreement Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.agreement_cost}} K Per
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Total Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.total_cost}} Cr
+                                                        (negotiable)
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">ROOMS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bed Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bath_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bath Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pad2">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/kitchen.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Kitchen</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/guest_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Guest Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">OTHERS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date }}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-10 col-sm-10">
+                                            <img class="pull-left size_in_1024" src="assets/images/lift.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Lift</span><br />
+                                                <span class="tab_data_sub"><b>Available</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/power_backup.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Power Backup</span><br />
+                                                <span class="tab_data_sub"><b>Yes</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pad2">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/water_supply.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Water Supply</span><br />
+                                                <span class="tab_data_sub"><b>Municipal Water</b></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024"
+                                                 src="assets/images/gated_community.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Gated Community</span><br />
+                                                <span class="tab_data_sub"><b>Yes</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div style="padding: 1em">
+                                <div class="properties-list">
+                                    <div class="add-images-title">
+                                        Add Wing Type
+                                        <a href="#" class="add-images-btn"
+                                           ng-click="openNewWingPopup()"></a>
+                                    </div>
+                                    <div class="properties-bx-wrap">
+                                        <div class="properties-bx" ng-repeat="image in images2D">
+                                            <div class="properties-bx-inner">
+                                                <div class="properties-img">
+                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
+                                                </div>
+                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- properties-bx-wrap ended -->
+                                </div>
+                            </div>
+                            <div class="tab_style">
+                                <div class="div_pad">
+                                    <span class="tab_content_head">AREA</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Build-up Area</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.built_up_area}}
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Carpet Area</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">COST</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Agreement Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.agreement_cost}} K Per
+                                                        sq.ft.
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Total Cost</span><br />
+                                                <span class="tab_data_sub">
+                                                    <b>
+                                                        {{::detail.total_cost}} Cr
+                                                        (negotiable)
+                                                    </b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div_pad">
+                                    <span class="tab_content_head">ROOMS</span><br />
+                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
+                                            <div class="pull-left img_pad">
+                                                <span class="tab_data_head">Bed Room</span><br />
+                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
+                                                </div&gt..
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- property-content ended -->
+                        </div><!-- main-content ended -->

@@ -1,0 +1,401 @@
+﻿<script>
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            }
+        });
+        $(".nav li").on("click", function () {
+            $(".nav").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
+
+
+</script>
+<div class="wrapper">
+    <!--end-
+    <!---Content Right section--->
+    <div class="col-md-9 rightsection">
+        <div class="top_section">
+            <h3>Reports</h3>
+            <div id="example">
+                <div class="demo-section k-content">
+                    <div id="tabstrip">
+                        <ul class="tabstrip1 nav">
+                            <li class="k-state-active">
+                                <a href="">Tab1</a>
+                            </li>
+                            <li class="active">
+                                Sales
+                            </li>
+                            <li>
+                                Tab2
+                            </li>
+                            <li>
+                                Tab3
+                            </li>
+                        </ul>
+                        <div>
+                            <span class="rainy">&nbsp;</span>
+                            <div class="weather">
+                                <h2>17<span>&ordm;C</span></h2>
+                                <p>Rainy weather in Paris.</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-md-1 sales_date">
+                                <span class="sales_date1">DATE FROM </span><br />
+                                <span class="sales_date2">15 </span><span class="sales_month">Oct'15</span><br />
+                                <span class="sales_day">Thu</span>
+                            </div>
+                            <div class="col-md-1 sales_date_right">
+                                <span class="sales_date1">DATE TO </span><br />
+                                <span class="sales_date2">20 </span><span class="sales_month">Nov'15</span><br />
+                                <span class="sales_day">Fri</span>
+                            </div>
+                            <div style="clear:both"></div>
+                            <p class="total_days">Last 40 Days</p>
+
+                            <div style="clear:both"></div>
+                            <div class="col-md-11 closed_main">
+                                <div class="closed_sales">
+                                    <span class="sales_title">CLOSED SALES</span>
+                                </div>
+                                <div class="col-md-11 closed_main1">
+                                    <div class="col-md-3 sales_center">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Sales Centers<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/bar1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul ng-repeat="item in cities">
+                                                <li ng-repeat="(key, val) in item">
+                                                    {{val}}
+                                                </li>
+                                            </ul>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_web">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Website<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir22.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#ff6d01;">Monday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Tuesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Wednesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Thursday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Friday <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_social">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Social Media<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir11.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#569ce1;">Facebook <span style="float:right">254</span></li>
+                                                <li style="color:#2ac9f3;">Twitter <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Google+ <span style="float:right">254</span></li>
+                                                <li style="color:#e8a733;">Blog <span style="float:right">254</span></li>
+                                                <li style="color:#e34343;">You Tube <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_exb">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Exhibitions<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/line1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------------------------------------------------->
+                            <div style="clear:both"></div>
+                            <div class="col-md-11 closed_main">
+                                <div class="closed_sales">
+                                    <span class="sales_title">BOOKINGS</span>
+                                </div>
+                                <div class="col-md-11 closed_main1">
+                                    <div class="col-md-3 sales_center">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Sales Centers<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/bar1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#078fff;">Mumbai <span style="float:right">254</span></li>
+                                                <li style="color:#fece00;">Delhi <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Kolkata <span style="float:right">254</span></li>
+                                                <li style="color:#d200ac;">Bengaluru <span style="float:right">254</span></li>
+                                                <li style="color:#bdc87c;">Noida <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_web">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Website<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir22.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#ff6d01;">Monday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Tuesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Wednesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Thursday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Friday <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_social">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Social Media<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir11.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#569ce1;">Facebook <span style="float:right">254</span></li>
+                                                <li style="color:#2ac9f3;">Twitter <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Google+ <span style="float:right">254</span></li>
+                                                <li style="color:#e8a733;">Blog <span style="float:right">254</span></li>
+                                                <li style="color:#e34343;">You Tube <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_exb">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Exhibitions<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/line1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------------------------------------------------->
+                            <div style="clear:both"></div>
+                            <div class="col-md-11 closed_main">
+                                <div class="closed_sales">
+                                    <span class="sales_title">LEADS</span>
+                                </div>
+                                <div class="col-md-11 closed_main1">
+                                    <div class="col-md-3 sales_center">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Sales Centers<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/bar1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#078fff;">Mumbai <span style="float:right">254</span></li>
+                                                <li style="color:#fece00;">Delhi <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Kolkata <span style="float:right">254</span></li>
+                                                <li style="color:#d200ac;">Bengaluru <span style="float:right">254</span></li>
+                                                <li style="color:#bdc87c;">Noida <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_web">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Website<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir22.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#ff6d01;">Monday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Tuesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Wednesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Thursday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Friday <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_social">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Social Media<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir11.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#569ce1;">Facebook <span style="float:right">254</span></li>
+                                                <li style="color:#2ac9f3;">Twitter <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Google+ <span style="float:right">254</span></li>
+                                                <li style="color:#e8a733;">Blog <span style="float:right">254</span></li>
+                                                <li style="color:#e34343;">You Tube <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_exb">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Exhibitions<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/line1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------------------------------------------------->
+                            <div style="clear:both"></div>
+                            <div class="col-md-11 closed_main">
+                                <div class="closed_sales">
+                                    <span class="sales_title">CLIENTS</span>
+                                </div>
+                                <div class="col-md-11 closed_main1">
+                                    <div class="col-md-3 sales_center">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Sales Centers<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/bar1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#078fff;">Mumbai <span style="float:right">254</span></li>
+                                                <li style="color:#fece00;">Delhi <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Kolkata <span style="float:right">254</span></li>
+                                                <li style="color:#d200ac;">Bengaluru <span style="float:right">254</span></li>
+                                                <li style="color:#bdc87c;">Noida <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_web">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Website<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir22.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#ff6d01;">Monday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Tuesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Wednesday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Thursday <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Friday <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_social">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Social Media<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/cir11.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#569ce1;">Facebook <span style="float:right">254</span></li>
+                                                <li style="color:#2ac9f3;">Twitter <span style="float:right">254</span></li>
+                                                <li style="color:#ff6d01;">Google+ <span style="float:right">254</span></li>
+                                                <li style="color:#e8a733;">Blog <span style="float:right">254</span></li>
+                                                <li style="color:#e34343;">You Tube <span style="float:right">254</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 sales_exb">
+                                        <div class="sales_center1">
+                                            <h4 class="sale_h4">Exhibitions<br /><br /><span class="spn_date"> OCT 15,2015-NOV 20,2015</span></h4>
+                                        </div>
+                                        <div class="div_chart">
+                                            <img src="images/line1.jpg" />
+                                        </div>
+                                        <div class="info_div">
+                                            <ul>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+                                                <li style="color:#e75555;">ABC Expo <span style="float:right">254</span></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!------------------------------------------------->
+
+                        </div>
+                        <div>
+                            <span class="sunny">&nbsp;</span>
+                            <div class="weather">
+                                <h2>21<span>&ordm;C</span></h2>
+                                <p>Sunny weather in London.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="cloudy">&nbsp;</span>
+                            <div class="weather">
+                                <h2>16<span>&ordm;C</span></h2>
+                                <p>Cloudy weather in Moscow.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--end--->
+</div>

@@ -1,0 +1,108 @@
+﻿<style>
+    .k-header {
+        background-color: #ffffff !important;
+    }
+</style>
+
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="property-header">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="property-title">Team Details</h2>
+                </div>
+                <button class="btn btn-default login-btn" ng-click="openAddPopup()">Add New User</button>
+            </div>
+        </div>
+    </div>
+    <div class="property-content">
+        <div class="content-inner property-inner">
+            <div class="div_head_pad">
+                <!--<span class="tab_head">
+                    {{detail.name}} &nbsp;<a href="#" class="edit_pad">
+                        <img src="assets/images/edit.png" />
+                    </a>
+                </span>-->
+               
+                
+                <br /><span class="tab_sub_head" ng-bind="name"  ></span>
+                <div class="row div_pad2 tab_strip_content">
+                    <div class="col-sm-10 common_tabstrip li_style" kendo-tab-strip>
+                        <ul class="tab_back tabs_pipe">
+                            <li class="k-state-active">ESSENTIAL</li>
+                            <li>USERS</li>
+                            <li>PROJECTS</li>
+                            <li>PROPERTY LISTINGS</li>
+                            <li>PEOPLE</li>
+                            <li>TASKS</li>
+
+                            <!--<li class="dropdown dropdown_menu dropdown_color">
+                                <span class="dropdown-toggle" data-toggle="dropdown">
+                                    MORE <i class="fa fa-angle-down dropdown_arrow"></i>
+                                </span>
+                                <ul class="dropdown-menu menu_dropdown">
+                                    <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
+                                    <li><a href="#"><i class="fa fa-cog"></i> Account Setting</a></li>
+                                    <li><a href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+                                </ul>
+                            </li>-->
+                        </ul>
+                       
+                         
+
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div class="tab_style">
+                                <div class="div_pad">
+                                    <span class="tab_content_head">Team</span><br />
+
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                            <h4 ng-bind="name">: NAME</h4>
+                                            <h4 ng-bind="description">:Description</h4>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="UserGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="ProjectGrid" selectable="true">
+
+                            </div>
+                        </div>
+                       
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="PropertyListGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="PeopleGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="TaskGrid" selectable="true">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- property-content ended -->
+</div><!-- main-content ended -->

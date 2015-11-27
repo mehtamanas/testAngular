@@ -1,0 +1,222 @@
+<div id="main-content" class="col-xs-12">
+    <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+          data-ng-submit="addNew(newForm.$valid)">
+
+        <div class="personal-container">
+
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="content-inner">
+                    <div class="property-header">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h2 class="property-title">Organization Details</h2>
+                            </div>
+                            <button class="btn btn-default login-btn" ng-click="editorg()">Edit Organizaton</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br/>
+            </div>
+
+            <div class="above-login">
+                <div class="col-sm-1"></div>             
+                <div class="channel-partner-content">
+
+                    <div class="row">                        
+                        <div class="col-sm-5">
+                            <label class="control-label">Organization Name</label>                          
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="name"></h4>
+                                    </label>
+                                </div>                           
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Pan No</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="pan_no"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Organization Id</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="orgid"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Tan No</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="tan_no"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Divisions</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="divisions"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Service Tax No</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="service_tax_no"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Address Primary</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="address"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Cin No</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="cin_no"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Email Primary</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="email"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">First Month Of Financial Year</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="first_month_of_financial_year"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Phone Primary</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="phone_no"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Language</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="language"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">List in Builder Directory</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="list_in_builder_directory"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Time Zone</label>
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="timezone"></h4>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
