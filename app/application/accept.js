@@ -1,5 +1,7 @@
-﻿var acceptController = function ($scope, $state, $cookieStore, apiService, $modal, $modalInstance) {
+﻿var acceptController = function ($scope, $state, $cookieStore, apiService, $modal, $modalInstance, $window) {
     console.log('acceptController');
+
+    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     //Audit log start
     $scope.params = {
@@ -47,10 +49,10 @@
     $scope.params = {
        
         status: "Approved",
-        organization_id: $cookieStore.get('orgID'),
+        id:window.sessionStorage.selectedCustomerID
         //User_ID: $cookieStore.get('userId')
     };
-
+   // alert(window.sessionStorage.selectedCustomerID);
    
 
     //if ($cookieStore.get('teamid') !== '') {
@@ -73,14 +75,24 @@
      //   alert(param.name);
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
-            alert("partner Accept successfully..!!");
+            //alert("partner Accept successfully..!!");
             $modalInstance.dismiss();
+            $scope.openSucessfullPopup();
         },
    function (error) {
-       alert("Error " + error.state);
+       //alert("Error " + error.state);
    });
     };
 
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'newuser/sucessfull.tpl.html',
+            backdrop: 'static',
+            controller: sucessfullController,
+            size: 'md'
+        });
+    };
 
    
 

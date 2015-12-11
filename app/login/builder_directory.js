@@ -24,7 +24,7 @@
 
        },
   function (error) {
-      alert("Error " + error.state);
+      console.log("Error " + error.state);
   }
 
   );

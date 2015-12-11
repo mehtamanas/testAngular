@@ -1,682 +1,467 @@
 ﻿<div id="main-content" class="col-xs-12">
     <div class="content-inner">
-        <div class="property-header">
+        <div class="pg-inner-header">
             <div class="row">
-                <div class="col-md-5">
-                    <h2 class="property-title">Project Details</h2>
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Project Details</h2>
+
                 </div>
-                <button class="btn btn-default login-btn" ng-click="openAddPopup()">Add New Project</button>
+
+
             </div>
-        </div>
-    </div>
-    <div class="property-content">
-        <div class="content-inner property-inner">
-            <div class="div_head_pad">
-                <!--<span class="tab_head">
-                    {{detail.name}} &nbsp;<a href="#" class="edit_pad">
-                        <img src="assets/images/edit.png" />
-                    </a>
-                </span>-->
-                <br /><span class="tab_sub_head" ng-bind="name" ></span>
-                <div class="row div_pad2 tab_strip_content">
-                    <div class="col-sm-10 common_tabstrip li_style" kendo-tab-strip>
-                        <ul class="tab_back tabs_pipe">
-                            <li class="k-state-active">ESSENTIAL</li>
-                            <li>USERS</li>
-                            <li>TEAMS</li>
-                            <li>PROPERTYLIST</li>
-                            <li>PEOPLE</li>
-                            <li>TASKS</li>
-                            <li>FLOOR TYPE</li>
-                            <li>TOWER TYPE</li>
-                            <li>UNIT TYPE</li>
-                            <li>WING TYPE</li>
-                            <!--<li class="dropdown dropdown_menu dropdown_color">
-                <span class="dropdown-toggle" data-toggle="dropdown">
-                    MORE <i class="fa fa-angle-down dropdown_arrow"></i>
-                </span>
-                <ul class="dropdown-menu menu_dropdown">
-                    <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i> Account Setting</a></li>
-                    <li><a href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
-                </ul>
-            </li>-->
+
+
+            <div class="pg-inner-content">
+
+                <div class="project-detail">
+
+                    
+                    <div class="project-detail-info">
+                     
+                        <div class="project-detail-photo">
+                          
+                            <img src={{image.media_url}} alt="" class="img-responsive" />
+                        </div>
+                      
+                        <div class="project-detail-txt">
+                            <a data-toggle="modal"><span class="edit-icon"></span></a>
+                            <div class="project-name">Project Name:  {{image.name}} </div>
+                            <div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.pin_Code}}</div>
+                            <div class="project-d02">Possession Date: {{image.possesion_date}}</div>
+                            <!--<div class="project-d03">Project Website: {{image.projectwebsite}}</div>
+                            <div class="project-d03">Company Website:{{image.companywebsite}}</div>-->
+                        </div>
+                    </div> <!-- project-detail-info ended -->   
+
+
+
+                    <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                            <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">FLOOR TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TOWER TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">WING TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">UNIT TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">AMENITIES</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">GALLERY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
                         </ul>
 
-                        <div style="padding: 1em" class="tab_content">
-                            <div class="tab_style">
-                                <div class="div_pad">
-                                    <span class="tab_content_head">Project</span><br />
+                        <div class="tab-content">
 
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <h4 ng-bind="name">: NAME</h4>
-                                            <h4 ng-bind="description">:Description</h4>
+                            <div class="tab-pane fade in active" id="summary">
 
-                                        </div>
+                                <div class="project-detail-summary">
 
-                                    </div>
-                                </div>
+                                    <div class="summary-bx" ng-repeat="sum in buildsummary">
+                                        <div class="summary-title"><span>{{::$index+1}}</span>{{::sum.tower_name}} </div>
 
-                            </div>
-                        </div>
+                                        <div class="tb-c-wrap">
 
+                                            <div class="tb-c"  ng-repeat="summery in sum.UnitList1" >
+                                                <h3>{{::summery.unit_type_desc}}</h3>
 
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="UserGrid" selectable="true">
-
-                            </div>
-                        </div>
-
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="TeamsGrid" selectable="true">
-
-                            </div>
-                        </div>
-
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="PropertyListGrid" selectable="true">
-
-                            </div>
-                        </div>
-
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="PeopleGrid" selectable="true">
-
-                            </div>
-                        </div>
-
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="TaskGrid" selectable="true">
-
-                            </div>
-                        </div>
-
-
-
-                        <div style="padding: 1em" class="tab_content">
-                            <div style="padding: 1em">
-                                <div class="properties-list">
-                                    <div class="add-images-title">
-                                        Add Floor Type
-                                        <a href="#" class="add-images-btn"
-                                           ng-click="openNewFloorPopup()"></a>
-                                    </div>
-                                    <div class="properties-bx-wrap">
-                                        <div class="properties-bx" ng-repeat="image in images2D">
-                                            <div class="properties-bx-inner">
-                                                <div class="properties-img">
-                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
+                                                <div class="tb-sub">
+                                                    <span class="tb-sub-t tb-sub-t01"></span>
+                                                    <span class="tb-sub-txt">Carpet Area<span>{{::summery.carpet_area}} sq.ft</span></span>
                                                 </div>
-                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
-                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                                <div class="tb-sub">
+                                                    <span class="tb-sub-t tb-sub-t02"></span>
+                                                    <span class="tb-sub-txt"> Saleable Area<span>{{::summery.super_built_up_area}} sq.ft</span></span>
+                                                </div>
+                                            </div>
+
+                                        </div><!-- tb-c-wrap ended -->
+                                    </div><!-- summary-bx ended -->
+                                    <!-- summary-bx ended -->
+
+                                </div><!-- project-detail-summary ended -->
+
+                            </div>
+
+                            </div>
+
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="UserGrid" selectable="true">
+
+                                </div>
+                            </div>
+
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="TeamsGrid" selectable="true">
+
+                                </div>
+                            </div>
+
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="PropertyListGrid" selectable="true">
+
+                                </div>
+                            </div>
+
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="PeopleGrid" selectable="true">
+
+                                </div>
+                            </div>
+
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="TaskGrid" selectable="true">
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="tab-pane fade" id="floor-type">
+                                <div class="tab-content-title">Floor Types <a class="add-btn"  data-toggle="modal" ng-click="openNewFloorPopup()">+</a></div>
+
+                                <div class="unit-content-wrap" ng-repeat="user in builddetail">
+                                    <div class="unit-title">{{user.floor_type}}</div>
+
+                                    <div class="unit-bx" ng-repeat="floor in user.UnitList1">
+                                        <a ng-click="openNewFloorPopup(floor.id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                        <h3>Unit {{$index + 1}}</h3>
+
+                                        <div class="unit-content">
+                                            <div class="unit-img">
+                                                <img src={{floor.Image_Url_Unit1}} alt="" class="img-responsive" />
+                                            </div>
+                                            <div class="unit-info">
+                                                <div class="tb-c-wrap">
+                                                    <div class="tb-c">
+                                                        <h3>{{floor.unit_type_desc}}</h3>
+                                                        <div class="tb-sub">
+                                                            <span class="tb-sub-t tb-sub-t03"></span>
+                                                            <span class="tb-sub-txt">Carpet Area<span>{{floor.carpet_area}}</span></span>
+                                                        </div>
+                                                        <div class="tb-sub">
+                                                            <span class="tb-sub-t tb-sub-t02"></span>
+                                                            <span class="tb-sub-txt">Saleable Area<span>{{floor.super_built_up_area}}</span></span>
+                                                        </div>
+                                                        <!--<div class="tb-sub">
+                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                        <span class="tb-sub-txt">No.of bedrooms<span>{{floor.num_bedrooms}}</span></span>
+                                    </div>
+                                    <div class="tb-sub">
+                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                        <span class="tb-sub-txt">No.of bathrooms<span>{{floor.num_bathrooms}}</span></span>
+                                    </div>
+                                    <div class="tb-sub">
+                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                        <span class="tb-sub-txt">Car Park<span>{{floor.cark_park}}</span></span>
+                                    </div>
+                                    <div class="tb-sub">
+                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                        <span class="tb-sub-txt">Floor Rise<span>{{floor.floor_rise}}</span></span>
+                                    </div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- unit-bx ended -->
+                                    <!-- unit-bx ended -->
+                                    <!-- unit-bx ended -->
+
+                                </div><!-- unit-content-wrap ended -->
+                                <!-- unit-content-wrap ended -->
+                            </div>
+
+
+
+
+                            <div id="tower-type">
+
+                                <div class="tab-content-title">Tower Type <a class="add-btn"  data-toggle="modal" ng-click="openNewTowerPopup()">+</a></div>
+
+                                <div class="unit-content-wrap" ng-repeat="tower in built">
+                                    
+                                    <div class="unit-title">{{tower.tower_name}}</div>
+
+                                    <div class="unit-bx">
+                                        <a ng-click="openNewTowerPopup(tower.id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                        <div class="unit-content">
+
+                                            <div class="unit-img">
+                                                <img src="{{tower.Image_Url_Tower1}}" alt="" class="img-responsive" width="150" height="70" />
+                                            </div>
+
+                                            <div class="unit-info">
+                                                <div class="tb-c-wrap">
+                                                    <div class="tb-c">
+
+                                                        <div class="tb-sub" ng-repeat="wings in tower.WingList ">
+                                                            <span class="tb-sub-t tb-sub-t03"></span>
+                                                            <span class="tb-sub-txt">
+                                                                {{wings.wing_name}}
+                                                                {{wings.wing_code}}
+                                                                <span>{{wings.wing_no}}</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- unit-bx ended -->
+
+
+
+                                </div><!-- unit-content-wrap ended -->
+                                <!-- unit-content-wrap ended -->
+
+                            </div><!-- tower-type ended -->
+
+
+
+                            <div class="tab-pane" id="wing-type">
+
+                                <div class="tab-content-title tab-content-title-b">Add Wing<a class="add-btn"  ng-click="openNewWingPopup()" data-toggle="modal">+</a></div>
+
+                                <div class="unit-content-wrap">
+
+                                    <div class="unit-bx" ng-repeat="user in builder">
+                                        <a ng-click="openNewWingPopup(wing.id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                        <h3>{{user.wing_code}}</h3>
+                                        <div class="unit-content">
+                                            <div class="unit-img">
+                                                <img src="{{user.image_url_wing1}}" alt="" class="img-responsive" width="100" height="50" />
+                                            </div>
+                                            <div class="unit-info">
+                                                <div class="tb-c-wrap">
+                                                    <div class="tb-c">
+                                                        <div class="tb-sub" ng-repeat="wing in user.FloorList1 ">
+                                                            <span class="tb-sub-t tb-sub-t03"></span>
+                                                            <span class="tb-sub-txt">{{wing.unit_type_desc}}<span>{{wing.no_of_units}}</span></span>
+                                                        </div>
+                                                        <!--<div class="tb-sub">
+                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                        <span class="tb-sub-txt">{{user.floor_type_name}}   <span>{{user.no_of_floors}}</span></span>
+                                    </div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- unit-bx ended -->
+
+
+
+                                </div><!-- unit-content-wrap ended -->
+
+                            </div>
+
+
+                            <div class="tab-pane" id="unit-type">
+                                <div class="tab-content-title tab-content-title-b">Unit Type <a class="add-btn"  ng-click="openNewUnitPopup()" data-toggle="modal">+</a></div>
+
+                                <div class="unit-content-wrap">
+
+                                    <div class="unit-bx" ng-repeat="user in orgUsers">
+                                        <a ng-click="openNewUnitPopup(user.id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                        <div class="unit-content">
+                                            <div class="unit-img">
+                                                <img src="{{user.Image_Url}}" alt="" class="img-responsive" width="150" height="70" />
+                                            </div>
+                                            <div class="unit-info">
+                                                <div class="tb-c-wrap">
+                                                    <div class="tb-c">
+                                                        <h3>{{user.unit_type_desc}}</h3>
+                                                        <div class="tb-sub">
+                                                            <span class="tb-sub-t tb-sub-t03"></span>
+                                                            <span class="tb-sub-txt">Carpet Area<span>{{user.carpet_area}}</span></span>
+                                                        </div>
+                                                        <div class="tb-sub">
+                                                            <span class="tb-sub-t tb-sub-t02"></span>
+                                                            <span class="tb-sub-txt">Saleable Area<span>{{user.super_built_up_area}}</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- unit-bx ended -->
+                                </div><!-- unit-content-wrap ended -->
+                            </div>
+
+
+                            <div class="tab-pane fade" id="amenities">
+
+                            <div class="tab-content-title tab-content-title-b"><b>Society Amenities</b> <a data-toggle="modal" class="add-btn" ng-click="openNewAmenityPopup()">+</a></div>
+                            <div class="society-amenities-wrap clearfix">
+                                <ul class="list-unstyled society-amenities-list">
+                                    <li ng-repeat="amenity in orgAmenities">
+                                        <span class="amenities-ico amenities-ico01">
+                                            <img src="{{amenity.media_url}}" alt="" class="img-responsive" width="45" height="45" />
+                                            <h5>{{amenity.amenity_type_code}}</h5>
+                                        </span>
+                                    </li>
+
+                                </ul>
+                            </div><!-- society-amenities-wrap ended -->
+
+                        </div><!-- amenities ended -->
+
+                            <div class="tab-pane fade" id="gallery">
+                            <div class="properties-list">
+
+                                <div class="tab-content-title tab-content-title-b"><b>Images</b> <a data-toggle="modal" class="add-btn" ng-click="openNewGalleryPopup()">+</a></div>
+
+                                <div class="properties-bx-wrap clearfix">
+                                    <div class="properties-bx" ng-repeat="image in Gallery">
+                                        <div class="properties-bx-inner">
+                                            <div class="properties-img">
+                                                <img src={{image.media_url}} alt="" class="img-responsive" />
+                                            </div>
+                                            <a class="properties-close"><i class="fa fa-close"></i></a>
+                                            <a class="properties-name">{{:: image.media_name}}</a>
+                                        </div>
+                                    </div>
+
+                                </div><!-- properties-bx-wrap ended -->
+
+
+
+                            </div>
+                        </div><!-- gallery ended -->
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="paymentGrid" selectable="true">
+                                    <div style="padding: 1em" class="tab_content">
+                                        <div style="padding: 1em">
+                                            <div class="properties-list">
+                                                <div class="add-images-title">
+                                                    Payment Schemes
+                                                    <a href="#" class="add-images-btn"
+                                                       ng-click="openNewPaymentSchemePopup()"></a>
+                                                </div>
+                                                <div class="properties-bx-wrap">
+                                                    <div class="properties-bx" ng-repeat="image in images2D">
+                                                        <div class="properties-bx-inner">
+                                                            <div class="properties-img">
+                                                                <img src={{image.media_url}} alt="" class="img-responsive" />
+                                                            </div>
+                                                            <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                                                            <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                             </div>
                                         </div>
 
                                     </div>
-                                    <!-- properties-bx-wrap ended -->
-                                </div>
-                            </div>
-                            <div class="tab_style">
-                                <div class="div_pad">
-                                    <span class="tab_content_head">AREA</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Build-up Area</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.built_up_area}}
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Carpet Area</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">COST</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Agreement Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.agreement_cost}} K Per
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Total Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.total_cost}} Cr
-                                                        (negotiable)
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">ROOMS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bed Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bath_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bath Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pad2">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/kitchen.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Kitchen</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/guest_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Guest Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">OTHERS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date }}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-10 col-sm-10">
-                                            <img class="pull-left size_in_1024" src="assets/images/lift.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Lift</span><br />
-                                                <span class="tab_data_sub"><b>Available</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/power_backup.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Power Backup</span><br />
-                                                <span class="tab_data_sub"><b>Yes</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pad2">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/water_supply.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Water Supply</span><br />
-                                                <span class="tab_data_sub"><b>Municipal Water</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024"
-                                                 src="assets/images/gated_community.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Gated Community</span><br />
-                                                <span class="tab_data_sub"><b>Yes</b></span>
-                                            </div>
-                                        </div>
+
+                                    <div class="tb-box clearfix">
+                                        <div class="builder-item" ng-repeat="user in orgpayment">
+
+                                            <div class="tb-content clearfix">
+                                                <div class="tb-content-inner">
+                                                    <div class="clearfix">
+                                                      <!--ss="tb-possession"><span>{{user.project_phase}}</span>-->
+                                                    </div>
+                                                    <div class="pull-left">
+                                                        <div class="pull-left">
+
+
+                                                            <div class="tb-c-wrap">
+                                                                <div class="tb-c">
+                                                                    <h3>Type of Payment</h3>
+                                                                    <div class="tb-sub">
+                                                                        <span>{{user.type_of_payment}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tb-c">
+                                                                    <h3>Base Rate</h3>
+                                                                    <div class="tb-sub">
+                                                                        <span>{{user.base_rate}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tb-c">
+                                                                    <h3>Milestone</h3>
+                                                                    <div class="tb-sub">
+                                                                        <span>{{user.description}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tb-c">
+                                                                    <h3>Percentage</h3>
+                                                                    <div class="tb-sub">
+                                                                        <span>{{user.percentage}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div><!-- tab-content-inner ended -->
+                                            </div><!-- tab-content ended -->
+                                        </div><!-- tab-box ended -->
+
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="tab-pane fade" id="inventory">
+                            <div class="generate-inventory">
+                                <div class="btn-generate-wrap" id="gen-inventory">
+                                    <btn class="btn btn-generate"  ng-click="towerGrid()"> Generate Inventory</btn>
+                                    <btn class="btn btn-generate" ng-click="showTowergrid()">Show Inventory</btn>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-4">
+                                        <input type="hidden" name="Select Project" data-ng-model="params.country">
+
+                                        <select ng-change="selectTower()"
+                                                ng-model="tower1" class="dropdown form-control" required>
+                                            <option value="" selected>-- Choose Tower--</option>
+                                            <option ng-repeat="tower in towers"
+                                                    value="{{tower.id}}">
+                                                {{tower.tower_name}}
+                                            </option>
+
+                                        </select>
+
+
+
+
+                                    </div>
+                                </div><br /><br />
+                                
+                             
+                                
+                                <div class="inventory-list">
+                                    <ol>
+                                        <li>Create Unite Type</li>
+                                        <li>Create Floor Type</li>
+                                        <li>Create Tower</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            
                         </div>
 
 
 
-                        <div style="padding: 1em" class="tab_content">
-                            <div style="padding: 1em">
-                                <div class="properties-list">
-                                    <div class="add-images-title">
-                                        Add Tower Type
-                                        <a href="#" class="add-images-btn"
-                                           ng-click="openNewTowerPopup()"></a>
-                                    </div>
-                                    <div class="properties-bx-wrap">
-                                        <div class="properties-bx" ng-repeat="image in images2D">
-                                            <div class="properties-bx-inner">
-                                                <div class="properties-img">
-                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
-                                                </div>
-                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
-                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                    <!-- properties-bx-wrap ended -->
-                                </div>
-                            </div>
-                            <div class="tab_style">
-                                <div class="div_pad">
-                                    <span class="tab_content_head">AREA</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Build-up Area</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.built_up_area}}
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Carpet Area</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">COST</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Agreement Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.agreement_cost}} K Per
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Total Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.total_cost}} Cr
-                                                        (negotiable)
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">ROOMS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bed Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bath_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bath Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pad2">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/kitchen.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Kitchen</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/guest_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Guest Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">OTHERS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date }}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-10 col-sm-10">
-                                            <img class="pull-left size_in_1024" src="assets/images/lift.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Lift</span><br />
-                                                <span class="tab_data_sub"><b>Available</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/power_backup.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Power Backup</span><br />
-                                                <span class="tab_data_sub"><b>Yes</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pad2">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/water_supply.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Water Supply</span><br />
-                                                <span class="tab_data_sub"><b>Municipal Water</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024"
-                                                 src="assets/images/gated_community.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Gated Community</span><br />
-                                                <span class="tab_data_sub"><b>Yes</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                </div>
+            </div>
+        </div>
 
 
+    </div>
 
-                        <div style="padding: 1em" class="tab_content">
-                            <div style="padding: 1em">
-                                <div class="properties-list">
-                                    <div class="add-images-title">
-                                        Add Unit Type
-                                        <a href="#" class="add-images-btn"
-                                           ng-click="openNewUnitPopup()"></a>
-                                    </div>
-                                    <div class="properties-bx-wrap">
-                                        <div class="properties-bx" ng-repeat="image in images2D">
-                                            <div class="properties-bx-inner">
-                                                <div class="properties-img">
-                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
-                                                </div>
-                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
-                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <!-- properties-bx-wrap ended -->
-                                </div>
-                            </div>
-                            <div class="tab_style">
-                                <div class="div_pad">
-                                    <span class="tab_content_head">AREA</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Build-up Area</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.built_up_area}}
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Carpet Area</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">COST</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Agreement Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.agreement_cost}} K Per
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Total Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.total_cost}} Cr
-                                                        (negotiable)
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">ROOMS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bed Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bath_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bath Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pad2">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/kitchen.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Kitchen</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/guest_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Guest Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bathrooms}}</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">OTHERS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date }}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-10 col-sm-10">
-                                            <img class="pull-left size_in_1024" src="assets/images/lift.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Lift</span><br />
-                                                <span class="tab_data_sub"><b>Available</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/power_backup.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Power Backup</span><br />
-                                                <span class="tab_data_sub"><b>Yes</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pad2">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/water_supply.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Water Supply</span><br />
-                                                <span class="tab_data_sub"><b>Municipal Water</b></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024"
-                                                 src="assets/images/gated_community.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Gated Community</span><br />
-                                                <span class="tab_data_sub"><b>Yes</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="padding: 1em" class="tab_content">
-                            <div style="padding: 1em">
-                                <div class="properties-list">
-                                    <div class="add-images-title">
-                                        Add Wing Type
-                                        <a href="#" class="add-images-btn"
-                                           ng-click="openNewWingPopup()"></a>
-                                    </div>
-                                    <div class="properties-bx-wrap">
-                                        <div class="properties-bx" ng-repeat="image in images2D">
-                                            <div class="properties-bx-inner">
-                                                <div class="properties-img">
-                                                    <img src={{image.media_url}} alt="" class="img-responsive" />
-                                                </div>
-                                                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
-                                                <a href="#" class="properties-name">{{:: image.media_name}}</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <!-- properties-bx-wrap ended -->
-                                </div>
-                            </div>
-                            <div class="tab_style">
-                                <div class="div_pad">
-                                    <span class="tab_content_head">AREA</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/build_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Build-up Area</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.built_up_area}}
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/carpet_area.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Carpet Area</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.carpet_area}} sq.ft.</b></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">COST</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/agreement_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Agreement Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.agreement_cost}} K Per
-                                                        sq.ft.
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/total_cost.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Total Cost</span><br />
-                                                <span class="tab_data_sub">
-                                                    <b>
-                                                        {{::detail.total_cost}} Cr
-                                                        (negotiable)
-                                                    </b>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="div_pad">
-                                    <span class="tab_content_head">ROOMS</span><br />
-                                    <span class="tab_content_sub">Last Updated {{::detail.C__updatedAt | date}}</span>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                            <img class="pull-left size_in_1024" src="assets/images/bed_room.png" />
-                                            <div class="pull-left img_pad">
-                                                <span class="tab_data_head">Bed Room</span><br />
-                                                <span class="tab_data_sub"><b>{{::detail.num_bedrooms}}</b></span>
-                                                </div&gt..
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- property-content ended -->
-                        </div><!-- main-content ended -->
+</div>
+               

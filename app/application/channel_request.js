@@ -55,7 +55,7 @@
 
                           function (error) {
                               deferred.reject(error);
-                              alert("not working");
+                              //alert("not working");
                           });
           }
      

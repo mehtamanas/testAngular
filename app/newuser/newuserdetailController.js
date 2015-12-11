@@ -1,7 +1,8 @@
 ﻿angular.module('newuser')
 
+
 .controller('newuserdetailController',
-    function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope) {
+    function ($scope, $state, security, $cookieStore,$modal, apiService, $window, $rootScope) {
         console.log('newuserdetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
@@ -40,23 +41,31 @@
 
         //end
 
-        if ($scope.seletedCustomerId !== '') {
+        if ($scope.seletedCustomerId != "undefined") {
 
          //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-            GetUrl = "User/Get?ID=" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-
+            GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            //alert(GetUrl);
 
             apiService.get(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
+               // alert($scope.data);
            //     alert($scope.seletedCustomerId);
               
-
-                $scope.first_name = $scope.data.first_name;
-                $scope.last_name = $scope.data.last_name;
-                $scope.account_email = $scope.data.account_email;
-                $scope.account_phone = $scope.data.account_phone;
-                $scope.account_country = $scope.data.account_country;
+                
+                $scope.first_name = $scope.data[0].first_name;
+                $scope.last_name = $scope.data[0].last_name;
+                $scope.account_email = $scope.data[0].account_email;
+                $scope.account_phone = $scope.data[0].account_phone;
+                $scope.account_country = $scope.data[0].account_country;
+                $scope.street_1 = $scope.data[0].street_1;
+                $scope.role_name = $scope.data[0].role_name;
+                $scope.zip_code = $scope.data[0].zip_code;
+                $scope.state = $scope.data[0].state;
+                $scope.city = $scope.data[0].city;
+                $scope.media_url = $scope.data[0].media_url;
+               // alert($scope.media_url);
       
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
@@ -475,6 +484,7 @@
 
         };
 
+
         $scope.openUserPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -484,7 +494,8 @@
                 size: 'md'
             });
         };
-      
+
+       
 
 
     });

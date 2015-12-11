@@ -1,3 +1,4 @@
+
 /**
  * Created by dwellarkaruna on 27/10/15.
  */
@@ -120,18 +121,29 @@ angular.module('project')
                 buttonCount: 5
             },
             columns: [
+                {
+                    //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
+                    //"<span style='padding-left:10px' class='property-photo'> </span>",
+                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
+                    title: "COLUMN",
+                    width: "60px",
+                    attributes: {
+                        "class": "UseHand",
+
+                    }
+                },
 
                  {
-                     template: "<img height='40px' width='40px'  class='user-photo' src='#= Project_image #'/>" +
-                     "<span style='padding-left:10px' class='customer-name'> </span>",
-
-                    
+                     template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
+                     "<span style='padding-left:10px' class='property-photo'> </span>",
+                     title: "Logo",
                      width: "120px",
                      attributes: {
                          "class": "UseHand",
 
                      }
                  },
+
                {
                    //  template: "<img height='40px' width='40px'  class='user-photo' src='assets/images/image-2.jpg' />" +
                    //"<span style='padding-left:10px' class='customer-name'>#: first_name #</span>",
@@ -146,7 +158,7 @@ angular.module('project')
                    }
                }, {
                    field: "Description",
-                   title: "Description",
+                   title: "Location",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -154,7 +166,7 @@ angular.module('project')
                    }
                },{
                    field: "ProjectUserCnt",
-                   title: "User",
+                   title: "Unit Types",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -163,7 +175,7 @@ angular.module('project')
                },
                 {
                    field: "ProjectTeamCnt",
-                   title: "Team",
+                   title: "Total Units",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -171,7 +183,7 @@ angular.module('project')
                    }
                }, {
                    field: "Property_count",
-                   title: "Property Listing",
+                   title: "Available Units",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -179,7 +191,7 @@ angular.module('project')
                    }
                }, {
                    field: "People_count",
-                   title: "People",
+                   title: "Area",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -187,7 +199,7 @@ angular.module('project')
                    }
                }, {
                    field: "Task_count",
-                   title: "Task",
+                   title: "Price",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -195,6 +207,28 @@ angular.module('project')
                    }
                }]
         };
+        //$scope.Fruits = [{
+        //    Id: 1,
+        //    Name: 'ACTIONS'
+        //}, {
+        //    Id: 2,
+        //    Name: 'DELETE'
+        //}, {
+        //    Id: 3,
+        //    Name: 'EDIT'
+        //}
+        //];
+
+        //$scope.GetValue = function (fruit) {
+
+        //    var fruitId = $scope.ddlFruits;
+        //    var fruitName = $.grep($scope.Fruits, function (fruit) {
+        //        return fruit.Id == fruitId;
+        //    })[0].Name;
+
+        //    $cookieStore.put('Selected Text', fruitName);
+        //    // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
+        //}
 
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
@@ -266,8 +300,6 @@ angular.module('project')
                 size: 'md'
             });
         };
-
-
         function clearFilters() {
             var gridData = $("#peopleGrid").data("kendoGrid");
             gridData.dataSource.filter({});

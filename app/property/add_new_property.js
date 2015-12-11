@@ -1,4 +1,4 @@
-﻿var PropertyPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance) {
+﻿var PropertyPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal) {
     console.log('PropertyPopUpController');
 
     //Audit log start
@@ -44,7 +44,15 @@
         userid: $cookieStore.get('userId')
        
     };
-
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'newuser/sucessfull.tpl.html',
+            backdrop: 'static',
+            controller: sucessfullController,
+            size: 'md'
+        });
+    };
     
     
    
@@ -67,7 +75,8 @@
         //alert(param.state);
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
-            alert("Property Created..!!");
+            //alert("Property Created..!!");
+            $scope.openSucessfullPopup();
             $modalInstance.dismiss();
 
 

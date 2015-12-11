@@ -17,11 +17,11 @@
 
         // alert(param.name);
         apiService.get(projectUrl).then(function (response) {
-            $scope.builddetail = response.data;
-
+            $scope.builddetail2 = response.data;
+            $scope.builddetail = $scope.builddetail2[0];
         },
    function (error) {
-       alert("Error " + error.state);
+       console.log("Error " + error.state);
 
 
    }
@@ -30,20 +30,20 @@
 
         projectUrl = "Organization/GetBuilderDetails1?id=" +    $scope.seletedCustomerId;
 
-       alert(projectUrl);
+       
         apiService.get(projectUrl).then(function (response) {
             $scope.orgUsers = response.data;
 
         },
    function (error) {
-       alert("Error " + error.state);
+       console.log("Error " + error.state);
    }
         );
 
         $scope.openChannelPopup = function () {
             if ($cookieStore.get('userId') == undefined)
             {
-                alert("hi");
+                
                 $cookieStore.put('builderflow', "yes");
                 $state.go('login');
                 return;

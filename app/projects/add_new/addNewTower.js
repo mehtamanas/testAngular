@@ -1,4 +1,4 @@
-﻿var AddNewTowerController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $window) {
+﻿var AddNewTowerController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $window, $modal, $rootScope) {
     console.log('AddNewTowerController');
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -7,6 +7,14 @@
     var uploader = $scope.uploader = new FileUploader({
         url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
     });
+
+    var uploader1 = $scope.uploader1 = new FileUploader({
+        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+    });
+    var uploader2 = $scope.uploader2 = new FileUploader({
+        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+    });
+
 
     $scope.showProgress = false;
 
@@ -19,43 +27,138 @@
         }
     });
 
+    // FILTERS
+   
+    // FILTERS
+    uploader2.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+    });
 
+
+
+    
     projectUrl = "WingType/Get_Wing_Type?id=" + $scope.seletedCustomerId + "&orgID=" + orgID;
-
-   // alert(projectUrl);
+   // alert($scope.seletedCustomerId);
+   // alert(orgID);
+   //alert(projectUrl);
     apiService.get(projectUrl).then(function (response) {
         $scope.wings = response.data;
 
+
     },
 function (error) {
-    alert("Error " + error.state);
+    console.log("Error " + error.state);
 }
     );
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'newuser/sucessfull.tpl.html',
+            backdrop: 'static',
+            controller: sucessfullController,
+            size: 'md'
+        });
 
- //   alert($scope.seletedCustomerId);
+        $rootScope.$broadcast('REFRESH','tower');
+    };
+
+
+
+    var upload1 = 0;
+    var upload2 = 0;
+    var upload3 = 0;
+    $scope.media1 = "";
+    $scope.media2 = "";
+    $scope.media3= "";
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
+     uploadResult = response[0];
         // post image upload call the below api to update the database
-        var uploadResult = response[0];
+     upload1 = 1;
+     $scope.media1 = uploadResult.Location;
+     if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
+         $scope.finalpost()
+     }
 
+    };
+
+    // CALLBACKS
+    uploader1.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        uploadResult1 = response[0];
+
+        upload2 = 1;
+        $scope.media2 = uploadResult1.Location;
+        if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
+            $scope.finalpost()
+        }
+    };
+
+
+    // CALLBACKS
+    uploader2.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        uploadResult2 = response[0];
+
+        upload3 = 1;
+        $scope.media3 = uploadResult2.Location;
+        if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
+            $scope.finalpost()
+        }
+
+    };
+
+    $scope.finalpost = function () {
         // TODO: Need to get these values dynamically
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
-            media_name: uploadResult.Name,
-            media_url: uploadResult.Location,
+            media_name: "",
+            media_url: $scope.media1,
+            // media_name: uploadResult1.Name,
+            Media_3d_zip: $scope.media2,
+            Minimap: $scope.media3,
             class_type: "Tower",
             media_type: "Logo",
             id: window.sessionStorage.selectedCustomerID,
             tower_name: $scope.params.tower_name,
-            no_of_wings: $scope.params.no_of_wings
+            no_of_wings: $scope.params.no_of_wings,
+            Base_Price: $scope.params.Base_Price,
+            CarParkPrice: $scope.params.CarParkPrice,
+            FloorRise: $scope.params.FloorRise,
+            FloorRiseStartsFrom: $scope.params.FloorRiseStartsFrom
         };
 
         //alert(postData.city);
-        //alert(postData.media_url);
+        //alert(postData.media_url);.
+
         apiService.post("Tower/CreateTower", postData).then(function (response) {
             var loginSession = response.data;
-            alert("Tower Done...");
+            var towerupdate = [];
+            for (var i in $scope.wings) {
+                var newTower = {};
+                newTower.total_no_of_floors = $scope.wings[i].total_no_of_floors;
+                newTower.wing_code = $scope.wings[i].wing_code;
+                newTower.wingid = $scope.wings[i].id;
+                newTower.id = loginSession.id;
+                towerupdate.push(newTower);
+            }
+            apiService.post("Tower/TowerUpdate", towerupdate).then(function (response) {
+                var loginSession = response.data;
+                //  alert("Tower Updated...");
+                $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
+
+            },
+            function (error) {
+
+            });
+
+            //  alert("Tower Done...");
             $modalInstance.dismiss();
 
         },
@@ -63,36 +166,41 @@ function (error) {
 
         });
 
+
+
         //uploadService.postDataAfterUpload(postData).then(function () {
         //    // Process the successful file upload
         //    alert("project Created");
         //}, function (error) {
         //    alert('Error creating');
         //})
+    }
+
+    
+
+    uploader.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
     };
 
 
+    uploader1.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
+    };
 
-    //$scope.choices = [{}];
 
-    //$scope.addNewChoice = function () {
-    //    var newItemNo = $scope.choices.length + 1;
-    //    $scope.choices.push({ 'id': 'choice' + newItemNo });
-    //    alert($scope.choices.number);
-    //};
-
-    //$scope.showAddChoice = function (choice) {
-    //    return choice.id === $scope.choices[$scope.choices.length - 1].id;
-    //};
-
-    uploader.onErrorItem = function (fileItem, response, status, headers) {
-        alert('Unable to upload file.');
+    uploader2.onErrorItem = function (fileItem, response, status, headers) {
+        aleconsole.log('Unable to upload file.');
     };
 
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
         $scope.showProgress = false;
     };
-
+    uploader1.onCompleteItem = function (fileItem, response, status, headers) {
+        $scope.showProgress = false;
+    };
+    uploader2.onCompleteItem = function (fileItem, response, status, headers) {
+        $scope.showProgress = false;
+    };
 
 //    Url = "GetCSC/city";
 
@@ -191,7 +299,11 @@ function (error) {
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId'),
         tower_name: $scope.tower_name,
-        no_of_wings: $scope.no_of_wings
+        no_of_wings: $scope.no_of_wings,
+        Base_Price: $scope.Base_Price,
+        CarParkPrice: $scope.CarParkPrice,
+        FloorRise: $scope.FloorRise,
+        FloorRiseStartsFrom: $scope.FloorRiseStartsFrom
     };
 
     //var emp = {

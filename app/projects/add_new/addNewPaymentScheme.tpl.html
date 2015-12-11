@@ -1,0 +1,152 @@
+﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<div class="main-content project add-new">
+    <!--<h3 style="margin-left:30px">Add New Payment Schemes</h3>-->
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Add New Payment Schemes</h4>
+    </div>
+
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+        <form name="addNewForm" novalidate
+              data-ng-submit="addNew(addNewForm.$valid)"
+              autocomplete="off"
+              class="form-horizontal">
+
+            
+
+            <div class="form-group"
+                 data-ng-class="{
+                    'has-error' : addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid),
+                    'has-success': addNewForm.project_name.$valid && !addNewForm.project_name.$pristine
+                 }">
+                  <div class="row">
+                    <div class="col-xs-5" style="margin-left:30px">
+                        <label class="control-label">Payment Scheme name</label>
+                        <label class="label-group">
+                            <input class="form-control" 
+                                   placeholder="Payment Scheme name"
+                                   data-ng-model="params.Pay_Scheme_name"
+                                   minlength="1"
+                                   maxlength="20"
+                                   input-focus
+                                   required />
+                        </label>
+                        <div class="text-danger"
+                             data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.project_name.$focus">
+                            {{'Please enter valid project name' | translate }}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5">
+                        <label class="control-label">Base Rate for scheme</label>
+                        <label class="label-group">
+                            <input class="form-control"
+                                   placeholder="Base Rate"
+                                   data-ng-model="params.base_rate"
+                                   minlength="1"
+                                   maxlength="20"
+                                   input-focus
+                                   required />
+                        </label>
+                        <div class="text-danger"
+                             data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.project_name.$focus">
+                            {{'Please enter valid project name' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                
+                    <div class="row" ng-repeat="choice in choices">
+                       
+                         <div class="col-xs-5" style="margin-left:30px">
+                            <label class="control-label">Milestone</label>
+                            <label class="label-group">
+                                <input class="form-control"
+                                       placeholder="Milestone"
+                                       data-ng-model="choice.Milestone"
+                                       minlength="1"
+                                       maxlength="20"
+                                       input-focus
+                                       required />
+                            </label>
+                            <div class="text-danger"
+                                 data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.project_name.$focus">
+                                {{'Please enter valid project name' | translate }}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-5">
+                            <label class="control-label">Percentage</label>
+                            <label class="label-group">
+                                <input class="form-control"
+                                       placeholder="Percentage"
+                                       data-ng-model="choice.percentage"
+                                       minlength="1"
+                                       maxlength="20"
+                                       input-focus
+                                       required />
+                            </label>
+                            <div class="text-danger"
+                                 data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.project_name.$focus">
+                                {{'Please enter valid project name' | translate }}
+                            </div>
+                        </div><div id="add-address" class="add-input add-input2" ng-click="addNewChoice()"><a href="javascript:">add</a></div>
+                     </div>
+
+                    
+                
+                    <!--<div class="properties-list">
+                        <div class="add-images-title" style="margin-left:30px">
+                            
+                            <a href="#" class="add-images-btn"
+                               ng-click="addNewChoice()"></a>
+                        </div>
+                       
+                            <div class="properties-bx" ng-repeat="image in images2D">
+                                <div class="properties-bx-inner">
+                                    <div class="properties-img">
+                                        <img src={{image.media_url}} alt="" class="img-responsive" />
+                                    </div>
+                                    <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                                    <a href="#" class="properties-name">{{:: image.media_name}}</a>
+                                </div>
+                            </div>
+                         </div>-->
+
+                <div class="col-xs-4 col-sm-4">
+                    <div class="form-group">
+                        <div class="col-xs-9" style="margin-left:30px;margin-top:20px">
+                            <button  class="f-btn" type="submit">
+                                Save
+                                <span class="icon-arrowright"></span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4">
+                    <div class="form-group">
+                        <div class="col-xs-9" style="margin-top:20px">
+                            <button class="f-btn" type="submit" ng-click="cancel()">
+                                Cancel
+                                <span class="icon-arrowright"></span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                     
+
+                        
+                   
+                </div>
+               
+        </form>
+
+       
+    </div>
+</div>

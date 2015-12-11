@@ -57,11 +57,11 @@
       //  alert(param.name);
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
-            alert("partner Decline successfully..!!");
+            //alert("partner Decline successfully..!!");
             $modalInstance.dismiss();
         },
    function (error) {
-       alert("Error " + error.state);
+       console.log("Error " + error.state);
    });
     };
 

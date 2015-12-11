@@ -44,7 +44,7 @@ angular.module('app.guest.login')
                             return;
                         }
                 
-                        $state.go('app');
+                        $state.go('app.project');
                     }
                    
                 },

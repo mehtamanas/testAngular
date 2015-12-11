@@ -1,4 +1,10 @@
-﻿var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService) {
+﻿var uploader_done = false;
+var uploader1_done = false;
+var uploader2_done = false;
+var uploader3_done = false;
+
+
+var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal) {
     console.log('ProjectPopUpController');
 
 
@@ -7,50 +13,77 @@
         url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
     });
 
+    var uploader1 = $scope.uploader1 = new FileUploader({
+        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+    });
+    var uploader2 = $scope.uploader2 = new FileUploader({
+        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+    });
+    var uploader3 = $scope.uploader3 = new FileUploader({
+        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+    });
+
     $scope.showProgress = false;
+
+
+    getApi = function () {
+
+    };
+
+
+
 
     // FILTERS
     uploader.filters.push({
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
         }
     });
 
+    // FILTERS
+    uploader1.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+        }
+    });
+
+    // FILTERS
+    uploader2.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+        }
+    });
+
+    // FILTERS
+    uploader3.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+        }
+    });
+
+
+    
+
+
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
+       // alert("uploader called");
+        uploadResult = response[0];
+        uploader_done = true;
+
+        if (uploader_done==true && uploader1_done==true && uploader2_done==true && uploader3_done==true) {
+            callApi();
+        }
         // post image upload call the below api to update the database
-        var uploadResult = response[0];
 
-        // TODO: Need to get these values dynamically
-        var postData = {
-            userid: $cookieStore.get('userId'),
-            name: $scope.params.name,
-            organization_id: $cookieStore.get('orgID'),
-            media_name: uploadResult.Name,
-            media_url: uploadResult.Location,
-             class_type:"Project",
-             street_2: $scope.params.street_2,
-             media_type: "Logo",
-             city: $scope.params.city,
-             state: $scope.params.state,
-             ZipCode: $scope.params.ZipCode,
-            project_type: $scope.params.project_type
-        };
-
-        //alert(postData.city);
-        //alert(postData.media_url);
-        apiService.post("Project/ProjectAddress", postData).then(function (response) {
-            var loginSession = response.data;
-            alert("project done");
-            $modalInstance.dismiss();
-
-             },
-        function (error) {
-
-        });
-         
         //uploadService.postDataAfterUpload(postData).then(function () {
         //    // Process the successful file upload
         //    alert("project Created");
@@ -59,11 +92,137 @@
         //})
     };
 
+
+
+    // CALLBACKS
+    uploader1.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader1 called");
+        uploadResult1 = response[0];
+        uploader1_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+
+            callApi();
+        }
+    };
+
+    // CALLBACKS
+    uploader2.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader2 called");
+        uploadResult2 = response[0];
+        uploader2_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+            callApi();
+        }
+    };
+
+
+    // CALLBACKS
+
+    uploader3.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader3 called");
+        uploadResult3 = response[0];
+        uploader3_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+            callApi();
+          }
+    };
+
+
+    var called = false;
+    callApi = function () {
+        if (called == true){
+            return;}
+        called = true;
+        // TODO: Need to get these values dynamically
+        var postData = {
+            userid: $cookieStore.get('userId'),
+            name: $scope.params.name,
+            organization_id: $cookieStore.get('orgID'),
+            media_logo_name: uploadResult.Name,
+            media_url1: uploadResult.Location,
+            //media_home_name: uploadResult1.Name,
+            media_url2: uploadResult1.Location,
+            //media_project_name: uploadResult2.Name,
+            media_url3: uploadResult2.Location,
+           // media_name: uploadResult.Name,
+            media_url4: uploadResult3.Location,
+            possession_date: $scope.params.possession_date,
+            total_area: $scope.params.totalProjectArea,
+            year:$scope.params.project_year,
+            class_type: "Project",
+            street_2: $scope.params.street_2,
+            media_type: "Logo",
+            city: $scope.params.city,
+            state: $scope.params.state,
+            ZipCode: $scope.params.ZipCode,
+            project_type: $scope.params.project_type
+        };
+
+        //alert(postData.city);
+        //alert(postData.media_url);
+        apiService.post("Project/ProjectAddress", postData).then(function (response) {
+            var loginSession = response.data;
+              console.log("project done");
+            $modalInstance.dismiss();
+            $scope.openSucessfullPopup();
+
+        },
+        function (error) {
+
+        });
+
+        $scope.openSucessfullPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'newuser/sucessfull.tpl.html',
+                backdrop: 'static',
+                controller: sucessfullController,
+                size: 'md'
+            });
+        }
+
+
+        //uploadService.postDataAfterUpload(postData).then(function () {
+        //    // Process the successful file upload
+        //    alert("project Created");
+        //}, function (error) {
+        //    alert('Error creating');
+        //})
+    };
+
+
+
     uploader.onErrorItem = function (fileItem, response, status, headers) {
-        alert('Unable to upload file.');
+        console.log('Unable to upload file.');
+    };
+
+
+    uploader1.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
+    };
+
+
+    uploader2.onErrorItem = function (fileItem, response, status, headers) {
+      console.log('Unable to upload file.');
+    };
+
+    uploader3.onErrorItem = function (fileItem, response, status, headers) {
+       console.log('Unable to upload file.');
     };
 
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
+        $scope.showProgress = false;
+    };
+    uploader1.onCompleteItem = function (fileItem, response, status, headers) {
+        $scope.showProgress = false;
+    };
+    uploader2.onCompleteItem = function (fileItem, response, status, headers) {
+        $scope.showProgress = false;
+    };
+    uploader2.onCompleteItem = function (fileItem, response, status, headers) {
         $scope.showProgress = false;
     };
 
@@ -75,7 +234,7 @@
 
     },
 function (error) {
-    alert("Error " + error.state);
+    console.log("Error " + error.state);
 });
 
 
@@ -92,7 +251,7 @@ function (error) {
 
     },
 function (error) {
-    alert("Error " + error.state);
+    console.log("Error " + error.state);
 });
 
 
@@ -105,23 +264,23 @@ function (error) {
     $scope.selectapartment = function () {
         $scope.params.project_type ="Apartment"
 
-        alert($scope.params.project_type);
+        console.log($scope.params.project_type);
     };
 
 
     $scope.selecthome = function () {
         $scope.params.project_type ="Family And Home";
-        alert($scope.params.project_type);
+        console.log($scope.params.project_type);
     };
 
     $scope.selectvilla = function () {
         $scope.params.project_type = "Villa";
-        alert($scope.params.project_type);
+        console.log($scope.params.project_type);
     };
 
     $scope.selectplot = function () {
         $scope.params.project_type = "Plot";
-        alert($scope.params.project_type);
+        console.log($scope.params.project_type);
     };
 
 

@@ -5,11 +5,10 @@
     function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope) {
         console.log('ProjectDetailController');
 
-      
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+        var orgID = $cookieStore.get('orgID');
 
         $rootScope.title = 'Dwellar./ProjectDetails';
-        //Audit log start
         $scope.params = {
 
             device_os: "windows10",
@@ -26,7 +25,6 @@
             User_ID: $cookieStore.get('userId')
         };
 
-
         AuditCreate = function (param) {
 
             apiService.post("AuditLog/Create", param).then(function (response) {
@@ -39,65 +37,28 @@
         };
         AuditCreate($scope.params);
 
-        //end
+        callApis();//callall the Apis
 
+        $scope.openNewPaymentSchemePopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/addNewPaymentScheme.tpl.html',
+                backdrop: 'static',
+                controller: AddNewPaymentSchemeController,
+                size: 'md'
+            });
+        };
 
-
-         
         if ($scope.seletedCustomerId !== '') {
             //GetUrl = "http://dw-webservices-dev.azurewebsites.net/Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
-           GetUrl = "Project/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
-             
-            apiService.get(GetUrl).then(function (response) {
-
-                $scope.data = response.data;
-               
-                $scope.name = $scope.data[0].name;
-                $scope.description = $scope.data[0].description;
-                //$scope.people_type = $scope.data[0].people_type;
-                //$scope.date_of_birth = $scope.data[0].date_of_birth;
-                //$scope.who_am_i = $scope.data[0].who_am_i;
-                if ($scope.data[0].contact_mobile !== '') {
-                    $scope.mobile = $scope.data[0].contact_mobile;
-                }
-                if ($scope.data[0].contact_email !== '') {
-                    $scope.email = $scope.data[0].contact_Email;
-                }
-            },
-                        function (error) {
-                            deferred.reject(error);
-                           
-                        });
-        }
-
+           
         $scope.goToDocument = function () {
             $state.go('loggedIn.modules.project.document');
         };
 
-        $scope.goToUpload = function(){
+        $scope.goToUpload = function () {
             $state.go('loggedIn.modules.contact.upload');
         };
-
-        //floor
-        //var propertyId = window.sessionStorage.selectedCustomerID;
-        //var getPropertyDetail = function () {
-        //    propertyService.getPropertyDetail(propertyId).then(function (detail) {
-        //        $scope.detail = detail.data[0];
-
-        //        // Build address if it is not of free from type
-        //        if ($scope.detail.freeform_address) {
-        //            $scope.propertyAddress = $scope.detail.freeform_address_text;
-        //        }
-        //        else {
-        //            var address = $scope.detail.street_1 + ', ' + $scope.detail.street_2 + ', ' + $scope.detail.city
-        //                + ', ' + $scope.detail.state + ', ' + $scope.detail.country + ', ' + $scope.detail.zip_code;
-
-        //            $scope.propertyAddress = address;
-        //        }
-        //    })
-        //};
-        //getPropertyDetail();
-        //end
 
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
@@ -150,15 +111,10 @@
 
         }
 
-
         function clearFilters() {
             var gridData = $("#DocumentGrid").data("kendoGrid");
             gridData.dataSource.filter({});
         }
-        $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-       // alert($scope.seletedCustomerId);
-        var orgID = $cookieStore.get('orgID');
-
 
         $scope.openAddPopup = function () {
             //   alert("abc");
@@ -178,7 +134,7 @@
                 }
             });
         };
-   
+
         $scope.UserGrid = {
             dataSource: {
 
@@ -229,13 +185,12 @@
                 width: "120px"
             }]
         };
-    
-        $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+
         $scope.TeamsGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev.azurewebsites.net/Project/GetProjectTeamList/" + $scope.seletedCustomerId 
+                    read: "http://dw-webservices-dev.azurewebsites.net/Project/GetProjectTeamList/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -259,7 +214,7 @@
                 field: "name",
                 title: "Name",
                 width: "120px"
-            }, 
+            },
             {
                 field: "description",
                 title: "Description",
@@ -271,8 +226,8 @@
             dataSource: {
                 type: "json",
                 transport: {
-                 
-                    read: "http://dw-webservices-dev.azurewebsites.net/Project/GetProjectPropertyList/" +  $scope.seletedCustomerId 
+
+                    read: "http://dw-webservices-dev.azurewebsites.net/Project/GetProjectPropertyList/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
 
@@ -320,7 +275,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                   
+
                     read: "http://dw-webservices-dev.azurewebsites.net/Project/GetContactInProject/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
@@ -360,7 +315,7 @@
                 field: "contact_Email",
                 title: "Contact Email",
                 width: "50px"
-             
+
             }]
         };
 
@@ -396,11 +351,11 @@
                 field: "description",
                 title: "Description",
                 width: "120px"
-            },{
-                 field: "status",
-                 title: "Status",
-                 width: "120px"
-                 },
+            }, {
+                field: "status",
+                title: "Status",
+                width: "120px"
+            },
             {
                 field: "priority",
                 title: "priority",
@@ -420,8 +375,42 @@
                 clearFilters();
 
         };
+        
+        $scope.selectTower = function () {
+
+            $scope.params.project_id = $scope.tower1;
+
+            //alert($scope.params.project_id);
+            $cookieStore.put('tower_id', $scope.params.project_id);
 
 
+
+        };
+       
+        $scope.towerGrid = function () {
+
+            Url = "Floors/GenerateTowerGrid"
+
+
+            var postData = {
+                tower_id: $cookieStore.get('tower_id')
+            }
+            apiService.post(Url, postData).then(function (response) {
+
+                $scope.towerGrid = response.data;
+                $state.go('towerGrid');
+            },
+        function (error) {
+            alert("Error " + error.tower);
+        });
+
+
+        }
+        $scope.showTowergrid = function () {
+            $state.go('towerGrid');
+
+        }
+        
         $scope.openNewFloorPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -461,4 +450,228 @@
                 size: 'md'
             });
         };
-    }); 
+
+        $scope.openNewGalleryPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/gallery.html',
+                backdrop: 'static',
+                controller: AddNewGalleryController,
+                size: 'md'
+            });
+        };
+
+        //for tower drop town
+        Url = "Tower/GetByProjectID/" + $scope.seletedCustomerId;
+
+        apiService.get(Url).then(function (response) {
+            $scope.towers = response.data;
+
+        },
+    function (error) {
+        alert("Error " + error.tower);
+    });
+
+        $scope.openNewAmenityPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/amenities.html',
+                backdrop: 'static',
+                controller: AddNewAmenityController,
+                size: 'md'
+            });
+        };
+
+        function callApis() {
+
+
+
+            //calling Project Main api
+            projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.main = response.data;
+                $scope.image = $scope.main[0];
+
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+
+
+
+            //callingWingApi
+            projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.builder = response.data;
+
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+
+            //calling Tower
+            projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.built = response.data;
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+            //calling Amenities
+            projectUrl = "Amenities/GetAmenities?id=" + $scope.seletedCustomerId;
+            apiService.get(projectUrl).then(function (response) {
+                $scope.orgAmenities = response.data;
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+            //calling Floors
+            projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.builddetail = response.data;
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+            //calling Payment
+            projectUrl = "Payment/GetPayment_Schedule?id="+ $scope.seletedCustomerId;//a271ec67-642a-48a4-8552-84199c432962 ";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.orgpayment = response.data;
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+            //calling  unittype
+            projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.orgUsers = response.data;
+            },
+   function (error) {
+       console.log("Error " + error.state);
+   }
+        );
+
+            //calling getImage
+            projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+            apiService.get(projectUrl).then(function (response) {
+                $scope.Gallery = response.data;
+            },
+       function (error) {
+           console.log("Error " + error.state);
+       }
+            );
+
+            GetUrl = "Tower/GetTowerSummary?id=" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
+             apiService.get(GetUrl).then(function (response) {
+                 $scope.buildsummary = response.data;
+                     },
+                        function (error) {
+                            console.log("Error " + error.state);
+
+                        });
+        }
+
+        };
+
+        $scope.$on('REFRESH', function (event, args) {
+
+            if (args == 'unit') {
+                projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.orgUsers = response.data;
+                },
+                    function (error) {
+                        console.log("Error " + error.state);
+                    }
+                );
+            }
+
+            else if (args == 'wing') {
+                projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.builder = response.data;
+
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           }
+                );
+
+            }
+
+            else if (args == 'tower') {
+
+                projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.built = response.data;
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           });
+            }
+
+            else if (args == 'amenity') {
+                projectUrl = "Amenities/GetAmenities?id=" + $scope.seletedCustomerId;
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.orgAmenities = response.data;
+
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           });
+            }
+
+            else if (args == 'images') {
+
+                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.Gallery = response.data;
+
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           });
+
+            }
+
+            else if (args == 'floor') {
+
+                projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.builddetail = response.data;
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           });
+            }
+
+            else if (args == 'payment') {
+                projectUrl = "Payment/GetPayment_Schedule?id=" + $scope.seletedCustomerId;//a271ec67-642a-48a4-8552-84199c432962 ";
+                apiService.get(projectUrl).then(function (response) {
+                    $scope.orgpayment = response.data;
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           }
+                );
+                
+            }
+
+            $state.go('app.projectdetail', {}, { reload: false });
+            $scope.$apply();
+
+        });
+
+    });

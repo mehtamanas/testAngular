@@ -15,7 +15,7 @@
 
             },
                   function (error) {
-                      alert('Hi1');
+                      //('Hi1');
                       // deferred.reject(error);
                       return deferred.promise;
                   });
@@ -32,7 +32,7 @@
 
             },
              function (error) {
-                 alert('Hi5');
+//alert('Hi5');
                  // deferred.reject(error);
                  return deferred.promise;
              });

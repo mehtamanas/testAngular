@@ -1,0 +1,323 @@
+﻿<div class="main-content project add-new">
+    <h3>Add New Project</h3>
+    <h4>Upload Project Logo</h4>
+    <div class="row">
+        <div class="modal-body col-lg-3 col-md-3 col-sm-3" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="btn btn-primary"><input type="file" nv-file-select="false" nv-file-multiple="false" uploader="uploader"></div>
+                    <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                        <div class="panel-body image-upload-panel">
+                            <div class="row" ng-hide="uploader.queue.length">
+                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                    <span class="page-center">Drag And Drop your file here</span>
+                                </div>
+                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                            </div>
+                            <div class="row" ng-show="uploader.queue.length">
+                                <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                    <div ng-show="uploader.isHTML5"
+                                         ng-thumb="{ file: item._file, height: 200 }"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="modal-body col-lg-3 col-md-3 col-sm-3" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="btn btn-primary"><input type="file" nv-file-select="" uploader="uploader1"></div>
+                    <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                        <div class="panel-body image-upload-panel">
+                            <div class="row" ng-hide="uploader1.queue.length">
+                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                    <span class="page-center">Drag And Drop your file here</span>
+                                </div>
+                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                            </div>
+                            <div class="row" ng-show="uploader1.queue.length">
+                                <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
+                                    <div ng-show="uploader1.isHTML5"
+                                         ng-thumb="{ file: item._file, height: 200 }"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="modal-body col-lg-3 col-md-3 col-sm-3" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="btn btn-primary"><input type="file" nv-file-select="" uploader="uploader2"></div>
+                    <div class="panel panel-success" uploader="uploader2" nv-file-over="">
+                        <div class="panel-body image-upload-panel">
+                            <div class="row" ng-hide="uploader2.queue.length">
+                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                    <span class="page-center">Drag And Drop your file here</span>
+                                </div>
+                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                            </div>
+                            <div class="row" ng-show="uploader2.queue.length">
+                                <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
+                                    <div ng-show="uploader2.isHTML5"
+                                         ng-thumb="{ file: item._file, height: 200 }"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-body col-lg-3 col-md-3 col-sm-3" nv-file-drop="" uploader="uploader3" filters="queueLimit, customFilter">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="btn btn-primary"><input type="file" nv-file-select="" uploader="uploader3"></div>
+                    <div class="panel panel-success" uploader="uploader3" nv-file-over="">
+                        <div class="panel-body image-upload-panel">
+                            <div class="row" ng-hide="uploader3.queue.length">
+                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                    <span class="page-center">Drag And Drop your file here</span>
+                                </div>
+                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                            </div>
+                            <div class="row" ng-show="uploader3.queue.length">
+                                <div class="col-sm-6 last" ng-repeat="item in uploader3.queue">
+                                    <div ng-show="uploader3.isHTML5"
+                                         ng-thumb="{ file: item._file, height: 200 }"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <div>
+
+            <div class="progress" ng-show="showProgress">
+                <div class="progress-bar" role="progressbar"
+                     ng-style="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+        </div>
+        <form name="addNewForm" novalidate
+              data-ng-submit="addNew(addNewForm.$valid)"
+              autocomplete="off"
+              class="form-horizontal">
+
+
+            <div class="form-group">
+                <div class="col-xs-10">
+                    <label class="control-label">Project Name</label>
+                    <label class="label-group">
+                        <input autofocus name="project_name" class="form-control"
+                               placeholder="Project Name"
+                               data-ng-model="params.name"
+                               input-focus
+                               required />
+                    </label>
+                    <div class="text-danger"
+                         data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.project_name.$focus">
+                        {{'Please enter valid project name' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                    <label class="control-label">Total Project Area</label>
+                    <label class="label-group">
+                        <input autofocus name="totalProject_area" class="form-control"
+                               placeholder="Total Project Area"
+                               data-ng-model="params.totalProjectArea"
+                               input-focus
+                               required />
+                    </label>
+                    <div class="text-danger"
+                         data-ng-if="addNewForm.totalProject_area.$invalid && (!addNewForm.totalProject_area.$pristine || showValid) && !addNewForm.totalProject_area.$focus">
+                        {{'Please enter valid Total Area' | translate }}
+                    </div>
+                </div>
+
+
+                <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                    <label class="control-label">Possession Date</label>
+                    <label class="label-group">
+                        <input autofocus name="possession_date" class="form-control"
+                               placeholder="Select Month"
+                               data-ng-model="params.possession_date"
+                               input-focus
+                               required />
+                    </label>
+                    <div class="text-danger"
+                         data-ng-if="addNewForm.possession_date.$invalid && (!addNewForm.possession_date.$pristine || showValid) && !addNewForm.possession_date.$focus">
+                        {{'Please enter valid Possession Date' | translate }}
+                    </div>
+
+                </div>
+
+                <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                    <label class="control-label"></label>
+                    <label class="label-group">
+                        <input autofocus name="project_year" class="form-control"
+                               placeholder="Year"
+                               data-ng-model="params.project_year"
+                               input-focus
+                               required />
+                    </label>
+                    <div class="text-danger"
+                         data-ng-if="addNewForm.project_year.$invalid && (!addNewForm.project_year.$pristine || showValid) && !addNewForm.project_year.$focus">
+                        {{'Please enter valid Year' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <h4>Address</h4>
+            <br />
+            <div class="form-group">
+                <div class="col-xs-10">
+                    <label class="control-label">Street</label>
+                    <label class="label-group">
+                        <input type="text" autofocus name="street" class="form-control"
+                               placeholder="Street"
+                               data-ng-model="params.street_2"
+                               alphabets-only
+                               required />
+                    </label>
+                    <div class="text-danger"
+                         data-ng-if="addNewForm.street.$invalid && (!addNewForm.street.$pristine || showValid) && !addNewForm.street.$focus">
+                        {{ 'Please enter valid street name' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <label class="control-label">State</label>
+
+                    <div class="form-group">
+
+
+
+                        <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control" required>
+                            <option value="" selected>--Choose State--</option>
+                            <option ng-repeat="state in states"
+                                    value="{{state.state_id}}">
+                                {{state.state_name}}
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3">
+                    <label class="control-label">City</label>
+
+                    <div class="form-group">
+
+
+
+                        <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control" required>
+                            <option value="" selected>--Choose City--</option>
+                            <option ng-repeat="city in cities"
+                                    value="{{city.city_id}}">
+                                {{city.city_name}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-1"></div>
+                <div class="col-sm-3">
+                    <label class="control-label">Post</label>
+                    <div class="form-group">
+                        <div class="col-xs-10">
+                            <label class="label-group">
+                                <input type="text" name="Post" class="form-control"
+                                       placeholder="Post"
+                                       data-ng-model="params.ZipCode"
+                                       alphabets-only
+                                       ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                                       required />
+                            </label>
+                            <!--<label class="normal-message"
+                                   data-ng-if="!(addNewForm.zip.$invalid && (!newForm.zip.$pristine || showValid))">
+                                Required
+                            </label>-->
+                            <!--<div class="text-danger"
+                                 data-ng-if="addNewForm.zip.$invalid && (!addNewForm.zip.$pristine || showValid) && !addNewForm.zip.$focus">
+                                {{ 'Please enter valid zip' | translate }}
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Select Project Type</h4>
+            <div class="row">
+
+                <!--<div class="col-sm-1"></div>-->
+
+                <div class="col-sm-1"></div>
+                <img src="images/apartment.png" style="width:110px;height:100px;" ng-click="selectapartment()" />
+                <img src="images/family.png" style="width:110px;height:100px;" ng-click="selecthome()" />
+                <img src="images/plot.png" style="width:110px;height:100px;" ng-click="selectvilla()" />
+                <img src="images/villas.png" style="width:110px;height:100px;" ng-click="selectplot()" />
+
+
+            </div>
+            <br />
+            <div>
+
+                <button type="submit" class="btn  btn-default" ng-click="showProgress=true;uploadFiles()"
+                        ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length">
+                    <!--<span class="glyphicon glyphicon-upload"></span>--> Save
+                </button>
+                <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
+                <button class="btn  btn-default" type="button" ng-click="reset()">re
+Reset
+                
+                </button>
+                re
+                
+
+            </div>
+            re
+            
+ <!--<div class="col-sm-2"></div>-->
+            <!--<button class="btn organization-btn" type="submit">Save</button>
+            <button class="btn  btn-default" type="button" ng-click="reset()">Reset</button>
+            <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>-->
+
+
+
+        </form>
+
+    </div>
+</div>

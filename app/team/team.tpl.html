@@ -6,25 +6,39 @@
 
 <div id="main-content" class="col-xs-12">
     <div class="content-inner">
-        <div class="property-header">
-            <div class="row">
-                <div class="col-md-5">
-                    <h2 class="property-title">Teams</h2>
-                </div>
-                <button class="btn btn-default login-btn" ng-click="openTeamPopup()">Add New Team</button>
+        
+    <div class="pg-inner-header">
+        <div class="row">
+
+            <div class="col-md-12">
+                <h2 class="pg-inner-title">Teams</h2>
             </div>
+
         </div>
     </div>
-    <div class="teams-content">
-        <div class="content-inner teams-inner">
-            <div class="div_head_pad">
+        </div>
+    
+    <div class="pg-inner-content">
 
-                <div class="leads_group f_icon" id="record-content">
-                    <div id="peopleGrid" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
-                    </div>
+        <form action="">
 
+            <div class="clearfix">
+                
+
+                <div class="pull-right btn-wrap-right">
+                    <a href="#" class="btn-lk" ng-click="openTeamPopup()">+ Create New Team</a>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div id="record-content" class="properties-content">
+
+                <div id="project-record-list" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
+                </div>
+
+            </div><!-- record-content ended -->
+
+        </form>
+
+    </div><!-- pg-inner-content ended -->
+
 </div>

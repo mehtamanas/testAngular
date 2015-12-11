@@ -1,7 +1,7 @@
 angular.module('organization')
 
 .controller('OrganizationController',
-      function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope) {
+      function ($scope, $state, security, $cookieStore, $modal,apiService, $window, $rootScope) {
           console.log('OrganizationController');
           var orgID = $cookieStore.get('orgID');
           $rootScope.title = 'Dwellar./Organization';
@@ -19,21 +19,22 @@ angular.module('organization')
                   
                //   $scope.name = $scope.data[0].name;
                 //  $scope.organization_id = $scope.data[0].organization_id;
-                  $scope.name = $scope.data[0].name;
-                  $scope.address = $scope.data[0].address;
-                  $scope.email = $scope.data[0].email;
-                  $scope.divisions = $scope.data[0].divisions;
-                  $scope.phone_no = $scope.data[0].phone_no;
-                  $scope.list_in_builder_directory = $scope.data[0].list_in_builder_directory;
-                  $scope.pan_no = $scope.data[0].pan_no;
-                  $scope.tan_no = $scope.data[0].tan_no;
-                  $scope.service_tax_no = $scope.data[0].service_tax_no;
-                  $scope.cin_no = $scope.data[0].cin_no;
-                  $scope.first_month_of_financial_year= $scope.data[0].first_month_of_financial_year;
-                  $scope.language = $scope.data[0].language;
-                  $scope.timezone = $scope.data[0].timezone;
-                  if ($scope.data[0].contact_mobile !== '') {
-                  $scope.mobile = $scope.data[0].contact_mobile;
+                  $scope.name = $scope.data.name;
+                  $scope.address = $scope.data.address;
+                  $scope.email = $scope.data.email;
+                  $scope.divisions = $scope.data.divisions;
+                  $scope.description = $scope.data.description;
+                  $scope.phone_no = $scope.data.phone_no;
+                  $scope.list_in_builder_directory = $scope.data.list_in_builder_directory;
+                  $scope.pan_no = $scope.data.pan_no;
+                  $scope.tan_no = $scope.data.tan_no;
+                  $scope.service_tax_no = $scope.data.service_tax_no;
+                  $scope.cin_no = $scope.data.cin_no;
+                  $scope.first_month_of_financial_year= $scope.data.first_month_of_financial_year;
+                  $scope.language = $scope.data.language;
+                  $scope.timezone = $scope.data.timezone;
+                  if ($scope.data.contact_mobile !== '') {
+                  $scope.mobile = $scope.data.contact_mobile;
                   }
                  
               },
@@ -42,6 +43,41 @@ angular.module('organization')
                               alert("not working");
                           });
           }
+
+
+          Url = "Project/GetProjectCount/" + orgID;
+
+          apiService.get(Url).then(function (response) {
+
+              $scope.data1 = response.data;
+              $scope.project_count = $scope.data1[0].project_count;
+              $scope.user_count = $scope.data1[0].user_count;
+              
+
+          },
+      function (error) {
+          alert("Error " + error.state);
+      });
+
+
+          //if (orgID !== '') {
+
+          //    GetUrl = "Project/GetProjectCount/" + orgID;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+
+          //    apiService.get(GetUrl).then(function (response) {
+
+          //        $scope.data1 = response.data1;
+
+          //        $scope.project_count = $scope.data1[0].project_count;
+          //        $scope.user_count = $scope.data1.user_count;
+
+          //    },
+          //                function (error) {
+
+          //                    alert("not working");
+          //                });
+          //}
+             
           // Init model
           $scope.params = {
               name: ''
@@ -134,10 +170,18 @@ angular.module('organization')
               }
           };
 
-          $scope.editorg = function () {
 
-              $state.go('EditOrganization');
+          $scope.openEditOrgPopup = function () {
+              var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'organization/EditOrganization.tpl.html',
+                  backdrop: 'static',
+
+                  controller: EditOrgPopUpController,
+                  size: 'md'
+              });
           };
+         
       }
 
 );

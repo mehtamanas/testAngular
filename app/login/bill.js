@@ -78,7 +78,7 @@ angular.module('app.guest.login')//to chnage
                                                
                    },                                       
                    function (error) {
-                        alert("Error" + error.state);
+                       console.log("Error" + error.state);
                     });
         };
 
@@ -94,7 +94,7 @@ angular.module('app.guest.login')//to chnage
 
             },
                 function (error) {
-                    alert("Error" + error.state);
+                    console.log("Error" + error.state);
                 });
         };
 
@@ -114,7 +114,7 @@ angular.module('app.guest.login')//to chnage
 
             },
                 function (error) {
-                    alert("Error" + error.state);
+                    console.log("Error" + error.state);
                 });
             $state.go('thanks');
         };

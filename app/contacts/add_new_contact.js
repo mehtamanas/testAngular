@@ -96,6 +96,32 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
 
+    $scope.choices = [{ id: 'choice1' }];
+
+    $scope.addNewChoice = function () {
+        var newItemNo = $scope.choices.length + 1;
+        $scope.choices.push({ 'id': 'choice' + newItemNo });
+    };
+
+
+    $scope.choices1 = [{ id: 'choice1' }];
+
+    $scope.addNewChoice1 = function () {
+        var newItemNo1 = $scope.choices1.length + 1;
+        $scope.choices1.push({ 'id': 'choice' + newItemNo1 });
+    };
+
+
+    $scope.choices2 = [{ id: 'choice1' }];
+
+    $scope.addNewChoice2 = function () {
+        var newItemNo2 = $scope.choices1.length + 1;
+        $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
+    };
+
+
+
+
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
@@ -148,6 +174,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     });
 
+        
 
           $scope.selectcity = function () {
               $scope.params.city = $scope.city1;
@@ -204,8 +231,10 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                       $scope.showValid = true;
                   }
               }
-          
+
+           
           }
+
       
       };
    

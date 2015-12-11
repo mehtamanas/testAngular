@@ -12,23 +12,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title ng-bind="title">Dwellar</title>
     <meta name="description" content="">
-    <link href="assets/css/KendoGrid1.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
     <link rel='stylesheet' href='lib/angular-loading-bar/css/loading-bar.css' type='text/css' media='all' />
     <link rel="stylesheet" href="assets/css/styles.css"/>
-    <link rel="stylesheet" href="assets/css/dwellar-1.0.0.css"/>
 
     <link rel="stylesheet" href="lib/kendo/css/kendo.common.min.css">
     <!--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css">-->
-    <link rel="stylesheet" href="lib/kendo/css/kendo.material.min.css">
-
-    <link rel="stylesheet" href="assets/css/kendo-extended.css"/>
-
-
-    
+    <link rel="stylesheet" href="lib/kendo/css/kendo.material.min.css">  
     <link rel="stylesheet" href="assets/css/style.css" />
     
     <script src="http://kendo.cdn.telerik.com/2015.3.930/js/jquery.min.js"></script>
@@ -40,162 +33,163 @@
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 -->
-<script src="lib/jquery/jquery.js"></script>
-<script src="lib/angular/angular.min.js"></script>
-<script src="lib/angular-ui-router/angular-ui-router.min.js"></script>
-<script src="lib/angular-cookies/angular-cookies.min.js"></script>
-<script src="lib/angular-translate/angular-translate.min.js"></script>
-<script src="lib/bootstrap/bootstrap.min.js"></script>
-<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="lib/kendo/jszip.min.js"></script>
-<script src="lib/kendo/kendo.all.min.js"></script>
-<script src="lib/angular-loading-bar/loading-bar.js"></script>
-<script src="lib/ng-flow-standalone/ng-flow-standalone.min.js"></script>
-<script src="lib/restangular/restangular.min.js"></script>
+    <script src="lib/jquery/jquery.js" defer></script>
+    <script src="lib/angular/angular.min.js" defer></script>
+    <script src="lib/angular-ui-router/angular-ui-router.min.js" defer></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js" defer></script>
+    <script src="lib/angular-translate/angular-translate.min.js" defer></script>
+    <script src="lib/bootstrap/bootstrap.min.js" defer></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js" defer></script>
+    <script src="lib/kendo/jszip.min.js" defer></script>
+    <script src="lib/kendo/kendo.all.min.js" defer></script>
+    <script src="lib/angular-loading-bar/loading-bar.js" defer></script>
+    <script src="lib/ng-flow-standalone/ng-flow-standalone.min.js" defer></script>
+    <script src="lib/restangular/restangular.min.js" defer></script>
 
-<script src="lib/lodash/lodash.min.js"></script>
-<!--<script src="lib/angular-material/angular-material.js"></script>-->
-<!--<script src="lib/angular-animate/angular-animate.js"></script>-->
+    <script src="lib/lodash/lodash.min.js" defer></script>
+    <!--<script src="lib/angular-material/angular-material.js" defer></script>-->
+    <!--<script src="lib/angular-animate/angular-animate.js" defer></script>-->
 
-<script src="app.js"></script>
-<script src="common/configs.js"></script>
-<script src="common/commonModule.js"></script>
-<script src="common/homeController.js"></script>
-<script src="common/directives.js"></script>
+    <script src="app.js" defer></script>
+    <script src="common/configs.js" defer></script>
+    <script src="common/commonModule.js" defer></script>
+    <script src="common/homeController.js" defer></script>
+    <script src="common/directives.js" defer></script>
 
-<script src="login/api.js"></script>
-<script src="login/loginModule.js"></script>
-<script src="login/login.js"></script>
-<script src="login/security.js"></script>
-<script src="login/authorization.js"></script>
-<script src="login/interceptor.js"></script>
-<script src="login/retryQueue.js"></script>
-<script src="login/signup_free_account.js"></script>
-<script src="login/subscription.js"></script>
-<script src="login/organization.js"></script>
-<script src="login/bill.js"></script>
-<script src="login/subscriptionLimit.js"></script>
-<script src="login/sales_enquiries.js"></script>
-<script src="login/thanks.js"></script>
-<script src="login/builder_directory.js"></script>
-    <script src="login/builder_directory_detail.js"></script>
-    <script src="login/channelform.js"></script>
-    <script src="login/uploadService.js"></script>
+    <script src="login/api.js" defer></script>
+    <script src="login/loginModule.js" defer></script>
+    <script src="login/login.js" defer></script>
+    <script src="login/security.js" defer></script>
+    <script src="login/authorization.js" defer></script>
+    <script src="login/interceptor.js" defer></script>
+    <script src="login/retryQueue.js" defer></script>
+    <script src="login/signup_free_account.js" defer></script>
+    <script src="login/subscription.js" defer></script>
+    <script src="login/organization.js" defer></script>
+    <script src="login/bill.js" defer></script>
+    <script src="login/subscriptionLimit.js" defer></script>
+    <script src="login/sales_enquiries.js" defer></script>
+    <script src="login/thanks.js" defer></script>
+    <script src="login/builder_directory.js" defer></script>
+    <script src="login/builder_directory_detail.js" defer></script>
+    <script src="login/channelform.js" defer></script>
+    <script src="login/uploadService.js" defer></script>
+    <script src="login/Forgetpassword.js" defer></script>
 
-<script src="property/module.js"></script>
-<script src="property/propertyService.js"></script>
-<script src="property/detail/propertyDetailController.js"></script>
-<script src="property/propertylisting.js"></script>
-<script src="property/add_new_property.js"></script>
-
-
-<script src="contacts/module.js"></script>
-<script src="contacts/contactsController.js"></script>
-<script src="contacts/contactsService.js"></script>
-<script src="contacts/detail/contactDetailController.js"></script>
-<script src="contacts/add_new_contact.js"></script>
-<script src="contacts/uploadService.js"></script>
+    <script src="property/module.js" defer></script>
+    <script src="property/propertyService.js" defer></script>
+    <script src="property/detail/propertyDetailController.js" defer></script>
+    <script src="property/propertylisting.js" defer></script>
+    <script src="property/add_new_property.js" defer></script>
 
 
-<script src="lib/angular-swipebox/angular-swipebox.min.js"></script>
-<script src="lib/angular-swipebox/jquery.swipebox.min.js"></script>
-<script src="lib/angular-file-upload/angular-file-upload.min.js"></script>
-<link rel="stylesheet" href="lib/angular-swipebox/css/swipebox.min.css" />
+    <script src="contacts/module.js" defer></script>
+    <script src="contacts/contactsController.js" defer></script>
+    <script src="contacts/contactsService.js" defer></script>
+    <script src="contacts/detail/contactDetailController.js" defer></script>
+    <script src="contacts/add_new_contact.js" defer></script>
+    <script src="contacts/uploadService.js" defer></script>
 
 
-<script src=" projects/module.js"></script>
-<script src="projects/projectController.js"></script>
-<script src="projects/projectService.js"></script>
-<script src="projects/ProjectDetailController.js"></script>
-<script src="projects/add_new_project.js"></script>
-<script src="projects/users/addTeamControl.js"></script>
-<script src="projects/uploadService.js"></script>
-<script src="projects/detail/contactDetailController.js"></script>
-<script src="projects/add_new/addNewFloor.js"></script>
-    <script src="projects/add_new/addNewTower.js"></script>
-    <script src="projects/add_new/addNewUnit.js"></script>
-    <script src="projects/add_new/uploadService.js"></script>
-    <script src="projects/add_new/addNewWing.js"></script>
+    <script src="lib/angular-swipebox/angular-swipebox.min.js" defer></script>
+    <script src="lib/angular-swipebox/jquery.swipebox.min.js" defer></script>
+    <script src="lib/angular-file-upload/angular-file-upload.min.js" defer></script>
+    <link rel="stylesheet" href="lib/angular-swipebox/css/swipebox.min.css" />
 
 
-
-<script src="team/module.js"></script>
-<script src="team/team.js"></script>
-<script src="team/TeamDetailController.js"></script>
-<script src="team/teamService.js"></script>
-<script src="team/add_new_team.js"></script>
-<script src="team/users/addUsersControl.js"></script>
-
-    
-    <script src="newuser/module.js"></script>
-    <script src="newuser/newuser.js"></script>
-    <script src="newuser/newuserdetailController.js"></script>
-    <script src="newuser/newuserService.js"></script>
-    <script src="newuser/add_new_user.js"></script>
-    <script src="newuser/sucessfull.js"></script>
-    <script src="newuser/import_users.js"></script>
-    <script src="newuser/uploadService.js"></script>
-    <script src="newuser/upload.js"></script>
-    <script src="newuser/map.js"></script>
-    <script src="newuser/review.js"></script>
-    <script src="newuser/summary.js"></script>
-
-<script src="organization/module.js"></script>
-<script src="organization/organization.js"></script>
-<script src="organization/organizationService.js"></script>
-    <script src="organization/EditOrganization.js"></script>
-    
-<script src="subscription_list/module.js"></script>
-<script src="subscription_list/subscription_list.js"></script>
-<script src="subscription_list/subscription_listService.js"></script>
+    <script src=" projects/module.js" defer></script>
+    <script src="projects/projectController.js" defer></script>
+    <script src="projects/projectService.js" defer></script>
+    <script src="projects/ProjectDetailController.js" defer></script>
+    <script src="projects/add_new_project.js" defer></script>
+    <script src="projects/uploadService.js" defer></script>
+    <script src="projects/detail/contactDetailController.js" defer></script>
+    <script src="projects/add_new/addNewFloor.js" defer></script>
+    <script src="projects/add_new/addNewTower.js" defer></script>
+    <script src="projects/add_new/addNewUnit.js" defer></script>
+    <script src="projects/add_new/uploadService.js" defer></script>
+    <script src="projects/add_new/addNewWing.js" defer></script>
+    <script src="projects/add_new/amenities.js" defer></script>
+    <script src="projects/towerGrid.js" defer></script>
+    <script src="projects/add_new/gallery.js" defer></script>
+    <script src="projects/add_new/addNewPaymentScheme.js" defer></script>
 
 
-<script src="billing/module.js"></script>
-<script src="billing/billing.js"></script>
-<script src="billing/billingService.js"></script>
+    <script src="team/module.js" defer></script>
+    <script src="team/team.js" defer></script>
+    <script src="team/add_new_team.js" defer></script>
+    <script src="team/users/addUsersControl.js" defer></script>
 
 
-<script src="channel_partners/module.js"></script>
-<script src="channel_partners/Channel_Partners.js"></script>
-<script src="channel_partners/channerlpartnerService.js"></script>
-<script src="channel_partners/channelform.js"></script>
-
- <!--<script src="channelform/channelController.js"></script>
- <script src="channelform/channelform.js"></script>
- <script src="channelform/module.js"></script>
- <script src="channelform/uploadService.js"></script>-->
-
-
-<script src="audit/module.js"></script>
-<script src="audit/audit.js"></script>
-<script src="audit/auditService.js"></script>
-
-
-<script src="report/module.js"></script>
-<script src="report/report.js"></script>
-<script src="report/reportService.js"></script>
-
-    <script src="application/module.js"></script>
-    <script src="application/applicationService.js"></script>
-    <script src="application/application.js"></script>
-    <script src="application/accept.js"></script>
-    <script src="application/channel_request.js"></script>
-    <script src="application/decline.js"></script>
-
-    <script src="current/module.js"></script>
-    <script src="current/currentService.js"></script>
-    <script src="current/current.js"></script>
-  
-
-<script src="teams/teamsModule.js"></script>
-<script src="teams/teamsController.js"></script>
-<script src="teams/teamsService.js"></script>
-<script src="teams/detail/teamsDetailController.js"></script>
-<script src="teams/detail/users/addUsersControl.js"></script>
+    <script src="newuser/module.js" defer></script>
+    <script src="newuser/newuser.js" defer></script>
+    <script src="newuser/newuserdetailController.js" defer></script>
+    <script src="newuser/newuserService.js" defer></script>
+    <script src="newuser/add_new_user.js" defer></script>
+    <script src="newuser/sucessfull.js" defer></script>
+    <script src="newuser/import_users.js" defer></script>
+    <script src="newuser/uploadService.js" defer></script>
+    <script src="newuser/upload.js" defer></script>
+    <script src="newuser/map.js" defer></script>
+    <script src="newuser/review.js" defer></script>
+    <script src="newuser/summary.js" defer></script>
+    <script src="newuser/edituser.js" defer></script>
+    <script src="newuser/option.js" defer></script>
 
 
-<!--upload module-->
-<script src="property/detail/upload/imageUpload/imageUploadCtrl.js"></script>
-<script src="property/detail/upload/videoUpload/videoUploadCtrl.js"></script>
+    <script src="organization/module.js" defer></script>
+    <script src="organization/organization.js" defer></script>
+    <script src="organization/organizationService.js" defer></script>
+    <script src="organization/EditOrganization.js" defer></script>
+
+    <script src="subscription_list/module.js" defer></script>
+    <script src="subscription_list/subscription_list.js" defer></script>
+    <script src="subscription_list/subscription_listService.js" defer></script>
+
+
+    <script src="billing/module.js" defer></script>
+    <script src="billing/billing.js" defer></script>
+    <script src="billing/billingService.js" defer></script>
+
+
+    <script src="channel_partners/module.js" defer></script>
+    <script src="channel_partners/Channel_Partners.js" defer></script>
+    <script src="channel_partners/channerlpartnerService.js" defer></script>
+    <script src="channel_partners/channelform.js" defer></script>
+
+    <!--<script src="channelform/channelController.js" defer></script>
+    <script src="channelform/channelform.js" defer></script>
+    <script src="channelform/module.js" defer></script>
+    <script src="channelform/uploadService.js" defer></script>-->
+
+
+    <script src="audit/module.js" defer></script>
+    <script src="audit/audit.js" defer></script>
+    <script src="audit/auditService.js" defer></script>
+
+
+    <script src="report/module.js" defer></script>
+    <script src="report/report.js" defer></script>
+    <script src="report/reportService.js" defer></script>
+
+    <script src="application/module.js" defer></script>
+    <script src="application/applicationService.js" defer></script>
+    <script src="application/application.js" defer></script>
+    <script src="application/accept.js" defer></script>
+    <script src="application/channel_request.js" defer></script>
+    <script src="application/decline.js" defer></script>
+
+    <script src="current/module.js" defer></script>
+    <script src="current/currentService.js" defer></script>
+    <script src="current/current.js" defer></script>
+
+
+    <script src="teams/teamsService.js" defer></script>
+    <script src="teams/detail/teamsDetailController.js" defer></script>
+
+
+    <!--upload module-->
+    <script src="property/detail/upload/imageUpload/imageUploadCtrl.js" defer></script>
+    <script src="property/detail/upload/videoUpload/videoUploadCtrl.js" defer></script>
 </body>
 </html>
