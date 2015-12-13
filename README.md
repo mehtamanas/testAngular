@@ -1,5 +1,5 @@
-# Angular-Master
-* All Angular code is to be checked into this repository. Do not check in any other code into this repo. 
-* Only commit code files you are ready to publish. Do not commit files which are not ready to be published.
-* Do not commit files such as exe's, images etc. Your .gitignore will take care of this already. Do not modify the .gitignore. 
-* Everyone except admins should check into the branch with their own name. **DO NOT** check into any other branch.
+# Angular
+* All AngularJS code is to be checked into this repository. Do not check in any other code into this repo. 
+* Commit files to your local repo throughout the day.
+* If you are not a lead, submit a merge request when you are ready to share your code. 
+* If you are a lead, review and accept merge requests and push to the right release branch regularly. 
