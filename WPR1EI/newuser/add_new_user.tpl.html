@@ -1,0 +1,108 @@
+
+
+<div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- modal-header ended -->
+
+            <div class="modal-body">
+                
+
+                    <h4 class="modal-title" id="exampleModalLabel">Create New User</h4>
+               
+                <div class="close-btn-wrap">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form class="form-content" name="newForm" autocomplete="off" novalidate
+                      data-ng-submit="addNewUser(newForm.$valid)">
+
+                   
+
+                    <div class="clearfix">
+
+                        <div class="form-bx">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                                        'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
+                                                                        'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
+                                                                    }">
+                                <input type="text" autofocus name="firstName" class="form-control"
+                                       placeholder="First Name"
+                                       data-ng-model="params.first_name"
+                                       minlength="1"
+                                       maxlength="40"
+                                       alphabets-only
+                                       input-focus
+                                       required
+                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                <div class="text-danger"
+                                     data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
+                                    {{ 'Please enter alphabets only' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-mdl field-req">*</div>
+
+                        <div class="form-bx">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                                        'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
+                                                                        'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
+                                                                     }">
+                                <input type="text" name="lastName" class="form-control"
+                                       placeholder="Last Name"
+                                       data-ng-model="params.last_name"
+                                       minlength="1"
+                                       maxlength="50"
+                                       alphabets-only
+                                       input-focus
+                                       required
+                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                <div class="text-danger"
+                                     data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
+                                    {{ 'Please enter alphabets only' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group"
+                         data-ng-class="{
+                                                               'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
+                                                               'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
+                                                              }">
+                        <div id="email-wrap" class="clearfix">
+                            <div id="email-no" class="form-bx form-bx2">
+                                <input type="email" name="email" class="form-control"
+                                       placeholder="Email Address"
+                                       data-ng-model="params.account_email"
+                                       minlength="1"
+                                       maxlength="30"
+                                       input-focus
+                                       ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
+                                       required />
+                                <div class="text-danger"
+                                     data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
+                                    {{ 'Please enter valid email' | translate }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                 
+                    
+                    <div class="modal-btn-wrap clearfix">
+                        <button class="f-btn" type="submit">Save and Send Invitation</button>
+                       
+                            
+                   </div>
+
+                </form>
+            </div><!-- modal-body ended -->
+
+        </div>
+    </div>
+</div><!-- modal ended -->

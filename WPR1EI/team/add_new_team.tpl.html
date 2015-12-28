@@ -1,0 +1,111 @@
+<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<!--<div class="main-content project add-new">
+    <h3>Add New Team</h3>
+
+    <form name="addNewForm" novalidate
+          data-ng-submit="addNew(addNewForm.$valid)"
+          autocomplete="off"
+          class="form-horizontal">
+
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid),
+                    'has-success': addNewForm.name.$valid && !addNewForm.name.$pristine
+                 }">
+            <div class="col-xs-11">
+                <label class="control-label">Team Name</label>
+                <label class="label-group">
+                    <input type="text" autofocus name="name" class="form-control"
+                           placeholder="Team Name"
+                           data-ng-model="params.name"
+                           minlength="1"
+                           maxlength="50"
+                           alphabets-only
+                           required
+                           ng-pattern="/^[a-zA-Z\s]*$/" />
+                </label>
+                <div class="text-danger"
+                     data-ng-if="addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus">
+                    {{ 'Please enter alphabets only' | translate }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group"
+             data-ng-class="{
+                    'has-error' : addNewForm.description.$invalid && (!addNewForm.description.$pristine || showValid),
+                    'has-success': addNewForm.description.$valid && !addNewForm.description.$pristine
+                 }">
+            <div class="col-xs-11">
+                <label class="control-label">Team Description</label>
+                <label class="label-group">
+                    <textarea class="form-control" cols="83" rows="10" name="description"
+                              placeholder="Team Description"
+                              data-ng-model="params.description"
+                              minlength="1"
+                              maxlength="500"
+                              alphabets-only
+                              input-focus
+                              required></textarea>
+                </label>
+                <div class="text-danger"
+                     data-ng-if="addNewForm.description.$invalid && (!addNewForm.description.$pristine || showValid) && !addNewForm.description.$focus">
+                    {{'Please enter Team desc.' | translate }}
+                </div>
+            </div>
+        </div>
+
+
+        <button class="btn organization-btn" type="submit">Save</button>
+        <button class="btn  btn-default" type="button" ng-click="reset()">Reset</button>
+        <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </form>
+</div>-->
+
+<div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="close-btn-wrap">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                    <h4 class="form-title">Add New Team</h4>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx8">
+                            <label for="">Team Name</label>
+                            <input type="text" class="form-control text-bold" autofocus name="name"
+                                   placeholder="Team Name"
+                                   data-ng-model="params.name"
+                                   minlength="1"
+                                   maxlength="50"
+                                   input-focus
+                                   required
+                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx8">
+                            <label for="">Team Description</label>
+                            <textarea cols="100" rows="10" name="description"
+                                   placeholder="Team Description"
+                                   data-ng-model="params.description"
+                                   minlength="1"
+                                   maxlength="500"
+                                   input-focus
+                                   required />
+                        </div>
+                    </div>
+                    <div class="modal-btn-wrap clearfix">
+                        <!--<button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()"
+                                ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length && !uploader3.getNotUploadedItems().length">
+                            Save
+                        </button>-->
+                        <button type="submit" class="f-btn">Save</button>
+                        
+                        <button type="button" class="f-btn" ng-click="cancel()">CANCEL</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,104 @@
+<div class="container-fluid property_detail_page">
+    <div id="header" class="navbar-fixed-top clearfix">
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div class="logo logo_center">
+                    <a href="/index.html#/home">
+                        <img src="assets/images/logo.png" alt="" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 center_alignment">
+                <ul class="list-inline right_alignment">
+                    <li class="notification_part">
+                        <img src="assets/images/notification.png">
+                        <sup>
+                            <img src="assets/images/ellipse.png" style="margin-left:-10px;" />
+                        </sup>
+                    </li>
+                    <li>
+                        <div class="pull-right user-sec">
+                            <div class="dropdown">
+                                <a id="user-dropdown" data-target="#" href="/index.html#/home" data-toggle="dropdown">
+                                    <span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar
+                                    <!--<a href="/index.html#/home"><span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar</a>-->
+                                    <!--<i class="fa fa-angle-down"></i>-->
+                                </a>
+
+
+                                <!--<ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Account Setting</a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+            </ul>-->
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!--<div class="">
+                            <a href="#"><img src="assets/images/new_property.png" class="property_image"/></a>
+                        </div>-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- header ended -->
+    <div id="content">
+        <div class="row">
+            <div id="sidebar" class="col-xs-12">
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a ui-sref="app.property" href="">
+                                    <span class="nav-icon nav-01"></span>
+                                    Properties
+                                </a>
+                            </li>
+                            <li ng-if="projects.read"><a href="#" ui-sref="app.project"><span class="nav-icon nav-01"></span> Projects</a></li>
+                            <li ng-if="users.read"><a href="#" ui-sref="app.newuser"><span class="nav-icon nav-02"></span> Users</a></li>
+                            <li ng-if="teams.read"><a href="#" ui-sref="app.team"><span class="nav-icon nav-05"></span> Teams</a></li>
+                            <li ng-if="true"><a href="#" ui-sref="app.subscription_list"><span class="nav-icon nav-05"></span> Subscription List</a></li>
+                            <li ng-if="billing.read"><a href="#" ui-sref="app.billing"><span class="nav-icon nav-05"></span> Billing</a></li>
+                            <li ng-if="contacts.read"><a href="#" ui-sref="app.contacts"><span class="nav-icon nav-05"></span> Contact</a></li>
+                            <li ng-if="organization.read"><a href="#" ui-sref="app.organization"><span class="nav-icon nav-07"></span> Organization</a></li>
+                            <li ng-if="plot.read"><a href="#" ui-sref="app.plot"><span class="nav-icon nav-07"></span>Plot</a></li>
+                            <li ng-if="reports.read"><a href="#" ui-sref="app.report"><span class="nav-icon nav-03"></span> Reports</a></li>
+                            <li ng-if="channelPartners.read"><a href="#" ui-sref="app.channel_partners"><span class="nav-icon nav-07"></span> Channel Partners</a></li>
+                            <li ng-if="plot.read"><a href="#" ui-sref="app.plot"><span class="nav-icon nav-07"></span>Plot</a></li>
+                            <li ng-if=""><a href="#" ui-sref="app.application"><span class="nav-icon nav-07"></span> Application</a></li>
+                            <li ng-if=""><a href="#" ui-sref="app.current"><span class="nav-icon nav-07"></span> Current</a></li>
+                            <li ng-if="auditTrail.read"><a href="#" ui-sref="app.audit"><span class="nav-icon nav-07"></span> Audit</a></li>
+                            <li ng-if="reports.read"><a href="#" ui-sref="app.report"><span class="nav-icon nav-03"></span> Reports</a></li>
+                            <li ng-if="">
+                                <a href="#"><span class="nav-icon nav-04"></span> Builder Directory</a>
+                            </li>
+
+                            <li ng-if="notifications.read"><a href="#"><span class="nav-icon nav-06"></span> Messages</a></li>
+
+                            <li ng-if=""><a href="#"><span class="nav-icon nav-08"></span> Security</a></li>
+                            <li><a href="#"><span class="nav-icon nav-09"></span> Support</a></li>
+                            <!--<li><a href="#" ng-click="logout()"><span class="nav-icon nav-04"></span> Log Out</a>-->
+                            <!--<li><a href="#" ng-click="logout()"><span class="nav-icon nav-03"></span> LogOut</a></li>-->
+                            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+            </div>
+            <!-- sidebar ended -->
+            <div ui-view></div>
+        </div>
+    </div>
+</div>
+<hr>

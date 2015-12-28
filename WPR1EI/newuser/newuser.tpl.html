@@ -1,0 +1,57 @@
+<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <!--<div class="property-header">-->
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-header">Users</h2>
+                    <!--<select ng-model="ddlFruits" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                            ng-change="GetValue()"></select>-->
+                </div>
+
+                <!--<button class="btn btn-default login-btn" ng-click="openUserPopup()">Add New User</button>
+                <button class="btn btn-default login-btn" ng-click="openImportUserPopup()">Import Users</button>-->
+
+            </div>
+        </div>
+    </div>  
+    
+    <div class="pg-inner-content">
+
+        <form action="">
+
+            <div class="clearfix">
+                <div class="pull-left actions-wrap">
+                    
+                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                            ng-change="GetValue();addUser()" >
+                    <option value="" selected>-- Action --</option>
+                    </select>
+                </div>
+
+                <div class="pull-right btn-wrap-right">
+                    <a href="#" id="btnSave" class="btn-lk" ng-click="openUserPopup()">+ Create New User</a>
+                    <a href="#" class="btn-lk" ng-click="openImportUserPopup()">+ Import Users</a>
+                   
+                </div>
+            </div>
+
+            <div id="record-content" class="properties-content">
+
+                <div id="project-record-list" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
+                </div>
+               
+
+            </div><!-- record-content ended -->
+            <br />
+            <!--<a href="#" class="btn-lk" addUser()">Show checked</a>-->
+
+        </form>
+
+    </div>
+</div>

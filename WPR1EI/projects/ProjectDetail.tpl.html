@@ -1,0 +1,463 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Project Details</h2>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="pg-inner-content">
+
+                <div class="project-detail">
+
+                    
+                    <div class="project-detail-info">
+                     
+                        <div class="project-detail-photo">
+                          
+                            <img src={{image.media_url}} alt="" class="img-responsive" />
+                        </div>
+                      
+                        <div class="project-detail-txt">
+                            <a ng-click="openEditProjectPopup()" data-toggle="modal"><span class="edit-icon"></span></a>
+
+                            <div class="project-name">Project Name:  {{image.name}} </div>
+                            <div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.ZipCode}}</div>
+                            <div class="project-d02">Street:{{image.Street_1}} {{image.Street_2}}</div>
+                            <div class="project-d02">Possession Date: {{image.possesion_date}}</div>
+                            <div class="project-d03">Project Website: {{image.project_website}}</div>
+                            <div class="project-d03">Company Website:{{image.builder_website}}</div>
+
+                        </div>
+                    </div> <!-- project-detail-info ended -->   
+
+
+
+                    <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                            <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">Essential</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                            <!--<li><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>-->
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TOWER TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">WING TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">FLOOR TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">UNIT TYPE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">CONTACTS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">GALLERY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">AMENITIES</a></li>
+                         </ul>
+
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade in active" id="summary">
+
+                                <div class="project-detail-summary">
+
+                                    <div class="summary-bx" ng-repeat="sum in buildsummary">
+                                        <div class="summary-title"><span>{{::$index+1}}</span>{{::sum.tower_name}} </div>
+
+                                        <div class="tb-c-wrap">
+
+                                            <div class="tb-c"  ng-repeat="summery in sum.UnitList1" >
+                                                <h3>{{::summery.unit_type_desc}}</h3>
+
+                                                <div class="tb-sub">
+                                                    <span class="tb-sub-t tb-sub-t01"></span>
+                                                    <span class="tb-sub-txt">Carpet Area<span>{{::summery.carpet_area}} sq.ft</span></span>
+                                                </div>
+                                                <div class="tb-sub">
+                                                    <span class="tb-sub-t tb-sub-t02"></span>
+                                                    <span class="tb-sub-txt"> Saleable Area<span>{{::summery.super_built_up_area}} sq.ft</span></span>
+                                                </div>
+                                            </div>
+
+                                        </div><!-- tb-c-wrap ended -->
+                                    </div><!-- summary-bx ended -->
+                                    <!-- summary-bx ended -->
+
+                                </div><!-- project-detail-summary ended -->
+
+                            </div>
+
+                            </div>  <!--Summmary-->
+
+
+                        <div style="padding: 1em" class="tab_content">
+                            <div class="tab_style">
+                                <div class="div_pad">
+
+
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                            <div class="row">
+
+                                                <div class="pull-left tb-box-img" >
+                                                    <h4>Project_Logo</h4>
+                                                    <img src="{{media_url1}}" alt="" width="218" height="160"  />
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="pull-left tb-box-img" style="float:left;">
+                                                    <h4>Project_Home_Page Image</h4>
+                                                    <img src="{{media_url2}}" alt="" width="218" height="160"  />
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="pull-left tb-box-img" style="float:left;">
+                                                    <h4>Project_Thumb_2D</h4>
+                                                    <img src="{{media_url3}}" alt="" width="218" height="160"  />
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                                <div class="pull-left tb-box-img" style="float:left;">
+                                                    <h4>Project 3D Image</h4>
+                                                    <img src="{{media_url4}}" alt="" width="218" height="160"  />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> <!--Essential-->
+
+
+                        <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="UserGrid" selectable="true">
+
+                                </div>
+                            </div>  <!--User-->
+
+
+                        <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="TeamsGrid" selectable="true">
+
+                                </div>
+                            </div> <!--Teams--> 
+
+
+                        <!--<div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="PropertyListGrid" selectable="true">
+
+                                </div>
+                            </div>-->  <!--Property-->
+
+                        <div id="tower-type">
+
+                            <div class="tab-content-title">Tower Type <a id="btnAdd" class="add-btn" data-toggle="modal" ng-click="openNewTowerPopup()">+</a></div>
+
+                            <div class="unit-content-wrap" ng-repeat="tower in built">
+
+                                <div class="unit-title">{{tower.tower_name}}</div>
+
+                                <div class="unit-bx">
+                                    <a id="iconEdit" ng-click="openEditTowerPopup(tower.id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                    <div class="unit-content">
+                                        <div class="unit-img">
+                                            <img src="{{tower.Image_Url_Tower1}}" alt="" class="img-responsive" width="150" height="70" />
+                                        </div>
+                                        <div class="unit-info">
+                                            <div class="tb-c-wrap">
+                                                <div class="tb-c">
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Base Price<span>{{tower.base_price}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Park Price<span>{{tower.cark_park_price}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Floor Rise<span>{{tower.floor_rise}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Floor Rise Starts From:<span>{{tower.floor_rise_starts_from}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">No of Wings<span>{{tower.no_of_wings}}</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- unit-bx ended -->
+                            </div><!-- unit-content-wrap ended -->
+                        </div>  <!-- tower-type ended -->
+
+                        <div class="tab-pane" id="wing-type">
+
+                            <div class="tab-content-title tab-content-title-b">Add Wing<a id="btnAdd" class="add-btn" ng-click="openNewWingPopup()" data-toggle="modal">+</a></div>
+
+                            <div class="unit-content-wrap">
+
+                                <div class="unit-bx" ng-repeat="user in builder">
+                                    <a id="iconEdit" ng-click="openEditWingPopup(user.id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                    <h3>{{user.wing_code}}</h3>
+                                    <div class="unit-content">
+                                        <div class="unit-img">
+                                            <img src="{{user.image_url_wing1}}" alt="" class="img-responsive" width="100" height="50" />
+                                        </div>
+                                        <div class="unit-info">
+                                            <div class="tb-c-wrap">
+                                                <div class="tb-c">
+                                                    <div class="tb-sub" ng-repeat="wing in user.FloorList1 ">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">{{wing.unit_type_desc}}<span>{{wing.no_of_units}}</span></span>
+                                                    </div>
+                                                    <!--<div class="tb-sub">
+                                    <span class="tb-sub-t tb-sub-t02"></span>
+                                    <span class="tb-sub-txt">{{user.floor_type_name}}   <span>{{user.no_of_floors}}</span></span>
+                                </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- unit-bx ended -->
+
+
+
+                            </div><!-- unit-content-wrap ended -->
+
+                        </div>          <!-- wing-type ended -->
+
+
+                        <div class="tab-pane fade" id="floor-type">
+                            <div class="tab-content-title">Floor Types <a id="btnAdd" class="add-btn" data-toggle="modal" ng-click="openNewFloorPopup()">+</a></div>
+
+                            <div class="unit-content-wrap" ng-repeat="user in builddetail">
+                                <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                <div class="unit-title">{{user.floor_type}}</div>
+
+                                <div class="unit-bx" ng-repeat="floor in user.UnitList1">
+
+                                    <!--<h3>Unit {{$index + 1}}</h3>-->
+
+                                    <div class="unit-content">
+                                        <div class="unit-img">
+                                            <img src={{user.Image_Url_Floor1}} alt="" class="img-responsive" />
+                                        </div>
+
+                                        <div class="unit-info">
+                                            <div class="tb-c-wrap">
+                                                <div class="tb-c">
+                                                    <!--<h3>{{floor.unit_type_desc}}</h3>-->
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">No of Units<span>{{user.totalUnitCount}}</span></span>
+                                                    </div>
+
+                                                    <!--<div class="tb-sub">
+                                    <span class="tb-sub-t tb-sub-t03"></span>
+                                    <span class="tb-sub-txt">No.of bedrooms<span>{{floor.num_bedrooms}}</span></span>
+                                </div>
+                                <div class="tb-sub">
+                                    <span class="tb-sub-t tb-sub-t03"></span>
+                                    <span class="tb-sub-txt">No.of bathrooms<span>{{floor.num_bathrooms}}</span></span>
+                                </div>
+                                <div class="tb-sub">
+                                    <span class="tb-sub-t tb-sub-t03"></span>
+                                    <span class="tb-sub-txt">Car Park<span>{{floor.cark_park}}</span></span>
+                                </div>
+                                <div class="tb-sub">
+                                    <span class="tb-sub-t tb-sub-t03"></span>
+                                    <span class="tb-sub-txt">Floor Rise<span>{{floor.floor_rise}}</span></span>
+                                </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- unit-bx ended -->
+                                <!-- unit-bx ended -->
+                                <!-- unit-bx ended -->
+
+                            </div><!-- unit-content-wrap ended -->
+                            <!-- unit-content-wrap ended -->
+                        </div>  <!-- floor-type ended -->
+
+
+                        <div class="tab-pane" id="unit-type">
+                            <div class="tab-content-title tab-content-title-b">Unit Type <a id="btnAdd" class="add-btn" ng-click="openNewUnitPopup()" data-toggle="modal">+</a></div>
+
+                            <div class="unit-content-wrap">
+
+                                <div class="unit-bx" ng-repeat="user in orgUsers">
+                                    <a id="iconEdit" ng-click="openNewUnitPopup(user)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                    <div class="unit-content">
+                                        <div class="unit-img">
+                                            <img src="{{user.Image_Url}}" alt="" class="img-responsive" width="150" height="70" />
+                                        </div>
+                                        <div class="unit-info">
+                                            <div class="tb-c-wrap">
+                                                <div class="tb-c">
+                                                    <h3>{{user.unit_type_desc}}</h3>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Carpet Area<span>{{user.carpet_area}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                        <span class="tb-sub-txt">Saleable Area<span>{{user.super_built_up_area}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Bedrooms<span>{{user.num_bedrooms}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                        <span class="tb-sub-txt">Bathrooms<span>{{user.num_bathrooms}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                        <span class="tb-sub-txt">Car Park<span>{{user.cark_park}}</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- unit-bx ended -->
+                            </div><!-- unit-content-wrap ended -->
+                        </div>  <!-- unit-type ended -->
+
+                        <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="PeopleGrid" selectable="true">
+
+                                </div>
+                            </div>  <!--People-->
+
+
+                        <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="TaskGrid" selectable="true">
+
+                                </div>
+                            </div>  <!--Task-->
+
+                        <div class="tab-pane fade" id="inventory">
+
+                            <div class="tab-content-title tab-content-title-b" id="gen-inventory">
+                                <div class="form-group">
+                                    <div class="col-xs-2">
+                                        <input type="hidden" name="Select Project" data-ng-model="params.country">
+
+                                        <select ng-change="selectTower()"
+                                                ng-model="tower1" class="dropdown form-control" required>
+                                            <option value="" selected>-- Choose Tower--</option>
+                                            <option ng-repeat="tower in towers"
+                                                    value="{{tower.id}}">
+                                                {{tower.tower_name}}
+                                            </option>
+
+                                        </select>
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                                <btn class="btn btn-generate" ng-click="towerGrid()"> Generate Inventory</btn>
+
+                                <!--<btn class="btn btn-generate" ng-click="showTowergrid()">Show Inventory</btn>-->
+                            </div>
+
+                            <div class="leads_group" id="record-content">
+                                <div kendo-grid k-options="TowerListGrid" selectable="true" id="gridInventory">
+
+                                </div>
+                            </div>
+
+
+                        </div> <!-- inventory ended -->
+
+                        <div class="tab-pane fade" id="payment">
+
+                            <div class="tab-content-title">Payment Schemes <a data-toggle="modal" ng-click="openNewPaymentSchemePopup()" class="add-btn">+</a></div>
+                            <div class="payment-list-wrap toggle-on" ng-repeat="user in orgpayment track by $index">
+                                <div class="payment-list-head clearfix">
+                                    <div class="pull-left payment-list-title">
+                                        {{user.type_of_payment}}<a data-toggle="modal"></a>
+                                        <a ng-click="openEditPaymentSchemePopup(user.PaymentScheduleDetailsList[0].payment_schedule_id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <label ng-click="toggleClass($index)">{{isVisible[$index] ? '+' : '-'}}</label>
+                                    </div>
+
+                                </div>
+                                <div ng-show="isVisible[$index]" class="payment-list-content">
+                                    <div class="payment-list-row clearfix" ng-repeat="sum in user.PaymentScheduleDetailsList">
+                                        <span class="payment-c01">{{sum.description}}</span>
+                                        <span class="payment-c02">{{sum.percentage}}</span>
+                                    </div>
+                                    <!--<div class="payment-list-row clearfix">
+                    <span class="payment-c01 payment-c-b">TOTAL</span>
+                    <span class="payment-c02 payment-c-b">{{ getTotal()}}</span>
+                </div>-->
+                                </div>
+                            </div>
+                        </div> <!-- payment ended -->
+
+                        <div class="tab-pane fade" id="gallery">
+                            <div class="properties-list">
+
+                                <div class="tab-content-title tab-content-title-b"><b>Images</b> <a id="btnAdd" data-toggle="modal" class="add-btn" ng-click="openNewGalleryPopup()">+</a></div>
+
+                                <div class="properties-bx-wrap clearfix">
+                                    <div class="properties-bx" ng-repeat="image in Gallery">
+                                        <div class="properties-bx-inner">
+                                            <div class="properties-img">
+                                                <img src={{image.media_url}} alt="" width="218" height="160" />
+                                            </div>
+                                            <a class="properties-close"><i class="fa fa-close"></i></a>
+                                            <!--<a class="properties-name">{{::image.media_name}}</a>-->
+                                            <a class="properties-name">{{image.notes}}</a>
+                                        </div>
+                                    </div>
+
+                                </div><!-- properties-bx-wrap ended -->
+
+
+
+                            </div>
+                        </div><!-- gallery ended -->
+
+                        <div class="tab-pane fade" id="amenities">
+
+                            <div class="tab-content-title tab-content-title-b"><b>Society Amenities</b> <a id="btnAdd" data-toggle="modal" class="add-btn" ng-click="openNewAmenityPopup()">+</a></div>
+                            <div class="society-amenities-wrap clearfix">
+                                <ul class="list-unstyled society-amenities-list">
+                                    <li ng-repeat="amenity in orgAmenities">
+                                        <span class="amenities-ico amenities-ico01">
+                                            <img src="{{amenity.media_url}}" alt="" class="img-responsive" width="45" height="45" />
+                                            <h5>{{amenity.amenity_type_code}}</h5>
+                                        </span>
+                                    </li>
+
+                                </ul>
+                            </div><!-- society-amenities-wrap ended -->
+
+                        </div><!-- amenities ended -->
+                         
+ </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+               

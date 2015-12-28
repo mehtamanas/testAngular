@@ -1,0 +1,588 @@
+﻿<div id="main-content" class="col-xs-12">
+  
+   
+
+    <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+          data-ng-submit="addNew(newForm.$valid)">
+        <div class="personal-container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="property-title">New Channel Partner Request</h2>
+                </div>
+                <button class="btn btn-default login-btn" ng-click="openAcceptPopup()">Approve</button>
+                <button class="btn btn-default login-btn" ng-click="openDeclinePopup()">Decline</button>
+            </div>
+
+
+            <!--<div class="row">
+                <h2 class="channel-partner-title" >New Channel Partner Request</h2>
+                
+                </div>-->
+                <div class="above-login">
+
+                    <div class="col-sm-1"></div>
+                    <h3>Personal Details</h3>
+
+                    <div class="col-sm-5"></div>
+                    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">.
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <!--<div class="col-sm-1"></div>
+
+                    <label><input type="radio" name="test1" ng-model="radioValue1" value="Individual" />Individual</label>
+                    <div class="col-xs-1">
+                        <label><input type="radio" name="test1" ng-model="radioValue1" value="Organization" />Organization</label>
+
+                    </div>-->
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            
+                            <label class="control-label">First Name</label>
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
+                                        'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
+                                    }">
+                                <div class="col-xs-10">
+
+                                    <label class="label-group">
+                                        <h4 ng-bind="first_name"></h4>
+                                    </label>
+                                    <!--<label class="normal-message"
+                                           data-ng-if="!(newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid))">
+                                        Required
+                                    </label>-->
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
+                                        {{ 'Please Enter Valid First Name' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Last Name</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
+                                        'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="last_name"></h4>
+                                    </label>
+                                    <!--<label class="normal-message"
+                                           data-ng-if="!(newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid))">
+                                        Required
+                                    </label>-->
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
+                                        {{ 'Please Enter Valid Last Name' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Enrollment No</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid) && !newForm.enrollno.$focus,
+                                        'has-success': newForm.enrollno.$valid && !newForm.enrollno.$pristine && !newForm.enrollno.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="enrollment_no"></h4>
+                                    </label>
+                                    <!--<label class="normal-message"
+                                           data-ng-if="!(newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid))">
+                                        Required
+                                    </label>-->
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid) && !newForm.enrollno.$focus">
+                                        {{ 'enter Valid Enrollment No' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Project Site</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid) && !newForm.projectsite.$focus,
+                                        'has-success': newForm.projectsite.$valid && !newForm.projectsite.$pristine && !newForm.projectsite.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="project_site"></h4>
+                                    </label>
+                                    <!--<label class="normal-message"
+                                           data-ng-if="!(newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid))">
+                                        Required
+                                    </label>-->
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid) && !newForm.email.$focus">
+                                        {{ 'Enter Valid Project Site' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label>Type Of Operations</label>
+                                <!--<div class="col-sm-12">
+                                    <div>
+                                        <label><input type="radio" name="test2" ng-model="radioValue2" value="Individual" /> Individual</label> &nbsp;
+                                        <label><input type="radio" name="test2" ng-model="radioValue2" value="Propritorship" />Propritorship</label>&nbsp;
+                                        <label><input type="radio" name="test2" ng-model="radioValue2" value="Propritorship Firm" />Propritorship Firm</label>&nbsp;
+                                        <label><input type="radio" name="test2" ng-model="radioValue2" value="Limited Company" />Limited Company </label>
+                                    
+
+
+                                    </div>
+                                </div>-->
+
+                                <h4 ng-bind="type_of_operation"></h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="above-login">
+
+                    <div class="col-sm-1"></div>
+                    <div class="h3-heading-wrap">
+                        <h3>Billing Details</h3>
+                    </div>
+
+                    <div class="channel-partner-content">
+
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <label class="control-label">Pan No</label>
+                                <div class="form-group"
+                                     data-ng-class="{
+                                        'has-error' : newForm.pan_num.$invalid && (!newForm.pan_num.$pristine || showValid) && !newForm.pan_num.$focus,
+                                        'has-success': newForm.pan_num.$valid && !newForm.pan_num.$pristine && !newForm.pan_num.$focus
+                                    }">
+                                    <div class="col-xs-10">
+                                        <label class="label-group">
+                                            <h4 ng-bind="pan_no"></h4>
+                                        </label>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.pan_num.$invalid && (!newForm.pan_num.$pristine || showValid) && !newForm.pan_num.$focus">
+                                            {{ 'Enter Valid Pan Number' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="control-label">Service Tax No</label>
+                                <div class="form-group"
+                                     data-ng-class="{
+                                        'has-error' : newForm.service_tax.$invalid && (!newForm.service_tax.$pristine || showValid) && !newForm.service_tax.$focus,
+                                        'has-success': newForm.service_tax.$valid && !newForm.service_tax.$pristine && !newForm.service_tax.$focus
+                                    }">
+                                    <div class="col-xs-10">
+                                        <label class="label-group">
+                                            <h4 ng-bind="servicetaxno"></h4>
+                                        </label>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.service_tax.$invalid && (!newForm.service_tax.$pristine || showValid) && !newForm.service_tax.$focus">
+                                            {{ 'Enter Valid Service Tax Number' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <label class="control-label">Cheque issued to be name</label>
+                                <div class="form-group"
+                                     data-ng-class="{
+                                        'has-error' : newForm.cheque.$invalid && (!newForm.cheque.$pristine || showValid) && !newForm.cheque.$focus,
+                                        'has-success': newForm.cheque.$valid && !newForm.cheque.$pristine && !newForm.cheque.$focus
+                                    }">
+                                    <div class="col-xs-10">
+                                        <label class="label-group">
+                                            <h4 ng-bind="chequeissuedname"></h4>
+                                        </label>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.cheque.$invalid && (!newForm.cheque.$pristine || showValid) && !newForm.cheque.$focus">
+                                            {{ 'Enter Valid Service Tax Number' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div><!-- channel-partner-content ended -->
+                </div><!-- channel-partner-inner ended -->
+
+
+
+
+                <div class="channel-partner-inner">
+
+                    <div class="col-sm-1"></div>
+                    <div class="h3-heading-wrap">
+                        <h3>Important</h3>
+                    </div>
+
+                    <div class="channel-partner-content">
+
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Are you associate with any other real estate company</label>
+                                    <!--<div class="col-sm-12">
+                                        <div>
+                                            <label><input type="radio" name="test3" ng-model="radioValue3" value="Yes" /> Yes</label> &nbsp;
+                                            <label><input type="radio" name="test3" ng-model="radioValue3" value="No" /> No</label>
+
+                                        </div>
+                                    </div>-->
+
+                                    <div class="col-sm-5">
+
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                        'has-error' : newForm.realEstate.$invalid && (!newForm.realEstate.$pristine || showValid) && !newForm.realEstate.$focus,
+                                        'has-success': newForm.realEstate.$valid && !newForm.realEstate.$pristine && !newForm.realEstate.$focus
+                                    }">
+                                            <div class="col-xs-10">
+                                                <label class="label-group">
+                                                    <h4 ng-bind="real_estate_association"></h4>
+                                                </label>
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.realEstate.$invalid && (!newForm.realEstate.$pristine || showValid) && !newForm.realEstate.$focus">
+                                                    {{ 'Please Enter Alphabets' | translate }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Primary Ocuupation</label>
+                                    <!--<div class="col-sm-12">
+                                        <div>
+                                            <label><input type="radio" name="test4" ng-model="yesno" value="Yes" />Real Estate Agent</label> &nbsp;
+                                            <label><input type="radio" name="test4" ng-model="yesno" value="No" />Others</label>
+
+                                        </div>
+                                    </div>-->
+
+                                    <div class="col-sm-5">
+
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                        'has-error' : newForm.primary.$invalid && (!newForm.primary.$pristine || showValid) && !newForm.primary.$focus,
+                                        'has-success': newForm.primary.$valid && !newForm.primary.$pristine && !newForm.primary.$focus
+                                    }">
+                                            <div class="col-xs-10">
+                                                <label class="label-group">
+                                                    <h4 ng-bind="name_of_association"></h4>
+                                                </label>
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.primary.$invalid && (!newForm.primary.$pristine || showValid) && !newForm.primary.$focus">
+                                                    {{ 'Please Enter Valid Occupation' | translate }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Area Of Specialization</label>
+                                    <!--<div class="col-sm-12">
+                                        <div>
+                                            <label><input type="radio" name="test5" ng-model="areatype" value="Real Estate" />Real Estate</label>  &nbsp;
+                                            <label><input type="radio" name="test5" ng-model="areatype" value="Residential" />Residential</label> &nbsp;
+                                            <label><input type="radio" name="test5" ng-model="areatype" value="Industry" />Industry</label> &nbsp;
+                                            <label><input type="radio" name="test5" ng-model="areatype" value="Retail" />Retail</label> &nbsp;
+                                            <label><input type="radio" name="test5" ng-model="areatype" value="Land" />Land</label>
+                                        </div>
+                                    </div>-->
+                                    <h4 ng-bind="area_of_specialization"></h4>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Total Turnover</label>
+                                    <!--<div class="col-sm-12">
+                                        <div>
+                                            <label><input type="radio" name="test6" ng-model="turnover" value="0-3cr" />0-3cr </label> &nbsp;
+                                            <label><input type="radio" name="test6" ng-model="turnover" value="3-10cr" /> 3-10cr</label> &nbsp;
+                                            <label><input type="radio" name="test6" ng-model="turnover" value="10-25cr" /> 10-25cr </label> &nbsp;
+                                            <label><input type="radio" name="test6" ng-model="turnover" value="25-40cr" /> 25-40cr</label> &nbsp;
+                                            <label><input type="radio" name="test6" ng-model="turnover" value="40cr and more" />40cr and more</label>
+                                        </div>
+                                    </div>-->
+                                    <h4 ng-bind="total_turnover"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  <!-- channel-partner-content ended -->
+
+                </div> <!-- channel-partner-inner ended -->
+
+
+                <div class="channel-partner-inner">
+
+                    <div class="col-sm-1"></div>
+                    <div class="h3-heading-wrap">
+                        <h3>Contact Details</h3>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <label class="control-label">Address</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus,
+                                        'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="address"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
+                                        {{ 'Enter Valid Address' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-sm-5">
+                    <label class="control-label">City</label>
+                    <div class="form-group"
+                         data-ng-class="{
+                                    'has-error' : newForm.City.$invalid && (!newForm.City.$pristine || showValid) && !newForm.City.$focus,
+                                    'has-success': newForm.City.$valid && !newForm.City.$pristine && !newForm.City.$focus
+                                }">
+                        <div class="col-xs-10">
+                            <label class="label-group">
+                                <input type="text" name="City" class="form-control"
+                                       placeholder="City"
+                                       data-ng-model="params.city"
+                                        minlength="1"
+                                        maxlength="10"
+                                       alphabets-only
+                                       input-focus
+                                       ng-pattern="/^[a-zA-Z\s]*$/"
+                                       required
+                                       />
+                            </label>
+                            <div class="text-danger"
+                                 data-ng-if="newForm.City.$invalid && (!newForm.City.$pristine || showValid) && !newForm.City.$focus">
+                                {{ 'Enter Valid City' | translate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+     </div>
+                         
+
+                    </div>
+
+
+                     
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3">
+                            <label class="control-label">State</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.state.$invalid && (!newForm.state.$pristine || showValid) && !newForm.state.$focus,
+                                        'has-success': newForm.state.$valid && !newForm.state.$pristine && !newForm.state.$focus
+                                    }">
+                                <div class="col-xs-12">
+                                    <label class="label-group">
+                                        <h4 ng-bind="state"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.state.$invalid && (!newForm.state.$pristine || showValid) && !newForm.state.$focus">
+                                        {{ 'Enter Valid State' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">City</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.City.$invalid && (!newForm.City.$pristine || showValid) && !newForm.City.$focus,
+                                        'has-success': newForm.City.$valid && !newForm.City.$pristine && !newForm.City.$focus
+                                    }">
+                                <div class="col-xs-12">
+                                    <label class="label-group">
+                                        <h4 ng-bind="city"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.City.$invalid && (!newForm.City.$pristine || showValid) && !newForm.City.$focus">
+                                        {{ 'Enter Valid City' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">Pin</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus,
+                                        'has-success': newForm.Pin.$valid && !newForm.Pin.$pristine && !newForm.Pin.$focus
+                                    }">
+                                <div class="col-xs-12">
+                                    <label class="label-group">
+                                        <h4 ng-bind="pin"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
+                                        {{ 'Enter Valid Pin' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <label class="control-label">Email</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.Email.$invalid && (!newForm.Email.$pristine || showValid) && !newForm.Email.$focus,
+                                        'has-success': newForm.Email.$valid && !newForm.Email.$pristine && !newForm.Email.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="email"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Email.$invalid && (!newForm.Email.$pristine || showValid) && !newForm.Email.$focus">
+                                        {{ 'Enter Valid Email ' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <label class="control-label">WebSite URL </label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.website_url.$invalid && (!newForm.website_url.$pristine || showValid) && !newForm.website_url.$focus,
+                                        'has-success': newForm.website_url.$valid && !newForm.website_url.$pristine && !newForm.website_url.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="website_url"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.website_url.$invalid && (!newForm.website_url.$pristine || showValid) && !newForm.website_url.$focus">
+                                        {{ 'Enter Valid WebSite URL' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="control-label">Office Phone</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.office_mobile.$invalid && (!newForm.office_mobile.$pristine || showValid) && !newForm.office_mobile.$focus,
+                                        'has-success': newForm.office_mobile.$valid && !newForm.office_mobile.$pristine && !newForm.office_mobile.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="office_phone"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.office_mobile.$invalid && (!newForm.office_mobile.$pristine || showValid) && !newForm.office_mobile.$focus">
+                                        {{ 'Enter Office Number' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <label class="control-label">Mobile</label>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                        'has-error' : newForm.Mobile.$invalid && (!newForm.Mobile.$pristine || showValid) && !newForm.Mobile.$focus,
+                                        'has-success': newForm.Mobile.$valid && !newForm.Mobile.$pristine && !newForm.Mobile.$focus
+                                    }">
+                                <div class="col-xs-10">
+                                    <label class="label-group">
+                                        <h4 ng-bind="mobile"></h4>
+                                    </label>
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Mobile.$invalid && (!newForm.Mobile.$pristine || showValid) && !newForm.Mobile.$focus">
+                                        {{ 'Enter Mobile Number' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+</form>
+      
+    </div>
+

@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dwellar</title>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/kendo.common.min.css" />
+    <link rel="stylesheet" href="css/kendo.material.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div id="header" class="navbar-fixed-top clearfix">
+
+            <div class="pull-left logo">
+                <a href="/">
+                    <img src="images/logo.png" alt="" />
+                </a>
+            </div><!-- logo ended -->
+
+            <div class="pull-right user-sec">
+                <div class="dropdown">
+                    <a id="user-dropdown" data-target="#" href="http://example.com" data-toggle="dropdown">
+                        <span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                        <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> Account Setting</a></li>
+                        <li><a href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
+                    </ul>
+                </div>
+            </div><!-- user-sec ended -->
+
+        </div><!-- header ended -->
+
+        <div id="content">
+            <div class="row">
+
+                <div id="main-content" class="col-xs-12">
+                    <div class="content-inner">
+
+                        <div class="builder-directory-header">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <h2 class="builder-directory-title">Builder Details</h2>
+                                    <button class="apply-btn" ng-click="openChannelPopup()" type="submit">Apply </button>
+                                </div>
+
+                            </div>
+                        </div><!-- builder-directory-header ended -->
+
+                    </div><!-- content-inner ended -->
+
+                    <div class="builder-directory-detail">
+
+                        <div class="builder-directory-inner">
+
+                            <img src={{builddetail.meadia_logo}} alt="" class="img-responsive builder-logo" height="60" width="260" />
+                            <div class="builder-logo-side">
+                                <h4>{{builddetail.OrganizationName}}</h4>
+                                <p>{{builddetail.Address}}</p>
+                            </div>
+
+                        </div><!-- builder-directory-inner ended -->
+
+                        <div class="builder-directory-inner">
+
+                            <div class="builder-directory-desr">
+
+                                <div class="builder-direcory-dl">
+                                    <div class="dl-box">
+                                        <span class="dd-sm">2007</span>
+                                        ESTABLISHED
+                                    </div>
+                                    <div class="dl-box">
+                                        <span>{{builddetail.totalProjects}}</span>
+                                        TOTAL PROJECTS
+                                    </div>
+                                    <div class="dl-box">
+                                        <span>{{builddetail.current_project}}</span>
+                                        CURRENT PROJECTS
+                                    </div>
+                                    <div class="dl-box">
+                                        <span>{{builddetail.UpComing_project}}</span>
+                                        upcoming projects
+                                    </div>
+                                </div>
+
+                                <h3>{{builddetail.who_am_i}}</h3>
+                                <div id="builder-intro" data-readmore="" aria-expanded="false">
+                                    <p>{{builddetail.description}}</p>
+                                </div>
+
+                            </div><!-- builder-directory-inner ended -->
+
+                        </div><!-- builder-directory-inner ended -->
+
+                        <div class="builder-tab clearfix">
+                            <div class="pull-left">Total Projects {{builddetail.totalProjects}}</div>
+                            <ul class="pull-right nav nav-tabs" role="tablist">
+                                <li><a href="#tab-all" aria-controls="home" role="tab" data-toggle="tab">ALL</a></li>
+                                <li class="active"><a href="#tab-complete" aria-controls="profile" role="tab" data-toggle="tab">COMPLETE {{builddetail.Complete_project}}</a></li>
+                                <li><a href="#tab-running" aria-controls="messages" role="tab" data-toggle="tab">RUNNING {{builddetail.Running_project}}</a></li>
+                                <li><a href="#tab-upcoming" aria-controls="settings" role="tab" data-toggle="tab">UPCOMING{{builddetail.UpComing_project}}</a></li>
+                            </ul>
+                        </div><!-- builder-tab ended -->
+
+                        <div class="builder-tab-content">
+                            <div class="tab-content">
+                                <div role="tabpanel" id="tab-all">
+                                    <div class="tb-box clearfix" ng-repeat="user in orgUsers">
+                                     
+
+                                            <div class="pull-left tb-box-img">
+                                                <img src="{{user.project_image}}" alt="" height="187" width="197" class="img-responsive" />
+                                            </div>
+                                            <div class="tb-content clearfix">
+                                                <div class="tb-content-inner">
+                                                    <div class="clearfix">
+                                                        <div class="tb-possession"><span>{{user.project_phase}}</span></div>
+                                                        <div class="pull-left">
+                                                            <div class="tb-title">
+                                                                <h4><span>{{user.name}}</span></h4>
+                                                                <div class="tb-title-sub"><span>{{user.address}}</span></div>
+                                                            </div>
+                                                            <div class="tb-c-wrap">
+                                                                <div class="tb-c" ng-repeat="unit in user.ProjectUnitList">
+                                                                    <h3>{{unit.unit_type_desc}}</h3>
+                                                                    <div class="tb-sub">
+                                                                        <span class="tb-sub-t tb-sub-t01"></span>
+                                                                        <span class="tb-sub-txt">Price<br />{{unit.list_price}}cr</span>
+                                                                    </div>
+                                                                    <div class="tb-sub">
+                                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                                        <span class="tb-sub-txt">Area<br />{{unit.carpet_area}}sq.ft</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div><!-- tab-content-inner ended -->
+                                            </div><!-- tab-content ended -->
+                                      
+
+                                    </div>
+                                </div>
+                        </div>
+
+                                </div><!-- builder-directory-detail ended -->
+
+                            </div><!-- main-content ended -->
+
+                        </div>
+                    </div><!-- content ended -->
+
+    </div>
+        </div>
+
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/bootstrap.min.js" defer></script>
+    <script src="js/kendo.all.min.js" defer></script>
+    <script src="js/readmore.min.js" defer></script>
+    <script src="js/custom.js" defer></script>
+</body>
+</html>
