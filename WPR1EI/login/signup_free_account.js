@@ -32,12 +32,14 @@ angular.module('app.guest.login')
     })
 
     .controller('SignupFreeAccountController',
-    function ($scope, $state, COUNTRIES, apiService, $cookieStore, $modal) {
+    function ($scope, $state, COUNTRIES, apiService, $cookieStore, $modal, $rootScope) {
         $scope.countryList = COUNTRIES;
 
         $scope.breadcrumb = 0;
 
+        $rootScope.title = 'Dwellar./Signup_free_account';
 
+       
 
 
         // Init model
@@ -115,6 +117,20 @@ angular.module('app.guest.login')
             hash: $scope.hash
         };
 
+        $scope.call_back_info = function () {
+           // alert("submit successfully");
+            new ProjectCreate($scope.callparam).then(function (response) {
+                console.log(response);
+                $scope.showValid = false;
+                $state.go('guest.signup.thanks');
+            }, function (error) {
+                console.log(error);
+            });
+
+
+
+        };
+
         projectUrl = "callback/Create";
         ProjectCreate = function (callparam) {
             // alert(param.name);
@@ -128,19 +144,7 @@ angular.module('app.guest.login')
        });
         };
 
-        $scope.call_back_info = function () {
-            alert("submit successfully");
-            new ProjectCreate($scope.callparam).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
-
-
-
-        };
+       
 
         $scope.addNew = function (isValid) {
             $scope.showValid = true;
@@ -203,9 +207,11 @@ angular.module('app.guest.login')
 
         //};
 
-        $scope.addPersonalInfo = function (isValid) {
-
-            if (isValid) {
+        $scope.addPersonalInfo = function (isValid)
+        {
+            $scope.showValid = true;
+            if (isValid)
+            {
 
                 $cookieStore.put('First_Name', $scope.params.first_name);
                 $cookieStore.put('Last_Name', $scope.params.last_name);
@@ -213,22 +219,10 @@ angular.module('app.guest.login')
                 $cookieStore.put('Phone', $scope.params.account_phone);
                 $cookieStore.put('Account_Country', $scope.params.account_country);
                 $cookieStore.put('Hash', $scope.params.Password);
-
-
-                //alert("hi org");
-
-                //alert('First_Name : ' + $cookieStore.get('First_Name'));
-                //alert('Last_Name : ' + $cookieStore.get('Last_Name'));
-                //alert('Account_Email : ' + $cookieStore.get('Account_Email'));
-                //alert('Phone : ' + $cookieStore.get('Phone'));
-                //alert('Account_Country : ' + $cookieStore.get('Account_Country'));
-                //alert('Password : ' + $cookieStore.get('Hash'));
-
-
                 $state.go('organization');
-
-
-            }
+                $scope.showValid = false;
+              }
+           
         };
 
 

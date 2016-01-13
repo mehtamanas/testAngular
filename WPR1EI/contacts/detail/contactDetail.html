@@ -3,7 +3,7 @@
         <div class="pg-inner-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pg-inner-title">Contact Details</h2>
+                    <h2 class="pg-inner-title">Contacts</h2>
 
                 </div>
 
@@ -25,9 +25,9 @@
                         </div>
                       
                         <div class="project-detail-txt">
-                            <a ng-click="openEditContactPopup()" data-toggle="modal"><span class="edit-icon"></span></a>
+                           
                             
-                            <div class="project-name">Name:  {{image.Contact_First_Name}} {{image.Contact_Last_Name}}  </div>
+                            <div class="project-name">Name:  {{image.Contact_First_Name}} {{image.Contact_Last_Name}} <a id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
                             <div class="project-d02"> {{image.Title}}</div>
                             <div class="project-d02">Type:{{image.Type}}</div>
                             <div class="project-d02">Phone:{{image.Contact_Phone}} </div>
@@ -40,15 +40,15 @@
 
                     <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
                         <ul class="nav nav-tabs responsive-tagJS" role="tablist">
-                            <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIAL</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">DOCUMENTS</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">ENGAGEMENT</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">QUOTES</a></li>
-                            <li><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
+                            <li class="k-state-active" id="contact_essential"> <a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIAL</a></li>
+                            <li id="contact_documents"><a aria-controls="summary" role="tab" data-toggle="tab">DOCUMENTS</a></li>
+                            <li id="contact_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>
+                            <li id="contact_payment"><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>
+                            <li id="contact_tasks"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                            <li id="contact_engagement"><a aria-controls="summary" role="tab" data-toggle="tab">ENGAGEMENT</a></li>
+                            <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
+                            <li id="contact_quotes"><a aria-controls="summary" role="tab" data-toggle="tab">QUOTES</a></li>
+                            <li id="contact_assignedto"><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
                             
                         </ul>
 
@@ -65,6 +65,7 @@
                         </div> <!--Essential-->
 
                         <div class="leads_group" id="documentGridDiv">
+                            <div class="tab-content-title">Documents<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" style="cursor:pointer">+</a></div>
                                 <div kendo-grid k-options="DocumentGrid" selectable="true">
 
                                 </div>
@@ -77,14 +78,14 @@
                             </div> <!--PropertyList--> 
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Payment Types <a class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()">+</a></div>
+                            <div class="tab-content-title">Payments <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()" style="cursor:pointer">+</a></div>
                                 <div kendo-grid k-options="PaymentGrid" selectable="true">
 
                                 </div>
                             </div>  <!--Payment-->
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Task <a class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
+                            <div class="tab-content-title">Tasks <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()" style="cursor:pointer">+</a></div>
                                 <div kendo-grid k-options="TaskGrid" selectable="true">
 
                                 </div>

@@ -11,7 +11,10 @@
      })
 
 .controller('subscriptionLimitController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal,$http) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $http, $rootScope) {
+
+
+        $rootScope.title = 'Dwellar./SubscriptionLimit';
          
         GetUrl_Sub = "Subscription/GetBySubscription/dd3aaef9-33f1-4306-bf38-b8af7ff17578";
         GetUrl_Subscription = "Subscription/GetBySubscription/4e8ccaef-8063-4e5a-8f9d-a46a63ae3d44";
@@ -97,7 +100,7 @@
          // alert("qqq" + $cookieStore.get('Subscription1_Name'));
           $cookieStore.put('Sub_Name', $cookieStore.get('Subscription1_Name'));
           $cookieStore.put('Sub_Price', $cookieStore.get('Subscription1_Price'));
-          $state.go("signup_free_account");
+          //$state.go("signup_free_account");
           };
 
           $scope.addPersonalInfo2 = function () {
@@ -105,7 +108,7 @@
             // alert($cookieStore.get('Subscription2_Name'));
              $cookieStore.put('Sub_Name', $cookieStore.get('Subscription2_Name'));
              $cookieStore.put('Sub_Price', $cookieStore.get('Subscription2_Price'));
-              $state.go("signup_free_account");
+             // $state.go("signup_free_account");
           };
 
         //for teams
@@ -115,7 +118,7 @@
               // alert("qqq" + $cookieStore.get('Subscription1_Name'));
               $cookieStore.put('Sub_Name', $cookieStore.get('Subscription3_Name'));
               $cookieStore.put('Sub_Price', $cookieStore.get('Subscription3_Price'));
-              $state.go("signup_free_account");
+             // $state.go("signup_free_account");
           };
 
           $scope.addPersonalInfo4 = function () {
@@ -123,7 +126,7 @@
               // alert("qqq" + $cookieStore.get('Subscription1_Name'));
               $cookieStore.put('Sub_Name', $cookieStore.get('Subscription4_Name'));
               $cookieStore.put('Sub_Price', $cookieStore.get('Subscription4_Price'));
-              $state.go("signup_free_account");
+             // $state.go("signup_free_account");
           };
 
 

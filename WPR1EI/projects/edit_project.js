@@ -10,17 +10,21 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
    
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     $scope.showProgress = false;
@@ -39,7 +43,8 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+
         }
     });
 
@@ -48,7 +53,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -57,7 +62,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -66,7 +71,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -147,13 +152,21 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
 
         var newadd = {};
 
-        if ($scope.choices2[0].Street_1 != undefined)
-            newadd.Street_1 = $scope.choices2[0].Street_1;
-        if ($scope.choices2[1].Street_1 != undefined)
-            newadd.Street_2 = $scope.choices2[1].Street_1;
-        if ($scope.choices2[2].Street_1 != undefined)
-            newadd.Street_2 = $scope.choices2[1].Street_1 + " " + $scope.choices2[2].Street_1;
+        for (i = 0; i < $scope.choices2.length; i++) {
+            if (i == 0) {
+                if ($scope.choices2[0].Street_1 != undefined)
+                    newadd.Street_1 = $scope.choices2[0].Street_1;
+            }
+            else if (i == 1) {
+                if ($scope.choices2[1].Street_1 != undefined)
+                    newadd.Street_2 = $scope.choices2[1].Street_1;
+            }
+            else if (i == 2) {
+                if ($scope.choices2[2].Street_1 != undefined)
+                    newadd.Street_2 = $scope.choices2[1].Street_1 + " " + $scope.choices2[2].Street_1;
+            }
 
+        }
 
 
         called = true;
@@ -172,18 +185,22 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             // media_name: uploadResult.Name,
             media_url4: uploadResult3.Location,
             possasion_month: $scope.params.possasion_month,
-            year: $scope.params.year,
+            year: $scope.params.project_year,
             project_website: $scope.params.project_website,
             builder_website: $scope.params.builder_website,
             total_area: $scope.params.total_project_area,
-            city_id: $scope.params.city_id,
+            city_id: $scope.params.city,
             state_id: $scope.params.state,
+            monthid: $scope.month1,
             class_type: "Project",
             Street_1: newadd.Street_1,
-            Street_2: newadd.Street_2,
+            //Street_2: newadd.Street_2,
             media_type: "Logo",
-            City: $scope.params.City,
-            State: $scope.params.State,
+            month: $scope.params.monthid,
+            city: $scope.params.city,
+            state: $scope.params.state,
+            lat1: $scope.params.lat1,
+            long1: $scope.params.long1,
             ZipCode: $scope.params.ZipCode,
             project_type: $scope.params.project_type,
             
@@ -207,7 +224,8 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md'
+                size: 'md',
+                resolve: { items: { title: "Project" } }
             });
         }
       
@@ -327,6 +345,36 @@ function (error) {
         return (city.stateid === $scope.params.state);
     };
 
+
+    Url = "GETCSC/GetMonth";
+
+    apiService.get(Url).then(function (response) {
+        $scope.month = response.data;
+
+    },
+function (error) {
+    alert("Error " + error.state);
+});
+
+    $scope.selectmonth = function () {
+        $scope.params.monthid = $scope.month1;
+        //alert($scope.params.month);
+    };
+
+    var min = new Date().getFullYear() - 10,
+    max = new Date().getFullYear() + 9;
+    $scope.years = [];
+    for (i = min ; i < max; i++) {
+        $scope.years.push(i);
+    }
+
+    $scope.selectyear = function () {
+        $scope.params.project_year = $scope.year1;
+        //alert($scope.params.month);
+    };
+
+
+
     $scope.selectedproject = 3;
 
     $scope.selectapartment = function () {
@@ -357,14 +405,20 @@ function (error) {
 
    
     projectUrl = "Project/GetByProjectIdnew/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
         $scope.choices2[0].Street_1 = response.data[0].Street_1;
         $scope.choices2[0].Street_2 = response.data[0].Street_2;
         $scope.state1 = response.data[0].State_id;
         $scope.params.state = response.data[0].State_id;
         $scope.city1 = response.data[0].city_id;
-      
+        $scope.params.city = response.data[0].city_id;
+        $scope.month1 = response.data[0].possasion_month;
+        $scope.year1 = response.data[0].year;
+        if (response.data[0].project_type == "Family And Home") $scope.selecthome();
+        if (response.data[0].project_type == "Villa") $scope.selectvilla();
+        if (response.data[0].project_type == "Plot") $scope.selectplot();
+        if (response.data[0].project_type == "Apartment") $scope.selectapartment();
     },
 
 function (error) {
@@ -380,13 +434,17 @@ function (error) {
         Street_2: $scope.Street_2,
         city_id: $scope.city_id,
         state_id: $scope.state_id,
-        State: $scope.State,
+        monthid: $scope.monthid,
+        month:$scope.month,
+        city: $scope.city,
+        state: $scope.state,
         project_type: $scope.project_type,
-        City: $scope.City,
-        year: $scope.year,
-        total_area: $scope.total_project_area,
+        project_year: $scope.project_year,
+        total_project_area: $scope.total_project_area,
         project_website: $scope.project_website,
         ZipCode: $scope.ZipCode,
+        lat1: $scope.lat1,
+        long: $scope.long1,
         possasion_month: $scope.possasion_month,
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId')

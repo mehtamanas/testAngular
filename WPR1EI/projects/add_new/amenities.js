@@ -5,7 +5,7 @@
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
     });
 
     $scope.showProgress = false;
@@ -155,7 +155,8 @@
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md'
+            size: 'md',
+            resolve: { items: { title: "Amenities" } }
         });
 
         $rootScope.$broadcast('REFRESH','amenity');

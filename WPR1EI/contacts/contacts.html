@@ -54,16 +54,23 @@
         <form action="">
 
             <div class="clearfix">
+                <div class="pull-left actions-wrap">
+
+                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                            ng-change="GetValue();addUser()" id="contacaction">
+                        <option value="" selected>ACTIONS</option>
+                    </select>
+                </div>
 
 
                 <div class="pull-right btn-wrap-right">
-                    <a href="#" class="btn-lk" ng-click="openContactPopup()">+ Create New Contact</a>
+                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openContactPopup()" style="cursor:pointer">+ Add New Contact</a>
                 </div>
             </div>
 
             <div id="record-content" class="properties-content">
 
-                <div id="project-record-list" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
+                <div id="contact_kenomain" kendo-grid k-options="contactGrid" selectable="true" k-on-change="myGridChange( dataItem )">
                 </div>
 
             </div><!-- record-content ended -->

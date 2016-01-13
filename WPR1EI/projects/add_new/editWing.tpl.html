@@ -1,16 +1,15 @@
 ﻿<div id="add_new_wing" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+   
+        <div class="modal-body">
+        
 
                 <div class="close-btn-wrap">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')">&times;><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" id="btn_editnewwing_close"data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')">&times;><span aria-hidden="true">&times;</span></button>
                 </div>
 
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
-                    <h4 class="form-title">Add New Wing Type</h4>
+                    <h4 class="form-title">Edit Wing Type</h4>
 
                     <div class="clearfix">
                         <div class="form-group"
@@ -20,7 +19,7 @@
                                                  }">
                             <div class="form-group form-bx form-bx2">
                                 <label for="">Enter Wing Name:</label>
-                                <input type="text" autofocus name="street" class="form-control"
+                                <input type="text" autofocus name="street" class="form-control"  id="editnewwing_wing_code"
                                        placeholder="Street"
                                        data-ng-model="params.wing_name"
                                        minlength="1"
@@ -42,7 +41,7 @@
                                                  }">
                             <div class="form-group form-bx form-bx2">
                                 <label for="">How many floors are there in this wing?</label>
-                                <input type="text" autofocus name="totalfloors" class="form-control"
+                                <input type="text" autofocus name="totalfloors" class="form-control" id="editnewwing_totalnooffloors"
                                        placeholder="How many floors are there"
                                        data-ng-model="params.total_no_of_floors"
                                        ng-pattern="/[0-9]/"
@@ -57,8 +56,8 @@
                     </div>
 
                     <div class="clearfix image-upload-container">
-                        <div class="image-upload-wrap">
-                            <div class="image-upload-title">Upload 2 Floor Plan</div>
+                        <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                            <div class="image-upload-title">Upload Wing Image</div>
                             <div class="dropzone dropzone-bx image-upload-bx">
                                 <div class="fallback">
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
@@ -66,7 +65,7 @@
                                             <div class="row" ng-hide="uploader.queue.length">
                                                 <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop your file here</span>
+                                                    <span class="page-center">Drag And Drop</span>
                                                 </div>
                                                 <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                             </div>
@@ -83,12 +82,13 @@
                             <div class="image-upload-link">
 
 
-                                <input type="file" nv-file-select="false" nv-file-multiple="false" uploader="uploader">
+                                <input type="file" nv-file-select="false" id="editnewwing_uploader1" accept="image/*" nv-file-multiple="false" uploader="uploader">
 
                             </div>
+                            </div>
 
-                            <div class="image-upload-wrap">
-                                <div class="image-upload-title">Upload 2 Floor Plan</div>
+                        <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
+                                <div class="image-upload-title">Upload 3D Zip</div>
                                 <div class="dropzone dropzone-bx image-upload-bx">
                                     <div class="fallback">
                                         <div class="panel panel-success" uploader="uploader1" nv-file-over="">
@@ -96,7 +96,7 @@
                                                 <div class="row" ng-hide="uploader1.queue.length">
                                                     <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                        <span class="page-center">Drag And Drop your file here</span>
+                                                        <span class="page-center">Drag And Drop</span>
                                                     </div>
                                                     <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                                 </div>
@@ -113,10 +113,11 @@
                                 <div class="image-upload-link">
 
 
-                                    <input type="file" nv-file-select="false" nv-file-multiple="false" uploader="uploader1">
+                                    <input type="file" nv-file-select="false" id="editnewwing_uploader2" accept="application/zip" nv-file-multiple="false" uploader="uploader1">
 
                                 </div>
                             </div>
+                   </div>
 
                             <h4 class="form-title form-title2">Assign Floor Type</h4>
                             <div class="row" data-ng-repeat="floor in floors ">
@@ -127,7 +128,7 @@
                                         <div class="clearfix">
                                             <div class="form-group form-bx">
                                                 <label for="">Floor Type</label>
-                                                <input type="text" disabled autofocus name="floortype" class="form-control"
+                                                <input type="text" disabled autofocus name="floortype" class="form-control" id="editnewwing_unit_type_desc"
                                                        placeholder="Floor Type"
                                                        data-ng-model="floor.floor_type_name"
                                                        input-focus
@@ -141,8 +142,8 @@
                                         <div class="clearfix">
                                             <div class="form-group form-bx">
                                                 <label for="">Floor No.</label>
-                                                <input type="text" autofocus name="floortype" class="form-control"
-                                                       placeholder="Floor Type"
+                                                <input type="text" autofocus name="floortype" class="form-control" id="editnewwing_no_of_unit"
+                                                       placeholder="Floor No"
                                                        data-ng-model="floor.no_of_units"
                                                        input-focus
                                                        required />
@@ -155,7 +156,7 @@
                                                         'has-success': addNewForm.floortype.$valid && !addNewForm.floortype.$pristine
                                                      }">
                                                 <div class="form-group form-bx">
-                                                    <input type="hidden" disabled autofocus name="floortype" class="form-control"
+                                                    <input type="hidden" disabled autofocus name="floortype" class="form-control" id="addnewwing_id"
                                                            placeholder="Floor Type"
                                                            data-ng-model="floor.floor_id"
                                                            ng-pattern="/[0-9]/"
@@ -174,15 +175,15 @@
                             </div>
 
                             <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" class="f-btn" ng-click="submit()"
+                                <button type="submit" class="f-btn" ng-click="submit()" id="btn_editnewwing_save"
                                         ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length">
                                     <!--<span class="glyphicon glyphicon-upload"></span>--> Save
                                 </button>
                             </div>
 
-                </form>
+</form>
             </div><!-- modal-body ended -->
 
-        </div>
-    </div>
+       
+    
 </div>

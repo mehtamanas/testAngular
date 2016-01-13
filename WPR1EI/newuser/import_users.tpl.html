@@ -86,15 +86,15 @@
                                                              ng-style="{ 'width': uploader.progress + '%' }"></div>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-success btn-s" ng-click="showProgress=true;uploader.uploadAll()"
+                                                <button type="button" id="btn_import_upload" class="btn btn-success btn-s" ng-click="showProgress=true;uploader.uploadAll()"
                                                         ng-disabled="!uploader.getNotUploadedItems().length">
                                                     <span class="glyphicon glyphicon-upload"></span> Upload
                                                 </button>
-                                                <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()"
+                                                <button type="button" id="btn_import_cancel"  class="btn btn-warning btn-s" ng-click="uploader.cancelAll()"
                                                         ng-disabled="!uploader.isUploading">
                                                     <span class="glyphicon glyphicon-ban-circle"></span> Cancel
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()"
+                                                <button type="button" id="btn_import_remove"  class="btn btn-danger btn-s" ng-click="uploader.clearQueue()"
                                                         ng-disabled="!uploader.queue.length">
                                                     <span class="glyphicon glyphicon-trash"></span> Remove
                                                 </button>
@@ -123,7 +123,7 @@
                                     <div class="main-content project add-new">
                                         <h3>Successfully Invited!</h3>
                                         <div class="col-sm-1"></div>
-                                        <button class="btn organization-btn" type="submit"><b>Ok</b></button>
+                                        <button class="btn organization-btn" id="btn_import_sub" type="submit"><b>Ok</b></button>
                                         <!--<a data-target="#" href="/index.html#/home/users"> Back to User List </a>-->
                                     </div>
                                 </div>

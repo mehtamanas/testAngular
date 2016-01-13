@@ -1,11 +1,81 @@
-<div class="login">
-    <div class="above-login-thanks">
-        <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
-              data-ng-submit="addPersonalInfo(newForm.$valid)">
-            <h1 class="thanks">Thank you</h1>
-            <div class="col-sm-1"></div>
-            <button class="btn organization-btn" type="submit"><b>Ok</b></button>
+<header class="navbar navbar-default navbar-fixed-top header2">
+    <div class="container">
+
+        <div class="pull-left logo">
+            <a href="/">
+                <img src="assets/images/logo.png" alt="" />
+            </a>
+        </div><!-- logo ended -->
+
+        <!--<div class="pull-right reg-wrap">
+            <a href="#" class="h-btn">SIGN UP</a>
+            <a href="#" class="h-btn">LOGIN</a>
+        </div>--><!-- reg-btn ended -->
+
+        <nav class="navbar navbar-default pull-right main-navbar">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li id="thanks_home"><a href="#">HOME</a></li>
+                    <li id="thanks_home"><a href="#">FEATURES</a></li>
+                    <li id="thanks_home"><a href="#">PLANS</a></li>
+                    <li id="thanks_home"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
+                    <li id="thanks_home"><a href="#">CONTACT US</a></liid="subscription_home">
+                </ul>
+            </div>
+
+        </nav><!-- main-navbar ended -->
+
+    </div>
+</header>
 
 
-</div>
-</div>
+<section id="content2">
+
+    <div class="container">
+        <div class="login-thanks">
+        <div class="above-login-thanks">
+            <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+                  data-ng-submit="addPersonalInfo(newForm.$valid)">
+                <!--<h1 class="thanks"></h1>-->
+                
+                    <img src="./images/thank you (2).png" style="height:524px ; margin-top: 20px" border="0"/>
+                <div class="col-sm-1">
+                </div>
+                <br/>
+                <button class="btn-thank organization-btn-thanks" id="btn_thank_ok" type="submit"><b>Ok</b></button>
+            </form>
+
+        </div>
+            </div>
+    </div>
+</section>
+
+
+<footer>
+
+    <div id="footer-bottom" class="footer-bottom2">
+        <div class="container">
+
+            <a href="#">Privacy Statement</a> | <a href="#">Site Map</a>
+
+            <div class="pull-left copyright">
+                &COPY; Copyright 2000-2015 Dwellar Pvt.Ltd. All rights reserved.
+            </div>
+
+            <div class="pull-right footer-logo">
+                <img src="assets/images/footer-logo.png" alt="" />
+            </div>
+
+        </div>
+    </div>
+</footer>

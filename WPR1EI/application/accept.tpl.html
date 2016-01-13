@@ -21,7 +21,7 @@
                  }">
             <div class="col-xs-11">
                 <label class="label-group">
-                    <textarea class="form-control" cols="83" rows="10" name="description"
+                    <textarea class="form-control" cols="83" rows="10" name="description" id="accept_text"
                               placeholder="Write the reason here... "
                               data-ng-model="params.description"
                               minlength="1"
@@ -38,9 +38,9 @@
         </div>
 
 
-        <button class="btn organization-btn" type="submit">Send</button>
+        <button class="btn organization-btn" type="submit" id="btn_accept_send">Send</button>
 
-        <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn  btn-default" type="button" ng-click="cancel()" id="btn_accept_send">Cancel</button>
     </form>
 </div>
 

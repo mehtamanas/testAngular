@@ -4,23 +4,27 @@ var uploader2_done = false;
 var uploader3_done = false;
 
 
-var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal) {
+var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ProjectPopUpController');
 
 
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     $scope.showProgress = false;
@@ -38,7 +42,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -47,7 +51,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -56,7 +60,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -65,7 +69,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|zip|rar'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
 
@@ -147,13 +151,21 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         var newadd = {};
 
-        if ($scope.choices2[0].Street_1 != undefined)
-            newadd.Street_1 = $scope.choices2[0].Street_1;
-        if ($scope.choices2[1].Street_1 != undefined)
-            newadd.Street_2 = $scope.choices2[1].Street_1;
-        if ($scope.choices2[2].Street_1 != undefined)
-            newadd.Street_2 = $scope.choices2[1].Street_1 + " " + $scope.choices2[2].Street_1;
-        
+        for (i = 0; i < $scope.choices2.length; i++) {
+            if (i == 0) {
+                if ($scope.choices2[0].Street_1 != undefined)
+                    newadd.Street_1 = $scope.choices2[0].Street_1;
+            }
+            else if (i == 1) {
+                if ($scope.choices2[1].Street_1 != undefined)
+                    newadd.Street_2 = $scope.choices2[1].Street_1;
+            }
+            else if (i == 2) {
+                if ($scope.choices2[2].Street_1 != undefined)
+                    newadd.Street_2 = $scope.choices2[1].Street_1 + " " + $scope.choices2[2].Street_1;
+            }
+
+        }
 
 
         // TODO: Need to get these values dynamically
@@ -169,7 +181,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             media_url3: uploadResult2.Location,
             // media_name: uploadResult.Name,
             media_url4: uploadResult3.Location,
-            possession_date: $scope.params.possession_date,
+            possession_date: $scope.params.month,
             total_area: $scope.params.totalProjectArea,
             year:$scope.params.project_year,
             class_type: "Project",
@@ -181,7 +193,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             ZipCode:$scope.ZipCode,
             project_type: $scope.params.project_type,
             project_website: $scope.params.project_website,
-            builder_website: $scope.params.builder_website
+            builder_website: $scope.params.builder_website,
+            lat1: $scope.params.lat1,
+            long1: $scope.params.long1
+
 
         };
 
@@ -192,8 +207,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             console.log("project done");
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-
-
+            $rootScope.$broadcast('REFRESH', 'projectGrid');
 
         },
         function (error) {
@@ -208,7 +222,8 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md'
+                size: 'md',
+                resolve: { items: { title: "Project" } }
             });
         }
 
@@ -226,7 +241,13 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             
         }
 
+        $scope.progressShow = function () {
+            if (uploader.queue.length > 0 || uploader1.queue.length > 0 || uploader2.queue.length > 0 || uploader3.queue.length > 0) {
+                $scope.showProgress=true;
 
+            }
+
+        }
 
         //uploadService.postDataAfterUpload(postData).then(function () {
         //    // Process the successful file upload
@@ -334,6 +355,37 @@ function (error) {
     };
 
 
+    Url = "GETCSC/GetMonth";
+
+    apiService.get(Url).then(function (response) {
+        $scope.month = response.data;
+
+    },
+function (error) {
+    alert("Error " + error.state);
+});
+
+    $scope.selectmonth = function () {
+        $scope.params.month = $scope.month1;
+        //alert($scope.params.month);
+    };
+
+    var min = new Date().getFullYear() - 10,
+    max = new Date().getFullYear() + 9;
+    $scope.years = [];
+    for (i = min ; i < max; i++) {
+        $scope.years.push(i);
+    }
+
+    $scope.selectyear = function () {
+        $scope.params.project_year = $scope.year1;
+        //alert($scope.params.month);
+    };
+
+
+
+
+
     $scope.choices2 = [{ id: 'choice1' }];
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
@@ -382,52 +434,7 @@ function (error) {
 
 
 
-    //Audit log start
-   // $scope.params = {
-
-   //     device_os: "windows10",
-   //     device_type: "mobile",
-   //     device_mac_id: "34:#$::43:434:34:45",
-   //     module_id: "Addnew Project",
-   //     action_id: "Addnew Project View",
-   //     details: "Addnew Project detail",
-   //     application: "angular",
-   //     browser: $cookieStore.get('browser'),
-   //     ip_address: $cookieStore.get('IP_Address'),
-   //     location: $cookieStore.get('Location'),
-   //     organization_id: $cookieStore.get('orgID'),
-   //     User_ID: $cookieStore.get('userId')
-   // };
-
-
-   // AuditCreate = function (param) {
-
-   //     apiService.post("AuditLog/Create", param).then(function (response) {
-   //         var loginSession = response.data;
-
-   //     },
-   //function (error) {
-
-   //});
-   // };
-   // AuditCreate($scope.params);
-
-    //end
-
-
-    //$scope.params = {
-    //    name: $scope.name,
-    //    city: $scope.city,
-    //    Street_2: $scope.Street_2,
-    //    state: $scope.state,
-    //    ZipCode: $scope.ZipCode,
-    //    project_type: $scope.project_type,
-    //    project_website: $scope.project_website,
-    //    builder_website: $scope.builder_website,
-    //    organization_id: $cookieStore.get('orgID'),
-    //    User_ID: $cookieStore.get('userId')
-    //};
-
+  
     var emp = {
         //id: $cookieStore.get('projectid'),
         name: $scope.name,
@@ -436,6 +443,9 @@ function (error) {
         Street_2: $scope.Street_2,
         state: $scope.state,
         ZipCode: $scope.ZipCode,
+        lat1: $scope.lat1,
+        long1: $scope.long1,
+        possession_date: $scope.month,
         project_type: $scope.project_type,
         project_website: $scope.project_website,
         builder_website: $scope.builder_website,
@@ -496,8 +506,6 @@ function (error) {
                 uploader2.uploadAll();
             if (uploader3.queue.length != 0)
                 uploader3.uploadAll();
-           
-                uploader4.uploadAll();
             if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0 )
                 $scope.finalpost();
             

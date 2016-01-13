@@ -8,7 +8,7 @@ angular.module('services.api', ['restangular'])
         Restangular.setBaseUrl(baseUrl);
         Restangular.setFullResponse(false);
         Restangular.setDefaultHeaders({'X-ZUMO-APPLICATION': 'wOoVLFttYdxtzrtAWXMctSGaUQqJqf32'});
-        Restangular.setDefaultHttpFields({withCredentials: false, cache: false, timeout: 60000}); // 60 second
+        Restangular.setDefaultHttpFields({withCredentials: false, cache: true, timeout: 60000}); // 60 second
 
         Restangular.addResponseInterceptor(function(response, operation, what, url) {
             $rootScope.$broadcast('API:loading:ended');
@@ -111,7 +111,17 @@ angular.module('services.api', ['restangular'])
                     return Restangular.one(resource).get(queryParams, headers);
                 }
             },
-
+            getWithoutCaching: function (resource, queryParams, headers, subElement) {
+                if (subElement) {
+                    return Restangular.all(resource)
+                    .withHttpConfig({ cache: false })
+                    .customGET(subElement, queryParams, headers);
+                } else {
+                    return Restangular.one(resource)
+                    .withHttpConfig({ cache: false })
+                    .get(queryParams, headers);
+                }
+            },
             put: function(resource, elementToPost, subElement, queryParams, headers) {
                 return Restangular.one(resource).customPUT(elementToPost, subElement, queryParams, headers);
             },

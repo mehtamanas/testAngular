@@ -25,7 +25,7 @@
 
            projectUrl = "Register/RecoverPasswordByEmail";
            ProjectCreate = function (param) {
-               alert(param.account_email);
+               
                apiService.post(projectUrl, param).then(function (response) {
                    var loginSession = response.data;
                    alert("Password Recovered By Your Email..!!");
@@ -59,9 +59,10 @@
            }
 
 
+
            passwordUrl = "Register/RecoverByMobileNo";
            PasswordCreate = function (param) {
-               alert(param.account_phone);
+               
                apiService.post(passwordUrl, param).then(function (response) {
                    var loginSession = response.data;
                    alert("Password Recovered By Your Phone number..!!");

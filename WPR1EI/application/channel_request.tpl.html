@@ -9,8 +9,8 @@
                 <div class="col-md-5">
                     <h2 class="property-title">New Channel Partner Request</h2>
                 </div>
-                <button class="btn btn-default login-btn" ng-click="openAcceptPopup()">Approve</button>
-                <button class="btn btn-default login-btn" ng-click="openDeclinePopup()">Decline</button>
+                <button class="btn btn-default login-btn" ng-click="openAcceptPopup()" id="btn_channelrequest_approve">Approve</button>
+                <button class="btn btn-default login-btn" ng-click="openDeclinePopup()" id="btn_channelrequest_decline">Decline</button>
             </div>
 
 
@@ -57,7 +57,7 @@
                                 <div class="col-xs-10">
 
                                     <label class="label-group">
-                                        <h4 ng-bind="first_name"></h4>
+                                        <h4 ng-bind="first_name" id="channel_request_fname"></h4>
                                     </label>
                                     <!--<label class="normal-message"
                                            data-ng-if="!(newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid))">
@@ -79,7 +79,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="last_name"></h4>
+                                        <h4 ng-bind="last_name" id="channel_request_lname"></h4>
                                     </label>
                                     <!--<label class="normal-message"
                                            data-ng-if="!(newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid))">
@@ -106,7 +106,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="enrollment_no"></h4>
+                                        <h4 ng-bind="enrollment_no" id="channel_request_enroll"></h4>
                                     </label>
                                     <!--<label class="normal-message"
                                            data-ng-if="!(newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid))">
@@ -128,7 +128,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="project_site"></h4>
+                                        <h4 ng-bind="project_site" id="channel_request_projectsite"></h4>
                                     </label>
                                     <!--<label class="normal-message"
                                            data-ng-if="!(newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid))">
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>-->
 
-                                <h4 ng-bind="type_of_operation"></h4>
+                                <h4 ng-bind="type_of_operation" id="channel_request_typeofoperation"></h4>
                             </div>
                         </div>
 
@@ -189,7 +189,7 @@
                                     }">
                                     <div class="col-xs-10">
                                         <label class="label-group">
-                                            <h4 ng-bind="pan_no"></h4>
+                                            <h4 ng-bind="pan_no" id="channel_request_panno"></h4>
                                         </label>
                                         <div class="text-danger"
                                              data-ng-if="newForm.pan_num.$invalid && (!newForm.pan_num.$pristine || showValid) && !newForm.pan_num.$focus">
@@ -207,7 +207,7 @@
                                     }">
                                     <div class="col-xs-10">
                                         <label class="label-group">
-                                            <h4 ng-bind="servicetaxno"></h4>
+                                            <h4 ng-bind="servicetaxno" id="channel_request_serviceno"></h4>
                                         </label>
                                         <div class="text-danger"
                                              data-ng-if="newForm.service_tax.$invalid && (!newForm.service_tax.$pristine || showValid) && !newForm.service_tax.$focus">
@@ -229,7 +229,7 @@
                                     }">
                                     <div class="col-xs-10">
                                         <label class="label-group">
-                                            <h4 ng-bind="chequeissuedname"></h4>
+                                            <h4 ng-bind="chequeissuedname" id="channel_request_chequeissue"></h4>
                                         </label>
                                         <div class="text-danger"
                                              data-ng-if="newForm.cheque.$invalid && (!newForm.cheque.$pristine || showValid) && !newForm.cheque.$focus">
@@ -279,7 +279,7 @@
                                     }">
                                             <div class="col-xs-10">
                                                 <label class="label-group">
-                                                    <h4 ng-bind="real_estate_association"></h4>
+                                                    <h4 ng-bind="real_estate_association" id="channel_request_realassociation"></h4>
                                                 </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.realEstate.$invalid && (!newForm.realEstate.$pristine || showValid) && !newForm.realEstate.$focus">
@@ -312,7 +312,7 @@
                                     }">
                                             <div class="col-xs-10">
                                                 <label class="label-group">
-                                                    <h4 ng-bind="name_of_association"></h4>
+                                                    <h4 ng-bind="name_of_association" id="channel_request_nameassociation"></h4>
                                                 </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.primary.$invalid && (!newForm.primary.$pristine || showValid) && !newForm.primary.$focus">
@@ -339,7 +339,7 @@
                                             <label><input type="radio" name="test5" ng-model="areatype" value="Land" />Land</label>
                                         </div>
                                     </div>-->
-                                    <h4 ng-bind="area_of_specialization"></h4>
+                                    <h4 ng-bind="area_of_specialization" id="channel_request_areaspecialization"></h4>
 
                                 </div>
                             </div>
@@ -355,7 +355,7 @@
                                             <label><input type="radio" name="test6" ng-model="turnover" value="40cr and more" />40cr and more</label>
                                         </div>
                                     </div>-->
-                                    <h4 ng-bind="total_turnover"></h4>
+                                    <h4 ng-bind="total_turnover" id="channel_request_turnover"></h4>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +383,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="address"></h4>
+                                        <h4 ng-bind="address" id="channel_request_address"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
@@ -440,7 +440,7 @@
                                     }">
                                 <div class="col-xs-12">
                                     <label class="label-group">
-                                        <h4 ng-bind="state"></h4>
+                                        <h4 ng-bind="state" id="channel_request_state"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.state.$invalid && (!newForm.state.$pristine || showValid) && !newForm.state.$focus">
@@ -459,7 +459,7 @@
                                     }">
                                 <div class="col-xs-12">
                                     <label class="label-group">
-                                        <h4 ng-bind="city"></h4>
+                                        <h4 ng-bind="city" id="channel_request_city"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.City.$invalid && (!newForm.City.$pristine || showValid) && !newForm.City.$focus">
@@ -478,7 +478,7 @@
                                     }">
                                 <div class="col-xs-12">
                                     <label class="label-group">
-                                        <h4 ng-bind="pin"></h4>
+                                        <h4 ng-bind="pin" id="channel_request_pin"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
@@ -502,7 +502,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="email"></h4>
+                                        <h4 ng-bind="email" id="channel_request_email"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.Email.$invalid && (!newForm.Email.$pristine || showValid) && !newForm.Email.$focus">
@@ -525,7 +525,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="website_url"></h4>
+                                        <h4 ng-bind="website_url" id="channel_request_website_url"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.website_url.$invalid && (!newForm.website_url.$pristine || showValid) && !newForm.website_url.$focus">
@@ -549,7 +549,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="office_phone"></h4>
+                                        <h4 ng-bind="office_phone" id="channel_request_office_phone" ></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.office_mobile.$invalid && (!newForm.office_mobile.$pristine || showValid) && !newForm.office_mobile.$focus">
@@ -568,7 +568,7 @@
                                     }">
                                 <div class="col-xs-10">
                                     <label class="label-group">
-                                        <h4 ng-bind="mobile"></h4>
+                                        <h4 ng-bind="mobile" id="channel_request_mobile"></h4>
                                     </label>
                                     <div class="text-danger"
                                          data-ng-if="newForm.Mobile.$invalid && (!newForm.Mobile.$pristine || showValid) && !newForm.Mobile.$focus">

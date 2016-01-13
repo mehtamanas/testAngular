@@ -6,7 +6,8 @@
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+       
     });
 
     $scope.showProgress = false;
@@ -89,46 +90,51 @@
          tot=tot+ parseInt($scope.choices2[i].percentage);
              
         }
-        if (tot > 100)
-        {
-            alert("cannot proceed...");
-            return;
-        }
-        if (tot < 100) {
-            alert("cannot proceed...");
-            return;
-        }
-
-        apiService.post("Payment/Add_new_Payment_scheme", param).then(function (response) {
-            var loginSession = response.data;
-            var schemeupdate = [];
-            for (var i in $scope.choices2) {
-                var newscheme = {};
-                
-                newscheme.user_id = $cookieStore.get('userId');
-                newscheme.organization_id = $cookieStore.get('orgID');
-                newscheme.Milestone = $scope.choices2[i].Milestone;
-                newscheme.percentage = $scope.choices2[i].percentage;
-                newscheme.project_id = window.sessionStorage.selectedCustomerID;
-                newscheme.payment_schedule_id = loginSession.id;
-                schemeupdate.push(newscheme);
+       
+            if (tot != 100) {
+                //alert("cannot proceed...");
+                $scope.openUnsucessPopup();
+                return;
             }
+        else
+            {
 
-            apiService.post("Payment/new_Paymnt_scheme_Milestn", schemeupdate).then(function (response) {
-                $scope.choices2 = response.data;
-                $modalInstance.dismiss();
-                $scope.openSucessfullPopup();
-            },
-         function (error) {
+                apiService.post("Payment/Add_new_Payment_scheme", param).then(function (response) {
+                    var loginSession = response.data;
+                    var schemeupdate = [];
+                    for (var i in $scope.choices2) {
+                        var newscheme = {};
 
-         });
-            
-            $modalInstance.dismiss();
+                        newscheme.user_id = $cookieStore.get('userId');
+                        newscheme.organization_id = $cookieStore.get('orgID');
+                        newscheme.Milestone = $scope.choices2[i].Milestone;
+                        newscheme.percentage = $scope.choices2[i].percentage;
+                        newscheme.project_id = window.sessionStorage.selectedCustomerID;
+                        newscheme.payment_schedule_id = loginSession.id;
+                        schemeupdate.push(newscheme);
+                    }
 
-        },
-   function (error) {
+                    apiService.post("Payment/new_Paymnt_scheme_Milestn", schemeupdate).then(function (response) {
+                        $scope.choices2 = response.data;
+                        $modalInstance.dismiss();
+                        $scope.openSucessfullPopup();
+                    },
+                 function (error) {
 
-   });
+                 });
+
+                    $modalInstance.dismiss();
+
+                },
+function (error) {
+
+});
+
+
+            }
+     
+
+ 
     }
 
    
@@ -167,6 +173,20 @@
         });
         $rootScope.$broadcast('REFRESH', 'payment');
     };
+
+    $scope.openUnsucessPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'newuser/unsuccess.tpl.html',
+            backdrop: 'static',
+            controller: UnsucessController,
+            size: 'md'
+
+        });
+
+        $rootScope.$broadcast('REFRESH', 'payment');
+    };
+
     $scope.params = {
         Pay_Scheme_name: $scope.Pay_Scheme_name,
         base_rate: $scope.base_rate,

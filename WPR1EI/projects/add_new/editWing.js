@@ -13,11 +13,13 @@ var EditNewWingController = function ($scope, $state, $cookieStore, apiService, 
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
 
@@ -33,19 +35,19 @@ var EditNewWingController = function ($scope, $state, $cookieStore, apiService, 
         }
     });
 
-    // FILTERS
-    //uploader1.filters.push({
-    //    name: 'imageFilter',
-    //    fn: function (item /*{File|FileLikeObject}*/, options) {
-    //        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-    //        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    //    }
-    //});
+    uploader1.filters.push({
+        name: 'imageFilter1',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
+        }
+    });
+
 
     projectUrl = "WingType/GetfloorMultiple?id=" + wing_id;
 
     //alert(projectUrl);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.floors = response.data;
 
     },
@@ -57,7 +59,7 @@ function (error) {
     projectUrl = "WingType/GetWingSingle?id=" + wing_id;
 
     //alert(projectUrl);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
 
     },

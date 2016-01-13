@@ -31,9 +31,9 @@ angular.module('MainApp', [
    'common',
    'application',
     'current',
-    'resourcepermission',
     'plot',
-    'ng.deviceDetector'
+    'ng.deviceDetector',
+    'setting'
 
 
    
@@ -43,7 +43,7 @@ angular.module('MainApp', [
         $urlRouterProvider.otherwise('/login');
     }])
     .constant('appConstants', {
-        'APIBaseURL': 'https://dw-webservices-dev2.azurewebsites.net/'
+        'APIBaseURL': 'https://dw-webservices-uat.azurewebsites.net/'
     }).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
         //cfpLoadingBarProvider.latencyThreshold = 500;
         cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';

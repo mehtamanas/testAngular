@@ -7,20 +7,22 @@
    // var tower_id = $cookieStore.get('tower_id');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
 
     $scope.showProgress = false;
 
-    // FILTERS
     uploader.filters.push({
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
@@ -30,6 +32,15 @@
     });
 
     // FILTERS
+    uploader1.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
+        }
+    });
+
+
 
     // FILTERS
     uploader2.filters.push({
@@ -45,7 +56,7 @@
 
     projectUrl = "Tower/GetMultipleWingTypebyTowerId?id=" + tower_id;
   
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.wings = response.data;
 
 
@@ -58,7 +69,7 @@ function (error) {
 
     projectUrl = "Tower/GetTowerByTower/" + tower_id;
     
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
 
 
@@ -151,8 +162,18 @@ function (error) {
             id: tower_id
         };
 
-        //alert(postData.city);
-        //alert(postData.media_url);.
+        var fnd = 0;
+        for (var i in $scope.wings) {
+
+            if ($scope.wings[i].wing_no != null) {
+                fnd = 1;
+                break;
+            }
+        }
+        if (fnd == 0) {
+            alert("No Wing Mapped.....");
+            retrun;
+        }
 
         apiService.post("Tower/EditTowerWing", postData).then(function (response) {
             var loginSession = response.data;

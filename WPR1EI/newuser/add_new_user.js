@@ -1,5 +1,5 @@
 
-var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $cookieStore, apiService, $modal) {
+var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $cookieStore, apiService, $modal,$rootScope) {
     console.info("UserPopUpController");
         
         $scope.countryList = COUNTRIES;
@@ -23,12 +23,12 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
         UserInvite = function (param) {          
             apiService.post(Url, param).then(function (response) {
                 var loginSession = response.data;
-               
-                //alert("User Invited..!!");
+                $scope.openSucessfullPopup();
                 $modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH', 'mainGridOptionss');
             },
        function (error) {
-           alert("Error " + error.state);
+           alert("User Already Exists " );
          
        });
         };
@@ -78,8 +78,8 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
                 new UserInvite($scope.params).then(function (response) {
                     console.log(response);
 
-                    $scope.openSucessfullPopup();
-                    $modalInstance.dismiss();
+                   
+                    $rootScope.$broadcast('REFRESH', 'userGrid');
                   
                 }, function (error) {
                     console.log(error);
@@ -97,7 +97,9 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md'
+                size: 'md',
+                resolve: { items: { title: "User" } }
+
             });
         };
         

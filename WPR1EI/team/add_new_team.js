@@ -94,6 +94,7 @@ var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $m
                         var loginSession = response.data;
                         $scope.openSucessfullPopup();
                         $modalInstance.dismiss();
+                        $rootScope.$broadcast('REFRESH', 'teamGrid');
                     },
                function (error) {
                    alert("Error " + error.state);

@@ -4,9 +4,11 @@
 
 angular.module('common')
     .controller('HomeController', ['$scope', '$cookieStore', '$location', 'security', '$rootScope', function ($scope, $cookieStore, $location, security, $rootScope) {
+        $scope.activeBar = 0;
         security.isAuthorized().then(function (response) {
             nav = response;
             console.log(nav);
+            $scope.loggedUser = $cookieStore.get('loggedUser');
         if (nav.length > 0) {
 
             for (i = 0; i < nav.length; i++) {

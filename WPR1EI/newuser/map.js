@@ -110,7 +110,7 @@ angular.module('newuser')//to chnage
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-dev2.azurewebsites.net/Team/GetTeamDetails/" + orgID
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
                 },
                 pageSize: 5
 

@@ -22,15 +22,18 @@
 
             <div class="clearfix">
 
-
-                <div class="pull-right btn-wrap-right">
-                    <a href="#" id="btnSave"class="btn-lk" ng-click="openPropertyPopup()">+ Create New Property</a>
-                </div>
+                <!--<div class="pull-left actions-wrap">
+                    <select id="actions-option" class="form-control actions-option">
+                        <option>ACTIONS</option>
+                        <option>EDIT</option>
+                        <option>DELETE</option>
+                    </select> 
+                </div>-->
             </div>
 
             <div id="record-content" class="properties-content">
 
-                <div id="project-record-list" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
+                <div id="project-record-list" kendo-grid="peopleGrid" k-options="TowerListGrid" selectable="true" k-on-change="myGridChange( dataItem )">
                 </div>
 
             </div><!-- record-content ended -->

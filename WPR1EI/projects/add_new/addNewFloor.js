@@ -8,16 +8,18 @@ var upload;
 
 var AddNewFloorController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $window, $modal, $rootScope) {
     console.log('AddNewFloorController');
-    
+
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     $scope.showProgress = false;
@@ -32,6 +34,13 @@ var AddNewFloorController = function ($scope, $state, $cookieStore, apiService, 
     });
 
     //FILTERS
+    uploader1.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
+        }
+    });
 
 
 
@@ -62,8 +71,7 @@ function (error) {
         upload1 = 1;
         $scope.media1 = uploadResult.Location;
         if (upload1 == 1 && upload2 == 1) {
-            $scope.showProgress = false;
-            $scope.finalpost();
+            $scope.finalpost()
         }
     };
 
@@ -76,8 +84,7 @@ function (error) {
         // TODO: Need to get these values dynamically
         upload2 = 1;
         if (upload1 == 1 && upload2 == 1) {
-            $scope.showProgress = false;
-            $scope.finalpost();
+            $scope.finalpost()
         }
 
 
@@ -141,13 +148,25 @@ function (error) {
             alert("Ivalid Range! " + nums);
             return;
         }
+
+        var fnd = 0;
+        for (var i in $scope.units) {
+
+            if ($scope.units[i].no_of_units != null) {
+                fnd = 1;
+                break;
+            }
+        }
+        if (fnd == 0) {
+            alert("No  unit mapped");
+            retrun;
+        }
+
         if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
             showProgress = true;
             uploader.uploadAll();
             uploader1.uploadAll();
         }
-
-        
     };
 
 
@@ -196,7 +215,7 @@ function (error) {
         return true;
     }
     $scope.isInInterval = function (array) {
-        var a = parseInt($scope.no_of_units);
+        var a = parseInt($scope.params.unit_no);
         for (var i = 0; i < array.length; i++) {
             if (array[i] < 1 || array[i] > a)
                 return false;
@@ -218,7 +237,7 @@ function (error) {
             return false;
     }
     $scope.isMissingNumber = function (array) {
-        var a = parseInt($scope.no_of_units);
+        var a = parseInt($scope.params.unit_no);
         var result = false;
         var nums = [];
         for (var i = 1; i <= a; i++) {
@@ -244,7 +263,7 @@ function (error) {
 
 
     $scope.invalid = function (array) {
-        var a = parseInt($scope.no_of_units);
+        var a = parseInt($scope.params.unit_no);
         var result = false;
         var nums = [];
 
@@ -264,7 +283,7 @@ function (error) {
 
     $scope.finalpost = function () {
         var postData = {
-            user_id: $cookieStore.get('userId'),
+            userid: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             media_name: "",
             media_url: $scope.media1,
@@ -276,8 +295,8 @@ function (error) {
             // unit_type_desc: $scope.params.unit_type_desc,
             no_of_units: $scope.params.no_of_units,
             media_type: "image",
-            unit_name: $scope.params.unit_name
-            
+            unit_name: $scope.params.unit_name,
+            unit_no: $scope.params.unit_no
         };
 
         $scope.openSucessfullPopup = function () {
@@ -286,7 +305,8 @@ function (error) {
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md'
+                size: 'md',
+                resolve: { items: { title: "Floor" } }
             });
 
             $rootScope.$broadcast('REFRESH', 'floor');
@@ -298,6 +318,8 @@ function (error) {
         //alert(postData.city);
         //alert(postData.media_url);
 
+    
+
         apiService.post("FloorType/FloorCreate", postData).then(function (response) {
             var loginSession = response.data;
             //    alert("Floor Done...");
@@ -305,7 +327,8 @@ function (error) {
             $modalInstance.dismiss();
             var unitupdate = [];
 
-            for (var i in $scope.units) {
+            for (var i in $scope.units)
+            {
 
                 var newUnit = {};
 
@@ -317,21 +340,25 @@ function (error) {
                 unitupdate.push(newUnit);
             }
 
-            apiService.post("UnitTypes/Edit_Unit_type", unitupdate).then(function (response) {
+            apiService.post("UnitTypes/Edit_Unit_type", unitupdate).then(function (response)
+            {
                 var loginSession = response.data;
-                
+                //    alert("Unit Edit Done...");
+
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
 
             },
-          function (error) {
+          function (error)
+          {
 
           });
 
 
         },
-        function (error) {
-
+        function (error)
+        {
+            alert(error.data.Message);
         });
 
     }
@@ -360,44 +387,48 @@ function (error) {
 
 
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
-        //$scope.showProgress = false;
+        $scope.showProgress = false;
     };
     uploader1.onCompleteItem = function (fileItem, response, status, headers) {
-        //$scope.showProgress = false;
+        $scope.showProgress = false;
     };
 
 
 
 
 
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "AddNewFloor",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
+    //Audit log start
+    // $scope.params = {
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
-            var loginSession = response.data;
-        },
-   function (error) {
+    //     device_os: "windows10",
+    //     device_type: "mobile",
+    //     device_mac_id: "34:#$::43:434:34:45",
+    //     module_id: "Addnew Project",
+    //     action_id: "Addnew Project View",
+    //     details: "Addnew Project detail",
+    //     application: "angular",
+    //     browser: $cookieStore.get('browser'),
+    //     ip_address: $cookieStore.get('IP_Address'),
+    //     location: $cookieStore.get('Location'),
+    //     organization_id: $cookieStore.get('orgID'),
+    //     User_ID: $cookieStore.get('userId')
+    // };
 
-   });
-    };
-    AuditCreate($scope.params);
+
+    // AuditCreate = function (param) {
+
+    //     apiService.post("AuditLog/Create", param).then(function (response) {
+    //         var loginSession = response.data;
+
+    //     },
+    //function (error) {
+
+    //});
+    // };
+    // AuditCreate($scope.params);
 
     //end
+
 
     $scope.params = {
 
@@ -445,7 +476,6 @@ function (error) {
     //});
     // };
 
-
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -456,27 +486,35 @@ function (error) {
 
     $scope.orgList = ['ABC Real Estate Ltd'];
 
-    $scope.addNew = function (isValid)
-    {
+    $scope.addNew = function (isValid) {
         $scope.showValid = true;
-        if (isValid)
-        {
-            
-            if (uploader.queue.length != 0)
-            uploader.uploadAll();
-            if (uploader1.queue.length != 0)
-            uploader1.uploadAll();
-            if (uploader.queue.length == 0 && uploader1.queue.length == 0)
-            $scope.finalpost();
+        
+        if (isValid) {
 
-              $scope.submit();
+            if ($scope.params.no_of_units != "" && $scope.params.unit_name != "")
+            {
+                if (uploader.queue.length != 0)
+                    uploader.uploadAll();
+                if (uploader1.queue.length != 0)
+                    uploader1.uploadAll();
+                if (uploader.queue.length == 0 && uploader1.queue.length == 0)
+                    $scope.finalpost();
+
+                $scope.submit();
+            }
+
+            //new ProjectCreate($scope.params).then(function (response) {
+            //    console.log(response);
+            //    $scope.showValid = false;
+            //    $state.go('guest.signup.thanks');
+            //}, function (error) {
+            //    console.log(error);
+            //});
 
             $scope.showValid = false;
 
         }
 
-
-    };
-
+    }
 
 };

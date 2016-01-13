@@ -46,7 +46,7 @@ angular.module('billing')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Billing/GetByID/" + orgID
+                    read: "https://dw-webservices-uat.azurewebsites.net/Billing/GetByID/" + orgID
                 },
                 pageSize: 2,
 

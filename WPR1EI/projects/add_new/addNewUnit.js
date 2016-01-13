@@ -15,12 +15,17 @@
     $scope.media1 = items.Image_Url_unit1;
     $scope.media2 = items.Image_Url_Unit2;
 
+    if (items.unit_id == undefined) $scope.title = "Add New Unit";
+    else $scope.title = "Edit Unit";
+
 
      uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+         url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+         queueLimit: 1
     });
      uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+         url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+         queueLimit: 1
     });
 
     $scope.showProgress = false;
@@ -39,7 +44,7 @@
         name: 'imageFilter1',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|zip|rar|'.indexOf(type) !== -1;
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
     var upload1 = 0;
@@ -105,7 +110,8 @@
         upload1 = 0;
         upload2 = 0;
 
-        if (items.unit_id == undefined) {//add
+        if (items.unit_id == undefined)
+        {//add
             var postData = {
                 user_id: $cookieStore.get('userId'),
                 //name: $scope.params.name,
@@ -128,28 +134,38 @@
                 num_bathrooms: $scope.num_bathrooms
 
             };
-            apiService.post("UnitTypes/CreateNewUnitType", postData).then(function (response) {
-                var loginSession = response.data;
-                //   alert("Unit Type Done");
-                $scope.openSucessfullPopup = function () {
-                    var modalInstance = $modal.open({
-                        animation: true,
-                        templateUrl: 'newuser/sucessfull.tpl.html',
-                        backdrop: 'static',
-                        controller: sucessfullController,
-                        size: 'md',
+            if ($scope.super_built_up_area >= $scope.carpet_area)
+            {
 
-                    });
-                    $rootScope.$broadcast('REFRESH', 'unit');
-                };
-                $modalInstance.dismiss();
-                $scope.openSucessfullPopup();
-            },
-            function (error) {
+                apiService.post("UnitTypes/CreateNewUnitType", postData).then(function (response)
+                {
+                    var loginSession = response.data;
+                    //   alert("Unit Type Done");
+                    $scope.openSucessfullPopup = function () {
+                        var modalInstance = $modal.open({
+                            animation: true,
+                            templateUrl: 'newuser/sucessfull.tpl.html',
+                            backdrop: 'static',
+                            controller: sucessfullController,
+                            size: 'md',
+                            resolve: { items: { title: "Unit" } }
 
-            });
+                        });
+                        $rootScope.$broadcast('REFRESH', 'unit');
+                    };
+                    $modalInstance.dismiss();
+                    $scope.openSucessfullPopup();
+                },
+           function (error) {
+
+           });
+            }
+            else { alert("Please enter saleable area greater than carpet area..."); }
+
+           
         }
-        else { //edit
+        else
+        { //edit
              var postData = {
                 //userid: $cookieStore.get('userId'),
                 //name: $scope.params.name,
@@ -172,28 +188,32 @@
                num_bathrooms: $scope.num_bathrooms
 
             };
+             if ($scope.super_built_up_area >= $scope.carpet_area)
+             {
+                 apiService.post("UnitTypes/EditUnit", postData).then(function (response)
+                 {
+                     var loginSession = response.data;
+                     //   alert("Unit Type Done");
+                     $scope.openSucessfullPopup = function () {
+                         var modalInstance = $modal.open({
+                             animation: true,
+                             templateUrl: 'newuser/sucessfull.tpl.html',
+                             backdrop: 'static',
+                             controller: sucessfullController,
+                             size: 'md',
 
-            apiService.post("UnitTypes/EditUnit", postData).then(function (response) {
-                var loginSession = response.data;
-                //   alert("Unit Type Done");
-                $scope.openSucessfullPopup = function () {
-                    var modalInstance = $modal.open({
-                        animation: true,
-                        templateUrl: 'newuser/sucessfull.tpl.html',
-                        backdrop: 'static',
-                        controller: sucessfullController,
-                        size: 'md',
+                         });
+                         $rootScope.$broadcast('REFRESH', 'unit');
+                     };
+                     $modalInstance.dismiss();
+                     $scope.openSucessfullPopup();
+                 },
+                function (error) {
 
-                    });
-                    $rootScope.$broadcast('REFRESH', 'unit');
-                };
-                $modalInstance.dismiss();
-                $scope.openSucessfullPopup();
-            },
-            function (error) {
-
-            });
-
+                });
+             }
+           
+             else { alert("Please enter saleable area greater than carpet area..."); }
            
 
         }

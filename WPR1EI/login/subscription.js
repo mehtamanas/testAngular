@@ -15,7 +15,7 @@ angular.module('login')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-dev2.azurewebsites.net/Subscription/Get" 
+                    read: "https://dw-webservices-uat.azurewebsites.net/Subscription/Get" 
 
                 },
                 pageSize: 5

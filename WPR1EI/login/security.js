@@ -181,7 +181,7 @@ angular.module('security', [
         },
         isAuthorized: function () {
             var deferred = $q.defer();
-            apiService.get('Permission/GetRolePermissionById?id=' + service.currentUser.user_id).then(function (response) {
+            apiService.get('Permission/GetRolePermissionById?id=' + $cookieStore.get('userId')).then(function (response) {
                 service.currentPermission = response.data;
                  service.permissions = [];
                 for (var i in service.currentPermission) {

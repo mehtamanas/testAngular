@@ -27,21 +27,21 @@
 
             <div class="pull-left logo">
                 <a href="/">
-                    <img src="images/logo.png" alt="" />
+                    <img src="assets/images/logo.png" alt="" />
                 </a>
             </div><!-- logo ended -->
 
             <div class="pull-right user-sec">
                 <div class="dropdown">
-                    <a id="user-dropdown" data-target="#" href="http://example.com" data-toggle="dropdown">
+                    <!--<a id="user-dropdown" data-target="#" href="http://example.com" data-toggle="dropdown">-->
                         <span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar
-                        <i class="fa fa-angle-down"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                        <!--<i class="fa fa-angle-down"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu" aria-labelledby="user-dropdown">
                         <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
                         <li><a href="#"><i class="fa fa-cog"></i> Account Setting</a></li>
                         <li><a href="#"><i class="fa fa-sign-out"></i> Signout</a></li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div><!-- user-sec ended -->
 
@@ -58,7 +58,7 @@
 
                                 <div class="col-md-12">
                                     <h2 class="builder-directory-title">Builder Details</h2>
-                                    <button class="apply-btn" ng-click="openChannelPopup()" type="submit">Apply </button>
+                                    <!--<button class="apply-btn" ng-click="openChannelPopup()" id="btn_builder_submit" type="submit">Apply </button>-->
                                 </div>
 
                             </div>
@@ -69,7 +69,7 @@
                     <div class="builder-directory-detail">
 
                         <div class="builder-directory-inner">
-
+                            <button style="width:100px;text-align:inherit;float:right" class="f-btn" ng-click="openChannelPopup()" type="submit">Apply </button>
                             <img src={{builddetail.meadia_logo}} alt="" class="img-responsive builder-logo" height="60" width="260" />
                             <div class="builder-logo-side">
                                 <h4>{{builddetail.OrganizationName}}</h4>
@@ -111,12 +111,12 @@
                         </div><!-- builder-directory-inner ended -->
 
                         <div class="builder-tab clearfix">
-                            <div class="pull-left">Total Projects {{builddetail.totalProjects}}</div>
+                            <div class="pull-left">Total Projects &nbsp;({{builddetail.totalProjects}})</div>
                             <ul class="pull-right nav nav-tabs" role="tablist">
                                 <li><a href="#tab-all" aria-controls="home" role="tab" data-toggle="tab">ALL</a></li>
-                                <li class="active"><a href="#tab-complete" aria-controls="profile" role="tab" data-toggle="tab">COMPLETE {{builddetail.Complete_project}}</a></li>
-                                <li><a href="#tab-running" aria-controls="messages" role="tab" data-toggle="tab">RUNNING {{builddetail.Running_project}}</a></li>
-                                <li><a href="#tab-upcoming" aria-controls="settings" role="tab" data-toggle="tab">UPCOMING{{builddetail.UpComing_project}}</a></li>
+                                <li class="active"><a href="#tab-complete" aria-controls="profile" role="tab" data-toggle="tab">COMPLETE ({{builddetail.Complete_project}})</a></li>
+                                <li><a href="#tab-running" aria-controls="messages" role="tab" data-toggle="tab">RUNNING ({{builddetail.Running_project}})</a></li>
+                                <li><a href="#tab-upcoming" aria-controls="settings" role="tab" data-toggle="tab">UPCOMING ({{builddetail.UpComing_project}})</a></li>
                             </ul>
                         </div><!-- builder-tab ended -->
 
@@ -133,9 +133,12 @@
                                                 <div class="tb-content-inner">
                                                     <div class="clearfix">
                                                         <div class="tb-possession"><span>{{user.project_phase}}</span></div>
+                                                        <div class="tb-possession" style="font-size:14px">POSSESSION: &nbsp;<span>{{user.possession_date}}</span></div>
                                                         <div class="pull-left">
                                                             <div class="tb-title">
+                                                                
                                                                 <h4><span>{{user.name}}</span></h4>
+                                                              
                                                                 <div class="tb-title-sub"><span>{{user.address}}</span></div>
                                                             </div>
                                                             <div class="tb-c-wrap">

@@ -14,7 +14,7 @@
             <div class="col-xs-11">
                 <label class="control-label">First Name</label>
                 <label class="label-group">
-                    <input type="text" autofocus name="firstname" class="form-control"
+                    <input type="text" autofocus name="firstname" class="form-control" id="sales_fname"
                            placeholder="First Name"
                            data-ng-model="params.firstname"
                            minlength="1"
@@ -39,7 +39,7 @@
             <div class="col-xs-11">
                 <label class="control-label">Last Name</label>
                 <label class="label-group">
-                    <input type="text" name="lastname" class="form-control"
+                    <input type="text" name="lastname" class="form-control" id="sales_lname"
                            placeholder="Last Name"
                            data-ng-model="params.lastname"
                            minlength="1"
@@ -82,7 +82,7 @@
             <div class="col-xs-11">
                 <label class="control-label">Email</label>
                 <label class="label-group">
-                    <input type="text" name="email" class="form-control"
+                    <input type="text" name="email" class="form-control" id="sales_email"
                            placeholder="Email"
                            data-ng-model="params.emailid"
                            minlength="1"
@@ -109,7 +109,7 @@
             <div class="col-xs-11">
                 <label class="control-label">Phone Number</label>
                 <label class="label-group">
-                    <input type="text" name="phoneno" class="form-control"
+                    <input type="text" name="phoneno" class="form-control" id="sales_phone"
                            placeholder="Mobile Number"
                            data-ng-model="params.phoneno"
                            minlength="1"
@@ -144,7 +144,7 @@
             <div class="col-xs-11">
                 <label class="control-label">Comment</label>
                 <label class="label-group">
-                    <textarea class="form-control" cols="4" rows="10" name="comment"
+                    <textarea class="form-control" cols="4" rows="10" name="comment" id="sales_comment"
                               placeholder="Project comment"
                               data-ng-model="params.comment"
                               minlength="1"
@@ -166,7 +166,7 @@
 
 
 
-        <button class="btn organization-btn" type="submit" ng-click="sales_info()">Submit</button>
+        <button class="btn organization-btn" id="btn_sales_sub" type="submit" ng-click="sales_info()">Submit</button>
         <!--<!--<button class="btn  btn-default" type="button" ng-click="reset()">Reset</button>
         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>-->

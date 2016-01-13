@@ -3,10 +3,10 @@
 
 <div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+   
+        <div class="modal-body">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <button id="btn_contacttask_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Create New Task</h4>
             </div>
             <form class="form-content form-content2 edit-organization-setting" name="addNewForm"  data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
@@ -14,7 +14,7 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx5">
                         <label for="">Summary</label>
-                        <input type="text" class="form-control text-bold" autofocus name="name"
+                        <input type="text" class="form-control text-bold" autofocus name="name" id="contacttask_summary"
                                
                                data-ng-model="params.summary"
                                minlength="1"
@@ -27,7 +27,7 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx5">
                         <label for="">Description</label>
-                        <textarea cols="100" rows="8" name="description"
+                        <textarea cols="100" rows="8" name="description" id="contacttask_description"
                                   
                                   data-ng-model="params.description"
                                   minlength="1"
@@ -39,7 +39,7 @@
                 
                     <div class="form-group form-bx  form-bx5">
                         <label for="">Assign To</label>
-                        <select ng-model="user1" ng-change="selectuser()"
+                        <select ng-model="user1" ng-change="selectuser()" id="contacttask_user"
                                 class="dropdown form-control" required>
                             <option value="" selected>Select User</option>
                             <option ng-repeat="User in users"
@@ -52,7 +52,7 @@
                     <div class="form-group form-bx  form-bx5">
                         <label for="">Set Priority</label>
                         <select ng-model="priority"
-                                class="dropdown form-control" required>
+                                class="dropdown form-control" id="contacttask_priority" required>
                             <option value="" selected>Select Priority</option>
                             <option ng-repeat="prio in priority"
                                     value="{{prio.id}}">
@@ -66,7 +66,7 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx5">
                         <label for="">Add Notes</label>
-                        <textarea cols="100" rows="5" name="description"
+                        <textarea cols="100" rows="5" name="description" id="contacttask_notes"
                                   
                                   data-ng-model="params.text"
                                   minlength="1"
@@ -80,12 +80,12 @@
                             ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length && !uploader3.getNotUploadedItems().length">
                         Save
                     </button>-->
-                    <button type="submit" class="f-btn">Save</button>
+                    <button id="btn_contacttask_save" type="submit" class="f-btn">Save</button>
 
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    <button id="btn_contacttask_cancelme" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
                 </div>
             </form>
 
         </div>
-    </div>
+   
 </div>

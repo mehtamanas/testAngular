@@ -7,7 +7,7 @@ angular.module('configs', [])
 
 .constant('CONFIGS', {
     baseURL: function () {
-        return 'http://dw-webservices-dev2.azurewebsites.net/';
+        return 'https://dw-webservices-uat.azurewebsites.net/';
         //return 'http://localhost:3979/';
 
         //if(window.location.origin.indexOf('localhost') !== -1) {

@@ -9,6 +9,7 @@
 
         $rootScope.title = 'Dwellar./Properties';
 
+        var userId = $cookieStore.get('userId');
        
 
         $('#btnSave').hide();
@@ -63,20 +64,16 @@
 
         });
 
+         $scope.TowerListGrid = {
+       // $scope.mainGridOptions = {
 
 
-   
-
-
-
-        
-
-        $scope.mainGridOptions = {
             dataSource: {
                 type: "json",
                 transport: {
-                   // read: "http://dw-webservices-dev2.azurewebsites.net/Subscription/GetById/" + orgID
-                    read: "https://dw-webservices-dev2.azurewebsites.net/PropertyListing/GetByID/" + orgID
+
+                    //read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/bcd0a0ad-68c2-4a96-9498-c1a19e429f53"
+                    read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/" + userId
                 },
                 pageSize: 5
 
@@ -95,161 +92,91 @@
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [{
-                field: "name",
-                title: "Name",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
+            columns: [
+                {
+                    //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
+                    //"<span style='padding-left:10px' class='property-photo'> </span>",
+                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
+                    title: "",
+                    width: "60px",
+                    attributes: {
+                        "class": "UseHand",
 
-                }
-            }, {
-                field: "num_bedrooms",
-                title: "Bedrooms",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
+                    }
+                },
 
-                }
-            }, {
+                {
+                    template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
+                    "<span style='padding-left:10px' class='property-photo'> </span>",
+                    title: "Photo",
+                    width: "120px",
+                    attributes:
+                      {
+                          "class": "UseHand",
+                      }
+                },
+               
+                {
+                    field: "tower_name",
+                    title: "NAME",
+                    width: "120px"
+                },
+             {
+                 field: "floorno",
+                 title: "FLOOR NO",
+                 width: "120px"
+             },
+              {
+                  field: "unitno",
+                  title: "UNIT NO",
+                  width: "120px"
+              },
+              {
+                  field: "carpark",
+                  title: "CAR PARK",
+                  width: "120px"
+              },
+              {
+                  field: "num_bedrooms",
+                  title: "BEDROOMS",
+                  width: "120px"
+              },
+            {
                 field: "num_bathrooms",
-                title: "Bathrooms",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
+                title: "BATHROOMS",
+                width: "120px"
             },
             {
-                field: "carpet_area",
-                title: "Carpet Area",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
-            }, {
-                field: "built_up_area",
-                title: "Built Up Area",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
-            }, {
                 field: "super_built_up_area",
-                title: "Super Built Up Area",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
-            }, {
-                field: "society_name",
-                title: "Society Name",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
-            }, {
-                field: "view_type",
-                title: "View Type",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
+                type: "number",
+                title: "SLB. AREA",
+                width: "120px"
+            },
+              {
+                  field: "carpet_area",
+                  type: "number",
+                  title: "CRP AREA",
+                  width: "120px"
+              },
+               {
+                   field: "total_consideration",
+                   title: "PRICE",
+                   width: "120px"
+               },
+                {
+                    field: "project_name",
+                    title: "PROJECT",
+                    width: "120px"
+                },
+            {
+                field: "available_status",
+                title: "STATUS",
+                width: "120px"
             }]
+
         };
 
-  // Paging from api
 
-        //$scope.mainGridOptions = {
-
-
-        //    dataSource: {
-        //        type: "json",
-        //        transport: {
-
-        //            read: "http://dw-webservices-dev2.azurewebsites.net/UnitTypes/GetTowerunitproperties/" + $cookieStore.get('tower_id')
-        //        },
-        //        pageSize: 5
-
-        //        //group: {
-        //        //    field: 'sport'
-        //        //}
-        //    },
-        //    groupable: true,
-        //    sortable: true,
-        //    selectable: "multiple",
-        //    reorderable: true,
-        //    resizable: true,
-        //    filterable: true,
-        //    pageable: {
-        //        refresh: true,
-        //        pageSizes: true,
-        //        buttonCount: 5
-        //    },
-        //    columns: [
-        //        {
-        //            //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
-        //            //"<span style='padding-left:10px' class='property-photo'> </span>",
-        //            template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-        //            title: "",
-        //            width: "60px",
-        //            attributes: {
-        //                "class": "UseHand",
-
-        //            }
-        //        },
-
-        //        {
-        //            template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
-        //            "<span style='padding-left:10px' class='property-photo'> </span>",
-        //            title: "Photo",
-        //            width: "120px",
-        //            attributes: {
-        //                "class": "UseHand",
-
-        //            }
-        //        }, {
-        //            field: "tower_name",
-        //            title: "Name",
-        //            width: "120px"
-        //        },
-        //      {
-        //          field: "num_bedrooms",
-        //          title: "Bedrooms",
-        //          width: "120px"
-        //      },
-        //    {
-        //        field: "num_bathrooms",
-        //        title: "Bathrooms",
-        //        width: "120px"
-        //    },
-        //    {
-        //        field: "super_built_up_area",
-        //        title: "Slb. Area",
-        //        width: "120px"
-        //    },
-        //      {
-        //          field: "carpet_area",
-        //          title: "Crp Area",
-        //          width: "120px"
-        //      },
-        //       {
-        //           field: "total_consideration",
-        //           title: "Price",
-        //           width: "120px"
-        //       },
-        //    {
-        //        field: "available_status",
-        //        title: "Status",
-        //        width: "120px"
-        //    }]
-
-        //};
         //Audit log start															
         $scope.params =
             {
@@ -286,7 +213,7 @@
 
             
             window.sessionStorage.selectedCustomerID = dataItem.id;
-            $state.go('app.propertydetail');
+            //$state.go('app.propertydetail');
 
 
         };

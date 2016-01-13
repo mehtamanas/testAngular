@@ -29,10 +29,10 @@
                 </a>
             </div><!-- logo ended -->
 
-            <div class="pull-right reg-wrap">
+            <!--<div class="pull-right reg-wrap">
                 <a href="#" class="h-btn">SIGN UP</a>
                 <a href="#" class="h-btn">LOGIN</a>
-            </div><!-- reg-btn ended -->
+            </div>--><!-- reg-btn ended -->
 
             <nav class="navbar navbar-default pull-right main-navbar">
 
@@ -47,11 +47,11 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">FEATURE</a></li>
-                        <li><a href="#">PLANS</a></li>
-                        <li><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
-                        <li><a href="#">CONTACT US</a></li>
+                        <li id="login_home"><a href="#">HOME</a></li>
+                        <li id="login_feature"><a href="#">FEATURES</a></li>
+                        <li id="login_plans"><a href="#">PLANS</a></li>
+                        <li id="login_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
+                        <li id="login_contact"><a href="#">CONTACT US</a></li>
                     </ul>
                 </div>
 
@@ -75,18 +75,18 @@
                         'has-error' : loginForm.email.$invalid && (!loginForm.email.$pristine || showValid) && !loginForm.email.$focus,
                         'has-success': loginForm.email.$valid && !loginForm.email.$pristine && !loginForm.email.$focus
                     }">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" name="email" class="form-control" id="username"
+                                <label for="exampleInputEmail1">Email Address</label>
+                                <input type="email" name="email" class="form-control" id="username" 
                                        placeholder="user@dwellar.com"
                                        data-ng-model="params.email"
                                        data-ng-pattern="patternRegexs.email"
                                        input-focus
-                                       pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
+                                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        required />
 
                                 <div class="text-danger"
                                      data-ng-if="loginForm.email.$invalid && (!loginForm.email.$pristine || showValid) && !loginForm.email.$focus">
-                                    {{ 'Please Enter Valid ' | translate }}
+                                    {{ 'Please Enter Valid Email Address ' | translate }}
                                 </div>
                             </div>
 
@@ -110,14 +110,14 @@
 
                             <div class="checkbox checkbx-txt">
                                 <label>
-                                    <input type="checkbox" name="remember" data-ng-model="params.remember" class="checkbx-f" id="remember"> Remember My Login
+                                    <input ng-click="rememberMe()" type="checkbox" name="remember" data-ng-model="params.remember" class="checkbx-f" id="remember"> Remember My Login
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-blk" name="login" id="btn_login">LOGIN</button>
+                            <button type="submit" class="btn btn-blk" name="login" id="btn_login">LOG IN</button>
 
                             <div class="forget-password">
-                                <a href="javascript:" ui-sref="Forgetpassword">I forget my passowrd</a>
+                                <a href="javascript:" ui-sref="Forgetpassword">I forgot my password</a>
                             </div>
                         </div>
                     </div><!-- login-bx ended -->

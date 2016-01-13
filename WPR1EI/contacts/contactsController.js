@@ -4,7 +4,10 @@ angular.module('contacts')
     {
         console.log('ContactListController');
 
-        $rootScope.title = 'Dwellar/Contact';
+        var userID = $cookieStore.get('userId');
+        
+
+        $rootScope.title = 'Dwellar/Contacts';
         var loginSession1;
         var orgID = $cookieStore.get('orgID');
 
@@ -84,14 +87,45 @@ angular.module('contacts')
 
         //end
 
+        //action
+        $scope.Fruits = [{
+            Id: 1,
+            Name: 'BLOCK'
+        }, {
+            Id: 2,
+            Name: 'INACTIVE'
+        }, {
+            Id: 3,
+            Name: 'ADD TO TEAM'
+        }, {
+            Id: 4,
+            Name: 'ASSIGN TO PROJECT'
+        }, {
+            Id: 5,
+            Name: 'ASSIGN ROLES'
+        }
+        ];
+
+        $scope.GetValue = function (fruit) {
+
+            var fruitId = $scope.ddlFruits;
+            var fruitName = $.grep($scope.Fruits, function (fruit) {
+                return fruit.Id == fruitId;
+            })[0].Name;
+
+            $cookieStore.put('Selected Text', fruitName);
+            // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
+        }
+        //End
+
         // Kendo code
-        $scope.mainGridOptions =
+        $scope.contactGrid =
         {
             dataSource: {
                 type: "json",
                 transport: {
-                   // read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetAllContactDetails?Id=442aa5f4-4298-4740-9e43-36ee021df1e7"
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetAllContactDetails?Id=" + orgID
+                   // read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetAllContactDetails?Id=442aa5f4-4298-4740-9e43-36ee021df1e7"
+                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetAllContactDetails?Id=" + userID
                     },
                 pageSize: 5
             },
@@ -128,7 +162,8 @@ angular.module('contacts')
                 {
                     template: "<img height='40px' width='40px'  class='user-photo' src='#= Contact_Image #'/>" +
                     "<span style='padding-left:10px' class='customer-name'> </span>",
-                     width: "120px",
+                    width: "60px",
+                    title:"Picture",
                      attributes:
                      {
                         "class": "UseHand",
@@ -262,6 +297,12 @@ angular.module('contacts')
             });
 
         }
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'contactGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
 
         $scope.openContactPopup = function () {
             var modalInstance = $modal.open({

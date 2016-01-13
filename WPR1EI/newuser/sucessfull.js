@@ -1,6 +1,7 @@
-﻿var sucessfullController = function ($scope, $state, $cookieStore, apiService, $modalInstance) {
+﻿var sucessfullController = function ($scope, $state, $cookieStore, apiService, $modalInstance,items) {
     console.log('sucessfullController');
 
+    $scope.title = items.title;
     //Audit log start
     $scope.params = {
 

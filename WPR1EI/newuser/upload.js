@@ -5,9 +5,9 @@
 
 var uploadController = function ($scope,$state, $modalInstance, uploadService, FileUploader) {
     var uploader = $scope.uploader = new FileUploader({
-        //url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
-        // url: 'https://dw-webservices-dev2.azurewebsites.net/User/Upload'
-        url: 'https://dw-webservices-dev2.azurewebsites.net/User/UploadCSV'
+        //url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
+        // url: 'https://dw-webservices-uat.azurewebsites.net/User/Upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/User/UploadCSV'
     });
   
 

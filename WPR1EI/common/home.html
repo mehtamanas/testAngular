@@ -10,20 +10,20 @@
             </div>
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 center_alignment">
                 <ul class="list-inline right_alignment">
-                    <li class="notification_part">
+                    <!--<li class="notification_part">
                         <img src="assets/images/notification.png">
                         <sup>
                             <img src="assets/images/ellipse.png" style="margin-left:-10px;" />
                         </sup>
-                    </li>
+                    </li>-->
                     <li>
                         <div class="pull-right user-sec">
                             <div class="dropdown">
-                                <a id="user-dropdown" data-target="#" href="/index.html#/home" data-toggle="dropdown">
-                                    <span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar
+                                <!--<a id="user-dropdown" data-target="#" href="/index.html#/home" data-toggle="dropdown">-->
+                                    <span class="avatar">D</span> <span class="welcome">Welcome</span>&nbsp;&nbsp;&nbsp;{{loggedUser}}
                                     <!--<a href="/index.html#/home"><span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar</a>-->
                                     <!--<i class="fa fa-angle-down"></i>-->
-                                </a>
+                                <!--</a>-->
 
 
                                 <!--<ul class="dropdown-menu" aria-labelledby="user-dropdown">
@@ -59,38 +59,35 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a ui-sref="app.property" href="">
-                                    <span class="nav-icon nav-01"></span>
-                                    Properties
-                                </a>
-                            </li>
-                            <li ng-if="projects.read"><a href="#" ui-sref="app.project"><span class="nav-icon nav-01"></span> Projects</a></li>
-                            <li ng-if="users.read"><a href="#" ui-sref="app.newuser"><span class="nav-icon nav-02"></span> Users</a></li>
-                            <li ng-if="teams.read"><a href="#" ui-sref="app.team"><span class="nav-icon nav-05"></span> Teams</a></li>
-                            <li ng-if="true"><a href="#" ui-sref="app.subscription_list"><span class="nav-icon nav-05"></span> Subscription List</a></li>
-                            <li ng-if="billing.read"><a href="#" ui-sref="app.billing"><span class="nav-icon nav-05"></span> Billing</a></li>
-                            <li ng-if="contacts.read"><a href="#" ui-sref="app.contacts"><span class="nav-icon nav-05"></span> Contact</a></li>
-                            <li ng-if="organization.read"><a href="#" ui-sref="app.organization"><span class="nav-icon nav-07"></span> Organization</a></li>
-                            <li ng-if="plot.read"><a href="#" ui-sref="app.plot"><span class="nav-icon nav-07"></span>Plot</a></li>
-                            <li ng-if="reports.read"><a href="#" ui-sref="app.report"><span class="nav-icon nav-03"></span> Reports</a></li>
-                            <li ng-if="channelPartners.read"><a href="#" ui-sref="app.channel_partners"><span class="nav-icon nav-07"></span> Channel Partners</a></li>
-                            <li ng-if="plot.read"><a href="#" ui-sref="app.plot"><span class="nav-icon nav-07"></span>Plot</a></li>
-                            <li ng-if=""><a href="#" ui-sref="app.application"><span class="nav-icon nav-07"></span> Application</a></li>
-                            <li ng-if=""><a href="#" ui-sref="app.current"><span class="nav-icon nav-07"></span> Current</a></li>
-                            <li ng-if="auditTrail.read"><a href="#" ui-sref="app.audit"><span class="nav-icon nav-07"></span> Audit</a></li>
-                            <li ng-if="reports.read"><a href="#" ui-sref="app.report"><span class="nav-icon nav-03"></span> Reports</a></li>
-                            <li ng-if="">
+                            
+                            <li id="home_project" ng-if="projects.read"><a  href="#" ui-sref="app.project"><span class="nav-icon nav-01"></span> Projects</a></li>
+                            <li id="home_property" ng-click="activeBar=1"><a  ui-sref="app.property" href=""  ><span class="nav-icon nav-11"></span>   Properties</a></li>
+                            <li id="home_newuser" ng-if="users.read" ng-click="activeBar=2"><a  href="#" ui-sref="app.newuser"  ><span class="nav-icon nav-02"></span> Users</a></li>
+                            <li id="home_team" ng-if="teams.read" ng-click="activeBar=3"><a  href="#" ui-sref="app.team"  ><span class="nav-icon nav-13"></span> Teams</a></li>
+                            <li id="home_subscription_list" ng-if="true" ng-click="activeBar=4"><a  href="#" ui-sref="app.subscription_list" ><span class="nav-icon nav-05"></span> Subscription List</a></li>
+                            <li id="home_billing" ng-if="billing.read"><a  href="#" ui-sref="app.billing" ><span class="nav-icon nav-14"></span>Billing</a></li>
+                            <li id="home_contacts"  ng-if="contacts.read"><a  href="#" ui-sref="app.contacts"><span class="nav-icon nav-05"></span> Contacts</a></li>
+                            <li id="home_organization" ng-if="organization.read"><a  href="#" ui-sref="app.organization"><span class="nav-icon nav-16"></span>Organization</a></li>
+                            <li ng-if="plot.read"><a href="#" ui-sref="app.plot"  ><span class="nav-icon nav-07"></span>Plot</a></li>
+                            <li id="home_report" ng-if="reports.read"><a  href="#" ui-sref="app.report"><span class="nav-icon nav-03"></span> Reports</a></li>
+                            <li id="home_setting"><a href="#" ui-sref="app.setting"><span class="nav-icon nav-03"></span> Settings</a></li>
+                            <li id="home_channel_partners" ng-if="channelPartners.read"><a  href="#" ui-sref="app.channel_partners"><span class="nav-icon nav-10"></span>Channel Partners</a></li>
+                            <li  ng-if="plot.read"><a  href="#" ui-sref="app.plot"><span class="nav-icon nav-07"></span>Plot</a></li>
+                            <li id="home_application" ng-if=""><a  href="#" ui-sref="app.application"><span class="nav-icon nav-07"></span> Application</a></li>
+                            <li id="home_current" ng-if=""><a  href="#" ui-sref="app.current"><span class="nav-icon nav-07"></span> Current</a></li>
+                            <li id="home_audit" ng-if="auditTrail.read"><a id="home_organization" href="#" ui-sref="app.audit"><span class="nav-icon nav-17"></span> Audit</a></li>
+                            <!--<li ng-if="reports.read"><a href="#" ui-sref="app.report"><span class="nav-icon nav-03"></span> Reports</a></li>-->
+                            <li  ng-if="">
                                 <a href="#"><span class="nav-icon nav-04"></span> Builder Directory</a>
                             </li>
 
-                            <li ng-if="notifications.read"><a href="#"><span class="nav-icon nav-06"></span> Messages</a></li>
+                            <!--<li ng-if="notifications.read"><a href="#"><span class="nav-icon nav-06"></span> Messages</a></li>-->
 
-                            <li ng-if=""><a href="#"><span class="nav-icon nav-08"></span> Security</a></li>
+                            <li id="home_security" ng-if=""><a href="#"><span class="nav-icon nav-08"></span> Security</a></li>
                             <li><a href="#"><span class="nav-icon nav-09"></span> Support</a></li>
                             <!--<li><a href="#" ng-click="logout()"><span class="nav-icon nav-04"></span> Log Out</a>-->
                             <!--<li><a href="#" ng-click="logout()"><span class="nav-icon nav-03"></span> LogOut</a></li>-->
-                            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li>
+                            <li id="home_signout"><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

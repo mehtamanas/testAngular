@@ -1,0 +1,351 @@
+﻿
+
+
+<div id="main-content" class="col-xs-12">
+
+
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Settings</h2>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="pg-inner-content">
+
+                <div class="project-detail">
+                    <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                           
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">ORGANIZATION</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">BOOKINGS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">CHANNEL PARTNERS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">NOTIFICATIONS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">BILLING</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">TAGS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">SECURITY</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">KIOSK</a></li>
+
+                        </ul>
+
+
+                        <div class="tab-content">
+
+                            ORGANIZATION
+
+                        </div>   <!--ORGANIZATION End-->
+
+                         
+                        <div class="tab-content">
+
+                            PROJECTS
+
+                        </div>    <!--PROJECTS End-->
+
+                     
+                           <!--PEOPLE End-->
+
+
+                                <div class="tab-content">
+
+                                    BOOKINGS
+
+                                </div>   <!--BOOKINGS End-->
+
+
+                                <div class="tab-content">
+
+                                    INVENTORY
+
+                                </div>   <!--INVENTORY End-->
+
+
+                                <div class="tab-content">
+
+                                    CHANNEL PARTNERS
+
+                                </div>   <!-- CHANNEL PARTNERS End-->
+
+
+                                <div class="tab-content">
+
+                                    USERS
+
+                                </div>   <!--USERS End-->
+
+
+
+                                <div class="tab-content">
+
+                                    TEAMS
+
+                                </div>   <!--TEAMS End-->
+
+
+                                <div class="tab-content">
+
+                                    TASKS
+
+                                </div>   <!--TASKS End-->
+
+
+                                <div class="tab-content">
+
+                                    NOTIFICATIONS
+
+                                </div>   <!--NOTIFICATIONS End-->
+
+
+                                <div class="tab-content">
+
+                                    BILLING
+
+                                </div>   <!--BILLING End-->
+
+
+                                <div class="tab-content">
+
+                                    TAGS
+
+                                </div>   <!--TAGS End-->
+
+
+                                <div class="tab-content">
+
+                                    SECURITY
+
+                                </div>   <!--SECURITY End-->
+
+                        
+            
+                        <div class="tab-content">
+
+                           KIOSK
+
+                        </div>   <!--SECURITY End-->
+                        <br />
+                        <br />
+                        <div class="tab-content">
+                            <div class="pg-inner-header">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 class="pg-inner-title">Kiosk Settings</h2>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="bx-h1-head  clearfix" style="width:950px; margin-left:20px">
+                                <div class="title">Kiosk Setting</div>
+                            </div>
+                          
+                            <div class="setting-content setting-inner-bx" style="height:1500px;   background:#e7e7e7;  border-width: 1px; margin-bottom:24px; width:981px; margin-left:20px">
+
+
+                                <div>
+                                    <br />
+                                    <br />
+                                    <br />
+
+                                    <div style="padding:20px">
+                                        <h5 style="font-weight:600"> Make Registration Mandatory</h5>
+                                        <label><input type="radio" name="test" ng-model="yesradioValue" value="1"  style="align-content:center" /> Yes</label> &nbsp;&nbsp;&nbsp;
+                                        <label><input type="radio" name="test" ng-model="yesradioValue" value="2" style="align-content:center" /> No</label>&nbsp;&nbsp;&nbsp;
+                                        
+                                    </div>
+                                </div>
+                                <div  >
+                                <br />
+                               
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Inactivity Timeout</h5>
+                                    <div class="form-bx">
+                                        <div class="form-bx form-bx3" style="width:250px" ;
+                                             data-ng-class="{
+                                                                        'has-error' : newForm.inactive_time.$invalid && (!newForm.inactive_time.$pristine || showValid) && !newForm.inactive_time.$focus,
+                                                                        'has-success': newForm.inactive_time.$valid && !newForm.inactive_time.$pristine && !newForm.inactive_time.$focus
+                                                                     }">
+                                            <input type="text" name="inactive_time" class="form-control"  
+                                                   ng-model="inactive_time"
+                                                   placeholder="Min"
+                                                   minlength="1"
+                                                   maxlength="5"
+                                                   ng-pattern="/^([1-9][0-9+./]*)$/"
+                                                   input-focus
+                                                   required  />
+                                            
+                                            <div class="text-danger"
+                                                 data-ng-if="newForm.inactive_time.$invalid && (!newForm.inactive_time.$pristine || showValid) && !newForm.inactive_time.$focus">
+                                                {{ 'enter valid time' | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              </div>
+
+                            <div>
+                                <br />
+                               
+                                <div style="padding:20px">
+                                <h5  style="font-weight:600">Projects View</h5>
+                                    <label><input type="radio" name="test1" ng-model="listradioValue" value="3" style="align-content:center" /> List View</label> &nbsp;&nbsp;&nbsp;
+                                    <label><input type="radio" name="test1" ng-model="listradioValue" value="4"  style="align-content:center" /> Panel View</label>&nbsp;&nbsp;&nbsp;
+                                    <label><input type="radio" name="test1" ng-model="listradioValue" value="5"  style="align-content:center" /> Map View</label>&nbsp;&nbsp;&nbsp;
+
+                                </div>
+
+                            </div>
+                            <div>
+                                <br />
+
+                               
+                               
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Show Content Only For The Following Projects</h5>
+                                    <h7 style="font-weight:100"> select multiple projects by holding SHIFT key</h7>
+                                    <div class="form-bx form-bx3 "  style="width:250px">
+                                        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" ng-model="project1" ng-change="selectproject1()"
+                                                class="dropdown form-control" required>
+                                            <option value="" selected>Select </option>
+                                            <option ng-repeat="project in projects"
+                                                    value="{{project.id}}">
+                                                {{project.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <br />
+                               
+                              
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Show Pricing For The Following Projects</h5>
+                                    <h7 style="font-weight:100"> select multiple projects by holding SHIFT key</h7>
+                                    <div class="form-bx form-bx3"  style="width:250px">
+                                        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds1" ng-model="project2" ng-change="selectproject2()"
+                                                class="dropdown form-control" required>
+                                            <option value="" selected>Select </option>
+                                            <option ng-repeat="project in projects"
+                                                    value="{{project.id}}">
+                                                {{project.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <br />
+                              
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Show Availability For The Following Projects</h5>
+                                    <h7 style="font-weight:100"> select multiple projects by holding SHIFT key</h7>
+                                    <div class="form-bx form-bx3"  style="width:250px">
+
+                                        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds2" ng-model="project3" ng-change="selectproject3()"
+                                                class="dropdown form-control" required>
+                                            <option value="" selected>Select </option>
+                                            <option ng-repeat="project in projects"
+                                                    value="{{project.id}}">
+                                                {{project.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <br />
+                              
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Show Booking Button For The Following Projects</h5>
+                                    <h7 style="font-weight:100"> select multiple projects by holding SHIFT key</h7>
+                                    <div class="form-bx form-bx3"  style="width:250px">
+                                        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds3" ng-model="project4" ng-change="selectproject4()"
+                                                class="dropdown form-control" required>
+                                            <option value="" selected>Select </option>
+                                            <option ng-repeat="project in projects"
+                                                    value="{{project.id}}">
+                                                {{project.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <br />
+                               
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Show Offer For The Following Projects</h5>
+                                    <h7 style="font-weight:100"> select multiple projects by holding SHIFT key</h7>
+                                    <div class="form-bx form-bx3"  style="width:250px">
+
+                                        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds4"ng-model="project5" ng-change="selectproject5()"
+                                                class="dropdown form-control" required>
+                                            <option value="" selected>Select </option>
+                                            <option ng-repeat="project in projects"
+                                                    value="{{project.id}}">
+                                                {{project.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <br />
+                              
+                                <div style="padding:20px">
+                                    <h5  style="font-weight:600">Allows Discounts For The Following Projects</h5>
+                                    <h7 style="font-weight:100"> select multiple projects by holding SHIFT key</h7>
+                                    <div class="form-bx form-bx3"  style="width:250px">
+
+                                        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds5"ng-model="project6" ng-change="selectproject6()"
+                                                class="dropdown form-control" required>
+                                            <option value="" selected>Select </option>
+                                            <option ng-repeat="project in projects"
+                                                    value="{{project.id}}">
+                                                {{project.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                         
+                            <div class="modal-btn-wrap clearfix">
+                                <button type="submit" ng-click="finalpost()"class="f-btn">&nbsp;&nbsp;&nbsp; SAVE</button>
+
+                                <button type="button" class="f-btn f-btn2 " ng-click="cancel()">CANCEL</button>
+                            </div>
+
+                            </div>
+                        </div>
+            </div>
+        
+
+   
+</div>
+
+</div>

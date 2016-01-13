@@ -1866,6 +1866,8 @@ pre {
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
     position: relative;
     min-height: 1px;
+    /*padding-left:15px;
+    padding-right:15px;*/
    
 }
 
@@ -2128,7 +2130,7 @@ pre {
     }
 
     .col-sm-1 {
-        width: 8.33333333%;
+        width: 3.33333333%;
     }
 
     .col-sm-pull-12 {
@@ -2330,7 +2332,7 @@ pre {
     }
 
     .col-md-3 {
-        width: 30%;
+        width: 25%;
     }
 
     .col-md-2 {
@@ -2496,6 +2498,7 @@ pre {
     .col-md-offset-0 {
         margin-left: 0;
     }
+  
 }
 
 @media (min-width:1200px) {
@@ -3338,7 +3341,7 @@ select[multiple].input-lg, textarea.input-lg {
 }
 
 .form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
-    padding-top: 7px;
+    padding-top: 0px;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -6048,12 +6051,6 @@ a.list-group-item-danger, button.list-group-item-danger {
 }
 
 .panel {
-    margin-bottom: 20px;
-    background-color: #fff;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 
 .panel-body {
@@ -6284,7 +6281,7 @@ a.list-group-item-danger, button.list-group-item-danger {
     .panel-success > .panel-heading {
         color: #3c763d;
         background-color: #dff0d8;
-        border-color: #d6e9c6;
+        
     }
 
         .panel-success > .panel-heading + .panel-collapse > .panel-body {
@@ -6494,6 +6491,7 @@ button.close {
 }
 
 .modal-content {
+    width:900px;
     position: relative;
     background-color: #fff;
     -webkit-background-clip: padding-box;
@@ -6504,6 +6502,7 @@ button.close {
     outline: 0;
     -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
     box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    margin:0 auto;
 }
 
 .modal-backdrop {
@@ -6575,7 +6574,6 @@ button.close {
 
 @media (min-width:768px) {
     .modal-dialog {
-        width: 600px;
         margin: 30px auto;
     }
 

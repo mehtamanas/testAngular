@@ -4,67 +4,67 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Channel Partner Form</h4>
+            <div>
+                <button type="button" id="btn_channel_cancel" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <h4 id="exampleModalLabel">Channel Partner Form</h4>
             </div><!-- modal-header ended -->
 
-            <div class="modal-body">
+            <div>
                 <form class="form-content" name="newForm" autocomplete="off" novalidate
                       data-ng-submit="addNewUser(newForm.$valid)">
 
-                    <h4>PERSONAL DETAILS</h4>
+                    <h4>Personal Details</h4>
 
                     <div>
                         <br/>
                     </div>
 
-                    <label><input type="radio" name="test1" ng-model="radioValue7"  value="Individual" />Individual</label>  &nbsp;
-                    <label><input type="radio" name="test1" ng-model="radioValue7" ng-checked="true" value="Organization" />Organization</label>
+                    <label><input type="radio" id="channel_ind" name="test1" ng-model="radioValue7"  value="Individual" />Individual</label>  &nbsp;
+                    <label><input type="radio" id="channel_org" name="test1" ng-model="radioValue7" ng-checked="true" value="Organization" />Organization</label>
 
-                    <div class="clearfix image-upload-container">
-                        <div class="image-upload-wrap">
-                            <div class="image-upload-title">Upload Channel Image</div>
-                            <div class="dropzone dropzone-bx image-upload-bx">
-                                <div class="fallback">
-                                    <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                        <div class="panel-body image-upload-panel">
-                                            <div class="row" ng-hide="uploader.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop your file here</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                     <div class="clearfix image-upload-container">
+                    <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                        <div class="image-upload-title">Upload Channel Image</div>
+                        <div class="dropzone dropzone-bx image-upload-bx">
+                            <div class="fallback">
+                                <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                                    <div class="panel-body image-upload-panel">
+                                        <div class="row" ng-hide="uploader.queue.length">
+                                            <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                                <span class="page-center">Drag And Drop your file here</span>
                                             </div>
-                                            <div class="row" ng-show="uploader.queue.length">
-                                                <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                                    <div ng-show="uploader.isHTML5"
-                                                         ng-thumb="{ file: item._file, height: 200 }"></div>
-                                                </div>
+                                            <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                        </div>
+                                        <div class="row" ng-show="uploader.queue.length">
+                                            <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                                <div ng-show="uploader.isHTML5"
+                                                     ng-thumb="{ file: item._file, height: 200 }"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse" nv-file-select="" uploader="uploader" />
-
-                            </div>
                         </div>
+                        <div class="image-upload-link">
+                            <div class="browse-title">Browse</div>
+                            <input type="file" class="image-upload-f" value="Browse" nv-file-select="" uploader="uploader" />
 
+                        </div>
                     </div>
+                         </div>
 
 
-                    <div class="clearfix">
+                    <div class="clearfix" style="text-align:left">
 
                         <div class="form-bx">
+                            <label class="control-label">First Name</label>
                             <div class="form-group"
                                  data-ng-class="{
                                                                         'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
                                                                         'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
                                                                     }">
-                                <input type="text" autofocus name="firstName" class="form-control"
+                                <input type="text" autofocus name="firstName" class="form-control" id="channel_fname"
                                        placeholder="First Name"
                                        data-ng-model="params.first_name"
                                        minlength="1"
@@ -83,12 +83,13 @@
                         <div class="field-mdl field-req">*</div>
 
                         <div class="form-bx">
+                            <label class="control-label">Last Name</label>
                             <div class="form-group"
                                  data-ng-class="{
                                                                         'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
                                                                         'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
                                                                      }">
-                                <input type="text" name="lastName" class="form-control"
+                                <input type="text" name="lastName" class="form-control" id="channel_lname"
                                        placeholder="Last Name"
                                        data-ng-model="params.last_name"
                                        minlength="1"
@@ -116,7 +117,7 @@
                                                     'has-error' : newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid) && !newForm.enrollno.$focus,
                                                     'has-success': newForm.enrollno.$valid && !newForm.enrollno.$pristine && !newForm.enrollno.$focus
                                                                     }">
-                                <input type="text" autofocus name="enrollno" class="form-control"
+                                <input type="text" autofocus name="enrollno" class="form-control" id="channel_enroll"
                                        placeholder="Enrollment No"
                                        data-ng-model="params.enrollment_no"
                                        minlength="1"
@@ -140,7 +141,7 @@
                                                                         'has-error' : newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid) && !newForm.projectsite.$focus,
                                                                         'has-success': newForm.projectsite.$valid && !newForm.projectsite.$pristine && !newForm.projectsite.$focus
                                                                      }">
-                                <input type="text" name="projectsite" class="form-control"
+                                <input type="text" name="projectsite" class="form-control" id="channel_project"
                                        placeholder="Last Name"
                                        data-ng-model="params.project_site"
                                        minlength="1"
@@ -166,16 +167,16 @@
                         <div class="col-sm-12">
                             
                                 <label>
-                                    <input type="radio" name="test2" ng-model="radioValue2" ng-checked="true" value="Individual" /> Individual
+                                    <input type="radio" id="channel_individual" name="test2" ng-model="radioValue2" ng-checked="true" value="Individual" /> Individual
                                 </label>
                                 <label>
-                                    <input type="radio" name="test2" ng-model="radioValue2" value="Propritorship" />Propritorship
+                                    <input type="radio" id="channel_propritor" name="test2" ng-model="radioValue2" value="Propritorship" />Propritorship
                                 </label>
                                 <label>
-                                    <input type="radio" name="test2" ng-model="radioValue2" value="Propritorship Firm" />Propritorship Firm
+                                    <input type="radio" id="channel_profirm" name="test2" ng-model="radioValue2" value="Propritorship Firm" />Propritorship Firm
                                 </label>
                                 <label>
-                                    <input type="radio" name="test2" ng-model="radioValue2" value="Limited Company" />Limited Company
+                                    <input type="radio" id="channel_limit" name="test2" ng-model="radioValue2" value="Limited Company" />Limited Company
                                 </label>
                             
                         </div>
@@ -199,7 +200,7 @@
                                                                 'has-success': newForm.pan_no.$valid && !newForm.pan_no.$pristine && !newForm.pan_no.$focus
                                                              }">
                                             <label for="">Pan No.</label>
-                                            <input type="text" name="pan_no" class="form-control"
+                                            <input type="text" name="pan_no" class="form-control" id="channel_panno"
                                                    placeholder="PAN No"
                                                    data-ng-model="params.pan_no"
                                                    minlength="1"
@@ -222,7 +223,7 @@
                                                                'has-success': newForm.service_tax_no.$valid && !newForm.service_tax_no.$pristine && !newForm.service_tax_no.$focus
                                                              }">
                                             <label for="">Service Tax No.</label>
-                                            <input type="text" name="service_tax_no" class="form-control"
+                                            <input type="text" name="service_tax_no" class="form-control" id="channel_taxno"
                                                    placeholder="Service Tax No"
                                                    data-ng-model="params.servicetaxno"
                                                    minlength="1"
@@ -248,7 +249,7 @@
                                                                 'has-success': newForm.cheque.$valid && !newForm.cheque.$pristine && !newForm.cheque.$focus
                                                              }">
                                             <label for="">Chaque issued to be name</label>
-                                            <input type="text" autofocus name="cheque" class="form-control"
+                                            <input type="text" autofocus name="cheque" class="form-control" id="channel_name"
                                                    placeholder="First Name"
                                                    data-ng-model="params.chequeissuedname"
                                                    minlength="1"
@@ -285,10 +286,10 @@
                                         <label>Are you associate with any other real estate company</label>
                                         
                                             <label>
-                                                <input type="radio" name="test3" ng-model="realyesno" ng-checked="true" value="Yes" /> Yes
+                                                <input type="radio" id="channel_yes" name="test3" ng-model="realyesno" ng-checked="true" value="Yes" /> Yes
                                             </label>
                                             <label>
-                                                <input type="radio" name="test3" ng-model="realyesno" value="No" /> No
+                                                <input type="radio" id="channel_no" name="test3" ng-model="realyesno" value="No" /> No
                                             </label>
                                        
                                         <div class="row">
@@ -306,8 +307,8 @@
                                         <label>Primary Occupations</label>
                                          <br />
 
-                                            <label><input type="radio" name="test11" ng-model="yesnoprimary" ng-checked="true" value="Yes" />Individual</label>  &nbsp;
-                                            <label><input type="radio" name="test11" ng-model="yesnoprimary" value="No" />Organization</label>
+                                            <label><input type="radio" id="channel_rad_indv"name="test11" ng-model="yesnoprimary" ng-checked="true" value="Yes" />Individual</label>  &nbsp;
+                                            <label><input type="radio" id="channel_rad_orgz" name="test11" ng-model="yesnoprimary" value="No" />Organization</label>
                                             
                                        
                                         <div class="row">
@@ -331,19 +332,19 @@
                                         <div> <br /></div> 
                                         
                                             <label>
-                                                <input type="radio" name="test5" ng-model="areatype" ng-checked="true" value="Real Estate" /> Commercial
+                                                <input type="radio" id="channel_commer" name="test5" ng-model="areatype" ng-checked="true" value="Real Estate" /> Commercial
                                             </label>
                                             <label>
-                                                <input type="radio" name="test5" ng-model="areatype" value="Residential" /> Residential
+                                                <input type="radio" id="channel_resident" name="test5" ng-model="areatype" value="Residential" /> Residential
                                             </label>
                                             <label>
-                                                <input type="radio" name="test5" ng-model="areatype" value="Industry" /> Inbdustry
+                                                <input type="radio" id="channel_inbd"name="test5" ng-model="areatype" value="Industry" /> Inbdustry
                                             </label>
                                             <label>
-                                                <input type="radio" name="test5" ng-model="areatype" value="Retail" /> Retail
+                                                <input type="radio" id="channel_retail"name="test5" ng-model="areatype" value="Retail" /> Retail
                                             </label>
                                             <label>
-                                                <input type="radio" name="test5" ng-model="areatype" value="Land" /> Land
+                                                <input type="radio" id="channel_land" name="test5" ng-model="areatype" value="Land" /> Land
                                             </label>
                                         
                                     </div>
@@ -353,19 +354,19 @@
                                         <label>Total Turnover</label>
                                         <div> <br /></div> 
                                             <label>
-                                                <input type="radio" name="test6" ng-model="turnover" ng-checked="true" value="0-3cr" /> 0-3cr
+                                                <input type="radio" id="channel_value1" name="test6" ng-model="turnover" ng-checked="true" value="0-3cr" /> 0-3cr
                                             </label>
                                             <label>
-                                                <input type="radio" name="test6" ng-model="turnover" value="3-10cr" /> 3-10cr
+                                                <input type="radio" id="channel_value2" name="test6" ng-model="turnover" value="3-10cr" /> 3-10cr
                                             </label>
                                             <label>
-                                                <input type="radio" name="test6" ng-model="turnover" value="10-25cr" /> 10-25cr
+                                                <input type="radio" id="channel_value3" name="test6" ng-model="turnover" value="10-25cr" /> 10-25cr
                                             </label>
                                             <label>
-                                                <input type="radio" name="test6" ng-model="turnover" value="25-40cr" /> 25-40cr
+                                                <input type="radio" id="channel_value4" name="test6" ng-model="turnover" value="25-40cr" /> 25-40cr
                                             </label>
                                             <label>
-                                                <input type="radio" name="test6" ng-model="turnover" value="40cr and more" />50cr and more
+                                                <input type="radio" id="channel_value5" name="test6" ng-model="turnover" value="40cr and more" />50cr and more
                                             </label>
                                       
                                     </div>
@@ -397,7 +398,7 @@
                                                                   'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
                                                                  }">
                                             <label for="">Address</label>
-                                            <input type="text" name="Address" class="form-control"
+                                            <input type="text" name="Address" class="form-control" id="channel_address"
                                                    placeholder="Address Line"
                                                    data-ng-model="params.address"
                                                    minlength="5"
@@ -419,7 +420,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="form-group">
                                                 <label for="">City</label>
-                                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control" required>
+                                                <select ng-model="city1" id="channel_city" ng-change="selectcity()" class="dropdown form-control" required>
                                                     <option value="" selected>City</option>
                                                     <option ng-repeat="cities in city"
                                                             value="{{cities.city_id}}">
@@ -432,7 +433,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="form-group">
                                                 <label for="">State</label>
-                                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control" required>
+                                                <select ng-model="state1"  id="channel_state" ng-change="selectstate()" class="dropdown form-control" required>
                                                     <option value="" selected>State</option>
                                                     <option ng-repeat="states in state"
                                                             value="{{states.state_name}}">
@@ -444,7 +445,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="form-group">
                                                 <label for="">Pin</label>
-                                                <input type="text" autofocus name="Pin" class="form-control"
+                                                <input type="text" autofocus name="Pin" class="form-control" id="channel_pin"
                                                        placeholder="Pin"
                                                        data-ng-model="params.pin"
                                                        required />
@@ -463,7 +464,7 @@
                                                                'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
                                                               }">
                                             <label for="">Email Id</label>
-                                            <input type="email" name="email" class="form-control"
+                                            <input type="email" name="email" class="form-control" id="channel_emailme"
                                                    placeholder="Email Address"
                                                    data-ng-model="params.email"
                                                    minlength="1"
@@ -501,7 +502,7 @@
                                                                  'has-success': newForm.office_mobile.$valid && !newForm.office_mobile.$pristine && !newForm.office_mobile.$focus
                                                               }">
                                             <label for="">Office Phone</label>
-                                            <input type="text" name="office_mobile" class="form-control"
+                                            <input type="text" name="office_mobile" class="form-control" id="channel_offpn"
                                                    placeholder="Office Phone"
                                                    data-ng-model="params.office_phone"
                                                    minlength="10"
@@ -523,7 +524,7 @@
                                                                  'has-success': newForm.Mobile.$valid && !newForm.Mobile.$pristine && !newForm.Mobile.$focus
                                                               }">
                                             <label for="">Mobile</label>
-                                            <input type="text" autofocus name="Mobile" class="form-control"
+                                            <input type="text" autofocus name="Mobile" class="form-control" id="channel_mob"
                                                    placeholder="Mobile"
                                                    data-ng-model="params.mobile"
                                                    minlength="10"
@@ -547,10 +548,10 @@
 
                             <div class="row">
                                 <div class="col-md-7 col-sm-6 col-xs-12">
-                                    <button class="f-btn" type="submit" ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">SUBMIT</button>
+                                    <button class="f-btn" id="btn_channel_sub" type="submit" ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">SUBMIT</button>
                                 </div>
                                 <div class="col-md-3 col-sm-4 col-xs-12">
-                                    <button class="f-btn f-btn2" type="button" ng-click="uploader.clearQueue(); reset()" ng-disabled="!uploader.queue.length">CANCEL</button>
+                                    <button class="f-btn f-btn2" id="btn_channel_cancelme" type="button" ng-click="uploader.clearQueue(); reset()" ng-disabled="!uploader.queue.length">CANCEL</button>
                                 </div>
                             </div>
 

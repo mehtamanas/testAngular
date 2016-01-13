@@ -1,7 +1,7 @@
 angular.module('app.guest.login')
 
 .controller('LoginController',
-    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, $modal, deviceDetector) {
+    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, $modal, deviceDetector,$window) {
         // Init model
         $scope.params = {
             email: '',
@@ -12,12 +12,24 @@ angular.module('app.guest.login')
         $scope.error = '';
         $scope.success = '';
 
-        $scope.$watch('params', function () {
+        $scope.rememberMe = function () {
+            if ($scope.params.remember) {
+                $window.localStorage.setItem($scope.params.email, JSON.stringify(data = { 'email': $scope.params.email, 'password': $scope.params.password }));
+            }
+        }
+
+        $scope.$watch('params.email', function () {
+            if ($window.localStorage.getItem($scope.params.email)!=undefined) {
+                $scope.params.password= (JSON.parse($window.localStorage.getItem($scope.params.email))).password;
+                $scope.params.remember = true;
+            }
             $scope.error = '';
             $scope.success = '';
         });
 
         $rootScope.title = 'Dwellar./Login';
+
+
 
 
         // Login
@@ -30,17 +42,11 @@ angular.module('app.guest.login')
                     console.log(response);
                     $scope.success = 'Login successful!';
                     $scope.error = '';
+                    $cookieStore.put('loggedUser', response.first_name);
 
                     if (!security.redirect()) {
                         if ($cookieStore.get('builderflow') == "yes") {
-                            var modalInstance = $modal.open({
-                                animation: true,
-                                templateUrl: 'login/channelform.tpl.html',
-                                backdrop: 'static',
-
-                                controller: ChannelPopupContoller,
-                                size: 'md'
-                            });
+                            $state.go('channel_form');
                             return;
                         }
 
@@ -99,15 +105,6 @@ angular.module('app.guest.login')
                                 add = data.results[0].formatted_address;
                                 $cookieStore.put('Location', add);
                             })
-
-                        var wmi = new ActiveXObject("WbemScripting.SWbemLocator");
-                        var service = wmi.ConnectServer(".");
-                        e = new Enumerator(service.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True"));
-                        for (; !e.atEnd() ; e.moveNext()) {
-                            var s = e.item();
-                            var macAddress = unescape(s.MACAddress);
-
-                        }
                     }),
 
 

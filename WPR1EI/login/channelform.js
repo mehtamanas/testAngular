@@ -1,9 +1,21 @@
-﻿
-var ChannelPopupContoller = function ($scope, $state, $cookieStore, $rootScope, apiService, $modalInstance, FileUploader, uploadService, $modal) {
+﻿angular.module('app.guest.login')
+
+      .config(function config($stateProvider) {
+          $stateProvider
+              .state('channel_form', {
+                  url: '/channel_form',
+                  templateUrl: 'login/channelform.tpl.html',
+                  controller: 'ChannelPopupContoller',
+                  data: { pageTitle: 'ChannelPopuporm' }
+              });
+      })
+
+
+.controller('ChannelPopupContoller',function ($scope, $state, $cookieStore, $rootScope, apiService, FileUploader, uploadService, $modal) {
     console.log('ChannelPopupContoller');
-          $rootScope.title = 'Dwellar./ChannelDetails';
+          $rootScope.title = 'Dwellar./Channelform';
           var uploader = $scope.uploader = new FileUploader({
-              url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+              url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
           });
 
           $scope.showProgress = false;
@@ -324,5 +336,5 @@ var ChannelPopupContoller = function ($scope, $state, $cookieStore, $rootScope, 
 
 
 
-      };
+      });
 

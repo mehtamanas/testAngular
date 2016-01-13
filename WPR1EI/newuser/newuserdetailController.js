@@ -5,6 +5,7 @@
     function ($scope, $state, security, $cookieStore,$modal, apiService, $window, $rootScope) {
         console.log('newuserdetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+        //alert($cookieStore.get('userId'));
 
         $('#btnSave').hide();
         $('#iconEdit').hide();
@@ -57,6 +58,7 @@
 
 
         });
+        $rootScope.title = 'Dwellar./UserDetails';
         //Audit log start															
         $scope.params =
             {
@@ -85,21 +87,23 @@
         AuditCreate($scope.params);
 
         //end
-        if ($scope.seletedCustomerId != "undefined") {
+        if ($scope.seletedCustomerId != "undefined")
+        {
 
-         //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             //alert(GetUrl);
 
             apiService.get(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
-               // alert($scope.data);
-           //     alert($scope.seletedCustomerId);
+                // alert($scope.data);
+                //   alert($scope.seletedCustomerId);
               
                 
                 $scope.first_name = $scope.data[0].first_name;
                 $scope.last_name = $scope.data[0].last_name;
+                $scope.status = $scope.data[0].status;
                 $scope.account_email = $scope.data[0].account_email;
                 $scope.account_phone = $scope.data[0].account_phone;
                 $scope.account_country = $scope.data[0].account_country;
@@ -109,7 +113,7 @@
                 $scope.state = $scope.data[0].state;
                 $scope.city = $scope.data[0].city;
                 $scope.media_url = $scope.data[0].media_url;
-               // alert($scope.media_url);
+                // alert($scope.media_url);
       
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
@@ -164,8 +168,8 @@
             dataSource: {
                 type: "json",
                 transport: {
-                   // read: "http://dw-webservices-dev2.azurewebsites.net/User/GetProjectsByUser/7fbfbdfd-0b46-4a99-bda0-2322e67e9f49"//402fe846-3873-4964-a8cc-92557bcf63ab
-                    read: "http://dw-webservices-dev2.azurewebsites.net/User/GetProjectsByUser/" + $scope.seletedCustomerId
+                    // read: "http://dw-webservices-uat.azurewebsites.net/User/GetProjectsByUser/7fbfbdfd-0b46-4a99-bda0-2322e67e9f49"//402fe846-3873-4964-a8cc-92557bcf63ab
+                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetProjectsByUser/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -256,13 +260,78 @@
         }
         
 
+
         $scope.TeamGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "http://dw-webservices-uat.azurewebsites.net/USER/GetTeamsbyUserid/" + $scope.seletedCustomerId
+
+                },
+                pageSize: 5,
+                refresh: true,
+                schema: {
+                    model: {
+                        fields: {
+
+                            Join_Date: { type: "date" },
+                            // end_date_time: { type: "date" },
+
+                        }
+                    }
+                }
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+
+            columns: [{
+                field: "name",
+                title: "Name",
+                width: "120px"
+            }, {
+                field: "No_Of_Member",
+                title: "No.of Member",
+                width: "120px"
+            }, {
+                field: "Location",
+                title: "Locations",
+                width: "120px"
+            },
+            {
+                field: "Join_Date",
+                title: "Join Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}'
+            },
+            {
+                field: "creator_first_name",
+                title: "Creator",
+                width: "120px",
+               
+            }]
+        };
+
+
+        $scope.DeviceGrid = {
             dataSource: {
 
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/User/GetTeamByUser/" + $scope.seletedCustomerId
-
+                    // read: "http://dw-webservices-uat.azurewebsites.net/User/GetTeamByUser/" + $scope.seletedCustomerId
+                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetDetailDevices/" + $scope.seletedCustomerId
                 },
 
                 pageSize: 5
@@ -284,40 +353,50 @@
                 buttonCount: 5
             },
             columns: [{
-                field: "name",
-                title: "Name",
+                field: "device_name",
+                title: "Device Name",
                 width: "120px",
-               
+
             }, {
-                field: "description",
-                title: "Description",
+                field: "operating_system",
+                title: "Operating System",
                 width: "120px",
-              
-            }]
+
+            },
+            {
+                field: "mac_id",
+                title: "Mac Id",
+                width: "120px",
+
+            },
+            {
+                field: "last_login",
+                title: "Last Login",
+                width: "120px",
+
+            }
+            ]
         };
 
-      
-
-
-        $scope.PropertyListGrid = {
+        $scope.ProjectsGrid = {
             dataSource: {
                 type: "json",
                 transport: {
 
-                    //read: "http://dw-webservices-dev2.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                    //read: "http://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
 
-                    read: "http://dw-webservices-dev2.azurewebsites.net/User/GetPropertyUserList/" + $scope.seletedCustomerId
+                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetProjectsByUser/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
                 schema: {
-                     model: {
-                         fields: {
+                    model: {
+                        fields: {
                            
-                             listing_date: { type: "date" },
-                             last_updated_date:{type:"date"}
+                            possession_date: { type: "date" },
+                            assigned_date: { type: "date" },
 
-                                  }
-                          }
+                        }
+                    }
                 }
 
                 //group: {
@@ -340,37 +419,46 @@
                 title: "Name",
                 width: "120px"
             }, {
-                field: "listing_date",
-                title: "Listing Date",
+                field: "Possession_Month",
+                title: "Possession Month",
                 width: "120px",
               
+            }, {
+                field: "assigned_date",
+                title: "Assigned Date",
+                width: "120px",
                 format: '{0:dd/MM/yyyy}'
-                //template: '#= kendo.toString(listing_date, "dd/MM/yyyy") #'
             }, {
-                field: "last_updated_date",
-                title: "Last Updated",
+                field: "Year",
+                title: "year",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}',
-               
-                //template: '#= kendo.toString(last_updated_date, "dd/MM/yyyy") #'
+
             }, {
-                field: "num_bedrooms",
-                title: "Bedrooms",
+                field: "assigned_by",
+                title: "Assigned By",
                 width: "120px",
-               
-            },
-                {
-                    field: "listing_source",
-                    title: "Source",
-                    width: "120px",
-                   
-                },
-                {
-                    field: "description",
-                    title: "Description",
-                    width: "120px",
-                  
-                }]
+
+            }, {
+                field: "total_project_area",
+                title: "Project Area",
+                width: "120px",
+
+            }, {
+                field: "project_website",
+                title: "Project Website",
+                width: "120px",
+
+            }, {
+                field: "builder_website",
+                title: "Builder Website",
+                width: "120px",
+
+            }, {
+                field: "possession_date",
+                title: "Possession Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}'
+            }]
 
         };
 
@@ -378,10 +466,10 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    ////  read: "http://dw-webservices-dev2.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //  // read:" https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    //  read: " https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    read: "http://dw-webservices-dev2.azurewebsites.net/User/GetContactInUser/" + $scope.seletedCustomerId
+                    ////  read: "http://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                    //  // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    //  read: " https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetContactInUser/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
                 refresh:true,
@@ -411,49 +499,40 @@
                 pageSizes: true,
                 buttonCount: 5
             },
-           
             columns: [{
-                field: "first_name",
-                title: "First Name",
-                width: "50px",
-                
-            },  {
-                field: "last_name",
-                title: "Last Name",
-                width: "50px",
-               
-            }, {
-                field: "people_type",
-                title: "People Type",
-                width: "50px",
-               
-            }, {
-                field: "date_of_birth",
-                title: "Date of Birth",
-                width: "50px",
-                format: '{0:dd/MM/yyyy}',
-               
-             
+                field: "name",
+                title: "Name",
+                width: "120px",
+
             }, {
                 field: "description",
-                title: "Description",
-                width: "50px",
-              
+                title: "No.of Member",
+                width: "120px",
 
             }, {
-                field: "company",
-                title: "Company",
-                width: "50px",
-                
+                field: "description",
+                title: "Locations",
+                width: "120px",
 
-            }]
+            }, {
+                field: "description",
+                title: "Join Date",
+                width: "120px",
+
+            }, {
+                field: "description",
+                title: "Creator",
+                width: "120px",
+
+            },
+            ]
         };
 
         $scope.TaskGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/User/GetTaskByUser/" + $scope.seletedCustomerId
+                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetTaskByUser/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -494,10 +573,10 @@
                 title: "Description",
                 width: "120px"
             },{
-                 field: "status",
-                 title: "Status",
-                 width: "120px"
-                 },
+                field: "status",
+                title: "Status",
+                width: "120px"
+            },
             {
                 field: "start_date_time",
                 title: "Start Date",
@@ -516,6 +595,237 @@
             }, {
                 field: "add_reminder",
                 title: "Reminder",
+                width: "120px"
+            }]
+        };
+        $scope.ContactsGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetContactInUser/" + $scope.seletedCustomerId
+
+                },
+                pageSize: 5,
+                refresh: true,
+                schema: {
+                    model: {
+                        fields: {
+
+                            start_date_time: { type: "date" },
+                            end_date_time: { type: "date" },
+
+                        }
+                    }
+                }
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+
+            columns: [  {
+                field: "first_name",
+                title: "Name",
+                width: "120px"
+            }, {
+                field: "designation",
+                title: "Title",
+                width: "120px"
+            },
+            {
+                field: "email",
+                title: "Email",
+                width: "120px"
+            },
+            {
+                field: "phone",
+                title: "Phone",
+                width: "120px",
+               
+            },
+            {
+                field: "city",
+                title: "City",
+                width: "120px",
+               
+            },{
+                field: "people_type",
+                title: "Type",
+                width: "120px"
+            }]
+        };
+
+        $scope.TowerListGrid = {
+            // $scope.mainGridOptions = {
+
+
+            dataSource: {
+                type: "json",
+                transport: {
+
+                    //read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/bcd0a0ad-68c2-4a96-9498-c1a19e429f53"
+                    read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/" + $scope.seletedCustomerId
+                },
+                pageSize: 5
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                {
+                    //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
+                    //"<span style='padding-left:10px' class='property-photo'> </span>",
+                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
+                    title: "",
+                    width: "60px",
+                    attributes: {
+                        "class": "UseHand",
+
+                    }
+                },
+
+                {
+                    template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
+                    "<span style='padding-left:10px' class='property-photo'> </span>",
+                    title: "Photo",
+                    width: "120px",
+                    attributes:
+                      {
+                          "class": "UseHand",
+                      }
+                },
+
+                {
+                    field: "tower_name",
+                    title: "Name",
+                    width: "120px"
+                },
+             {
+                 field: "floorno",
+                 title: "Floor No",
+                 width: "120px"
+             },
+              {
+                  field: "unitno",
+                  title: "Unit No",
+                  width: "120px"
+              },
+              {
+                  field: "carpark",
+                  title: "Car Park",
+                  width: "120px"
+              },
+              {
+                  field: "num_bedrooms",
+                  title: "Bedrooms",
+                  width: "120px"
+              },
+            {
+                field: "num_bathrooms",
+                title: "Bathrooms",
+                width: "120px"
+            },
+            {
+                field: "super_built_up_area",
+                type: "number",
+                title: "Slb. Area",
+                width: "120px"
+            },
+              {
+                  field: "carpet_area",
+                  type: "number",
+                  title: "Crp Area",
+                  width: "120px"
+              },
+               {
+                   field: "total_consideration",
+                   title: "Price",
+                   width: "120px"
+               },
+                {
+                    field: "project_name",
+                    title: "Project",
+                    width: "120px"
+                },
+            {
+                field: "available_status",
+                title: "Status",
+                width: "120px"
+            }]
+
+        };
+
+        $scope.RoleGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "http://dw-webservices-uat.azurewebsites.net/Role/GetRoleByUser/" + $scope.seletedCustomerId
+
+                },
+                pageSize: 5,
+                refresh: true,
+                schema: {
+                    model: {
+                        fields: {
+
+                            assigned_date: { type: "date" },
+                           
+
+                        }
+                    }
+                }
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+
+            columns: [{
+                field: "name",
+                title: "Name",
+                width: "120px"
+            }, {
+                field: "assigned_date",
+                title: "Assigned Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}'
+            }, {
+                field: "assigned_by",
+                title: "Assigned By",
                 width: "120px"
             }]
         };

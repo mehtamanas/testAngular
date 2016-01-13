@@ -2,24 +2,103 @@
 
 <div id="main-content" class="col-xs-12">
     <div class="content-inner">
-        <div class="property-header">
+
+        <div class="pg-inner-header">
             <div class="row">
-                <div class="col-md-5">
-                    <h2 class="property-title">Subscription List</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="teams-content">
-        <div class="content-inner teams-inner">
-            <div class="div_head_pad">
 
-                <div class="leads_group f_icon" id="record-content">
-                    <div id="peopleGrid" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
-                    </div>
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Subscription List</h2>
+                </div>
+
+            </div>
+        </div><!-- channel-partner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content2">
+        <div class="content-inner-bx">
+            <div class="company-profile-h">
+
+                <div class="clearfix">
+                    <!--<a ng-click="openEditOrgPopup()" data-toggle="modal"><span class="edit-icon"></span></a>-->
+                    <div class="pull-left company-profile-photo">
+                        <img src="{{data.media_url}}" alt="" width="218" height="160" class="img-responsive" />
+
+                    </div><!-- company-profile-photo ended-->
+
+                    <div class="pull-right profile-side-txt">
+
+                        <div class="profile-info-btn-dis clearfix" ng-repeat="sum in subscriptions1">
+                             Subscription Name:
+                           <span class="pull-right"></span>{{sum.name}}<br />
+                            Start Date:
+                            <span class="pull-right"></span>{{sum.start_date | date: "dd/MM/yyyy"}}<br />
+                            Storage Limit:
+                            <span class="pull-right"></span>{{sum.storage_limit}}<br />
+                            Used Storage:
+                            <span class="pull-right"></span>{{sum.used_storage}}<br />
+                            End Date:
+                            <span class="pull-right"></span>{{sum.end_date | date: "dd/MM/yyyy"}}
+                        </div>
+
+                       
+
+                       
+
+                    </div><!-- profile-side-txt ended-->
 
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+                <div>
+                    <br />
+                </div>
+
+
+                <label class="label-group">
+                    <h5 ng-bind="description"></h5>
+                </label>
+
+            </div><!-- company-profile-h ended -->
+        </div><!-- content-inner-bx ended -->
+    </div><!-- pg-inner-content ended -->
+
+    <div class="pg-inner-content2 pg-inner-content2-2">                    
+                    <div class="content-inner-bx">
+                        
+                        <div class="clearfix"  >
+                            
+                            <div class="pull-left company-profile-half">
+                                <div class="company-profile-row clearfix" ng-repeat="user in subscriptions">
+                                    <div class="pull-left profile-row1">{{user.resourceHeading}}</div> 
+                                    <div class="pull-right profile-row2"><div ng-if="user.limit1==-1"><img src="images/plan-mark.png" /></div></div>
+
+                                    <div class="pull-right profile-row2" ng-if="user.limit1!=-1">{{user.limit1}} </div>
+                                    <div class="pull-right profile-row2" ng-if="user.limit1==undefined">&nbsp;</div>
+
+                                    <div class="pull-right profile-row2"><div ng-if="user.limit2==-1"><img src="images/plan-mark.png" /> </div>  </div>
+
+                                    <div class="pull-right profile-row2" ng-if="user.limit2!=-1">{{user.limit2}} </div>
+                                    <div class="pull-right profile-row2" ng-if="user.limit2==undefined">&nbsp;</div>
+
+                                    <div class="pull-right profile-row2"><div ng-if="user.limit3==-1"><img src="images/plan-mark.png" /> </div> </div>
+
+                                    <div class="pull-right profile-row2" ng-if="user.limit3!=-1">{{user.limit3}} </div>
+                                    <div class="pull-right profile-row2" ng-if="user.limit3==undefined">&nbsp;</div>
+
+                                    <div class="pull-right profile-row2"><div ng-if="user.limit4==-1"><img src="images/plan-mark.png" />  </div> </div>
+
+                                    <div class="pull-right profile-row2" ng-if="user.limit4!=-1">{{user.limit4}} </div>
+                                    <div class="pull-right profile-row2" ng-if="user.limit4==undefined">&nbsp;</div>
+
+   
+                                  
+                                </div>
+                             </div>
+                          </div>
+                        
+                    </div><!-- content-inner-bx ended -->
+                    <br /><br />
+                </div><!-- content-inner-bx ended -->
+        
+   
+

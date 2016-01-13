@@ -51,7 +51,7 @@
 
 
     //alert(projectUrl);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
 
      
@@ -65,7 +65,7 @@ function (error) {
     projectUrl = "Payment/GetPay_Sch_Detail_Multiple/" + payment_sch_id;
 
     //alert(projectUrl);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.choices2 = response.data;
 
     
@@ -112,9 +112,11 @@ function (error) {
         }
         if (tot > 100) {
             alert("cannot proceed...");
+            return;
         }
         if (tot < 100) {
-            alert("total done...");
+            alert("cannot proceed");
+            return;
         }
 
 

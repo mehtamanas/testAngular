@@ -4,8 +4,8 @@
 var import_usersController = function ($scope, $modalInstance, uploadService, FileUploader) {
   
     var uploader = $scope.uploader = new FileUploader({
-        //url: 'https://dw-webservices-dev2.azurewebsites.net/User/Upload'
-        url:'https://dw-webservices-dev2.azurewebsites.net/User/Upload'
+        //url: 'https://dw-webservices-uat.azurewebsites.net/User/Upload'
+        url:'https://dw-webservices-uat.azurewebsites.net/User/Upload'
     });
 
     $scope.showProgress = false;

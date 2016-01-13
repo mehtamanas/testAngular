@@ -26,7 +26,7 @@
                         <label class="control-label">Role</label>
 
                         <div class="form-group">
-                            <select ng-model="name1" ng-change="selectrole()" class="dropdown form-control" required>
+                            <select ng-model="name1" ng-change="selectrole()" id="repermission_role" class="dropdown form-control" required>
                                 <option value="" selected>--Choose Role--</option>
                                 <option ng-repeat="role in roles"
                                         value="{{role.id}}">
@@ -96,7 +96,7 @@
             </div>-->
 
             <div>
-                <button type="submit" class="btn-lk" ng-click="addresource()">Save</button>
+                <button type="submit" id="btn_permission_save" class="btn-lk" ng-click="addresource()">Save</button>
             </div>
            
 

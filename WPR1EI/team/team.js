@@ -4,6 +4,8 @@ angular.module('team')
         console.log('TeamListController');
         $rootScope.title = 'Dwellar./Teams';
 
+        var userID = $cookieStore.get('userId');
+        //alert($cookieStore.get('userId'));
 
         $('#btnSave').hide();
         $('#iconEdit').hide();
@@ -141,13 +143,21 @@ angular.module('team')
         AuditCreate($scope.params);
 
         //end
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'teamGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
 
         // Kendo code
         $scope.mainGridOptions = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-dev2.azurewebsites.net/Team/GetTeamDetails/" + orgID
+                    //read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + userID
+                    
                 },
                 pageSize: 5
 

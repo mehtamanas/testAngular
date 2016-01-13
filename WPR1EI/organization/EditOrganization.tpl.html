@@ -6,7 +6,7 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Edit Organization Details</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Edit Organization</h4>
             </div><!-- modal-header ended -->
 
             <div class="modal-body">
@@ -27,7 +27,7 @@
                                             <div class="row" ng-hide="uploader.queue.length">
                                                 <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop your file here</span>
+                                                    <span class="page-center">Drag And Drop</span>
                                                 </div>
                                                 <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                             </div>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse" nv-file-select="" uploader="uploader" />
+                                <input type="file" class="image-upload-f" value="Browse" nv-file-select="" accept="image/*" uploader="uploader" />
 
                             </div>
                         </div>
@@ -74,23 +74,263 @@
                         </div>
                     </div>
 
-                    <div class="organization_address_wrap clearfix">
-                        <div class="form-group form-bx form-bx7">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                        'has-error' : newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus,
-                                        'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
-                                    }">
-                                <label for="">Address</label>
-                                <textarea id="organization_address" ng-model="address" style="width:100%;height:100px">
+                    <div class="pull-left f-half-1">
 
-                                </textarea>
-                                <div class="text-danger"
-                                     data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
-                                    {{ 'invalid Address' | translate }}
+                   <div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group"
+                                     data-ng-class="{
+                            'has-error' : newForm.Street_1.$invalid && (!newForm.Street_1.$pristine || showValid),
+                            'has-success': newForm.Street_1.$valid && !newForm.Street_1.$pristine
+                        }">
+                                    <label for="">Street 1</label>
+
+                                    <input type="text" name="Street_1" class="form-control" id="orgz_street1"
+                                           placeholder="Street 1"
+                                           data-ng-model="street_1"
+                                           ng-pattern="/^[a-z 0-9\s]+$/i"
+                                           required />
+
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Street_1.$invalid && (!newForm.Street_1.$pristine || showValid) && !newForm.Street_1.$focus">
+                                        {{ 'Please enter valid Street' | translate }}
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        
+
+                   <!--<div class="clearfix">
+                            
+                        </div>-->
+                               
+                   <!--<div class="clearfix">
+                                <div class="form-bx form-bx6">
+                                    <div class="form-group"
+                                         data-ng-class="{
+                            'has-error' : newForm.street_3.$invalid && (!newForm.street_3.$pristine || showValid),
+                            'has-success': newForm.street_3.$valid && !newForm.street_3.$pristine && !!params.street_3
+                        }">
+                                        <label for="">Street 3</label>
+
+                                        <input type="text" name="street_3" class="form-control" id="orgz_street3"
+                                               placeholder="Street 3"
+                                               data-ng-model="params.street_3"
+                                               ng-pattern="/^[a-z 0-9\s]+$/i"
+                                               required />
+
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.street_3.$invalid && (!newForm.street_3.$pristine || showValid) && !newForm.street_3.$focus">
+                                            {{ 'Please enter valid Street 3' | translate }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                
+                            </div>-->
+                       
+                   <!--<div class="clearfix">
+                        <div class="form-bx form-bx6">
+                            <div class="form-group">
+                                <label for="">Country</label>
+
+                                <select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control" required>
+                                    <option value="" selected> Country</option>
+                                    <option ng-repeat="country in countries  "
+                                            value="{{country.id}}">
+                                        {{country.country_name}}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>-->
+                        <div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group">
+                                    <label for="">Country</label>
+
+                                    <select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control" required>
+                                        <option value="" selected> Country</option>
+                                        <option ng-repeat="country in countries  "
+                                                value="{{country.id}}">
+                                            {{country.country_name}}
+                                        </option>
+                                    </select>
+
                                 </div>
                             </div>
                         </div>
+
+                        <div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group">
+                                    <label for="">City</label>
+
+                                    <!--<select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control" required>
+                    <option value="" selected> Country</option>
+                    <option ng-repeat="country in countries  "
+                            value="{{country.id}}">
+                        {{country.country_name}}
+                    </option>
+                </select>-->
+                                    <select ng-model="city1" id="orgz_city" ng-change="selectcity()" class="dropdown form-control" required>
+                                        <option value="" selected>City</option>
+                                        <option ng-repeat="city in cities | filter:filterExpression"
+                                                value="{{city.city_id}}">
+                                            {{city.city_name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                            
+                        </div>
+
+                    <div class="pull-left f-half-2">
+
+                        <div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group"
+                                     data-ng-class="{
+                            'has-error' : newForm.Street_2.$invalid && (!newForm.Street_2.$pristine || showValid),
+                            'has-success': newForm.Street_2.$valid && !newForm.Street_2.$pristine && !!params.Street_2
+                        }">
+                                    <label for="">Street 2</label>
+
+                                    <input type="text" name="Street_2" class="form-control" id="orgz_street2"
+                                           placeholder="Street 2"
+                                           data-ng-model="street_2"
+                                           ng-pattern="/^[a-z 0-9\s]+$/i"
+                                           required />
+
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Street_2.$invalid && (!newForm.Street_2.$pristine || showValid) && !newForm.Street_2.$focus">
+                                        {{ 'Please enter valid Street 2' | translate }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!--<div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                                             'has-error' : newForm.Tan_No.$invalid && (!newForm.Tan_No.$pristine || showValid) && !newForm.Tan_No.$focus,
+                                                            'has-success': newForm.Tan_No.$valid && !newForm.Tan_No.$pristine && !newForm.Tan_No.$focus
+                                                        }">
+                                    <label for="">TAN No.</label>
+                                    <input type="text" name="Tan_No" class="form-control"
+                                           placeholder="45865EDFGR58E"
+                                           data-ng-model="tan_no"
+                                           minlength="1"
+                                           maxlength="10"
+                                           alphabets-only
+                                           input-focus
+                                           ng-pattern="/^[A-Z0-9\.]*$/" />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Tan_No.$invalid && (!newForm.Tan_No.$pristine || showValid) && !newForm.Tan_No.$focus">
+                                        {{ 'Please Enter Valid TAN No' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group">
+                                    <label for="">State</label>
+
+                                    <!--<select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control" required>
+                    <option value="" selected> Country</option>
+                    <option ng-repeat="country in countries  "
+                            value="{{country.id}}">
+                        {{country.country_name}}
+                    </option>
+                </select>-->
+                                    <select ng-model="state1" id="orgz_state" ng-change="selectstate()" class="dropdown form-control" required>
+                                        <option value="" selected> State</option>
+                                        <option ng-repeat="state in states"
+                                                value="{{state.state_id}}">
+                                            {{state.state_name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--<div class="clearfix">
+                            <div class="form-bx form-bx6">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                                          'has-error' : newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus,
+                                                           'has-success': newForm.service_tax_no.$valid && !newForm.service_tax_no.$pristine && !newForm.service_tax_no.$focus
+                                                         }">
+                                    <label for="">Service Tax No.</label>
+                                    <input type="text" name="service_tax_no" class="form-control"
+                                           placeholder="AER25647E"
+                                           data-ng-model="service_tax_no"
+                                           minlength="1"
+                                           maxlength="15"
+                                           alphabets-only
+                                           input-focus
+                                           ng-pattern="/^[A-Z0-9\.]*$/" />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus">
+                                        {{ 'Please Enter Valid Service Tax No' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <div class="form-bx form-bx6">
+
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                            'has-error' : newForm.ZipCode.$invalid && (!newForm.ZipCode.$pristine || showValid),
+                            'has-success': newForm.ZipCode.$valid && !newForm.ZipCode.$pristine }">
+
+
+                                <label for="">Postal Code</label>
+                                <input type="text" name="ZipCode" class="form-control" id="orgz_zip"
+                                       placeholder="Postal Code"
+                                       data-ng-model="zip_code"
+                                       ng-pattern="/^([1-9][0-9]*)$/"
+                                       minlength="6"
+                                       maxlength="6"
+                                       required />
+
+                                <div class="text-danger"
+                                     data-ng-if="newForm.ZipCode.$invalid && (!newForm.ZipCode.$pristine || showValid)">
+                                    {{ 'Invalid Postal Code' | translate }}
+                                </div>
+                                <!--<div class="text-danger"
+                 data-ng-if="newForm.zip_code.$error.minlength || newForm.zip_code.$error.maxlength">
+                {{ 'Invalid Postal Code' | translate }}
+            </div>-->
+
+                            </div>
+
+                        </div>
+
+                        
+
+
+                        
+
+
+                        
+
                     </div>
 
                     <div class="organization_desc_wrap clearfix">
@@ -101,7 +341,7 @@
                                         'has-success': newForm.Description.$valid && !newForm.Description.$pristine && !newForm.Description.$focus
                                     }">
                                 <label for="">Description</label>
-                                <textarea id="organization_desc" ng-model="description" style="width:100%;height:100px"></textarea>
+                                <textarea id="organization_desc" autofocus  kendo-editor k-ng-model="description"></textarea>
                                 <div class="text-danger"
                                      data-ng-if="newForm.Description.$invalid && (!newForm.Description.$pristine || showValid) && !newForm.Description.$focus">
                                     {{ 'invalid Description' | translate }}
@@ -164,7 +404,7 @@
                                                      }">
                                             <label for="" class="clearfix">Email <span class="pull-right">Primary</span></label>
                                             <input type="text" name="email" class="form-control"
-                                                   placeholder="contact@dbrality.co.in"
+                                                   placeholder=" something@yourdomainname.com"
                                                    data-ng-model="choice1.email"
                                                    minlength="1"
                                                    maxlength="30"
@@ -177,7 +417,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a href="javascript:">remove</a></div>
+                                    <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a href="javascript:">Remove</a></div>
                                 </div>
                             </div>
 
@@ -191,48 +431,26 @@
                                                      }">
                                                 <label for="" class="clearfix">Phone <span class="pull-right">Primary</span></label>
                                                 <input type="text" name="Phone" class="form-control"
-                                                       placeholder="033 25648695"
+                                                       placeholder="0325648695"
                                                        data-ng-model="choice.phone_no"
                                                        minlength="1"
                                                        maxlength="10"
                                                        alphabets-only
                                                        input-focus
-                                                       ng-pattern="/[0-9]/" />
+                                                       ng-pattern="/^([1-9][0-9]*)$/" />
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.Phone.$invalid && (!newForm.Phone.$pristine || showValid) && !newForm.Phone.$focus">
                                                     {{ 'Please Enter Valid Phone Number' | translate }}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a href="javascript:">remove</a></div>
+                                        <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a href="javascript:">Remove</a></div>
                                     </div>
                                 </div>
 
-                                <div class="clearfix">
-                                    <div class="form-bx form-bx6">
-                                        <div class="form-group"
-                                             data-ng-class="{
-                                                            'has-error' : newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus,
-                                                            'has-success': newForm.Language.$valid && !newForm.Language.$pristine && !newForm.Language.$focus
-                                                     }">
-                                            <label for="">Language	</label>
-                                            <input type="text" name="Language" class="form-control"
-                                                   placeholder="English"
-                                                   data-ng-model="language"
-                                                   minlength="1"
-                                                   maxlength="30"
-                                                   alphabets-only
-                                                   input-focus
-                                                   ng-pattern="/^[a-zA-Z\s]*$/" />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus">
-                                                {{ 'Please Enter Alphabets' | translate }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
-                                <div class="clearfix">
+                                <!--<div class="clearfix">
                                     <div class="form-bx form-bx6">
                                         <label for="">List In Builder Directory	</label>
                                         <label><input type="radio" name="test" ng-model="radioValue" ng-checked="true" value="1" /> Yes</label>
@@ -241,7 +459,17 @@
 
 
                                     </div>
+                                </div>-->
+                            <div class="pull-left f-half-5">
+                                <div class="form-group form-bx form-bx9-1">
+                                    <label for="">List In Builder Directory</label>
+                                    <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" required>
+                                        <option value="" selected>--Select Yes or No--</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
                                 </div>
+                            </div>
 
                             </div><!-- f-half-1 ended -->
 
@@ -256,13 +484,13 @@
                                                          }">
                                         <label for="">PAN No.</label>
                                         <input type="text" name="pan_no" class="form-control"
-                                               placeholder="AER25647E"
+                                               placeholder="AER25647ES"
                                                data-ng-model="pan_no"
                                                minlength="1"
-                                               maxlength="30"
+                                               maxlength="10"
                                                alphabets-only
                                                input-focus
-                                               ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                               ng-pattern="/^[A-Z0-9\.]*$/" />
                                         <div class="text-danger"
                                              data-ng-if="newForm.pan_no.$invalid && (!newForm.pan_no.$pristine || showValid) && !newForm.pan_no.$focus">
                                             {{ 'Please Enter Valid PAN No' | translate }}
@@ -281,13 +509,13 @@
                                                         }">
                                         <label for="">TAN No.</label>
                                         <input type="text" name="Tan_No" class="form-control"
-                                               placeholder="45865EDFGR58E"
+                                               placeholder="4RB2H56U8S"
                                                data-ng-model="tan_no"
                                                minlength="1"
-                                               maxlength="30"
+                                               maxlength="10"
                                                alphabets-only
                                                input-focus
-                                               ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                               ng-pattern="/^[A-Z0-9\.]*$/" />
                                         <div class="text-danger"
                                              data-ng-if="newForm.Tan_No.$invalid && (!newForm.Tan_No.$pristine || showValid) && !newForm.Tan_No.$focus">
                                             {{ 'Please Enter Valid TAN No' | translate }}
@@ -306,13 +534,13 @@
                                                          }">
                                         <label for="">Service Tax No.</label>
                                         <input type="text" name="service_tax_no" class="form-control"
-                                               placeholder="AER25647E"
+                                               placeholder="B1H3U4S6H8A2N7M"
                                                data-ng-model="service_tax_no"
                                                minlength="1"
-                                               maxlength="30"
+                                               maxlength="15"
                                                alphabets-only
                                                input-focus
-                                               ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                               ng-pattern="/^[A-Z0-9\.]*$/" />
                                         <div class="text-danger"
                                              data-ng-if="newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus">
                                             {{ 'Please Enter Valid Service Tax No' | translate }}
@@ -331,13 +559,13 @@
                                                           }">
                                         <label for="">CIN No.</label>
                                         <input type="text" name="cin_no" class="form-control"
-                                               placeholder="AER25647E"
+                                               placeholder="M2A4H6A38J1N9S65UR2DN"
                                                data-ng-model="cin_no"
                                                minlength="1"
-                                               maxlength="30"
+                                               maxlength="21"
                                                alphabets-only
                                                input-focus
-                                               ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                               ng-pattern="/^[A-Z0-9\.]*$/" />
                                         <div class="text-danger"
                                              data-ng-if="newForm.cin_no.$invalid && (!newForm.cin_no.$pristine || showValid) && !newForm.cin_no.$focus">
                                             {{ 'Please Enter Valid CIN No' | translate }}
@@ -366,11 +594,36 @@
                                     <label for="">Time Zone</label>
                                     <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" required>
                                         <option value="" selected>--Select Timezone--</option>
-                                        <option ng-repeat="Time in timezone"
+                                        <option ng-repeat="Time in timezone | orderBy:'timezone'"
                                                 value="{{Time.id}}">
                                             {{Time.timezone}}
                                         </option>
                                     </select>
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix">
+                                <div class="form-bx form-bx6">
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                                            'has-error' : newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus,
+                                                            'has-success': newForm.Language.$valid && !newForm.Language.$pristine && !newForm.Language.$focus
+                                                     }">
+                                        <label for="">Language	</label>
+                                        <input type="text" name="Language" class="form-control"
+                                               placeholder="English"
+                                               data-ng-model="language"
+                                               minlength="1"
+                                               maxlength="30"
+                                               alphabets-only
+                                               input-focus
+                                               ng-pattern="/^[a-zA-Z\s]*$/" />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus">
+                                            {{ 'Please Enter Alphabets' | translate }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -386,7 +639,7 @@
                     <div class="modal-btn-wrap clearfix">
                         <button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
 
-                        <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                        <button type="button" class="f-btn f-btn2" ng-click="$dismiss('cancel')">CANCEL</button>
                     </div>
 
                 </form>

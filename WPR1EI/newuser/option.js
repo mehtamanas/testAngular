@@ -100,18 +100,18 @@
 function (error) {
     alert("Error " + error.state);
 });
-    alert($cookieStore.get('orgID'));
+    //alert($cookieStore.get('orgID'));
 
-    if ($cookieStore.get('Selected Text') == "Assign to project") {
+    if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
 
         Url = "Project/Get/" + $cookieStore.get('orgID');
         
     }
-    else if ($cookieStore.get('Selected Text') == "Assign Roles") {
+    else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
         Url = "Role/Get/" + $cookieStore.get('orgID');
 
     }
-    else if ($cookieStore.get('Selected Text') == "Add To Team") {
+    else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {
 
         Url = "Team/Get/" + $cookieStore.get('orgID');
 
@@ -163,7 +163,7 @@ function (error) {
         var newMember = {};
     
         var Url;
-        if ($cookieStore.get('Selected Text') == "Assign to project") {
+        if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
             for (var i in $scope.checkedIds) {
                 
                
@@ -180,7 +180,7 @@ function (error) {
             //$scope.openSucessfullPopup();
 
         }
-        else if ($cookieStore.get('Selected Text') == "Assign Roles") {
+        else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
             for (var i in $scope.checkedIds) {
                  
                
@@ -197,7 +197,7 @@ function (error) {
             //$scope.openSucessfullPopup();
 
         }
-        else if ($cookieStore.get('Selected Text') == "Add To Team") {
+        else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {
             // Add the new users
             for (var i in $scope.checkedIds) {
                

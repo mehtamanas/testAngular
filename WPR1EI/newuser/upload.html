@@ -3,9 +3,9 @@
         <button type="button" class="close" ng-click="$close()">
             <span aria-hidden="true">×</span><span class="sr-only">Close</span>
         </button>
-        <button class="btn btn-default login-btn"  type="submit" ng-click="mapfun()"> Map Fields</button>
-        <button class="btn btn-default login-btn" type="submit" ng-click="reviewfun()">Review Data</button>
-        <button class="btn btn-default login-btn" type="submit" ng-click="summaryfun()"> Import</button>
+        <button class="btn btn-default login-btn" id="btn_upload_map" type="submit" ng-click="mapfun()"> Map Fields</button>
+        <button class="btn btn-default login-btn" id="btn_upload_reviewdata" type="submit" ng-click="reviewfun()">Review Data</button>
+        <button class="btn btn-default login-btn" id="btn_upload_imp" type="submit" ng-click="summaryfun()"> Import</button>
        
     </div>
     <br>
@@ -41,14 +41,14 @@
                 </div>
             </div>
            
-                <button type="button" class="btn btn-default login-btn" ng-click="showProgress=true;uploader.uploadAll()"
+                <button type="button" id="btn_upl_uploadme" class="btn btn-default login-btn"ng-click="showProgress=true;uploader.uploadAll()"
                         ng-disabled="!uploader.getNotUploadedItems().length">Upload
                 </button>
             
-            <button type="button" class="btn btn-default login-btn" ng-click="uploader.cancelAll()"
+            <button type="button" id="btn_upl_cancelme" class="btn btn-default login-btn" ng-click="uploader.cancelAll()"
                     ng-disabled="!uploader.isUploading"> Cancel
             </button>
-            <button type="button" class="btn btn-default login-btn" ng-click="uploader.clearQueue()"
+            <button type="button" id="btn_upl_removeme" class="btn btn-default login-btn" ng-click="uploader.clearQueue()"
                     ng-disabled="!uploader.queue.length"> Remove
             </button>
             

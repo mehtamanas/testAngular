@@ -1,144 +1,9 @@
-﻿<!--<div class="main-content new-user-container">
-    <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
-          data-ng-submit="addNew(newForm.$valid)">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="title">Add Property Name</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-
-                </div>
-            </div>
-        </div>
-
-        <label class="control-label">Property Name</label>
-                <div class="form-group"
-                     data-ng-class="{
-                            'has-error' : newForm.Add_Property_Name.$invalid && (!newForm.Add_Property_Name.$pristine || showValid) && !newForm.Add_Property_Name.$focus,
-                            'has-success': newForm.Add_Property_Name.$valid && !newForm.Add_Property_Name.$pristine && !newForm.Add_Property_Name.$focus
-                        }">
-                    <div class="col-xs-12">
-                        <label class="label-group">
-                            <input type="text" autofocus name="Add_Property_Name" class="form-control"
-                                   placeholder="Add Property Name"
-                                   data-ng-model="params.name"
-                                   minlength="1"
-                                   maxlength="40"
-                                   alphabets-only
-                                   input-focus
-                                   required
-                                  />
-
-                        </label>
-                        <div class="text-danger"
-                             data-ng-if="newForm.Add_Property_Name.$invalid && (!newForm.Add_Property_Name.$pristine || showValid) && !newForm.Add_Property_Name.$focus">
-                            {{ 'Please enter alphabets only' | translate }}
-                </div>
-            </div>
-
-        </div>
-        <label class="control-label">Select Project</label>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <input type="hidden" name="Select Project" data-ng-model="params.country">
-
-                    <select  ng-change="selectproject()" ng-model="project1" class="dropdown form-control" required>
-                        <option value="" selected>-- Choose Project --</option>
-                        <option ng-repeat="project in projects"
-                                value="{{project.id}}">
-                            {{project.name}}
-                        </option>
-                    </select>
-
-
-
-            </div>
-        </div>
-        <label class="control-label">Address</label>
-        <div class="form-group"
-             data-ng-class="{
-                    'has-error' : newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus,
-                    'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
-                }">
-            <div class="col-xs-12">
-                <label class="label-group">
-                    <input type="text" name="Address" class="form-control"
-                           placeholder="Address"
-                           data-ng-model="params.address"
-                           minlength="1"
-                           maxlength="30"
-                           input-focus
-                           required />
-                </label>
-                <div class="text-danger"
-                     data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
-                    {{ 'Please enter valid email' | translate }}
-                </div>
-            </div>
-
-
-
-        </div>
-
-
-
-        <div class="col-sm-5">
-            <label class="control-label">State</label>
-            <div class="form-group">
-
-
-                    <select ng-change="selectstate()" ng-model="state1" class="dropdown form-control" required>
-                        <option value="" selected>-- Choose State --</option>
-                        <option ng-repeat="state in states"
-                                value="{{state.state_id}}">
-                            {{state.state_name}}
-                        </option>
-                    </select>
-
-            </div>
-        </div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5">
-            <label class="control-label">City</label>
-            <div class="form-group">
-
-
-                <select ng-change="selectcity()" ng-model="city1" class="dropdown form-control" required>
-                    <option value="" selected>-- Choose City --</option>
-                    <option ng-repeat="city in cities"
-                            value="{{city.city_id}}">
-                        {{city.city_name}}
-                    </option>
-                </select>
-
-
-            </div>
-        </div>
-
-        <div>
-
-            <button class="btn  btn-default" type="submit">Save</button>
-            <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
-            <button class="btn  btn-default" type="button" ng-click="reset()">Remove</button>
-        </div>
-
-
-
-
-    </form>
-</div>-->
-
+﻿
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+   
 
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" id="btn_addnewproperty_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Add New Property</h4>
             </div><!-- modal-header ended -->
 
@@ -148,7 +13,7 @@
 
                     <div class="clearfix image-upload-container">
                         <div class="image-upload-wrap">
-                            <div class="image-upload-title">Upload Contact Image</div>
+                            <div class="image-upload-title">Upload Thumbnail</div>
                             <div class="dropzone dropzone-bx image-upload-bx">
                                 <div class="fallback">
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
@@ -172,7 +37,7 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse" nv-file-select="" uploader="uploader" />
+                                <input type="file" class="image-upload-f" id="addnewproperty_uploader1" value="Browse" nv-file-select="" uploader="uploader" />
 
                             </div>
                         </div>
@@ -190,7 +55,7 @@
                         <div id="phone-wrap" class="clearfix">
                             <div id="phone-no" class="form-bx form-bx2">
                                 <label for="">Project Name</label>
-                                <input type="text" name="Add_Property_Name" class="form-control"
+                                <input type="text" name="Add_Property_Name" class="form-control" id="addnewproperty_name"
                                        placeholder="Project Name"
                                        data-ng-model="params.name"
                                        minlength="1"
@@ -234,7 +99,7 @@
                         <div id="address-wrap" class="clearfix">
                             <div id="address-no" class="form-bx form-bx2">
                                 <label for="" style="padding-top:5px;"><b>Address</b></label>
-                                <input type="text" name="Address" class="form-control"
+                                <input type="text" name="Address" class="form-control" id="addnewproperty_address"
                                        placeholder="Address"
                                        data-ng-model="params.address"
                                        minlength="5"
@@ -281,7 +146,7 @@
                                                                             'has-error' : newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus,
                                                                             'has-success': newForm.Pin.$valid && !newForm.Pin.$pristine && !newForm.Pin.$focus
                                                                          }">
-                                <input type="text" name="Pin" class="form-control"
+                                <input type="text" name="Pin" class="form-control" id="addnewproperty_zip_code"
                                        placeholder="Pin"
                                        data-ng-model="params.zip_code"
                                        minlength="1"
@@ -301,9 +166,9 @@
                    
 
                     <div class="modal-btn-wrap clearfix">
-                        <button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
+                        <button type="submit" class="f-btn" id="btn_addnewproperty_save" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
 
-                        <button type="button" class="f-btn" ng-click="cancel()">CANCEL</button>
+                        <button type="button" class="f-btn" id="btn_addnewproperty_cancel" ng-click="cancel()">CANCEL</button>
                     </div>   
 
 
@@ -311,6 +176,5 @@
 </form>
             </div><!-- modal-body ended -->
 
-        </div>
-    </div>
+     
 </div>

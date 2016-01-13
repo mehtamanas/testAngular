@@ -1,11 +1,10 @@
 ﻿<div id="add_new_floor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+   
 
             <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
 
                 <div class="close-btn-wrap">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" id="btn_gallery_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
                 </div>
 
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
@@ -21,7 +20,7 @@
 
                             <div class="form-group form-bx form-bx2">
                                 <label for="">Notes</label>
-                                <input type="text"name="notes"  class="form-control"
+                                <input type="text" autofocus name="notes"  class="form-control" id="gallery_notes"
                                        placeholder="Add Notes "
                                        data-ng-model="params.notes"
                                        minlength="1"
@@ -32,7 +31,7 @@
                             </div>
                             <div class="text-danger"
                                  data-ng-if="addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus">
-                                {{ 'Please enter valid floor name' | translate }}
+                                {{ 'Please enter valid note' | translate }}
                             </div>
                         </div>
                     </div>
@@ -49,7 +48,7 @@
                                             <div class="row" ng-hide="uploader.queue.length">
                                                 <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop your file here</span>
+                                                    <span class="page-center">Drag And Drop</span>
                                                 </div>
                                                 <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                             </div>
@@ -65,7 +64,7 @@
                             </div>
                             <div class="image-upload-link">
 
-                                <input type="file" nv-file-select="false" nv-file-multiple="false" uploader="uploader">
+                                <input type="file" nv-file-select="false" id="gallery_uploader1" accept="image/*" nv-file-multiple="false" uploader="uploader">
 
 
                             </div>
@@ -77,8 +76,8 @@
                              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                     </div>
                             <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" id="save" class="f-btn"
-                                        ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <button type="submit" id="gallery_save" class="f-btn"
+                                        ng-click="showProgress=true;uploader.uploadAll()"  ng-disabled="!uploader.getNotUploadedItems().length">
                                     Save
                                 </button>
                             </div>
@@ -86,6 +85,5 @@
                 </form>
             </div><!-- modal-body ended -->
 
-        </div>
-    </div>
+     
 </div>

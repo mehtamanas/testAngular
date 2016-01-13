@@ -48,14 +48,7 @@
                 $state.go('login');
                 return;
             }
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'login/channelform.tpl.html',
-                backdrop: 'static',
-
-                controller: ChannelPopupContoller,
-                size: 'md'
-            });
+            $state.go('channel_form');
         };
     }
 

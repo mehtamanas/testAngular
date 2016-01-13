@@ -1,27 +1,33 @@
 ﻿
-var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieStore, apiService, $modal, $window, FileUploader, uploadService) {
+var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieStore,$rootScope, apiService, $modal, $window, FileUploader, uploadService) {
     console.info("EditOrgPopUpController");
 
     var orgID = $cookieStore.get('orgID');
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
-  
+    $(document).ready(function () {
+        $("#organization_address").kendoEditor();
+    });
 
-   
+
     if (orgID !== '') {
        
         GetUrl = "Organization/Get/" + orgID;
         apiService.get(GetUrl).then(function (response) {
 
-            $scope.data = response.data;
+            $scope.data = response.data[0];
 
             $scope.name = $scope.data.name;
             $scope.organization_id = $scope.data.organization_id;
             $scope.description = $scope.data.description;
             $scope.name = $scope.data.name;
-            $scope.address = $scope.data.address;
+            //$scope.address = $scope.data.address;
+            $scope.street_1 = $scope.data.street_1;
+            $scope.street_2 = $scope.data.street_2;
+           
             $scope.email = $scope.data.email;
             $scope.phone_no = $scope.data.phone_no;
             $scope.pan_no = $scope.data.pan_no;
@@ -38,6 +44,17 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
             
             $scope.choices1[0].email = $scope.data.email;           
             $scope.choices[0].phone_no = $scope.data.phone_no;
+            
+            $scope.city = $scope.data.city;
+            $scope.state = $scope.data.state;
+            $scope.zip_code = $scope.data.zip_code;
+            $scope.country = $scope.data.country;
+           
+
+            //
+
+
+
 
         },
                            function (error) {
@@ -49,7 +66,9 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
     $scope.params = {
 
         name: $scope.name,
-        address: $scope.address,
+        
+        street_1: $scope.street_1,
+        street_2: $scope.street_2,
         description: $scope.description,
         divisions: $scope.divisions,
         email: $scope.email,
@@ -62,8 +81,14 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
         first_month_of_financial_year: $scope.first_month_of_financial_year,
         cin_no: $scope.cin_no,
         organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
+        User_ID: $cookieStore.get('userId'),
+        city: $scope.city,
+        state: $scope.state,
+        zip_code: $scope.zip_code,
+        country: $scope.country,
 
+         
+       
     };
 
     $scope.choices = [{ id: 'choice1' }];
@@ -107,14 +132,16 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
         data = response.data;
         a = 0, b = 0;
         for (i = 0; i < data.length; i++) {
-            if (data[i].element_type == "email" ) {
+            if (data[i].element_type == "email_org") {
                 if (a > 0) { $scope.choices1.push({ 'id': 'choice' + (a+1) }); }
                 $scope.choices1[a].email = data[i].element_info1;
+                $scope.choices1[a].class_id = data[i].class_id;
                 a++;
             }
-            if (data[i].element_type == "phone") {
+            if (data[i].element_type == "phone_org") {
                 if (b > 0) { $scope.choices.push({ 'id': 'choice' + (b + 1) }); }
                 $scope.choices[b].phone_no = data[i].element_info1;
+                $scope.choices[b].class_id = data[i].class_id;
                 b++;
             }
         }
@@ -149,6 +176,7 @@ function (error) {
             controller: sucessfullController,
             size: 'md'
         });
+       
     }
 
     Url = "GETCSC/GetMonth";
@@ -167,7 +195,64 @@ function (error) {
     };
 
 
-    $scope.reset = function () {
+  
+
+    $scope.selectbuilder = function () {
+        $scope.params.radioValue = $scope.directory1;
+        //alert($scope.params.month);
+    };
+
+
+    Url = "GetCSC/state";
+    apiService.get(Url).then(function (response) {
+        $scope.states = response.data;
+    },
+function (error) {
+    alert("Error " + error.state);
+});
+
+    $scope.selectstate = function () {
+        $scope.params.state = $scope.state1;
+        //alert($scope.params.state);
+    };
+
+
+    Url = "GetCSC/city";
+    apiService.get(Url).then(function (response) {
+        $scope.cities = response.data;
+    },
+function (error) {
+    alert("Error " + error.cities);
+
+
+});
+    $scope.selectcity = function () {
+        $scope.params.city = $scope.city1;
+        //alert($scope.params.city);
+    };
+
+    $scope.filterExpression = function (city) {
+        return (city.stateid === $scope.params.state);
+    };
+
+
+    Url = "GetCSC/Country";
+
+    apiService.get(Url).then(function (response) {
+        $scope.countries = response.data;
+
+    },
+function (error) {
+    console.log("Error " + error.country);
+});
+    $scope.selectcountry = function () {
+        $scope.params.country = $scope.country1;
+        //alert($scope.params.country);
+    };
+
+
+
+      $scope.reset = function () {
         $scope.params = {};
     }
 
@@ -192,10 +277,7 @@ function (error) {
     }
 
   
-    $scope.selectstate = function () {
-        $scope.params.state = $scope.state1;
-        //alert($scope.params.state);
-    };
+
 
     $scope.reset = function () {
         $scope.params = {};
@@ -248,24 +330,31 @@ function (error) {
             Media_Type: "Organization_Logo",
             description: $scope.description,
             divisions: $scope.divisions,
-            email: $scope.email,
-            phone_no: $scope.phone_no,
+            email: $scope.choices1[0].email,
+            phone_no: $scope.choices[0].phone_no,
             language: $scope.language,
-            list_in_builder_directory: $scope.radioValue,
+            list_in_builder_directory: $scope.directory1,
             pan_no: $scope.pan_no,
             tan_no: $scope.tan_no,
             service_tax_no: $scope.service_tax_no,
             cin_no: $scope.cin_no,
             first_month_of_financial_year: $scope.params.month,
-            timezone: $scope.params.timezone
+            timezone: $scope.params.timezone,
+            street_1: $scope.street_1,
+            street_2: $scope.street_2,
+            city: $scope.city1,
+            state: $scope.state1,
+            zip_code: $scope.zip_code,
+            country: $scope.country1,
+
+            
 
         };
        
         apiService.post("Organization/Edit", postData).then(function (response) {
             //alert("hi dude");
             var loginSession = response.data;
-            $scope.openSucessfullPopup();
-            $modalInstance.dismiss();
+            
             //alert("edit org done");
 
         },
@@ -277,20 +366,37 @@ function (error) {
         for (var i in $scope.choices1) {
             var postData_email =
                 {
-                    class_id: $cookieStore.get('orgID'),
+                     id: $scope.choices1[i].class_id,
+                     class_id: $cookieStore.get('orgID'),
                     class_type: "Organization",
-                    element_type: "email",
+                    element_type: "email_org",
                     element_info1: $scope.choices1[i].email,
                 }
             media.push(postData_email);
         }
 
+ 
+
+       
+
+      
+     
+
+
+    
+
+
+
+      
+
+      
         for (var i in $scope.choices) {
             var postData_phone =
                 {
+                    id: $scope.choices[i].class_id,
                     class_id: $cookieStore.get('orgID'),
                     class_type: "Organization",
-                    element_type: "phone",
+                    element_type: "phone_org",
                     element_info1: $scope.choices[i].phone_no,
                 }
             media.push(postData_phone);
@@ -304,7 +410,9 @@ function (error) {
        function (error) {
 
        });
-
+        $scope.openSucessfullPopup();
+        $modalInstance.dismiss();
+        $rootScope.$broadcast('REFRESH', 'organization');
     }
 
 };

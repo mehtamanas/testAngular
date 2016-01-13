@@ -11,10 +11,38 @@ angular.module('app.guest.login')
     })
 
     .controller('OController',
-    function ($scope, $state, COUNTRIES, apiService, $cookieStore) {
+    function ($scope, $state, COUNTRIES, apiService, $cookieStore, $rootScope) {
         $scope.countryList = COUNTRIES;
         $scope.breadcrumb = 1;
-              
+         
+   
+
+        $rootScope.title = 'Dwellar./Organization';
+        $scope.signup = function () {
+            $state.go('signup_free_account');
+            
+            $scope.signupfree.first_name;
+            $scope.signupfree.last_name;
+            $scope.signupfree.account_email;
+            $scope.signupfree.account_phone;
+            $scope.signupfree.account_country;
+
+        };
+
+        $scope.signupfree =
+       {
+        first_name: $cookieStore.get('First_Name'),
+        last_name: $cookieStore.get('Last_Name'),
+        account_email: $cookieStore.get('Account_Email'),
+        account_phone: $cookieStore.get('Phone'),
+        account_country: $cookieStore.get('Account_Country'),
+        Password: $cookieStore.get('Hash'),
+        OrgName: $cookieStore.get('OrgName'),
+     
+        };
+      
+   
+
         // Init model
         $scope.params = {
             name: $scope.name,
@@ -42,6 +70,57 @@ angular.module('app.guest.login')
 
         $scope.confirms = {
             hash: $scope.hash
+        };
+
+
+        Url = "GetCSC/Country";
+
+        apiService.get(Url).then(function (response) {
+            $scope.countries = response.data;
+
+        },
+    function (error) {
+        console.log("Error " + error.country);
+    });
+
+
+        $scope.selectcountry = function () {
+            $scope.params.country = $scope.country1;
+            //alert($scope.params.country);
+        };
+
+        Url = "GetCSC/state";
+        apiService.get(Url).then(function (response) {
+            $scope.states = response.data;
+        },
+    function (error) {
+        alert("Error " + error.state);
+    });
+
+        $scope.selectstate = function () {
+            $scope.params.state = $scope.state1;
+            //alert($scope.params.state);
+        };
+
+
+        Url = "GetCSC/city";
+        apiService.get(Url).then(function (response) {
+            $scope.cities = response.data;
+        },
+    function (error) {
+        alert("Error " + error.cities);
+
+
+    });
+
+        $scope.filterExpression = function (city) {
+            return (city.stateid === $scope.params.state);
+        };
+
+
+        $scope.selectcity = function () {
+            $scope.params.city = $scope.city1;
+            //alert($scope.params.city);
         };
 
         $scope.addPersonalInfo = function (isValid) {

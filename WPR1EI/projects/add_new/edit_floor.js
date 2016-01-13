@@ -14,11 +14,13 @@ var AddNewEditFloorController = function ($scope, $state, $cookieStore, apiServi
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     $scope.showProgress = false;
@@ -33,14 +35,20 @@ var AddNewEditFloorController = function ($scope, $state, $cookieStore, apiServi
     });
 
     //FILTERS
-
+    uploader1.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
+        }
+    });
 
 
     projectUrl = "Floors/Get_Floor_TypeByFloorId?floorID=" + FloorId;
 
     //alert(projectUrl);
     //alert($scope.seletedCustomerId);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
 
     },
@@ -53,7 +61,7 @@ function (error) {
 
     //alert(projectUrl);
     //alert($scope.seletedCustomerId);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.units = response.data;
 
     },
@@ -155,6 +163,21 @@ function (error) {
             alert("Ivalid Range! " + nums);
             return;
         }
+
+        var fnd = 0;
+        for (var i in $scope.units) {
+
+            if ($scope.units[i].no_of_units != null) 
+            {
+                fnd = 1;
+                break;
+            }
+        }
+        if (fnd == 0) {
+            alert("No  unit mapped");
+            retrun;
+        }
+
         if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
             showProgress = true;
             uploader.uploadAll();

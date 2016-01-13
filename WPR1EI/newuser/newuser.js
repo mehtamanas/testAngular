@@ -6,7 +6,11 @@ angular.module('newuser')
 .controller('newuserController',
       function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
           console.log('TeamListController');
-          $rootScope.title = 'Dwellar./Teams';
+          $rootScope.title = 'Dwellar./Users';
+
+          var userID = $cookieStore.get('userId');
+
+          //alert($cookieStore.get('userId'));
 
 
           $('#btnSave').hide();
@@ -155,7 +159,8 @@ angular.module('newuser')
                   size: 'md'
               });
           };
-          $scope.GetValue = function (fruit) {
+          $scope.GetValue = function (fruit)
+          {
 
               var fruitId = $scope.ddlFruits;
               var fruitName = $.grep($scope.Fruits, function (fruit) {
@@ -164,9 +169,14 @@ angular.module('newuser')
 
               $cookieStore.put('Selected Text', fruitName);
               // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
+
+             
+
+
           }
 
-          $scope.addUser = function () {
+          $scope.addUser = function ()
+          {
 
               var usersToBeAddedOnServer = [];
               $cookieStore.remove('checkedIds');
@@ -180,22 +190,22 @@ angular.module('newuser')
               }
 
               var Text = $cookieStore.get('Selected Text');
-              if ($cookieStore.get('Selected Text') == "Assign to project") {
+              if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
                   $state.go($scope.optionPopup());
               }
-              else if ($cookieStore.get('Selected Text') == "Assign Roles") {
+              else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
                   $state.go($scope.optionPopup())
 
               }
-              else if ($cookieStore.get('Selected Text') == "Add To Team") {
+              else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {
 
                   $state.go($scope.optionPopup())
 
               }
-              else if ($cookieStore.get('Selected Text') == "Block") {
+              else if ($cookieStore.get('Selected Text') == "BLOCK") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
-                      alert(" Done...");
+
                   },
       function (error) {
 
@@ -211,7 +221,8 @@ angular.module('newuser')
               dataSource: {
                   type: "json",
                   transport: {
-                      read: "http://dw-webservices-dev2.azurewebsites.net/User/GetCount/" + orgID
+                     // read: "https://dw-webservices-uat.azurewebsites.net/User/GetCount/" + orgID
+                      read: "https://dw-webservices-uat.azurewebsites.net/User/GetCount/" + userID
                   },
                   pageSize: 5
 
@@ -236,7 +247,8 @@ angular.module('newuser')
 
                   //template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />"
                   template: "<input type='checkbox' data-id='#= account_email #'  class='checkbox' ng-click='onClick($event)' />",
-                  width:"60px"
+                  title: "<input type='checkbox' class='checkbox' ng-disabled='false'/>",
+                  width: "60px"
               },
 
                     {
@@ -261,7 +273,17 @@ angular.module('newuser')
 
       },
 
-               {
+             {
+                 field: "Status",
+                 title: "Status",
+                 width: "80px",
+
+                 attributes: {
+                     "class": "UseHand",
+
+                 }
+
+             },{
                    field: "Role_name",
                    title: "Role",
                    width: "80px",
@@ -277,9 +299,10 @@ angular.module('newuser')
                   field: "Project_count",
                   title: "Projects",
                   width: "100px",
-
+                
                   attributes: {
                       "class": "UseHand",
+                      "style":"text-align:right;"
 
                   }
 
@@ -290,7 +313,7 @@ angular.module('newuser')
                   width: "100px",
                   attributes: {
                       "class": "UseHand",
-
+                      "style": "text-align:right;"
                   }
 
               },
@@ -300,7 +323,7 @@ angular.module('newuser')
                   width: "100px",
                   attributes: {
                       "class": "UseHand",
-
+                      "style": "text-align:right;"
                   }
 
               },
@@ -310,35 +333,37 @@ angular.module('newuser')
                  width: "100px",
                  attributes: {
                      "class": "UseHand",
-
+                     "style": "text-align:right;"
                  }
 
-             },
-              {
-                  field: "Task_count",
-                  title: "Tasks",
-                  width: "100px",
-                  attributes: {
-                      "class": "UseHand",
-                  }
+             }
+              //{
+              //    field: "Task_count",
+              //    title: "Tasks",
+              //    width: "100px",
+              //    attributes: {
+              //        "class": "UseHand",
+              //    }
 
-              }]
+              //}
+              ]
           };
           $scope.Fruits = [{
               Id: 1,
-              Name: 'Block'
+              Name: 'BLOCK'
           }, {
               Id: 2,
-              Name: 'Inactivate'
+              Name: 'INACTIVATE'
+          //}, {
+          //    Id: 3,
+          //    Name: 'ADD TO TEAM'
+          //}, {
+          //    Id: 4,
+          //    Name: 'ASSIGN TO PROJECT'
+              //
           }, {
               Id: 3,
-              Name: 'Add To Team'
-          }, {
-              Id: 4,
-              Name: 'Assign to project'
-          }, {
-              Id: 5,
-              Name: 'Assign Roles'
+              Name: 'ASSIGN ROLES'
           }
           ];
           $scope.checkedIds = [];
@@ -381,6 +406,11 @@ angular.module('newuser')
 
 
           }
+          $scope.$on('REFRESH', function (event, args) {
+              if (args == 'mainGridOptions') {
+                  $('.k-i-refresh').trigger("click");
+              }
+          });
 
 
 
@@ -389,7 +419,7 @@ angular.module('newuser')
           //    dataSource: {
           //        type: "json",
           //        transport: {
-          //            read: "https://dw-webservices-dev2.azurewebsites.net/Team/GetTeamDetails/" + orgID
+          //            read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
           //        },
           //        pageSize: 5
 

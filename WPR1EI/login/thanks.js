@@ -28,7 +28,10 @@ angular.module('app.guest.login')//to chnage
 
 
 .controller('ThanksController',
-    function ($scope, $state) {
+    function ($scope, $state, $rootScope) {
+
+        $rootScope.title = 'Dwellar./Thanks';
+
         $scope.addPersonalInfo = function (isValid) {
             if (isValid) {
                 $state.go('login');

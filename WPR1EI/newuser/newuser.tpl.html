@@ -9,7 +9,7 @@
         <div class="pg-inner-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pg-inner-header">Users</h2>
+                    <h2 class="pg-inner-title">Users</h2>
                     <!--<select ng-model="ddlFruits" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
                             ng-change="GetValue()"></select>-->
                 </div>
@@ -30,13 +30,13 @@
                     
                     <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
                             ng-change="GetValue();addUser()" >
-                    <option value="" selected>-- Action --</option>
+                    <option value="" selected> ACTION </option>
                     </select>
                 </div>
 
                 <div class="pull-right btn-wrap-right">
-                    <a href="#" id="btnSave" class="btn-lk" ng-click="openUserPopup()">+ Create New User</a>
-                    <a href="#" class="btn-lk" ng-click="openImportUserPopup()">+ Import Users</a>
+                    <a href="#"  class="btn-lk" ng-click="openUserPopup()">+ ADD NEW USER </a>
+                    <!--<a href="#" class="btn-lk" ng-click="openImportUserPopup()">+ Import Users</a>-->
                    
                 </div>
             </div>

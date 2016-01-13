@@ -13,11 +13,13 @@ var AddNewWingController = function ($scope, $state, $cookieStore, apiService, $
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
 
@@ -30,6 +32,14 @@ var AddNewWingController = function ($scope, $state, $cookieStore, apiService, $
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+    });
+
+    uploader1.filters.push({
+        name: 'imageFilter1',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -133,8 +143,8 @@ function (error) {
 
         var array = [];
         for (var i in $scope.floors) {
-            if ($scope.floors[i].no_of_units != null) {
-                var testArray = $scope.convertToArray($scope.floors[i].no_of_units);
+            if ($scope.floors[i].no_of_units_new != null) {
+                var testArray = $scope.convertToArray($scope.floors[i].no_of_units_new);
                 Array.prototype.push.apply(array, testArray);
             }
         };
@@ -155,14 +165,33 @@ function (error) {
             alert("Ivalid Range! " + nums);
             return;
         }
-        if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
-            
-            showProgress = true;
-            uploader.uploadAll();
-            uploader1.uploadAll();
 
+
+        var fnd = 0;
+        for (var i in $scope.floors) {
+
+            if ($scope.floors[i].no_of_units_new != null) {
+                fnd = 1;
+                break;
+            }
+        }
+        if (fnd == 0) {
+            alert("No Floor Mapped.....");
+            retrun;
         }
 
+
+        if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
+            
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader1.queue.length != 0)
+                uploader1.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0)
+                $scope.finalpost();
+
+        }
+       
         
 
     };
@@ -411,7 +440,7 @@ function (error) {
                 var towerupdate = [];
                 for (var i in $scope.floors) {
                     var newTower = {};
-                    newTower.no_of_units = $scope.floors[i].no_of_units;
+                    newTower.no_of_units = $scope.floors[i].no_of_units_new;
                     newTower.unit_type_desc = $scope.floors[i].unit_type_desc;
                     newTower.wingid = loginSession.id;
                     newTower.id = $scope.floors[i].id;
@@ -433,7 +462,8 @@ function (error) {
                         templateUrl: 'newuser/sucessfull.tpl.html',
                         backdrop: 'static',
                         controller: sucessfullController,
-                        size: 'md'
+                        size: 'md',
+                        resolve: { items: { title: "Wing" } }
                     });
 
                     $rootScope.$broadcast('REFRESH','wing');
@@ -444,7 +474,7 @@ function (error) {
 
             },
           function (error) {
-
+              alert(error.data.Message);
           });
       
 
@@ -624,14 +654,9 @@ function (error) {
 
         if (isValid) {
 
-            if (uploader.queue.length != 0)
-                uploader.uploadAll();
-            if (uploader1.queue.length != 0)
-                uploader1.uploadAll();
-            if (uploader.queue.length == 0 && uploader1.queue.length == 0)
-                $scope.finalpost();
+            $scope.submit();
 
-             $scope.submit();
+
 
             $scope.showValid = false;
 

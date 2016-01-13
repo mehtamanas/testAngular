@@ -15,11 +15,16 @@ angular.module('organization')
 
               apiService.get(GetUrl).then(function (response) {
 
-                  $scope.data = response.data;
+                  $scope.data = response.data[0];
 
                   $scope.organization_id = $scope.data.organization_id;
                   $scope.name = $scope.data.name;
-                  $scope.address = $scope.data.address;
+                  $scope.street_1 = $scope.data.street_1;
+                  $scope.street_2 = $scope.data.street_2;
+                  $scope.city = $scope.data.city;
+                  $scope.state = $scope.data.state;
+                  $scope.zip_code = $scope.data.zip_code;
+                  $scope.country = $scope.data.country;
                   $scope.email = $scope.data.email;
                   $scope.divisions = $scope.data.divisions;
                   $scope.description = $scope.data.description;
@@ -169,19 +174,60 @@ angular.module('organization')
               }
           };
 
+          $scope.$on('REFRESH', function (event, args) {
 
-          $scope.openEditOrgPopup = function () {
-              var modalInstance = $modal.open({
-                  animation: true,
-                  templateUrl: 'organization/EditOrganization.tpl.html',
-                  backdrop: 'static',
+              setTimeout(function () {
+                  if (args == 'organization') {
+                      projectUrl = "Organization/Get/" + orgID;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                      apiService.getWithoutCaching(projectUrl).then(function (response) {
+                          $scope.data = response.data[0];
+                          $scope.organization_id = $scope.data.organization_id;
+                          $scope.name = $scope.data.name;
+                          $scope.street_1 = $scope.data.street_1;
+                          $scope.street_2 = $scope.data.street_2;
+                          $scope.city = $scope.data.city;
+                          $scope.state = $scope.data.state;
+                          $scope.zip_code = $scope.data.zip_code;
+                          $scope.country = $scope.data.country
+                          $scope.email = $scope.data.email;
+                          $scope.divisions = $scope.data.divisions;
+                          $scope.description = $scope.data.description;
+                          $scope.phone_no = $scope.data.phone_no;
+                          $scope.list_in_builder_directory = $scope.data.list_in_builder_directory;
+                          $scope.pan_no = $scope.data.pan_no;
+                          $scope.tan_no = $scope.data.tan_no;
+                          $scope.service_tax_no = $scope.data.service_tax_no;
+                          $scope.cin_no = $scope.data.cin_no;
+                          $scope.first_month_of_financial_year = $scope.data.first_month_of_financial_year;
+                          $scope.language = $scope.data.language;
+                          $scope.timezone = $scope.data.timezone;
+                          if ($scope.data.contact_mobile !== '') {
+                              $scope.mobile = $scope.data.contact_mobile;
+                          }
+                          $state.go('app.organization', {}, { reload: false });
 
-                  controller: EditOrgPopUpController,
-                  size: 'md'
-              });
-          };
+                      },
+                          function (error) {
+                              console.log("Error " + error.state);
+                          }
+                      );
+                  }
+              },1500);
+
+          });
+
+              $scope.openEditOrgPopup = function () {
+                  var modalInstance = $modal.open({
+                      animation: true,
+                      templateUrl: 'organization/EditOrganization.tpl.html',
+                      backdrop: 'static',
+
+                      controller: EditOrgPopUpController,
+                      size: 'md'
+                  });
+              };
          
-      }
-
+          }
+          
 );
 

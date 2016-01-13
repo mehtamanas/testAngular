@@ -1,13 +1,10 @@
 ﻿
 
 <div id="add_new_floor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-
+    
+        <div class="modal-body">
                 <div class="close-btn-wrap">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" id="btn_addnewfloor_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
                 </div>
 
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
@@ -23,7 +20,7 @@
 
                             <div class="form-group form-bx f-unit">
                                 <label for="">How many units are there on this floor?</label>
-                                <input type="text" name="floors" class="form-control" id="unitfloor"
+                                <input type="text" autofocus name="floors" class="form-control" id="addnewfloor_no_of_units"
                                        placeholder="Units "
                                        data-ng-model="params.no_of_units"
                                        minlength="1"
@@ -47,7 +44,7 @@
 
                             <div class="form-group form-bx form-bx2">
                                 <label for="">Enter floor type name:</label>
-                                <input type="text" autofocus name="tname" class="form-control" id="floorname"
+                                <input type="text" autofocus name="tname" class="form-control" id="addnewfloor_floor_name"
                                        placeholder="Enter Floor Name"
                                        data-ng-model="params.unit_name"
                                        minlength="1"
@@ -63,8 +60,8 @@
                     </div>
 
                     <div class="clearfix image-upload-container">
-                        <div class="image-upload-wrap">
-                            <div class="image-upload-title">Upload Wing Image</div>
+                        <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                            <div class="image-upload-title">Upload Floor Image</div>
                             <div class="dropzone dropzone-bx image-upload-bx">
                                 <div class="fallback">
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
@@ -72,7 +69,7 @@
                                             <div class="row" ng-hide="uploader.queue.length">
                                                 <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop your file here</span>
+                                                    <span class="page-center">Drag And Drop</span>
                                                 </div>
                                                 <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                             </div>
@@ -88,12 +85,13 @@
                             </div>
                             <div class="image-upload-link">
 
-                                <input type="file" nv-file-select="false" nv-file-multiple="false" uploader="uploader">
+                                <input type="file" nv-file-select="false" id="addnewfloor_uploader1" nv-file-multiple="false" accept="image/*" uploader="uploader">
 
 
                             </div>
+                            </div>
 
-                            <div class="image-upload-wrap">
+                            <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
                                 <div class="image-upload-title">Upload 3D Zip</div>
                                 <div class="dropzone dropzone-bx image-upload-bx">
                                     <div class="fallback">
@@ -102,7 +100,7 @@
                                                 <div class="row" ng-hide="uploader1.queue.length">
                                                     <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                        <span class="page-center">Drag And Drop your file here</span>
+                                                        <span class="page-center">Drag And Drop</span>
                                                     </div>
                                                     <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                                 </div>
@@ -118,67 +116,67 @@
                                 </div>
                                 <div class="image-upload-link">
 
-                                    <input type="file" nv-file-select="false" nv-file-multiple="false" uploader="uploader1">
+                                    <input type="file" nv-file-select="false" id="addnewfloor_uploader2" nv-file-multiple="false" accept="application/zip"  uploader="uploader1">
 
 
                                 </div>
                             </div>
+                        
 
                             <h4 class="form-title form-title2">Assign Unit Type</h4>
-                            <div class="row" data-ng-repeat="unit in units ">
+                            <div class="row" data-ng-repeat="unit in units " style="margin-left:7px;">
 
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
+                                    <label class="control-label">Unit Type</label>
 
 
-                                  
                                     <div class="col-xs-10">
 
                                         <label class="label-group">
-                                            <input type="text" disabled autofocus name="floortype" onblur="blur()" class="form-control" id="floorid"
+                                            <input type="text" disabled autofocus name="floortype" onblur="blur()" class="form-control" id="addnewfloor_unit_type_desc"
                                                    placeholder="Unit Type"
                                                    data-ng-model="unit.unit_type_desc"
                                                    ng-minlength="1"
                                                    ng-maxlength="10"
                                                    ng-pattern="/^[a-zA-Z\s]+$/"
-                                                   input-focus
-                                                    />
+                                                   input-focus />
                                         </label>
-                                        
+
                                     </div>
 
                                 </div>
-                                <div class="col-sm-6">
-                                    <label class="control-label">unit No</label>
-                                  
+                                <div class="col-sm-4">
+                                    <label class="control-label">Unit No</label>
+
                                     <div class="form-group">
                                         <div class="col-xs-10">
 
                                             <label class="label-group">
-                                                <input autofocus name="floorno" class="form-control" id="unitno" 
+                                                <input autofocus name="floorno" class="form-control" id="addnewfloor_unit_no"
                                                        placeholder="unit No"
                                                        data-ng-model="unit.no_of_units "
-                                                       input-focus
-                                                        />
+                                                       input-focus />
                                             </label>
                                         </div>
                                     </div>
                                 </div>
-                              
-                                    <div class="col-xs-10">
 
-                                        <label class="label-group">
-                                            <input type="hidden" disabled autofocus name="floortype" class="form-control"
-                                                   placeholder="Unit Type"
-                                                   data-ng-model="unit.id"
-                                                   ng-pattern="/^[a-zA-Z\s]+$/"
-                                                   input-focus
-                                                    /></label>
-                                      </div>
+                                <div class="col-xs-10">
 
-                              
+                                    <label class="label-group">
+                                        <input type="hidden" disabled autofocus name="floortype" id="addnewfloor_unit_id" class="form-control"
+                                               placeholder="Unit Type"
+                                               data-ng-model="unit.id"
+                                               ng-pattern="/^[a-zA-Z\s]+$/"
+                                               input-focus />
+                                    </label>
+                                </div>
+
+
 
                             </div>
+                        </div>
 
                             <div class="progress" ng-show="showProgress">
                                 <div class="progress-bar" role="progressbar"
@@ -186,16 +184,15 @@
                             </div>
 
                             <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" id="save" class="f-btn" ng-click="showProgress=true;submit();">
+                                <button type="submit" id="btn_addnewfloor_save" class="f-btn" ng-click="showProgress=true;submit();">
                                     Save
                                 </button>
                             </div>
 
-                </form>
+</form>
             </div><!-- modal-body ended -->
 
-        </div>
-    </div>
+    
 </div><!-- modal ended -->
 
 

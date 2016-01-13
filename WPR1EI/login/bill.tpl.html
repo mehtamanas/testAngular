@@ -1,5 +1,5 @@
 
-<header class="navbar-top-fixed header2">
+<header class="navbar navbar-default navbar-fixed-top header2">
     <div class="container">
 
         <div class="pull-left logo">
@@ -8,10 +8,10 @@
             </a>
         </div><!-- logo ended -->
 
-        <div class="pull-right reg-wrap">
+        <!--<div class="pull-right reg-wrap">
             <a href="#" class="h-btn">SIGN UP</a>
             <a href="#" class="h-btn">LOGIN</a>
-        </div><!-- reg-btn ended -->
+        </div>--><!-- reg-btn ended -->
 
         <nav class="navbar navbar-default pull-right main-navbar">
 
@@ -26,11 +26,11 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">FEATURE</a></li>
-                    <li><a href="#">PLANS</a></li>
-                    <li><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
-                    <li><a href="#">CONTACT US</a></li>
+                    <li id="bill_home"><a href="#">HOME</a></li>
+                    <li id="bill_features"><a href="#">FEATURES</a></li>
+                    <li id="bill_plans"><a href="#">PLANS</a></li>
+                    <li id="bill_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
+                    <li id="bill_contact"><a href="#">CONTACT US</a></li>
                 </ul>
             </div>
 
@@ -48,9 +48,9 @@
 
                 <div class="col-md-7">
                     <div class="col-sm-1"></div>
-                    <h2 class="title"><b>Sign Up</b></h2>
+                    <h2 class="title"><b style="margin-left:-15px">Sign Up</b></h2>
                     <div class="col-sm-1"> </div>
-                    <p class="text-gray-light special">Sign Up in 60 seconds, Upgrade, Downgrade or Cancel any time.</p>
+                   
 
                     <ul class="state-bar" data-ng-if="breadcrumb<=2">
                         <li data-ng-class="{ 'selected': breadcrumb>=0 }">Personal Info</li>
@@ -113,7 +113,7 @@
                                             <label for="send-us">Send us a Cheque</label>
                                         </label>-->
                                         <div class="col-sm-1"></div>
-                                        <input type="radio" name="paymentMethod" data-ng-model="params.type" value="cheque">
+                                        <input type="radio" name="paymentMethod" data-ng-model="params.type" value="cheque" ng-checked="true">
                                         <label for="send-us">&nbsp; &nbsp;Send us a Cheque</label>
                                         <div class="payment-image">
                                             <div class="send-us-card"></div>
@@ -126,7 +126,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-1"></div>
-                            <button class="btn organization-btn" type="submit"><b>PAY NOW</b></button>
+                            <button class="btn organization-btn" id="btn_bill_paynow" type="submit"><b>PAY NOW</b></button>
                         </form>
                     </div>
 
@@ -190,7 +190,7 @@
                                     <span>0120-4960600</span>
                                 </div>
                                 <div>
-                                    <label><b>India Tell Free: </b></label>
+                                    <label><b>India Toll Free: </b></label>
                                     <span>0120-4960600</span>
                                 </div>
                                 <div>
@@ -204,7 +204,7 @@
                         <div class="sales-enquiries">
                             <div class="form-group">
                                 <div class="sale-icon"></div>
-                                <div class="content-icon"><b>Sales Enquiries</b></div>
+                                <div class="content-icon"><b style="color: #289ff1;">Sales Enquiries</b></div>
                             </div>
                             <div class="form-group">
                                 <div class="from-india">
@@ -212,12 +212,12 @@
                                 </div>
                                 <div>
                                     <div>
-                                        <label><b>India Tel Free: </b></label>
+                                        <label><b>India Toll Free: </b></label>
                                         <span>1800-102-2558</span>
                                     </div>
                                     <div>
                                         <label><b>Mobile: </b></label>
-                                        <span>+9-9818882211</span>
+                                        <span>+91 9818882211</span>
                                     </div>
                                 </div>
                                 <div>
@@ -227,41 +227,117 @@
                             </div>
                         </div>
                         <!-- Request a call Back -->
+                        
                         <div class="request-call-back">
-                            <div class="form-group">
-                                <div class="title">
-                                    <b>Request a call Back</b>
+                            <form name="newForm1" class="form-horizontal" autocomplete="off" novalidate
+                                  data-ng-submit="addPersonalInfo1(newForm1.$valid)">
+                                <div class="form-group">
+                                    <div class="title">
+                                        <b>Request a call Back</b>
+                                    </div>
+                                    <p>If you have any request fill in the below details</p>
                                 </div>
-                                <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</p>
-                            </div>
-                            <div class="ionic">
-                                <div class="list list-inset">
-                                    <div class="form-group">
-                                        <label class="item item-input">
-                                            <input type="text" placeholder="Name">
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="item item-input">
-                                            <input type="text" placeholder="Company">
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="item item-input">
-                                            <input type="text" placeholder="Email">
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="item item-input">
-                                            <input type="text" placeholder="Phone">
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn submit-btn">Submit</button>
+                                <div class="ionic">
+                                    <div class="list list-inset">
+
+                                        <!--<label class="item item-input">-->
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm1.name.$invalid && (!newForm1.name.$pristine || showValid) && !newForm1.name.$focus,
+                                                                        'has-success': newForm1.name.$valid && !newForm1.name.$pristine && !newForm1.name.$focus
+                                                                    }">
+                                            <input type="text" name="name" class="form-control" id="name"
+                                                   placeholder="Name"
+                                                   data-ng-model="callparam.name"
+                                                   minlength="1"
+                                                   maxlength="40"
+                                                   alphabets-only
+                                                   required
+                                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                                        </div>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm1.name.$invalid && (!newForm1.name.$pristine || showValid) && !newForm1.name.$focus">
+                                            {{ 'Please enter alphabets only' | translate }}
+                                        </div>
+                                        <!--</label>-->
+                                        <!--<label class="item item-input">-->
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm1.company.$invalid && (!newForm1.company.$pristine || showValid) && !newForm1.company.$focus,
+                                                                        'has-success': newForm1.company.$valid && !newForm1.company.$pristine && !newForm1.company.$focus
+                                                                    }">
+                                            <input type="text" autofocus name="company" class="form-control" id="company"
+                                                   placeholder="Company"
+                                                   data-ng-model="callparam.company"
+                                                   minlength="1"
+                                                   maxlength="40"
+                                                   alphabets-only
+                                                   required
+                                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                                        </div>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm1.company.$invalid && (!newForm1.company.$pristine || showValid) && !newForm1.company.$focus">
+                                            {{ 'Please enter alphabets only' | translate }}
+                                        </div>
+                                        <!--</label>-->
+
+
+
+
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm1.email.$invalid && (!newForm1.email.$pristine || showValid) && !newForm1.email.$focus,
+                                                                        'has-success': newForm1.email.$valid && !newForm1.email.$pristine && !newForm1.email.$focus
+                                                                    }">
+                                            <!--<label class="item item-input">-->
+                                            <input type="text" autofocus name="email" class="form-control" id="email"
+                                                   placeholder="Email"
+                                                   data-ng-model="callparam.email"
+                                                   minlength="1"
+                                                   maxlength="40"
+                                                   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                                   ng-model-options="{ updateOn: 'blur' }" />
+                                        </div>
+                                        <!--</label>-->
+
+                                        <div class="text-danger"
+                                             data-ng-if="newForm1.email.$invalid && (!newForm1.email.$pristine || showValid) && !newForm1.email.$focus">
+                                            {{ 'invalid email' | translate }}
+                                        </div>
+
+
+
+                                        <!--<label class="item item-input">-->
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm1.phone.$invalid && (!newForm1.phone.$pristine || showValid) && !newForm1.phone.$focus,
+                                                                        'has-success': newForm1.phone.$valid && !newForm1.phone.$pristine && !newForm1.phone.$focus
+                                                                    }">
+                                            <input type="text" name="phone" class="form-control" id="phone"
+                                                   placeholder="Phone"
+                                                   data-ng-model="callparam.phone"
+                                                   minlength="10"
+                                                   maxlength="10"
+                                                   required
+                                                   ng-pattern="/^[0-9]*$/" />
+                                            <!--</label>-->
+
+                                        </div>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm1.phone.$invalid && (!newForm1.phone.$pristine || showValid) && !newForm1.phone.$focus">
+                                            {{ 'invalid phone' | translate }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="btn submit-btn" id="btn_signup_sub" ng-click="call_back_info()">Submit</button>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
+
+
                     </div>
                 </div>
 
@@ -271,7 +347,12 @@
         </div>
     </section>
 
-        <footer>
+
+
+
+
+
+<footer>
 
             <div id="footer-bottom" class="footer-bottom2">
                 <div class="container">

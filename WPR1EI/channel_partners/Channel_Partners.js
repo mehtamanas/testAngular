@@ -104,9 +104,9 @@ angular.module('channel_partners')
               dataSource: {
                   type: "json",
                   transport: {
-                      read: "https://dw-webservices-dev2.azurewebsites.net/ChannelPartners/GetByID/" + orgID
+                      read: "https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetByID/" + orgID
 
-                      //read:"https://dw-webservices-dev2.azurewebsites.net/ChannelPartners/GetByID/38a801a8-9c32-4b52-8433-00c059421218"
+                      //read:"https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetByID/38a801a8-9c32-4b52-8433-00c059421218"
                   },
                   pageSize: 5
 
@@ -174,20 +174,10 @@ angular.module('channel_partners')
                       width: "120px",
                      
                   }, {
-                      field: "revenue_generated",
-                      title: "Revenue Generated",
-                      width: "120px",
-                      
-                  }, {
                       field: "commission_rate",
                       title: "Commission Rate",
                       width: "120px",
                      
-                  }, {
-                      field: "revenue_generated",
-                      title: "Revenue Generated",
-                      width: "120px",
-
                   }]
           };
       }

@@ -5,14 +5,17 @@
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-dev.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
 
@@ -28,7 +31,16 @@
     });
 
     // FILTERS
-   
+    uploader1.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
+        }
+    });
+
+
+
     // FILTERS
     uploader2.filters.push({
         name: 'imageFilter',
@@ -60,14 +72,15 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md'
+            size: 'md',
+            resolve: { items: { title: "Tower" } }
         });
 
         $rootScope.$broadcast('REFRESH','tower');
     };
 
 
-
+   
     var upload1 = 0;
     var upload2 = 0;
     var upload3 = 0;
@@ -112,6 +125,8 @@ function (error) {
 
     };
 
+ 
+
     $scope.finalpost = function () {
         // TODO: Need to get these values dynamically
         var postData = {
@@ -133,15 +148,26 @@ function (error) {
             FloorRiseStartsFrom: $scope.params.FloorRiseStartsFrom
         };
 
-        //alert(postData.city);
-        //alert(postData.media_url);.
+        var fnd = 0;
+        for (var i in $scope.wings) {
+
+            if ($scope.wings[i].total_no_of_floors_new != null) {
+                fnd = 1;
+                break;
+            }
+        }
+        if (fnd == 0) {
+            alert("No Wing Mapped.....");
+            retrun;
+        }
+
 
         apiService.post("Tower/CreateTower", postData).then(function (response) {
             var loginSession = response.data;
             var towerupdate = [];
             for (var i in $scope.wings) {
                 var newTower = {};
-                newTower.total_no_of_floors = $scope.wings[i].total_no_of_floors;
+                newTower.total_no_of_floors = $scope.wings[i].total_no_of_floors_new;
                 newTower.wing_code = $scope.wings[i].wing_code;
                 newTower.wingid = $scope.wings[i].id;
                 newTower.id = loginSession.id;
@@ -163,7 +189,7 @@ function (error) {
 
         },
         function (error) {
-
+            alert(error.data.Message);
         });
 
 

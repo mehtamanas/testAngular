@@ -3345,8 +3345,8 @@ select[multiple].input-lg, textarea.input-lg {
 }
 
 .form-horizontal .form-group {
-    margin-right: -15px;
-    margin-left: -15px;
+    /*margin-right: -15px;
+    margin-left: -15px;*/
 }
 
 @media (min-width:768px) {
@@ -6934,6 +6934,8 @@ button.close {
 
 .pull-left {
     float: left !important;
+    margin-right: 15px;
+    margin-left: 2px;
 }
 
 .hide {

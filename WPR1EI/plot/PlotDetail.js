@@ -190,10 +190,10 @@
         //    dataSource: {
         //        type: "json",
         //        transport: {
-        //            read: "http://dw-webservices-dev2.azurewebsites.net/Inventory/GetMultiplePlotInventory"
+        //            read: "https://dw-webservices-uat.azurewebsites.net/Inventory/GetMultiplePlotInventory"
         //        },
         //        update: {
-        //            url: "http://dw-webservices-dev2.azurewebsites.net/Inventory/Edit_MultiplePlotInventory",
+        //            url: "https://dw-webservices-uat.azurewebsites.net/Inventory/Edit_MultiplePlotInventory",
         //            dataType: "json"
         //        },
         //        pageSize: 5,
@@ -277,11 +277,11 @@
         //    dataSource = new kendo.data.DataSource({
         //        transport: {
         //            read: {
-        //                read: "http://dw-webservices-dev2.azurewebsites.net/Inventory/GetMultiplePlotInventory",
+        //                read: "https://dw-webservices-uat.azurewebsites.net/Inventory/GetMultiplePlotInventory",
         //                dataType: "json"
         //            },
         //            update: {
-        //                url: "http://dw-webservices-dev2.azurewebsites.net/Inventory/Edit_MultiplePlotInventory",
+        //                url: "https://dw-webservices-uat.azurewebsites.net/Inventory/Edit_MultiplePlotInventory",
         //                dataType: "jsonp"
         //            },
 

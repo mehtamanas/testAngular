@@ -1,7 +1,4 @@
-﻿
-
-
-<!-- main-content ended -->
+﻿<!-- main-content ended -->
 
 
 <div id="main-content" class="col-xs-12">
@@ -23,14 +20,15 @@
                         </div>
 
                         <div class="project-detail-txt">
-                            <a ng-click="openUserPopup()" data-toggle="modal"><span class="edit-icon"></span></a>
+                           
 
-                            <div class="project-name">Project Name:  {{image.name}} </div>
-                            <div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.ZipCode}}</div>
-                            <div class="project-d02">Street:{{image.Street_1}} {{image.Street_2}}</div>
-                            <div class="project-d02">Possession Date: {{image.possesion_date}}</div>
-                            <div class="project-d03">Project Website: {{image.project_website}}</div>
-                            <div class="project-d03">Company Website:{{image.builder_website}}</div>
+                            <div class="project-name"> Name:{{first_name}} <a ng-click="openUserPopup()" data-toggle="modal"><span class="edit-icon"></span></a> </div>
+                            <!--<div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.ZipCode}}</div>-->
+                            <div class="project-d02">Role: {{role_name}}</div>
+                            <div class="project-name">Phone:{{account_phone}} </div>
+                            <div class="project-d02">Email: {{account_email}}</div>
+                            <div class="project-d02">Status: {{status}}</div>
+                            <!--<!--<div class="project-d03">Company Website:{{builder_website}}</div>-->
 
                         </div>
                     </div>
@@ -47,146 +45,175 @@
 
 
 
-                        <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
-                            <ul class="nav nav-tabs responsive-tagJS" role="tablist">
-                                <!--<li> <a aria-controls="summary" role="tab" data-toggle="tab" class="k-state-active">ESSENTIAL</a></li>-->
-                                <li class="k-state-active"><a aria-controls="summary" role="tab" data-toggle="tab"> ESSENTIAL</a></li>
+                    <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                            <!--<li> <a aria-controls="summary" role="tab" data-toggle="tab" class="k-state-active">ESSENTIAL</a></li>-->
+                            <!--<li class="k-state-active"><a aria-controls="summary" role="tab" data-toggle="tab"> ESSENTIAL</a></li>-->
 
-                                <li><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
-                                <li><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>
-                                <li><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
-                                <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                            <!--<li id="newuser_summary"><a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>-->
+                            <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
+                            <li id="newuser_role"><a aria-controls="summary" role="tab" data-toggle="tab">ROLES</a></li>
+                            <li id="newuser_device"><a aria-controls="summary" role="tab" data-toggle="tab">DEVICES</a></li>
+                            <li id="newuser_project"><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
+                            <li id="newuser_team"><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                            <li id="newuser_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTY LISTINGS</a></li>
+                            <li id="newuser_contact"><a aria-controls="summary" role="tab" data-toggle="tab">CONTACTS</a></li>
+                            <li id="newuser_audit"><a aria-controls="summary" role="tab" data-toggle="tab">AUDIT HISTORY</a></li>
+                        </ul>
 
-                            </ul>
+                        <div class="content-inner-bx">
 
-                            <div class="content-inner-bx">
+                            <div class="clearfix">
 
-                                <div class="clearfix">
+                                <div class="pull-left company-profile-half">
 
-                                    <div class="pull-left company-profile-half">
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">First Name:</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="first_name"></h4>
-                                                </label>
-                                            </div>
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">First Name:</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="first_name"></h4>
+                                            </label>
                                         </div>
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">Account Phone</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="account_phone"></h4>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">Role</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="role_name"></h4>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">City</span></div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="city"></h4>
-                                                </label>
-                                            </div>
-                                        </div>
-   
                                     </div>
-                                    <div class="pull-left company-profile-half company-profile-half-2">
 
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">Last Name</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="last_name"></h4>
-                                                </label>
-                                            </div>
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">Account Phone</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="account_phone"></h4>
+                                            </label>
                                         </div>
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">Account Email</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="account_email"></h4>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">Address</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="street_1"></h4>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="company-profile-row clearfix">
-                                            <div class="pull-left profile-row1">State</div>
-                                            <div class="pull-right profile-row2">
-                                                <label class="label-group">
-                                                    <h4 ng-bind="state"></h4>
-                                                </label>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                </div>
-                            </div>
 
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">Role</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="role_name"></h4>
+                                            </label>
+                                        </div>
+                                    </div>
 
-                            
-
-
-                            <div class="leads_group" id="record-content">
-                                <div kendo-grid k-options="ProjectGrid" selectable="true">
-
-                                </div>
-                            </div>
-
-
-                            <div class="leads_group" id="record-content">
-                                <div kendo-grid k-options="TeamGrid" selectable="true">
-
-                                </div>
-                            </div>
-
-
-                            <div class="leads_group" id="record-content">
-                                <div kendo-grid k-options="PropertyListGrid" selectable="true">
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">City</span></div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="city"></h4>
+                                            </label>
+                                        </div>
+                                    </div>
 
                                 </div>
-                            </div>
+                                <div class="pull-left company-profile-half company-profile-half-2">
 
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">Last Name</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="last_name"></h4>
+                                            </label>
+                                        </div>
+                                    </div>
 
-                            <div class="leads_group" id="record-content">
-                                <div kendo-grid k-options="PeopleGrid" selectable="true">
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">Account Email</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="account_email"></h4>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">Address</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="street_1"></h4>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">State</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="state"></h4>
+                                            </label>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
-
-
-                            <div class="leads_group" id="record-content">
-                                <div kendo-grid k-options="TaskGrid" selectable="true">
-
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
 
-                
+
+
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="RoleGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="DeviceGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <!--<div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="PeopleGrid" selectable="true">
+
+                            </div>
+                        </div>-->
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="ProjectsGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="TeamGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+                        <!--<div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="PeopleGrid" selectable="true">
+
+                            </div>
+                        </div>-->
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="TowerListGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="ContactsGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+                        <div class="leads_group" id="record-content">
+                            <div kendo-grid k-options="TaskGrid" selectable="true">
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </div>
-    </div>
-    </div>
+</div>

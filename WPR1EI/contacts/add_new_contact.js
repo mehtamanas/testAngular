@@ -8,7 +8,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload'
+        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+        queueLimit: 1
     });
 
     $scope.showProgress = false;
@@ -37,7 +38,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                 ip_address: $cookieStore.get('IP_Address'),
                 location: $cookieStore.get('Location'),
                 organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
+                User_ID: $cookieStore.get('userId'),
+                
             };
 
         AuditCreate = function (param) {
@@ -80,19 +82,24 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             class_type: "Contact",
             street_1: $scope.params.street_1,
             street_2: $scope.params.street_2,
+            mappinguser_id: $scope.params.mappinguser_id
 
            
         };
 
         apiService.post("Contact/CreateNew", postData).then(function (response) {
             var loginSession = response.data;
-            $scope.openSucessfullPopup();
             $modalInstance.dismiss();
+            $scope.openSucessfullPopup();
+            $rootScope.$broadcast('REFRESH', 'contactGrid');
 
         },
        function (error) {
 
        });
+
+
+
 
 
 
@@ -126,7 +133,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         apiService.post("ElementInfo/Create", media).then(function (response) {
             var loginSession = response.data;
-            $scope.openSucessfullPopup();
+            
 
         },
        function (error) {
@@ -175,7 +182,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         User_ID: $cookieStore.get('userId'),
         street_1: $scope.street_1,
         street_2: $scope.street_2,
-       
+        mappinguser_id: $scope.mappinguser_id
+        
 
     };
     
@@ -195,7 +203,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         $(this).parent().remove();
     });
 
-    $scope.choices = [{ id: 'choice1' }];
+    $scope.choices = [{ id: 'choice1' }]; // remove code
     $scope.addNewChoice = function (e) {
         var classname = e.currentTarget.className;
         if (classname == 'remove-field') {
@@ -210,7 +218,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
 
-    $scope.choices1 = [{ id: 'choice1' }];
+    $scope.choices1 = [{ id: 'choice1' }]; // remove code
     $scope.addNewChoice1 = function (e) {
         var classname = e.currentTarget.className;
         if (classname == 'remove-field') {
@@ -224,7 +232,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     };
 
 
-    $scope.choices2 = [{ id: 'choice1' }];
+    $scope.choices2 = [{ id: 'choice1' }]; // remove code
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
         if (classname == 'remove-field') {
@@ -263,7 +271,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
       });
   
        $scope.selectuser = function () {
-           $scope.params.user_id = $scope.user1;
+           $scope.params.mappinguser_id = $scope.user1;
            //alert($scope.params.user_id);
        };
 

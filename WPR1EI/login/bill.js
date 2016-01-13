@@ -11,11 +11,13 @@ angular.module('app.guest.login')//to chnage
       })
 
 .controller('SignupBillController',
-    function ($scope, $state, $cookieStore, apiService, $filter) {
+    function ($scope, $state, $cookieStore, apiService, $filter, $rootScope, $window) {
         $scope.breadcrumb = 2;
         // Init model
         $scope.Sub_Name = $cookieStore.get('Sub_Name');
-        
+        $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+
+        $rootScope.title = 'Dwellar./Bill';
          
         if ($cookieStore.get('Sub_Price') != "Free") {
             $scope.Sub_Price = parseFloat($cookieStore.get('Sub_Price')).toFixed(2);
@@ -51,12 +53,12 @@ angular.module('app.guest.login')//to chnage
             street_3: $cookieStore.get('Street_3'),
             city: $cookieStore.get('City'),
             state: $cookieStore.get('State'),
-            zip_code: $cookieStore.get('Zip_code'),
+            zip_code: $cookieStore.get('zip_code'),
             country:$cookieStore.get('Country')
         };
         $scope.subscription = {
             organization_id: '',
-            Subscription_Name:  $cookieStore.get('Subscription_Name')
+            Subscription_Name: $scope.Sub_Name
         };
 
         UserCreate = function (param) {
@@ -66,7 +68,7 @@ angular.module('app.guest.login')//to chnage
             userNorg = 'Register/UserWithOrg';
                 apiService.post(userNorg, param).then(function (response) {
                     var loginSession = response.data;
-                    alert("Email has been sent for Approval..!! Login to Continue...");
+                    //alert("Email has been sent for Approval..!! Login to Continue...");
 
  //                   alert("org_id" + loginSession.Organization_Id);
                     $scope.organization.Id = loginSession.Organization_Id;
@@ -94,7 +96,7 @@ angular.module('app.guest.login')//to chnage
 
             },
                 function (error) {
-                    console.log("Error" + error.state);
+                    alert("User Already Exists.....Choose Another Email-id");
                 });
         };
 
@@ -105,12 +107,12 @@ angular.module('app.guest.login')//to chnage
              
                 
          //   alert($scope.subscription.organization_id);
-          //  alert($scope.subscription.Subscription_Name);
+          //alert($scope.subscription.Subscription_Name);
 
             apiService.post(subCreate, $scope.subscription).then(function (response) {
                 var loginSession = response.data;
                
-                alert("Subscription has been Created..!!");
+                //alert("Subscription has been Created..!!");
 
             },
                 function (error) {

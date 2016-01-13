@@ -16,47 +16,47 @@
 
 </script>
 
-<div class="navbar navbar-default navbar-fixed-top">
+<header class="navbar navbar-default navbar-fixed-top header2">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true" ng-click="menuCollapsed = ! menuCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="navbar-brand">
-                <button nb-left-menu type="button" class="navbar-toggle navbar-left"
-                        data-ng-hide="!isAuthenticated || currentState == 'loggedIn.modules.inventory'">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-align-right"></i>
-                </button>
-                <img class="normal-logo" src="assets/icons/logo/normal-logo.png" data-ng-if="!isAuthenticated">
-                <img class="blue-logo" src="assets/icons/logo/blue-logo.png" data-ng-if="isAuthenticated">
-            </div>
-        </div>
-        <div class="collapse navbar-collapse" collapse="menuCollapsed">
-            <ul class="nav navbar-nav navbar-right" data-ng-if="!isAuthenticated">
-                <li>
-                    <a href="http://www.dwellar.com/" target="_blank">Home</a>
-                </li>
-                <li data-ng-class="{ 'active' : currentState == 'guest.login' }">
-                    <a ui-sref="guest.login">Login</a>
-                </li>
-                <li data-ng-class="{ 'active' : currentState == 'guest.signup_free_account' || currentState == 'guest.signup' }">
-                    <a ui-sref="guest.signup_free_account">Sign up</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" data-ng-if="isAuthenticated">
-                <li><a>Welcome Dwellar</a></li>
-                <li class="sidebar-bread-crumb"><a>|</a></li>
-                <li><a href="" data-ng-click="logout()">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 
-<section id="content">
+        <div class="pull-left logo">
+            <a href="/">
+                <img src="assets/images/logo.png" alt="" />
+            </a>
+        </div><!-- logo ended -->
+
+        <!--<div class="pull-right reg-wrap">
+            <a href="#" class="h-btn">SIGN UP</a>
+            <a href="#" class="h-btn">LOGIN</a>
+        </div>--><!-- reg-btn ended -->
+
+        <nav class="navbar navbar-default pull-right main-navbar">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li id="subscription_home"><a href="#">HOME</a></li>
+                    <li id="subscription_feature"><a href="#">FEATURES</a></li>
+                    <li id="subscription_plan"><a href="#">PLANS</a></li>
+                    <li id="subscription_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
+                    <li id="subscription_contact"><a href="#">CONTACT US</a></li>
+                </ul>
+            </div>
+
+        </nav><!-- main-navbar ended -->
+
+    </div>
+</header><!-- header ended -->
+
+<section id="content2">
     <div class="container">
 
         <h2>Select Plan</h2>
@@ -80,7 +80,7 @@
                                 </span>
                             </div>
 
-                            <a href="#" ng-click="addPersonalInfo2()" class="h03">Get Started Now</a>
+                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo2()" class="h03">BUY NOW</a>
                         </ul>
                     </div>
 
@@ -94,7 +94,7 @@
                                 </span>
                             </div>
 
-                            <a href="#" ng-click="addPersonalInfo4()" class="h03">BUY4 NOW</a>
+                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo4()" class="h03">BUY NOW</a>
                         </ul>
                     </div>
 
@@ -111,7 +111,7 @@
 
                             </div>
                             <!--<a ui-sref="signup_free_account" class="h03">BUY NOW</a>-->
-                            <a href="#" ng-click="addPersonalInfo3()" class="h03">BUY3 NOW</a>
+                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo3()" class="h03">BUY NOW</a>
                             <!--<a ui-sref="subscriptionLimit">Create Account</a>-->
                         </ul>
                     </div>
@@ -132,20 +132,20 @@
                                 <!--<span class="plan-duration plan-duration2">/month</span>-->
                             </div>
                             <!--<a ui-sref="signup_free_account" class="h03">BUY NOW</a>-->
-                            <a href="#" ng-click="addPersonalInfo1()" class="h03">Click To Connect</a>
+                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo1()" class="h03">BUY NOW</a>
                             <!--<a ui-sref="subscriptionLimit">Create Account</a>-->
                         </ul>
                     </div>
 
                 </div><!-- plan-header ended -->
 
-                <div class="plan-content" >
+                <div class="plan-content">
                     <div class="plan-row clearfix" ng-repeat="user in subscriptions">
 
                         <div class="pull-left plan-c01">{{user.resourceHeading}}</div>
-                        <div class="pull-left plan-c02" ><div ng-if="user.limit1==-1"><img src="images/plan-mark.png" /> </div> </div>
+                        <div class="pull-left plan-c02"><div ng-if="user.limit1==-1"><img src="images/plan-mark.png" /> </div> </div>
 
-                        <div class="pull-left plan-c02"  ng-if="user.limit1!=-1">{{user.limit1}} </div>
+                        <div class="pull-left plan-c02" ng-if="user.limit1!=-1">{{user.limit1}} </div>
                         <div class="pull-left plan-c02" ng-if="user.limit1==undefined">&nbsp;</div>
 
 
@@ -154,8 +154,8 @@
                         <div class="pull-left plan-c03" ng-if="user.limit2!=-1">{{user.limit2}} </div>
                         <div class="pull-left plan-c03" ng-if="user.limit2==undefined">&nbsp;</div>
 
-                        <div class="pull-left plan-c03" ><div ng-if="user.limit3==-1"><img src="images/plan-mark.png" /> </div> </div>
-                     
+                        <div class="pull-left plan-c03"><div ng-if="user.limit3==-1"><img src="images/plan-mark.png" /> </div> </div>
+
                         <div class="pull-left plan-c03" ng-if="user.limit3!=-1">{{user.limit3}} </div>
                         <div class="pull-left plan-c03" ng-if="user.limit3==undefined">&nbsp;</div>
 
@@ -163,148 +163,38 @@
 
                         <div class="pull-left plan-c03" ng-if="user.limit4!=-1">{{user.limit4}} </div>
                         <div class="pull-left plan-c03" ng-if="user.limit4==undefined">&nbsp;</div>
-
-
-                        
-                        <!--<div class="pull-left plan-c03" ng-class="{'subscription-icon':user.limit2==-1}">{{user.limit2}}</div>
-                        <div class="pull-left plan-c03" ng-class="{'subscription-icon':user.limit3==-1}">{{user.limit3}}</div>
-                        <div class="pull-left plan-c03" ng-class="{'subscription-icon':user.limit4==-1}">{{user.limit4}}</div>-->
-                    </div>
+                     </div>
                 </div>
-                    <!--<div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Create Team</div>
-                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">MLS Listing</div>
-                        <div class="pull-left plan-c02">&nbsp;</div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Campaing Management</div>
-                        <div class="pull-left plan-c02">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Builder Directory</div>
-                        <div class="pull-left plan-c02">&nbsp;</div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Data and Analytics</div>
-                        <div class="pull-left plan-c02">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Social listening and analysis</div>
-                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Content marketing</div>
-                        <div class="pull-left plan-c02">&nbsp;</div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Predictive Intelligence</div>
-                        <div class="pull-left plan-c02"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>
-                    <div class="plan-row clearfix">
-                        <div class="pull-left plan-c01">Lead tracking</div>
-                        <div class="pull-left plan-c02">&nbsp;</div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03">&nbsp;</div>
-                        <div class="pull-left plan-c03"><img src="images/plan-mark.png" alt="" /></div>
-                    </div>-->
-                </div><!-- plan-content ended -->
+                
+            </div><!-- plan-content ended -->
 
-            </div><!-- plan-sec ended -->
-        </div><!-- plan-wrap ended -->
-
-    </div>
+        </div><!-- plan-sec ended -->
+    </div><!-- plan-wrap ended -->
+   
 </section><!-- content ended -->
 
-<div class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <div class="footer-content">
-            <div class="logo">
-                <img src="assets/icons/bottom-logo.png">
+
+
+
+<footer>
+
+    <div id="footer-bottom" class="footer-bottom2">
+        <div class="container">
+
+            <a href="#">Privacy Statement</a> | <a href="#">Site Map</a>
+
+            <div class="pull-left copyright">
+                &COPY; Copyright 2000-2015 Dwellar Pvt.Ltd. All rights reserved.
             </div>
-            <div class="copyright">
-                Copyrights Dwellar @ 2015
+
+            <div class="pull-right footer-logo">
+                <img src="assets/images/footer-logo.png" alt="" />
             </div>
+
         </div>
     </div>
-</div>
+</footer><!-- footer-bottom -->
 
 
-<!--<div>
-    <div class="weather">
 
-      <div class="col-md-11 closed_main">
-          <div class="closed_sales">
-             <span class="sales_title">Subscription Module Limit</span>
-          </div>
-       <div class="col-md-11 closed_main1">
-                                        <div class="col-md-3 sales_center">
-                                            <div class="sales_center1">
-                                                <h4 class="sale_h4">Subscription1<br /><br /></h4>
-                                            </div>
-                                            <div class="info_div">
-                                                <ul ng-repeat="item in subscriptions">
-                                                    <li ng-repeat="(key, val) in item">
-                                                        {{val}}
-                                                   </li>
-                                                </ul>
-                                                <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
-                                                      data-ng-submit="addPersonalInfo1(newForm.$valid)">
-                                                    <button class="btn organization-btn" type="submit">Buy Subscription</button>
-                                                </form>
 
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 sales_web">
-                                            <div class="sales_center1">
-                                                <h4 class="sale_h4">Subscription2<br /><br /></h4>
-                                            </div>
-
-                                            <div class="info_div">
-                                                <ul ng-repeat="item in subscriptionList">
-                                                    <li ng-repeat="(key, val) in item">
-
-                                                        {{val}}
-
-                                                    </li>
-                                                </ul>
-                                                <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
-                                                      data-ng-submit="addPersonalInfo2(newForm.$valid)">
-
-                                                    <button class="btn organization-btn" type="submit">Buy Subscription</button>
-                                                    </form>
-</div>
-
-                                        </div>
-                                    </div>
-
-      </div>
-   </div>
-
-</div>-->

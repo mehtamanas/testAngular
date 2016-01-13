@@ -7,7 +7,7 @@
                         <div class="row">
                             
                             <div class="col-md-12">
-                                <h2 class="pg-inner-title">Organization Profile</h2>
+                                <h2 class="pg-inner-title">Organization</h2>
                             </div>
                             
                         </div>                        
@@ -20,7 +20,7 @@
                         <div class="company-profile-h">
                             
                             <div class="clearfix">
-                                <a ng-click="openEditOrgPopup()" data-toggle="modal"><span class="edit-icon"></span></a>
+                                <a ng-click="openEditOrgPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a>
                                 <div class="pull-left company-profile-photo">
                                     <img src="{{data.media_url}}" alt="" width="218" height="160" class="img-responsive" />
                                    
@@ -68,47 +68,93 @@
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Organization Name:</div> 
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="name"></h5>
+                                        <label class="label-group"  ng-bind="name">
+                                            <!--<h5 ng-bind="name"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Organization ID:</div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="organization_id"></h5>
+                                        <label class="label-group" ng-bind="organization_id">
+                                            <<!--h5 ng-bind="organization_id"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Divisions:</div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="divisions"></h5>
+                                        <label class="label-group" ng-bind="divisions">
+                                            <!--<h5 ng-bind="divisions"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
-                                    <div class="pull-left profile-row1">Address:<span>Primary</span></div>
+                                    <div class="pull-left profile-row1">Street 1<span>Primary</span></div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="address"></h5>
+                                        <label class="label-group"  ng-bind="street_1">
+                                            <!--<h5 ng-bind="address"></h5>-->
                                         </label>
                                     </div>
                                 </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Street2<span>Primary</span></div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group" ng-bind="street_2">
+                                            <!--<h5 ng-bind="address"></h5>-->
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Country<span>Primary</span></div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group" ng-bind="country">
+                                            <!--<h5 ng-bind="address"></h5>-->
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">State<span>Primary</span></div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group" ng-bind="state">
+                                            <!--<h5 ng-bind="address"></h5>-->
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">City<span>Primary</span></div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group" ng-bind="city">
+                                            <!--<h5 ng-bind="address"></h5>-->
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Postal Code<span>Primary</span></div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group" ng-bind="zip_code">
+                                            <!--<h5 ng-bind="address"></h5>-->
+                                        </label>
+                                    </div>
+                                </div>
+
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Email:<span>Primary</span></div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="email"></h5>
+                                        <label class="label-group" ng-bind="email">
+                                            <!--<h5 ng-bind="email"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Phone:<span>Primary</span></div> 
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
+                                        <label class="label-group" ng-bind="phone_no">
                                             <h5 ng-bind="phone_no"></h5>
                                         </label>
                                     </div>
@@ -116,8 +162,8 @@
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Listed in Builder Directory:</div> 
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="list_in_builder_directory"></h5>
+                                        <label class="label-group" ng-bind="list_in_builder_directory">
+                                            <!--<h5 ng-bind="list_in_builder_directory"></h5>-->
                                         </label>
                                     </div>
                                 </div>
@@ -127,40 +173,40 @@
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">PAN No. :</div> 
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="pan_no"></h5>
+                                        <label class="label-group" ng-bind="pan_no">
+                                            <!--<h5 ng-bind="pan_no"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">TAN No. :</div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="tan_no"></h5>
+                                        <label class="label-group" ng-bind="tan_no">
+                                            <!--<h5 ng-bind="tan_no"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Service Tax No. :</div>	  
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="service_tax_no"></h5>
+                                        <label class="label-group" ng-bind="service_tax_no">
+                                            <!--<h5 ng-bind="service_tax_no"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">CIN No. :</div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="cin_no"></h5>
+                                        <label class="label-group" ng-bind="cin_no">
+                                            <!--<h5 ng-bind="cin_no"></h5>-->
                                         </label>
                                     </div>
                                 </div>
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">First month of financial year:</div>
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="first_month_of_financial_year"></h5>
+                                        <label class="label-group" ng-bind="first_month_of_financial_year">
+                                            <!--<h5 ng-bind="first_month_of_financial_year"></h5>-->
                                         </label>
                                      <!--<span class="dropdown-i"></span>-->
                                     </div>
@@ -168,16 +214,16 @@
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Language:</div>	
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <h5 ng-bind="language"></h5>
+                                        <label class="label-group" ng-bind="language">
+                                            <!--<h5 ng-bind="language"></h5>-->
                                         </label>
                                     </div>
                                 </div>                                
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Time Zone:</div> 
                                     <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                        <h5 ng-bind="timezone"></h5>
+                                        <label class="label-group" ng-bind="timezone">
+                                        <!--<h5 ng-bind="timezone"></h5>-->
                                         </label>
                                     </div>
                                 </div>

@@ -7,35 +7,35 @@
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         $rootScope.title = 'Dwellar./TeamDetails';
 
-        //Audit log start
-        $scope.params = {
+       // //Audit log start
+       // $scope.params = {
 
-            device_os: "windows10",
-            device_type: "mobile",
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "TeamDetail",
-            action_id: "TeamDetail View",
-            details: "TeamDetail",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
+       //     device_os: "windows10",
+       //     device_type: "mobile",
+       //     device_mac_id: "34:#$::43:434:34:45",
+       //     module_id: "TeamDetail",
+       //     action_id: "TeamDetail View",
+       //     details: "TeamDetail",
+       //     application: "angular",
+       //     browser: $cookieStore.get('browser'),
+       //     ip_address: $cookieStore.get('IP_Address'),
+       //     location: $cookieStore.get('Location'),
+       //     organization_id: $cookieStore.get('orgID'),
+       //     User_ID: $cookieStore.get('userId')
+       // };
 
 
-        AuditCreate = function (param) {
+       // AuditCreate = function (param) {
 
-            apiService.post("AuditLog/Create", param).then(function (response) {
-                var loginSession = response.data;
+       //     apiService.post("AuditLog/Create", param).then(function (response) {
+       //         var loginSession = response.data;
 
-            },
-       function (error) {
+       //     },
+       //function (error) {
 
-       });
-        };
-        AuditCreate($scope.params);
+       //});
+       // };
+       // AuditCreate($scope.params);
 
         //end
 
@@ -132,7 +132,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Team/GetProjectByTeam/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetProjectByTeam/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
 
@@ -225,7 +225,7 @@
 
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Team/GetUsersByTeam/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetUsersByTeam/" + $scope.seletedCustomerId
 
                 },
 
@@ -289,9 +289,9 @@
                 type: "json",
                 transport: {
 
-                    //read: "http://dw-webservices-dev2.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                    //read: "https://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
 
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Team/GetTeamPropertyList/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamPropertyList/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
                 schema: {
@@ -358,10 +358,10 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    ////  read: "http://dw-webservices-dev2.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //  // read:" https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    //  read: " https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Team/GetPeopleByTeam/" + $scope.seletedCustomerId
+                    ////  read: "https://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                    //  // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    //  read: " https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetPeopleByTeam/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
                 schema: {
@@ -416,7 +416,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Team/GetTaskByTeam/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTaskByTeam/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,

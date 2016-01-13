@@ -2,171 +2,106 @@
 /**
  * Created by dwellarkaruna on 27/10/15.
  */
-
 angular.module('project')
     .controller('projectListController' ,
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope)
+    {
+          $rootScope.title = 'Dwellar./Projects';
+          var userID = $cookieStore.get('userId');
+          //alert($cookieStore.get('userId'));
 
-        $rootScope.title = 'Dwellar./Projects';
-        // console.log('projectListController');
+            $('#btnSave').hide();
+            $('#iconEdit').hide();
+            $('#btnAdd').hide();
 
-        $('#btnSave').hide();
-        $('#iconEdit').hide();
-        $('#btnAdd').hide();
-
-
-
-        security.isAuthorized().then(function (response) {
-            nav = response;
-            console.log(nav);
-            if (nav.length > 0) {
-
-                for (i = 0; i < nav.length; i++) {
-                    if (nav[i].resource === "Projects") {
-                        $rootScope.projects = nav[i];
-
-                    }
-                    if (nav[i].resource === "Users") $rootScope.users = nav[i];
-                    if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
-
-                    if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
-                    if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
-                    if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
-                    if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
-                    if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
-                    if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
-                    if (nav[i].resource === "Builders") $rootScope.support = nav[i];
-                    if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
-                    if (nav[i].resource === "Support") $rootScope.support = nav[i];
-                    if (nav[i].resource === "Property") $rootScope.property = nav[i];
-                    if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
-                    if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
-                    if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
-
-
-
-
-                }
-            }
-
-
-
-            if ($rootScope.projects.write) {
-                event.preventDefault();
-                $('#btnSave').show();
-                $('#iconEdit').hide();
-                $('#btnAdd').hide();
-            }
-
-
-
-        });
-
-        //   var loginSession1;
-        var orgID = $cookieStore.get('orgID');
-        //$scope.delete1 = function (id) {
-        //    apiService.remove('team/Delete/' + id).then(function (response) {
-        //        $scope.loginSession2 = response.data;
-        //        //alert('Login Session : ' + loginSession.user_id);
-        //        $state.go('loggedIn.modules.team');
-
-        //    },
-        //          function (error) {
-        //              //alert('Hi1');
-        //              // deferred.reject(error);
-        //              return deferred.promise;
-        //          });
-
-        //};
-
-        //var j = 0;
-        //$scope.editnew = function (id) {
-        //    $cookieStore.put('teamid', id);
-        //    apiService.get('team/Get?orgid=' + orgID).then(function (response) {
-        //        $scope.loginSession2 = response.data;
-        //        //alert('Login Session : ' + loginSession.user_id);
-        //        $state.go('loggedIn.modules.team.add_new');
-
-        //    },
-        //     function (error) {
-        //         alert('Hi5');
-        //         // deferred.reject(error);
-        //         return deferred.promise;
-        //     });
-        //};
-        //apiService.get('team/Get?orgid=' + orgID).then(function (response) {
-        //    $scope.loginSession1 = response.data;
-        //    //alert('Login Session : ' + loginSession.user_id);
-        //},
-
-
-
-        //function (error) {
-        //    alert('Hi3');
-        //    // deferred.reject(error);
-        //    return deferred.promise;
-        //});
-
-        $scope.goAddNew = function () {
-            $cookieStore.put('projectid', '');
-            $state.go('app.projects.add_new_project');
-        };
-        //$scope.goEdit = function () {
-        //    $state.go('loggedIn.modules.team.update');
-        //};
-
-
-        //Audit log start															
-        $scope.params =
+            security.isAuthorized().then(function (response)
             {
-                device_os: $cookieStore.get('Device_os'),
-                device_type: $cookieStore.get('Device'),
-                device_mac_id: "34:#$::43:434:34:45",
-                module_id: "Contact",
-                action_id: "Contact View",
-                details: "ProjectView",
-                application: "angular",
-                browser: $cookieStore.get('browser'),
-                ip_address: $cookieStore.get('IP_Address'),
-                location: $cookieStore.get('Location'),
-                organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
-            };
+                nav = response;
+                console.log(nav);
+                if (nav.length > 0)
+                {
 
-        AuditCreate = function (param) {
-            apiService.post("AuditLog/Create", param).then(function (response) {
-                var loginSession = response.data;
-            },
-       function (error) {
+                    for (i = 0; i < nav.length; i++)
+                    {
+                            if (nav[i].resource === "Projects")
+                            {
+                                $rootScope.projects = nav[i];
+                            }
+                        if (nav[i].resource === "Users") $rootScope.users = nav[i];
+                        if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
+                        if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
+                        if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
+                        if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
+                        if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
+                        if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
+                        if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
+                        if (nav[i].resource === "Builders") $rootScope.support = nav[i];
+                        if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
+                        if (nav[i].resource === "Support") $rootScope.support = nav[i];
+                        if (nav[i].resource === "Property") $rootScope.property = nav[i];
+                        if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
+                        if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
+                        if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
+                  }
+              }
 
-       });
-        };
-        AuditCreate($scope.params);
+                if ($rootScope.projects.write)
+                {
+                    event.preventDefault();
+                    $('#btnSave').show();
+                    $('#iconEdit').hide();
+                    $('#btnAdd').hide();
+                }
+          });
 
-        //end
+                    var orgID = $cookieStore.get('orgID');
+                    $scope.goAddNew = function ()
+                    {
+                        $cookieStore.put('projectid', '');
+                        $state.go('app.projects.add_new_project');
+                    };
 
-        // Kendo code
-        $scope.$on('refreshMainGrid',function(event){
-            $scope.mainGridOptions.dataSource.transport.read();
-    
-    });
-     
-       
+                //Audit log start															
+                $scope.params =
+                    {
+                        device_os: $cookieStore.get('Device_os'),
+                        device_type: $cookieStore.get('Device'),
+                        device_mac_id: "34:#$::43:434:34:45",
+                        module_id: "Contact",
+                        action_id: "Contact View",
+                        details: "ProjectView",
+                        application: "angular",
+                        browser: $cookieStore.get('browser'),
+                        ip_address: $cookieStore.get('IP_Address'),
+                        location: $cookieStore.get('Location'),
+                        organization_id: $cookieStore.get('orgID'),
+                        User_ID: $cookieStore.get('userId')
+                    };
 
-        $scope.mainGridOptions = {
+                AuditCreate = function (param)
+                {
+                    apiService.post("AuditLog/Create", param).then(function (response)
+                    {
+                        var loginSession = response.data;
+                    },
+                   function (error)
+                   {
+
+                   });
+               };
+                AuditCreate($scope.params);
+            //end
+
+       //grid fuctionality start
+        $scope.projectGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: "http://dw-webservices-dev2.azurewebsites.net/Project/GetCount/" + orgID
-                   // read: "http://dw-webservices-dev2.azurewebsites.net/Organization/GetProjectDetails?id=" + orgID
-                    read: "https://dw-webservices-dev2.azurewebsites.net/Organization/GetProjectDetails?id=" + orgID
+                   // read: "https://dw-webservices-uat.azurewebsites.net/Organization/GetProjectDetails?id=" + orgID
+                    read: "https://dw-webservices-uat.azurewebsites.net/Organization/GetProjectDetails?id=" + userID
     
                 },
                 pageSize: 5
-
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -181,14 +116,12 @@ angular.module('project')
             },
             columns: [
                 {
-                    //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
-                    //"<span style='padding-left:10px' class='property-photo'> </span>",
                     template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                    title: "COLUMN",
+                    title: "SELECT",
                     width: "60px",
-                    attributes: {
+                    attributes:
+                      {
                         "class": "UseHand",
-
                     }
                 },
 
@@ -197,61 +130,65 @@ angular.module('project')
                      "<span style='padding-left:10px' class='property-photo'> </span>",
                      title: "Logo",
                      width: "120px",
-                     attributes: {
+                     attributes:
+                       {
                          "class": "UseHand",
-
-                     }
+                       }
                  },
-
-                 
                {
-                   //  template: "<img height='40px' width='40px'  class='user-photo' src='assets/images/image-2.jpg' />" +
-                   //"<span style='padding-left:10px' class='customer-name'>#: first_name #</span>",
-
-
                    field: "name",
-                   title: "Name",
+                   title: "NAME",
                    width: "120px",
-                   attributes: {
+                   attributes:
+                    {
                        "class": "UseHand",
-
-                   }
+                    }
                }, {
                    field: "address",
-                   title: "Location",
+                   title: "LOCATION",
                    width: "120px",
-                   attributes: {
+                   attributes:
+                     {
                        "class": "UseHand",
-
-                   }
+                     }
                },{
                    field: "unitTypes",
-                   title: "unitTypes",
+                   title: "UNIT TYPES",
                    width: "120px",
-                   attributes: {
+                   attributes:
+                     {
                        "class": "UseHand",
-
-                   }
+                     }
                },
                 {
                     field: "unitCount",
-                   title: "Total Units",
+                   title: "TOTAL UNITS",
                    width: "120px",
-                   attributes: {
+                   attributes:
+                    {
                        "class": "UseHand",
-
                    }
                }, {
                    field: "available",
-                   title: "Available Units",
+                   title: "AVAILABLE UNITS",
                    width: "120px",
-                   attributes: {
+                   attributes:
+                     {
                        "class": "UseHand",
-
-                   }
+                     }
                }, {
                    field: "area",
-                   title: "Area",
+                   title: "AREA",
+                   width: "120px",
+                   attributes:
+                     {
+                       "class": "UseHand",
+                     }
+               },
+
+               {
+                   field: "possession_date",
+                   title: "POSSESSION DATE",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
@@ -261,36 +198,15 @@ angular.module('project')
                
                {
                    field: "price",
-                   title: "Price",
+                   title: "PRICE",
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
 
-                   }
+                   },
+
                }]
         };
-        //$scope.Fruits = [{
-        //    Id: 1,
-        //    Name: 'ACTIONS'
-        //}, {
-        //    Id: 2,
-        //    Name: 'DELETE'
-        //}, {
-        //    Id: 3,
-        //    Name: 'EDIT'
-        //}
-        //];
-
-        //$scope.GetValue = function (fruit) {
-
-        //    var fruitId = $scope.ddlFruits;
-        //    var fruitName = $.grep($scope.Fruits, function (fruit) {
-        //        return fruit.Id == fruitId;
-        //    })[0].Name;
-
-        //    $cookieStore.put('Selected Text', fruitName);
-        //    // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
-        //}
 
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
@@ -351,6 +267,16 @@ angular.module('project')
             });
 
         }
+        function clearFilters() {
+            var gridData = $("#peopleGrid").data("kendoGrid");
+            gridData.dataSource.filter({});
+        }
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'projectGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
 
         $scope.openProjectPopup = function () {
            // alert("hi");
@@ -362,10 +288,7 @@ angular.module('project')
                 size: 'md'
             });
         };
-        function clearFilters() {
-            var gridData = $("#peopleGrid").data("kendoGrid");
-            gridData.dataSource.filter({});
-        }
+       
     }
 );
 

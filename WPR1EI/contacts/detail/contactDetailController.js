@@ -6,7 +6,9 @@ angular.module('contacts')
     {
         console.log('ContactDetailControllerdm');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+        
 
+        $rootScope.title = 'Dwellar./ContactDetails';
      
         
     ////Audit log start															
@@ -56,7 +58,7 @@ angular.module('contacts')
                 {
                     type: "json",
                     transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetDocument/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetDocument/" + $scope.seletedCustomerId
                 },
                 schema: {
                     model: {
@@ -106,9 +108,9 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: "http://dw-webservices-dev2.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //read: "http://dw-webservices-dev2.azurewebsites.net//PropertyListing/GetByID/" + $scope.seletedCustomerId
-                    read: "http://dw-webservices-dev2.azurewebsites.net/PropertyListing/GetPropertyMediaByContact/" + $scope.seletedCustomerId
+                    //read: "https://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                    //read: "https://dw-webservices-uat.azurewebsites.net//PropertyListing/GetByID/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/PropertyListing/GetPropertyMediaByContact/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -168,7 +170,7 @@ angular.module('contacts')
 
         //        type: "json",
         //        transport: {
-        //            read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetPayment/" + $scope.seletedCustomerId
+        //            read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetPayment/" + $scope.seletedCustomerId
 
         //        },
 
@@ -225,13 +227,13 @@ angular.module('contacts')
 
         //    }]
     ////////////};
-        alert($scope.seletedCustomerId);
+      //  alert($scope.seletedCustomerId);
         $scope.PaymentGrid = {
             dataSource: {
 
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Payment/GetByPaymentId?contact_id=" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Payment/GetByPaymentId?contact_id=" + $scope.seletedCustomerId
 
                 },
 
@@ -290,7 +292,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/ToDoItem/GetMultipleTaskById/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/ToDoItem/GetMultipleTaskById/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -358,7 +360,7 @@ angular.module('contacts')
                 pageSize: 20,
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetEngagement/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetEngagement/" + $scope.seletedCustomerId
                 },
                 schema: {
                     model: {
@@ -405,7 +407,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Notes/GetByID/" + $scope.seletedCustomerId
+                    read: "https://dw-webservices-uat.azurewebsites.net/Notes/GetByID/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -435,10 +437,10 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    ////  read: "http://dw-webservices-dev2.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //  // read:" https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    //  read: " https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/" + $scope.seletedCustomerId
+                    ////  read: "https://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                    //  // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    //  read: " https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
 
@@ -490,8 +492,8 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-dev2.azurewebsites.net/Contact/GetAssignTo/" + $scope.seletedCustomerId
-                    // read:" https://dw-webservices-dev2.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetAssignTo/" + $scope.seletedCustomerId
+                    // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
                 },
                 pageSize: 5
 
@@ -531,7 +533,6 @@ angular.module('contacts')
                 animation: true,
                 templateUrl: 'contacts/edit_contact.tpl.html',
                 backdrop: 'static',
-
                 controller: EditContactPopUpController,
                 size: 'md'
             });
@@ -546,6 +547,20 @@ angular.module('contacts')
                 templateUrl: 'contacts/addpayment.tpl.html',
                 backdrop: 'static',
                 controller: PaymentUpController,
+                size: 'md'
+
+            });
+
+        };
+
+
+        $scope.openNewDocument = function () {
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/add_new_doc.tpl.html',
+                backdrop: 'static',
+                controller: AddNewDocumentController,
                 size: 'md'
 
             });
