@@ -30,7 +30,7 @@
                             </div>
                             <div class="text-danger"
                                  data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
-                                {{ 'Please enter valid floor name' | translate }}
+                                {{ 'Enter valid value for no of units' | translate }}
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="text-danger"
                                  data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
-                                {{ 'Please enter valid floor name' | translate }}
+                                {{ 'Enter valid value for floor name' | translate }}
                             </div>
                         </div>
                     </div>
@@ -182,6 +182,8 @@
                                 <div class="progress-bar" role="progressbar"
                                      ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                             </div>
+
+                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                             <div class="modal-btn-wrap3 clearfix">
                                 <button type="submit" id="btn_addnewfloor_save" class="f-btn" ng-click="showProgress=true;submit();">

@@ -1,11 +1,11 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var import_usersController = function ($scope, $modalInstance, uploadService, FileUploader) {
+var import_usersController = function ($scope, $modalInstance,apiService, uploadService, FileUploader) {
   
     var uploader = $scope.uploader = new FileUploader({
-        //url: 'https://dw-webservices-uat.azurewebsites.net/User/Upload'
-        url:'https://dw-webservices-uat.azurewebsites.net/User/Upload'
+       
+        url:apiService.baseUrl +'User/Upload'
     });
 
     $scope.showProgress = false;

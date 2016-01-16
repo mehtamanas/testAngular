@@ -3,8 +3,8 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
     console.log('AddNewDocumentController');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+        
     });
 
     $scope.showProgress = false;
@@ -20,6 +20,13 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
     });
 
     // CALLBACKS
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         var uploadResult = response[0];
@@ -50,6 +57,12 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
 
         });
     };
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+
+        console.log("UploadCancelled");
+    }
 
 
     $scope.openSucessfullPopup = function () {

@@ -221,8 +221,8 @@ angular.module('newuser')
               dataSource: {
                   type: "json",
                   transport: {
-                     // read: "https://dw-webservices-uat.azurewebsites.net/User/GetCount/" + orgID
-                      read: "https://dw-webservices-uat.azurewebsites.net/User/GetCount/" + userID
+                     
+                      read: apiService.baseUrl + "User/GetCount/" + userID
                   },
                   pageSize: 5
 
@@ -414,14 +414,7 @@ angular.module('newuser')
 
 
 
-          // Kendo code
-          //$scope.mainGridOptions = {
-          //    dataSource: {
-          //        type: "json",
-          //        transport: {
-          //            read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
-          //        },
-          //        pageSize: 5
+          
 
           //        //group: {
           //        //    field: 'sport'

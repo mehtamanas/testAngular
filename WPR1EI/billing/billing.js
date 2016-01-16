@@ -46,7 +46,7 @@ angular.module('billing')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Billing/GetByID/" + orgID
+                    read: apiService.baseUrl +"Billing/GetByID/" + orgID
                 },
                 pageSize: 2,
 
@@ -81,17 +81,32 @@ angular.module('billing')
                 title: "Bill Date",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                 
             }, {
                 field: "due_date",
                 title: "Due Date",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                
             }, {
                 field: "invoice",
                 title: "Invoice",
                 width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
 
             }]
         };

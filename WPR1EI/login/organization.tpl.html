@@ -48,7 +48,7 @@
 
                 <div class="col-md-7">
                     <div class="col-sm-1"></div>
-                    <h2 class="title"><b style="margin-left:-15px">Sign Up</b></h2>
+                    <h2 class="title"><b>Sign Up</b></h2>
                     <div class="col-sm-1"> </div>
                   
 
@@ -228,7 +228,7 @@
                                             </div>-->
                                             <select ng-model="city1" id="orgz_city" ng-change="selectcity()" class="dropdown form-control" required>
                                                 <option value="" selected>City</option>
-                                                <option ng-repeat="city in cities | filter:filterExpression"
+                                                <option ng-repeat="city in cities| filter:filterExpression | orderBy:'city_name'"
                                                         value="{{city.city_id}}">
                                                     {{city.city_name}}
                                                 </option>
@@ -272,13 +272,13 @@
                             <div class="
 
                     <div class=" col-sm-1"></div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button class="btn organization-btn" id="btn_signup" type="submit" ng-click="signup()"><b>< Back</b></button>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           
 
 
@@ -508,7 +508,7 @@
     <div id="footer-bottom" class="footer-bottom2">
         <div class="container">
 
-            <a href="#">Privacy Statement</a> | <a href="#">Site Map</a>
+            <!--<a href="#">Privacy Statement</a> | <a href="#">Site Map</a>-->
 
             <div class="pull-left copyright">
                 &COPY; Copyright 2000-2015 Dwellar Pvt.Ltd. All rights reserved.

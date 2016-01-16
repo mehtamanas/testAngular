@@ -155,8 +155,8 @@ angular.module('team')
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
-                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + userID
+                    //read: apiService.baseUrl +"Team/GetTeamDetails/" + orgID
+                    read: apiService.baseUrl +"Team/GetTeamDetails/" + userID
                     
                 },
                 pageSize: 5
@@ -185,7 +185,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-                                   
+                                   "style": "text-align:center"
                                }
                            }, {
                                field: "User_Count",
@@ -193,7 +193,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -202,7 +202,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -211,7 +211,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -220,7 +220,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -229,7 +229,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }]

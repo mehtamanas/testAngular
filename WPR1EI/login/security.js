@@ -89,7 +89,7 @@ angular.module('security', [
                 });
             },
             function (error) {
-                alert("Invalid Email Address or Passowrd. Please try again");
+                alert(error.data.Message);
                 deferred.reject(error);
                 return deferred.promise;
             });

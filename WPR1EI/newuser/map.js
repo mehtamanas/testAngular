@@ -110,7 +110,7 @@ angular.module('newuser')//to chnage
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
+                    read: apiService.baseUrl + "Team/GetTeamDetails/" + orgID
                 },
                 pageSize: 5
 
@@ -138,6 +138,7 @@ angular.module('newuser')//to chnage
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
+                                   "style": "text-align:center"
                                    
                                }
                            }, {
@@ -146,6 +147,7 @@ angular.module('newuser')//to chnage
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
+                                   "style": "text-align:right"
 
                                }
 
@@ -155,7 +157,7 @@ angular.module('newuser')//to chnage
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -164,7 +166,7 @@ angular.module('newuser')//to chnage
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -173,7 +175,7 @@ angular.module('newuser')//to chnage
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }, {
@@ -182,7 +184,7 @@ angular.module('newuser')//to chnage
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-
+                                   "style": "text-align:right"
                                }
 
                            }]

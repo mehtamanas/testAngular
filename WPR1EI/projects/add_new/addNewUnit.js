@@ -12,20 +12,20 @@
     $scope.organization_id= $cookieStore.get('orgID');
     $scope.User_ID = $cookieStore.get('userId');
     $rootScope.title = 'Dwellar./projects';
-    $scope.media1 = items.Image_Url_unit1;
+    $scope.media1 = items.Image_Url;
     $scope.media2 = items.Image_Url_Unit2;
 
-    if (items.unit_id == undefined) $scope.title = "Add New Unit";
-    else $scope.title = "Edit Unit";
+    if (items.unit_id == undefined) $scope.title = "Add New Unit Type";
+    else $scope.title = "Edit Unit Type";
 
 
      uploader = $scope.uploader = new FileUploader({
-         url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-         queueLimit: 1
+        url: apiService.uploadURL,
+         
     });
      uploader1 = $scope.uploader1 = new FileUploader({
-         url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-         queueLimit: 1
+        url: apiService.uploadURL,
+         
     });
 
     $scope.showProgress = false;
@@ -50,6 +50,19 @@
     var upload1 = 0;
     var upload2 = 0;
     // CALLBACKS
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+    uploader1.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader1.queue.length > 1) {
+            uploader1.removeFromQueue(0);
+        }
+    }
+
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
     var   uploadResult = response[0];
         // post image upload call the below api to update the database
@@ -219,6 +232,13 @@
         }
     }
 
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+        uploader1.cancelAll();
+        
+        console.log("UploadCancelled");
+    }
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {
         console.log('Unable to upload file.');

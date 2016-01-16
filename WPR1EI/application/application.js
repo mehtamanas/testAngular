@@ -95,8 +95,8 @@
             dataSource: {
                 type: "json",
                 transport: {
-                   // read: "https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetListorgID/38a801a8-9c32-4b52-8433-00c059421218/Applied"
-                    read: "https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetListorgID/" + orgID + "/Applied"
+                   // read: apiService.baseUrl +"ChannelPartners/GetListorgID/38a801a8-9c32-4b52-8433-00c059421218/Applied"
+                    read: apiService.baseUrl +"ChannelPartners/GetListorgID/" + orgID + "/Applied"
                 },
                 pageSize: 5
 
@@ -124,6 +124,7 @@
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
+                                   "style": "text-align:center"
 
                                }
                            }, {
@@ -132,6 +133,7 @@
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
+                                   "style": "text-align:center"
 
                                }
 
@@ -141,6 +143,7 @@
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
+                                   "style": "text-align:center"
 
                                }
 
@@ -152,6 +155,7 @@
                                 width: "120px",
                                 attributes: {
                                     "class": "UseHand",
+                                    "style": "text-align:center"
 
                                 }
 
@@ -165,6 +169,7 @@
                                attributes: {
                                    "class": "UseHand",
                                    format: '{0:dd/MM/yyyy}',
+                                   "style": "text-align:right"
                                }
 
                            },
@@ -174,6 +179,7 @@
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
+                                   "style": "text-align:center"
 
                                }
                            }

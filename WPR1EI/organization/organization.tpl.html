@@ -30,12 +30,12 @@
 
                                     <div class="profile-info-btn clearfix">
                                         User Licenses - In Use 
-                                        <span class="pull-right">{{user_count}}</span>
+                                        <span class="pull-right">{{user_count}}/{{total_user_lisence}}</span>
                                     </div>
 
                                     <div class="profile-info-btn clearfix">
                                         Projects - In Use 
-                                        <span class="pull-right">{{project_count}}</span>
+                                        <span class="pull-right">{{project_count}}/{{total_project_count}}</span>
                                     </div>
 
                                     <div >
@@ -218,7 +218,15 @@
                                             <!--<h5 ng-bind="language"></h5>-->
                                         </label>
                                     </div>
-                                </div>                                
+                                </div>  
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Year:</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group" ng-bind="fiscal_year">
+                                            <!--<h5 ng-bind="language"></h5>-->
+                                        </label>
+                                    </div>
+                                </div>                              
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Time Zone:</div> 
                                     <div class="pull-right profile-row2">

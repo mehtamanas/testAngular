@@ -97,8 +97,7 @@ angular.module('project')
             dataSource: {
                 type: "json",
                 transport: {
-                   // read: "https://dw-webservices-uat.azurewebsites.net/Organization/GetProjectDetails?id=" + orgID
-                    read: "https://dw-webservices-uat.azurewebsites.net/Organization/GetProjectDetails?id=" + userID
+                    read: apiService.baseUrl + "Organization/GetProjectDetails?id=" + userID
     
                 },
                 pageSize: 5
@@ -117,7 +116,7 @@ angular.module('project')
             columns: [
                 {
                     template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                    title: "SELECT",
+                    title: "<input id='checkAll', type='checkbox', class='check-box' />",
                     width: "60px",
                     attributes:
                       {
@@ -141,7 +140,8 @@ angular.module('project')
                    width: "120px",
                    attributes:
                     {
-                       "class": "UseHand",
+                        "class": "UseHand",
+                        "style": "text-align:center"
                     }
                }, {
                    field: "address",
@@ -149,7 +149,8 @@ angular.module('project')
                    width: "120px",
                    attributes:
                      {
-                       "class": "UseHand",
+                         "class": "UseHand",
+                         "style": "text-align:center"
                      }
                },{
                    field: "unitTypes",
@@ -157,7 +158,8 @@ angular.module('project')
                    width: "120px",
                    attributes:
                      {
-                       "class": "UseHand",
+                         "class": "UseHand",
+                         "style": "text-align:center"
                      }
                },
                 {
@@ -166,7 +168,8 @@ angular.module('project')
                    width: "120px",
                    attributes:
                     {
-                       "class": "UseHand",
+                        "class": "UseHand",
+                        "style":"text-align:right"
                    }
                }, {
                    field: "available",
@@ -174,7 +177,8 @@ angular.module('project')
                    width: "120px",
                    attributes:
                      {
-                       "class": "UseHand",
+                         "class": "UseHand",
+                         "style": "text-align:right"
                      }
                }, {
                    field: "area",
@@ -182,7 +186,8 @@ angular.module('project')
                    width: "120px",
                    attributes:
                      {
-                       "class": "UseHand",
+                         "class": "UseHand",
+                         "style": "text-align:right"
                      }
                },
 
@@ -192,6 +197,7 @@ angular.module('project')
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
+                       "style": "text-align:right"
 
                    }
                },
@@ -202,6 +208,7 @@ angular.module('project')
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
+                       "style": "text-align:right"
 
                    },
 

@@ -117,7 +117,7 @@
         };
 
         if ($scope.seletedCustomerId !== '') {
-            //GetUrl = "https://dw-webservices-uat.azurewebsites.net/Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
+            //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
            
         $scope.goToDocument = function () {
             $state.go('loggedIn.modules.project.document');
@@ -207,7 +207,7 @@
 
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Project/GetUsersInProject/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Project/GetUsersInProject/" + $scope.seletedCustomerId
 
                 },
 
@@ -232,24 +232,52 @@
             columns: [{
                 field: "first_name",
                 title: "First Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+                    }
+
             }, {
                 field: "last_name",
                 title: "Last Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
+
+
             }, {
                 field: "account_email",
                 title: "Email",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
             }, {
                 field: "account_phone",
                 title: "Phone",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:right"
+                   }
             },
             {
                 field: "account_country",
                 title: "Country",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
             }]
         };
 
@@ -257,7 +285,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Project/GetProjectTeamList/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Project/GetProjectTeamList/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -280,12 +308,22 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
             },
             {
                 field: "description",
                 title: "Description",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
             }]
         };
 
@@ -294,7 +332,7 @@
                 type: "json",
                 transport: {
 
-                    read: "https://dw-webservices-uat.azurewebsites.net/Project/GetProjectPropertyList/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Project/GetProjectPropertyList/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
 
@@ -316,24 +354,50 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
             }, {
                 field: "built_up_area",
                 title: "Area",
-                width: "120px"
+                width: "120px",
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
+
             }, {
                 field: "flat_number",
                 title: "Flat No",
-                width: "120px"
+                width: "120px",
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
             }, {
                 field: "floor_number",
                 title: "Floor No",
-                width: "120px"
+                width: "120px",
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
             },
                 {
                     field: "total_cost",
                     title: "Total Cost",
-                    width: "120px"
+                    width: "120px",
+                    attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
                 }]
 
         };
@@ -343,7 +407,7 @@
                 type: "json",
                 transport: {
 
-                    read: "https://dw-webservices-uat.azurewebsites.net/Project/GetContactInProject/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Project/GetContactInProject/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
 
@@ -365,19 +429,40 @@
             columns: [{
                 field: "first_name",
                 title: "First Name",
-                width: "50px"
+                width: "50px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+
             }, {
                 field: "people_type",
                 title: "people Type",
-                width: "50px"
+                width: "50px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
             }, {
                 field: "phone",
                 title: "Contact Phone",
-                width: "50px"
+                width: "50px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:right"
+                 }
             }, {
                 field: "email",
                 title: "Contact Email",
-                width: "50px"
+                width: "50px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
 
             }]
         };
@@ -386,7 +471,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Project/GetTasksInProject/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Project/GetTasksInProject/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -409,25 +494,50 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }, {
                 field: "description",
                 title: "Description",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }, {
                 field: "status",
                 title: "Status",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
             {
                 field: "priority",
                 title: "priority",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
             {
                 field: "status",
                 title: "status",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }]
         };
 
@@ -483,7 +593,7 @@
                 type: "json",
                 transport: {
 
-                    read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitproperties/" + $cookieStore.get('tower_id')
+                    read: apiService.baseUrl + "UnitTypes/GetTowerunitproperties/" + $cookieStore.get('tower_id')
                 },
                 pageSize: 5
 
@@ -527,52 +637,102 @@
             }, {
                   field: "tower_name",
                   title: "Name",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
               },
               {
                   field: "num_bedrooms",
                   title: "Bedrooms",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
               },
             {
                 field: "num_bathrooms",
                 title: "Bathrooms",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
             },
             {
                 field: "super_built_up_area",
                 title: "Slb. Area",
-                width: "120px"
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
             },
               {
                   field: "carpet_area",
                   title: "Crp Area",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
               },
                {
                      field: "total_consideration",
                      title: "Price",
-                     width: "120px"
+                     width: "120px",
+                     attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
                },
             {
                       field: "available_status",
                       title: "Status",
-                     width: "120px"
+                      width: "120px",
+                      attributes:
+                      {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
             },
               {
                   field: "floorno",
                   title: "Floor No",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
               },
                 {
                     field: "unitno",
                     title: "Unit No",
-                    width: "120px"
+                    width: "120px",
+                    attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                 },
                   {
                       field: "carpark",
                       title: "Car Park",
-                      width: "120px"
+                      width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                   }]
 
         };
@@ -585,7 +745,7 @@
         //            type: "json",
         //            transport: {
 
-        //                read: "https://dw-webservices-uat.azurewebsites.net/Floors/GetTowerDetailsFloors/" + $cookieStore.get('tower_id')
+        //                read: apiService.baseUrl +"Floors/GetTowerDetailsFloors/" + $cookieStore.get('tower_id')
         //            },
         //            pageSize: 5
 
@@ -1023,7 +1183,7 @@
 
             //calling essential
              if ($scope.seletedCustomerId !== '') {
-                 //GetUrl = "https://dw-webservices-uat.azurewebsites.net/Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
+                 //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
                  GetUrl = "Project/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
 
                  apiService.get(GetUrl).then(function (response) {
@@ -1183,6 +1343,19 @@
            function (error) {
                console.log("Error " + error.state);
            });
+            }
+            else if (args == 'summery') {
+                projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+                apiService.getWithoutCaching(projectUrl).then(function (response) {
+                    $scope.main = response.data;
+                    $scope.image = $scope.main[0];
+
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           }
+                );
+
             }
             $state.go('app.projectdetail', {}, { reload: false });
             $scope.$apply();

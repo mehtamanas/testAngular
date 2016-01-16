@@ -27,11 +27,11 @@
                                        maxlength="50"
                                        alphabets-only
                                        required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                       />
                             </div>
                             <div class="text-danger"
                                  data-ng-if="addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus">
-                                {{ 'Please enter valid note' | translate }}
+                                {{ 'Please enter a proper note' | translate }}
                             </div>
                         </div>
                     </div>
@@ -75,6 +75,9 @@
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                     </div>
+
+                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+
                             <div class="modal-btn-wrap3 clearfix">
                                 <button type="submit" id="gallery_save" class="f-btn"
                                         ng-click="showProgress=true;uploader.uploadAll()"  ng-disabled="!uploader.getNotUploadedItems().length">

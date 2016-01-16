@@ -7,16 +7,13 @@ angular.module('configs', [])
 
 .constant('CONFIGS', {
     baseURL: function () {
-        return 'https://dw-webservices-uat.azurewebsites.net/';
-        //return 'http://localhost:3979/';
-
-        //if(window.location.origin.indexOf('localhost') !== -1) {
-        //    return 'http://localhost/dwellar-api';
-        //} else if(window.location.origin.indexOf('http://web.beesightsoft.com') !== -1) {
-        //    return 'http://web.beesightsoft.com/dwellar-api';
-        //} else {
-        //    return '/api';
-        //}
+        return 'https://dw-webservices-uat2.azurewebsites.net/';
+    },
+    uploadURL: function () {
+        return 'https://dw-webservices-uat2.azurewebsites.net/MediaElement/upload';
+    },
+    ipTraceUrl: function () {
+        return 'http://ipinfo.io/json';
     }
 })
 

@@ -95,8 +95,8 @@
             dataSource: {
                 type: "json",
                 transport: {
-                 //   read: "https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetListorgID/38a801a8-9c32-4b52-8433-00c059421218/Approved"
-                    read: "https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetListorgID/" + orgID + "/Approved"
+                 //   read: apiService.baseUrl +"ChannelPartners/GetListorgID/38a801a8-9c32-4b52-8433-00c059421218/Approved"
+                    read: apiService.baseUrl +"ChannelPartners/GetListorgID/" + orgID + "/Approved"
                 },
                 pageSize: 5
 

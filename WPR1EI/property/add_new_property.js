@@ -3,7 +3,7 @@ var PropertyPopUpController = function ($scope, $state, $cookieStore, apiService
     console.log('PropertyPopUpController');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
+        url: apiService.baseUrl +'MediaElement/upload'
     });
 
     $scope.showProgress = false;

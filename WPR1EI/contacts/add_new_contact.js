@@ -8,8 +8,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+   
     });
 
     $scope.showProgress = false;
@@ -55,7 +55,18 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         //end
 
 
+        uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+            if (uploader.queue.length > 1) {
+                uploader.removeFromQueue(0);
+            }
+        }
 
+
+        $scope.CanceUpload = function () {
+            uploader.cancelAll();
+
+            console.log("UploadCancelled");
+        }
 
 
     // CALLBACKS

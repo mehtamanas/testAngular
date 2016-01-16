@@ -108,7 +108,7 @@ function (error) {
         
     }
     else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
-        Url = "Role/Get/" + $cookieStore.get('orgID');
+        Url = "Role/Get/442aa5f4-4298-4740-9e43-36ee021df1e7";
 
     }
     else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {
@@ -160,18 +160,17 @@ function (error) {
 
         var usersToBeAddedOnServer = [];
 
-        var newMember = {};
+       
     
         var Url;
         if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
             for (var i in $scope.checkedIds) {
-                
-               
+                var newMember = {};
                 newMember.project_id = $scope.params.city;
                 newMember.mapping_id = $scope.checkedIds[i];
-               newMember.user_id = $cookieStore.get('userId');
-               newMember.organization_id = $cookieStore.get('orgID');
-               newMember.isteam = "0";
+                newMember.user_id = $cookieStore.get('userId');
+                newMember.organization_id = $cookieStore.get('orgID');
+                newMember.isteam = "0";
                 usersToBeAddedOnServer.push(newMember);
             }
             
@@ -182,10 +181,7 @@ function (error) {
         }
         else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
             for (var i in $scope.checkedIds) {
-                 
-               
-                
-              
+                var newMember = {};
                 newMember.role_user_id = $scope.checkedIds[i];
                 newMember.role_id = $scope.params.city;
                 newMember.user_id = $cookieStore.get('userId');
@@ -200,8 +196,7 @@ function (error) {
         else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {
             // Add the new users
             for (var i in $scope.checkedIds) {
-               
-              
+                var newMember = {};
                 newMember.team_user_id = $scope.checkedIds[i];
                 newMember.team_id =  $scope.params.city;
                 newMember.user_id = $cookieStore.get('userId');

@@ -104,9 +104,9 @@ angular.module('channel_partners')
               dataSource: {
                   type: "json",
                   transport: {
-                      read: "https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetByID/" + orgID
+                      read: apiService.baseUrl +"ChannelPartners/GetByID/" + orgID
 
-                      //read:"https://dw-webservices-uat.azurewebsites.net/ChannelPartners/GetByID/38a801a8-9c32-4b52-8433-00c059421218"
+                      //read:apiService.baseUrl +"ChannelPartners/GetByID/38a801a8-9c32-4b52-8433-00c059421218"
                   },
                   pageSize: 5
 
@@ -137,46 +137,91 @@ angular.module('channel_partners')
                       field: "partner_name",
                       title: "Partner Name",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
                     
                   }, {
                       field: "company",
                       title: "Comany",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
                       
                   }, {
                       field: "contact_Email",
                       title: "Contact Email",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
                     
                   }, {
                       field: "city",
                       title: "City",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
                     
                   }, {
                       field: "total_projects",
                       title: "Total Projects",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                      
                   }, {
                       field: "property_sold",
                       title: "Property Sold",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                      
                   }, {
                       field: "property_listing",
                       title: "Property Listing",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                      
                   }, {
                       field: "revenue_generated",
                       title: "Revenue Generated",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                      
                   }, {
                       field: "commission_rate",
                       title: "Commission Rate",
                       width: "120px",
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
                      
                   }]
           };

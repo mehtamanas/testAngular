@@ -14,13 +14,13 @@ var AddNewEditFloorController = function ($scope, $state, $cookieStore, apiServi
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+       
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+       
     });
 
     $scope.showProgress = false;
@@ -74,6 +74,19 @@ function (error) {
     var upload2 = 0;
     $scope.media1 = "";
     $scope.media2 = "";
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+    uploader1.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader1.queue.length > 1) {
+            uploader1.removeFromQueue(0);
+        }
+    }
+
+
 
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
@@ -360,6 +373,13 @@ function (error) {
     }
 
 
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+        uploader1.cancelAll();
+        
+        console.log("UploadCancelled");
+    }
+
 
     //uploadService.postDataAfterUpload(postData).then(function () {
     //    // Process the successful file upload
@@ -374,7 +394,8 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md'
+            size: 'md',
+            resolve: { items: { title: "Floor Editing" } }
         });
 
         $rootScope.$broadcast('REFRESH', 'floor');

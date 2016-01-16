@@ -70,33 +70,30 @@
                     <div class="clearfix">
                         <div class="form-group"
                              data-ng-class="{
-                                                               'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
-                                                               'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
-                                                              }">
+                            'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
+                            'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
+                            }">
+
                             <div id="email-wrap">
                                 <div id="email-no" class="form-bx form-bx2">
                                     <p>To enter multiple addresses,add comma after each address</p>
-                                    <input type="email" autofocus name="email" class="form-control" id="newuseradd_email"
+                                    <input autofocus name="email" class="form-control" id="newuseradd_email"
                                            placeholder="Enter the Email Address"
                                            data-ng-model="params.account_email"
-                                           minlength="1"
-                                           maxlength="30"
-                                           input-focus
-                                           ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
+                                           ng-pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@example\.com"
                                            required />
                                     <div class="text-danger"
                                          data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
-                                        {{ 'Please enter valid email' | translate }}
+                                        {{ 'Please enter alphabets only' | translate }}
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <button class="f-btn" type="submit" style="width:150px; height:50px; margin-top: 28px;" id="btn_newuser_invite"> INVITE </button>
+                            <button class="f-btn" ng-click="newuse()" style="width:150px; height:50px; margin-top: 28px;" id="btn_newuser_invite"> INVITE </button>
                         </div>
 
-                   </div>
+                    </div>
                         <!--<div class="modal-btn-wrap clearfix">
              <button class="f-btn" type="submit">Save and Send Invitation</button>
 

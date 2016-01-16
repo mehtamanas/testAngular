@@ -5,14 +5,14 @@
 
     $rootScope.title = 'Dwellar./projects';
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
+        url: apiService.baseUrl +'MediaElement/upload'
     });
 
     $scope.showProgress = false;
 
 
     //var uploader1 = $scope.uploader1 = new FileUploader({
-    //    url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
+    //    url: apiService.baseUrl +'MediaElement/upload'
     //});
 
     //$scope.showProgress = false;

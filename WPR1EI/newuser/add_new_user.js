@@ -19,21 +19,32 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
         $scope.sucess = function (openSucessfullPopup) {
             $state.go('newuser.sucessfull');
         }
-        Url = "Register/InviteUser";
-        UserInvite = function (param) {          
-            apiService.post(Url, param).then(function (response) {
+        $scope.newuse = function () {
+            var schemeupdate = [];
+            email = $scope.params.account_email;
+            var emails = email.split(",");
+            for (i = 0; i < emails.length; i++) {
+                var userscheme = {};
+                userscheme.first_name = $scope.first_name,
+                userscheme.last_name = $scope.last_name,
+                userscheme.account_email = emails[i],
+                userscheme.product_type = 'dwellar',
+                userscheme.organization_id = $scope.Organization,
+
+                schemeupdate.push(userscheme);
+            }
+            Url = "Register/InviteUser";
+            apiService.post(Url, schemeupdate).then(function (response) {
                 var loginSession = response.data;
                 $scope.openSucessfullPopup();
                 $modalInstance.dismiss();
-                $rootScope.$broadcast('REFRESH', 'mainGridOptionss');
+                $rootScope.$broadcast('REFRESH', 'mainGridOptions');
             },
        function (error) {
-           alert("User Already Exists " );
-         
+           alert("User Already Exists ");
+
        });
-        };
-
-
+        }
 
     //Audit log start															
         $scope.params =

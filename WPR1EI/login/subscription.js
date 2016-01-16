@@ -1,6 +1,6 @@
 angular.module('login')
 .controller('subscriptionController',
-    function($scope, $state, security) {
+    function($scope, $state,apiService, security) {
       
         var loginSession1;
         
@@ -15,7 +15,7 @@ angular.module('login')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Subscription/Get" 
+                    read: apiService.baseUrl + "Subscription/Get" 
 
                 },
                 pageSize: 5
@@ -41,26 +41,52 @@ angular.module('login')
                             //"<span style='padding-left:10px' class='customer-name'>#: first_name #</span>",
                             field: "name",
                             title: " Name",
-                            width: "120px"
+                            width: "120px",
+                            attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+
                         }, {
                             field: "description",
                             title: "Description",
-                            width: "120px"
+                            width: "120px",
+                            attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
 
                         }, {
                             field: "renewal_type",
                             title: "Renewal Type",
-                            width: "120px"
+                            width: "120px",
+                            attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
 
                         }, {
                             field: "price",
                             title: "Price",
-                            width: "120px"
+                            width: "120px",
+                            attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
 
                         }, {
                             field: "renewal_term",
                             title: "Renewal Term",
-                            width: "120px"
+                            width: "120px",
+                            attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:right"
+                  }
 
                         }]
         };

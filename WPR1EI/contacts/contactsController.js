@@ -124,8 +124,8 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                   // read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetAllContactDetails?Id=442aa5f4-4298-4740-9e43-36ee021df1e7"
-                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetAllContactDetails?Id=" + userID
+                   
+                    read: apiService.baseUrl + "Contact/GetAllContactDetails?Id=" + userID
                     },
                 pageSize: 5
             },
@@ -152,7 +152,7 @@ angular.module('contacts')
             columns: [
                  {
                      template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                     title: "COLUMN",
+                     title:"<input id='checkAll', type='checkbox', class='check-box' />",
                      width: "60px",
                      attributes:
                       {
@@ -175,6 +175,7 @@ angular.module('contacts')
                      width: "120px",
                      attributes: {
                          "class": "UseHand",
+                         "style": "text-align:center"
 
                      }
                  },
@@ -184,6 +185,7 @@ angular.module('contacts')
                     width: "120px",
                     attributes: {
                         "class": "UseHand",
+                        "style": "text-align:center"
 
                     }
                 },
@@ -194,6 +196,7 @@ angular.module('contacts')
                     width: "120px",
                     attributes: {
                         "class": "UseHand",
+                        "style": "text-align:right"
 
                     }
                 },
@@ -204,6 +207,7 @@ angular.module('contacts')
                 width: "120px",
                 attributes: {
                     "class": "UseHand",
+                    "style": "text-align:center"
                 }
             },
 
@@ -213,7 +217,8 @@ angular.module('contacts')
                 width: "120px",
                 attributes:
                 {
-                 "class": "UseHand",
+                    "class": "UseHand",
+                    "style": "text-align:center"
                 }
             },
 
@@ -223,6 +228,7 @@ angular.module('contacts')
                 width: "120px",
                 attributes: {
                     "class": "UseHand",
+                    "style": "text-align:center"
 
                 }
             },
@@ -233,6 +239,7 @@ angular.module('contacts')
                 width: "120px",
                 attributes: {
                     "class": "UseHand",
+                    "style": "text-align:center"
 
                 }
             },

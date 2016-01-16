@@ -438,7 +438,7 @@
 
                 <div class="project-type-list clearfix">
 
-                    <div class="pull-left project-type-bx project-type01" ng-class="{'project-selected': selectedproject==0}">
+                    <div class="pull-left project-type-bx project-type01 project-selected" ng-class="{'project-selected': selectedproject==0}">
                         <div class="select-tick"></div>
                         <div class="project-type-inner">
                             <div class="project-type-img" ng-click="selectapartment()">
@@ -479,13 +479,14 @@
                     </div>
 
                 </div><!-- select-project-type ended -->
-                <div class="progress" ng-show="showProgress">
+                <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0">
                     <div class="progress-bar" role="progressbar"
                          ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4 + '%' }"></div>
                 </div>
+               <!--<a ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                 <div class="modal-btn-wrap4 clearfix">
-                    <button type="submit" class="btn btn-blk" id="btn_addnewproject_save" ng-click="progressShow();uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()">
+                    <button type="submit" class="f-btn " id="btn_addnewproject_save" ng-click="uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()">
                         <!--<span class="glyphicon glyphicon-upload"></span>--> SAVE
                     </button>
                 </div>
@@ -495,4 +496,3 @@
 
     
 
-</div><!-- modal ended -->

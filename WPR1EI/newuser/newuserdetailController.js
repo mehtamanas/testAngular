@@ -168,8 +168,8 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    // read: "http://dw-webservices-uat.azurewebsites.net/User/GetProjectsByUser/7fbfbdfd-0b46-4a99-bda0-2322e67e9f49"//402fe846-3873-4964-a8cc-92557bcf63ab
-                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetProjectsByUser/" + $scope.seletedCustomerId
+                    
+                    read: apiService.baseUrl + "User/GetProjectsByUser/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -193,11 +193,21 @@
                 field: "name",
                 title: "Name",
                 width: "120px",
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+                    }
                 
             }, {
                 field: "description",
                 title: "Description",
                 width: "120px",
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+                    }
               
             }]
         };
@@ -265,7 +275,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-uat.azurewebsites.net/USER/GetTeamsbyUserid/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "USER/GetTeamsbyUserid/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -300,26 +310,51 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+                    }
             }, {
                 field: "No_Of_Member",
                 title: "No.of Member",
-                width: "120px"
+                width: "120px",
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:right"
+                    }
             }, {
                 field: "Location",
                 title: "Locations",
-                width: "120px"
+                width: "120px",
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+                    }
             },
             {
                 field: "Join_Date",
                 title: "Join Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes:
+                    {
+                        "class": "UseHand",
+                        "style": "text-align:right"
+                    }
             },
             {
                 field: "creator_first_name",
                 title: "Creator",
                 width: "120px",
+                    attributes:
+        {
+            "class": "UseHand",
+            "style": "text-align:center"
+        }
                
             }]
         };
@@ -330,8 +365,8 @@
 
                 type: "json",
                 transport: {
-                    // read: "http://dw-webservices-uat.azurewebsites.net/User/GetTeamByUser/" + $scope.seletedCustomerId
-                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetDetailDevices/" + $scope.seletedCustomerId
+                   
+                    read: apiService.baseUrl + "User/GetDetailDevices/" + $scope.seletedCustomerId
                 },
 
                 pageSize: 5
@@ -356,23 +391,43 @@
                 field: "device_name",
                 title: "Device Name",
                 width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
 
             }, {
                 field: "operating_system",
                 title: "Operating System",
                 width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
 
             },
             {
                 field: "mac_id",
                 title: "Mac Id",
                 width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:right"
+  }
 
             },
             {
                 field: "last_login",
                 title: "Last Login",
                 width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
 
             }
             ]
@@ -383,9 +438,9 @@
                 type: "json",
                 transport: {
 
-                    //read: "http://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
+                   
 
-                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetProjectsByUser/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "User/GetProjectsByUser/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
                 schema: {
@@ -417,47 +472,86 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:center"
+ }
             }, {
                 field: "Possession_Month",
                 title: "Possession Month",
                 width: "120px",
-              
+                attributes:
+   {
+       "class": "UseHand",
+       "style": "text-align:right"
+   }
             }, {
                 field: "assigned_date",
                 title: "Assigned Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:right"
+ }
             }, {
                 field: "Year",
                 title: "year",
                 width: "120px",
-
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:right"
+                 }
             }, {
                 field: "assigned_by",
                 title: "Assigned By",
                 width: "120px",
-
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:center"
+ }
             }, {
                 field: "total_project_area",
                 title: "Project Area",
                 width: "120px",
-
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:right"
+ }
             }, {
                 field: "project_website",
                 title: "Project Website",
                 width: "120px",
-
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:center"
+ }
             }, {
                 field: "builder_website",
                 title: "Builder Website",
                 width: "120px",
-
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:center"
+ }
             }, {
                 field: "possession_date",
                 title: "Possession Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes:
+ {
+     "class": "UseHand",
+     "style": "text-align:right"
+ }
             }]
 
         };
@@ -466,10 +560,8 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    ////  read: "http://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //  // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    //  read: " https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetContactInUser/" + $scope.seletedCustomerId
+                  
+                    read: apiService.baseUrl + "User/GetContactInUser/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
                 refresh:true,
@@ -503,27 +595,47 @@
                 field: "name",
                 title: "Name",
                 width: "120px",
-
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }, {
                 field: "description",
                 title: "No.of Member",
                 width: "120px",
-
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
             }, {
                 field: "description",
                 title: "Locations",
                 width: "120px",
-
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }, {
                 field: "description",
                 title: "Join Date",
                 width: "120px",
-
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }, {
                 field: "description",
                 title: "Creator",
                 width: "120px",
-
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             },
             ]
         };
@@ -532,7 +644,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetTaskByUser/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "User/GetTaskByUser/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -567,42 +679,77 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }, {
                 field: "description",
                 title: "Description",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             },{
                 field: "status",
                 title: "Status",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             },
             {
                 field: "start_date_time",
                 title: "Start Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
             },
             {
                 field: "end_date_time",
                 title: "End Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
             }, {
                 field: "priority",
                 title: "Priority",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }, {
                 field: "add_reminder",
                 title: "Reminder",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }]
         };
         $scope.ContactsGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-uat.azurewebsites.net/User/GetContactInUser/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "User/GetContactInUser/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -637,32 +784,62 @@
             columns: [  {
                 field: "first_name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }, {
                 field: "designation",
                 title: "Title",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             },
             {
                 field: "email",
                 title: "Email",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             },
             {
                 field: "phone",
                 title: "Phone",
                 width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
                
             },
             {
                 field: "city",
                 title: "City",
                 width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
                
             },{
                 field: "people_type",
                 title: "Type",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }]
         };
 
@@ -674,8 +851,8 @@
                 type: "json",
                 transport: {
 
-                    //read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/bcd0a0ad-68c2-4a96-9498-c1a19e429f53"
-                    read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/" + $scope.seletedCustomerId
+                    
+                    read: apiService.baseUrl + "UnitTypes/GetTowerunitpropertiesall/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
 
@@ -721,59 +898,114 @@
                 {
                     field: "tower_name",
                     title: "Name",
-                    width: "120px"
+                    width: "120px",
+                    attributes:
+    {
+        "class": "UseHand",
+        "style": "text-align:center"
+    }
                 },
              {
                  field: "floorno",
                  title: "Floor No",
-                 width: "120px"
+                 width: "120px",
+                 attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
              },
               {
                   field: "unitno",
                   title: "Unit No",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:right"
+  }
               },
               {
                   field: "carpark",
                   title: "Car Park",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:right"
+  }
               },
               {
                   field: "num_bedrooms",
                   title: "Bedrooms",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
               },
             {
                 field: "num_bathrooms",
                 title: "Bathrooms",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
             },
             {
                 field: "super_built_up_area",
                 type: "number",
                 title: "Slb. Area",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
             },
               {
                   field: "carpet_area",
                   type: "number",
                   title: "Crp Area",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
               },
                {
                    field: "total_consideration",
                    title: "Price",
-                   width: "120px"
+                   width: "120px",
+                   attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
                },
                 {
                     field: "project_name",
                     title: "Project",
-                    width: "120px"
+                    width: "120px",
+                    attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
                 },
             {
                 field: "available_status",
                 title: "Status",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }]
 
         };
@@ -782,7 +1014,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "http://dw-webservices-uat.azurewebsites.net/Role/GetRoleByUser/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Role/GetRoleByUser/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -817,16 +1049,31 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes:
+              {
+                  "class": "UseHand",
+                  "style": "text-align:center"
+              }
             }, {
                 field: "assigned_date",
                 title: "Assigned Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
             }, {
                 field: "assigned_by",
                 title: "Assigned By",
-                width: "120px"
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
             }]
         };
 

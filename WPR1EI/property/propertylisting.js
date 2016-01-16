@@ -72,8 +72,8 @@
                 type: "json",
                 transport: {
 
-                    //read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/bcd0a0ad-68c2-4a96-9498-c1a19e429f53"
-                    read: "https://dw-webservices-uat.azurewebsites.net/UnitTypes/GetTowerunitpropertiesall/" + userId
+                    //read: apiService.baseUrl +"UnitTypes/GetTowerunitpropertiesall/bcd0a0ad-68c2-4a96-9498-c1a19e429f53"
+                    read: apiService.baseUrl +"UnitTypes/GetTowerunitpropertiesall/" + userId
                 },
                 pageSize: 5
 
@@ -113,65 +113,121 @@
                     attributes:
                       {
                           "class": "UseHand",
+                          "style": "text-align:center"
                       }
                 },
                
                 {
                     field: "tower_name",
                     title: "NAME",
-                    width: "120px"
+                    width: "120px",
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
                 },
              {
                  field: "floorno",
                  title: "FLOOR NO",
-                 width: "120px"
+                 width: "120px",
+                 attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
              },
               {
                   field: "unitno",
                   title: "UNIT NO",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
               },
               {
                   field: "carpark",
                   title: "CAR PARK",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
               },
               {
                   field: "num_bedrooms",
                   title: "BEDROOMS",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
               },
             {
                 field: "num_bathrooms",
                 title: "BATHROOMS",
-                width: "120px"
+                width: "120px",
+                attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
             },
             {
                 field: "super_built_up_area",
                 type: "number",
                 title: "SLB. AREA",
-                width: "120px"
+                width: "120px",
+                attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
             },
               {
                   field: "carpet_area",
                   type: "number",
                   title: "CRP AREA",
-                  width: "120px"
+                  width: "120px",
+                  attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
               },
                {
                    field: "total_consideration",
                    title: "PRICE",
-                   width: "120px"
+                   width: "120px",
+                   attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
                },
                 {
                     field: "project_name",
                     title: "PROJECT",
-                    width: "120px"
+                    width: "120px",
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
                 },
             {
                 field: "available_status",
                 title: "STATUS",
-                width: "120px"
+                width: "120px",
+                attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
             }]
 
         };

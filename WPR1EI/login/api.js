@@ -48,6 +48,9 @@ angular.module('services.api', ['restangular'])
         });
 
         var service = {
+            ipTraceUrl: CONFIGS.ipTraceUrl(),
+            baseUrl: CONFIGS.baseURL(),
+            uploadURL: CONFIGS.uploadURL(),
             authToken: '',
             all: function(resource, queryParams) {
                 if(queryParams === undefined) {

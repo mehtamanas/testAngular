@@ -3,11 +3,11 @@
  */
 
 
-var uploadController = function ($scope,$state, $modalInstance, uploadService, FileUploader) {
+var uploadController = function ($scope,$state, $modalInstance, uploadService,apiService, FileUploader) {
     var uploader = $scope.uploader = new FileUploader({
-        //url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
-        // url: 'https://dw-webservices-uat.azurewebsites.net/User/Upload'
-        url: 'https://dw-webservices-uat.azurewebsites.net/User/UploadCSV'
+        //url: apiService.baseUrl +'MediaElement/upload'
+        // url: apiService.baseUrl +'User/Upload'
+        url: apiService.baseUrl +'User/UploadCSV'
     });
   
 

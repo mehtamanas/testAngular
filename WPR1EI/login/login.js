@@ -1,7 +1,7 @@
 angular.module('app.guest.login')
 
 .controller('LoginController',
-    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, $modal, deviceDetector,$window) {
+    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, $modal, deviceDetector, $window, Idle, $cookies) {
         // Init model
         $scope.params = {
             email: '',
@@ -14,13 +14,13 @@ angular.module('app.guest.login')
 
         $scope.rememberMe = function () {
             if ($scope.params.remember) {
-                $window.localStorage.setItem($scope.params.email, JSON.stringify(data = { 'email': $scope.params.email, 'password': $scope.params.password }));
+                $cookieStore.put($scope.params.email, JSON.stringify(data = { 'email': $scope.params.email, 'password': $scope.params.password }));
             }
         }
 
         $scope.$watch('params.email', function () {
-            if ($window.localStorage.getItem($scope.params.email)!=undefined) {
-                $scope.params.password= (JSON.parse($window.localStorage.getItem($scope.params.email))).password;
+            if ($cookieStore.get($scope.params.email)!=undefined) {
+                $scope.params.password= (JSON.parse($cookieStore.get($scope.params.email))).password;
                 $scope.params.remember = true;
             }
             $scope.error = '';
@@ -49,7 +49,7 @@ angular.module('app.guest.login')
                             $state.go('channel_form');
                             return;
                         }
-
+                        Idle.watch();
                         $state.go('app.project');
                     }
 
@@ -111,7 +111,7 @@ angular.module('app.guest.login')
                 function (error) {
                     console.log(error);
                     $scope.success = '';
-                    $scope.error = 'Invalid Email Address or Passowrd. Please try again.';
+                    $scope.error = 'Email Address or Passowrd. Please try again.';
                 });
 
             }
@@ -125,5 +125,56 @@ angular.module('app.guest.login')
                 size: 'md'
             });
         };
+
+
+        //session timeout start
+        $scope.events = [];
+
+        $rootScope.$on('IdleStart', function () {
+            // the user appears to have gone idle
+            console.log("IdleStart");
+        });
+
+        $rootScope.$on('IdleWarn', function (e, countdown) {
+            // follows after the IdleStart event, but includes a countdown until the user is considered timed out
+            // the countdown arg is the number of seconds remaining until then.
+            // you can change the title or display a warning dialog from here.
+            // you can let them resume their session by calling Idle.watch()
+            console.log("IdleWarn");
+        });
+
+        $rootScope.$on('IdleTimeout', function () {
+            // the user has timed out (meaning idleDuration + timeout has passed without any activity)
+            // this is where you'd log them
+            $cookieStore.remove('Country');
+            $cookieStore.remove('Device');
+            $cookieStore.remove('Device_os');
+            $cookieStore.remove('IP_Address');
+            $cookieStore.remove('LatLon');
+            $cookieStore.remove('Location');
+            $cookieStore.remove('Platform');
+            $cookieStore.remove('authToken');
+            $cookieStore.remove('browser');
+            $cookieStore.remove('currentUser');
+            $cookieStore.remove('loggedUser');
+            $cookieStore.remove('orgID');
+            $cookieStore.remove('userId');
+            localStorage.clear();
+            console.log("loggedout");
+            $state.go('login');
+        });
+
+        $rootScope.$on('IdleEnd', function () {
+            // the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
+            console.log("IdleEnd");
+        });
+
+        $rootScope.$on('Keepalive', function() {
+            // do something to keep the user's session alive
+            console.log("Keepalive");
+        });
+
+
+        //end
     }
-);
+)

@@ -11,7 +11,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/AuditLog/GetByID/" + orgID
+                    read: apiService.baseUrl +"AuditLog/GetByID/" + orgID
 
                 },
                 pageSize: 5,

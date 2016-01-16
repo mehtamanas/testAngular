@@ -9,7 +9,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
         var uploader = $scope.uploader = new FileUploader(
         {
-            url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+           url: apiService.uploadURL,
             queueLimit: 1
         });
 

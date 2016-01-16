@@ -30,11 +30,7 @@
                                 <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                     <div class="panel-body image-upload-panel">
                                         <div class="row" ng-hide="uploader.queue.length">
-                                            <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                <span class="page-center">Drag And Drop your file here</span>
-                                            </div>
-                                            <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                            <img ng-src={{params.media_url}} alt="Drag and Drop" class="img-responsive" />
                                         </div>
                                         <div class="row" ng-show="uploader.queue.length">
                                             <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
@@ -48,7 +44,7 @@
                         </div>
                         <div class="image-upload-link">
                             <div class="browse-title">Browse</div>
-                            <input type="file" class="image-upload-f" value="Browse" nv-file-select="" uploader="uploader" />
+                            <input type="file" class="image-upload-f" value="Browse" nv-file-select="" uploader="uploader"  />
 
                         </div>
                     </div>
@@ -545,6 +541,9 @@
                                 <div class="progress-bar" role="progressbar"
                                      ng-style="{ 'width': uploader.progress+ '%' }"></div>
                             </div>
+
+                             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+
 
                             <div class="row">
                                 <div class="col-md-7 col-sm-6 col-xs-12">

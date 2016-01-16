@@ -6,7 +6,7 @@
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
+       url: apiService.uploadURL,
        
     });
 
@@ -225,13 +225,13 @@ function (error) {
         if (isValid) {
 
 
-            new paymentCreate($scope.params).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
+            //new paymentCreate($scope.params).then(function (response) {
+            //    console.log(response);
+            //    $scope.showValid = false;
+            //    $state.go('guest.signup.thanks');
+            //}, function (error) {
+            //    console.log(error);
+            //});
 
             $scope.showValid = false;
 

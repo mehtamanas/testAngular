@@ -141,7 +141,7 @@
                                                                maxlength="30"
                                                                input-focus
                                                                data-ng-pattern="patternRegexs.email"
-                                                               ng-pattern="/^(?=[A-Z0-9][A-Z0-9._%+-]{5,253}$)[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,8}[A-Z]{2,63}$/"
+                                                               ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
                                                                required />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
@@ -307,9 +307,17 @@
                                             </div>
                                         </div>
 
+                                        <div class="progress" ng-show="showProgress">
+                                            <div class="progress-bar" role="progressbar"
+                                                 ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+                                        </div>
+
+                                         <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                                         <div class="modal-btn-wrap clearfix">
                                             <button id="btn_contact_save" type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
+
+                                            
 
                                             <button id="btn_contact_cancelme" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
                                         </div>

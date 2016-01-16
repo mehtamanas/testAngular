@@ -116,7 +116,7 @@
                 type: "json",
                 transport: {
 
-                    read: "https://dw-webservices-uat.azurewebsites.net/Floors/GetTowerDetailsFloors/" + $cookieStore.get('tower_id')
+                    read: apiService.baseUrl + "Floors/GetTowerDetailsFloors/" + $cookieStore.get('tower_id')
                 },
                 pageSize: 5
 

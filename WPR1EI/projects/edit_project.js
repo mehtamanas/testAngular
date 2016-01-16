@@ -4,27 +4,23 @@ var uploader2_done = false;
 var uploader3_done = false;
 
 
-var EditProjectController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal) {
+var EditProjectController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope) {
     console.log('EditProjectController');
 
    
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL
     });
 
     $scope.showProgress = false;
@@ -80,6 +76,26 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
 
 
     // CALLBACKS
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+    uploader1.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader1.queue.length > 1) {
+            uploader1.removeFromQueue(0);
+        }
+    }
+    uploader2.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader2.queue.length > 1) {
+            uploader2.removeFromQueue(0);
+        }
+    }
+    uploader3.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader3.queue.length > 1) {
+            uploader3.removeFromQueue(0);
+        }
+    }
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // alert("uploader called");
         uploadResult = response[0];
@@ -226,7 +242,10 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
                 controller: sucessfullController,
                 size: 'md',
                 resolve: { items: { title: "Project" } }
+
+
             });
+            $rootScope.$broadcast('REFRESH', 'summery');
         }
       
     };
@@ -402,6 +421,15 @@ function (error) {
         console.log($scope.params.project_type);
     };
 
+    // cancel progress bar code....
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+        uploader1.cancelAll();
+        uploader2.cancelAll();
+        uploader3.cancelAll();
+        console.log("UploadCancelled");
+    }
 
    
     projectUrl = "Project/GetByProjectIdnew/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";

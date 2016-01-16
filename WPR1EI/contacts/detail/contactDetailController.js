@@ -58,7 +58,7 @@ angular.module('contacts')
                 {
                     type: "json",
                     transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetDocument/" + $scope.seletedCustomerId
+                        read: apiService.baseUrl + "Contact/GetDocument/" + $scope.seletedCustomerId
                 },
                 schema: {
                     model: {
@@ -108,9 +108,8 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: "https://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //read: "https://dw-webservices-uat.azurewebsites.net//PropertyListing/GetByID/" + $scope.seletedCustomerId
-                    read: "https://dw-webservices-uat.azurewebsites.net/PropertyListing/GetPropertyMediaByContact/" + $scope.seletedCustomerId
+                   
+                    read: apiService.baseUrl + "PropertyListing/GetPropertyMediaByContact/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -165,75 +164,17 @@ angular.module('contacts')
 
         };
 
-        //$scope.PaymentGrid = {
-        //    dataSource: {
+        
 
-        //        type: "json",
-        //        transport: {
-        //            read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetPayment/" + $scope.seletedCustomerId
+        
 
-        //        },
-
-        //        pageSize: 5,
-
-        //        schema: {
-        //            model: {
-        //                fields: {
-
-        //                    duedate: { type: "date" },
-        //                    datepaid: { type: "date" }
-
-
-        //                }
-        //            }
-        //        }
-
-        //        //group: {
-        //        //    field: 'sport'
-        //        //}
-        //    },
-
-        //    sortable: true,
-        //    pageable: true,
-        //    groupable: true,
-        //    filterable: true,
-        //    columns: [{
-        //        field: "amount",
-        //        title: "Amount",
-        //        width: "120px",
-
-        //    }, {
-        //        field: "payment_type",
-        //        title: "Type",
-        //        width: "120px",
-
-        //    }, {
-        //        field: "payment_status",
-        //        title: "Status",
-        //        width: "120px",
-
-        //    }, {
-        //        field: "duedate",
-        //        title: "Due Required",
-        //        width: "120px",
-        //        format: '{0:dd/MM/yyyy}',
-
-        //    },
-        //    {
-        //        field: "datepaid",
-        //        title: "Date Paid",
-        //        width: "120px",
-        //        format: '{0:dd/MM/yyyy}',
-
-        //    }]
-    ////////////};
-      //  alert($scope.seletedCustomerId);
+       
         $scope.PaymentGrid = {
             dataSource: {
 
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Payment/GetByPaymentId?contact_id=" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Payment/GetByPaymentId?contact_id=" + $scope.seletedCustomerId
 
                 },
 
@@ -292,7 +233,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/ToDoItem/GetMultipleTaskById/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "ToDoItem/GetMultipleTaskById/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5,
@@ -360,7 +301,7 @@ angular.module('contacts')
                 pageSize: 20,
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetEngagement/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Contact/GetEngagement/" + $scope.seletedCustomerId
                 },
                 schema: {
                     model: {
@@ -407,7 +348,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Notes/GetByID/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId
 
                 },
                 pageSize: 5
@@ -437,10 +378,8 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    ////  read: "https://dw-webservices-uat.azurewebsites.net/PersonContactDevice/GetById?ID=" + orgID
-                    //  // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    //  read: " https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/" + $scope.seletedCustomerId
+                    
+                    read: apiService.baseUrl + "Contact/GetQuote/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
 
@@ -492,8 +431,8 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Contact/GetAssignTo/" + $scope.seletedCustomerId
-                    // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
+                    read: apiService.baseUrl + "Contact/GetAssignTo/" + $scope.seletedCustomerId
+                   
                 },
                 pageSize: 5
 

@@ -1641,7 +1641,7 @@ div.k-grid-footer {
 
 .image-upload-wrap .image-upload-title {
     font-size:12px;
-    font-weight:normal;
+    font-weight:normal !important;
     color:#606060;    
     margin-bottom: 7px;
 }
@@ -1756,7 +1756,7 @@ h4.form-sub-title {
 }
 
 .form-content .form-bx8 {
-    width:800px;
+    width:779px;
 }
 
 .form-content .form-bx9 {
@@ -1778,7 +1778,7 @@ h4.form-sub-title {
 }
 
 .form-content .form-bx3-1 {
-    margin-right: 15px;
+    margin-right: 12px;
     width: 257px;
 }
 
@@ -3331,7 +3331,7 @@ form.callback  {
 }
 
 .form-content .form-bx11-1 {
-    margin-right:25px;
+    margin-right:20px;
 } 
 
 .form-b-b {

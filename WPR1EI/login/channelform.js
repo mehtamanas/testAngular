@@ -15,7 +15,7 @@
     console.log('ChannelPopupContoller');
           $rootScope.title = 'Dwellar./Channelform';
           var uploader = $scope.uploader = new FileUploader({
-              url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
+              url: apiService.baseUrl +'MediaElement/upload'
           });
 
           $scope.showProgress = false;
@@ -29,7 +29,14 @@
               }
           });
 
-          // CALLBACKS
+    // CALLBACKS
+
+          uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+              if (uploader.queue.length > 1) {
+                  uploader.removeFromQueue(0);
+              }
+          }
+
           uploader.onSuccessItem = function (fileItem, response, status, headers) {
               // post image upload call the below api to update the database
               var uploadResult = response[0];
@@ -90,6 +97,13 @@
               //    alert('Error creating');
               //})
           };
+
+          $scope.CanceUpload = function () {
+              uploader.cancelAll();
+
+              console.log("UploadCancelled");
+          }
+
 
           uploader.onErrorItem = function (fileItem, response, status, headers) {
               alert('Unable to upload file.');

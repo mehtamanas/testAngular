@@ -5,17 +5,17 @@
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+       
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+       
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+    
     });
 
 
@@ -88,6 +88,23 @@ function (error) {
     $scope.media2 = "";
     $scope.media3= "";
     // CALLBACKS
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+    uploader1.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader1.queue.length > 1) {
+            uploader1.removeFromQueue(0);
+        }
+    }
+    uploader2.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader2.queue.length > 1) {
+            uploader2.removeFromQueue(0);
+        }
+    }
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
      uploadResult = response[0];
         // post image upload call the below api to update the database
@@ -202,6 +219,14 @@ function (error) {
         //})
     }
 
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+        uploader1.cancelAll();
+        uploader2.cancelAll();
+       
+        console.log("UploadCancelled");
+    }
     
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {

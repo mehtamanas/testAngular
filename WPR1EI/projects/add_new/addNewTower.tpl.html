@@ -179,7 +179,7 @@
                                             <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
 
                                                 <div class="image-upload-wrap">
-                                                    <div class="image-upload-title">Upload Wing Image</div>
+                                                    <div class="image-upload-title">Upload Tower Image</div>
                                                     <div class="dropzone dropzone-bx image-upload-bx">
                                                         <div class="fallback">
                                                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
@@ -348,6 +348,8 @@
                                                 <div class="progress-bar" role="progressbar"
                                                      ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress)/3 + '%' }"></div>
                                             </div>
+
+                                         <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                                             <div class="modal-btn-wrap3 clearfix">
                                                 <button type="submit" id="addnewtower_save" class="f-btn" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll()"

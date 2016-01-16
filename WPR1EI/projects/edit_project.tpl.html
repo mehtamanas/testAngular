@@ -21,11 +21,7 @@
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                            <img ng-src={{params.media_url1}} alt="Drag and Drop" class="img-responsive" />
                                             </div>
                                             <div class="row" ng-show="uploader.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
@@ -51,11 +47,7 @@
                                     <div class="panel panel-success" uploader="uploader1" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader1.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                                <img ng-src={{params.media_url2}} alt="Drag and Drop" class="img-responsive" />  
                                             </div>
                                             <div class="row" ng-show="uploader1.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
@@ -81,11 +73,7 @@
                                     <div class="panel panel-success" uploader="uploader2" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader2.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                                <img ng-src={{params.media_url3}} alt="Drag and Drop" class="img-responsive" />    
                                             </div>
                                             <div class="row" ng-show="uploader2.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
@@ -111,11 +99,7 @@
                                     <div class="panel panel-success" uploader="uploader3" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader3.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                                <img ng-src={{params.media_url4}} alt="Drag and Drop" class="img-responsive" />       
                                             </div>
                                             <div class="row" ng-show="uploader3.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader3.queue">
@@ -295,17 +279,26 @@
                         </div>
 
                         <div class="pull-left f-half-6">
-                            <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs">Postal Code</label>
-                                <input type="text" name="Post" class="form-control text-bold"
-                                       placeholder="Postal Code" id="editproject_postal_code"
-                                       minlength="6"
-                                       maxlength="6"
-                                       data-ng-model="params.ZipCode"
-                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
-                                       required />
+                            <div class="form-group"
+                                 data-ng-class="{
+                                              'has-error' : addNewForm.Post.$invalid && (!addNewForm.Post.$pristine || showValid) && !addNewForm.Post.$focus,
+                                              'has-success': addNewForm.Post.$valid && !addNewForm.Post.$pristine && !addNewForm.Post.$focus
+                                                                 }">
+                                <div class="form-group form-bx form-bx3-1">
+                                    <label for="" class="hidden-xs">Postal Code</label>
+                                    <input type="text" name="Post" class="form-control text-bold"
+                                           placeholder="Postal Code" id="editproject_postal_code"
+                                           minlength="6"
+                                           maxlength="6"
+                                           data-ng-model="params.ZipCode"
+                                           ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                           required />
+                                </div>
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.Post.$invalid && (!addNewForm.Post.$pristine || showValid) && !addNewForm.Post.$focus">
+                                    {{ 'Please enter valid postal code' | translate }}
+                                </div>
                             </div>
-                        </div>
 
                     </div>
 
@@ -319,7 +312,7 @@
 
                                 <label for="">Latitude</label>
                                 <input class="form-control" name="lat" id="addnewproject_project_website"
-                                       placeholder="Latitu"
+                                       placeholder="Latitude"
                                        data-ng-model="params.lat1"
                                        minlength="1"
                                        maxlength="30"
@@ -420,40 +413,40 @@
 
                     <div class="project-type-list clearfix">
 
-                        <div class="pull-left project-type-bx project-type01" ng-class="{'project-selected': selectedproject==4}">
+                        <div class="pull-left project-type-bx project-type01" ng-class="{'project-selected': selectedproject==4}" ng-click="selectapartment()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
-                                <div class="project-type-img" ng-click="selectapartment()">
+                                <div class="project-type-img" >
                                     <!--<img src="images/apartment.png" style="width:110px;height:100px;" ng-click="selectapartment()" />-->
                                 </div>
                                 <div class="project-type-title">Apartment</div>
                             </div>
                         </div>
 
-                        <div class="pull-left project-type-bx project-type02" ng-class="{'project-selected': selectedproject==5}">
+                        <div class="pull-left project-type-bx project-type02" ng-class="{'project-selected': selectedproject==5}" ng-click="selecthome()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
-                                <div class="project-type-img" ng-click="selecthome()">
+                                <div class="project-type-img" >
                                     <!--<img src="images/family.png" style="width:110px;height:100px;" ng-click="selecthome()" />-->
                                 </div>
                                 <div class="project-type-title">Single Family Home</div>
                             </div>
                         </div>
 
-                        <div class="pull-left project-type-bx project-type03" ng-class="{'project-selected': selectedproject==6}">
+                        <div class="pull-left project-type-bx project-type03" ng-class="{'project-selected': selectedproject==6}" ng-click="selectvilla()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
-                                <div class="project-type-img" ng-click="selectvilla()">
+                                <div class="project-type-img">
                                     <!--<img src="images/plot.png" style="width:110px;height:100px;" ng-click="selectvilla()" />-->
                                 </div>
                                 <div class="project-type-title">Villas</div>
                             </div>
                         </div>
 
-                        <div class="pull-left project-type-bx project-type04" ng-class="{'project-selected': selectedproject==7}">
+                        <div class="pull-left project-type-bx project-type04" ng-class="{'project-selected': selectedproject==7}" ng-click="selectplot()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
-                                <div class="project-type-img" ng-click="selectplot()">
+                                <div class="project-type-img">
                                     <!--<img src="images/villas.png" style="width:110px;height:100px;" ng-click="selectplot()" />-->
                                 </div>
                                 <div class="project-type-title">Plot</div>
@@ -465,7 +458,7 @@
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4 + '%' }"></div>
                     </div>
-
+                     
                     <div class="modal-btn-wrap4 clearfix">
                         <button type="submit" class="f-btn" id="editproject_update" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()">
                             <!--<span class="glyphicon glyphicon-upload"></span>--> UPDATE

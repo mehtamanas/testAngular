@@ -10,21 +10,21 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+        url: apiService.uploadURL,
+        
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+        url: apiService.uploadURL,
+        
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+        url: apiService.uploadURL,
+        
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+        url: apiService.uploadURL,
+        
     });
 
     $scope.showProgress = false;
@@ -73,8 +73,28 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         }
     });
 
-
-    
+    //single select of image
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+    uploader1.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader1.queue.length > 1) {
+            uploader1.removeFromQueue(0);
+        }
+    }
+    uploader2.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader2.queue.length > 1) {
+            uploader2.removeFromQueue(0);
+        }
+    }
+    uploader3.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader3.queue.length > 1) {
+            uploader3.removeFromQueue(0);
+        }
+    }
+    // end of select of image
 
 
     // CALLBACKS
@@ -211,7 +231,8 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         },
         function (error) {
-
+            alert(error.data.Message);
+    
         });
 
 
@@ -241,13 +262,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             
         }
 
-        $scope.progressShow = function () {
-            if (uploader.queue.length > 0 || uploader1.queue.length > 0 || uploader2.queue.length > 0 || uploader3.queue.length > 0) {
-                $scope.showProgress=true;
-
-            }
-
-        }
+      
 
         //uploadService.postDataAfterUpload(postData).then(function () {
         //    // Process the successful file upload
@@ -432,6 +447,13 @@ function (error) {
     };
 
 
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+        uploader1.cancelAll();
+        uploader2.cancelAll();
+        uploader3.cancelAll();
+        console.log("UploadCancelled");
+    }
 
 
   

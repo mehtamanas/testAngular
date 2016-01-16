@@ -13,13 +13,13 @@ var AddNewWingController = function ($scope, $state, $cookieStore, apiService, $
     var orgID = $cookieStore.get('orgID');
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+        
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+        
     });
 
 
@@ -71,6 +71,18 @@ function (error) {
     $scope.media2 = "";
 
     // CALLBACKS
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+    uploader1.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader1.queue.length > 1) {
+            uploader1.removeFromQueue(0);
+        }
+    }
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
 
         uploadResult = response[0];
@@ -487,6 +499,14 @@ function (error) {
 
 
     };
+
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+        uploader1.cancelAll();
+      
+        console.log("UploadCancelled");
+    }
 
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {

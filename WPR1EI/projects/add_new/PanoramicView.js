@@ -4,15 +4,15 @@
 
     $rootScope.title = 'Dwellar./projects';
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+        
     });
 
     $scope.showProgress = false;
 
 
     //var uploader1 = $scope.uploader1 = new FileUploader({
-    //    url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload'
+    //    url: apiService.baseUrl +'MediaElement/upload'
     //});
 
     //$scope.showProgress = false;
@@ -26,6 +26,12 @@
         }
     });
 
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
 
 
     uploader.onSuccessItem = function (files, response, status, headers) {
@@ -57,6 +63,13 @@
       });
 
     };
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+
+        console.log("UploadCancelled");
+    }
+
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -95,7 +108,12 @@
    function (error) {
 
    });
+
+     
     };
+
+  
+
     AuditCreate($scope.params);
 
     //end

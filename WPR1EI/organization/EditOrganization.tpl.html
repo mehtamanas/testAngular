@@ -1,8 +1,7 @@
 ﻿
 
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+  
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
@@ -25,12 +24,7 @@
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
-                                            </div>
+                                                <img ng-src={{data.media_url}} alt="Drag and Drop" class="img-responsive" />
                                             <div class="row" ng-show="uploader.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
                                                     <div ng-show="uploader.isHTML5"
@@ -433,7 +427,7 @@
                                                 <input type="text" name="Phone" class="form-control"
                                                        placeholder="0325648695"
                                                        data-ng-model="choice.phone_no"
-                                                       minlength="1"
+                                                       minlength="10"
                                                        maxlength="10"
                                                        alphabets-only
                                                        input-focus
@@ -461,7 +455,7 @@
                                     </div>
                                 </div>-->
                             <div class="pull-left f-half-5">
-                                <div class="form-group form-bx form-bx9-1">
+                                <div class="form-bx form-bx6">
                                     <label for="">List In Builder Directory</label>
                                     <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" required>
                                         <option value="" selected>--Select Yes or No--</option>
@@ -486,7 +480,7 @@
                                         <input type="text" name="pan_no" class="form-control"
                                                placeholder="AER25647ES"
                                                data-ng-model="pan_no"
-                                               minlength="1"
+                                               minlength="10"
                                                maxlength="10"
                                                alphabets-only
                                                input-focus
@@ -511,7 +505,7 @@
                                         <input type="text" name="Tan_No" class="form-control"
                                                placeholder="4RB2H56U8S"
                                                data-ng-model="tan_no"
-                                               minlength="1"
+                                               minlength="10"
                                                maxlength="10"
                                                alphabets-only
                                                input-focus
@@ -536,7 +530,7 @@
                                         <input type="text" name="service_tax_no" class="form-control"
                                                placeholder="B1H3U4S6H8A2N7M"
                                                data-ng-model="service_tax_no"
-                                               minlength="1"
+                                               minlength="15"
                                                maxlength="15"
                                                alphabets-only
                                                input-focus
@@ -561,7 +555,7 @@
                                         <input type="text" name="cin_no" class="form-control"
                                                placeholder="M2A4H6A38J1N9S65UR2DN"
                                                data-ng-model="cin_no"
-                                               minlength="1"
+                                               minlength="21"
                                                maxlength="21"
                                                alphabets-only
                                                input-focus
@@ -636,6 +630,8 @@
                              ng-style="{ 'width': uploader.progress + '%' }"></div>
                     </div>
 
+                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+
                     <div class="modal-btn-wrap clearfix">
                         <button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
 
@@ -645,6 +641,4 @@
                 </form>
             </div><!-- modal-body ended -->
 
-        </div>
-    </div>
 </div><!-- modal ended -->

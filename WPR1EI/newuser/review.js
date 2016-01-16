@@ -109,7 +109,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: "https://dw-webservices-uat.azurewebsites.net/Team/GetTeamDetails/" + orgID
+                    read: apiService.baseUrl + "Team/GetTeamDetails/" + orgID
                 },
                 pageSize: 5
 

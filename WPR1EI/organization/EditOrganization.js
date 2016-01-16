@@ -4,8 +4,8 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
 
     var orgID = $cookieStore.get('orgID');
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-dev2.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+      
     });
 
     $(document).ready(function () {
@@ -314,6 +314,12 @@ function (error) {
     };
 
 
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         var uploadResult = response[0];
@@ -413,6 +419,12 @@ function (error) {
         $scope.openSucessfullPopup();
         $modalInstance.dismiss();
         $rootScope.$broadcast('REFRESH', 'organization');
+    }
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+
+        console.log("UploadCancelled");
     }
 
 };

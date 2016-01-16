@@ -5,8 +5,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     var uploader = $scope.uploader = new FileUploader({
-        url: 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload',
-        queueLimit: 1
+       url: apiService.uploadURL,
+        
     });
 
 
@@ -224,6 +224,12 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     };
 
 
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         var uploadResult = response[0];
@@ -329,11 +335,19 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md'
+                size: 'md',
+                resolve: { items: { title: "User" } }
             });
         }
 
     }
+
+    $scope.CanceUpload = function () {
+        uploader.cancelAll();
+       
+        console.log("UploadCancelled");
+    }
+
 
 };
 

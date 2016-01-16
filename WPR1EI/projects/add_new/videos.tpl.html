@@ -51,6 +51,9 @@
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                     </div>
+
+                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+
                     <div class="modal-btn-wrap3 clearfix">
                         <button type="submit" id="save" class="f-btn"
                                 ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">

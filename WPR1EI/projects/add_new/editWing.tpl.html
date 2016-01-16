@@ -63,11 +63,7 @@
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader.queue.length">
-                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
-                                                </div>
-                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                                <img ng-src={{params.Image_Url_wing1}} alt="Drag and Drop" class="img-responsive" />
                                             </div>
                                             <div class="row" ng-show="uploader.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
@@ -94,11 +90,7 @@
                                         <div class="panel panel-success" uploader="uploader1" nv-file-over="">
                                             <div class="panel-body image-upload-panel">
                                                 <div class="row" ng-hide="uploader1.queue.length">
-                                                    <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                        <span class="page-center">Drag And Drop</span>
-                                                    </div>
-                                                    <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                                    <img ng-src={{params.Image_Url_wing2}} alt="Drag and Drop" class="img-responsive" /> 
                                                 </div>
                                                 <div class="row" ng-show="uploader1.queue.length">
                                                     <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
@@ -169,14 +161,15 @@
                                 </div>
                             </div>
 
-                            <div class="progress" ng-show="showProgress">
-                                <div class="progress-bar" role="progressbar"
-                                     ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
-                            </div>
+                    <div class="progress" ng-show="showProgress">
+                        <div class="progress-bar" role="progressbar"
+                             ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
+                    </div>
 
+
+                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
                             <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" class="f-btn" ng-click="submit()" id="btn_editnewwing_save"
-                                        ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length">
+                                <button type="submit" class="f-btn" ng-click="submit()" id="btn_editnewwing_save">
                                     <!--<span class="glyphicon glyphicon-upload"></span>--> Save
                                 </button>
                             </div>

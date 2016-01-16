@@ -314,7 +314,7 @@
                 serverFiltering: true,
                 transport: {
                     read: {
-                        url: "https://dw-webservices-uat.azurewebsites.net/project/Get/" + $cookieStore.get('orgID'),
+                        url: apiService.baseUrl +"project/Get/" + $cookieStore.get('orgID'),
                     }
                 }
             }
