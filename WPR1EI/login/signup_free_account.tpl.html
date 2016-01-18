@@ -58,10 +58,10 @@
 
 
                         <ul class="state-bar" data-ng-if="breadcrumb<=2">
-                            <li data-ng-class="{ 'selected': breadcrumb>=0 }">Personal Info</li>
-                            <li data-ng-class="{ 'selected': breadcrumb>=1 }">Organization</li>
-                            <li data-ng-class="{ 'selected': breadcrumb>=2 }">Billing</li>
-                            <li data-ng-class="{ 'selected': breadcrumb>=3 }">Complete</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>0, 'current': breadcrumb==0 }">Personal Info</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>1,'current': breadcrumb==1 }">Organization</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>2,'current': breadcrumb==2 }">Billing</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>3,'current': breadcrumb==3 }">Complete</li>
                         </ul>
 
                         <div data-ng-include="'guest/signup/personal_info/personal_info.tpl.html'" data-ng-if="breadcrumb===0"></div>
