@@ -6,7 +6,7 @@ angular.module('contacts')
     {
         console.log('ContactDetailControllerdm');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-        
+       // alert($scope.seletedCustomerId);
 
         $rootScope.title = 'Dwellar./ContactDetails';
      
@@ -49,6 +49,44 @@ angular.module('contacts')
        console.log("Error " + error.state);
    }
         );
+
+        if ($scope.seletedCustomerId != "undefined") {
+
+            //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            GetUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            //alert(GetUrl);
+
+            apiService.get(GetUrl).then(function (response) {
+
+                $scope.data = response.data;
+                // alert($scope.data);
+                //   alert($scope.seletedCustomerId);
+
+
+                $scope.Contact_First_Name = $scope.data[0].Contact_First_Name;
+                $scope.Contact_Last_Name = $scope.data[0].Contact_Last_Name;
+                $scope.Contact_Email = $scope.data[0].Contact_Email;
+                $scope.Contact_Phone = $scope.data[0].Contact_Phone;
+                $scope.street1 = $scope.data[0].street1;
+                $scope.Role = $scope.data[0].Role;
+                $scope.zipcode = $scope.data[0].zipcode;
+                $scope.State = $scope.data[0].State;
+                $scope.City = $scope.data[0].City;
+              //$scope.media_url = $scope.data[0].media_url;
+                // alert($scope.media_url);
+
+                if ($scope.data.contact_mobile !== '') {
+                    $scope.mobile = $scope.data.contact_mobile;
+                }
+                if ($scope.data.contact_email !== '') {
+                    $scope.email = $scope.data.contact_Email;
+                }
+            },
+                        function (error) {
+                            deferred.reject(error);
+                            alert("not working");
+                        });
+        }
 
 
       
