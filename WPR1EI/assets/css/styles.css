@@ -3838,7 +3838,9 @@ form.callback  {
 .signup ul.state-bar li.selected:after {
   background-position: -2px -67px;
 }
-
+.signup ul.state-bar li.current {
+     color: #289ff1;
+    }
 
 ul.state-bar {
   list-style: none;
