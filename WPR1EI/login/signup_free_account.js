@@ -22,7 +22,7 @@ angular.module('app.guest.login')
     .config(function config($stateProvider) {
         $stateProvider
             .state('signup_free_account', {
-                url: '/signup-free-account',
+                url: '/signup-free-account?subscriptionType',
                 controller: 'SignupFreeAccountController',
                 templateUrl: 'login/signup_free_account.tpl.html',
 
