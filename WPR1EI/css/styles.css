@@ -833,7 +833,7 @@ div.k-grid-footer {
     border-bottom:1px solid #e1e1e1;
 }
 
-.properties-list .properties-bx .properties-img img {
+.properties-list .properties-bx-inner .properties-img img {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -876,7 +876,7 @@ div.k-grid-footer {
     border-color:#2799e7;    
 }
 
-.properties-list .properties-bx:hover .properties-img img {    
+.properties-list .properties-bx-inner:hover .properties-img img {    
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
@@ -6470,7 +6470,7 @@ div.k-grid-footer {
     width:26px;
     height:23px;
     margin-right:10px;
-    background:url("/images/icons-content.png") center center transparent;
+    /*background:url("/images/icons-content.png") center center transparent;*/
 }
 
 
@@ -6770,7 +6770,7 @@ div.k-grid-footer {
     border-bottom:1px solid #e1e1e1;
 }
 
-.properties-list .properties-bx .properties-img img {
+.properties-list .properties-bx-inner .properties-img img {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -6813,7 +6813,7 @@ div.k-grid-footer {
     border-color:#2799e7;    
 }
 
-.properties-list .properties-bx:hover .properties-img img {    
+.properties-list .properties-bx-inner:hover .properties-img img {    
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
@@ -7341,7 +7341,7 @@ div.k-grid-footer {
 
 .add-input {
     float:left;
-    margin-top:10px;
+    margin-top:3px;
 
 }
 
@@ -7558,7 +7558,7 @@ div.k-grid-footer {
 }
 
 .image-upload-container {
-    margin:0 0 25px;
+    margin:0 0 25px -12px;
 }
 
 .image-upload-container .image-upload-wrap {
@@ -7567,9 +7567,9 @@ div.k-grid-footer {
 }
 
 .image-upload-wrap .image-upload-title {
-    font-size:12px;
-    font-weight:normal;
-    color:#606060;    
+    font-size:14px;
+    font-weight:500;
+    color:#595959;    
     margin-bottom: 7px;
 }
 
@@ -9288,6 +9288,12 @@ form.callback  {
 .form-content .form-bx-1 {
     width:270px;
 }
+.form-content .form-bx-2 {
+    width:270px;
+    margin-top:-21px;
+    margin-left:-10px;
+}
+
 
 
 /*** login start***/ 
@@ -12114,9 +12120,10 @@ LEFT
     
     }
  .login-thanks {
-         max-width: 100%;
+         max-width: 50%;
          max-height: 100%;
          margin: 50px auto;
+       
 
     }
 .organization-btn-thanks {
@@ -13259,4 +13266,20 @@ LEFT
     font-size:12px;
     font-weight: bold;
     text-decoration: underline;
+}
+
+
+.title-thank-you {
+    color: #289ff1;
+}
+
+.process-icons div {
+float:left;
+width:30%;
+
+}
+
+.process-icons 
+{
+    display:block;
 }

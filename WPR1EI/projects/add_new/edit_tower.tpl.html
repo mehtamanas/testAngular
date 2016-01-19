@@ -24,7 +24,7 @@
                                                        }">
                                     <div class="form-group form-bx f-unit">
                                         <label for="">How Many Wings Are There in This Tower?</label>
-                                        <input type="text" class="form-control" autofocus name="floors" placeholder="2"  id="editnewtower_no_of_wings"
+                                        <input type="text" class="form-control" autofocus name="floors" placeholder="Wing No"  id="editnewtower_no_of_wings"
                                                data-ng-model="params.no_of_wings"
                                                minlength="1"
                                                maxlength="10"
@@ -75,7 +75,7 @@
                                     <div class="form-group form-bx">
                                         <label for="">Base Price</label>
                                         <div class="area-f">
-                                            <input type="text" class="form-control" name="bprice" placeholder="26,000" id="editnewtower_base_price"
+                                            <input type="text" class="form-control" name="bprice" placeholder="Base Price" id="editnewtower_base_price"
                                                    data-ng-model="params.base_price"
                                                    minlength="1"
                                                    maxlength="10"
@@ -102,7 +102,7 @@
                                                              }">
                                     <div class="form-group form-bx">
                                         <label for="">Car Park Price</label>
-                                        <input type="text" class="form-control" name="carprice" placeholder="10,00,000" id="editnewtower_car_price"
+                                        <input type="text" class="form-control" name="carprice" placeholder="Car Park Price" id="editnewtower_car_price"
                                                data-ng-model="params.cark_park_price"
                                                minlength="1"
                                                maxlength="10"
@@ -127,7 +127,7 @@
                                     <div class="form-group form-bx">
                                         <label for="">Floor Rise</label>
                                         <div class="area-f">
-                                            <input type="text" class="form-control" name="floorprice" placeholder="260"id="editnewtower_floor_rise"
+                                            <input type="text" class="form-control" name="floorprice" placeholder="Floor Rise"id="editnewtower_floor_rise"
                                                    data-ng-model="params.floor_rise"
                                                    minlength="1"
                                                    maxlength="10"
@@ -155,7 +155,7 @@
                                     <div class="form-group form-bx">
                                         <label for="">Floor Rise Starts From</label>
                                         <div class="area-f">
-                                            <input type="text" class="form-control" name="floorstart" placeholder="15" id="editnewtower_rise_start"
+                                            <input type="text" class="form-control" name="floorstart" placeholder="Floor Rise Starts From" id="editnewtower_rise_start"
                                                    data-ng-model="params.floor_rise_starts_from"
                                                    minlength="1"
                                                    maxlength="10"
@@ -194,12 +194,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="image-upload-link">
-
-
-                                <input type="file" nv-file-select="false" id="editnewtower_uploader1" accept="image/*" nv-file-multiple="false" uploader="uploader">
-
-                            </div>
+                        <div class="image-upload-link">
+                            <div class="browse-title">Browse</div>
+                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                            <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                        </div>
                             </div>
 
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -221,12 +220,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="image-upload-link">
 
-
-                                    <input type="file" nv-file-select="false"id="editnewtower_uploader2" accept="application/zip" nv-file-multiple="false" uploader="uploader1">
-
-                                </div>
+                                    <div class="image-upload-link">
+                                        <div class="browse-title">Browse</div>
+                                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip"  nv-file-select="" uploader="uploader1" />
+                                        <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
+                                    </div>
                                 </div>
 
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
@@ -248,12 +247,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="image-upload-link">
-
-
-                                        <input type="file" nv-file-select="false" id="editnewtower_uploader3" accept="image/*" nv-file-multiple="false" uploader="uploader2">
-
-                                    </div>
+                                        <div class="image-upload-link">
+                                            <div class="browse-title">Browse</div>
+                                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                                            <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p>
+                                        </div>
                                 </div>
 
                     </div>

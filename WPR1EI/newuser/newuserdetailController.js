@@ -2,7 +2,7 @@
 
 
 .controller('newuserdetailController',
-    function ($scope, $state, security, $cookieStore,$modal, apiService, $window, $rootScope) {
+    function ($scope, $state, security, $cookieStore, $modal, apiService, $window, $rootScope, newuserService) {
         console.log('newuserdetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
@@ -1061,19 +1061,19 @@
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
                 attributes:
-{
-    "class": "UseHand",
-    "style": "text-align:right"
-}
+                {
+                    "class": "UseHand",
+                    "style": "text-align:right"
+                }
             }, {
                 field: "assigned_by",
                 title: "Assigned By",
                 width: "120px",
                 attributes:
-{
-    "class": "UseHand",
-    "style": "text-align:center"
-}
+            {
+                "class": "UseHand",
+                "style": "text-align:center"
+            }
             }]
         };
 
@@ -1083,6 +1083,26 @@
             else
                 clearFilters();
 
+        };
+
+
+
+        $scope.openAddPopup = function () {
+            //   alert("abc");
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'newuser/Projects/addProject.tpl.html',
+                backdrop: 'static',
+                controller: AddProjectController,
+                size: 'md',
+                resolve: {
+                    newuserService: newuserService,
+                    newuserData: {
+                        userId: window.sessionStorage.selectedCustomerID,
+                        orgId: $cookieStore.get('orgID')
+                    }
+                }
+            });
         };
 
 

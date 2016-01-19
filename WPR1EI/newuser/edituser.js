@@ -29,6 +29,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.state1 = response.data[0].state_id;
             $scope.params.state = response.data[0].state_id;
             $scope.city1 = response.data[0].city_id;
+            $scope.params.city = response.data[0].city_id;
         },
                    function (error) {
                        alert("not working");
@@ -271,6 +272,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
         apiService.post("User/Edit", postData).then(function (response) {
             var loginSession = response.data;
+            $modalInstance.dismiss();
+            $scope.openSucessfullPopup();
           
         },
         function (error) {
@@ -323,9 +326,9 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
        function (error) {
 
        });
-        $modalInstance.dismiss();
-        $scope.openSucessfullPopup();
-        $rootScope.$broadcast('REFRESH', 'newuser');
+       // $modalInstance.dismiss();
+        //$scope.openSucessfullPopup();
+       // $rootScope.$broadcast('REFRESH', 'newuser');
 
 
 
@@ -338,6 +341,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                 size: 'md',
                 resolve: { items: { title: "User" } }
             });
+            $rootScope.$broadcast('REFRESH', 'summary');
         }
 
     }

@@ -122,7 +122,7 @@
                  function (error) {
 
                  });
-
+                    $scope.total = tot;
                     $modalInstance.dismiss();
 
                 },
@@ -225,13 +225,13 @@ function (error) {
         if (isValid) {
 
 
-            //new paymentCreate($scope.params).then(function (response) {
-            //    console.log(response);
-            //    $scope.showValid = false;
-            //    $state.go('guest.signup.thanks');
-            //}, function (error) {
-            //    console.log(error);
-            //});
+            new paymentCreate($scope.params).then(function (response) {
+                console.log(response);
+                $scope.showValid = false;
+                $state.go('guest.signup.thanks');
+            }, function (error) {
+                console.log(error);
+            });
 
             $scope.showValid = false;
 

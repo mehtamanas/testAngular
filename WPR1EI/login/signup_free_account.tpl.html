@@ -58,10 +58,10 @@
 
 
                         <ul class="state-bar" data-ng-if="breadcrumb<=2">
-                            <li data-ng-class="{ 'selected': breadcrumb>=0 }">Personal Info</li>
-                            <li data-ng-class="{ 'selected': breadcrumb>=1 }">Organization</li>
-                            <li data-ng-class="{ 'selected': breadcrumb>=2 }">Billing</li>
-                            <li data-ng-class="{ 'selected': breadcrumb>=3 }">Complete</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>0, 'current': breadcrumb==0 }">Personal Info</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>1,'current': breadcrumb==1 }">Organization</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>2,'current': breadcrumb==2 }">Billing</li>
+                            <li data-ng-class="{ 'selected': breadcrumb>3,'current': breadcrumb==3 }">Complete</li>
                         </ul>
 
                         <div data-ng-include="'guest/signup/personal_info/personal_info.tpl.html'" data-ng-if="breadcrumb===0"></div>
@@ -88,8 +88,8 @@
                                     }">
                                             <div class="col-xs-10">
                                                 <label class="label-group">
-                                                    <input type="text" name="firstName" class="form-control" id="signup_fname" 
-                                                           autofocus
+                                                    <input  type="text" autofocus name="firstName" class="form-control" id="signup_fname" 
+                                                          
                                                            placeholder="First Name"
                                                            data-ng-model="params.first_name"
                                                            alphabets-only
@@ -449,7 +449,7 @@
                                                        minlength="1"
                                                        maxlength="40"
                                                        ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                                                       ng-model-options="{ updateOn: 'blur' }" />
+                                                       required />
                                             </div>
                                             <!--</label>-->
 
@@ -490,56 +490,7 @@
                                 </form>
                             </div>
 
-                            <!--<div class="request-call-back">
-                                <div class="form-group">
-                                    <div class="title">
-                                        <b>Request a call Back</b>
-                                    </div>
-                                    <p>If you have any request fill in the below details</p>
-                                </div>
-                                <div class="ionic">
-                                    <div class="list list-inset">
-                                        <div class="form-group">
-                                            <label class="item item-input">
-                                                <input type="text" placeholder="Name">
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="item item-input">
-                                                <input type="text" placeholder="Company">
-                                            </label>
-                                        </div>
-                                        <div class="form-group"
-                                                 data-ng-class="{
-                                        'has-error' : newForm.Email.$invalid && (!newForm.Email.$pristine || showValid) && !newForm.Email.$focus,
-                                        'has-success': newForm.Email.$valid && !newForm.Email.$pristine && !newForm.Email.$focus
-                                    }">
-                                                <label class="item item-input">
-                                                    <input type="text" placeholder="Email" id=""
-                                                           data-ng-model="params.Email"
-                                                           data-ng-pattern="patternRegexs.email"
-                                                           ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                                                           ng-model-options="{ updateOn: 'blur' }"
-                                                           required />
-                                                </label>
-                                           
-                                                <div class="text-danger"
-                                                     data-ng-if="newForm.Email.$invalid && (!newForm.Email.$pristine || showValid) && !newForm.Email.$focus">
-                                                    {{ 'invalid email' | translate }}
-                                                </div>
-                                            </div>
-                                            
-                                        <div class="form-group">
-                                            <label class="item item-input">
-                                                <input type="text" placeholder="Phone">
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <button class="btn submit-btn" id="btn_signup_sub" ng-click="call_back_info()">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+                            
                         </div>
                     </div>
                 </div>

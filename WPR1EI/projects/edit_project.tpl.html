@@ -33,11 +33,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-
-                            </div>
+                           <div class="image-upload-link">
+                               <div class="browse-title">Browse</div>
+                               <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                               <<p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                           </div>
                         </div>
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -61,8 +61,8 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse" id="editproject_uploader2"  accept="image/*" nv-file-select="" uploader="uploader1" />
-
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+                                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
                             </div>
                         </div>
 
@@ -87,8 +87,8 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse"  id="editproject_uploader3"  accept="image/*" nv-file-select="" uploader="uploader2" />
-
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                                <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p>
                             </div>
                         </div>
 
@@ -113,7 +113,8 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse" id="editproject_uploader4"  accept="image/*" nv-file-select="" uploader="uploader3" />
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader3" />
+                                <p ng-show="uploader3.queue.length"> {{uploader3.queue[0]._file.name}}</p>
                             </div>
                         </div>
                     </div>

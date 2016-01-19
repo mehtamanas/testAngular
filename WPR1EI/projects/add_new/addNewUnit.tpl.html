@@ -228,9 +228,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="image-upload-link">
-                                                    <input type="file" nv-file-select="false" id="addnewunit_uploader1" nv-file-multiple="false"  accept="image/*" uploader="uploader">
-
-
+                                                    <div class="browse-title">Browse</div>
+                                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                                    <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                                                 </div>
 
                                             </div>
@@ -260,11 +260,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="image-upload-link">
-
-
-                                                    <input type="file" nv-file-select="false" id="addnewunit_uploader2" nv-file-multiple="false" accept="application/zip" uploader="uploader1">
-
-
+                                                    <div class="browse-title">Browse</div>
+                                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                                                    <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
                                                 </div>
                                             </div>
                                        </div>

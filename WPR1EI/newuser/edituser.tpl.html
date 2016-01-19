@@ -36,8 +36,8 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" value="Browse" nv-file-select="" accept="image/*" uploader="uploader" />
-
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                                     </div>
 
                                 </div>
-                                <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a href="javascript:">remove</a></div>
+                                <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)" style="margin-top:-28px"><a href="javascript:">remove</a></div>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                                         {{ 'invalid email address' | translate }}
                                     </div>
                                 </div>
-                                <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a href="javascript:">remove</a></div>
+                                <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)" style="margin-top:-28px"><a href="javascript:">remove</a></div>
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                                          data-ng-if="addNewForm.Address.$invalid && (!addNewForm.Address.$pristine || showValid) && !addNewForm.Address.$focus">
                                         {{ 'Please enter valid address' | translate }}
                                     </div>
-                                </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">remove</a></div>
+                                </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top:-28px"><a href="javascript:">remove</a></div>
                             </div>
                         </div>
 
@@ -239,8 +239,8 @@
                                 <input type="text" name="Pin" class="form-control" id="edituser_zip"
                                        placeholder="Pin"
                                        data-ng-model="params.zip_code"
-                                       minlength="1"
-                                       maxlength="7"
+                                       minlength="6"
+                                       maxlength="6"
                                        input-focus
                                        ng-pattern="/^[0-9]{1,7}$/"
                                        required />

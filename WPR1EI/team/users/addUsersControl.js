@@ -1,11 +1,11 @@
 /**
  * Created by User on 10/28/2015.
  */
-var AddUsersController = function ($scope, $q, $cookieStore, teamService, teamData,$modalInstance) {
-  //  alert("ff");
+var AddUsersController = function ($scope, $q, $cookieStore, teamService, teamData, $modalInstance) {
+    //  alert("ff");
     $scope.usersInTeam = undefined;
     $scope.orgUsers = undefined;
-   
+
     var currentlyLoggedInUserId = $cookieStore.get('userId');
     //alert(currentlyLoggedInUserId);
     var loadUsers = function () {
@@ -13,16 +13,17 @@ var AddUsersController = function ($scope, $q, $cookieStore, teamService, teamDa
         // Use $q.all to get both the result and then process the result
         var teamPromise = teamService.getUsersInTeam(teamData.teamId);
         var orgPromise = teamService.getOrgUsers(teamData.orgId);
-      //  alert(teamPromise);
+        //  alert(teamPromise);
         //alert(orgPromise);
         var promises = [teamPromise, orgPromise];
 
-        $q.all(promises).then(function (values) { $scope.usersInTeam = values[0].data;
-            $scope.orgUsers = _.filter(values[1].data, {status: 'Active'});
+        $q.all(promises).then(function (values) {
+            $scope.usersInTeam = values[0].data;
+            $scope.orgUsers = _.filter(values[1].data, { status: 'Active' });
 
             // Now, find out the users already in the team and mark them
             angular.forEach($scope.usersInTeam, function (existingUser) {
-                var existingOrgUser = _.findWhere($scope.orgUsers, {user_id: existingUser.user_id});
+                var existingOrgUser = _.findWhere($scope.orgUsers, { user_id: existingUser.user_id });
                 if (existingOrgUser) existingOrgUser.isTeamMember = true;
             })
         });

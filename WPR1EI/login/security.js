@@ -89,7 +89,11 @@ angular.module('security', [
                 });
             },
             function (error) {
-                alert(error.data.Message);
+
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
                 deferred.reject(error);
                 return deferred.promise;
             });

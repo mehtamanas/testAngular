@@ -132,7 +132,7 @@ angular.module('app.guest.login')
                 $cookieStore.put('Street_3', $scope.params.street_3);
                 $cookieStore.put('City', $scope.params.city);
                 $cookieStore.put('State', $scope.params.state);
-                $cookieStore.put('Zip_code', $scope.params.zip_code);
+                $cookieStore.put('zip_code', $scope.params.zip_code);
                 $cookieStore.put('Country', $scope.params.country);
                 $cookieStore.put('who_am_i', $scope.params.who_am_i);
 
@@ -156,7 +156,10 @@ angular.module('app.guest.login')
                 
              //   alert('Type : ' + $cookieStore.get('who_am_i'));
                 $cookieStore.get('who_am_i')
-                $state.go('bill');
+                if ($rootScope.subscriptionType == "Basic")
+                    $state.go('thanks');
+                else
+                    $state.go('bill');
 
 
             }

@@ -2,8 +2,8 @@
  * Created by dwellarkaruna on 27/10/15.
  */
 angular.module('application')
-    .service('applicationService', ['$http',
-        function ($http) {
+    .service('applicationService', ['$http','apiService',
+        function ($http, apiService) {
 
             this.get = function(url){
               return $http.get(url);

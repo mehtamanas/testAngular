@@ -37,10 +37,9 @@
                                     </div>
                                 </div>
                                 <div class="image-upload-link">
-
-                                    <input type="file" nv-file-select="false" id="gallery_uploader1" nv-file-multiple="false" accept="application/pdf" uploader="uploader">
-
-
+                                    <div class="browse-title">Browse</div>
+                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/pdf" nv-file-select="" uploader="uploader" />
+                                    <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                                 </div>
                             </div>
                         </div>
@@ -69,10 +68,9 @@
                                 </div>
                             </div>
                             <div class="image-upload-link">
-
-                                <input type="file" nv-file-select="false" id="addnewfloor_uploader2" accept="application/pdf" nv-file-multiple="false" uploader="uploader1">
-
-
+                                <div class="browse-title">Browse</div>
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/pdf"  nv-file-select="" uploader="uploader1" />
+                                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
                             </div>
                         </div>
 

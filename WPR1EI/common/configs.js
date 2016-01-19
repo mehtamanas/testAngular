@@ -7,10 +7,10 @@ angular.module('configs', [])
 
 .constant('CONFIGS', {
     baseURL: function () {
-        return 'https://dw-webservices-uat2.azurewebsites.net/';
+        return 'https://dw-webservices-uat.azurewebsites.net/';
     },
     uploadURL: function () {
-        return 'https://dw-webservices-uat2.azurewebsites.net/MediaElement/upload';
+        return 'https://dw-webservices-uat.azurewebsites.net/MediaElement/upload';
     },
     ipTraceUrl: function () {
         return 'http://ipinfo.io/json';

@@ -22,7 +22,7 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            return '|x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -47,7 +47,7 @@
             class_id: window.sessionStorage.selectedCustomerID,
             media_name: uploadResult.Name,
             class_type: "Project",
-            media_type: "View_Type_Full_2D",
+            media_type: "Panorma_zip_Full_2D",
 
         };
 

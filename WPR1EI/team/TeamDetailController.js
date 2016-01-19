@@ -6,10 +6,10 @@
         console.log('TeamDetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         $rootScope.title = 'Dwellar./TeamDetails';
+        var orgID = $cookieStore.get('orgID');
 
        // //Audit log start
        // $scope.params = {
-
        //     device_os: "windows10",
        //     device_type: "mobile",
        //     device_mac_id: "34:#$::43:434:34:45",
@@ -23,8 +23,6 @@
        //     organization_id: $cookieStore.get('orgID'),
        //     User_ID: $cookieStore.get('userId')
        // };
-
-
        // AuditCreate = function (param) {
 
        //     apiService.post("AuditLog/Create", param).then(function (response) {
@@ -32,113 +30,221 @@
 
        //     },
        //function (error) {
-
        //});
        // };
        // AuditCreate($scope.params);
 
         //end
 
+        TeamUrl = "Team/GetById/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+        apiService.get(TeamUrl).then(function (response) {
+            $scope.main = response.data;
+            $scope.image = $scope.main[0];
 
+        },
+   function (error) {
+       console.log("Error " + error.state);
+   }
+        );
 
+        if ($scope.seletedCustomerId != "undefined") {
 
-
-        if ($scope.seletedCustomerId !== '') {
-
+            //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            //alert(GetUrl);
 
             apiService.get(GetUrl).then(function (response) {
+
                 $scope.data = response.data;
-                // alert($scope.data[0].name);
+                // alert($scope.data);
+                //   alert($scope.seletedCustomerId);
+
+
                 $scope.name = $scope.data[0].name;
                 $scope.description = $scope.data[0].description;
-
-                //$scope.data = response.data;
-                //alert($scope.data[0].first_name);
-                //$scope.first_name = $scope.data[0].first_name;
-                //$scope.last_name = $scope.data[0].last_name;
-                //$scope.people_type = $scope.data[0].people_type;
-                //$scope.date_of_birth = $scope.data[0].date_of_birth;
-                //$scope.who_am_i = $scope.data[0].who_am_i;
-                if ($scope.data[0].contact_mobile !== '') {
-                    $scope.mobile = $scope.data[0].contact_mobile;
+             
+                if ($scope.data.contact_mobile !== '') {
+                    $scope.mobile = $scope.data.contact_mobile;
                 }
-                if ($scope.data[0].contact_email !== '') {
-                    $scope.email = $scope.data[0].contact_Email;
+                if ($scope.data.contact_email !== '') {
+                    $scope.email = $scope.data.contact_Email;
                 }
             },
-
                         function (error) {
                             deferred.reject(error);
                             alert("not working");
                         });
         }
 
-       
-        $scope.openAddPopup = function () {
-         //   alert("abc");
-            var modalInstance = $modal.open({
-                
-                animation: true,
-                templateUrl: 'team/users/addUsers.html',
-                backdrop: 'static',
-                controller: AddUsersController,
-                windowClass: 'addUser',
-                resolve: {
-                    teamService: teamService,
-                    teamData: {
-                        teamId: window.sessionStorage.selectedCustomerID,
-                        orgId: $cookieStore.get('orgID')
-                    }
-                }
-            });
-        };
 
 
-        $scope.goToDocument = function () {
-            $state.go('loggedIn.modules.team.document');
-        };
-
-        $scope.goToUpload = function () {
-            $state.go('loggedIn.modules.contact.upload');
-        };
-
-        //$scope.goAddNew = function () {
-        //    //alert(selected_tab);
-        //    $scope.selected_tab = $window.selected_tab;
-        //    if (selected_tab == "PAYMENT") {
-        //        $state.go('loggedIn.modules.people.add_new_payment');
-        //    } else if (selected_tab == "ENGAGEMENT") {
-        //       $state.go('loggedIn.modules.people.add_new_engagement');
-        //    } else if (selected_tab == "TASK") {
-        //        $state.go('loggedIn.modules.people.add_new_task');
-        //    } else if (selected_tab == "PROPERTYLIST") {
-        //        $state.go('loggedIn.modules.people.add_new_propertylist');
-        //    } else if (selected_tab == "DOCUMENT") {
-        //        $state.go('loggedIn.modules.people.add_new_document');
-        //    } else if (selected_tab == "QUOTES") {
-        //        $state.go('loggedIn.modules.people.add_new_quotes');
-        //    }
-        //    else if (selected_tab == "ASSIGNMENT_TO") {
-        //        $state.go('loggedIn.modules.people.add_new_assign');
-        //    } else if (selected_tab == "NOTES") {
-        //        $state.go('loggedIn.modules.people.add_new_notes');
-        //    }
-
-        //};
-
-        var orgID = $cookieStore.get('orgID');
+        //grid functionality start
         $scope.ProjectGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl +"Team/GetProjectByTeam/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Team/GetProjectByTeam/" + $scope.seletedCustomerId
                 },
                 pageSize: 5
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
 
-                //group: {
-                //    field: 'sport'
-                //}
+            columns: [{
+                field: "name",
+                title: "Name",
+                width: "120px"
+            }, {
+
+                field: "description",
+                title: "Description",
+                width: "120px",
+               
+            }]
+        };
+
+        $scope.UserGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: apiService.baseUrl +"Team/GetUsersByTeam/" + $scope.seletedCustomerId
+                },
+                pageSize: 5
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            }, schema: {
+                model: {
+                    fields: {
+                       
+                        date: { type: "date" },
+                       
+                    }
+                }
+            },
+            columns: [{
+                template: "<img height='40px' width='40px' src='#= media_url #'/>" +
+                "<span style='padding-left:10px' class='property-photo'> </span>",
+                title: "Picture",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+
+                }
+            }, {
+                field: "name",
+                title: "First Name",
+                width: "120px",
+
+            }, {
+                field: "account_email",
+                title: "Email",
+                width: "120px",
+
+            }, {
+                field: "account_phone",
+                title: "Phone",
+                width: "120px",
+
+            },{
+                field: "date",
+                title: "Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}'
+            }]
+        };
+
+        $scope.PropertyListGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read:apiService.baseUrl + "Team/GetTeamPropertyList/" + $scope.seletedCustomerId
+                },
+                pageSize: 5,
+                schema: {
+                    model: {
+                        fields: {
+                            listing_date: { type: "date" },
+                            last_updated_date: { type: "date" }
+                        }
+                    }
+                }
+
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+
+            columns: [{
+                field: "name",
+                title: "Name",
+                width: "120px",
+            }, {
+
+                field: "listing_date",
+                title: "Listing Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}'
+            }, {
+
+                field: "last_updated_date",
+                title: "Last Updated",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}'
+            }, {
+
+                field: "built_up_area",
+                title: "Built Up",
+                width: "120px",
+
+            },{
+                field: "super_built_up_area",
+                title: "Super Built Up ",
+                width: "120px",
+
+              }]
+        };
+
+        $scope.PeopleGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: apiService.baseUrl + "Team/GetPeopleByTeam/" + $scope.seletedCustomerId
+                },
+                pageSize: 5,
+                schema: {
+                    model: {
+                        fields: {
+                            date_of_birth: { type: "date" }
+                        }
+                    }
+                }
+
             },
             groupable: true,
             sortable: true,
@@ -152,24 +258,103 @@
                 buttonCount: 5
             },
             columns: [{
-                field: "name",
+                field: "first_name",
+                title: "First Name",
+                width: "50px",
+
+            }, {
+                field: "last_name",
+                title: "Last Name",
+                width: "50px",
+
+            }, {
+                field: "people_type",
+                title: "People Type",
+                width: "50px",
+
+            }, {
+                field: "date_of_birth",
+                title: "Date Of Birth",
+                width: "50px",
+
+                format: '{0:dd/MM/yyyy}'
+            }]
+        };
+
+        $scope.TaskGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByTeamId/" + $scope.seletedCustomerId + "/Team"
+                },
+                pageSize: 5,
+
+
+                schema: {
+                    model: {
+                        fields: {
+                            created_date_time: { type: "date" },
+                            start_date_time: { type: "date" },
+                            end_date_time: { type: "date" }
+                        }
+                    }
+                }
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [{
+                field: "team_name",
                 title: "Name",
                 width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
+
+            }, {
+                field: "priority",
+                title: "Priority",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}',
+
             }, {
                 field: "description",
                 title: "Description",
                 width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
+                format: '{0:dd/MM/yyyy}',
+
+            },
+            {
+                field: "summary",
+                title: "Summary",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}',
+
+            },
+            {
+                field: "text",
+                title: "Text",
+                width: "120px",
+                format: '{0:dd/MM/yyyy}',
+
+            },
+            {
+                template: "<a id='iconEdit' ng-click='openEditTask()' data-toggle='modal' style='cursor:pointer'><span class='edit-icon'></span></a>",
+                width: "60px",
+                attributes:
+                  {
+                      "class": "UseHand",
+                  }
             }]
         };
 
+        //end
+       
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
@@ -221,370 +406,72 @@
 
         }
 
-
         function clearFilters() {
             var gridData = $("#DocumentGrid").data("kendoGrid");
             gridData.dataSource.filter({});
         }
-
-        $scope.UserGrid = {
-            dataSource: {
-
-                type: "json",
-                transport: {
-                    read: apiService.baseUrl +"Team/GetUsersByTeam/" + $scope.seletedCustomerId
-
-                },
-
-                pageSize: 5
-
-                //group: {
-                //    field: 'sport'
-                //}
-            },
-
-            groupable: true,
-            sortable: true,
-            selectable: "multiple",
-            reorderable: true,
-            resizable: true,
-            filterable: true,
-            pageable: {
-                refresh: true,
-                pageSizes: true,
-                buttonCount: 5
-            },
-            columns: [{
-                field: "first_name",
-                title: "First Name",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "last_name",
-                title: "Last Name",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "account_email",
-                title: "Email",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "account_phone",
-                title: "Phone",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:right"
-                }
-            },
-            {
-                field: "account_country",
-                title: "Country",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "status",
-                title: "Status",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }]
-        };
-
-
-
-
-        $scope.PropertyListGrid = {
-            dataSource: {
-                type: "json",
-                transport: {
-
-                    //read: apiService.baseUrl +"PersonContactDevice/GetById?ID=" + orgID
-
-                    read: apiService.baseUrl +"Team/GetTeamPropertyList/" + $scope.seletedCustomerId
-                },
-                pageSize: 5,
-                schema: {
-                    model: {
-                        fields: {
-
-                            listing_date: { type: "date" },
-                            last_updated_date: { type: "date" }
-
-
-                        }
-                    }
-                }
-
-                //group: {
-                //    field: 'sport'
-                //}
-            },
-            groupable: true,
-            sortable: true,
-            selectable: "multiple",
-            reorderable: true,
-            resizable: true,
-            filterable: true,
-            pageable: {
-                refresh: true,
-                pageSizes: true,
-                buttonCount: 5
-            },
-
-            columns: [{
-                field: "name",
-                title: "Name",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "listing_date",
-                title: "Listing Date",
-                width: "120px",
-                format: '{0:dd/MM/yyyy}',
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:right"
-                }
-            }, {
-                field: "last_updated_date",
-                title: "Last Updated",
-                width: "120px",
-               format: '{0:dd/MM/yyyy}',
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:right"
-                }
-            }, {
-                field: "built_up_area",
-                title: "Built Up",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:right"
-                }
-            },
-                {
-                    field: "super_built_up_area",
-                    title: "Super Built Up ",
-                    width: "120px",
-                    attributes: {
-                        "class": "UseHand",
-                        "style": "text-align:right"
-                    }
-                }]
-
-        };
-
-        $scope.PeopleGrid = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    ////  read: apiService.baseUrl +"PersonContactDevice/GetById?ID=" + orgID
-                    //  // read:" https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    //  read: " https://dw-webservices-uat.azurewebsites.net/Contact/GetQuote/4a0ef2c4-09cc-46ba-abc3-8970f5eb6ee8"
-                    read: apiService.baseUrl +"Team/GetPeopleByTeam/" + $scope.seletedCustomerId
-                },
-                pageSize: 5,
-                schema: {
-                    model: {
-                        fields: {
-
-                            date_of_birth: { type: "date" }
-                           }
-                    }
-                }
-
-                //group: {
-                //    field: 'sport'
-                //}
-            },
-            groupable: true,
-            sortable: true,
-            selectable: "multiple",
-            reorderable: true,
-            resizable: true,
-            filterable: true,
-            pageable: {
-                refresh: true,
-                pageSizes: true,
-                buttonCount: 5
-            },
-            columns: [{
-                field: "first_name",
-                title: "First Name",
-                width: "50px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "last_name",
-                title: "Last Name",
-                width: "50px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "people_type",
-                title: "People Type",
-                width: "50px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "date_of_birth",
-                title: "Date Of Birth",
-                width: "50px",
-                format: '{0:dd/MM/yyyy}',
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:right"
-                }
-            }]
-        };
-
-        $scope.TaskGrid = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: apiService.baseUrl +"Team/GetTaskByTeam/" + $scope.seletedCustomerId
-
-                },
-                pageSize: 5,
-                schema: {
-                    model: {
-                        fields: {
-
-                            created_date_time: { type: "date" },
-                            start_date_time: { type: "date" },
-                            end_date_time: { type: "date" }
-
-                        }
-                    }
-                }
-
-                //group: {
-                //    field: 'sport'
-                //}
-            },
-            groupable: true,
-            sortable: true,
-            selectable: "multiple",
-            reorderable: true,
-            resizable: true,
-            filterable: true,
-            pageable: {
-                refresh: true,
-                pageSizes: true,
-                buttonCount: 5
-            },
-            columns: [{
-                field: "name",
-                title: "Name",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "description",
-                title: "Description",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            }, {
-                field: "status",
-                title: "Status",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            },
-            {
-                field: "priority",
-                title: "Priority",
-                width: "120px",
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            },
-            {
-                field: "created_date_time",
-                title: "Created Date",
-                width: "120px",
-               
-                format: '{0:dd/MM/yyyy}',
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:right"
-                }
-            },
-             {
-                 field: "start_date_time",
-                 title: "Start Date",
-                 width: "120px",
-                
-                 format: '{0:dd/MM/yyyy}',
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:right"
-                 }
-             },
-             {
-                 field: "end_date_time",
-                 title: "End Date",
-                 width: "120px",
-                 format: '{0:dd/MM/yyyy}',
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:right"
-                 }
-             },
-             {
-                 field: "add_reminder",
-                 title: "Reminder",
-                 width: "120px",
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:right"
-                 }
-             }]
-        };
 
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
             else
                 clearFilters();
+        };
 
+        //API functionality start
+        if ($scope.seletedCustomerId !== '') {
+            GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            apiService.get(GetUrl).then(function (response) {
+                $scope.data = response.data;
+                $scope.name = $scope.data[0].name;
+                $scope.description = $scope.data[0].description;
+            },
+              function (error) {
+                  deferred.reject(error);
+                  alert("not working");
+              });
+        }
+        //end
+
+        //popup functionality start
+        $scope.openAddPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'team/users/addUsers.html',
+                backdrop: 'static',
+                controller: AddUsersController,
+                windowClass: 'addUser',
+                resolve: {
+                    teamService: teamService,
+                    teamData: {
+                        teamId: window.sessionStorage.selectedCustomerID,
+                        orgId: $cookieStore.get('orgID')
+                    }
+                }
+            });
+        };
+
+        $scope.openAddNewTask = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'team/add_new_task.tpl.html',
+                backdrop: 'static',
+                controller: AddNewTaskTeam,
+                size: 'md'
+            });
         };
 
 
 
 
+        $scope.openEditTask = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'team/edit_task.html',
+                backdrop: 'static',
+                controller: EditTaskTeam,
+                size: 'md'
+            });
+        };
+        //end
     });

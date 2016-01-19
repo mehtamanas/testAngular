@@ -31,11 +31,12 @@
                                                ng-pattern="/^[\w -]*$/"
                                                input-focus
                                                required />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.schemename.$invalid && (!newForm.schemename.$pristine || showValid) && !newForm.schemename.$focus">
+                                            {{ 'Please enter Payment Scheme name ' | translate }}
+                                        </div>
                                     </div>
-                                    <div class="text-danger"
-                                         data-ng-if="newForm.schemename.$invalid && (!newForm.schemename.$pristine || showValid) && !newForm.schemename.$focus">
-                                        {{ 'Please enter Payment Scheme name ' | translate }}
-                                    </div>
+                                   
                                 </div>
                           
 
@@ -44,7 +45,7 @@
                                                  'has-error' : newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus,
                                                  'has-success': newForm.baserate.$valid && !newForm.baserate.$pristine && !newForm.baserate.$focus
                                                                    }">
-                                <div class="form-group form-bx form-bx-1">
+                                <div class="form-group form-bx form-bx-2">
                                     <label for="">Base Rate For Scheme</label>
                                     <div class="area-f">
                                         <input class="form-control" name="baserate" id="addnewpayement_base_rate"
@@ -56,17 +57,20 @@
                                                input-focus
                                                required />
                                         <span class="area-txt">/sq.ft</span>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus">
+                                            {{ 'Please enter Base Rate' | translate }}
+                                        </div>
                                     </div>
+                                   
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus">
-                                    {{ 'Please enter Base Rate' | translate }}
-                                </div>
+
                             </div>
                         
                             </div>
                        
-
+                               <br />
+                                <br />
                                 <div class="clearfix form-bx-ht" ng-repeat="choice in choices2">
 
                                     <div class="form-group"
@@ -84,11 +88,12 @@
                                                    ng-pattern="/^[\w -]*$/"
                                                    input-focus
                                                    required />
+                                            <div class="text-danger"
+                                                 data-ng-if="newForm.Milestone.$invalid && (!newForm.Milestone.$pristine || showValid) && !newForm.Milestone.$focus">
+                                                {{ 'Please enter Valid Milestone' | translate }}
+                                            </div>
                                         </div>
-                                        <div class="text-danger"
-                                             data-ng-if="newForm.Milestone.$invalid && (!newForm.Milestone.$pristine || showValid) && !newForm.Milestone.$focus">
-                                            {{ 'Please enter Valid Milestone' | translate }}
-                                        </div>
+                                     
                                         </div>
 
                                     <div class="form-group"
@@ -96,7 +101,7 @@
                                                          'has-error' : newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus,
                                                          'has-success': newForm.Percentage.$valid && !newForm.Percentage.$pristine && !newForm.Percentage.$focus
                                                                     }">
-                                        <div class="form-group form-bx form-bx-1">
+                                        <div class="form-group form-bx form-bx-2">
                                             <label for=""><b>Percent</b></label>
                                             <div class="area-f">
                                                 <input class="form-control"
@@ -108,15 +113,17 @@
                                                        input-focus
                                                        required />
                                                 <span class="area-txt">%</span>
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus">
+                                                    {{ 'Please enter valid percentage' | translate }}
+                                                </div>
                                             </div>
+
                                         </div>
-                                        <div class="text-danger"
-                                             data-ng-if="newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus">
-                                            {{ 'Please enter valid percentage' | translate }}
-                                        </div>
+                                   
                                      </div>
 
-                                        <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">Remove</a></div>
+                                        <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top: -92px;margin-left: 254px;"><a href="javascript:" style="float:right">Remove</a></div>
 
                                     </div>
                                 </div><!-- payment-modal-wrap ended -->

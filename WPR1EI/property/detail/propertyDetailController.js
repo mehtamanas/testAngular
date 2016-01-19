@@ -6,9 +6,9 @@ angular.module('property')
 
 
 
-    .controller('PropertyDetailController', ['$scope', 'propertyService', 'appConstants', '$sce', '$modal', '$window','apiService','$cookieStore','$rootScope',
+    .controller('PropertyDetailController', ['$scope', 'propertyService', '$sce', '$modal', '$window', 'apiService', '$cookieStore', '$rootScope',
            
-    function ($scope, propertyService, appConstants, $sce, $modal, apiService, $window, $cookieStore, $rootScope) {
+    function ($scope, propertyService, $sce, $modal, apiService, $window, $cookieStore, $rootScope) {
             
   
             $rootScope.title = 'Dwellar./PropertyDetails';
@@ -88,7 +88,7 @@ angular.module('property')
                     pageSize: 20,
                     type: "json",
                     transport: {
-                        read: appConstants.APIBaseURL + 'Contact/GetContactByProperty/' + propertyId
+                        read: apiService.baseUrl + 'Contact/GetContactByProperty/' + propertyId
                     },
                     schema: {
                         model: {

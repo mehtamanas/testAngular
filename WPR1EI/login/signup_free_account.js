@@ -22,7 +22,7 @@ angular.module('app.guest.login')
     .config(function config($stateProvider) {
         $stateProvider
             .state('signup_free_account', {
-                url: '/signup-free-account',
+                url: '/signup-free-account?subscriptionType',
                 controller: 'SignupFreeAccountController',
                 templateUrl: 'login/signup_free_account.tpl.html',
 
@@ -70,38 +70,23 @@ angular.module('app.guest.login')
             hash: $scope.hash
         };
 
-
-
-
-
-
-        $scope.openSalesPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'login/sales_enquiries.tpl.html',
-                backdrop: 'static',
-                controller: SalesPopUpController,
-
-            });
-        };
-        $scope.addNew = function (isValid) {
+       
+        $scope.addPersonalInfo = function (isValid) {
             $scope.showValid = true;
             if (isValid) {
 
-
-                new ProjectCreate($scope.params).then(function (response) {
-                    console.log(response);
-                    $scope.showValid = false;
-                    $state.go('guest.signup.thanks');
-                }, function (error) {
-                    console.log(error);
-                });
-
+                $cookieStore.put('First_Name', $scope.params.first_name);
+                $cookieStore.put('Last_Name', $scope.params.last_name);
+                $cookieStore.put('Account_Email', $scope.params.account_email);
+                $cookieStore.put('Phone', $scope.params.account_phone);
+                $cookieStore.put('Account_Country', $scope.params.account_country);
+                $cookieStore.put('Hash', $scope.params.Password);
+                $state.go('organization');
                 $scope.showValid = false;
-
             }
 
-        }
+        };
+
 
 
         $scope.callparam = {
@@ -118,112 +103,105 @@ angular.module('app.guest.login')
         };
 
         $scope.call_back_info = function () {
-           // alert("submit successfully");
-            new ProjectCreate($scope.callparam).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
+
+            projectUrl = "callback/Create";
+            ProjectCreate = function (callparam) {
+
+                apiService.post(projectUrl, callparam).then(function (response) {
+                    var loginSession = response.data;
+                    alert("Thank You We Will Call Back to Soon.....!!");
+                    $modalInstance.dismiss();
+                },
+           function (error) {
+               alert("Error " + error.state);
+           });
+            };
+
 
 
 
         };
 
-        projectUrl = "callback/Create";
-        ProjectCreate = function (callparam) {
-            // alert(param.name);
-            apiService.post(projectUrl, callparam).then(function (response) {
-                var loginSession = response.data;
-                alert("Thank You We Will Call Back to Soon.....!!");
-                $modalInstance.dismiss();
-            },
-       function (error) {
-           alert("Error " + error.state);
-       });
-        };
 
-       
 
-        $scope.addNew = function (isValid) {
+        $scope.addPersonalInfo1 = function (isValid) {
             $scope.showValid = true;
             if (isValid) {
 
 
-                new ProjectCreate($scope.callparam).then(function (response) {
-                    console.log(response);
-                    $scope.showValid = false;
-                    $state.go('guest.signup.thanks');
-                }, function (error) {
-                    console.log(error);
-                });
+                //new ProjectCreate($scope.callparam).then(function (response) {
+                //    console.log(response);
+                //    $scope.showValid = false;
+                //    $state.go('guest.signup.thanks');
+                //}, function (error) {
+                //    console.log(error);
+                //});
 
-                $scope.showValid = false;
-
+             
             }
+            $scope.showValid = false;
 
         }
 
 
-        //UserCreate = function (param) {
-        //    var newbuilder = "";
-        //    if ($scope.radioValue == 1) {
-        //        newbuilder = 'Register/UserWithOrg';
-        //        apiService.post(newbuilder, param).then(function (response) {
-        //                var loginSession = response.data;
-        //                alert(" Builder Email has been sent for Approval..!!");
-        //                opensubscription();
-        //            },
-        //            function (error) {.
+        $scope.openSalesPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'login/sales_enquiries.tpl.html',
+                backdrop: 'static',
+                controller: SalesPopUpController,
 
-        //                alert("Error" + error.state);
-        //            });
-        //    }
-        //    else {
-        //        newbuilder = 'Register/User';
-        //        apiService.get('organization/GetByName?orgName=' + param.OrganizationName).then(function (response) {
-        //                $scope.data = response.data;
-        //                angular.forEach($scope.data, function (value, key) {
-        //                    param.organization_id = value.organization_id;
-        //                    apiService.post(newbuilder, param).then(function (response) {
-        //                            var loginSession = response.data;
-        //                            alert(" broker Email has been sent for Approval..!!");
-        //                            opensubscription();
-        //                        },
-
-        //                        function (error) {
-        //                            // deferred.reject(error);
-        //                            //return deferred.promise;
-        //                            alert("Error" + error.state);
-        //                        });
-        //                });
-        //            },
-        //            function (error) {
-        //                deferred.reject(error);
-        //                alert("not working");
-        //            });
-        //    }
-
-        //};
-
-        $scope.addPersonalInfo = function (isValid)
-        {
-            $scope.showValid = true;
-            if (isValid)
-            {
-
-                $cookieStore.put('First_Name', $scope.params.first_name);
-                $cookieStore.put('Last_Name', $scope.params.last_name);
-                $cookieStore.put('Account_Email', $scope.params.account_email);
-                $cookieStore.put('Phone', $scope.params.account_phone);
-                $cookieStore.put('Account_Country', $scope.params.account_country);
-                $cookieStore.put('Hash', $scope.params.Password);
-                $state.go('organization');
-                $scope.showValid = false;
-              }
-           
+            });
         };
+        //$scope.addNew = function (isValid) {
+        //    $scope.showValid = true;
+        //    if (isValid) {
+
+
+        //        new ProjectCreate($scope.params).then(function (response) {
+        //            console.log(response);
+        //            $scope.showValid = false;
+        //            $state.go('guest.signup.thanks');
+        //        }, function (error) {
+        //            console.log(error);
+        //        });
+
+        //        $scope.showValid = false;
+
+        //    }
+
+        //}
+
+
+      
+
+        
+
+       
+
+        //$scope.addNew = function (isValid) {
+        //    $scope.showValid = true;
+        //    if (isValid) {
+
+
+        //        new ProjectCreate($scope.callparam).then(function (response) {
+        //            console.log(response);
+        //            $scope.showValid = false;
+        //            $state.go('guest.signup.thanks');
+        //        }, function (error) {
+        //            console.log(error);
+        //        });
+
+        //        $scope.showValid = false;
+
+        //    }
+
+        //}
+
+       
+     
+
+       
 
 
         Url = "GetCSC/Country";

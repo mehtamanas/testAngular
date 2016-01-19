@@ -96,7 +96,8 @@
         //for DW1
 
           $scope.addPersonalInfo1 = function () {
-          $scope.showValid = true;
+              $scope.showValid = true;
+              $rootScope.subscriptionType = "Enterprise";
          // alert("qqq" + $cookieStore.get('Subscription1_Name'));
           $cookieStore.put('Sub_Name', $cookieStore.get('Subscription1_Name'));
           $cookieStore.put('Sub_Price', $cookieStore.get('Subscription1_Price'));
@@ -105,6 +106,7 @@
 
           $scope.addPersonalInfo2 = function () {
               $scope.showValid = true;
+              $rootScope.subscriptionType = "Basic";
             // alert($cookieStore.get('Subscription2_Name'));
              $cookieStore.put('Sub_Name', $cookieStore.get('Subscription2_Name'));
              $cookieStore.put('Sub_Price', $cookieStore.get('Subscription2_Price'));
@@ -115,6 +117,7 @@
 
           $scope.addPersonalInfo3 = function () {
               $scope.showValid = true;
+              $rootScope.subscriptionType = "Team";
               // alert("qqq" + $cookieStore.get('Subscription1_Name'));
               $cookieStore.put('Sub_Name', $cookieStore.get('Subscription3_Name'));
               $cookieStore.put('Sub_Price', $cookieStore.get('Subscription3_Price'));
@@ -123,6 +126,7 @@
 
           $scope.addPersonalInfo4 = function () {
               $scope.showValid = true;
+              $rootScope.subscriptionType = "Individual";
               // alert("qqq" + $cookieStore.get('Subscription1_Name'));
               $cookieStore.put('Sub_Name', $cookieStore.get('Subscription4_Name'));
               $cookieStore.put('Sub_Price', $cookieStore.get('Subscription4_Price'));

@@ -557,7 +557,7 @@
             $cookieStore.put('tower_id', $scope.params.project_id);
             //var grid = document.getElementById('gridInventory');
             //grid.data('kendoGrid').refresh();
-            $scope.TowerListGrid.dataSource.transport.read();
+            $('.k-i-refresh').trigger("click");
 
            
 

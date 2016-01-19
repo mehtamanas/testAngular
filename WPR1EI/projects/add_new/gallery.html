@@ -9,7 +9,7 @@
 
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
-                    <h4 class="form-title">Gallery</h4>
+                    <h4 class="form-title">Add New Images</h4>
 
                     <div class="clearfix">
                         <div class="form-group"
@@ -18,7 +18,7 @@
                                                     'has-success': addNewForm.notes.$valid && !addNewForm.notes.$pristine
                                                  }">
 
-                            <div class="form-group form-bx form-bx2">
+                            <div class="form-group form-bx form-bx8">
                                 <label for="">Notes</label>
                                 <input type="text" autofocus name="notes"  class="form-control" id="gallery_notes"
                                        placeholder="Add Notes "
@@ -63,10 +63,9 @@
                                 </div>
                             </div>
                             <div class="image-upload-link">
-
-                                <input type="file" nv-file-select="false" id="gallery_uploader1" accept="image/*" nv-file-multiple="false" uploader="uploader">
-
-
+                                <div class="browse-title">Browse</div>
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                             </div>
                            </div>
                     </div>

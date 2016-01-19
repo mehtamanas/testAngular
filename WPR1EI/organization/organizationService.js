@@ -2,8 +2,8 @@
  * Created by dwellarkaruna on 27/10/15.
  */
 angular.module('organization')
-    .service('organizationService', ['$http',
-        function ($http) {
+    .service('organizationService', ['$http','apiService',
+function ($http,apiService) {
 
             this.get = function(url){
               return $http.get(url);
@@ -15,7 +15,7 @@ angular.module('organization')
 
             this.AuditCreate = function (param) {
 
-                $http.post(appConstants.APIBaseURL + "AuditLog/Create", param).then(function (response) {
+                $http.post(apiService.baseUrl + "AuditLog/Create", param).then(function (response) {
                     var loginSession = response.data;
 
                 },

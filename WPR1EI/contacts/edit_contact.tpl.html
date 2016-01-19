@@ -1,8 +1,8 @@
 ﻿
 
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-   
-
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
           
 
             <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
@@ -12,11 +12,7 @@
                 <form class="form-content" name="newForm" autocomplete="off" novalidate
                       data-ng-submit="addNewUser(newForm.$valid)">
 
-                    <!--<div class="upload-wrap">
-                        <input name="upload-photo" id="upload-photo" type="file" />
-                        <span class="upload-text">Add Photo</span>
-
-                    </div>-->
+                   
                     <h4 class="form-title">Edit Contact</h4>
 
                     <div class="clearfix image-upload-container">
@@ -41,12 +37,13 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input id="editcontactupload" type="file" class="image-upload-f" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                             </div>
                         </div>
 
                     </div>
+
 
                     <div class="clearfix">
 
@@ -92,6 +89,41 @@
                                 <div class="text-danger"
                                      data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
                                     {{ 'Please enter alphabets only' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="clearfix">
+
+                        <div class="form-bx">
+                            <select id="gender_select" ng-change="selectgender()" ng-model="directory2" class="dropdown form-control" required>
+                                <option value="" selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+
+                        <div class="field-mdl field-req">*</div>
+
+                        <div class="form-bx">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                                        'has-error' : newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus,
+                                                                        'has-success': newForm.Age.$valid && !newForm.Age.$pristine && !newForm.Age.$focus
+                                                                     }">
+                                <input type="text" name="Age" class="form-control" id="contact_age"
+                                       placeholder="Age"
+                                       data-ng-model="params.age"
+                                       input-focus
+                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                       required />
+                                <div class="text-danger"
+                                     data-ng-if="newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus">
+                                    {{ 'Please enter valid age' | translate }}
                                 </div>
                             </div>
                         </div>
@@ -157,24 +189,13 @@
                     <div class="clearfix">
 
                         <div class="form-bx">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                                        'has-error' : newForm.Type.$invalid && (!newForm.Type.$pristine || showValid) && !newForm.Type.$focus,
-                                                                        'has-success': newForm.Type.$valid && !newForm.Type.$pristine && !newForm.Type.$focus
-                                                                    }">
-                                <input type="text" autofocus name="Type" class="form-control" id="editcontact_type"
-                                       placeholder="Type"
-                                       data-ng-model="params.Type"
-                                       minlength="1"
-                                       maxlength="40"
-                                       alphabets-only
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.Type.$invalid && (!newForm.Type.$pristine || showValid) && !newForm.Type.$focus">
-                                    {{ 'Please enter alphabets only' | translate }}
-                                </div>
+                            <div class="form-bx">
+                                <select id="type_select" ng-change="selecttype()" ng-model="directory1" class="dropdown form-control" required>
+                                    <option value="" selected>Select Type</option>
+                                    <option value="Client">Client</option>
+                                    <option value="Lead">Lead</option>
+                                    <option value="Contact">Contact</option>
+                                </select>
                             </div>
                         </div>
                         <div class="field-mdl field-req">*</div>
@@ -202,6 +223,8 @@
                         </div>
 
                     </div>
+
+
                     <div class="clearfix">
                         <div class="form-group form-bx ">
                             <label for="">Assign To</label>
@@ -260,6 +283,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="clearfix">
                         <div class="form-bx form-bx3">
                             <select ng-model="state1" ng-change="selectstate(state)" class="dropdown form-control" id="editcontact_state" required>
@@ -307,18 +332,7 @@
                         </div>
                     </div>
 
-                    <div class="progress" ng-show="showProgress">
-                        <div class="progress-bar" role="progressbar"
-                             ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
-                    </div>
-
-                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
-
                     <div class="modal-btn-wrap clearfix">
-
-
-                        
-
                         <button id="btn_editcontect_save" type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
 
                         <button id="btn_editcontact_cancelme" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
@@ -327,5 +341,6 @@
 
 
             </div><!-- modal-body ended -->
-    
+        </div>
+    </div>
 </div><!-- modal ended -->

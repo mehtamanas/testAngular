@@ -41,7 +41,7 @@
                 </button>
             </div>
 
-            <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li id="subscription_home"><a href="#">HOME</a></li>
                     <li id="subscription_feature"><a href="#">FEATURES</a></li>
@@ -49,7 +49,7 @@
                     <li id="subscription_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
                     <li id="subscription_contact"><a href="#">CONTACT US</a></li>
                 </ul>
-            </div>-->
+            </div>
 
         </nav><!-- main-navbar ended -->
 
@@ -69,7 +69,6 @@
                         <span>FEATURES</span>
                     </div>
 
-
                     <div class="pull-left plan-h02">
                         <ul ng-repeat="item2 in subscriptions2">
                             <div class="h01">{{item2.Subscription_Name}}</div>
@@ -80,7 +79,7 @@
                                 </span>
                             </div>
 
-                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo2()" class="h03">BUY NOW</a>
+                            <a ui-sref="signup_free_account({subscriptionType:item2.Subscription_Name})" ng-click="addPersonalInfo2()" class="h03">BUY NOW</a>
                         </ul>
                     </div>
 
@@ -94,7 +93,7 @@
                                 </span>
                             </div>
 
-                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo4()" class="h03">BUY NOW</a>
+                            <a ui-sref="signup_free_account({subscriptionType: item4.Subscription_Name})" ng-click="addPersonalInfo4()" class="h03">BUY NOW</a>
                         </ul>
                     </div>
 
@@ -111,7 +110,7 @@
 
                             </div>
                             <!--<a ui-sref="signup_free_account" class="h03">BUY NOW</a>-->
-                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo3()" class="h03">BUY NOW</a>
+                            <a ui-sref="signup_free_account({subscriptionType: item3.Subscription_Name})" ng-click="addPersonalInfo3()" class="h03">BUY NOW</a>
                             <!--<a ui-sref="subscriptionLimit">Create Account</a>-->
                         </ul>
                     </div>
@@ -132,7 +131,7 @@
                                 <!--<span class="plan-duration plan-duration2">/month</span>-->
                             </div>
                             <!--<a ui-sref="signup_free_account" class="h03">BUY NOW</a>-->
-                            <a ui-sref="signup_free_account" ng-click="addPersonalInfo1()" class="h03">BUY NOW</a>
+                            <a ui-sref="signup_free_account({subscriptionType: item1.Subscription_Name})" ng-click="addPersonalInfo1()" class="h03">BUY NOW</a>
                             <!--<a ui-sref="subscriptionLimit">Create Account</a>-->
                         </ul>
                     </div>

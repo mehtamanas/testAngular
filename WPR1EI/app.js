@@ -43,7 +43,7 @@ angular.module('MainApp', [
         $urlRouterProvider.otherwise('/login');
     }])
     .constant('appConstants', {
-        'APIBaseURL': 'https://dw-webservices-uat2.azurewebsites.net/'
+        
     }).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
         //cfpLoadingBarProvider.latencyThreshold = 500;
         cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
@@ -51,9 +51,11 @@ angular.module('MainApp', [
     }])
 .run(function ($rootScope, $location, $cookieStore) {
     $rootScope.$on("$stateChangeStart", function (event, next, current) {
-        //if (($cookieStore.get('userId') === undefined)) {
-        //    $location.url('/app/index.html#/login');
-        //}
+        if (($cookieStore.get('userId') === undefined)) {
+            if ((next.name).indexOf("app") > -1) {
+                $location.url('/app/index.html#/login');
+            }
+        }
     })
 });
     
