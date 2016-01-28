@@ -73,16 +73,20 @@
                 $rootScope.$broadcast('REFRESH', 'videos');
             };
 
-            //alert(user_id);
+            
             apiService.post("MediaElement/Create", postData).then(function (response) {
                 var loginSession = response.data;
-                //   alert("Image upload Done");
+               
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
 
             },
-            function (error) {
-
+            function (error)
+            {
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
             });
         }
 
@@ -113,8 +117,12 @@
             apiService.post("AuditLog/Create", param).then(function (response) {
                 var loginSession = response.data;
             },
-       function (error) {
-
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
         AuditCreate($scope.params);

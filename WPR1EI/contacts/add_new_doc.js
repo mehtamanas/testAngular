@@ -1,5 +1,5 @@
 ﻿
-var AddNewDocumentController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal) {
+var AddNewDocumentController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService,$rootScope, $modal) {
     console.log('AddNewDocumentController');
 
     var uploader = $scope.uploader = new FileUploader({
@@ -14,8 +14,8 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
     uploader.filters.push({
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
-            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            
+            return item;
         }
     });
 
@@ -27,36 +27,57 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
         }
     }
 
-    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+    uploader.onSuccessItem = function (fileItem, response, status, headers)
+    {
         // post image upload call the below api to update the database
-        var uploadResult = response[0];
+        $scope.media_url = response[0].Location;
+        uploader_done = true;
+        if (uploader_done == true)
+        {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+       
 
-        // TODO: Need to get these values dynamically
+    }
+       
+    var called = false;
+
+    $scope.finalpost = function ()
+    {
+        if (called == true)
+        {
+            return;
+        }
+
         var postData = {
 
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             contact_id: $scope.seletedCustomerId,
-            media_name: uploadResult.Name,
-            media_url: uploadResult.Location,
+            //media_name: uploadResult.Name,
+            media_url: $scope.media_url,
             Document_Category: $scope.params.documenttype,
-            Document_Name: $scope.params.Document_Name,            
+            Document_Name: $scope.params.Document_Name,
             document_type_id: $scope.params.documenttype,
-            
+
         };
 
 
         apiService.post("DocumentType/DocumentCreate", postData).then(function (response) {
             var loginSession = response.data;
-           // alert("Document done");
+            // alert("Document done");
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
-
+            $rootScope.$broadcast('REFRESH', 'DocumentGrid');
+            called = true;
         },
         function (error) {
 
         });
-    };
+    }
+       
+    
 
     $scope.CanceUpload = function () {
         uploader.cancelAll();
@@ -71,7 +92,8 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md'
+            size: 'md',
+            resolve: { items: { title: "Document" } }
         });
     }
 
@@ -117,18 +139,15 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
     };
 
 
-    $scope.addNew = function (isValid) {
+    $scope.addNewUser = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
 
-            //alert("hi");
-            new ProjectCreate($scope.params).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
+            
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader.queue.length == 0)
+                $scope.finalpost();
 
             $scope.showValid = false;
 

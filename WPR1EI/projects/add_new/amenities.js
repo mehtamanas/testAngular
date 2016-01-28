@@ -41,10 +41,13 @@
         }
 
     },
- function (error) {
-     alert("Error " + error.state);
- }
-    );
+ function (error)
+ {
+     if (error.status === 400)
+         alert(error.data.Message);
+     else
+         alert("Network issue");
+ });
 
    
     $scope.onClick = function (e) {
@@ -122,8 +125,12 @@
         },
 
 
-    function (error) {
-
+    function (error)
+    {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
         attributes: {
             "class";"UseHand"

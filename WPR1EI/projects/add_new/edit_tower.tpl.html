@@ -268,9 +268,9 @@
                                                     <label for="">Wing Name:</label>
                                                     <input type="text" disabled class="form-control" name="wingname" placeholder="A-1" id="editnewtower_wing_code"
                                                            data-ng-model="wing.wing_name"
-                                                           ng-pattern="/^[a-zA-Z\s]+$/"
+                                                         
                                                            input-focus
-                                                           required />
+                                                            />
                                                 </div>
                                             </div>
                                             <!--<div class="clearfix">
@@ -290,7 +290,7 @@
                                                     <input type="text" class="form-control" name="totalfloors" placeholder="1" id="editnewtower_totalfloors"
                                                            data-ng-model="wing.wing_no"  
                                                            input-focus
-                                                           required />
+                                                            />
                                                 </div>
                                             </div>
                                             <!--<div class="clearfix">
@@ -309,7 +309,7 @@
                                                            placeholder="Floor Number"
                                                            data-ng-model="wing.wing_id"
                                                            input-focus
-                                                           required />
+                                                            />
                                                 </div>
                                             </div>
                                             <!--<div class="clearfix">
@@ -326,15 +326,14 @@
                                 </div>
 
 
-                    <div class="progress" ng-show="showProgress">
+                    <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress)/3)>0">
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress)/3 + '%' }"></div>
                     </div>
                      <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
                                
                      <div class="modal-btn-wrap3 clearfix">
-                        <button type="submit" id="editnewtower_save" class="f-btn" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll()"
-                                            ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length">
+                        <button type="submit" id="editnewtower_save" class="f-btn">
                                         SAVE
                        </button>
                    </div>

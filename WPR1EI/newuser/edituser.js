@@ -1,5 +1,5 @@
 ﻿
-var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieStore, apiService, $modal, $window, FileUploader, uploadService) {
+var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieStore, $rootScope,apiService, $modal, $window, FileUploader, uploadService) {
     //console.log("EditUserPopUpController");
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -32,7 +32,10 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.params.city = response.data[0].city_id;
         },
                    function (error) {
-                       alert("not working");
+                       if (error.status === 400)
+                           alert(error.data.Message);
+                       else
+                           alert("Network issue");
                    });
     }
 
@@ -54,17 +57,15 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                 $scope.choices[b].class_id = data[i].class_id;
                 b++;
             }
-            if (data[i].element_type == "address_user") {
-                if (c > 0) { $scope.choices2.push({ 'id': 'choice' + (c + 1) }); }
-                $scope.choices2[c].Street_1 = data[i].element_info1;
-                $scope.choices2[c].class_id = data[i].class_id;
-                c++;
-            }
+          
         }
 
     },
    function (error) {
-       alert("Error " + error.state);
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
 
 
@@ -143,8 +144,12 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     apiService.get(Url).then(function (response) {
         $scope.states = response.data;
     },
-    function (error) {
-        alert("Error " + error.state);
+    function (error)
+    {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
 
     $scope.selectstate = function () {
@@ -153,11 +158,16 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     };
 
     Url = "GetCSC/city";
-    apiService.get(Url).then(function (response) {
+    apiService.get(Url).then(function (response)
+    {
         $scope.cities = response.data;
     },
-    function (error) {
-        alert("Error " + error.cities);
+    function (error)
+    {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
 
     $scope.selectcity = function () {
@@ -165,7 +175,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     };
 
     ///filtering of state city
-    $scope.filterExpression = function (city) {
+    $scope.filterExpression = function (city)
+    {
         return (city.stateid === $scope.params.state);
     };
 
@@ -174,11 +185,16 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     apiService.get(Url).then(function (response) {
         $scope.roles = response.data;
     },
-    function (error) {
-        alert("Error " + error.roles);
+    function (error)
+    {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
 
-    $scope.selectrole = function () {
+    $scope.selectrole = function ()
+    {
         $scope.params.role_name = $scope.role_name;
     };
 
@@ -235,22 +251,27 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         // post image upload call the below api to update the database
         var uploadResult = response[0];
 
-        //var address = [];      
+    
 
-        //var newadd = {};
-        //for (i = 0; i < $scope.choices2.length; i++) {
-        //    if (i == 0)
-        //    {
-        //        if ($scope.choices2[0].Street_1 != undefined)
-        //            newadd.Street_1 = $scope.choices2[0].Street_1;
-        //    }
-        //    else if (i == 1)
-        //    {
-        //        if ($scope.choices2[1].Street_2 != undefined)
-        //            newadd.Street_2 = $scope.choices2[1].Street_2;
-        //    }            
-        //}
-        // TODO: Need to get these values dynamically
+
+        var address = [];
+
+        var newadd = {};
+
+        for (i = 0; i < $scope.choices2.length; i++) {
+            if (i == 0) {
+                if ($scope.choices2[0].Street_1 != undefined)
+                    newadd.Street_1 = $scope.choices2[0].Street_1;
+            }
+            else if (i == 1) {
+                if ($scope.choices2[1].Street_1 != undefined)
+                    newadd.Street_2 = $scope.choices2[1].Street_1;
+            }
+          
+
+        }
+
+
         var postData =
             {
                 // media_name: uploadResult.media_name,
@@ -263,95 +284,98 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                 account_email: $scope.choices1[0].account_email,
                 account_phone: $scope.choices[0].account_phone,
                 role_name: $scope.params.role_name,
-                Street_1: $scope.choices2[0].Street_1,
+                Street_1: newadd.Street_1,
+                Street_2: newadd.Street_2,
                 //Street_2: newadd.Street_2,
                 zip_code: $scope.params.zip_code,
                 state: $scope.params.state,
                 city: $scope.params.city
             };
+        if ($scope.params.first_name != undefined && $scope.params.last_name != undefined && $scope.params.role_name != undefined) {
+            apiService.post("User/Edit", postData).then(function (response) {
+                var loginSession = response.data;
 
-        apiService.post("User/Edit", postData).then(function (response) {
-            var loginSession = response.data;
+            },
+            function (error)
+            {
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
+            });
+
+            var media = [];
+            for (var i in $scope.choices1) {
+                var postData_email =
+                    {
+                        id: $scope.choices1[i].class_id,
+                        class_id: window.sessionStorage.selectedCustomerID,
+                        class_type: "User",
+                        element_type: "email_user",
+                        element_info1: $scope.choices1[i].account_email,
+                    }
+                media.push(postData_email);
+            }
+
+            for (var i in $scope.choices) {
+                var postData_phone =
+                    {
+                        id: $scope.choices[i].class_id,
+                        class_id: window.sessionStorage.selectedCustomerID,
+                        class_type: "User",
+                        element_type: "phone_user",
+                        element_info1: $scope.choices[i].account_phone,
+                    }
+                media.push(postData_phone);
+            }
+
+
+            apiService.post("ElementInfo/Create", media).then(function (response)
+            {
+                var loginSession = response.data;
+
+
+            },
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+           });
+
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-          
-        },
-        function (error) {
-            alert("not working ");
-        });
-
-
-        var media = [];
-        for (var i in $scope.choices1) {
-            var postData_email =
-                {
-                    id: $scope.choices1[i].class_id,
-                    class_id: window.sessionStorage.selectedCustomerID,
-                    class_type: "User",
-                    element_type: "email_user",
-                    element_info1: $scope.choices1[i].account_email,
-                }
-            media.push(postData_email);
+            $rootScope.$broadcast('REFRESH', 'newuser');
         }
-
-        for (var i in $scope.choices) {
-            var postData_phone =
-                {
-                    id: $scope.choices[i].class_id,
-                    class_id: window.sessionStorage.selectedCustomerID,
-                    class_type: "User",
-                    element_type: "phone_user",
-                    element_info1: $scope.choices[i].account_phone,
-                }
-            media.push(postData_phone);
-        }
-
-        for (var i in $scope.choices2) {
-            var postData_address =
-                {
-                    id: $scope.choices2[i].class_id,
-                    class_id: window.sessionStorage.selectedCustomerID,
-                    class_type: "User",
-                    element_type: "address_user",
-                    element_info1: $scope.choices2[i].Street_1,
-                }
-            media.push(postData_address);
-        }
-
-        apiService.post("ElementInfo/Create", media).then(function (response) {
-            var loginSession = response.data;
+    }
+       
 
 
-        },
-       function (error) {
+  
 
-       });
-       // $modalInstance.dismiss();
-        //$scope.openSucessfullPopup();
-       // $rootScope.$broadcast('REFRESH', 'newuser');
-
-
+     
 
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/sucessfull.tpl.html',
+                templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
-                controller: sucessfullController,
+                controller: EditsucessfullController,
                 size: 'md',
                 resolve: { items: { title: "User" } }
             });
-            $rootScope.$broadcast('REFRESH', 'summary');
+         
         }
 
-    }
+   
 
     $scope.CanceUpload = function () {
-        uploader.cancelAll();
+    uploader.cancelAll();
        
-        console.log("UploadCancelled");
-    }
-
+    console.log("UploadCancelled");
+    
+}
 
 };
 

@@ -15,7 +15,8 @@ angular.module('app.guest.login')
         $scope.countryList = COUNTRIES;
         $scope.breadcrumb = 1;
          
-   
+        $scope.Sub_Name = $cookieStore.get('Sub_Name');
+        $scope.radioValue = "1";
 
         $rootScope.title = 'Dwellar./Organization';
         $scope.signup = function () {
@@ -37,7 +38,7 @@ angular.module('app.guest.login')
         account_phone: $cookieStore.get('Phone'),
         account_country: $cookieStore.get('Account_Country'),
         Password: $cookieStore.get('Hash'),
-        OrgName: $cookieStore.get('OrgName'),
+        OrgName: $cookieStore.get('orgName'),
      
         };
       
@@ -67,6 +68,21 @@ angular.module('app.guest.login')
             country:$scope.country
             
         };
+        $scope.params.name = $cookieStore.get('orgName');
+        $scope.params.street_1 = $cookieStore.get('Street_1');
+        $scope.params.street_2 = $cookieStore.get('Street_2');
+        $scope.params.street_3 = $cookieStore.get('Street_3');
+       
+        $scope.state1 = $cookieStore.get('State');
+        $scope.params.city = $cookieStore.get('City');
+        $scope.city1 = $cookieStore.get('City');
+       
+        $scope.params.zip_code = $cookieStore.get('zip_code');
+        $scope.country1 = $cookieStore.get('Country');
+
+
+
+
 
         $scope.confirms = {
             hash: $scope.hash
@@ -124,9 +140,11 @@ angular.module('app.guest.login')
         };
 
         $scope.addPersonalInfo = function (isValid) {
-            if (isValid) {
+            $scope.showValid = true;
+            if (isValid)
+            {
 
-                $cookieStore.put('OrgName', $scope.params.name);
+                $cookieStore.put('orgName', $scope.params.name);
                 $cookieStore.put('Street_1', $scope.params.street_1);
                 $cookieStore.put('Street_2', $scope.params.street_2);
                 $cookieStore.put('Street_3', $scope.params.street_3);
@@ -134,7 +152,7 @@ angular.module('app.guest.login')
                 $cookieStore.put('State', $scope.params.state);
                 $cookieStore.put('zip_code', $scope.params.zip_code);
                 $cookieStore.put('Country', $scope.params.country);
-                $cookieStore.put('who_am_i', $scope.params.who_am_i);
+                
 
                 if ($scope.radioValue == 1) {
                     $cookieStore.put("who_am_i", "Broker");
@@ -144,23 +162,125 @@ angular.module('app.guest.login')
                     ($cookieStore.put("who_am_i", "Builder"));
                 }
 
-                //alert("hi bill");
-
-                //alert('Name : ' + $cookieStore.get('Name'));
-                //alert('Street_1 : ' + $cookieStore.get('Street_1'));
-                //alert('Street_2 : ' + $cookieStore.get('Street_2'));
-                //alert('Street_3 : ' + $cookieStore.get('Street_3'));
-                //alert('City : ' + $cookieStore.get('City'));
-                //alert('State : ' + $cookieStore.get('State'));
-                //alert('Zip_code : ' + $cookieStore.get('Zip_code'));
                 
-             //   alert('Type : ' + $cookieStore.get('who_am_i'));
+                
+
+                $scope.organization = {
+                    Id: '',
+                    street_1: $cookieStore.get('Street_1'),
+                    street_2: $cookieStore.get('Street_2'),
+                    street_3: $cookieStore.get('Street_3'),
+                    city: $cookieStore.get('City'),
+                    state: $cookieStore.get('State'),
+                    zip_code: $cookieStore.get('zip_code'),
+                    country: $cookieStore.get('Country')
+                };
+                $scope.subscription = {
+                    organization_id: '',
+                    Subscription_Name: $scope.Sub_Name
+                };
+
+                $scope.params = {
+                    first_name: $cookieStore.get('First_Name'),
+                    last_name: $cookieStore.get('Last_Name'),
+                    account_email: $cookieStore.get('Account_Email'),
+                    account_phone: $cookieStore.get('Phone'),
+                    account_country: $cookieStore.get('Account_Country'),
+                    Password: $cookieStore.get('Hash'),
+                    OrgName: $cookieStore.get('orgName'),
+                    who_am_i: $cookieStore.get('who_am_i')
+                    //   Organization_Id: ''
+
+                };
+
+
+                UserCreate = function (param) {
+                    //     alert('inuserCreate');
+                    var userNorg = "";
+
+                    userNorg = 'Register/UserWithOrg';
+                    apiService.post(userNorg, param).then(function (response) {
+                        var loginSession = response.data;
+                        //alert("Email has been sent for Approval..!! Login to Continue...");
+
+                        //                   alert("org_id" + loginSession.Organization_Id);
+                        $scope.organization.Id = loginSession.Organization_Id;
+                        $scope.subscription.organization_id = loginSession.Organization_Id;
+                        // alert('Org id - :' + $scope.organization.Id);
+                        $cookieStore.put('Organization_id', $scope.subscription.organization_id);
+                        new OrganizationEdit($scope.organization);
+
+
+                    },
+                       function (error) {
+                           console.log("Error" + error.state);
+                       });
+                };
+
+                OrganizationEdit = function (paramsOrg) {
+                    //   alert('inOrgEdit');
+                    var orgEdit = "";
+                    orgEdit = 'Organization/CreateOrgAddress';
+                    apiService.post(orgEdit, paramsOrg).then(function (response) {
+                        var loginSession = response.data;
+                        //   alert("Organization has been Created..!!");   
+
+                        new SubscriptionCreate();
+
+                    },
+                        function (error) {
+                            alert("User Already Exists.....Choose Another Email-id");
+                        });
+                };
+
+                SubscriptionCreate = function () {
+                    //  alert('inSubscription');
+                    var subCreate = "";
+                    subCreate = 'OrgSubscription/Create';
+
+
+                    //   alert($scope.subscription.organization_id);
+                    //alert($scope.subscription.Subscription_Name);
+
+                    apiService.post(subCreate, $scope.subscription).then(function (response) {
+                        var loginSession = response.data;
+
+                        //alert("Subscription has been Created..!!");
+
+                    },
+                        function (error) {
+                            console.log("Error" + error.state);
+                        });
+                    $state.go('thanks');
+                };
                 $cookieStore.get('who_am_i')
                 if ($rootScope.subscriptionType == "Basic")
-                    $state.go('thanks');
-                else
-                    $state.go('bill');
+                {
 
+                    new UserCreate($scope.params);
+
+                    $cookieStore.remove('First_Name');
+                    $cookieStore.remove('Last_Name');
+                    $cookieStore.remove('Account_Email');
+                    $cookieStore.remove('Phone');
+                    $cookieStore.remove('Account_Country');
+                    $cookieStore.remove('orgName');
+                    $cookieStore.remove('Street_1');
+                    $cookieStore.remove('Street_2');
+                    $cookieStore.remove('Street_3');
+                    $cookieStore.remove('State');
+                    $cookieStore.remove('City');
+                    $cookieStore.remove('zip_code');
+                    $cookieStore.remove('Country');
+                    $state.go('thanks');
+                }
+
+                else
+                {
+                    $state.go('bill');
+                }
+                   
+                $scope.showValid = false;
 
             }
 

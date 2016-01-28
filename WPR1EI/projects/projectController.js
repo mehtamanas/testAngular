@@ -86,7 +86,10 @@ angular.module('project')
                     },
                    function (error)
                    {
-
+                       if (error.status === 400)
+                           alert(error.data.Message);
+                       else
+                           alert("Network issue");
                    });
                };
                 AuditCreate($scope.params);
@@ -224,6 +227,23 @@ angular.module('project')
 
         };
 
+        $scope.myGridChange = function (dataItem) {
+            // dataItem will contain the row that was selected
+            window.sessionStorage.selectedCustomerID = dataItem.id;
+            //  alert(window.sessionStorage.selectedCustomerID);
+            //$state.go('app.projectdetail');
+            if ($cookieStore.get('projectId') === undefined)
+                $cookieStore.put('projectId', dataItem.id);
+            else {
+                $cookieStore.remove('projectId');
+                $cookieStore.put('projectId', dataItem.id);
+            }
+            $state.go('app.projectdetail');
+
+        };
+
+
+
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
@@ -278,6 +298,11 @@ angular.module('project')
             var gridData = $("#peopleGrid").data("kendoGrid");
             gridData.dataSource.filter({});
         }
+
+
+
+
+      
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'projectGrid') {

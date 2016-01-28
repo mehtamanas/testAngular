@@ -36,7 +36,7 @@
                            <div class="image-upload-link">
                                <div class="browse-title">Browse</div>
                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                               <<p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                               <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                            </div>
                         </div>
 
@@ -136,12 +136,13 @@
                                        ng-pattern="/^[a-z 1-9\s]+$/i"
                                        input-focus
                                        required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.Address.$focus">
+                                    {{ 'Please enter valid Project Name' | translate }}
+                                </div>
                             </div>
                         </div>
-                        <div class="text-danger"
-                             data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.Address.$focus">
-                            {{ 'Please enter valid Project Name' | translate }}
-                        </div>
+                      
                     </div>
 
 
@@ -164,7 +165,7 @@
                                                maxlength="7"
                                                ng-pattern="/^([1-9][0-9+./]*)$/"
                                                input-focus
-                                               required>
+                                               />
                                         <span class="area-txt">acres</span>
                                         <div class="text-danger"
                                              data-ng-if="addNewForm.totalProject_area.$invalid && (!addNewForm.totalProject_area.$pristine || showValid) && !addNewForm.totalProject_area.$focus">
@@ -185,7 +186,7 @@
                                                                  }">
 
                                 <label for="">Possession Month</label>
-                                <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control" required>
+                                <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control">
                                     <option value="" selected>--Select Month--</option>
                                     <option ng-repeat="mon in month "
                                             value="{{mon.month}}">
@@ -208,7 +209,7 @@
                             <div class="pull-left f-half-5">
                                 <div class="form-group form-bx form-bx9-1">
                                     <label for="">Year</label>
-                                    <select id="year_select" ng-change="selectyear()" ng-model="year1" class="dropdown form-control" required>
+                                    <select id="year_select" ng-change="selectyear()" ng-model="year1" class="dropdown form-control">
                                         <option value="" selected>--Select year--</option>
                                         <option ng-repeat="year in years"
                                                 value="{{year}}">
@@ -239,12 +240,12 @@
                                            minlength="1"
                                            maxlength="50"
                                            input-focus
-                                           required />
+                                           />
                                     <div class="text-danger"
                                          data-ng-if="addNewForm.Address.$invalid && (!addNewForm.Address.$pristine || showValid) && !addNewForm.Address.$focus">
                                         {{ 'Please enter valid address' | translate }}
                                     </div>
-                                </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">remove</a></div>
+                                </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top: -15px;"><a href="javascript:">remove</a></div>
                             </div>
                         </div>
 
@@ -256,7 +257,7 @@
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="" class="hidden-xs">State</label>
-                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold" required>
+                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold" >
                                     <option value="" selected>--Choose State--</option>
                                     <option ng-repeat="state in states"
                                             value="{{state.state_id}}">
@@ -269,7 +270,7 @@
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">City</label>
-                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold" required>
+                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold">
                                     <option value="" selected>--Choose City--</option>
                                     <option ng-repeat="city in cities | filter:filterExpression"
                                             value="{{city.city_id}}">
@@ -293,12 +294,13 @@
                                            maxlength="6"
                                            data-ng-model="params.ZipCode"
                                            ng-pattern="/^(0|[1-9][0-9]*)$/"
-                                           required />
+                                            />
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.Post.$invalid && (!addNewForm.Post.$pristine || showValid) && !addNewForm.Post.$focus">
+                                        {{ 'Please enter valid postal code' | translate }}
+                                    </div>
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.Post.$invalid && (!addNewForm.Post.$pristine || showValid) && !addNewForm.Post.$focus">
-                                    {{ 'Please enter valid postal code' | translate }}
-                                </div>
+                             
                             </div>
 
                     </div>
@@ -319,14 +321,15 @@
                                        maxlength="30"
                                        ng-pattern="/^([1-9][0-9+./]*)$/"
                                        input-focus
-                                       required />
+                                     />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.lat.$invalid && (!addNewForm.lat.$pristine || showValid) && !newForm.lat.$focus">
+                                    {{ 'Please enter valid latitude' | translate }}
+                                </div>
+
 
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.lat.$invalid && (!addNewForm.lat.$pristine || showValid) && !newForm.lat.$focus">
-                                {{ 'Please enter valid latitude' | translate }}
-                            </div>
-
+                           
 
 
                             <div class="form-group"
@@ -344,14 +347,15 @@
                                                maxlength="30"
                                                ng-pattern="/^([1-9][0-9+./]*)$/"
                                                input-focus
-                                               required />
+                                                />
                                         <!--<span class="area-txt">/sq.ft</span>-->
                                     </div>
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.long.$invalid && (!addNewForm.long.$pristine || showValid) && !addNewForm.long.$focus">
+                                        {{ 'Please enter valid longitude' | translate }}
+                                    </div>
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.long.$invalid && (!addNewForm.long.$pristine || showValid) && !addNewForm.long.$focus">
-                                    {{ 'Please enter valid longitude' | translate }}
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -369,17 +373,17 @@
                                        placeholder="Project Website"
                                        data-ng-model="params.project_website"
                                        minlength="1"
-                                       maxlength="20"
-                                       ng-pattern="/^[a-z 1-9\]+[_+.+/+-/]*$/"
+                                       maxlength="50"
+                                       ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
                                        input-focus
-                                       required />
+                                        />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.project_website.$invalid && (!addNewForm.project_website.$pristine || showValid) && !newForm.project_website.$focus">
+                                    {{ 'Please enter project website' | translate }}
+                                </div>
+
 
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.project_website.$invalid && (!addNewForm.project_website.$pristine || showValid) && !newForm.project_website.$focus">
-                                {{ 'Please enter project website' | translate }}
-                            </div>
-
 
 
                             <div class="form-group"
@@ -394,17 +398,19 @@
                                                placeholder="Builder Website"
                                                data-ng-model="params.builder_website"
                                                minlength="1"
-                                               maxlength="20"
-                                               ng-pattern="/^[a-z 1-9\]+[_+.+/+-/]*$/"
+                                               maxlength="50"
+                                               ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
                                                input-focus
-                                               required />
+                                               />
                                         <!--<span class="area-txt">/sq.ft</span>-->
+                                        <div class="text-danger"
+                                             data-ng-if="addNewForm.builder_website.$invalid && (!addNewForm.builder_website.$pristine || showValid) && !addNewForm.builder_website.$focus">
+                                            {{ 'Please enter builder website' | translate }}
+                                        </div>
                                     </div>
+                                    
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.builder_website.$invalid && (!addNewForm.builder_website.$pristine || showValid) && !addNewForm.builder_website.$focus">
-                                    {{ 'Please enter builder website' | translate }}
-                                </div>
+                             
                             </div>
                         </div>
                     </div>
@@ -424,25 +430,25 @@
                             </div>
                         </div>
 
-                        <div class="pull-left project-type-bx project-type02" ng-class="{'project-selected': selectedproject==5}" ng-click="selecthome()">
+                        <!--<div class="pull-left project-type-bx project-type02" ng-class="{'project-selected': selectedproject==5}" ng-click="selecthome()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
                                 <div class="project-type-img" >
-                                    <!--<img src="images/family.png" style="width:110px;height:100px;" ng-click="selecthome()" />-->
+                                    <img src="images/family.png" style="width:110px;height:100px;" ng-click="selecthome()" />
                                 </div>
                                 <div class="project-type-title">Single Family Home</div>
                             </div>
-                        </div>
+                        </div>-->
 
-                        <div class="pull-left project-type-bx project-type03" ng-class="{'project-selected': selectedproject==6}" ng-click="selectvilla()">
+                        <!--<div class="pull-left project-type-bx project-type03" ng-class="{'project-selected': selectedproject==6}" ng-click="selectvilla()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
                                 <div class="project-type-img">
-                                    <!--<img src="images/plot.png" style="width:110px;height:100px;" ng-click="selectvilla()" />-->
+                                    <img src="images/plot.png" style="width:110px;height:100px;" ng-click="selectvilla()" />
                                 </div>
                                 <div class="project-type-title">Villas</div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="pull-left project-type-bx project-type04" ng-class="{'project-selected': selectedproject==7}" ng-click="selectplot()">
                             <div class="select-tick"></div>
@@ -455,13 +461,13 @@
                         </div>
 
                     </div><!-- select-project-type ended -->
-                    <div class="progress" ng-show="showProgress">
+                    <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0">
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4 + '%' }"></div>
                     </div>
                      
                     <div class="modal-btn-wrap4 clearfix">
-                        <button type="submit" class="f-btn" id="editproject_update" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()">
+                        <button type="submit" class="f-btn" id="editproject_update">
                             <!--<span class="glyphicon glyphicon-upload"></span>--> UPDATE
                         </button>
                     </div>

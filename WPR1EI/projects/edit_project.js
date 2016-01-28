@@ -98,21 +98,14 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
     }
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // alert("uploader called");
-        uploadResult = response[0];
+        $scope.params.media_url1 = response[0].Location;
         uploader_done = true;
 
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            callApi();
+            $scope.finalpost();
         }
-        // post image upload call the below api to update the database
-
-        //uploadService.postDataAfterUpload(postData).then(function () {
-        //    // Process the successful file upload
-        //    alert("project Created");
-        //}, function (error) {
-        //    alert('Error creating');
-        //})
+       
     };
 
 
@@ -121,11 +114,11 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         console.log("uploader1 called");
-        uploadResult1 = response[0];
+        $scope.params.media_url2 = response[0].Location;
         uploader1_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            callApi();
+            $scope.finalpost();
         }
     };
 
@@ -133,11 +126,11 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
     uploader2.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         console.log("uploader2 called");
-        uploadResult2 = response[0];
+        $scope.params.media_url3 = response[0].Location;
         uploader2_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            callApi();
+            $scope.finalpost();
         }
     };
 
@@ -147,12 +140,12 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
     uploader3.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         console.log("uploader3 called");
-        uploadResult3 = response[0];
+        $scope.params.media_url4 = response[0].Location;
         uploader3_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
 
-            callApi();
+            $scope.finalpost();
         }
     };
 
@@ -160,7 +153,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
 
 
     var called = false;
-    callApi = function () {
+    $scope.finalpost = function () {
         if (called == true) {
             return;
         }
@@ -192,14 +185,14 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             userid: $cookieStore.get('userId'),
             Name: $scope.params.Project_name,
             organization_id: $cookieStore.get('orgID'),
-            media_logo_name: uploadResult.Name,
-            media_url1: uploadResult.Location,
+            //media_logo_name: uploadResult.Name,
+            media_url1: $scope.params.media_url1,
             //media_home_name: uploadResult1.Name,
-            media_url2: uploadResult1.Location,
+            media_url2: $scope.params.media_url2,
             //media_project_name: uploadResult2.Name,
-            media_url3: uploadResult2.Location,
+            media_url3: $scope.params.media_url3,
             // media_name: uploadResult.Name,
-            media_url4: uploadResult3.Location,
+            media_url4: $scope.params.media_url4,
             possasion_month: $scope.params.possasion_month,
             year: $scope.params.project_year,
             project_website: $scope.params.project_website,
@@ -210,7 +203,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             monthid: $scope.month1,
             class_type: "Project",
             Street_1: newadd.Street_1,
-            //Street_2: newadd.Street_2,
+            Street_2: newadd.Street_2,
             media_type: "Logo",
             month: $scope.params.monthid,
             city: $scope.params.city,
@@ -230,18 +223,21 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
 
         },
         function (error) {
-
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
 
             
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/sucessfull.tpl.html',
+                templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
-                controller: sucessfullController,
+                controller: EditsucessfullController,
                 size: 'md',
-                resolve: { items: { title: "Project" } }
+                resolve: { items: { title: "Project " } }
 
 
             });
@@ -306,7 +302,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             device_mac_id: "34:#$::43:434:34:45",
             module_id: "Contact",
             action_id: "Contact View",
-            details: "EditProject",
+            details: "EditProject" + $scope.seletedCustomerId,
             application: "angular",
             browser: $cookieStore.get('browser'),
             ip_address: $cookieStore.get('IP_Address'),
@@ -319,8 +315,12 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);
@@ -333,8 +333,12 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         $scope.cities = response.data;
 
     },
-function (error) {
-    console.log("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
 
@@ -350,8 +354,12 @@ function (error) {
         $scope.states = response.data;
 
     },
-function (error) {
-    console.log("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
 
@@ -371,8 +379,12 @@ function (error) {
         $scope.month = response.data;
 
     },
-function (error) {
-    alert("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
     $scope.selectmonth = function () {
@@ -436,12 +448,14 @@ function (error) {
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
         $scope.choices2[0].Street_1 = response.data[0].Street_1;
-        $scope.choices2[0].Street_2 = response.data[0].Street_2;
+        $scope.choices2.push({ 'Street_1': response.data[0].Street_2 });
         $scope.state1 = response.data[0].State_id;
         $scope.params.state = response.data[0].State_id;
         $scope.city1 = response.data[0].city_id;
         $scope.params.city = response.data[0].city_id;
-        $scope.month1 = response.data[0].possasion_month;
+        $scope.month1 = response.data[0].monthid;
+        $scope.params.monthid = response.data[0].monthid;
+   
         $scope.year1 = response.data[0].year;
         if (response.data[0].project_type == "Family And Home") $scope.selecthome();
         if (response.data[0].project_type == "Villa") $scope.selectvilla();
@@ -449,10 +463,13 @@ function (error) {
         if (response.data[0].project_type == "Apartment") $scope.selectapartment();
     },
 
-function (error) {
-    console.log("Error " + error.state);
-}
-    );
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
+});
 
     $scope.params = {
 
@@ -493,7 +510,16 @@ function (error) {
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader1.queue.length != 0)
+                uploader1.uploadAll();
+            if (uploader2.queue.length != 0)
+                uploader2.uploadAll();
+            if (uploader3.queue.length != 0)
+                uploader3.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0)
+                $scope.finalpost();
 
             $scope.showValid = false;
 

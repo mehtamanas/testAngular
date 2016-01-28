@@ -9,10 +9,7 @@
             </a>
         </div><!-- logo ended -->
 
-        <!--<div class="pull-right reg-wrap">
-            <a href="#" class="h-btn">SIGN UP</a>
-            <a href="#" class="h-btn">LOGIN</a>
-        </div>--><!-- reg-btn ended -->
+       
 
         <nav class="navbar navbar-default pull-right main-navbar">
 
@@ -25,15 +22,7 @@
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li id="signup_home"><a href="#">HOME</a></li>
-                    <li id="signup_feature"><a href="#">FEATURES</a></li>
-                    <li id="signup_plans"><a href="#">PLANS</a></li>
-                    <li id="signup_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
-                    <li id="signup_contact"><a href="#">CONTACT US</a></li>
-                </ul>
-            </div>
+            
 
         </nav><!-- main-navbar ended -->
 
@@ -95,13 +84,13 @@
                                                            alphabets-only
                                                            input-focus
                                                            maxlength="40"
-                                                           ng-pattern="/^[a-zA-Z\s]*$/" 
+                                                           ng-pattern="/^[a-zA-Z +'\s]*$/" 
                                                            required
                                                            />
                                                 </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
-                                                    {{ 'Please Enter Valid First Name' | translate }}
+                                                    {{ ' Enter Valid First Name' | translate }}
                                                 </div>
                                             </div><div class="field-mdl field-req">*</div>
                                         </div>
@@ -125,13 +114,13 @@
                                                            alphabets-only
                                                            input-focus
                                                            maxlength="40"
-                                                           ng-pattern="/^[a-zA-Z\s]*$/"
+                                                           ng-pattern="/^[a-zA-Z +'\s]*$/"
                                                            required
                                                             />
                                                 </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
-                                                    {{ 'Please Enter Valid Last Name ' | translate }}
+                                                    {{ 'Enter Valid Last Name ' | translate }}
                                                 </div>
                                             </div><div class="field-mdl field-req">*</div>
                                         </div>
@@ -155,7 +144,7 @@
                                                            data-ng-model="params.account_email"
                                                            minlength="1"
                                                            maxlength="30"
-                                                           ng-pattern="/^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$/"
+                                                           ng-pattern="/^[a-zA-Z\s]+[a-zA-Z\s0-9._-]+@[a-zA-Z\sa-z]+\.[a-zA-Z\s.]{2,5}$/"
                                                            ng-model-options="{ updateOn: 'blur' }"
                                                            required />
                                                 </label>
@@ -165,24 +154,32 @@
                                                 </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
-                                                    {{ 'Please Enter Valid Email Address' | translate }}
+                                                    {{ ' Enter Valid Email Address' | translate }}
                                                 </div>
                                             </div><div class="field-mdl field-req">*</div>
                                         </div>
                                     </div>
                                     
                                     <div class="col-sm-5">
-                                        <div class="form-group">
+                                        <label for="" class="hidden-xs">Country</label>
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                        'has-error' : newForm.country.$invalid && (!newForm.country.$pristine || showValid) && !newForm.country.$focus,
+                                        'has-success': newForm.country.$valid && !newForm.country.$pristine && !newForm.country.$focus
+                                    }">
                                             <div class="col-xs-10">
-                                                <label for="" class="hidden-xs">Country</label>
-                                                <select ng-model="state1" ng-change="selectcountry()" id="signup_country" class="dropdown form-control">
-                                                  
+                                                <select ng-model="country1"  name = country ng-change="selectcountry()" id="signup_country" class="dropdown form-control" required>
+
                                                     <option value="" selected>--Choose Country--</option>
-                                                    <option required ng-repeat="country in countries  "
+                                                    <option ng-repeat="country in countries  "
                                                             value="{{country.id}}">
                                                         {{country.country_name}}
                                                     </option>
                                                 </select>
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
+                                                    {{ ' Enter Valid Country' | translate }}
+                                                </div>
                                             </div><div class="field-mdl field-req" style="margin-top:17px">*</div>
                                         </div>
                                     </div>
@@ -234,7 +231,7 @@
                                                 <div ng-if="newForm.confirmPassword.$error"></div>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">
-                                                    {{ 'Please Enter Valid Password' | translate }}
+                                                    {{ ' Enter Valid Password' | translate }}
                                                 </div>
                                             </div><div class="field-mdl field-req">*</div>
                                         </div>
@@ -266,9 +263,9 @@
                                                 </lable>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.phone.$invalid && (!newForm.phone.$pristine || showValid) && !newForm.phone.$focus">
-                                                    {{ 'Please Enter 10 Digit Phone Number' | translate }}
+                                                    {{ 'Enter 10 Digit Phone Number' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div clss="field-mdl field-areq">*</div>
                                         </div>
                                     </div>
                                 </div>
@@ -276,7 +273,7 @@
                                     <div class="col-sm-1"></div>
                                     <div class="col-sm-5">
                                         
-                                        <button class="btn organization-btn" id="btn_signup_save" type="submit"><b>SAVE & NEXT ></b></button>
+                                        <button class="btn organization-btn" id="btn_signup_save"  type="submit"><b>SAVE & NEXT ></b></button>
                                         
                                     </div>
                                 </div>
@@ -357,7 +354,7 @@
                             <div class="sales-enquiries">
                                 <div class="form-group">
                                     <div class="sale-icon"></div>
-                                    <div class="content-icon"><a href="#" ng-click="openSalesPopup()"><b>Sales Enquiries </b></a></div>
+                                    <div class="content-icon"><b style="color: #289ff1;">Sales Enquiries </b></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="from-india">
@@ -380,116 +377,6 @@
                                 </div>
                             </div>
                             <!-- Request a call Back -->
-
-                            <div class="request-call-back">
-                                <form name="newForm1" class="form-horizontal" autocomplete="off" novalidate
-                                      data-ng-submit="addPersonalInfo1(newForm1.$valid)">
-                                    <div class="form-group">
-                                        <div class="title">
-                                            <b>Request a call Back</b>
-                                        </div>
-                                        <p>If you have any request fill in the below details</p>
-                                    </div>
-                                    <div class="ionic">
-                                        <div class="list list-inset">
-
-                                            <!--<label class="item item-input">-->
-                                            <div class="form-group"
-                                                 data-ng-class="{
-                                                                        'has-error' : newForm1.name.$invalid && (!newForm1.name.$pristine || showValid) && !newForm1.name.$focus,
-                                                                        'has-success': newForm1.name.$valid && !newForm1.name.$pristine && !newForm1.name.$focus
-                                                                    }">
-                                                <input type="text" name="name" class="form-control" id="name"
-                                                       placeholder="Name"
-                                                       data-ng-model="callparam.name"
-                                                       minlength="1"
-                                                       maxlength="40"
-                                                       alphabets-only
-                                                       required
-                                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                            </div>
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm1.name.$invalid && (!newForm1.name.$pristine || showValid) && !newForm1.name.$focus">
-                                                {{ 'Please enter alphabets only' | translate }}
-                                            </div>
-                                            <!--</label>-->
-                                            <!--<label class="item item-input">-->
-                                            <div class="form-group"
-                                                 data-ng-class="{
-                                                                        'has-error' : newForm1.company.$invalid && (!newForm1.company.$pristine || showValid) && !newForm1.company.$focus,
-                                                                        'has-success': newForm1.company.$valid && !newForm1.company.$pristine && !newForm1.company.$focus
-                                                                    }">
-                                                <input type="text" autofocus name="company" class="form-control" id="company"
-                                                       placeholder="Company"
-                                                       data-ng-model="callparam.company"
-                                                       minlength="1"
-                                                       maxlength="40"
-                                                       alphabets-only
-                                                       required
-                                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                            </div>
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm1.company.$invalid && (!newForm1.company.$pristine || showValid) && !newForm1.company.$focus">
-                                                {{ 'Please enter alphabets only' | translate }}
-                                            </div>
-                                            <!--</label>-->
-
-
-
-
-                                            <div class="form-group"
-                                                 data-ng-class="{
-                                                                        'has-error' : newForm1.email.$invalid && (!newForm1.email.$pristine || showValid) && !newForm1.email.$focus,
-                                                                        'has-success': newForm1.email.$valid && !newForm1.email.$pristine && !newForm1.email.$focus
-                                                                    }">
-                                                <!--<label class="item item-input">-->
-                                                <input type="text" autofocus name="email" class="form-control" id="email"
-                                                       placeholder="Email"
-                                                       data-ng-model="callparam.email"
-                                                       minlength="1"
-                                                       maxlength="40"
-                                                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                                                       required />
-                                            </div>
-                                            <!--</label>-->
-
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm1.email.$invalid && (!newForm1.email.$pristine || showValid) && !newForm1.email.$focus">
-                                                {{ 'invalid email' | translate }}
-                                            </div>
-
-
-
-                                            <!--<label class="item item-input">-->
-                                            <div class="form-group"
-                                                 data-ng-class="{
-                                                                        'has-error' : newForm1.phone.$invalid && (!newForm1.phone.$pristine || showValid) && !newForm1.phone.$focus,
-                                                                        'has-success': newForm1.phone.$valid && !newForm1.phone.$pristine && !newForm1.phone.$focus
-                                                                    }">
-                                                <input type="text" name="phone" class="form-control" id="phone"
-                                                       placeholder="Phone"
-                                                       data-ng-model="callparam.phone"
-                                                       minlength="10"
-                                                       maxlength="10"
-                                                       required
-                                                       ng-pattern="/^[0-9]*$/" />
-                                                <!--</label>-->
-
-                                            </div>
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm1.phone.$invalid && (!newForm1.phone.$pristine || showValid) && !newForm1.phone.$focus">
-                                                {{ 'invalid phone' | translate }}
-                                            </div>
-
-                                            <div class="form-group">
-                                                <button class="btn submit-btn" id="btn_signup_sub" ng-click="call_back_info()">Submit</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
                             
                         </div>
                     </div>
@@ -506,10 +393,11 @@
     <div id="footer-bottom" class="footer-bottom2">
         <div class="container">
 
-            <a href="#">Privacy Statement</a> | <a href="#">Site Map</a>
+            <!--<a href="#">Privacy Statement</a> | <a href="#">Site Map</a>-->
 
             <div class="pull-left copyright">
-                &COPY; Copyright 2000-2015 Dwellar Pvt.Ltd. All rights reserved.
+                ©Copyright 2016. Dwellar Systems Private Limited. All Rights Reserved.
+
             </div>
 
             <div class="pull-right footer-logo">

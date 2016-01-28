@@ -9,10 +9,10 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
     var currentlyLoggedInUserId = $cookieStore.get('userId');
 
     var loadProjects = function () {
-
+        var userID = $cookieStore.get('userId');
         // Use $q.all to get both the result and then process the result
         var userPromise = newuserService.getProjectsInUser(newuserData.userId);//this user all projects
-        var orgPromise = newuserService.getOrgProjects(newuserData.orgId); // organisation all project
+        var orgPromise = newuserService.getOrgProjects(userID); // organisation all project
         //  alert(teamPromise);
         //alert(orgPromise);
 
@@ -26,7 +26,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
 
             // Now, find out the users already in the team and mark them
             angular.forEach($scope.ProjectsInUser, function (existingUser) {    //this user all prokect loop
-                var existingOrgProject = _.findWhere($scope.orgProjects, { project_id: existingUser.id }); //finding project id user belongs to in all project
+                var existingOrgProject = _.findWhere($scope.orgProjects, { id: existingUser.id }); //finding project id user belongs to in all project
                 if (existingOrgProject) existingOrgProject.isUserMember = true;
             })
         });
@@ -99,7 +99,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
         var updatePromisses = [];
         angular.forEach(projectsToAdd, function (projectId) {
             var newMember = {};
-            newMember.mapping_id = projectId;
+            newMember.mapping_id = currentlyLoggedInUserId;
             newMember.project_id = projectId;
             newMember.user_id = currentlyLoggedInUserId;
             newMember.organization_id = newuserData.orgId;
@@ -111,7 +111,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
         var removePromisses = [];
         angular.forEach(projectsToRemove, function (userId) {
             var existingMember = {};
-            existingMember.mapping_id = userId;
+            existingMember.mapping_id = currentlyLoggedInUserId;
             existingMember.project_id = userId;
             existingMember.user_id = currentlyLoggedInUserId;
             existingMember.organization_id = newuserData.orgId;

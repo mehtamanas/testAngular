@@ -16,7 +16,7 @@ angular.module('newuser')
             };
 
             this.getOrgTeams = function (orgId) {
-                alert(orgId);
+             //   alert(orgId);
 
                 return $http.get(apiService.baseUrl + 'Team/Get?orgID=' + orgId)
             };
@@ -27,11 +27,13 @@ angular.module('newuser')
                 return $http.get(apiService.baseUrl + 'User/GetProjectsByUser/' + userId)
             };
 
-            this.getOrgProjects = function (orgId) {
+            this.getOrgProjects = function (userID) {
                
-                alert("orgId" + orgId);
+              //  alert("userID" + userID);
 
-                return $http.get(apiService.baseUrl + 'Project/Get?orgID=' + orgId)
+              //  return $http.get(apiService.baseUrl + 'Project/Get/' + orgId)
+                return $http.get(apiService.baseUrl + "Organization/GetProjectDetails?id=" + userID )
+    
             };
 
             this.getEngagements = function () {

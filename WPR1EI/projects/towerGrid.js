@@ -40,8 +40,12 @@
                 var loginSession = response.data;
 
             },
-       function (error) {
-
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
         AuditCreate($scope.params);
@@ -204,8 +208,12 @@
             $scope.towers = response.data;
 
         },
-    function (error) {
-        console.log("Error " + error.tower);
+    function (error)
+    {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
 
         $scope.selectTower = function () {
@@ -227,10 +235,13 @@
             $scope.built = response.data;
 
         },
-   function (error) {
-       console.log("Error " + error.state);
-   }
-        );
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
 
        
 

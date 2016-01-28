@@ -22,7 +22,7 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|x-zip-compressed|'.indexOf(type) !== -1;
+         return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -58,8 +58,12 @@
             $scope.openSucessfullPopup();
 
         },
-      function (error) {
-
+      function (error)
+      {
+          if (error.status === 400)
+              alert(error.data.Message);
+          else
+              alert("Network issue");
       });
 
     };
@@ -105,8 +109,12 @@
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
 
      

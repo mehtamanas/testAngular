@@ -82,22 +82,15 @@
                 $scope.openSucessfullPopup();
 
             },
-                   function (error) {
-
+                   function (error)
+                   {
+                       if (error.status === 400)
+                           alert(error.data.Message);
+                       else
+                           alert("Network issue");
                    });
         }
-        
-           
-        
-        //else
-        //{
-        //    alert("Cannot Proceed without notes");
-        //}
-
-       
-
-
-    };
+     };
 
     $scope.CanceUpload = function () {
         uploader.cancelAll();
@@ -125,8 +118,12 @@
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);

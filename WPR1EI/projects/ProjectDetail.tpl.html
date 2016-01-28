@@ -6,9 +6,9 @@
                     <h2 class="pg-inner-title">Projects Details</h2>
 
                 </div>
+
+
             </div>
-        </div>
-    </div>
 
 
             <div class="pg-inner-content">
@@ -36,6 +36,15 @@
                             <div class="project-d03">Company Website:{{image.builder_website}}</div>
 
                         </div>
+                        <!--<div style="float:right; margin-top:210px" >
+                            <a href="https://www.facebook.com/">
+                                <img src="../images/facebook_icon_medium.png" />
+                            </a>
+                            <a href="https://twitter.com/">
+                                <img src="../images/twitter_icon_medium.png" />
+                            </a>
+                        </div>-->
+
                     </div> <!-- project-detail-info ended -->   
 
 
@@ -77,11 +86,11 @@
                                                 <h3>{{::summery.unit_type_desc}}</h3>
 
                                                 <div class="tb-sub">
-                                                    <span class="tb-sub-t tb-sub-t02"></span>
+                                                    <span class="tb-sub-t tb-sub-t06"></span>
                                                     <span class="tb-sub-txt">Carpet Area<span>{{::summery.carpet_area}} sq.ft</span></span>
                                                 </div>
                                                 <div class="tb-sub">
-                                                    <span class="tb-sub-t tb-sub-t02"></span>
+                                                    <span class="tb-sub-t tb-sub-t04"></span>
                                                     <span class="tb-sub-txt"> Saleable Area<span>{{::summery.super_built_up_area}} sq.ft</span></span>
                                                 </div>
                                             </div>
@@ -169,23 +178,23 @@
                                             <div class="tb-c-wrap">
                                                 <div class="tb-c">
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t07"></span>
                                                         <span class="tb-sub-txt">Base Price<span>{{tower.base_price}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t07"></span>
                                                         <span class="tb-sub-txt">Park Price<span>{{tower.cark_park_price}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t07"></span>
                                                         <span class="tb-sub-txt">Floor Rise<span>{{tower.floor_rise}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t07"></span>
                                                         <span class="tb-sub-txt">Floor Rise Starts From<span>{{tower.floor_rise_starts_from}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t08"></span>
                                                         <span class="tb-sub-txt">No of Wings<span>{{tower.no_of_wings}}</span></span>
                                                     </div>
                                                 </div>
@@ -213,7 +222,7 @@
                                             <div class="tb-c-wrap">
                                                 <div class="tb-c">
                                                     <div class="tb-sub" ng-repeat="wing in user.FloorList1 ">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t06"></span>
                                                         <span class="tb-sub-txt">{{wing.unit_type_desc}}<span>{{wing.no_of_units}}</span></span>
                                                     </div>
                                                     <!--<div class="tb-sub">
@@ -235,11 +244,11 @@
                         <div class="tab-pane fade" id="floor-type">
                             <div class="tab-content-title">Floor Types <a id="btn_openfloorpopup" class="add-btn" data-toggle="modal" ng-click="openNewFloorPopup()" style="cursor:pointer">+</a></div>
 
-                            <div class="unit-content-wrap" ng-repeat="user in builddetail">
+                            <div class="unit-bx" ng-repeat="user in builddetail">
                                 <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a>
                                 <div class="unit-title">{{user.floor_type}}</div>
 
-                                <div class="unit-bx" ng-repeat="floor in user.UnitList1">
+                                <!--<div class="unit-bx" ng-repeat="floor in user.UnitList1">-->
 
                                     <!--<h3>Unit {{$index + 1}}</h3>-->
 
@@ -253,31 +262,16 @@
                                                 <div class="tb-c">
                                                     <!--<h3>{{floor.unit_type_desc}}</h3>-->
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t04"></span>
                                                         <span class="tb-sub-txt">No of Units<span>{{user.no_of_units_floor}}</span></span>
                                                     </div>
 
-                                                    <!--<div class="tb-sub">
-                                    <span class="tb-sub-t tb-sub-t03"></span>
-                                    <span class="tb-sub-txt">No.of bedrooms<span>{{floor.num_bedrooms}}</span></span>
-                                </div>
-                                <div class="tb-sub">
-                                    <span class="tb-sub-t tb-sub-t03"></span>
-                                    <span class="tb-sub-txt">No.of bathrooms<span>{{floor.num_bathrooms}}</span></span>
-                                </div>
-                                <div class="tb-sub">
-                                    <span class="tb-sub-t tb-sub-t03"></span>
-                                    <span class="tb-sub-txt">Car Park<span>{{floor.cark_park}}</span></span>
-                                </div>
-                                <div class="tb-sub">
-                                    <span class="tb-sub-t tb-sub-t03"></span>
-                                    <span class="tb-sub-txt">Floor Rise<span>{{floor.floor_rise}}</span></span>
-                                </div>-->
+                                      
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div><!-- unit-bx ended -->
+                                <!--</div>-->   <!-- unit-bx ended -->
                                 <!-- unit-bx ended -->
                                 <!-- unit-bx ended -->
 
@@ -302,11 +296,11 @@
                                                 <div class="tb-c">
                                                     <h3>{{user.unit_type_desc}}</h3>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-t tb-sub-t06"></span>
                                                         <span class="tb-sub-txt">Carpet Area<span>{{user.carpet_area}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                        <span class="tb-sub-t tb-sub-t04"></span>
                                                         <span class="tb-sub-txt">Saleable Area<span>{{user.super_built_up_area}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
@@ -318,7 +312,7 @@
                                                         <span class="tb-sub-txt">Bathrooms<span>{{user.num_bathrooms}}</span></span>
                                                     </div>
                                                     <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                        <span class="tb-sub-t tb-sub-t05"></span>
                                                         <span class="tb-sub-txt">Car Park<span>{{user.cark_park}}</span></span>
                                                     </div>
                                                 </div>
@@ -373,10 +367,10 @@
                                 <div kendo-grid k-options="TowerListGrid" selectable="true" id="gridInventory" k-on-change="myGridChange(dataItem)">
 
                                 </div>
-                            </div>
-
-
-                        </div> <!-- inventory ended -->
+                                <div ng-show="width>0" class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':width+'%'}">
+                                
+                                        </div>
 
                         <div class="tab-pane fade" id="payment">
 
@@ -400,7 +394,7 @@
                                     </div>
                                     <div class="payment-list-row clearfix">
                     <span class="payment-c01 payment-c-b">TOTAL</span>
-                    <span class="payment-c02 payment-c-b">{{ getTotal()}}</span>
+                    <span class="payment-c02 payment-c-b">100</span>
                 </div>
                                 </div>
                             </div>
@@ -528,3 +522,8 @@
             </div>
         </div>
 
+
+    </div>
+
+</div>
+               

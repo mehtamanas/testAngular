@@ -10,16 +10,22 @@ angular.module('services.api', ['restangular'])
         Restangular.setDefaultHeaders({'X-ZUMO-APPLICATION': 'wOoVLFttYdxtzrtAWXMctSGaUQqJqf32'});
         Restangular.setDefaultHttpFields({withCredentials: false, cache: true, timeout: 60000}); // 60 second
 
-        Restangular.addResponseInterceptor(function(response, operation, what, url) {
+        Restangular.addResponseInterceptor(function (response, operation, what, url) {    //inventory loader
             $rootScope.$broadcast('API:loading:ended');
-
+            if (what.indexOf("Floors/GenerateTowerGrid") != -1) {
+                $rootScope.$broadcast('inventoryLoaded', 0);
+            }
             var responseArr = [];
             responseArr['data'] = response;
 
             return responseArr;
         });
 
-        Restangular.addRequestInterceptor(function(element, operation, what, url) {
+
+       
+
+
+        Restangular.addRequestInterceptor(function (element, operation, what, url) {
             // Not cache
             //if(operation === 'get') {
             //    Restangular.setDefaultRequestParams({ver: Math.random()});
@@ -34,10 +40,17 @@ angular.module('services.api', ['restangular'])
                 url: url
             };
 
-            if(what.indexOf('loadingSpinnerNotShowing') === -1) {
+            if (what.indexOf("Floors/GenerateTowerGrid") != -1) {
+                $rootScope.$broadcast('inventoryLoading', 1);
+            }
+
+            if (what.indexOf('loadingSpinnerNotShowing') === -1) {
                 $rootScope.$broadcast('API:loading:started', data);
             }
         });
+
+
+
 
         Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
             $rootScope.$broadcast('API:loading:ended');
@@ -155,4 +168,8 @@ angular.module('services.api', ['restangular'])
 
         return service;
     }
+
+
+
+
 );

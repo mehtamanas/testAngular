@@ -46,9 +46,13 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
 
     //end
 
+    var called = false;
 
-    $scope.finalpost = function () {
-        // TODO: Need to get these values dynamically
+    $scope.finalpost = function ()
+    {
+        if (called == true) {
+            return;
+        }
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
@@ -63,10 +67,10 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
 
         apiService.post("Payment/CreateAddNewPayment", postData).then(function (response) {
             var loginSession = response.data;
-            alert("Payment Created...");
-
             $scope.openSucessfullPopup();
-
+            $modalInstance.dismiss();
+            $rootScope.$broadcast('REFRESH', 'PaymentGrid');
+            called = true;
         },
      function (error) {
 
@@ -78,34 +82,35 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md'
+                size: 'md',
+                resolve: { items: { title: "Payment" } }
             });
 
 
         }
 
-        $scope.params = {
-//payment_schedule_id:$scope.payment_type1,
-            payment_schedule_id: $scope.payment_type1,
-            Amount: $scope.Amount,
-            duedate: $scope.duedate,
-            organization_id: $cookieStore.get('orgID'),
-            user_id: $cookieStore.get('userId'),
-            //contact_id: window.sessionStorage.selectedCustomerID,
-        };
-
-        var emp = {
-          //  payment_type1: $scope.payment_type1,
-            payment_schedule_id: $scope.payment_type1,
-            Amount: $scope.Amount,
-            duedate: $scope.duedate,
-            organization_id: $cookieStore.get('orgID'),
-            user_id: $cookieStore.get('userId'),
-            contact_id: window.sessionStorage.selectedCustomerID,
-        };
+       
     }
    
+    $scope.params = {
+        //payment_schedule_id:$scope.payment_type1,
+        payment_schedule_id: $scope.payment_type1,
+        Amount: $scope.Amount,
+        duedate: $scope.duedate,
+        organization_id: $cookieStore.get('orgID'),
+        user_id: $cookieStore.get('userId'),
+        //contact_id: window.sessionStorage.selectedCustomerID,
+    };
 
+    var emp = {
+        //  payment_type1: $scope.payment_type1,
+        payment_schedule_id: $scope.payment_type1,
+        Amount: $scope.Amount,
+        duedate: $scope.duedate,
+        organization_id: $cookieStore.get('orgID'),
+        user_id: $cookieStore.get('userId'),
+        contact_id: window.sessionStorage.selectedCustomerID,
+    };
 
         Url = "Payment/GetPayment";
 
@@ -125,20 +130,15 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
 
 
 
-        $scope.addNew = function (isValid) {
+        $scope.addNewPayment = function (isValid)
+        {
             $scope.showValid = true;
-            if (isValid) {
+            if (isValid)
+            {
+                $scope.finalpost();
+                $rootScope.$broadcast('REFRESH', 'PaymentGrid');
 
-
-                new ProjectCreate($scope.params).then(function (response) {
-                    console.log(response);
-                    $scope.showValid = false;
-                    $state.go('guest.signup.thanks');
-                }, function (error) {
-                    console.log(error);
-                });
-
-                $scope.showValid = false;
+            $scope.showValid = false;
 
             }
 

@@ -44,7 +44,7 @@
         name: 'imageFilter1',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|x-zip-compressed|'.indexOf(type) !== -1;
+         return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
     var upload1 = 0;
@@ -64,10 +64,10 @@
 
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-    var   uploadResult = response[0];
+    //var   uploadResult = response[0];
         // post image upload call the below api to update the database
     upload1 = 1;
-    $scope.media1 = uploadResult.Location;
+    $scope.media1 = response[0].Location;
       if(upload1==1 && upload2==1)
 
       {
@@ -88,8 +88,8 @@
     // CALLBACKS
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-    var  uploadResult1 = response[0];
-    $scope.media2 = uploadResult1.Location;
+    //var  uploadResult1 = response[0];
+        $scope.media2 = response[0].Location;
         // TODO: Need to get these values dynamically
       upload2 = 1;
       if (upload1 == 1 && upload2 == 1) {
@@ -102,19 +102,7 @@
       }
     };
 
-    //$scope.submit = function () {
-       
-
-    //        if (uploader.queue.length != 0)
-    //            uploader.uploadAll();
-    //        if (uploader1.queue.length != 0)
-    //            uploader1.uploadAll();
-    //        if (uploader.queue.length == 0 && uploader1.queue.length == 0)
-    //            $scope.finalpost();
-
-            
-        
-    //};
+   
 
 
 
@@ -170,7 +158,10 @@
                     $scope.openSucessfullPopup();
                 },
            function (error) {
-
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
             }
             else { alert("Please enter saleable area greater than carpet area..."); }
@@ -210,9 +201,9 @@
                      $scope.openSucessfullPopup = function () {
                          var modalInstance = $modal.open({
                              animation: true,
-                             templateUrl: 'newuser/sucessfull.tpl.html',
+                             templateUrl: 'newuser/Edited.tpl.html',
                              backdrop: 'static',
-                             controller: sucessfullController,
+                             controller: EditsucessfullController,
                              size: 'md',
 
                          });
@@ -221,8 +212,12 @@
                      $modalInstance.dismiss();
                      $scope.openSucessfullPopup();
                  },
-                function (error) {
-
+                function (error)
+                {
+                    if (error.status === 400)
+                        alert(error.data.Message);
+                    else
+                        alert("Network issue");
                 });
              }
            

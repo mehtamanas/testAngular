@@ -39,7 +39,7 @@ var AddNewEditFloorController = function ($scope, $state, $cookieStore, apiServi
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|x-zip-compressed|'.indexOf(type) !== -1;
+         return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -53,7 +53,10 @@ var AddNewEditFloorController = function ($scope, $state, $cookieStore, apiServi
 
     },
 function (error) {
-    console.log("Error " + error.state);
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 }
     );
 
@@ -66,7 +69,10 @@ function (error) {
 
     },
 function (error) {
-    console.log("Error " + error.state);
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 }
     );
 
@@ -90,12 +96,12 @@ function (error) {
 
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-        var uploadResult = response[0];
+      
         // post image upload call the below api to update the database
-
+        $scope.params.Image_Url_Wing1 = response[0].Location;
 
         upload1 = 1;
-        $scope.media1 = uploadResult.Location;
+       
         if (upload1 == 1 && upload2 == 1) {
             $scope.showProgress = false;
             $scope.finalpost()
@@ -105,9 +111,9 @@ function (error) {
 
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-        var uploadResult1 = response[0];
+        $scope.params.Image_Url_Wing2= response[0].Location;
 
-        $scope.media2 = uploadResult1.Location;
+        
         // TODO: Need to get these values dynamically
         upload2 = 1;
         if (upload1 == 1 && upload2 == 1) {
@@ -192,9 +198,12 @@ function (error) {
         }
 
         if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
-            showProgress = true;
-            uploader.uploadAll();
-            uploader1.uploadAll();
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader1.queue.length != 0)
+                uploader1.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0)
+                $scope.finalpost();
         }
     };
 
@@ -244,7 +253,7 @@ function (error) {
         return true;
     }
     $scope.isInInterval = function (array) {
-        var a = parseInt($scope.no_of_units);
+        var a = parseInt($scope.params.no_of_units);
         for (var i = 0; i < array.length; i++) {
             if (array[i] < 1 || array[i] > a)
                 return false;
@@ -266,7 +275,7 @@ function (error) {
             return false;
     }
     $scope.isMissingNumber = function (array) {
-        var a = parseInt($scope.no_of_units);
+        var a = parseInt($scope.params.no_of_units);
         var result = false;
         var nums = [];
         for (var i = 1; i <= a; i++) {
@@ -292,7 +301,7 @@ function (error) {
 
 
     $scope.invalid = function (array) {
-        var a = parseInt($scope.no_of_units);
+        var a = parseInt($scope.params.no_of_units);
         var result = false;
         var nums = [];
 
@@ -310,14 +319,18 @@ function (error) {
             return false;
     }
 
+    var called = false;
     $scope.finalpost = function () {
+        if (called == true) {
+            return;
+        }
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             media_name: "",
-            Image_Url_Floor1: $scope.media1,
+            Image_Url_Floor1: $scope.params.Image_Url_Wing1,
             // media_name: uploadResult1.Name,
-            Image_Url_Floor2: $scope.media2,
+            Image_Url_Floor2: $scope.params.Image_Url_Wing2,
             class_type: "Project",
             Floor_type: $scope.params.Unit_Type_desc,
             no_of_units: $scope.params.no_of_units,
@@ -326,7 +339,20 @@ function (error) {
             
         };
 
-       
+        $scope.openSucessfullPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'newuser/Edited.tpl.html',
+                backdrop: 'static',
+                controller: EditsucessfullController,
+                size: 'md',
+                resolve: { items: { title: "Floor" } }
+            });
+
+            $rootScope.$broadcast('REFRESH', 'floor');
+          
+        }
+
 
 
 
@@ -335,7 +361,7 @@ function (error) {
 
         apiService.post("FloorType/EditFloorTypeSingle", postData).then(function (response) {
             var loginSession = response.data;
-            //    alert("Floor Done...");
+           
 
             $modalInstance.dismiss();
             var unitupdate = [];
@@ -355,19 +381,27 @@ function (error) {
             apiService.post("FloorType/EditFloorTypeMultiple", unitupdate).then(function (response) {
                 var loginSession = response.data;
                 //    alert("Unit Edit Done...");
-
+                called = true;
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
 
             },
-          function (error) {
-
+          function (error)
+          {
+              if (error.status === 400)
+                  alert(error.data.Message);
+              else
+                  alert("Network issue");
           });
 
 
         },
-        function (error) {
-
+        function (error)
+        {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
 
     }
@@ -388,20 +422,7 @@ function (error) {
     //    alert('Error creating');
     //})
 
-    $scope.openSucessfullPopup = function () {
-        var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
-            backdrop: 'static',
-            controller: sucessfullController,
-            size: 'md',
-            resolve: { items: { title: "Floor Editing" } }
-        });
-
-        $rootScope.$broadcast('REFRESH', 'floor');
-        // $rootScope.$emit('REFRESH','floor');
-    }
-
+ 
 
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {
@@ -447,8 +468,12 @@ function (error) {
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);
@@ -515,7 +540,12 @@ function (error) {
 
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
-        $scope.submit();
+        if (isValid)
+        {
+            $scope.submit();
+
+        }
+        $scope.showValid = false;
 
 
     }

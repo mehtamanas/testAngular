@@ -82,8 +82,12 @@
             }
 
         },
-        function (error) {
-
+        function (error)
+        {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
 
     };
@@ -117,8 +121,12 @@
             //   alert("Image upload Done");
             
         },
-        function (error) {
-
+        function (error)
+        {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
 
 
@@ -149,8 +157,12 @@
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);

@@ -56,8 +56,12 @@
 
      
     },
-function (error) {
-    console.log("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 }
     );
 
@@ -72,8 +76,12 @@ function (error) {
 
 
     },
-function (error) {
-    console.log("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 }
     );
 
@@ -120,14 +128,7 @@ function (error) {
         }
 
 
-        //var postData = {
-        //    user_id: $cookieStore.get('userId'),
-        //    organization_id: $cookieStore.get('orgID'),
-        //    type_of_payment: $scope.params.Pay_Scheme_name,
-        //    base_rate: $scope.params.base_rate,
-        //    id: payment_schedule_id
-
-        //};
+      
 
         apiService.post("Payment/EditPaymentScheme", param).then(function (response) {
             var loginSession = response.data;
@@ -149,15 +150,23 @@ function (error) {
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
             },
-         function (error) {
-
+         function (error)
+         {
+             if (error.status === 400)
+                 alert(error.data.Message);
+             else
+                 alert("Network issue");
          });
 
-            $modalInstance.dismiss();
+            
 
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     }
    
@@ -181,10 +190,11 @@ function (error) {
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: EditsucessfullController,
             size: 'md',
+            resolve: { items: { title: "Payment" } }
 
         });
         $rootScope.$broadcast('REFRESH', 'payment');

@@ -7,7 +7,7 @@ var uploader3_done = false;
 var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ProjectPopUpController');
 
-
+   
 
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
@@ -100,21 +100,14 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
        // alert("uploader called");
-        uploadResult = response[0];
+        $scope.media_url1 = response[0].Location;
         uploader_done = true;
 
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            callApi();
+            $scope.finalpost();
         }
-        // post image upload call the below api to update the database
-
-        //uploadService.postDataAfterUpload(postData).then(function () {
-        //    // Process the successful file upload
-        //    alert("project Created");
-        //}, function (error) {
-        //    alert('Error creating');
-        //})
+   
     };
 
 
@@ -123,11 +116,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         console.log("uploader1 called");
-        uploadResult1 = response[0];
+        $scope.media_url2 = response[0].Location;
         uploader1_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            callApi();
+            $scope.finalpost();
         }
     };
 
@@ -135,11 +128,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
     uploader2.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         console.log("uploader2 called");
-        uploadResult2 = response[0];
+        $scope.media_url3 = response[0].Location;
         uploader2_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            callApi();
+            $scope.finalpost();
         }
     };
 
@@ -149,23 +142,23 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
     uploader3.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
         console.log("uploader3 called");
-        uploadResult3 = response[0];
+        $scope.media_url4 = response[0].Location;
         uploader3_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-
-            callApi();
+            $scope.finalpost(); 
           }
     };
 
 
     var called = false;
-    callApi = function () {
+
+    $scope.finalpost = function () {
         if (called == true){
             return;
         }
 
-        called = true;
+        
 
         var address = [];
 
@@ -193,14 +186,14 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             userid: $cookieStore.get('userId'),
             name: $scope.params.name,
             organization_id: $cookieStore.get('orgID'),
-            media_logo_name: uploadResult.Name,
-            media_url1: uploadResult.Location,
+            //media_logo_name: uploadResult.Name,
+            media_url1: $scope.media_url1,
             //media_home_name: uploadResult1.Name,
-            media_url2: uploadResult1.Location,
+            media_url2: $scope.media_url2,
             //media_project_name: uploadResult2.Name,
-            media_url3: uploadResult2.Location,
+            media_url3: $scope.media_url3,
             // media_name: uploadResult.Name,
-            media_url4: uploadResult3.Location,
+            media_url4: $scope.media_url4,
             possession_date: $scope.params.month,
             total_area: $scope.params.totalProjectArea,
             year:$scope.params.project_year,
@@ -228,11 +221,13 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'projectGrid');
-
+            called = true;
         },
         function (error) {
-            alert(error.data.Message);
-    
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
 
 
@@ -261,18 +256,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
            
             
         }
-
-      
-
-        //uploadService.postDataAfterUpload(postData).then(function () {
-        //    // Process the successful file upload
-        //    alert("project Created");
-        //}, function (error) {
-        //    alert('Error creating');
-        //})
     };
-
-
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {
         console.log('Unable to upload file.');
@@ -327,20 +311,29 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);
-
+    $scope.params.project_type = "Apartment";
+    $scope.selectedproject = 0;
     //end
 
     Url = "GetCSC/state";
     apiService.get(Url).then(function (response) {
         $scope.states = response.data;
     },
-function (error) {
-    alert("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
     $scope.selectstate = function () {
@@ -353,10 +346,12 @@ function (error) {
     apiService.get(Url).then(function (response) {
         $scope.cities = response.data;
     },
-function (error) {
-    alert("Error " + error.cities);
-
-
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
     $scope.filterExpression = function (city) {
@@ -376,8 +371,12 @@ function (error) {
         $scope.month = response.data;
 
     },
-function (error) {
-    alert("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
     $scope.selectmonth = function () {
@@ -398,9 +397,6 @@ function (error) {
     };
 
 
-
-
-
     $scope.choices2 = [{ id: 'choice1' }];
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
@@ -415,9 +411,6 @@ function (error) {
         }
 
     };
-
-   
-  
  
     $scope.selectedproject = -1;
 
@@ -475,35 +468,7 @@ function (error) {
         User_ID: $cookieStore.get('userId')
     };
 
-    //if ($cookieStore.get('projectid') !== '') {
-    //    apiService.get('Project/GetbyID/' + $cookieStore.get('projectid')).then(function (response) {
-    //        $scope.data = response.data;
-    //        angular.forEach($scope.data, function (value, key) {
-    //            $scope.params.name = value.name;
-    //            $scope.params.description = value.description;
-    //        });
-    //    },
-    //            function (error) {
-    //                deferred.reject(error);
-    //                alert("not working");
-    //            });
-    //}
-
     
-   // projectUrl = "Project/ProjectAddress";
-   // ProjectCreate = function (param) {
-   //     //alert(param.name);
-   //     apiService.post(projectUrl, param).then(function (response) {
-   //         var loginSession = response.data;
-   //         alert("Project Created..!!");
-   //         $modalInstance.dismiss();
-
-         
-   //     },
-   //function (error) {
-   //    alert("Error " + error.state);
-   //});
-   // };
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');

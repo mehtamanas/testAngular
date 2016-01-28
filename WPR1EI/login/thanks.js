@@ -1,20 +1,11 @@
-//angular.module('app.guest.login')//to change
 
-//.config(function($stateProvider) {
-//    $stateProvider
-//        .state('thanks', {//tochange
-//            url: '/thanks',
-//            views: {
-//                'main-content@guest': {
-//                    templateUrl: 'login/thanks.tpl.html',//tochange
-//                    controller: 'ThanksController'
-//                }
-//            },
-//            data: {pageTitle: 'Thanks'}
-//        });
-//})
 
-angular.module('app.guest.login')//to chnage
+
+
+
+
+
+angular.module('app.guest.login')
 
   .config(function config($stateProvider) {
       $stateProvider
@@ -32,11 +23,13 @@ angular.module('app.guest.login')//to chnage
 
         $rootScope.title = 'Dwellar./Thanks';
 
-        $scope.addPersonalInfo = function (isValid) {
-            if (isValid) {
-                $state.go('login');
-            }
+       
 
-        }
+        $scope.thanksLogin = function ()
+        {
+            $state.go('login');
+
+           
+        };
     }
 );

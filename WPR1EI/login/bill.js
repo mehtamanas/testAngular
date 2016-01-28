@@ -40,7 +40,7 @@ angular.module('app.guest.login')//to chnage
             account_phone: $cookieStore.get('Phone'),
             account_country: $cookieStore.get('Account_Country'),
             Password: $cookieStore.get('Hash'),
-            OrgName: $cookieStore.get('OrgName'),
+            OrgName: $cookieStore.get('orgName'),
             who_am_i: $cookieStore.get('who_am_i')
          //   Organization_Id: ''
 
@@ -118,6 +118,19 @@ angular.module('app.guest.login')//to chnage
                 function (error) {
                     console.log("Error" + error.state);
                 });
+            $cookieStore.remove('First_Name');
+            $cookieStore.remove('Last_Name');
+            $cookieStore.remove('Account_Email');
+            $cookieStore.remove('Phone');
+            $cookieStore.remove('Account_Country');
+            $cookieStore.remove('orgName');
+            $cookieStore.remove('Street_1');
+            $cookieStore.remove('Street_2');
+            $cookieStore.remove('Street_3');
+            $cookieStore.remove('State');
+            $cookieStore.remove('City');
+            $cookieStore.remove('zip_code');
+            $cookieStore.remove('Country');
             $state.go('thanks');
         };
 

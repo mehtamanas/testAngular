@@ -112,10 +112,17 @@ angular.module('contacts')
                 },
                 pageSize: 5
             },
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
                 field: "Document_Name",
                 title: "Document Name",
@@ -169,10 +176,17 @@ angular.module('contacts')
                 //    field: 'sport'
                 //}
             },
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
                 field: "Property_Name",
                 title: "Property Name",
@@ -232,11 +246,17 @@ angular.module('contacts')
                 }
 
             },
-
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
                 field: "amount",
                 title: "Amount",
@@ -296,10 +316,17 @@ angular.module('contacts')
                 //    field: 'sport'
                 //}
             },
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
                 field: "name",
                 title: "Name",
@@ -396,10 +423,17 @@ angular.module('contacts')
                 //    field: 'sport'
                 //}
             },
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
                 field: "class_type",
                 title: "Type",
@@ -438,10 +472,17 @@ angular.module('contacts')
                 //    field: 'sport'
                 //}
             },
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
                 field: "amount",
                 title: "amount",
@@ -470,7 +511,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Contact/GetAssignTo/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Contact/GetAssignToList?id=" + $scope.seletedCustomerId
                    
                 },
                 pageSize: 5
@@ -479,31 +520,43 @@ angular.module('contacts')
                 //    field: 'sport'
                 //}
             },
-            sortable: true,
-            pageable: true,
             groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
             filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
             columns: [{
-                field: "id",
-                title: " Contact",
+                field: "first_name",
+                title: " First Name",
                 width: "120px",
                 attributes: {
                     "class": "UseHand",
 
                 }
             }, {
-                field: "project_id",
-                title: "Project ",
+                field: "last_name",
+                title: "Last Name ",
                 width: "120px",
                 
             }, {
-                field: "date",
-                title: "User",
+                field: "contact_element_info_email",
+                title: "Email",
                 width: "120px",
               
                
             }]
         };
+
+
+
+
+     
 
     //popup functionality start
         $scope.openEditContactPopup = function () {
@@ -558,5 +611,67 @@ angular.module('contacts')
 
         };
 
+       
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'PaymentGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'DocumentGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+
+        $scope.$on('REFRESH', function (event, args) {
+
+            setTimeout(function () {
+
+                if (args == 'contacts') {
+
+
+                    //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+                    GetUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+                    //alert(GetUrl);
+
+                    apiService.getWithoutCaching(GetUrl).then(function (response) {
+
+                        $scope.data = response.data;
+                        // alert($scope.data);
+                        //   alert($scope.seletedCustomerId);
+
+                        $scope.main = response.data;
+                        $scope.image = $scope.main[0];
+                        //////////////////////////////////////
+                        $scope.Contact_First_Name = $scope.data[0].Contact_First_Name;
+                        $scope.Contact_Last_Name = $scope.data[0].Contact_Last_Name;
+                        $scope.Contact_Email = $scope.data[0].Contact_Email;
+                        $scope.Contact_Phone = $scope.data[0].Contact_Phone;
+                        $scope.street1 = $scope.data[0].street1;
+                        $scope.Role = $scope.data[0].Role;
+                        $scope.zipcode = $scope.data[0].zipcode;
+                        $scope.State = $scope.data[0].State;
+                        $scope.City = $scope.data[0].City;
+                        // alert($scope.media_url);
+
+                        if ($scope.data.contact_mobile !== '') {
+                            $scope.mobile = $scope.data.contact_mobile;
+                        }
+                        if ($scope.data.contact_email !== '') {
+                            $scope.email = $scope.data.contact_Email;
+                        }
+                        $state.go('app.contactdetail', {}, { reload: false });
+                    },
+                                function (error) {
+                                    deferred.reject(error);
+                                    alert("not working");
+                                });
+
+                }
+
+            }, 1000);
+        });
 
     });

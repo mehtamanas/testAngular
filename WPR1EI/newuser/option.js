@@ -1,4 +1,4 @@
-﻿var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal) {
+﻿var OptionPopUpController = function ($scope, $state, $cookieStore, apiService,$rootScope, $modalInstance, $modal) {
     console.log('OptionPopUpController');
 
 
@@ -38,8 +38,12 @@
             var loginSession = response.data;
 
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);
@@ -67,9 +71,12 @@
         $scope.projects = response.data;
 
     },
-                function (error) {
-                    deferred.reject(error);
-                    alert("not working");
+                function (error)
+                {
+                    if (error.status === 400)
+                        alert(error.data.Message);
+                    else
+                        alert("Network issue");
                 });
     //alert("hii pop");
     projectUrl = "PropertyListing/CreateProperty";
@@ -88,8 +95,12 @@
 
 
         },
-   function (error) {
-       alert("Error " + error.state);
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
 
@@ -99,8 +110,12 @@
         $scope.cities = response.data;
 
     },
-function (error) {
-    alert("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
     //alert($cookieStore.get('orgID'));
 
@@ -125,8 +140,12 @@ function (error) {
         $scope.states = response.data;
 
     },
-function (error) {
-    alert("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
     $scope.selectproject = function () {
@@ -216,9 +235,14 @@ function (error) {
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            $rootScope.$broadcast('REFRESH', 'mainGridOptions');
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
 
     }

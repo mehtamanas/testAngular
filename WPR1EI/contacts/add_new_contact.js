@@ -45,8 +45,12 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             apiService.post("AuditLog/Create", param).then(function (response) {
                 var loginSession = response.data;
             },
-       function (error) {
-
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
         AuditCreate($scope.params);
@@ -55,107 +59,165 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
     // CALLBACKS
-    uploader.onSuccessItem = function (fileItem, response, status, headers) {
-        // post image upload call the below api to update the database
-        var uploadResult = response[0];
+        uploader.onSuccessItem = function (fileItem, response, status, headers)
+        {
+            // post image upload call the below api to update the database
 
-        // TODO: Need to get these values dynamically
-        var postData = {
-            user_id: $cookieStore.get('userId'),
-            organization_id: $cookieStore.get('orgID'),
-            media_name: uploadResult.Name,
-            media_url: uploadResult.Location,
-            first_name: $scope.params.first_name,
-            age: $scope.params.age,
-            gender: $scope.directory2,
-            last_name: $scope.params.last_name,
-            people_type: $scope.directory1,
-            designation: $scope.params.designation,
-            contact_element_info_email: $scope.choices1[0].contact_element_info_email,
-            contact_element_info_phone: $scope.choices[0].contact_element_info_phone,
-            state: $scope.params.state,
-            project_id: $scope.params.project_id,
-            city: $scope.params.city,
-            zip_code: $scope.params.zip_code,
-            class_type: "Contact",
-            street_1: $scope.choices2[0].street_1,
-          //  street_2: $scope.choices2[1].street_1,
-            mappinguser_id: $scope.params.mappinguser_id
+            $scope.media_url = response[0].Location;
+            uploader_done = true;
+            if (uploader_done == true) {
+                $scope.showProgress = false;
+                $scope.finalpost();
+            }
 
-
-           
         };
+    
 
-        apiService.post("Contact/CreateNew", postData).then(function (response) {
-            var loginSession = response.data;
-            $modalInstance.dismiss();
-            $scope.openSucessfullPopup();
-            $rootScope.$broadcast('REFRESH', 'contactGrid');
+        var called = false;
 
-
-            var media = [];
-            for (var i in $scope.choices1)
-            {
-                var postData_email =
-                    {
-                        id: $scope.choices1[i].class_id,
-                        class_id: loginSession.id,
-                        class_type: "Contact",
-                        element_type: "email_contact",
-                        element_info1: $scope.choices1[i].contact_element_info_email,
-                    }
-                media.push(postData_email);
-            }
-        
-            for (var i in $scope.choices)
-            {
-                var postData_phone =
-                    {
-                        id: $scope.choices[i].class_id,
-                        class_id: loginSession.id,
-                        class_type: "Contact",
-                        element_type: "phone_contact",
-                        element_info1: $scope.choices[i].contact_element_info_phone,
-                    }
-                media.push(postData_phone);
+        $scope.finalpost = function ()
+        {
+            if (called == true) {
+                return;
             }
 
-            for (var i in $scope.choices2) {
-                var postData_address =
-                    {
-                        id: $scope.choices2[i].class_id,
-                        class_id: loginSession.id,
-                        class_type: "Contact",
-                        element_type: "address_contact",
-                        element_info1: $scope.choices2[i].street_1,
-                    }
-                media.push(postData_address);
+
+            var address = [];
+
+            var newadd = {};
+
+            for (i = 0; i < $scope.choices2.length; i++) {
+                if (i == 0) {
+                    if ($scope.choices2[0].Street_1 != undefined)
+                        newadd.Street_1 = $scope.choices2[0].Street_1;
+                }
+                else if (i == 1) {
+                    if ($scope.choices2[1].Street_1 != undefined)
+                        newadd.Street_2 = $scope.choices2[1].Street_1;
+                }
+             
+
             }
-      
 
 
-            apiService.post("ElementInfo/Create", media).then(function (response) {
+            var postData = {
+                user_id: $cookieStore.get('userId'),
+                organization_id: $cookieStore.get('orgID'),
+                //media_name: uploadResult.Name,
+                media_url: $scope.media_url,
+                first_name: $scope.params.first_name,
+                age: $scope.params.age,
+                gender: $scope.directory2,
+                last_name: $scope.params.last_name,
+                people_type: $scope.directory1,
+                designation: $scope.params.designation,
+                contact_element_info_email: $scope.choices1[0].contact_element_info_email,
+                contact_element_info_phone: $scope.choices[0].contact_element_info_phone,
+                state: $scope.params.state,
+                project_id: $scope.params.project_id,
+                city: $scope.params.city,
+                zip_code: $scope.params.zip_code,
+                class_type: "Contact",
+                Street_1: newadd.Street_1,
+                Street_2: newadd.Street_2,
+                mappinguser_id: $scope.params.mappinguser_id
+
+
+
+            };
+
+            apiService.post("Contact/CreateNew", postData).then(function (response) {
                 var loginSession = response.data;
-            
+                $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
+                $rootScope.$broadcast('REFRESH', 'contactGrid');
+
+
+                var media = [];
+                for (var i in $scope.choices1) {
+                    var postData_email =
+                        {
+                            id: $scope.choices1[i].class_id,
+                            class_id: loginSession.id,
+                            class_type: "Contact",
+                            element_type: "email_contact",
+                            element_info1: $scope.choices1[i].contact_element_info_email,
+                        }
+                    media.push(postData_email);
+                }
+
+                for (var i in $scope.choices) {
+                    var postData_phone =
+                        {
+                            id: $scope.choices[i].class_id,
+                            class_id: loginSession.id,
+                            class_type: "Contact",
+                            element_type: "phone_contact",
+                            element_info1: $scope.choices[i].contact_element_info_phone,
+                        }
+                    media.push(postData_phone);
+                }
+
+               
+
+
+
+                apiService.post("ElementInfo/Create", media).then(function (response) {
+                    var loginSession = response.data;
+                    called = true;
+
+                },
+               function (error) {
+
+               });
+
+
 
             },
            function (error) {
 
            });
-       
-       
 
-        },
-       function (error) {
+            var address = [];
 
-       });
+            for (var i in $scope.choices2) {
 
-    };
+                var newadd = {};
+                newadd.Street_1 = $scope.choices2[i].Street_1;
+
+                newadd.Street_2 = $scope.choices2[i].Street_2;
+                address.push(newadd);
 
 
+            }
+
+            ////var media = [];
+            ////for (var i in $scope.removechoices1) {
+            ////    var removeData_email =
+            ////        {
+            ////            id: $scope.removechoices1[i].class_id,
+            ////            class_id: loginSession.id,
+            ////            class_type: "Contact",
+            ////            element_type: "email_contact",
+            ////            element_info1: $scope.removechoices1[i].contact_element_info_email,
+            ////        }
+            ////    media.push(removeData_email);
+            ////}
+
+            ////for (var i in $scope.removechoices) {
+            ////    var removeData_phone =
+            ////        {
+            ////            id: $scope.removechoices[i].class_id,
+            ////            class_id: loginSession.id,
+            ////            class_type: "Contact",
+            ////            element_type: "phone_contact",
+            ////            element_info1: $scope.removechoices[i].contact_element_info_phone,
+            ////        }
+            ////    media.push(removeData_phone);
+            ////}
 
 
-       
+        }
 
   
     uploader.onErrorItem = function (fileItem, response, status, headers) {
@@ -167,20 +229,36 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     };
 
 
-
-
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md'
+            size: 'md',
+            resolve: { items: { title: "Contact" } }
         });
 
         
     }
   
+
+
+    var address = [];
+        
+    for (var i in $scope.choices2) {     
+
+        var newadd = {};     
+        newadd.Street_1 = $scope.choices2[i].Street_1;
+         
+        newadd.Street_2 = $scope.choices2[i].Street_2;
+        address.push(newadd);
+           
+            
+    }
+
+
+
 
     $scope.params = {
         first_name: $scope.first_name,
@@ -204,7 +282,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     };
     
-   
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -340,63 +417,23 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
               //alert($scope.params.city);
           };
 
-          $scope.addNewContact = function (isValid) {
+          $scope.addNewContact = function (isValid)
+          {
               $scope.showValid = true;
         
-              if (isValid) {
+              if (isValid)
+              {
+                  if (uploader.queue.length != 0)
+                      uploader.uploadAll();
+                  if (uploader.queue.length == 0)
+                      $scope.finalpost();
 
-                  contactList.first_name = $scope.params.first_name;
-                  contactList.last_name = $scope.params.last_name;
-                  contactList.User_ID = $scope.params.User_ID;
-                  contactList.organization_id = $scope.params.organization_id;
-                  contactList.people_type = 'Lead';
-                  contactList.who_am_i = $scope.who_am_i;
-                  //                
-                  contactList.Android_SmartPhone_Version = $scope.Android_SmartPhone_Version;
-                  contactList.Android_Tablet_Version = $scope.Android_Tablet_Version;
-                  contactList.iPad_Version = $scope.iPad_Version;
-                  contactList.iPhone_Version = $scope.iPhone_Version;
-                  contactList.Kiosk_Version = $scope.Kiosk_Version;
-                  contactList.allPhone = $scope.params.all_phone;
-
-                  contactList.contact_mobile = $scope.params.mobile;
-                  contactList.contact_email = $scope.params.email;
-                  contactList.who_am_i = $scope.who_am_i;
-
-
-                  if (contactList.who_am_i == 'others') {
-                      contactList.others = $scope.others;
-                  }
-
-                  new ContactCreate(contactList).then(function (response) {
-                      console.log(response);
-                      $scope.showValid = false;
-                      $scope.params.first_name = "";
-                      $scope.params.last_name = "";
-                      $scope.params.email = "";
-                      $scope.params.mobile = "";
-
-                  }, function (error) {
-                      console.log(error);
-                  });
-
-              }
-              if (isValid) {
                   $scope.showValid = false;
-                  console.log(isValid);
-                  if (isValid) {
-                      $scope.showValid = false;
-                  } else {
-                      $scope.showValid = true;
-                  }
-              }
-
-           
+              }   
           }
 
       
       };
    
-      
       
       

@@ -1269,8 +1269,8 @@ div.k-grid-footer {
     background:url("../images/icons-content.png") -88px -132px transparent;
 }
 
-.tb-sub-t02 { 
-    background:url("../images/icons-content.png") -88px -167px transparent;
+.tb-sub-t06 { 
+    background:url("../images/carpet-area.png") repeat scroll -70px -171px;
 }
 
 .tb-sub-txt {
@@ -1627,13 +1627,22 @@ div.k-grid-footer {
 }
 
 .image-upload-wrap .image-upload-bx {
-    background:url('../images/upload-image-icon.png') center center no-repeat #f4f4f4;
-    border:1px dashed #cccccc;
-    height:102px;
+  background: url("../images/upload-image-icon.png") no-repeat 76px 44px #f4f4f4;
+    border: 1px dashed #cccccc;
+    height: 110px;
     line-height: 102px;
-    width:204px;
+    width: 204px;
     text-align: center;
-    overflow: hidden;    
+    overflow: hidden;
+}
+.image-upload-wrap .photo-upload-bx {
+  background: url("../images/plus_icon.png") no-repeat 76px 44px #f4f4f4;
+    border: 1px dashed #cccccc;
+    height: 110px;
+    line-height: 102px;
+    width: 204px;
+    text-align: center;
+    overflow: hidden;
 }
 
 .dropzone.image-upload-bx {
@@ -1641,6 +1650,11 @@ div.k-grid-footer {
     padding: 0;
     overflow: hidden;
 }
+/*#uploadContact{
+ 
+  
+   
+}*/
 
 .dropzone.image-upload-bx .dz-message {
     display:none;
@@ -2500,6 +2514,20 @@ body > #footer-bottom a {
     font-weight: bold;
     color:#a6a6a6;
 }
+.project-detail-txt .project-d05 {
+    font-size: 12px;
+    font-weight: bold;
+    background: #32CD32;
+    text-align: center;
+    width: 100px;
+    color: #fff;
+    border-radius: 10px;
+    margin-top: 3px;
+}
+
+
+
+
 
 .project-detail-tabs {
     background-color:#fff;
@@ -2864,13 +2892,13 @@ body > #footer-bottom a {
     font-size:15px;
 }
 
-.tb-sub-t03 {
+/*.tb-sub-t03 {
     background: transparent url("../images/icons-content.png") repeat scroll -88px -197px;
 }
 
 .unit-bx .tb-sub-t02 {
     background:transparent url("../images/icons-content.png") repeat scroll -87px -165px
-}
+}*/
 
 .tab-content-title b {
     font-size:18px;
@@ -7214,8 +7242,8 @@ div.k-grid-footer {
     background:url("../images/icons-content.png") -88px -132px transparent;
 }
 
-.tb-sub-t02 { 
-    background:url("../images/icons-content.png") -88px -167px transparent;
+.tb-sub-t06 { 
+    background:url("../images/carpet-area.png") repeat scroll -70px -171px;
 }
 
 .tb-sub-txt {
@@ -7369,7 +7397,7 @@ div.k-grid-footer {
 }
 
 .close-btn-wrap {
-    postion:relative;
+    position:relative;
     height:30px;
 }
 
@@ -7537,7 +7565,7 @@ div.k-grid-footer {
 
 .f-unit .form-control {
     text-align: center;
-    font-size:20px;
+    font-size:15px;
     width:148px;
 }
 
@@ -7573,7 +7601,7 @@ div.k-grid-footer {
     margin-bottom: 7px;
 }
 
-.image-upload-wrap .image-upload-bx {
+/*.image-upload-wrap .image-upload-bx {
     background:url('../images/upload-image-icon.png') center center no-repeat #f4f4f4;
     border:1px dashed #cccccc;
     height:102px;
@@ -7581,7 +7609,7 @@ div.k-grid-footer {
     width:204px;
     text-align: center;
     
-}
+}*/
 
 .dropzone.image-upload-bx {
     min-height: 0;
@@ -8820,12 +8848,38 @@ form.callback  {
 }
 
 .tb-sub-t03 {
-    background: transparent url("../images/icons-content.png") repeat scroll -88px -197px;
+    /*background: transparent url("../images/icons-content.png") repeat scroll -88px -197px;*/
+     background: transparent url("../images/bedroom.png") repeat scroll -70px -206px;
 }
 
 .unit-bx .tb-sub-t02 {
-    background:transparent url("../images/icons-content.png") repeat scroll -87px -165px
+    background:transparent url("../images/bathroom.png") repeat scroll -70px -171px;
 }
+
+.tb-sub-t04{
+
+     background:transparent url("../images/saleable-area.png") repeat scroll -70px -171px;
+
+}
+
+.tb-sub-t05{
+     background:transparent url("../images/car-park.png") repeat scroll -70px -171px;
+
+}
+
+.tb-sub-t06{
+      background:transparent url("../images/carpet-area.png") repeat scroll -70px -171px;
+
+}
+.tb-sub-t07{
+      background:transparent url("../images/rupee_icon.png") repeat scroll -70px -171px;
+
+}
+.tb-sub-t08{
+      background:transparent url("../images/tower.png") repeat scroll -70px -171px;
+
+}
+
 
 .tab-content-title b {
     font-size:18px;
@@ -9772,6 +9826,9 @@ form.callback  {
   background-position: -2px -67px;
 }
 
+.signup ul.state-bar li.current {
+  color: #289ff1;
+}
 
 ul.state-bar {
   list-style: none;
@@ -12119,11 +12176,13 @@ LEFT
     
     
     }
- .login-thanks {
-         max-width: 50%;
-         max-height: 100%;
+.login-thanks {
+         max-width: 60%;
+         /*max-height: 100%;*/
          margin: 50px auto;
-       
+         height:700px;
+         border: 1px solid !important;
+         padding: 61px;
 
     }
 .organization-btn-thanks {
@@ -12155,7 +12214,7 @@ LEFT
     border: 1px solid transparent;
     border-radius: 4px;
     margin-top: 20px;
-    margin-left:50%;
+    margin-left:38%;
 }
 
 
@@ -13282,4 +13341,20 @@ width:30%;
 .process-icons 
 {
     display:block;
+}
+
+#newuseradd_email{
+
+
+   background: url(../images/email_small_icon.png) no-repeat scroll 18px 18px;
+   padding-left:48px;
+   width:98%;
+    
+}
+.backArrow{
+
+     background: url(../images/L-Arrow.png) no-repeat scroll -5px -16px;
+     padding-left:48px;
+     color:#289ff1;
+     width:98%;
 }

@@ -55,12 +55,12 @@
    
 
 
-    //$scope.choices = [{ id: 'choice1' }];
+    $scope.choices = [{ id: 'choice1' }];
 
-    //$scope.addNewChoice = function () {
-    //    var newItemNo = $scope.choices.length + 1;
-    //    $scope.choices.push({ 'id': 'choice' + newItemNo });
-    //};
+    $scope.addNewChoice = function () {
+        var newItemNo = $scope.choices.length + 1;
+        $scope.choices.push({ 'id': 'choice' + newItemNo });
+    };
 
     
     $scope.choices2 = [{ id: 'choice1' }];
@@ -120,6 +120,10 @@
                         $scope.openSucessfullPopup();
                     },
                  function (error) {
+                     if (error.status === 400)
+                         alert(error.data.Message);
+                     else
+                         alert("Network issue");
 
                  });
                     $scope.total = tot;
@@ -127,6 +131,10 @@
 
                 },
 function (error) {
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 
 });
 
@@ -169,6 +177,7 @@ function (error) {
             backdrop: 'static',
             controller: sucessfullController,
             size: 'md',
+            resolve: { items: { title: "Payment" } }
 
         });
         $rootScope.$broadcast('REFRESH', 'payment');

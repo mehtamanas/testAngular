@@ -35,7 +35,7 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|x-zip-compressed|'.indexOf(type) !== -1;
+         return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -106,10 +106,10 @@ function (error) {
     }
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-     uploadResult = response[0];
+     //uploadResult = response[0];
         // post image upload call the below api to update the database
      upload1 = 1;
-     $scope.media1 = uploadResult.Location;
+     $scope.media1 = response[0].Location;
      if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
          $scope.finalpost()
      }
@@ -119,10 +119,10 @@ function (error) {
     // CALLBACKS
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-        uploadResult1 = response[0];
+        //uploadResult1 = response[0];
 
         upload2 = 1;
-        $scope.media2 = uploadResult1.Location;
+        $scope.media2 = response[0].Location;
         if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
             $scope.finalpost()
         }
@@ -132,10 +132,10 @@ function (error) {
     // CALLBACKS
     uploader2.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-        uploadResult2 = response[0];
+        //uploadResult2 = response[0];
 
         upload3 = 1;
-        $scope.media3 = uploadResult2.Location;
+        $scope.media3 = response[0].Location;
         if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
             $scope.finalpost()
         }
@@ -144,7 +144,16 @@ function (error) {
 
  
 
-    $scope.finalpost = function () {
+    var called = false;
+    $scope.finalpost = function ()
+    {
+        if (called == true) {
+            return;
+        }
+        var upload1 = 0;
+        var upload2 = 0;
+        var upload3 = 0;
+
         // TODO: Need to get these values dynamically
         var postData = {
             user_id: $cookieStore.get('userId'),
@@ -178,7 +187,7 @@ function (error) {
             retrun;
         }
 
-
+       
         apiService.post("Tower/CreateTower", postData).then(function (response) {
             var loginSession = response.data;
             var towerupdate = [];
@@ -193,32 +202,34 @@ function (error) {
             apiService.post("Tower/TowerUpdate", towerupdate).then(function (response) {
                 var loginSession = response.data;
                 //  alert("Tower Updated...");
+                called = true;
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
-
+                
             },
-            function (error) {
-
+            function (error)
+            {
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
             });
 
             //  alert("Tower Done...");
             $modalInstance.dismiss();
 
         },
-        function (error) {
+    function (error)
+    {
+        if (error.status === 400)
             alert(error.data.Message);
-        });
+        else
+            alert("Network issue");
+    });
 
+}
 
-
-        //uploadService.postDataAfterUpload(postData).then(function () {
-        //    // Process the successful file upload
-        //    alert("project Created");
-        //}, function (error) {
-        //    alert('Error creating');
-        //})
-    }
-
+   
 
     $scope.CanceUpload = function () {
         uploader.cancelAll();
@@ -253,61 +264,17 @@ function (error) {
         $scope.showProgress = false;
     };
 
-//    Url = "GetCSC/city";
-
-//    apiService.get(Url).then(function (response) {
-//        $scope.cities = response.data;
-
-//    },
-//function (error) {
-//    alert("Error " + error.state);
-//});
-
-
-//    $scope.selectcity = function () {
-//        $scope.params.city = $scope.city1;
-//        //alert($scope.params.city);
-//    };
-
-
-//    Url = "GetCSC/state";
-
-//    apiService.get(Url).then(function (response) {
-//        $scope.states = response.data;
-
-//    },
-//function (error) {
-//    alert("Error " + error.state);
-//});
-
-
-//    $scope.selectstate = function () {
-//        $scope.params.state = $scope.state1;
-//        //alert($scope.params.state);
-//    };
-
-
-//    $scope.selectapartment = function () {
-//        $scope.params.project_type = "Apartment"
-
-//        alert($scope.params.project_type);
-//    };
-
-
-//    $scope.selecthome = function () {
-//        $scope.params.project_type = "Family And Home";
-//        alert($scope.params.project_type);
-//    };
-
-//    $scope.selectvilla = function () {
-//        $scope.params.project_type = "Villa";
-//        alert($scope.params.project_type);
-//    };
-
-//    $scope.selectplot = function () {
-//        $scope.params.project_type = "Plot";
-//        alert($scope.params.project_type);
-//    };
+    $scope.submit = function ()
+    {
+        if (uploader.queue.length != 0)
+            uploader.uploadAll();
+        if (uploader1.queue.length != 0)
+            uploader1.uploadAll();
+        if (uploader2.queue.length != 0)
+            uploader2.uploadAll();
+        if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0)
+            $scope.finalpost();
+    }
 
 
 
@@ -354,44 +321,7 @@ function (error) {
         FloorRiseStartsFrom: $scope.FloorRiseStartsFrom
     };
 
-    //var emp = {
-    //    //id: $cookieStore.get('projectid'),
-      
-    //    organization_id: $cookieStore.get('orgID'),
-    //    User_ID: $cookieStore.get('userId'),
-    //    tower_name: $scope.tower_name,
-    //    no_of_wings: $scope.no_of_wings
-    //};
-
-    //if ($cookieStore.get('projectid') !== '') {
-    //    apiService.get('Project/GetbyID/' + $cookieStore.get('projectid')).then(function (response) {
-    //        $scope.data = response.data;
-    //        angular.forEach($scope.data, function (value, key) {
-    //            $scope.params.name = value.name;
-    //            $scope.params.description = value.description;
-    //        });
-    //    },
-    //            function (error) {
-    //                deferred.reject(error);
-    //                alert("not working");
-    //            });
-    //}
-
-
-    // projectUrl = "Project/ProjectAddress";
-    // ProjectCreate = function (param) {
-    //     //alert(param.name);
-    //     apiService.post(projectUrl, param).then(function (response) {
-    //         var loginSession = response.data;
-    //         alert("Project Created..!!");
-    //         $modalInstance.dismiss();
-
-
-    //     },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-    // };
+   
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -405,16 +335,11 @@ function (error) {
 
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
-        if (isValid) {
+        if (isValid)
+        {
 
-
-            //new ProjectCreate($scope.params).then(function (response) {
-            //    console.log(response);
-            //    $scope.showValid = false;
-            //    $state.go('guest.signup.thanks');
-            //}, function (error) {
-            //    console.log(error);
-            //});
+            $scope.submit();
+      
 
             $scope.showValid = false;
 

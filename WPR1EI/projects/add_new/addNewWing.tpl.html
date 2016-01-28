@@ -8,7 +8,7 @@
                                         <button type="button" class="close" id="btn_addnewwing_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')">&times;><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     
-                                    <form class="form-content form-content2 edit-organization-setting" name="addNewForm"  data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                                    <form class="form-content form-content2 edit-organization-setting" name="addNewForm"  data-ng-submit="addNew(addNewForm.$valid)" novalidate autocomplete="off">
                                         
                                         <h4 class="form-title">Add New Wing Type</h4>
                                                                                 
@@ -147,16 +147,12 @@
                                                                 </div>
                                                             </div>
                                                             <div class="clearfix">
-                                                                <div class="form-group"
-                                                                     data-ng-class="{
-                                                        'has-error' : addNewForm.floortype.$invalid && (!addNewForm.floortype.$pristine || showValid),
-                                                        'has-success': addNewForm.floortype.$valid && !addNewForm.floortype.$pristine
-                                                     }">
+                                                                <div class="form-group">
                                                                     <div class="form-group form-bx">
                                                                         <input type="hidden" disabled autofocus name="floortype" class="form-control" id="addnewwing_id"
                                                                                placeholder="Floor Type"
                                                                                data-ng-model="floor.id"
-                                                                               ng-pattern="/[0-9]/"
+                                                                              
                                                                                input-focus />
                                                                     </div>
                                                                 </div>
@@ -165,7 +161,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="progress" ng-show="showProgress">
+                                                <div class="progress" ng-show="((uploader.progress+uploader1.progress)/2)>0">
                                                     <div class="progress-bar" role="progressbar"
                                                          ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                                                 </div>
@@ -173,7 +169,7 @@
                                          <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                                                 <div class="modal-btn-wrap3 clearfix">
-                                                    <button type="submit" class="f-btn" ng-click="showProgress = true;" id="btn_addnewwing_save"> 
+                                                    <button type="submit" class="f-btn" id="btn_addnewwing_save"> 
                                                         <!--<span class="glyphicon glyphicon-upload"></span>--> SAVE
                                                     </button>
                                                 </div>

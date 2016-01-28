@@ -43,8 +43,10 @@ angular.module('organization')
                  
               },
                           function (error) {
-                      
-                              alert("not working");
+                              if (error.status === 400)
+                                  alert(error.data.Message);
+                              else
+                                  alert("Network issue");
                           });
           }
 
@@ -56,11 +58,17 @@ angular.module('organization')
               $scope.data1 = response.data;
               $scope.project_count = $scope.data1[0].project_count;
               $scope.user_count = $scope.data1[0].user_count;
+              $scope.total_project_count = $scope.data1[0].total_project_count;
+              $scope.total_user_lisence = $scope.data1[0].total_user_lisence;
               
 
           },
-      function (error) {
-          alert("Error " + error.state);
+      function (error)
+      {
+          if (error.status === 400)
+              alert(error.data.Message);
+          else
+              alert("Network issue");
       });
 
 
@@ -111,9 +119,12 @@ angular.module('organization')
 
               },
 
-              function (error) {
-                  // deferred.reject(error);
-                  //return deferred.promise;
+              function (error)
+              {
+                  if (error.status === 400)
+                      alert(error.data.Message);
+                  else
+                      alert("Network issue");
               });
               alert("NAME1" + name);
               return deferred.promise;
@@ -143,8 +154,12 @@ angular.module('organization')
                   var loginSession = response.data;
 
               },
-         function (error) {
-
+         function (error)
+         {
+             if (error.status === 400)
+                 alert(error.data.Message);
+             else
+                 alert("Network issue");
          });
           };
           AuditCreate($scope.params);
@@ -207,8 +222,12 @@ angular.module('organization')
                           $state.go('app.organization', {}, { reload: false });
 
                       },
-                          function (error) {
-                              console.log("Error " + error.state);
+                          function (error)
+                          {
+                              if (error.status === 400)
+                                  alert(error.data.Message);
+                              else
+                                  alert("Network issue");
                           }
                       );
                   }

@@ -84,8 +84,12 @@
             apiService.post("AuditLog/Create", param).then(function (response) {
                 var loginSession = response.data;
             },
-       function (error) {
-
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
         AuditCreate($scope.params);
@@ -548,6 +552,20 @@
                 clearFilters();
 
         };
+
+        $scope.$on('inventoryLoaded', function (event, args) {
+            if (args == 0) {
+                $scope.width = 100;
+                //setTimeout(function () { $scope.width = 0 }, 3000);
+                $scope.width = 0;
+            }
+        });
+        $scope.$on('inventoryLoading', function (event, args) {
+            if (args == 1) {
+                $scope.width = 5;
+                //setInterval($scope.width + 2, 2000);
+            }
+        });
         
         $scope.selectTower = function () {
 
@@ -563,24 +581,23 @@
 
         };
        
-        $scope.towerGrid = function () {
-
+       $scope.towerGrid = function () {
             Url = "Floors/GenerateTowerGrid"
 
             var postData = {
-                tower_id: $cookieStore.get('tower_id')
+                tower_id: $scope.tower1
             }
             apiService.post(Url, postData).then(function (response) {
 
-                $scope.towerGrid = response.data;
+                $('.k-i-refresh').trigger("click");
                 //$state.go('towerGrid');  
-                 
+
             },
         function (error) {
             alert("Error " + error.tower);
         });
 
-          
+
 
         }
 
@@ -593,7 +610,7 @@
                 type: "json",
                 transport: {
 
-                    read: apiService.baseUrl + "UnitTypes/GetTowerunitproperties/" + $cookieStore.get('tower_id')
+                    read: apiService.baseUrl + "UnitTypes/GetTowerunitproperties/" + $cookieStore.get('projectId')
                 },
                 pageSize: 5
 
@@ -736,98 +753,7 @@
                   }]
 
         };
-        //$scope.showTowergrid = function () {
-            
-        //    $scope.TowerListGrid = {
-
-
-        //        dataSource: {
-        //            type: "json",
-        //            transport: {
-
-        //                read: apiService.baseUrl +"Floors/GetTowerDetailsFloors/" + $cookieStore.get('tower_id')
-        //            },
-        //            pageSize: 5
-
-        //            //group: {
-        //            //    field: 'sport'
-        //            //}
-        //        },
-        //        groupable: true,
-        //        sortable: true,
-        //        selectable: "multiple",
-        //        reorderable: true,
-        //        resizable: true,
-        //        filterable: true,
-        //        pageable: {
-        //            refresh: true,
-        //            pageSizes: true,
-        //            buttonCount: 5
-        //        },
-        //        columns: [{
-        //            field: "flat_no",
-        //            title: "Flat No",
-        //            width: "120px"
-        //        }, {
-        //            field: "tower_name",
-        //            title: "Tower Name",
-        //            width: "120px"
-        //        }, {
-        //            field: "floor_num",
-        //            title: "Floor",
-        //            width: "120px"
-        //        }, {
-        //            field: "unit_no",
-        //            title: "Unit No",
-        //            width: "120px"
-        //        },
-        //          {
-        //              field: "no_of_units",
-        //              title: "Type",
-        //              width: "120px"
-        //          },
-        //        {
-        //            field: "super_built_up_area",
-        //            title: "Saleable Area",
-        //            width: "120px"
-        //        },
-        //        {
-        //            field: "carpet_area",
-        //            title: "Carpet Area",
-        //            width: "120px"
-        //        },
-        //          {
-        //              field: "floor_rise_applicable",
-        //              title: "Floor Rise Applicable",
-        //              width: "120px"
-        //          },
-
-        //          {
-        //              field: "floor_rise_rate",
-        //              title: "Floor Rise Rate",
-        //              width: "120px"
-        //          },
-        //           {
-        //               field: "cp_offered",
-        //               title: "CP Offered",
-        //               width: "120px"
-        //           },
-        //            {
-        //                field: "cp_post",
-        //                title: "CP Cost",
-        //                width: "120px"
-        //            },
-        //             {
-        //                 field: "total_consideration",
-        //                 title: "Total Consideration in 20:40:40",
-        //                 width: "120px"
-        //             }
-
-        //        ]
-
-        //    };
-           
-        //}
+       
         
       
 
@@ -993,8 +919,12 @@
             $scope.towers = response.data;
 
         },
-    function (error) {
-        alert("Error " + error.tower);
+    function (error)
+    {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
 
         $scope.openNewAmenityPopup = function () {
@@ -1052,10 +982,13 @@
                 $scope.image = $scope.main[0];
 
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       } );
 
 
 
@@ -1066,10 +999,13 @@
                 $scope.builder = response.data;
 
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
 
 
             //calling Tower
@@ -1078,9 +1014,11 @@
                 $scope.built = response.data;
             },
        function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
 
             //calling brochure  pdf start
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
@@ -1088,27 +1026,35 @@
                 $scope.Gallery2 = response.data;
             },
        function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
             //calling brochure pdf end
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
             apiService.get(projectUrl).then(function (response) {
                 $scope.Gallery1 = response.data;
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
             // calling panoramic views api
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/View_Type_Full_2D";
             apiService.get(projectUrl).then(function (response) {
                 $scope.view = response.data;
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
 
 
             //calling Amenities
@@ -1116,20 +1062,26 @@
             apiService.get(projectUrl).then(function (response) {
                 $scope.orgAmenities = response.data;
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
 
             //calling Floors
             projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
             apiService.get(projectUrl).then(function (response) {
                 $scope.builddetail = response.data;
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
 
             $scope.isVisible = [];
             $scope.isVisible[0] = true;
@@ -1147,37 +1099,49 @@
                 $scope.orgpayment = response.data;
 
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
             //calling  unittype
             projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgUsers = response.data;
             },
-   function (error) {
-       console.log("Error " + error.state);
-   }
-        );
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
 
             //calling getImage
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId +"/Gallery_Type_Full_2D";
             apiService.get(projectUrl).then(function (response) {
                 $scope.Gallery = response.data;
             },
-       function (error) {
-           console.log("Error " + error.state);
-       }
-            );
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
 
             GetUrl = "Tower/GetTowerSummary?id=" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
              apiService.get(GetUrl).then(function (response) {
                  $scope.buildsummary = response.data;
                      },
-                        function (error) {
-                            console.log("Error " + error.state);
-
+                        function (error)
+                        {
+                            if (error.status === 400)
+                                alert(error.data.Message);
+                            else
+                                alert("Network issue");
                         });
 
 
@@ -1202,9 +1166,12 @@
                          $scope.email = $scope.data[0].contact_Email;
                      }
                  },
-                             function (error) {
-                                 deferred.reject(error);
-
+                             function (error)
+                             {
+                                 if (error.status === 400)
+                                     alert(error.data.Message);
+                                 else
+                                     alert("Network issue");
                              });
              }
 
@@ -1221,8 +1188,12 @@
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.orgUsers = response.data;
                 },
-                    function (error) {
-                        console.log("Error " + error.state);
+                    function (error)
+                    {
+                        if (error.status === 400)
+                            alert(error.data.Message);
+                        else
+                            alert("Network issue");
                     }
                 );
             }
@@ -1234,10 +1205,13 @@
                     $scope.builder = response.data;
 
                 },
-           function (error) {
-               console.log("Error " + error.state);
-           }
-                );
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+           });
 
             }
 
@@ -1248,8 +1222,12 @@
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.built = response.data;
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
             }
 
@@ -1260,8 +1238,12 @@
                     $scope.orgAmenities = response.data;
 
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
             }
 
@@ -1273,8 +1255,12 @@
                     $scope.Gallery = response.data;
 
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
 
             }
@@ -1286,8 +1272,12 @@
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.builddetail = response.data;
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
             }
 
@@ -1298,8 +1288,12 @@
                     $scope.orgpayment = response.data;
 
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            }
                 );
             }
@@ -1311,8 +1305,12 @@
                     $scope.Videos = response.data;
 
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
 
             }
@@ -1322,8 +1320,12 @@
                 apiService.get(projectUrl).then(function (response) {
                     $scope.view = response.data;
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
             }
             else if (args == 'brochure')
@@ -1332,16 +1334,24 @@
                 apiService.get(projectUrl).then(function (response) {
                     $scope.Gallery = response.data;
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
                 //calling brochure pdf end
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.get(projectUrl).then(function (response) {
                     $scope.Gallery1 = response.data;
                 },
-           function (error) {
-               console.log("Error " + error.state);
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
             }
             else if (args == 'summery') {
@@ -1351,10 +1361,13 @@
                     $scope.image = $scope.main[0];
 
                 },
-           function (error) {
-               console.log("Error " + error.state);
-           }
-                );
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+           });
 
             }
             $state.go('app.projectdetail', {}, { reload: false });

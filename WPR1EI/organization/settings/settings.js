@@ -52,8 +52,12 @@ angular.module('app.modules.organization.settings', [])
                 $scope.currentOrg.phone = orgInfo.phone;
                 $scope.currentOrg.fax = orgInfo.fax;
             }
-        }, function(error) {
-            console.log(error);
+        }, function (error)
+        {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
     }
 );

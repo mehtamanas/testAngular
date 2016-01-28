@@ -29,10 +29,7 @@
                
             </div><!-- logo ended -->
 
-            <!--<div class="pull-right reg-wrap">
-                <a href="#" class="h-btn">SIGN UP</a>
-                <a href="#" class="h-btn">LOGIN</a>
-            </div>--><!-- reg-btn ended -->
+          
 
             <nav class="navbar navbar-default pull-right main-navbar">
 
@@ -45,15 +42,7 @@
                     </button>
                 </div>
 
-                <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li id="login_home"><a href="#">HOME</a></li>
-                        <li id="login_feature"><a href="#">FEATURES</a></li>
-                        <li id="login_plans"><a href="#">PLANS</a></li>
-                        <li id="login_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
-                        <li id="login_contact"><a href="#">CONTACT US</a></li>
-                    </ul>
-                </div>-->
+                
 
             </nav><!-- main-navbar ended -->
 
@@ -76,13 +65,13 @@
                         'has-success': loginForm.email.$valid && !loginForm.email.$pristine && !loginForm.email.$focus
                     }">
                                 <label for="exampleInputEmail1">Email Address</label>
-                                <input type="email" name="email" class="form-control" id="username" 
+                                <input type="email" name="email" class="form-control" id="username"
                                        placeholder="user@dwellar.com"
-                                       data-ng-model="params.email"
-                                       data-ng-pattern="patternRegexs.email"
-                                       input-focus
-                                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                       data-ng-model="params.email"                                       
+                                       ng-pattern="/^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$/"
+                                       
                                        required />
+                              
 
                                 <div class="text-danger"
                                      data-ng-if="loginForm.email.$invalid && (!loginForm.email.$pristine || showValid) && !loginForm.email.$focus">
@@ -142,6 +131,7 @@
 
                 <div class="pull-left copyright">
                     ©Copyright 2016. Dwellar Systems Private Limited. All Rights Reserved.
+                  
                 </div>
 
                 <div class="pull-right footer-logo">

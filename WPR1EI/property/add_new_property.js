@@ -49,8 +49,12 @@ var PropertyPopUpController = function ($scope, $state, $cookieStore, apiService
             $modalInstance.dismiss();
 
         },
-        function (error) {
-
+        function (error)
+        {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
         });
     };
 
@@ -95,8 +99,12 @@ var PropertyPopUpController = function ($scope, $state, $cookieStore, apiService
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
     },
-   function (error) {
-       alert("Error " + error.state);
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
 
     $scope.selectproject = function () {
@@ -110,8 +118,12 @@ var PropertyPopUpController = function ($scope, $state, $cookieStore, apiService
     apiService.get(Url).then(function (response) {
         $scope.states = response.data;
     },
-function (error) {
-    alert("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 });
 
     $scope.selectstate = function () {
@@ -124,9 +136,12 @@ function (error) {
     apiService.get(Url).then(function (response) {
         $scope.cities = response.data;
     },
-function (error) {
-    alert("Error " + error.cities);
-
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 
 });
 
@@ -151,8 +166,12 @@ function (error) {
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error) {
-
+   function (error)
+   {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
     AuditCreate($scope.params);

@@ -1,8 +1,7 @@
 ﻿
                    
                     <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">                        
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content"> 
+                       
                                 
                                 <!--<div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -14,7 +13,7 @@
                                         <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <form class="form-content" name="newForm" autocomplete="off" novalidate
-                                          data-ng-submit="addNewUser(newForm.$valid)">
+                                          data-ng-submit="addNewContact(newForm.$valid)">
 
                                         <!--<div class="upload-wrap">
                 <input name="upload-photo" id="upload-photo" type="file" />
@@ -24,17 +23,17 @@
                                         <h4 class="form-title">Add New Contact</h4>
 
                                         <div class="clearfix image-upload-container">
-                                            <div class="image-upload-wrap">
+                                            <div class="modal-body image-upload-wrap">
                                                 <div class="image-upload-title">Upload Contact Image</div>
-                                                <div class="dropzone dropzone-bx image-upload-bx">
+                                                <div class="dropzone dropzone-bx photo-upload-bx">
                                                     <div class="fallback">
                                                         <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                                             <div class="panel-body image-upload-panel">
                                                                 <div class="row" ng-hide="uploader.queue.length">
                                                                     <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                                                    <!--<div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
                                                                         <span class="page-center">Drag And Drop your file here</span>
-                                                                    </div>
+                                                                    </div>-->
                                                                     <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                                                 </div>
                                                                 <div class="row" ng-show="uploader.queue.length">
@@ -48,7 +47,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="image-upload-link">
-                                                    <div class="browse-title">Browse</div>
+                                                    <div class="browse-title">Add Photo</div>
                                                     <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                                                     <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
                                                 </div>
@@ -130,7 +129,7 @@
                                                                placeholder="Age"
                                                                data-ng-model="params.age"                                                              
                                                                input-focus
-                                                               ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                                               ng-pattern="/^([1-9][0-9]*)$/"
                                                                required />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus">
@@ -163,7 +162,7 @@
                                                             {{ 'Please enter valid Phone Number' | translate }}
                                                         </div>
                                                     </div>
-                                                    <div id="contact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="contact_remove_phone" href="javascript:">remove</a></div>
+                                                    <div id="contact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)" style="margin-top:-28px"><a id="contact_remove_phone" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,7 +189,7 @@
                                                             {{ 'Please enter valid email' | translate }}
                                                         </div>
                                                     </div>
-                                                    <div id="contact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_email" href="javascript:">remove</a></div>
+                                                    <div id="contact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)" style="margin-top:-28px"><a id="contact_remove_email" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -274,7 +273,7 @@
                                                         <label for="" style="padding-top:5px;"><b>Address</b></label>
                                                         <input type="text" name="Address" class="form-control" id="contact_address"
                                                                placeholder="Address Line"
-                                                               data-ng-model="choice.street_1"
+                                                               data-ng-model="choice.Street_1"
                                                                minlength="5"
                                                                maxlength="50"
                                                                input-focus
@@ -284,7 +283,7 @@
                                                             {{ 'Please enter valid address' | translate }}
                                                         </div>
                                                     </div>
-                                                    <div id="contact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">remove</a></div>
+                                                    <div id="contact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top:-13px"><a id="contact_remove_address" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -336,9 +335,14 @@
                                             </div>
                                         </div>
 
+                                        <div class="progress" ng-show="((uploader.progress)/1)>0">
+                                            <div class="progress-bar" role="progressbar"
+                                                 ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+                                        </div>
+
 
                                         <div class="modal-btn-wrap clearfix">
-                                            <button id="btn_contact_save" type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
+                                            <button id="btn_contact_save" type="submit" class="f-btn">SAVE</button>
 
                                             <button id="btn_contact_cancelme" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
                                         </div>
@@ -346,8 +350,7 @@
 
 
                                 </div><!-- modal-body ended -->                              
-                            </div>
-                        </div>
+
                     </div><!-- modal ended -->
                     
               

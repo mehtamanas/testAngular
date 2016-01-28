@@ -19,6 +19,9 @@ angular.module('app.guest.login')
     };
 })
 
+
+
+
     .config(function config($stateProvider) {
         $stateProvider
             .state('signup_free_account', {
@@ -38,9 +41,8 @@ angular.module('app.guest.login')
         $scope.breadcrumb = 0;
 
         $rootScope.title = 'Dwellar./Signup_free_account';
-
+     
        
-
 
         // Init model
         $scope.params = {
@@ -48,7 +50,8 @@ angular.module('app.guest.login')
             last_name: $scope.last_name,
             account_email: $scope.account_email,
             account_phone: $scope.account_phone,
-            account_country: $scope.countryList[0].name,
+            account_country: $scope.country,
+            country: $scope.country,
             Password: $scope.Password,
             OrgName: $scope.OrgName
         };
@@ -57,17 +60,40 @@ angular.module('app.guest.login')
             last_name: $scope.last_name,
             account_email: $scope.account_email,
             account_phone: $scope.account_phone,
-            account_country: $scope.countryList[0].name,
+            account_country: $scope.country,
+            country: $scope.country,
             hash: $scope.Password,
             organization_id: '',
             OrganizationName: $scope.OrgName,
             subName: $scope.subName
         };
 
+        $scope.params.first_name = $cookieStore.get('First_Name');
+        $scope.params.last_name = $cookieStore.get('Last_Name');
+        $scope.params.account_email = $cookieStore.get('Account_Email');
+        $scope.params.account_phone = $cookieStore.get('Phone');               
+        $scope.country1 = $cookieStore.get('Account_Country');
+      
+
 
 
         $scope.confirms = {
             hash: $scope.hash
+        };
+
+        $scope.CheckUser = function () {
+            Url = "User/GetEmailCheck?Email_id=" + $scope.params.account_email;
+
+            apiService.get(Url).then(function (response) {
+                data = response.data;
+                $state.go("organization");
+               
+            },
+           function (error) {
+               alert("User Already Exists Choose Another Email-id");
+               $state.go("signup_free_account");
+              
+           });
         };
 
        
@@ -79,10 +105,13 @@ angular.module('app.guest.login')
                 $cookieStore.put('Last_Name', $scope.params.last_name);
                 $cookieStore.put('Account_Email', $scope.params.account_email);
                 $cookieStore.put('Phone', $scope.params.account_phone);
-                $cookieStore.put('Account_Country', $scope.params.account_country);
+                $cookieStore.put('Account_Country', $scope.params.country);
                 $cookieStore.put('Hash', $scope.params.Password);
-                $state.go('organization');
+                //$cookieStore.put('OrgName', $scope.params.OrgName);
+               
                 $scope.showValid = false;
+                $scope.CheckUser();
+               
             }
 
         };
@@ -124,24 +153,7 @@ angular.module('app.guest.login')
 
 
 
-        $scope.addPersonalInfo1 = function (isValid) {
-            $scope.showValid = true;
-            if (isValid) {
-
-
-                //new ProjectCreate($scope.callparam).then(function (response) {
-                //    console.log(response);
-                //    $scope.showValid = false;
-                //    $state.go('guest.signup.thanks');
-                //}, function (error) {
-                //    console.log(error);
-                //});
-
-             
-            }
-            $scope.showValid = false;
-
-        }
+       
 
 
         $scope.openSalesPopup = function () {
@@ -153,55 +165,9 @@ angular.module('app.guest.login')
 
             });
         };
-        //$scope.addNew = function (isValid) {
-        //    $scope.showValid = true;
-        //    if (isValid) {
-
-
-        //        new ProjectCreate($scope.params).then(function (response) {
-        //            console.log(response);
-        //            $scope.showValid = false;
-        //            $state.go('guest.signup.thanks');
-        //        }, function (error) {
-        //            console.log(error);
-        //        });
-
-        //        $scope.showValid = false;
-
-        //    }
-
-        //}
-
-
-      
-
-        
 
        
 
-        //$scope.addNew = function (isValid) {
-        //    $scope.showValid = true;
-        //    if (isValid) {
-
-
-        //        new ProjectCreate($scope.callparam).then(function (response) {
-        //            console.log(response);
-        //            $scope.showValid = false;
-        //            $state.go('guest.signup.thanks');
-        //        }, function (error) {
-        //            console.log(error);
-        //        });
-
-        //        $scope.showValid = false;
-
-        //    }
-
-        //}
-
-       
-     
-
-       
 
 
         Url = "GetCSC/Country";
@@ -217,8 +183,11 @@ angular.module('app.guest.login')
 
         $scope.selectcountry = function () {
             $scope.params.country = $scope.country1;
-            //alert($scope.params.country);
+           
         };
     }
+
+
+
 )
 

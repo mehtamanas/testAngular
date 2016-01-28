@@ -2,7 +2,7 @@
 
 
 .controller('newuserdetailController',
-    function ($scope, $state, security, $cookieStore, $modal, apiService, $window, $rootScope, newuserService) {
+    function ($scope, $state, security, $cookieStore, $modal,$rootScope, apiService, $window, $rootScope, newuserService) {
         console.log('newuserdetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
@@ -80,8 +80,12 @@
             apiService.post("AuditLog/Create", param).then(function (response) {
                 var loginSession = response.data;
             },
-       function (error) {
-
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
         AuditCreate($scope.params);
@@ -122,9 +126,12 @@
                     $scope.email = $scope.data.contact_Email;
                 }
             },
-                        function (error) {
-                            deferred.reject(error);
-                            alert("not working");
+                        function (error)
+                        {
+                            if (error.status === 400)
+                                alert(error.data.Message);
+                            else
+                                alert("Network issue");
                         });
         }
 
@@ -1096,7 +1103,7 @@
                 controller: AddProjectController,
                 size: 'md',
                 resolve: {
-                    newuserService: newuserService,
+                    8: newuserService,
                     newuserData: {
                         userId: window.sessionStorage.selectedCustomerID,
                         orgId: $cookieStore.get('orgID')
@@ -1105,6 +1112,57 @@
             });
         };
 
+        $scope.$on('REFRESH', function (event, args) {
+
+            setTimeout(function () {
+
+                if (args == 'newuser') {
+
+
+                    //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+                    GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+                    //alert(GetUrl);
+
+                    apiService.getWithoutCaching(GetUrl).then(function (response) {
+
+                        $scope.data = response.data;
+                        // alert($scope.data);
+                        //   alert($scope.seletedCustomerId);
+
+
+                        $scope.first_name = $scope.data[0].first_name;
+                        $scope.last_name = $scope.data[0].last_name;
+                        $scope.status = $scope.data[0].status;
+                        $scope.account_email = $scope.data[0].account_email;
+                        $scope.account_phone = $scope.data[0].account_phone;
+                        $scope.account_country = $scope.data[0].account_country;
+                        $scope.street_1 = $scope.data[0].street_1;
+                        $scope.role_name = $scope.data[0].role_name;
+                        $scope.zip_code = $scope.data[0].zip_code;
+                        $scope.state = $scope.data[0].state;
+                        $scope.city = $scope.data[0].city;
+                        $scope.media_url = $scope.data[0].media_url;
+                        // alert($scope.media_url);
+
+                        if ($scope.data.contact_mobile !== '') {
+                            $scope.mobile = $scope.data.contact_mobile;
+                        }
+                        if ($scope.data.contact_email !== '') {
+                            $scope.email = $scope.data.contact_Email;
+                        }
+                        $state.go('app.newuserdetail', {}, { reload: false });
+                    },
+                                function (error) {
+                                    if (error.status === 400)
+                                        alert(error.data.Message);
+                                    else
+                                        alert("Network issue");
+                                });
+
+                }
+
+            }, 1500);
+        });
 
         $scope.openUserPopup = function () {
             var modalInstance = $modal.open({

@@ -7,7 +7,7 @@
                                         <button type="button" id="btn_addnewunit_close" class="close" data-dismiss="modal" aria-label="Close"  ng-click="$dismiss('cancel')"&times;><span aria-hidden="true">&times;</span></button>
                                     </div>
                                                                         
-                                    <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                                    <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
                                         <h4 class="form-title">{{title}}</h4>
 
@@ -272,13 +272,12 @@
                                                      ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                                             </div>
 
-                                         <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+                                         
 
                                         <div class="modal-btn-wrap3 clearfix">
-                                            <!--<button type="submit" class="f-btn">SAVE</button>-->
-                                            <button type="submit" class="f-btn" id="btn_addnewunit_save" ng-click="showProgress = true;">
-                                                    <!--ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length"-->
-                                                <!--<span class="glyphicon glyphicon-upload"></span>--> Save
+                                            
+                                            <button type="submit" class="f-btn" ng-class="showProgress=true" id="btn_addnewunit_save">
+                                                    Save
                                             </button>
                                         </div>
 

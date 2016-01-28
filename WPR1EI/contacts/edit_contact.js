@@ -1,4 +1,7 @@
-﻿/**
+﻿
+
+
+/**
  * Created by dwellarkaruna on 24/10/15.
  */
 var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope)
@@ -28,7 +31,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         });
 
         contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-        apiService.get(contactUrl).then(function (response)
+        apiService.getWithoutCaching(contactUrl).then(function (response)
         {
             $scope.params = response.data[0];
 
@@ -37,13 +40,20 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
             $scope.choices2[0].street1 = response.data[0].street1;
             $scope.choices2[0].Street_2 = response.data[0].Street_2;
-
+            $scope.params.State = response.data[0].Stateid;
             $scope.state1 = response.data[0].Stateid;
             $scope.city1 = response.data[0].cityid;
+            $scope.params.City = response.data[0].cityid;
+
 
 
             $scope.user1 = response.data[0].Assigned_To;
+            $scope.params.mappinguser_id = response.data[0].Assigned_To;
             $scope.project1 = response.data[0].projectid;
+            $scope.params.project_id = response.data[0].projectid;
+            $scope.people_type = response.data[0].people_type;
+            //$scope.params.radioValue = response.data[0].gender;
+            $scope.gender = response.data[0].gender;
         },
         function (error)
         {
@@ -68,11 +78,11 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                 media_name: uploadResult.Name,
                 media_url: uploadResult.Location,
                 age: $scope.params.age,
-                gender: $scope.directory2,
-                people_type: $scope.directory1,
+                gender: $scope.gender,
+                people_type: $scope.people_type,
                 first_name: $scope.params.Contact_First_Name,
                 last_name: $scope.params.Contact_Last_Name,
-                people_type: $scope.params.Type,
+                //people_type: $scope.params.Type,
                 designation: $scope.params.Title,
                 contact_element_info_email: $scope.choices1[0].Contact_Email,
                 contact_element_info_phone: $scope.choices[0].Contact_Phone,
@@ -80,12 +90,11 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                 project_id: $scope.params.projectid,
                 city: $scope.params.City,
                 zip_code: $scope.params.zipcode,
-                street_1: $scope.params.street1,
-                street_2: $scope.params.street2,
+                Street_1: newadd.Street_1,
+                Street_2: newadd.Street_2,
                 city_id: $scope.city1,
                 state_id: $scope.state1,
-
-                
+                mappinguser_id: $scope.params.mappinguser_id
           };
 
             apiService.post("Contact/Edit", postData).then(function (response)
@@ -119,23 +128,14 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                     media.push(postData_phone);
                 }
 
-                for (var i in $scope.choices2) {
-                    var postData_address =
-                        {
-                            id: $scope.choices2[i].class_id,
-                            class_id: window.sessionStorage.selectedCustomerID,
-                            class_type: "Contact",
-                            element_type: "address_contact",
-                            element_info1: $scope.choices2[i].street1,
-                        }
-                    media.push(postData_address);
-                }
+               
 
                 apiService.post("ElementInfo/Create", media).then(function (response) {
                     var loginSession = response.data;
-                    $scope.openSucessfullPopup();
+                   
                 },
-               function (error) {
+               function (error)
+               {
 
                });
 
@@ -161,17 +161,17 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             $scope.showProgress = false;
         };
 
-        $scope.openSucessfullPopup = function ()
-        {
+        $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
-            backdrop: 'static',
-            controller: sucessfullController,
-            size: 'md'
+                animation: true,
+                templateUrl: 'newuser/Edited.tpl.html',
+                backdrop: 'static',
+                controller: EditsucessfullController,
+                size: 'md',
+                resolve: { items: { title: "Contact" } }
             });
-        }
 
+        }
 
         $scope.params =
         {
@@ -184,7 +184,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             age: $scope.age,
             gender: $scope.gender,
             zip_code: $scope.zip_code,
-            people_type: $scope.Type,
+            people_type: $scope.people_type,
             designation: $scope.Title,
             organization_id: $cookieStore.get('orgID'),
             User_ID: $scope.user_id,
@@ -244,19 +244,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         };
 
 
-    //$scope.choices2 = [{ id: 'choice1' }];
-    //$scope.addNewChoice2 = function (e) {
-    //    var classname = e.currentTarget.className;
-    //    if (classname == 'remove-field') {
-
-    //    }
-    //    else if ($scope.choices2.length) {
-    //        var newItemNo = $scope.choices2.length + 1;
-    //        $scope.choices2.push({ 'id': 'choice' + newItemNo });
-    //    }
-
-    //};
-
+    
         $scope.choices2 = [{ id: 'choice1' }];
 
         $scope.addNewChoice2 = function (e)
@@ -325,13 +313,13 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         };
 
         $scope.selectgender = function () {
-            $scope.params.radioValue = $scope.directory1;
+            $scope.params.gender = $scope.gender;
             //alert($scope.params.month);
         };
 
 
         $scope.selecttype = function () {
-            $scope.params.radioValue = $scope.directory2;
+            $scope.params.people_type = $scope.people_type;
             //alert($scope.params.month);
         };
 
@@ -348,7 +336,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
         $scope.selectuser = function ()
         {
-            $scope.params.user_id = $scope.user1;
+            $scope.params.mappinguser_id = $scope.user1;
             //alert($scope.params.user_id);
         };
 

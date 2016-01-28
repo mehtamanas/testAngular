@@ -451,6 +451,26 @@
             });
         };
 
+
+        $scope.openProjectPopup = function () {
+            //   alert("abc");
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'team/addProject.tpl.html',
+                backdrop: 'static',
+                controller: AddProjectTeamController,
+                size: 'md',
+                resolve: {
+                    newuserService: teamService,
+                    newuserData: {
+                        teamId: window.sessionStorage.selectedCustomerID,
+                        orgId: $cookieStore.get('orgID')
+                    }
+                }
+            });
+        };
+
+
         $scope.openAddNewTask = function () {
             var modalInstance = $modal.open({
                 animation: true,

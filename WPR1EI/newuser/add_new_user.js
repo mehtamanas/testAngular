@@ -16,8 +16,8 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
             product_type:'dwellar',
             organization_id: $scope.Organization
         };
-        $scope.sucess = function (openSucessfullPopup) {
-            $state.go('newuser.sucessfull');
+        $scope.sucess = function (opendonePopup) {
+            $state.go('newuser.invite');
         }
         $scope.newuse = function () {
             var schemeupdate = [];
@@ -36,7 +36,7 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
             Url = "Register/InviteUser";
             apiService.post(Url, schemeupdate).then(function (response) {
                 var loginSession = response.data;
-                $scope.openSucessfullPopup();
+                $scope.opendonePopup();
                 $modalInstance.dismiss();
                 $rootScope.$broadcast('REFRESH', 'mainGridOptions');
             },
@@ -67,8 +67,12 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
             apiService.post("AuditLog/Create", param).then(function (response) {
                 var loginSession = response.data;
             },
-       function (error) {
-
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
         AuditCreate($scope.params);
@@ -92,26 +96,28 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
                    
                     $rootScope.$broadcast('REFRESH', 'userGrid');
                   
-                }, function (error) {
-                    console.log(error);
+                }, function (error)
+                {
+                    if (error.status === 400)
+                        alert(error.data.Message);
+                    else
+                        alert("Network issue");
                 });
               
                 //$scope.existingEmail("Himangshumaity@gmail.com");
             }
         };
 
-    // Existing email
-    //popup sucessfull user invited
-        $scope.openSucessfullPopup = function () {
+        $scope.opendonePopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/sucessfull.tpl.html',
+                templateUrl: 'newuser/invite.tpl.html',
                 backdrop: 'static',
-                controller: sucessfullController,
+                controller: InviteController,
                 size: 'md',
-                resolve: { items: { title: "User" } }
+
 
             });
         };
-        
+
     }

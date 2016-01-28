@@ -29,7 +29,7 @@
 
                             <div class="project-name">Name:  {{image.Contact_First_Name}} {{image.Contact_Last_Name}} <a id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
                             <div class="project-d02"> {{image.Title}}</div>
-                            <div class="project-d02">Type:{{image.Type}}</div>
+                            <div class="project-d02">Type:{{image.people_type}}</div>
                             <div class="project-d02">Phone:{{image.Contact_Phone}} </div>
                             <div class="project-d02">Email: {{image.Contact_Email}}</div>
 
@@ -44,10 +44,10 @@
                             <li id="contact_documents"><a aria-controls="summary" role="tab" data-toggle="tab">DOCUMENTS</a></li>
                             <li id="contact_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>
                             <li id="contact_payment"><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>
-                            <li id="contact_tasks"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                            <!--<li id="contact_tasks"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
                             <li id="contact_engagement"><a aria-controls="summary" role="tab" data-toggle="tab">ENGAGEMENT</a></li>
                             <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
-                            <li id="contact_quotes"><a aria-controls="summary" role="tab" data-toggle="tab">QUOTES</a></li>
+                            <li id="contact_quotes"><a aria-controls="summary" role="tab" data-toggle="tab">QUOTES</a></li>-->
                             <li id="contact_assignedto"><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
 
                         </ul>
@@ -76,14 +76,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="company-profile-row clearfix">
-                                        <div class="pull-left profile-row1">Role</div>
-                                        <div class="pull-right profile-row2">
-                                            <label class="label-group">
-                                                <h4 ng-bind="Role"></h4>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    
 
 
                                     <div class="company-profile-row clearfix">
@@ -158,36 +151,7 @@
                             </div>
                         </div>  <!--Payment-->
 
-                        <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Tasks <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()" style="cursor:pointer">+</a></div>
-                            <div kendo-grid k-options="TaskGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Task-->
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="engagementGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Task-->
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="engagementGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Engagement-->
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="NotesGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Notes-->
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="QuotesGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Quote-->
+                     
 
                         <div class="leads_group" id="record-content">
                             <div kendo-grid k-options="AssignmentToGrid" selectable="true">

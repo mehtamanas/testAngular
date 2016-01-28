@@ -150,6 +150,19 @@ angular.module('newuser')
 
           //end
 
+          $scope.openSucessfullPopup = function () {
+              var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'newuser/sucessfull.tpl.html',
+                  backdrop: 'static',
+                  controller: sucessfullController,
+                  size: 'md',
+                  resolve: { items: { title: "User" } }
+              });
+
+          }
+
+
           $scope.optionPopup = function () {
               var modalInstance = $modal.open({
                   animation: true,
@@ -189,9 +202,14 @@ angular.module('newuser')
                   usersToBeAddedOnServer.push(newMember);
               }
 
+              if (usersToBeAddedOnServer.length == 0)
+              {
+                  return;
+              }
               var Text = $cookieStore.get('Selected Text');
               if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
                   $state.go($scope.optionPopup());
+                  $state.go($scope.openSucessfullPopup())
               }
               else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
                   $state.go($scope.optionPopup())
@@ -205,11 +223,22 @@ angular.module('newuser')
               else if ($cookieStore.get('Selected Text') == "BLOCK") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
-
+                      $state.go($scope.openSucessfullPopup());
                   },
       function (error) {
 
       });
+
+              }
+              else if ($cookieStore.get('Selected Text') == "INACTIVATE") {
+                  apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
+                      var loginSession = response.data;
+                      $state.go($scope.openSucessfullPopup())
+                  },
+      function (error) {
+
+      });
+
               }
           }
 
@@ -385,7 +414,8 @@ angular.module('newuser')
               for (var i in $scope.checkedIds) {
                   if(id== $scope.checkedIds[i])
                   {
-                      $scope.checkedIds.splice(i,1);
+                      $scope.checkedIds.splice(i, 1);
+                      fnd = 1;
                   }
                  
               }

@@ -44,7 +44,9 @@
                                 <input type="text" autofocus name="totalfloors" class="form-control" id="editnewwing_totalnooffloors"
                                        placeholder="How many floors are there"
                                        data-ng-model="params.total_no_of_floors"
-                                       ng-pattern="/[0-9]/"
+                                       minlength="1"
+                                       maxlength="2"
+                                       ng-pattern="/^([1-9][0-9]*)$/"
                                        input-focus
                                        required />
                             </div>
@@ -122,7 +124,7 @@
                                                        placeholder="Floor Type"
                                                        data-ng-model="floor.floor_type_name"
                                                        input-focus
-                                                       required />
+                                                        />
                                             </div>
                                         </div>
 
@@ -136,22 +138,17 @@
                                                        placeholder="Floor No"
                                                        data-ng-model="floor.no_of_units"
                                                        input-focus
-                                                       required />
+                                                      />
                                             </div>
                                         </div>
                                         <div class="clearfix">
-                                            <div class="form-group"
-                                                 data-ng-class="{
-                                                        'has-error' : addNewForm.floortype.$invalid && (!addNewForm.floortype.$pristine || showValid),
-                                                        'has-success': addNewForm.floortype.$valid && !addNewForm.floortype.$pristine
-                                                     }">
+                                            <div class="form-group">
                                                 <div class="form-group form-bx">
                                                     <input type="hidden" disabled autofocus name="floortype" class="form-control" id="addnewwing_id"
                                                            placeholder="Floor Type"
                                                            data-ng-model="floor.floor_id"
-                                                           ng-pattern="/[0-9]/"
                                                            input-focus
-                                                           required />
+                                                           />
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +156,7 @@
                                 </div>
                             </div>
 
-                    <div class="progress" ng-show="showProgress">
+                    <div class="progress" ng-show="((uploader.progress+uploader1.progress)/2)>0">
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                     </div>
@@ -167,7 +164,7 @@
 
                      <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
                             <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" class="f-btn" ng-click="submit()" id="btn_editnewwing_save">
+                                <button type="submit" class="f-btn" id="btn_editnewwing_save">
                                     <!--<span class="glyphicon glyphicon-upload"></span>--> Save
                                 </button>
                             </div>

@@ -39,7 +39,7 @@ var AddNewWingController = function ($scope, $state, $cookieStore, apiService, $
         name: 'imageFilter1',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|x-zip-compressed|'.indexOf(type) !== -1;
+         return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -85,10 +85,9 @@ function (error) {
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
 
-        uploadResult = response[0];
         // post image upload call the below api to update the database
         upload1 = 1;
-        $scope.media1 = uploadResult.Location;
+        $scope.media1 = response[0].Location;
        
         if (upload1 == 1 && upload2 == 1) {
          
@@ -104,9 +103,9 @@ function (error) {
 
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-        var uploadResult1 = response[0];
+      
 
-        $scope.media2 = uploadResult1.Location;
+        $scope.media2 = response[0].Location;
         // TODO: Need to get these values dynamically
         upload2 = 1;
         if (upload1 == 1 && upload2 == 1) {
@@ -319,106 +318,14 @@ function (error) {
         else
             return false;
     }
-    /// CALLBACKS
-    //uploader1.onSuccessItem = function (fileItem, response, status, headers) {
-    //    // post image upload call the below api to update the database
-    //    uploadResult1 = response[0];
-    //    $scope.media2 = uploadResult1.Location;
-    //    // TODO: Need to get these values dynamically
-    //    upload2 = 1;
-    //    if (upload1 == 1 && upload2 == 1) {
-    //        $scope.showProgress = false;
-    //        $scope.finalpost();
-    //    }
-    
-    //    else if (upload2 == 1 && uploader.queue.length == 0) {
-           
-    //        $scope.finalpost();
-    //    }
-    //    else if (upload1 == 1 && uploader1.queue.length == 0) {
-
-    //        $scope.finalpost();
-    //    }
-    //};
-    //validation start
-    //var checkUnitValidity = function () {
-
-    //    for (var i in $scope.floors) { //for each boxes(units)
-
-    //        if (validated == false) {
-    //            break;
-    //        }
-    //        newUnit.no_of_units = $scope.floors[i].no_of_units;
-    //        if (newUnit.no_of_units != null) {
-    //            if (newUnit.no_of_units.indexOf(","))
-    //                split = $scope.floors[i].no_of_units.split(",");//split value of each box by comma
-
-    //            for (var j = 0; j < split.length; j++)//for each set in split
-    //            {
-    //                var x = split[j].indexOf("-");//in case the set contains the - then split it again before pusing it
-    //                if (x != -1) {
-    //                    var splitAgain;
-    //                    splitAgain = split[j].split("-");
-
-    //                    for (var y = splitAgain[0]; y <= splitAgain[1]; y++) {//insert all the numbers of slitAgain Range(ie set with "-")
-    //                        validate(y);
-    //                    }
-    //                }
-    //                else {
-    //                    validate(split[j]);
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    if (pushedUnit.length > $scope.params.total_no_of_floors) {//to check if unitset/pushed unit contains more numbers then the unit_no 
-    //        validated = false;
-    //        upload = 2;
-    //        alert("not validated");
-    //    }
-    //    var found;
-    //    for (var m = 0; m < $scope.params.total_no_of_floors; m++) {// to check if all the items of unit are present in the pushed_unit
-    //        found = false;
-    //        for (var n = 0; n < pushedUnit.length; n++) {
-    //            if (m == pushedUnit[n]) {
-    //                found = true;
-    //                break;
-    //            }
-    //        }
-    //        if (found == false && n == pushedUnit.length) {
-    //            validated = false;
-    //            upload = 2;
-    //            alert("not validated");
-    //        }
-
-    //    }
-    //}
-
-    //var validate = function (x) {
-    //    for (var k = 0; k < pushedUnit.length; k++)//validation before pushing the value into array
-    //    {
-    //        if (x == pushedUnit[k]) {
-    //            insert = false;
-    //            alert("not validated");
-    //            break;
-    //        }
-    //    }
-
-    //    if (pushedUnit.length == 0 && insert == true)
-    //        pushedUnit[pushedUnit.length] = x;
-    //    else if (insert == true && k == pushedUnit.length)
-    //        pushedUnit[pushedUnit.length] = x;
-    //    else if (insert == false) {
-    //        validated = false;
-    //        upload = 2;
-    //    }
-
-    //}
-    //validation end
-
+ 
+    var called = false;
     $scope.finalpost = function () {
         // TODO: Need to get these values dynamically
-       
+        if (called == true) {
+            return;
+        }
+
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
@@ -464,8 +371,12 @@ function (error) {
                     $modalInstance.dismiss();
 
                 },
-                function (error) {
-
+                function (error)
+                {
+                    if (error.status === 400)
+                        alert(error.data.Message);
+                    else
+                        alert("Network issue");
                 });
 
                 $scope.openSucessfullPopup = function () {
@@ -483,10 +394,14 @@ function (error) {
 
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
-
+                called = true;
             },
-          function (error) {
-              alert(error.data.Message);
+          function (error)
+          {
+              if (error.status === 400)
+                  alert(error.data.Message);
+              else
+                  alert("Network issue");
           });
       
 
@@ -527,60 +442,6 @@ function (error) {
   
 
    
-
-    //    apiService.get(Url).then(function (response) {
-    //        $scope.cities = response.data;
-
-    //    },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-
-
-    //    $scope.selectcity = function () {
-    //        $scope.params.city = $scope.city1;
-    //        //alert($scope.params.city);
-    //    };
-
-
-   
-    //    apiService.get(Url).then(function (response) {
-    //        $scope.states = response.data;
-
-    //    },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-
-
-    //    $scope.selectstate = function () {
-    //        $scope.params.state = $scope.state1;
-    //        //alert($scope.params.state);
-    //    };
-
-
-    //    $scope.selectapartment = function () {
-    //        $scope.params.project_type = "Apartment"
-
-    //        alert($scope.params.project_type);
-    //    };
-
-
-    //    $scope.selecthome = function () {
-    //        $scope.params.project_type = "Family And Home";
-    //        alert($scope.params.project_type);
-    //    };
-
-    //    $scope.selectvilla = function () {
-    //        $scope.params.project_type = "Villa";
-    //        alert($scope.params.project_type);
-    //    };
-
-    //    $scope.selectplot = function () {
-    //        $scope.params.project_type = "Plot";
-    //        alert($scope.params.project_type);
-    //    };
-
 
 
 
@@ -629,35 +490,7 @@ function (error) {
         User_ID: $cookieStore.get('userId')
     };
 
-    //if ($cookieStore.get('projectid') !== '') {
-    //    apiService.get('Project/GetbyID/' + $cookieStore.get('projectid')).then(function (response) {
-    //        $scope.data = response.data;
-    //        angular.forEach($scope.data, function (value, key) {
-    //            $scope.params.name = value.name;
-    //            $scope.params.description = value.description;
-    //        });
-    //    },
-    //            function (error) {
-    //                deferred.reject(error);
-    //                alert("not working");
-    //            });
-    //}
-
-
-    // projectUrl = "Project/ProjectAddress";
-    // ProjectCreate = function (param) {
-    //     //alert(param.name);
-    //     apiService.post(projectUrl, param).then(function (response) {
-    //         var loginSession = response.data;
-    //         alert("Project Created..!!");
-    //         $modalInstance.dismiss();
-
-
-    //     },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-    // };
+  
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');

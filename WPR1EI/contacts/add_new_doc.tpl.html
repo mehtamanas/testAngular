@@ -32,7 +32,7 @@
                                        required />
                                 <div class="text-danger"
                                      data-ng-if="newForm.Add_Document_Name.$invalid && (!newForm.Add_Document_Name.$pristine || showValid) && !newForm.Add_Document_Name.$focus">
-                                    {{ 'Please enter valid Project Name' | translate }}
+                                    {{ 'Enter valid document name' | translate }}
                                 </div>
                             </div>
 
@@ -40,26 +40,32 @@
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-group"  data-ng-class="{
+                             'has-error' : newForm.Cat.$invalid && (!newForm.Cat.$pristine || showValid) && !newForm.Cat.$focus,
+                             'has-success': newForm.Cat.$valid && !newForm.Cat.$pristine && !newForm.Cat.$focus
+                             }">
                         <div id="phone-wrap" class="clearfix">
                             <div id="phone-no" class="form-bx form-bx2">
                                 <label for="">Category</label>
-                                <select ng-model="category1" ng-change="selectCategory()" id="contactdoc_category"
+                                <select name="Cat" ng-model="category1" ng-change="selectCategory()" id="contactdoc_category"
                                         class="dropdown form-control" required>
                                     <option value="" selected>Select Category</option>
                                     <option ng-repeat="category in categories"
                                             value="{{category.id}}">
                                         {{category.documenttype}}
-                                    </option>
-
-                                </select>
+                                    </option></select>
+                                    <div class="text-danger"
+                                     data-ng-if="newForm.Cat.$invalid && (!newForm.Cat.$pristine || showValid) && !newForm.Cat.$focus">
+                                    {{ 'Enter valid category for document' | translate }}
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
 
                     <div class="clearfix image-upload-container">
-                        <div class="image-upload-wrap">
+                        <div class="modal-body image-upload-wrap">
                             <div class="image-upload-title">Upload Document Image</div>
                             <div class="dropzone dropzone-bx image-upload-bx">
                                 <div class="fallback">
@@ -84,7 +90,7 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="*" nv-file-select="" uploader="uploader" />
                                 <p ng-show="uploader.queue.length" >{{uploader.queue[0]._file.name}}</p>
                             </div>
                         </div>
@@ -163,7 +169,7 @@
                         </div>
                     </div>-->
 
-                    <div class="progress" ng-show="showProgress">
+                    <div class="progress" ng-show="((uploader.progress)/1)>0">
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                     </div>
@@ -171,7 +177,7 @@
                      <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                     <div class="modal-btn-wrap clearfix">
-                        <button id="btn_contactdoc_save" type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()">SAVE</button>
+                        <button id="btn_contactdoc_save" type="submit" class="f-btn">SAVE</button>
 
                         
 

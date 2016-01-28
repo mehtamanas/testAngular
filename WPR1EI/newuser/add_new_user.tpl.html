@@ -1,5 +1,7 @@
 
-
+<div class="close-btn-wrap">
+    <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+</div>
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
    
             <!-- modal-header ended -->
@@ -9,10 +11,7 @@
 
                     <!--<h4 class="modal-title" id="exampleModalLabel">Add New User</h4>-->
                 <p align="center" style="font-size:30px">Add New User</p>
-               
-                <div class="close-btn-wrap">
-                    <button type="button" class="close" id="btn_newuser_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
-                </div>
+             
                 <form class="form-content" name="newForm" autocomplete="off" novalidate
                       data-ng-submit="addNewUser(newForm.$valid)">
 
@@ -76,12 +75,13 @@
 
                             <div id="email-wrap">
                                 <div id="email-no" class="form-bx form-bx2">
-                                    <p>To enter multiple addresses,add comma after each address</p>
-                                    <input autofocus name="email" class="form-control" id="newuseradd_email"
+                                    <p>To enter multiple addresses, add comma after each address</p>
+                                    <input autofocus name="email" class="form-control" id="newuseradd_email" type="text"
                                            placeholder="Enter the Email Address"
                                            data-ng-model="params.account_email"
-                                           ng-pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@example\.com"
+                                           ng-pattern="/^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$/"
                                            required />
+                                  
                                     <div class="text-danger"
                                          data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
                                         {{ 'Please enter alphabets only' | translate }}

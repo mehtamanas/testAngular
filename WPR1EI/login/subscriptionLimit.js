@@ -101,7 +101,20 @@
          // alert("qqq" + $cookieStore.get('Subscription1_Name'));
           $cookieStore.put('Sub_Name', $cookieStore.get('Subscription1_Name'));
           $cookieStore.put('Sub_Price', $cookieStore.get('Subscription1_Price'));
-          //$state.go("signup_free_account");
+              //$state.go("signup_free_account");
+          $cookieStore.remove('First_Name');
+          $cookieStore.remove('Last_Name');
+          $cookieStore.remove('Account_Email');
+          $cookieStore.remove('Phone');
+          $cookieStore.remove('Account_Country');
+          $cookieStore.remove('orgName');
+          $cookieStore.remove('Street_1');
+          $cookieStore.remove('Street_2');
+          $cookieStore.remove('Street_3');
+          $cookieStore.remove('State');
+          $cookieStore.remove('City');
+          $cookieStore.remove('zip_code');
+          $cookieStore.remove('Country');
           };
 
           $scope.addPersonalInfo2 = function () {
@@ -110,7 +123,20 @@
             // alert($cookieStore.get('Subscription2_Name'));
              $cookieStore.put('Sub_Name', $cookieStore.get('Subscription2_Name'));
              $cookieStore.put('Sub_Price', $cookieStore.get('Subscription2_Price'));
-             // $state.go("signup_free_account");
+              // $state.go("signup_free_account");
+             $cookieStore.remove('First_Name');
+             $cookieStore.remove('Last_Name');
+             $cookieStore.remove('Account_Email');
+             $cookieStore.remove('Phone');
+             $cookieStore.remove('Account_Country');
+             $cookieStore.remove('orgName');
+             $cookieStore.remove('Street_1');
+             $cookieStore.remove('Street_2');
+             $cookieStore.remove('Street_3');
+             $cookieStore.remove('State');
+             $cookieStore.remove('City');
+             $cookieStore.remove('zip_code');
+             $cookieStore.remove('Country');
           };
 
         //for teams
@@ -121,7 +147,20 @@
               // alert("qqq" + $cookieStore.get('Subscription1_Name'));
               $cookieStore.put('Sub_Name', $cookieStore.get('Subscription3_Name'));
               $cookieStore.put('Sub_Price', $cookieStore.get('Subscription3_Price'));
-             // $state.go("signup_free_account");
+              // $state.go("signup_free_account");
+              $cookieStore.remove('First_Name');
+              $cookieStore.remove('Last_Name');
+              $cookieStore.remove('Account_Email');
+              $cookieStore.remove('Phone');
+              $cookieStore.remove('Account_Country');
+              $cookieStore.remove('orgName');
+              $cookieStore.remove('Street_1');
+              $cookieStore.remove('Street_2');
+              $cookieStore.remove('Street_3');
+              $cookieStore.remove('State');
+              $cookieStore.remove('City');
+              $cookieStore.remove('zip_code');
+              $cookieStore.remove('Country');
           };
 
           $scope.addPersonalInfo4 = function () {
@@ -130,7 +169,20 @@
               // alert("qqq" + $cookieStore.get('Subscription1_Name'));
               $cookieStore.put('Sub_Name', $cookieStore.get('Subscription4_Name'));
               $cookieStore.put('Sub_Price', $cookieStore.get('Subscription4_Price'));
-             // $state.go("signup_free_account");
+              // $state.go("signup_free_account");
+              $cookieStore.remove('First_Name');
+              $cookieStore.remove('Last_Name');
+              $cookieStore.remove('Account_Email');
+              $cookieStore.remove('Phone');
+              $cookieStore.remove('Account_Country');
+              $cookieStore.remove('orgName');
+              $cookieStore.remove('Street_1');
+              $cookieStore.remove('Street_2');
+              $cookieStore.remove('Street_3');
+              $cookieStore.remove('State');
+              $cookieStore.remove('City');
+              $cookieStore.remove('zip_code');
+              $cookieStore.remove('Country');
           };
 
 

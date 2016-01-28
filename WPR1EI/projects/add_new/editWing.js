@@ -39,7 +39,7 @@ var EditNewWingController = function ($scope, $state, $cookieStore, apiService, 
         name: 'imageFilter1',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            return '|x-zip-compressed|'.indexOf(type) !== -1;
+         return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -51,8 +51,12 @@ var EditNewWingController = function ($scope, $state, $cookieStore, apiService, 
         $scope.floors = response.data;
 
     },
-function (error) {
-    console.log("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 }
     );
 
@@ -63,8 +67,12 @@ function (error) {
         $scope.params = response.data[0];
 
     },
-function (error) {
-    console.log("Error " + error.state);
+function (error)
+{
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
 }
     );
 
@@ -92,23 +100,42 @@ function (error) {
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
 
-        uploadResult = response[0];
+      
         // post image upload call the below api to update the database
         upload1 = 1;
-        $scope.media1 = uploadResult.Location;
+        $scope.params.Image_Url_wing1= response[0].Location;
 
         if (upload1 == 1 && upload2 == 1) {
-            //pushedUnit = [];
-            //insert = true;
-            //validated = true;
-            //var newUnit = {};
-            //var split;
-            //upload;
-            //checkUnitValidity();
+
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+        else if (upload1 == 1 && uploader1.queue.length == 0) { // For the first uploader not uploading
             $scope.showProgress = false;
             $scope.finalpost();
         }
     };
+
+
+    uploader1.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+
+
+        $scope.params.Image_Url_wing2 = response[0].Location;
+        // TODO: Need to get these values dynamically
+        upload2 = 1;
+        if (upload1 == 1 && upload2 == 1) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+        else if (upload2 == 1 && uploader.queue.length == 0) { // For the second uploader not uploading
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+
+    };
+
+
 
 
     $scope.blur = function () {
@@ -168,9 +195,12 @@ function (error) {
         }
         if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
 
-            showProgress = true;
-            uploader.uploadAll();
-            uploader1.uploadAll();
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader1.queue.length != 0)
+                uploader1.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0)
+                $scope.finalpost();
 
         }
     };
@@ -287,111 +317,21 @@ function (error) {
             return false;
     }
     /// CALLBACKS
-    uploader1.onSuccessItem = function (fileItem, response, status, headers) {
-        // post image upload call the below api to update the database
-        uploadResult1 = response[0];
-        $scope.media2 = uploadResult1.Location;
-        // TODO: Need to get these values dynamically
-        upload2 = 1;
-        if (upload1 == 1 && upload2 == 1) {
-            //pushedUnit = [];
-            //insert = true;
-            //validated = true;
-            //var newUnit = {};
-            //var split;
-            //upload;
-            //checkUnitValidity();
-            $scope.showProgress = false;
-            $scope.finalpost();
-        }
-
-    };
-    //validation start
-    //var checkUnitValidity = function () {
-
-    //    for (var i in $scope.floors) { //for each boxes(units)
-
-    //        if (validated == false) {
-    //            break;
-    //        }
-    //        newUnit.no_of_units = $scope.floors[i].no_of_units;
-    //        if (newUnit.no_of_units != null) {
-    //            if (newUnit.no_of_units.indexOf(","))
-    //                split = $scope.floors[i].no_of_units.split(",");//split value of each box by comma
-
-    //            for (var j = 0; j < split.length; j++)//for each set in split
-    //            {
-    //                var x = split[j].indexOf("-");//in case the set contains the - then split it again before pusing it
-    //                if (x != -1) {
-    //                    var splitAgain;
-    //                    splitAgain = split[j].split("-");
-
-    //                    for (var y = splitAgain[0]; y <= splitAgain[1]; y++) {//insert all the numbers of slitAgain Range(ie set with "-")
-    //                        validate(y);
-    //                    }
-    //                }
-    //                else {
-    //                    validate(split[j]);
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    if (pushedUnit.length > $scope.params.total_no_of_floors) {//to check if unitset/pushed unit contains more numbers then the unit_no 
-    //        validated = false;
-    //        upload = 2;
-    //        alert("not validated");
-    //    }
-    //    var found;
-    //    for (var m = 0; m < $scope.params.total_no_of_floors; m++) {// to check if all the items of unit are present in the pushed_unit
-    //        found = false;
-    //        for (var n = 0; n < pushedUnit.length; n++) {
-    //            if (m == pushedUnit[n]) {
-    //                found = true;
-    //                break;
-    //            }
-    //        }
-    //        if (found == false && n == pushedUnit.length) {
-    //            validated = false;
-    //            upload = 2;
-    //            alert("not validated");
-    //        }
-
-    //    }
-    //}
-
-    //var validate = function (x) {
-    //    for (var k = 0; k < pushedUnit.length; k++)//validation before pushing the value into array
-    //    {
-    //        if (x == pushedUnit[k]) {
-    //            insert = false;
-    //            alert("not validated");
-    //            break;
-    //        }
-    //    }
-
-    //    if (pushedUnit.length == 0 && insert == true)
-    //        pushedUnit[pushedUnit.length] = x;
-    //    else if (insert == true && k == pushedUnit.length)
-    //        pushedUnit[pushedUnit.length] = x;
-    //    else if (insert == false) {
-    //        validated = false;
-    //        upload = 2;
-    //    }
-
-    //}
-    //validation end
-
+    
+ 
+    var called = false;
     $scope.finalpost = function () {
         // TODO: Need to get these values dynamically
-
+        if (called == true) {
+            return;
+        }
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             media_name: "",
-            Image_Url_wing1:$scope.media1  ,
+            Image_Url_wing1: $scope.params.Image_Url_wing1,
             // media_name: uploadResult1.Name,
-            Image_Url_wing2: $scope.media2,
+            Image_Url_wing2: $scope.params.Image_Url_wing2,
             class_type: "Project",
             media_type: "Logo",
             wing_name: $scope.params.wing_name,
@@ -417,18 +357,22 @@ function (error) {
                 $modalInstance.dismiss();
 
             },
-            function (error) {
-
+            function (error)
+            {
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
             });
 
             $scope.openSucessfullPopup = function () {
                 var modalInstance = $modal.open({
                     animation: true,
-                    templateUrl: 'newuser/sucessfull.tpl.html',
+                    templateUrl: 'newuser/Edited.tpl.html',
                     backdrop: 'static',
-                    controller: sucessfullController,
+                    controller: EditsucessfullController,
                     size: 'md',
-                    resolve: { items: { title: "Wing Editing" } }
+                    resolve: { items: { title: "Wing " } }
                 });
 
                 $rootScope.$broadcast('REFRESH', 'wing');
@@ -436,33 +380,24 @@ function (error) {
 
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-
+            called = true;
         },
-      function (error) {
-
+      function (error)
+      {
+          if (error.status === 400)
+              alert(error.data.Message);
+          else
+              alert("Network issue");
       });
-
-
-        //uploadService.postDataAfterUpload(postData).then(function () {
-        //    // Process the successful file upload
-        //    alert("project Created");
-        //}, function (error) {
-        //    alert('Error creating');
-        //})
 
 
     };
 
 
 
-}
 
-$scope.CanceUpload = function () {
-    uploader.cancelAll();
-    uploader1.cancelAll();
-    
-    console.log("UploadCancelled");
-}
+
+
 uploader.onErrorItem = function (fileItem, response, status, headers) {
     console.log('Unable to upload file.');
 };
@@ -478,63 +413,9 @@ uploader.onCompleteItem = function (fileItem, response, status, headers) {
 };
 uploader1.onCompleteItem = function (fileItem, response, status, headers) {
     //$scope.showProgress = false;
+}
 
-
-    //    Url = "GetCSC/city";
-
-    //    apiService.get(Url).then(function (response) {
-    //        $scope.cities = response.data;
-
-    //    },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-
-
-    //    $scope.selectcity = function () {
-    //        $scope.params.city = $scope.city1;
-    //        //alert($scope.params.city);
-    //    };
-
-
-    //    Url = "GetCSC/state";
-
-    //    apiService.get(Url).then(function (response) {
-    //        $scope.states = response.data;
-
-    //    },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-
-
-    //    $scope.selectstate = function () {
-    //        $scope.params.state = $scope.state1;
-    //        //alert($scope.params.state);
-    //    };
-
-
-    //    $scope.selectapartment = function () {
-    //        $scope.params.project_type = "Apartment"
-
-    //        alert($scope.params.project_type);
-    //    };
-
-
-    //    $scope.selecthome = function () {
-    //        $scope.params.project_type = "Family And Home";
-    //        alert($scope.params.project_type);
-    //    };
-
-    //    $scope.selectvilla = function () {
-    //        $scope.params.project_type = "Villa";
-    //        alert($scope.params.project_type);
-    //    };
-
-    //    $scope.selectplot = function () {
-    //        $scope.params.project_type = "Plot";
-    //        alert($scope.params.project_type);
-    //    };
+  
 
 
 
@@ -583,35 +464,6 @@ uploader1.onCompleteItem = function (fileItem, response, status, headers) {
         User_ID: $cookieStore.get('userId')
     };
 
-    //if ($cookieStore.get('projectid') !== '') {
-    //    apiService.get('Project/GetbyID/' + $cookieStore.get('projectid')).then(function (response) {
-    //        $scope.data = response.data;
-    //        angular.forEach($scope.data, function (value, key) {
-    //            $scope.params.name = value.name;
-    //            $scope.params.description = value.description;
-    //        });
-    //    },
-    //            function (error) {
-    //                deferred.reject(error);
-    //                alert("not working");
-    //            });
-    //}
-
-
-    // projectUrl = "Project/ProjectAddress";
-    // ProjectCreate = function (param) {
-    //     //alert(param.name);
-    //     apiService.post(projectUrl, param).then(function (response) {
-    //         var loginSession = response.data;
-    //         alert("Project Created..!!");
-    //         $modalInstance.dismiss();
-
-
-    //     },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-    // };
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -623,21 +475,14 @@ uploader1.onCompleteItem = function (fileItem, response, status, headers) {
 
     $scope.orgList = ['ABC Real Estate Ltd'];
 
-    $scope.addNew = function () {
+    $scope.addNew = function (isValid) {
         $scope.showValid = true;
         //$scope.submit();
 
-        if (isValid) {
+        if (isValid)
+        {
 
-
-            //new ProjectCreate($scope.params).then(function (response) {
-            //    console.log(response);
-            //    $scope.showValid = false;
-            //    $state.go('guest.signup.thanks');
-            //}, function (error) {
-            //    console.log(error);
-            //});
-
+            $scope.submit();
             $scope.showValid = false;
 
         }
