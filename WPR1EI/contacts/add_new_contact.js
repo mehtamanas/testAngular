@@ -191,30 +191,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
             }
 
-            ////var media = [];
-            ////for (var i in $scope.removechoices1) {
-            ////    var removeData_email =
-            ////        {
-            ////            id: $scope.removechoices1[i].class_id,
-            ////            class_id: loginSession.id,
-            ////            class_type: "Contact",
-            ////            element_type: "email_contact",
-            ////            element_info1: $scope.removechoices1[i].contact_element_info_email,
-            ////        }
-            ////    media.push(removeData_email);
-            ////}
-
-            ////for (var i in $scope.removechoices) {
-            ////    var removeData_phone =
-            ////        {
-            ////            id: $scope.removechoices[i].class_id,
-            ////            class_id: loginSession.id,
-            ////            class_type: "Contact",
-            ////            element_type: "phone_contact",
-            ////            element_info1: $scope.removechoices[i].contact_element_info_phone,
-            ////        }
-            ////    media.push(removeData_phone);
-            ////}
 
 
         }

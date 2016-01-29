@@ -151,26 +151,17 @@ angular.module('contacts')
         };
 
         $scope.PropertyListGrid = {
+            // $scope.mainGridOptions = {
+
+
             dataSource: {
                 type: "json",
                 transport: {
-                   
-                    read: apiService.baseUrl + "PropertyListing/GetPropertyMediaByContact/" + $scope.seletedCustomerId
 
+
+                    read: apiService.baseUrl + "Contact/GetTowerunitpropertiesContact/" + $scope.seletedCustomerId
                 },
-                pageSize: 5,
-
-                schema: {
-                    model: {
-                        fields: {
-
-                            date: { type: "date" }
-
-
-
-                        }
-                    }
-                }
+                pageSize: 5
 
                 //group: {
                 //    field: 'sport'
@@ -187,36 +178,144 @@ angular.module('contacts')
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [{
-                field: "Property_Name",
-                title: "Property Name",
-             
-                width: "120px"
-            }, {
-                field: "Area",
-                title: "Area",
+            columns: [
+                {
+                    //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
+                    //"<span style='padding-left:10px' class='property-photo'> </span>",
+                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
+                    title: "",
+                    width: "60px",
+                    attributes: {
+                        "class": "UseHand",
+
+                    }
+                },
+
+                {
+                    template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
+                    "<span style='padding-left:10px' class='property-photo'> </span>",
+                    title: "Photo",
+                    width: "120px",
+                    attributes:
+                      {
+                          "class": "UseHand",
+                      }
+                },
+
+                {
+                    field: "tower_name",
+                    title: "Name",
+                    width: "120px",
+                    attributes:
+    {
+        "class": "UseHand",
+        "style": "text-align:center"
+    }
+                },
+             {
+                 field: "floorno",
+                 title: "Floor No",
+                 width: "120px",
+                 attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
+             },
+              {
+                  field: "unitno",
+                  title: "Unit No",
+                  width: "120px",
+                  attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:right"
+  }
+              },
+              {
+                  field: "carpark",
+                  title: "Car Park",
+                  width: "120px",
+                  attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:right"
+  }
+              },
+              {
+                  field: "num_bedrooms",
+                  title: "Bedrooms",
+                  width: "120px",
+                  attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
+              },
+            {
+                field: "num_bathrooms",
+                title: "Bathrooms",
                 width: "120px",
-              
-            }, {
-                field: "status",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
+            },
+            {
+                field: "super_built_up_area",
+                type: "number",
+                title: "Slb. Area",
+                width: "120px",
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
+            },
+              {
+                  field: "carpet_area",
+                  type: "number",
+                  title: "Crp Area",
+                  width: "120px",
+                  attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
+              },
+               {
+                   field: "total_consideration",
+                   title: "Price",
+                   width: "120px",
+                   attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:right"
+}
+               },
+                {
+                    field: "project_name",
+                    title: "Project",
+                    width: "120px",
+                    attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
+                },
+            {
+                field: "available_status",
                 title: "Status",
                 width: "120px",
-                
-                field: "Image_Url",
-                title: "Image Url",
-                width: "120px",
-              
-            },
-                {
-                    field: "Date",
-                    title: "Date",
-                    width: "120px",
-                    format: '{0:dd/MM/yyyy}',
-                    
-                }]
+                attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
+            }]
 
         };
-
         
 
         
