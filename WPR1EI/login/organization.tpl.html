@@ -76,6 +76,7 @@
                                 <div class="col-sm-6">
                                     <label><input type="radio" id="orgz_broker" name="test" ng-model="radioValue" value="1" ng-checked="true" />&nbsp; Broker</label>
                                     &nbsp; &nbsp; &nbsp;<label><input type="radio" id="orgz_Builder" name="test" ng-model="radioValue" value="2" /> &nbsp; Builder</label>
+                                    &nbsp; &nbsp; &nbsp;<label><input type="radio" id="orgz_Service" name="test" ng-model="radioValue" value="3" /> &nbsp; Service Industry</label>
                                 </div>
                                 <div class="col-sm-6">
 
@@ -84,13 +85,13 @@
                             <div class="row">
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-5">
-
+                                    <label class="control-label">Organization Name</label>
                                     <div class="form-group"
                                          data-ng-class="{
                             'has-error' : newForm.name.$invalid && (!newForm.name.$pristine || showValid),
                             'has-success': newForm.name.$valid && !newForm.name.$pristine  }">
                                         <div class="col-xs-12">
-
+                                           
                                             <label class="label-group">
                                                 <input type="text" name="name" class="form-control" id="orgz_name" autofocus
                                                        placeholder="Organization Name"
@@ -107,6 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
+                                    <label class="control-label">Street1</label>
                                     <div class="form-group"
                                          data-ng-class="{
                             'has-error' : newForm.street_1.$invalid && (!newForm.street_1.$pristine || showValid),
@@ -132,6 +134,7 @@
                             <div class="row">
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-5">
+                                    <label class="control-label">Street2</label>
                                     <div class="form-group"
                                          data-ng-class="{
                             'has-error' : newForm.street_2.$invalid && (!newForm.street_2.$pristine || showValid),
@@ -153,6 +156,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
+                                    <label class="control-label">Street3</label>
                                     <div class="form-group"
                                          data-ng-class="{
                             'has-error' : newForm.street_3.$invalid && (!newForm.street_3.$pristine || showValid),
@@ -178,6 +182,7 @@
                             <div class="row">
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-5">
+                                    <label class="control-label">Country</label>
                                     <div class="form-group"    data-ng-class="{
                             'has-error' : newForm.country.$invalid && (!newForm.country.$pristine || showValid),
                             'has-success': newForm.country.$valid && !newForm.country.$pristine && !!params.country
@@ -199,6 +204,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
+                                    <label class="control-label">State</label>
                                     <div class="form-group"  data-ng-class="{
                             'has-error' : newForm.State.$invalid && (!newForm.State.$pristine || showValid),
                             'has-success': newForm.State.$valid && !newForm.State.$pristine && !!params.State
@@ -223,6 +229,8 @@
                             <div class="row">
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-5">
+                                    <label class="control-label">City</label>
+                                    
                                     <div class="form-group" data-ng-class="{
                             'has-error' : newForm.City.$invalid && (!newForm.City.$pristine || showValid),
                             'has-success': newForm.City.$valid && !newForm.City.$pristine && !!params.City
@@ -245,6 +253,7 @@
                                 </div>
 
                                 <div class="col-sm-5">
+                                    <label class="control-label">Postal Code</label>
                                     <div class="form-group"     data-ng-class="{
                             'has-error' : newForm.zip_code.$invalid && (!newForm.zip_code.$pristine || showValid),
                             'has-success': newForm.zip_code.$valid && !newForm.zip_code.$pristine }">
@@ -252,7 +261,7 @@
                                       
                                             <div class="col-xs-12">
                                                 <label class="label-group">
-                                                    <input type="text" name="zip_code" class="form-control" id="orgz_zip" style="width: 92%;margin-left: 16px;"
+                                                    <input type="text" name="zip_code" class="form-control" id="orgz_zip"
                                                            placeholder="Postal Code"
                                                            data-ng-model="params.zip_code"
                                                            ng-pattern="/^([1-9][0-9]*)$/"
@@ -281,7 +290,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                           
 
 
@@ -290,7 +299,7 @@
                         </form>
                     </div>
 
-                    <div class="profile">
+                    <!--<div class="profile">
                         <div class="col-sm-1"></div>
                         <div class="media">
                             <div class="media-left pull-left">
@@ -321,7 +330,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->  <!--edited by pradip-->
                 </div>
                 <!-- RIGHT -->
                 <div class="col-md-3 left-border">

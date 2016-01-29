@@ -4,7 +4,7 @@ angular.module('security', [
     'security.authorization'
 ])
 
-.factory('security', function($rootScope, $cookieStore, $stateParams, $q, $location, securityRetryQueue, apiService) {
+.factory('security', function($rootScope, $cookieStore, $stateParams, $q, $location, securityRetryQueue, apiService,$modal) {
     // Redirect to the given url (defaults to '/')
     function redirect(url) {
         if(url !== '/guest/login') {
@@ -91,7 +91,18 @@ angular.module('security', [
             function (error) {
 
                 if (error.status === 400)
-                    alert(error.data.Message);
+                {
+                    var modalInstance = $modal.open({
+                        animation: true,
+                        templateUrl: 'login/error.tpl.html',
+                        backdrop: 'static',
+                        controller: ErrorsucessfullController,
+                        size: 'md',
+                        resolve: { items: { title: error.data.Message } }
+                    });
+
+                }
+                    //alert(error.data.Message);
                 else
                     alert("Network issue");
                 deferred.reject(error);
