@@ -1083,6 +1083,126 @@
             }
             }]
         };
+        $scope.AuditGrid = {
+            dataSource: {
+
+                type: "json",
+                transport: {
+
+                    read: apiService.baseUrl + "AuditLog/GetAuditByUserID/" + $scope.seletedCustomerId
+
+                },
+
+                pageSize: 5
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [{
+                field: "user_email",
+                title: "user_email",
+                width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
+
+            }, {
+                field: "device_os",
+                title: "device_os",
+                width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
+
+            },
+            {
+                field: "application",
+                title: "application",
+                width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:right"
+  }
+
+            },
+            {
+                field: "device_type",
+                title: "device_type",
+                width: "120px",
+                attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
+
+            },
+            {
+                field: "device_mac_id",
+                title: "device_mac_id",
+                width: "120px",
+                attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+            },
+     {
+         field: "ip_address",
+         title: "ip_address",
+         width: "120px",
+         attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
+
+     },
+     {
+         field: "timestamp",
+         title: "timestamp",
+         width: "120px",
+         attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
+
+     },
+     {
+         field: "location",
+         title: "location",
+         width: "120px",
+         attributes:
+{
+    "class": "UseHand",
+    "style": "text-align:center"
+}
+
+     },
+
+
+
+            ]
+        };
 
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)

@@ -162,18 +162,12 @@
 
 
                         <div class="form-bx2">
-                            <select ng-change="selectrole()" id="edituser_role" ng-model="role_name" class="dropdown form-control" required>
-                                <option value="" selected>Role</option>
-                                <option ng-repeat="role in roles"
-                                        value="{{role.id}}">
-                                    {{role.name}}
-                                </option>
-                               
-                            </select>
+
+                            <select kendo-multi-select k-options="selectOptions" id="edituser_role" k-ng-model="role_name" k-on-change="selectrole()" class="dropdown form-control"></select>
                             <div class="field-mdl field-req">*</div>
                         </div>
-                       
-                   
+
+
                     </div>
                     
 
