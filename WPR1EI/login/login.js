@@ -40,6 +40,7 @@ angular.module('app.guest.login')
             if (isValid) {
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
+                   
                     $scope.success = 'Login successful!';
                     $scope.error = '';
                     $cookieStore.put('loggedUser', response.first_name);
@@ -109,13 +110,19 @@ angular.module('app.guest.login')
 
 
                 function (error) {
-                    console.log(error);
-                    $scope.success = '';
-                    $scope.error = 'Email Address or Passowrd. Please try again.';
+                    if (error.status === 400)
+                        alert(error.data.Message);
+                    else
+                        alert("Network issue");
                 });
 
             }
         };
+
+        
+
+       
+
         $scope.openSignupPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,

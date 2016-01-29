@@ -2057,7 +2057,8 @@ h4.form-sub-title {
 }
 
 .properties-content  .k-grid-header th.k-header {
-    vertical-align: middle;
+   font-weight: bold;
+    color: #444;
 }
 
 body > header {
@@ -6882,6 +6883,8 @@ div.k-grid-footer {
 .h3-heading-wrap {
     border-bottom:1px solid #e7e7e7;
     padding:18px 25px 16px;
+    text-align:center;
+
 }
 
 .h3-heading-wrap h3 {
@@ -12177,14 +12180,17 @@ LEFT
     
     }
 .login-thanks {
-         max-width: 60%;
-         /*max-height: 100%;*/
-         margin: 50px auto;
-         height:700px;
-         border: 1px solid !important;
-         padding: 61px;
-
+       max-width: 89%;
+    max-height: 100%;
+    margin: 50px auto;
+    /* height: 700px; */
+    border: 1px solid !important;
+    padding: 61px;
     }
+
+
+
+
 .organization-btn-thanks {
 
  background: #289ff1;
@@ -13330,6 +13336,7 @@ LEFT
 
 .title-thank-you {
     color: #289ff1;
+    text-align:center;
 }
 
 .process-icons div {
