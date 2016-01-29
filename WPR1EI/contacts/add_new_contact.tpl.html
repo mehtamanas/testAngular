@@ -94,7 +94,7 @@
                                                            maxlength="50"
                                                            alphabets-only
                                                            input-focus
-                                                           required
+                                                           
                                                            ng-pattern="/^[a-zA-Z\s]*$/" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
@@ -108,13 +108,23 @@
 
                                         <div class="clearfix">
 
-                                            <div class="form-bx">                                                                                                  
-                                                    <select id="gender_select" ng-change="selectgender()" ng-model="directory2" class="dropdown form-control" required>
+                                            <div class="form-bx">
+                                                <div class="form-group"
+                                                     data-ng-class="{
+                                                                        'has-error' : newForm.gender.$invalid && (!newForm.gender.$pristine || showValid) && !newForm.gender.$focus,
+                                                                        'has-success': newForm.gender.$valid && !newForm.gender.$pristine && !newForm.gender.$focus
+                                                                     }">
+                                                    <select id="gender_select" name="gender" ng-change="selectgender()" ng-model="directory2" class="dropdown form-control" required>
                                                         <option value="" selected>Select Gender</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
+                                                    <div class="text-danger"
+                                                         data-ng-if="newForm.gender.$invalid && (!newForm.gender.$pristine || showValid) && !newForm.gender.$focus">
+                                                        {{ 'Enter valid Gender' | translate }}
+                                                    </div>
                                                 </div>
+                                            </div>
 
 
                                                 <div class="field-mdl field-req">*</div>
@@ -130,7 +140,7 @@
                                                                data-ng-model="params.age"                                                              
                                                                input-focus
                                                                ng-pattern="/^([1-9][0-9]*)$/"
-                                                               required />
+                                                                />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus">
                                                             {{ 'Please enter valid age' | translate }}
@@ -197,12 +207,22 @@
                                         <div class="clearfix">
 
                                             <div class="form-bx">
-                                                <select id="type_select" ng-change="selecttype()" ng-model="directory1" class="dropdown form-control" required>
-                                                    <option value="" selected>Select Type</option>
-                                                    <option value="Client">Client</option>
-                                                    <option value="Lead">Lead</option>
-                                                    <option value="Contact">Contact</option>
-                                                </select>
+                                                <div class="form-group"
+                                                     data-ng-class="{
+                                                               'has-error' : newForm.type.$invalid && (!newForm.type.$pristine || showValid) && !newForm.type.$focus,
+                                                               'has-success': newForm.type.$valid && !newForm.type.$pristine && !newForm.type.$focus
+                                                              }">
+                                                    <select id="type_select" name="type" ng-change="selecttype()" ng-model="directory1" class="dropdown form-control" required>
+                                                        <option value="" selected>Select Type</option>
+                                                        <option value="Client">Client</option>
+                                                        <option value="Lead">Lead</option>
+                                                        <option value="Contact">Contact</option>
+                                                    </select>
+                                                    <div class="text-danger"
+                                                         data-ng-if="newForm.type.$invalid && (!newForm.type.$pristine || showValid) && !newForm.type.$focus">
+                                                        {{ 'Enter valid Contact Type' | translate }}
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="field-mdl field-req">*</div>
                                             
@@ -219,7 +239,7 @@
                                                            maxlength="50"
                                                            alphabets-only
                                                            input-focus
-                                                           required
+                                                           
                                                            ng-pattern="/^[a-zA-Z\s]*$/" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Title.$invalid && (!newForm.Title.$pristine || showValid) && !newForm.Title.$focus">
@@ -232,30 +252,50 @@
 
                                         <div class="clearfix">
                                             <div class="form-group form-bx ">
-                                                <label for="">Assign To</label>
-                                                <select ng-model="user1" ng-change="selectuser()" id="contact_user"
-                                                        class="dropdown form-control" required>
-                                                    <option value="" selected>Select User</option>
-                                                    <option ng-repeat="User in users"
-                                                            value="{{User.id}}">
-                                                        {{User.first_name}}
-                                                    </option>
-                                                </select>
+                                                <div class="form-group"
+                                                     data-ng-class="{
+                                                                        'has-error' : newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus,
+                                                                        'has-success': newForm.user.$valid && !newForm.user.$pristine && !newForm.user.$focus
+                                                                     }">
+                                                    <label for="">Assign To</label>
+                                                    <select ng-model="user1" name="user" ng-change="selectuser()" id="contact_user"
+                                                            class="dropdown form-control" required>
+                                                        <option value="" selected>Select User</option>
+                                                        <option ng-repeat="User in users"
+                                                                value="{{User.id}}">
+                                                            {{User.first_name}}
+                                                        </option>
+                                                    </select>
+                                                    <div class="text-danger"
+                                                         data-ng-if="newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus">
+                                                        {{ 'Enter valid user to be assigned' | translate }}
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="field-mdl field-mdl2 field-req">*</div>
 
                                             <div class="form-group form-bx ">
-                                                <label for="">Add To Project</label>
-                                                <select ng-model="project1" ng-change="selectproject()" id="contact_project"
-                                                        class="dropdown form-control" required>
-                                                    <option value="" selected>Select Project</option>
-                                                    <option ng-repeat="project in projects"
-                                                            value="{{project.id}}">
-                                                        {{project.name}}
-                                                    </option>
+                                                <div class="form-group"
+                                                     data-ng-class="{
+                                                                        'has-error' : newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus,
+                                                                        'has-success': newForm.project.$valid && !newForm.project.$pristine && !newForm.project.$focus
+                                                                     }">
+                                                    <label for="">Add To Project</label>
+                                                    <select ng-model="project1" name="project" ng-change="selectproject()" id="contact_project"
+                                                            class="dropdown form-control" required>
+                                                        <option value="" selected>Select Project</option>
+                                                        <option ng-repeat="project in projects"
+                                                                value="{{project.id}}">
+                                                            {{project.name}}
+                                                        </option>
 
-                                                </select>
+                                                    </select>
+                                                    <div class="text-danger"
+                                                         data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">
+                                                        {{ 'Enter valid project to be assigned' | translate }}
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="field-mdl field-mdl2 field-req">*</div>
@@ -326,7 +366,7 @@
                                                            maxlength="6"
                                                            input-focus
                                                            ng-pattern="/^[0-9]{1,7}$/"
-                                                           required />
+                                                           />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
                                                         {{ 'Please enter valid pin' | translate }}
