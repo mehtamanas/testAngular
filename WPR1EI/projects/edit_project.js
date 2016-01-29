@@ -448,7 +448,9 @@ function (error)
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
         $scope.choices2[0].Street_1 = response.data[0].Street_1;
-        $scope.choices2.push({ 'Street_1': response.data[0].Street_2 });
+        if (response.data[0].Street_2 != undefined) {
+            $scope.choices2.push({ 'Street_1': response.data[0].Street_2 });
+        }
         $scope.state1 = response.data[0].State_id;
         $scope.params.state = response.data[0].State_id;
         $scope.city1 = response.data[0].city_id;

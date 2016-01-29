@@ -184,9 +184,12 @@ function (error) {
         }
         if (fnd == 0) {
             alert("No Wing Mapped.....");
-            retrun;
+            return;
         }
-
+        if (parseInt($scope.params.no_of_wings) != parseInt(totfound)) {
+            alert("No of wings not match properly....");
+            return;
+        }
        
         apiService.post("Tower/CreateTower", postData).then(function (response) {
             var loginSession = response.data;

@@ -72,7 +72,7 @@
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
         if (classname == 'remove-field') {
-           // $scope.choices2.pop();
+           $scope.choices2.pop();
         }
         else if ($scope.choices2.length) {
             var newItemNo2 = $scope.choices2.length + 1;
