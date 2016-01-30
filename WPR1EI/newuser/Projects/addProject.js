@@ -62,7 +62,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
 
             var existingProjects = _.pluck($scope.ProjectsInUser, 'id');
 
-            alert(project.id);
+           // alert(project.id);
 
             // User should not be already existing and do not add duplicate entry
             if (existingProjects.indexOf(project.id) == -1 && projectsTobeAdded.indexOf(project.id) == -1) {

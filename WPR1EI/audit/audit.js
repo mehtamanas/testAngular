@@ -2,8 +2,8 @@
 .controller('AuditController',
     function ($scope, $state, security, $cookieStore, apiService, $rootScope) {
 
-        var orgID = $cookieStore.get('orgID');
-
+       var orgID = $cookieStore.get('orgID');
+        //var userId = $cookieStore.get('userId');
         $rootScope.title = 'Dwellar./Audit';
 
        // alert(orgID);
@@ -11,10 +11,11 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl +"AuditLog/GetByID/" + orgID
+                    read: apiService.baseUrl + "AuditLog/GetByID/" + orgID
+                   // read: apiService.baseUrl + "AuditLog/GetByID/" + userId
 
                 },
-                pageSize: 5,
+                pageSize: 20,
                 schema: {
                     model: {
                         fields: {

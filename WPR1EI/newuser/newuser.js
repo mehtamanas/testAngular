@@ -1,8 +1,4 @@
 angular.module('newuser')
-
-
-
-
 .controller('newuserController',
       function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
           console.log('TeamListController');
@@ -45,9 +41,6 @@ angular.module('newuser')
                       if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
                       if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
                       if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
-
-
-
 
                   }
               }
@@ -253,7 +246,7 @@ angular.module('newuser')
                      
                       read: apiService.baseUrl + "User/GetCount/" + userID
                   },
-                  pageSize: 5
+                  pageSize: 20
 
                   //group: {
                   //    field: 'sport'
@@ -274,10 +267,14 @@ angular.module('newuser')
 
               columns: [{
 
-                  //template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />"
-                  template: "<input type='checkbox' data-id='#= account_email #'  class='checkbox' ng-click='onClick($event)' />",
-                  title: "<input type='checkbox' class='checkbox' ng-disabled='false'/>",
-                  width: "60px"
+                 
+                  template: "<input type='checkbox', class='checkbox', data-id='#= account_email #',  ng-click='onClick($event)' />",
+                  title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='submit(dataItem)' />",
+                  width: "60px",
+                  attributes:
+                      {
+                          "class": "UseHand",
+                      }
               },
 
                     {
@@ -404,6 +401,14 @@ angular.module('newuser')
                  // alert($scope.checkedIds[i]);
               }
           };
+
+          $scope.submit = function (e) {
+
+              if ($('.check-box:checked').length > 0)
+                  $('.checkbox').prop('checked', true);
+              else
+                  $('.checkbox').prop('checked', false);
+          }
 
           $scope.onClick = function (e) {
               var element = $(e.currentTarget);

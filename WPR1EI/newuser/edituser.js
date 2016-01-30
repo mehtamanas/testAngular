@@ -20,7 +20,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             serverFiltering: true,
             transport: {
                 read: {
-                    url: apiService.baseUrl + "Role/Get/" + $cookieStore.get('orgID'),
+                    url: apiService.baseUrl + "Role/Get/442aa5f4-4298-4740-9e43-36ee021df1e7"
                 }
             }
         }
@@ -108,9 +108,9 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
     $scope.choices = [{ id: 'choice1' }];
 
-    $(document).on("click", ".remove-field", function () {
-        $(this).parent().remove();
-    });
+   
+
+
 
     $scope.choices = [{ id: 'choice1' }];
     $scope.addNewChoice = function (e) {
@@ -240,6 +240,13 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+           // return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
@@ -361,6 +368,28 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         }
     }
 
+
+    $(document).on("click", ".remove-field", function () {
+        var removedElement = $(this).parent().find('#edituser_mail').val();
+        var removedElement1 = $(this).parent().find('#edituser_phno').val();
+
+        for (var i in $scope.choices1) {
+            if (removedElement == $scope.choices1[i].account_email) {
+                $scope.choices1.splice(i, 1);
+                fnd = 1;
+            }
+
+        }
+        for (var i in $scope.choices) {
+            if (removedElement1 == $scope.choices[i].account_phone) {
+                $scope.choices.splice(i, 1);
+                fnd = 1;
+            }
+
+        }
+
+        $(this).parent().remove();
+    });
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
