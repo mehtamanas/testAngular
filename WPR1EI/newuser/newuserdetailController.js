@@ -179,7 +179,7 @@
                     read: apiService.baseUrl + "User/GetProjectsByUser/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5
+                pageSize:20
 
                 //group: {
                 //    field: 'sport'
@@ -285,7 +285,7 @@
                     read: apiService.baseUrl + "USER/GetTeamsbyUserid/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5,
+                pageSize: 20,
                 refresh: true,
                 schema: {
                     model: {
@@ -376,7 +376,7 @@
                     read: apiService.baseUrl + "User/GetDetailDevices/" + $scope.seletedCustomerId
                 },
 
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -449,7 +449,7 @@
 
                     read: apiService.baseUrl + "User/GetProjectsByUser/" + $scope.seletedCustomerId
                 },
-                pageSize: 5,
+                pageSize: 20,
                 schema: {
                     model: {
                         fields: {
@@ -570,7 +570,7 @@
                   
                     read: apiService.baseUrl + "User/GetContactInUser/" + $scope.seletedCustomerId
                 },
-                pageSize: 5,
+                pageSize: 20,
                 refresh:true,
                 schema: {
                     model: {
@@ -654,7 +654,7 @@
                     read: apiService.baseUrl + "User/GetTaskByUser/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5,
+                pageSize: 20,
                 refresh:true,
                 schema: {
                     model: {
@@ -759,7 +759,7 @@
                     read: apiService.baseUrl + "User/GetContactInUser/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5,
+                pageSize: 20,
                 refresh: true,
                 schema: {
                     model: {
@@ -861,7 +861,7 @@
                     
                     read: apiService.baseUrl + "UnitTypes/GetTowerunitpropertiesall/" + $scope.seletedCustomerId
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -1024,7 +1024,7 @@
                     read: apiService.baseUrl + "Role/GetRoleByUser/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5,
+                pageSize: 20,
                 refresh: true,
                 schema: {
                     model: {
@@ -1093,7 +1093,7 @@
 
                 },
 
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'

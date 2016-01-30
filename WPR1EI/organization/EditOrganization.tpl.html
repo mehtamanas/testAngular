@@ -2,7 +2,6 @@
 
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">Edit Organization</h4>
@@ -368,6 +367,30 @@
                         </div>
                     </div>
 
+                    <div class="clearfix">
+                        <div class="form-bx form-bx6">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                            'has-error' : newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus,
+                                                            'has-success': newForm.Language.$valid && !newForm.Language.$pristine && !newForm.Language.$focus
+                                                     }">
+                                <label for="">Language	</label>
+                                <input type="text" name="Language" class="form-control"
+                                       placeholder="Language"
+                                       data-ng-model="language"
+                                       minlength="1"
+                                       maxlength="30"
+                                       alphabets-only
+                                       input-focus
+                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                <div class="text-danger"
+                                     data-ng-if="newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus">
+                                    {{ 'Please Enter Alphabets' | translate }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div><!-- f-half-1 ended -->
 
                 <div class="pull-left f-half-2">
@@ -500,29 +523,7 @@
                     </div>
 
 
-                    <div class="clearfix">
-                        <div class="form-bx form-bx6">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                            'has-error' : newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus,
-                                                            'has-success': newForm.Language.$valid && !newForm.Language.$pristine && !newForm.Language.$focus
-                                                     }">
-                                <label for="">Language	</label>
-                                <input type="text" name="Language" class="form-control"
-                                       placeholder="Language"
-                                       data-ng-model="language"
-                                       minlength="1"
-                                       maxlength="30"
-                                       alphabets-only
-                                       input-focus
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.Language.$invalid && (!newForm.Language.$pristine || showValid) && !newForm.Language.$focus">
-                                    {{ 'Please Enter Alphabets' | translate }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                 </div><!-- f-half-2 ended -->
 
