@@ -32,11 +32,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
                     <div class="image-upload-link">
-                        <div class="browse-title">Browse</div>
+                        <div class="browse-title">Add Photo</div>
                         <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                    </div>
+                        </div>
                 </div>
 
             </div>
@@ -162,7 +162,7 @@
                                 {{ 'Please enter valid Phone Number' | translate }}
                             </div>
                         </div>
-                        <div id="editcontact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)" style="margin-top:-28px"><a id="editcontact_remove_phone" href="javascript:">remove</a></div>
+                        <div id="editcontact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="editcontact_remove_phone" href="javascript:">remove</a></div>
                     </div>
                 </div>
             </div>
@@ -181,6 +181,7 @@
                                    data-ng-model="choice1.Contact_Email"
                                    minlength="1"
                                    maxlength="30"
+                                   ng-disabled="$first"
                                    input-focus
                                    ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
                                    required />
@@ -189,7 +190,7 @@
                                 {{ 'Please enter valid email' | translate }}
                             </div>
                         </div>
-                        <div id="editcontact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)" style="margin-top:-28px"><a id="editcontact_remove_email" href="javascript:">remove</a></div>
+                        <div id="editcontact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="editcontact_remove_email" href="javascript:">remove</a></div>
                     </div>
                 </div>
             </div>
@@ -275,7 +276,7 @@
                                                                  }">
                     <div id="address-wrap" class="clearfix">
                         <div id="address-no" class="form-bx form-bx2">
-                            <label for="" style="padding-top:5px;"><b>Address</b></label>
+                            <!--<label for="" style="padding-top:5px;"><b>Address</b></label>-->
                             <input type="text" name="Address" class="form-control" id="editcontact_address"
                                    placeholder="Address Line"
                                    data-ng-model="choice.Street_1"
@@ -288,7 +289,7 @@
                                 {{ 'Please enter valid address' | translate }}
                             </div>
                         </div>
-                        <div id="editcontact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top:-13px"><a id="editcontact_remove_address" href="javascript:">remove</a></div>
+                        <div id="editcontact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="editcontact_remove_address" href="javascript:">remove</a></div>
                     </div>
                 </div>
             </div>

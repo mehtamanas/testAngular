@@ -24,7 +24,14 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1)
+            {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+
         }
     });
 
@@ -33,6 +40,8 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             uploader.removeFromQueue(0);
         }
     }
+
+   
 
     contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(contactUrl).then(function (response) {

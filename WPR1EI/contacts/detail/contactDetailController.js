@@ -110,7 +110,7 @@ angular.module('contacts')
                         }
                     }
                 },
-                pageSize: 5
+                pageSize: 20
             },
             groupable: true,
             sortable: true,
@@ -161,7 +161,7 @@ angular.module('contacts')
 
                     read: apiService.baseUrl + "Contact/GetTowerunitpropertiesContact/" + $scope.seletedCustomerId
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -330,7 +330,7 @@ angular.module('contacts')
 
                 },
 
-                pageSize: 5,
+                pageSize: 20,
 
                 schema: {
                     model: {
@@ -394,7 +394,7 @@ angular.module('contacts')
                     read: apiService.baseUrl + "ToDoItem/GetMultipleTaskById/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5,
+                pageSize: 20,
 
                 schema: {
                     model: {
@@ -516,7 +516,7 @@ angular.module('contacts')
                     read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -613,7 +613,7 @@ angular.module('contacts')
                     read: apiService.baseUrl + "Contact/GetAssignToList?id=" + $scope.seletedCustomerId
                    
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'

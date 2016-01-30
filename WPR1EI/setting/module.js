@@ -6,7 +6,7 @@ angular.module('setting', [])
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
             .state('app.setting', {
-                url: '/setting',
+                url: '/settings',
                 templateUrl: 'setting/setting.tpl.html',
                 controller: 'settingController',
                 title: 'setting'
