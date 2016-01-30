@@ -14,6 +14,10 @@ angular.module('app.guest.login')
     function ($scope, $state, COUNTRIES, apiService, $cookieStore, $rootScope) {
         $scope.countryList = COUNTRIES;
         $scope.breadcrumb = 1;
+
+        $(document).ready(function () {
+            $("#orgz_name").focus();
+        });
          
         $scope.Sub_Name = $cookieStore.get('Sub_Name');
         $scope.radioValue = "1";

@@ -36,6 +36,10 @@ angular.module('app.guest.login')
 
     .controller('SignupFreeAccountController',
     function ($scope, $state, COUNTRIES, apiService, $cookieStore, $modal, $rootScope) {
+        $(document).ready(function () {
+            $("#signup_fname").focus();
+        });
+
         $scope.countryList = COUNTRIES;
 
         $scope.breadcrumb = 0;
