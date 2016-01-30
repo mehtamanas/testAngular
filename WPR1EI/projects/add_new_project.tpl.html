@@ -151,12 +151,11 @@
                                    minlength="1"
                                    maxlength="30"
                                    ng-pattern="/^[a-z 0-9\s]+$/i"
-                                   ng-model-options="{ updateOn: 'blur' }"
                                    input-focus
                                    required />
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.Address.$focus">
-                                {{ 'Enter valid Project Name' | translate }}
+                            <div ng-messages="addNewForm.project_name.$error" style="color:maroon" role="alert">
+                                <div ng-message="required" data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.totalProject_area.$focus">This field should not be empty </div>
+                                <div ng-message="pattern">Enter valid project name</div>
                             </div>
                         </div>
                        <div class="field-mdl field-req" style="margin-top: 25px; margin-left:10px">*</div>
@@ -266,7 +265,7 @@
                                      data-ng-if="addNewForm.Address.$invalid && (!addNewForm.Address.$pristine || showValid) && !addNewForm.Address.$focus">
                                     {{ 'Please enter valid address' | translate }}
                                 </div>
-                            </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top:-15px"><a href="javascript:">Remove</a></div>
+                            </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" ><a href="javascript:">Remove</a></div>
                         </div>
                     </div>
 
@@ -395,9 +394,8 @@
                             <input class="form-control" name="project_website" id="addnewproject_project_website"
                                    placeholder="Project Website"
                                    data-ng-model="params.project_website"
-                                   minlength="1"
-                                   maxlength="50"
-                                    ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
+                                
+                                    ng-pattern="/^(https:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
                                     input-focus
                                              />
 
@@ -423,8 +421,7 @@
                                     <input class="form-control" name="builder_website" id="addnewproject_builder_website"
                                            placeholder="Builder Website"
                                            data-ng-model="params.builder_website"
-                                           minlength="1"
-                                           maxlength="30"
+                                          
                                            ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
                                            input-focus 
                                            />

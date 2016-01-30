@@ -34,6 +34,11 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|pdf|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|pdf|'.indexOf(type) !== -1;
         }
     });
@@ -43,6 +48,11 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|pdf|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|pdf|'.indexOf(type) !== -1;
         }
     });

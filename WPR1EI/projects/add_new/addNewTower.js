@@ -26,8 +26,14 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
+
     });
 
     // FILTERS
@@ -35,7 +41,12 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-         return '||x-zip-compressed|'.indexOf(type) !== -1;
+            var im = '||x-zip-compressed|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
+            return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
 
@@ -46,8 +57,14 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
+
     });
 
 
@@ -175,6 +192,7 @@ function (error) {
         };
 
         var fnd = 0;
+        var totfound = 0;
         for (var i in $scope.wings) {
 
             if ($scope.wings[i].total_no_of_floors_new != null) {

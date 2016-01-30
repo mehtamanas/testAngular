@@ -54,11 +54,12 @@
                                                            maxlength="30"
                                                            ng-pattern="/^[\w -]*$/"
                                                            required />
+                                                    <div class="text-danger"
+                                                         data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
+                                                        {{ 'Enter valid Tower Name' | translate }}
+                                                    </div>
                                                 </div>
-                                                <div class="text-danger"
-                                                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
-                                                    {{ 'Enter valid Tower Name' | translate }}
-                                                </div>
+                                               
                                             </div>
                                         </div>
 
@@ -201,11 +202,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
                                                     <div class="image-upload-link">
                                                         <div class="browse-title">Browse</div>
                                                         <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                                                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                                                    </div>
+                                                        </div>
                                                 </div>
                                             </div>
 

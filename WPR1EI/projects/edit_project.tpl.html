@@ -33,12 +33,14 @@
                                     </div>
                                 </div>
                             </div>
-                           <div class="image-upload-link">
-                               <div class="browse-title">Browse</div>
-                               <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                               <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                           <div class="uploadFileName">
+                               <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
+                               <div class="image-upload-link">
+                                   <div class="browse-title">Browse</div>
+                                   <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+
+                               </div>
                            </div>
-                        </div>
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
                             <div class="image-upload-title">Upload Home Page Image</div>
@@ -59,12 +61,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
-                                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
+                            <div class="uploadFileName">
+                                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
+                                <div class="image-upload-link">
+                                    <div class="browse-title">Browse</div>
+                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+
+                                </div>
                             </div>
-                        </div>
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
                             <div class="image-upload-title">Upload Project Thumbnail</div>
@@ -85,12 +89,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
-                                <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p>
+                            <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>
+                                <div class="image-upload-link">
+                                    <div class="browse-title">Browse</div>
+                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+
+                                </div>
                             </div>
-                        </div>
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader3" filters="queueLimit, customFilter">
                             <div class="image-upload-title">Upload 3D Image</div>
@@ -111,11 +116,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="uploadFileName"><p ng-show="uploader3.queue.length"> {{uploader3.queue[0]._file.name}}</p></div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
                                 <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader3" />
-                                <p ng-show="uploader3.queue.length"> {{uploader3.queue[0]._file.name}}</p>
-                            </div>
+                               
+                                </div>
                         </div>
                     </div>
 
@@ -136,9 +142,9 @@
                                        ng-pattern="/^[a-z 1-9\s]+$/i"
                                        input-focus
                                        required />
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.Address.$focus">
-                                    {{ 'Please enter valid Project Name' | translate }}
+                                <div ng-messages="addNewForm.project_name.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.project_name.$invalid && (!addNewForm.project_name.$pristine || showValid) && !addNewForm.totalProject_area.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern">Enter valid project name</div>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +195,7 @@
                                 <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control">
                                     <option value="" selected>--Select Month--</option>
                                     <option ng-repeat="mon in month "
-                                            value="{{mon.month}}">
+                                            value="{{mon.id}}">
                                         {{mon.month}}
                                 </select>
                             </div>
@@ -245,7 +251,7 @@
                                          data-ng-if="addNewForm.Address.$invalid && (!addNewForm.Address.$pristine || showValid) && !addNewForm.Address.$focus">
                                         {{ 'Please enter valid address' | translate }}
                                     </div>
-                                </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top: -15px;"><a href="javascript:">remove</a></div>
+                                </div><div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" ><a href="javascript:">remove</a></div>
                             </div>
                         </div>
 
@@ -372,9 +378,7 @@
                                 <input class="form-control" name="project_website" id="editproject_project_website"
                                        placeholder="Project Website"
                                        data-ng-model="params.project_website"
-                                       minlength="1"
-                                       maxlength="50"
-                                       ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
+                                       ng-pattern="/^(https:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
                                        input-focus
                                         />
                                 <div class="text-danger"
@@ -397,8 +401,7 @@
                                         <input class="form-control" name="builder_website" id="editproject_builder_website"
                                                placeholder="Builder Website"
                                                data-ng-model="params.builder_website"
-                                               minlength="1"
-                                               maxlength="50"
+                                             
                                                ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/"
                                                input-focus
                                                />
@@ -450,15 +453,15 @@
                             </div>
                         </div>-->
 
-                        <div class="pull-left project-type-bx project-type04" ng-class="{'project-selected': selectedproject==7}" ng-click="selectplot()">
+                        <!--<div class="pull-left project-type-bx project-type04" ng-class="{'project-selected': selectedproject==7}" ng-click="selectplot()">
                             <div class="select-tick"></div>
                             <div class="project-type-inner">
                                 <div class="project-type-img">
-                                    <!--<img src="images/villas.png" style="width:110px;height:100px;" ng-click="selectplot()" />-->
+                                    <img src="images/villas.png" style="width:110px;height:100px;" ng-click="selectplot()" />
                                 </div>
                                 <div class="project-type-title">Plot</div>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div><!-- select-project-type ended -->
                     <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0">

@@ -33,7 +33,8 @@ angular.module('MainApp', [
     'current',
     'plot',
     'ng.deviceDetector',
-    'setting'
+    'setting',
+    'ngMessages'
 
 
    
