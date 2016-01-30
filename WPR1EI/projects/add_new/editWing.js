@@ -193,6 +193,19 @@ function (error)
             alert("Ivalid Range! " + nums);
             return;
         }
+
+        var fnd = 0;
+        for (var i in $scope.floors) {
+
+            if ($scope.floors[i].no_of_units != null) {
+                fnd = 1;
+                break;
+            }
+        }
+        if (fnd == 0) {
+            alert("No Floor Mapped.....");
+            return;
+        }
         if (!$scope.isDuplicate(array) && !$scope.isMissingNumber(array)) {
 
             if (uploader.queue.length != 0)

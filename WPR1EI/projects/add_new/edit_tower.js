@@ -206,7 +206,7 @@ function (error)
         }
         if (fnd == 0) {
             alert("No Wing Mapped.....");
-            retrun;
+           return;
         }
 
         apiService.post("Tower/EditTowerWing", postData).then(function (response) {

@@ -188,7 +188,7 @@ function (error) {
         }
         if (fnd == 0) {
             alert("No Floor Mapped.....");
-            retrun;
+            return;
         }
 
 
