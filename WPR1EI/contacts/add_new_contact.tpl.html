@@ -46,12 +46,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="uploadFileName">
+                                                <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
+                                                </div>
                                                 <div class="image-upload-link">
+                                                   
                                                     <div class="browse-title">Add Photo</div>
                                                     <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                                                    <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
-                                                </div>
-                                            </div>
+                                                    
+                                               </div>
 
                                         </div>
 
@@ -74,7 +77,7 @@
                                                            ng-pattern="/^[a-zA-Z\s]*$/" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
-                                                        {{ 'Please enter alphabets only' | translate }}
+                                                        {{ 'Enter valid first name' | translate }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +101,7 @@
                                                            ng-pattern="/^[a-zA-Z\s]*$/" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
-                                                        {{ 'Please enter alphabets only' | translate }}
+                                                        {{ 'Enter valid last name ' | translate }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +146,7 @@
                                                                 />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus">
-                                                            {{ 'Please enter valid age' | translate }}
+                                                            {{ 'Enter valid age' | translate }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,10 +172,10 @@
                                                                required />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
-                                                            {{ 'Please enter valid Phone Number' | translate }}
+                                                            {{ 'Enter valid Phone Number' | translate }}
                                                         </div>
                                                     </div>
-                                                    <div id="contact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)" style="margin-top:-28px"><a id="contact_remove_phone" href="javascript:">remove</a></div>
+                                                    <div id="contact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="contact_remove_phone" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,7 +202,7 @@
                                                             {{ 'Please enter valid email' | translate }}
                                                         </div>
                                                     </div>
-                                                    <div id="contact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)" style="margin-top:-28px"><a id="contact_remove_email" href="javascript:">remove</a></div>
+                                                    <div id="contact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_email" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -310,7 +313,7 @@
                                                                  }">
                                                 <div id="address-wrap" class="clearfix">
                                                     <div id="address-no" class="form-bx form-bx2">
-                                                        <label for="" style="padding-top:5px;"><b>Address</b></label>
+                                                        <!--<label for="" style="padding-top:5px;"><b>Address</b></label>-->
                                                         <input type="text" name="Address" class="form-control" id="contact_address"
                                                                placeholder="Address Line"
                                                                data-ng-model="choice.Street_1"
@@ -323,7 +326,7 @@
                                                             {{ 'Please enter valid address' | translate }}
                                                         </div>
                                                     </div>
-                                                    <div id="contact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" style="margin-top:-13px"><a id="contact_remove_address" href="javascript:">remove</a></div>
+                                                    <div id="contact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
                                         </div>

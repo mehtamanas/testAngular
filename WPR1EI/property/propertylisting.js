@@ -75,7 +75,7 @@
                     //read: apiService.baseUrl +"UnitTypes/GetTowerunitpropertiesall/bcd0a0ad-68c2-4a96-9498-c1a19e429f53"
                     read: apiService.baseUrl +"UnitTypes/GetTowerunitpropertiesall/" + userId
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
