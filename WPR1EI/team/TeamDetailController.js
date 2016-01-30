@@ -85,7 +85,7 @@
                 transport: {
                     read: apiService.baseUrl + "Team/GetProjectByTeam/" + $scope.seletedCustomerId
                 },
-                pageSize: 5
+                pageSize: 20
             },
             groupable: true,
             sortable: true,
@@ -118,7 +118,7 @@
                 transport: {
                     read: apiService.baseUrl +"Team/GetUsersByTeam/" + $scope.seletedCustomerId
                 },
-                pageSize: 5
+                pageSize: 20
             },
             groupable: true,
             sortable: true,
@@ -177,7 +177,7 @@
                 transport: {
                     read:apiService.baseUrl + "Team/GetTeamPropertyList/" + $scope.seletedCustomerId
                 },
-                pageSize: 5,
+                pageSize: 20,
                 schema: {
                     model: {
                         fields: {
@@ -236,7 +236,7 @@
                 transport: {
                     read: apiService.baseUrl + "Team/GetPeopleByTeam/" + $scope.seletedCustomerId
                 },
-                pageSize: 5,
+                pageSize: 20,
                 schema: {
                     model: {
                         fields: {
@@ -287,7 +287,7 @@
                 transport: {
                     read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByTeamId/" + $scope.seletedCustomerId + "/Team"
                 },
-                pageSize: 5,
+                pageSize: 20,
 
 
                 schema: {

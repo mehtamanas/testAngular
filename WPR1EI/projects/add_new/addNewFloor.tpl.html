@@ -50,13 +50,13 @@
                                        data-ng-model="params.unit_name"
                                        minlength="1"
                                        maxlength="40"
-                                       
                                        required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
+                                    {{ 'Enter valid value for floor name' | translate }}
+                                </div>
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
-                                {{ 'Enter valid value for floor name' | translate }}
-                            </div>
+                           
                         </div>
                     </div>
 

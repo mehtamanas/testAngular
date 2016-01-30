@@ -27,11 +27,12 @@
                                                        maxlength="20"
                                                        ng-pattern="/^[\w -]*$/"
                                                        required />
+                                                        <div class="text-danger"
+                                                             data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">
+                                                            {{ 'Enter valid Wing Name' | translate }}
+                                                        </div>
                                                 </div>
-                                                <div class="text-danger"
-                                                     data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">
-                                                    {{ 'Enter valid Wing Name' | translate }}
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <div class="clearfix">
@@ -48,11 +49,12 @@
                                                        ng-pattern="/^([1-9][0-9]*)$/"
                                                        input-focus
                                                        required />
+                                                    <div class="text-danger"
+                                                         data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">
+                                                        {{'Enter valid Number of Floors' | translate }}
+                                                    </div>
                                                 </div>
-                                                <div class="text-danger"
-                                                     data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">
-                                                    {{'Enter valid Number of Floors' | translate }}
-                                                </div>
+                                               
                                             </div>
                                             </div>
                                         

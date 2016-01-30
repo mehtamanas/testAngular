@@ -23,8 +23,12 @@
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|mp4|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|mp4|'.indexOf(type) !== -1;
-            
         }
     });
 

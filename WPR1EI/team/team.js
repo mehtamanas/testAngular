@@ -159,7 +159,7 @@ angular.module('team')
                     read: apiService.baseUrl +"Team/GetTeamDetails/" + userID
                     
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'

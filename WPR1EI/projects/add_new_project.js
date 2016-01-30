@@ -42,6 +42,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
@@ -51,6 +56,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
@@ -60,6 +70,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
@@ -69,6 +84,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     });
@@ -173,10 +193,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
                 if ($scope.choices2[1].Street_1 != undefined)
                     newadd.Street_2 = $scope.choices2[1].Street_1;
             }
-            else if (i == 2) {
-                if ($scope.choices2[2].Street_1 != undefined)
-                    newadd.Street_2 = $scope.choices2[1].Street_1 + " " + $scope.choices2[2].Street_1;
-            }
+            //else if (i == 2) {
+            //    if ($scope.choices2[2].Street_1 != undefined)
+            //        newadd.Street_2 = $scope.choices2[1].Street_1 + " " + $scope.choices2[2].Street_1;
+            //}
 
         }
 
@@ -405,7 +425,7 @@ function (error)
             wrappedResult.parent().remove();
             $scope.choices2.pop();
         }
-        else if ($scope.choices2.length < 3) {
+        else if ($scope.choices2.length < 2) {
             var newItemNo2 = $scope.choices2.length + 1;
             $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
         }

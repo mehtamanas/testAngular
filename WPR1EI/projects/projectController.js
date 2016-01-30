@@ -103,7 +103,7 @@ angular.module('project')
                     read: apiService.baseUrl + "Organization/GetProjectDetails?id=" + userID
     
                 },
-                pageSize: 5
+                pageSize: 20
             },
             groupable: true,
             sortable: true,

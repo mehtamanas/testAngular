@@ -215,7 +215,7 @@
 
                 },
 
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -292,7 +292,7 @@
                     read: apiService.baseUrl + "Project/GetProjectTeamList/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -338,7 +338,7 @@
 
                     read: apiService.baseUrl + "Project/GetProjectPropertyList/" + $scope.seletedCustomerId
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -413,7 +413,7 @@
 
                     read: apiService.baseUrl + "Project/GetContactInProject/" + $scope.seletedCustomerId
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -478,7 +478,7 @@
                     read: apiService.baseUrl + "Project/GetTasksInProject/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
@@ -612,7 +612,7 @@
 
                     read: apiService.baseUrl + "UnitTypes/GetTowerunitproperties/" + $cookieStore.get('projectId')
                 },
-                pageSize: 5
+                pageSize: 20
 
                 //group: {
                 //    field: 'sport'
