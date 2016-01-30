@@ -7372,7 +7372,7 @@ div.k-grid-footer {
 
 .add-input {
     float:left;
-    margin-top:3px;
+    margin-top:-27px;
 
 }
 
@@ -7388,7 +7388,7 @@ div.k-grid-footer {
 .remove-field {    
     display: inline-block;
     font-size: 13px;
-    margin: 50px 0 0 13px;
+    margin: 17px 0 0 13px;
 }
 
 .remove-field a {
@@ -13364,4 +13364,11 @@ width:30%;
      padding-left:48px;
      color:#289ff1;
      width:98%;
+}
+
+.uploadFileName{
+height: 25px;
+padding-top: 5px;
+width: 190px;
+overflow: hidden;
 }

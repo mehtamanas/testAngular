@@ -1,7 +1,7 @@
 angular.module('app.guest.login')
 
 .controller('LoginController',
-    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, $modal, deviceDetector, $window, Idle, $cookies) {
+    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, $window, Idle, $cookies, $filter, apiService) {
         // Init model
         $scope.params = {
             email: '',
@@ -38,6 +38,7 @@ angular.module('app.guest.login')
             $scope.showValid = true;
 
             if (isValid) {
+                $scope.params.email = $filter('lowercase')($scope.params.email);
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
                    
@@ -99,7 +100,10 @@ angular.module('app.guest.login')
                         $cookieStore.put('Country', $scope.loginSession1.country);
                         $cookieStore.put('Platform', $scope.loginSession1.ip);
                         $cookieStore.put('Device', vm.data.device);
-                        $cookieStore.put('Device_os', vm.data.os_version);
+                        if (vm.data.device === "unknown")
+                            $cookieStore.put('Device_os', vm.data.os);
+                        else
+                            $cookieStore.put('Device_os', vm.data.os_version);
 
                         url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + $cookieStore.get('LatLon') + '&sensor=true',
                             $http.get(url).success(function (data) {
@@ -119,8 +123,28 @@ angular.module('app.guest.login')
             }
         };
 
-        
 
+        // edited by surekha on 30-1-2016
+        $scope.params =
+                  {
+                      operating_system: $cookieStore.get('Device_os'),
+                      device_name: $cookieStore.get('Device'),
+                      mac_id: "34:#$::43:434:34:45",
+                      organization_id: $cookieStore.get('orgID'),
+                      User_ID: $cookieStore.get('userId')
+                  };
+
+        DeviceCreate = function (param) {
+            apiService.post("User/DeviceCreate", param).then(function (response) {
+                var loginSession = response.data;
+            },
+           function (error) {
+
+           });
+        };
+        DeviceCreate($scope.params);
+        
+        //end
        
 
         $scope.openSignupPopup = function () {
@@ -206,6 +230,7 @@ angular.module('app.guest.login')
             $cookieStore.remove('tower_id');
             $cookieStore.remove('teamid');
             localStorage.clear();
+            $modalInstance.dismiss();
             console.log("loggedout");
             $state.go('login');
         });
