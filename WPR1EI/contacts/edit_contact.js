@@ -70,7 +70,10 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         $scope.gender = response.data[0].gender;
     },
     function (error) {
-        console.log("Error " + error.state);
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     }
   );
 
@@ -98,10 +101,13 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     },
     function (error) {
-        alert("Error " + error.state);
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
     });
 
-    var called = false;
+    
 
 
     // CALLBACKS
@@ -117,7 +123,10 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     };
 
 
-    $scope.finalpost = function () {
+    var called = false;
+
+    $scope.finalpost = function ()
+    {
         if (called == true) {
             return;
         }
@@ -139,19 +148,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
         }
 
-        //var address = [];
-
-        //for (var i in $scope.choices2) {
-
-        //    var newadd = {};
-        //    newadd.Street_1 = $scope.choices2[i].Street_1;
-
-        //    newadd.Street_2 = $scope.choices2[i].Street_2;
-        //    address.push(newadd);
-
-
-        //}
-
+      
         var postData =
        {
            contact_id: $scope.seletedCustomerId,
@@ -170,7 +167,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            contact_element_info_email: $scope.choices1[0].Contact_Email,
            contact_element_info_phone: $scope.choices[0].Contact_Phone,
            state: $scope.params.State,
-           project_id: $scope.params.projectid,
+           project_id: $scope.params.project_id,
            city: $scope.params.City,
            zip_code: $scope.params.zipcode,
            Street_1: newadd.Street_1,
@@ -219,12 +216,21 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                 called = true;
 
             },
-           function (error) {
-
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
            });
 
         },
-       function (error) {
+       function (error)
+       {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
 
        });
 
@@ -255,7 +261,8 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             size: 'md',
             resolve: { items: { title: "Contact" } }
         });
-        //$rootScope.$broadcast('REFRESH', 'contactdetails');
+        $rootScope.$broadcast('REFRESH', 'contactdetails');
+        $rootScope.$broadcast('REFRESH', 'AssignmentToGrid');
     }
 
     $scope.params =
@@ -407,7 +414,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.selectstate = function (state) {
         $scope.params.State = $scope.state1;
-        //alert($scope.params.state);
+        $scope.city1 = "";
     };
 
 
@@ -428,7 +435,9 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         //alert($scope.params.city);
     };
 
-    $scope.addNewContact = function (isValid) {
+    $scope.EditContact = function (isValid)
+    {
+
         $scope.showValid = true;
 
         if (isValid) {
@@ -441,10 +450,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             $scope.showValid = false;
 
         }
-
-
-
-    }
+}
 
 
 };

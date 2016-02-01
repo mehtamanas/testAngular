@@ -57,6 +57,7 @@
                                                </div>
 
                                         </div>
+                                            </div>
 
                                         <div class="clearfix">
 
@@ -124,7 +125,7 @@
                                                     </select>
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.gender.$invalid && (!newForm.gender.$pristine || showValid) && !newForm.gender.$focus">
-                                                        {{ 'Enter valid Gender' | translate }}
+                                                        {{ 'Enter valid gender' | translate }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,7 +141,9 @@
                                                                      }">
                                                         <input type="text" name="Age" class="form-control" id="contact_age"
                                                                placeholder="Age"
-                                                               data-ng-model="params.age"                                                              
+                                                               data-ng-model="params.age"
+                                                               minlength="1"
+                                                               maxlength="2"                                                              
                                                                input-focus
                                                                ng-pattern="/^([1-9][0-9]*)$/"
                                                                 />
@@ -172,9 +175,9 @@
                                                                required />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
-                                                            {{ 'Enter valid Phone Number' | translate }}
+                                                            {{ 'Enter valid phone number' | translate }}
                                                         </div>
-                                                    </div>
+                                                    </div><div class="field-mdl field-req">*</div>
                                                     <div id="contact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="contact_remove_phone" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
@@ -199,9 +202,9 @@
                                                                required />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
-                                                            {{ 'Please enter valid email' | translate }}
+                                                            {{ 'Enter valid email address' | translate }}
                                                         </div>
-                                                    </div>
+                                                    </div><div class="field-mdl field-req">*</div>
                                                     <div id="contact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_email" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
@@ -223,7 +226,7 @@
                                                     </select>
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.type.$invalid && (!newForm.type.$pristine || showValid) && !newForm.type.$focus">
-                                                        {{ 'Enter valid Contact Type' | translate }}
+                                                        {{ 'Enter valid type' | translate }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -246,7 +249,7 @@
                                                            ng-pattern="/^[a-zA-Z\s]*$/" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Title.$invalid && (!newForm.Title.$pristine || showValid) && !newForm.Title.$focus">
-                                                        {{ 'Please enter alphabets only' | translate }}
+                                                        {{ 'Enter valid title' | translate }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,7 +328,7 @@
                                                              data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
                                                             {{ 'Please enter valid address' | translate }}
                                                         </div>
-                                                    </div>
+                                                    </div><div class="field-mdl field-req">*</div>
                                                     <div id="contact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">remove</a></div>
                                                 </div>
                                             </div>
@@ -333,7 +336,7 @@
 
                                         <div class="clearfix">
                                             <div class="form-bx form-bx3">
-                                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control" id="contact_details_state" required>
+                                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control" id="contact_details_state">
                                                     <option value="" selected>state</option>
                                                     <option ng-repeat="state in states"
                                                             value="{{state.state_id}}">
@@ -346,7 +349,7 @@
                                             <div class="field-mdl field-mdl2 field-req"></div>
 
                                             <div class="form-bx form-bx3">
-                                                <select ng-change="selectcity()" ng-model="city1" class="dropdown form-control" id="contact_details_city" required>
+                                                <select ng-change="selectcity()" ng-model="city1" class="dropdown form-control" id="contact_details_city">
                                                     <option value="" selected>City</option>
                                                     <option ng-repeat="city in cities  | filter:filterExpression"
                                                             value="{{city.city_id}}">
