@@ -7,7 +7,7 @@
             <button id="btn_editbtn_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
         <form class="form-content" name="newForm" autocomplete="off" novalidate
-              data-ng-submit="addNewContact(newForm.$valid)">
+              data-ng-submit="EditContact(newForm.$valid)">
 
 
             <h4 class="form-title">Edit Contact</h4>
@@ -61,7 +61,7 @@
                                ng-pattern="/^[a-zA-Z\s]*$/" />
                         <div class="text-danger"
                              data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
-                            {{ 'Enter valid' | translate }}
+                            {{ 'Enter valid first name' | translate }}
                         </div>
                     </div>
                 </div>
@@ -81,11 +81,10 @@
                                maxlength="30"
                                alphabets-only
                                input-focus
-                               required
                                ng-pattern="/^[a-zA-Z\s]*$/" />
                         <div class="text-danger"
                              data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
-                            {{ 'Please enter alphabets only' | translate }}
+                            {{ 'Enter valid last name' | translate }}
                         </div>
                     </div>
                 </div>
@@ -108,7 +107,7 @@
                         </select>
                         <div class="text-danger"
                              data-ng-if="newForm.gender.$invalid && (!newForm.gender.$pristine || showValid) && !newForm.gender.$focus">
-                            {{ 'Please enter alphabets only' | translate }}
+                            {{ 'Enter valid gender' | translate }}
                         </div>
                     </div>
                 </div>
@@ -126,13 +125,13 @@
                                placeholder="Age"
                                data-ng-model="params.age"
                                minlength="1"
-                               maxlength="3"
+                               maxlength="2"
                                input-focus
                                ng-pattern="/^(0|[1-9][0-9]*)$/"
-                               required />
+                               />
                         <div class="text-danger"
                              data-ng-if="newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus">
-                            {{ 'Please enter valid age' | translate }}
+                            {{ 'Enter valid age' | translate }}
                         </div>
                     </div>
                 </div>
@@ -159,9 +158,9 @@
                                    required />
                             <div class="text-danger"
                                  data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
-                                {{ 'Please enter valid Phone Number' | translate }}
+                                {{ 'Enter valid phone number' | translate }}
                             </div>
-                        </div>
+                        </div><div class="field-mdl field-req">*</div>
                         <div id="editcontact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="editcontact_remove_phone" href="javascript:">remove</a></div>
                     </div>
                 </div>
@@ -187,9 +186,9 @@
                                    required />
                             <div class="text-danger"
                                  data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
-                                {{ 'Please enter valid email' | translate }}
+                                {{ 'Enter valid email address' | translate }}
                             </div>
-                        </div>
+                        </div><div class="field-mdl field-req">*</div>
                         <div id="editcontact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="editcontact_remove_email" href="javascript:">remove</a></div>
                     </div>
                 </div>
@@ -199,13 +198,21 @@
             <div class="clearfix">
 
                 <div class="form-bx">
-                    <div class="form-bx">
+                    <div class="form-group"
+                         data-ng-class="{
+                                                               'has-error' : newForm.type.$invalid && (!newForm.type.$pristine || showValid) && !newForm.type.$focus,
+                                                               'has-success': newForm.type.$valid && !newForm.type.$pristine && !newForm.type.$focus
+                                                              }">
                         <select id="type_select" name="type" ng-change="selecttype()" ng-model="people_type" class="dropdown form-control" required>
                             <option value="" selected>Select Type</option>
                             <option value="Client">Client</option>
                             <option value="Lead">Lead</option>
                             <option value="Contact">Contact</option>
                         </select>
+                        <div class="text-danger"
+                             data-ng-if="newForm.type.$invalid && (!newForm.type.$pristine || showValid) && !newForm.type.$focus">
+                            {{ 'Enter valid type' | translate }}
+                        </div>
                     </div>
                 </div>
                 <div class="field-mdl field-req">*</div>
@@ -223,11 +230,11 @@
                                maxlength="50"
                                alphabets-only
                                input-focus
-                               required
+                              
                                ng-pattern="/^[a-zA-Z\s]*$/" />
                         <div class="text-danger"
                              data-ng-if="newForm.Title.$invalid && (!newForm.Title.$pristine || showValid) && !newForm.Title.$focus">
-                            {{ 'Please enter alphabets only' | translate }}
+                            {{ 'Enter valid title' | translate }}
                         </div>
                     </div>
                 </div>
@@ -237,31 +244,51 @@
 
             <div class="clearfix">
                 <div class="form-group form-bx ">
-                    <label for="">Assign To</label>
-                    <select ng-model="user1" ng-change="selectuser()"
-                            class="dropdown form-control" id="editcontact_assignto" required>
-                        <option value="" selected>Select User</option>
-                        <option ng-repeat="User in users"
-                                value="{{User.id}}">
-                            {{User.first_name}}
-                        </option>
-                    </select>
-                </div>
+                    <div class="form-group"
+                         data-ng-class="{
+                                                                        'has-error' : newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus,
+                                                                        'has-success': newForm.user.$valid && !newForm.user.$pristine && !newForm.user.$focus
+                                                                     }">
+                        <label for="">Assign To</label>
+                        <select ng-model="user1" name="user" ng-change="selectuser()"
+                                class="dropdown form-control" id="editcontact_assignto" required>
+                            <option value="" selected>Select User</option>
+                            <option ng-repeat="User in users"
+                                    value="{{User.id}}">
+                                {{User.first_name}}
+                            </option>
+                        </select>
+                        <div class="text-danger"
+                             data-ng-if="newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus">
+                            {{ 'Enter valid user to be assigned' | translate }}
+                        </div>
+                        </div>
+                    </div>
 
                 <div class="field-mdl field-mdl2 field-req">*</div>
 
                 <div class="form-group form-bx ">
-                    <label for="">Add To Project</label>
-                    <select ng-model="project1" ng-change="selectproject()"
-                            class="dropdown form-control" id="editcontact_project" required>
-                        <option value="" selected>Select Project</option>
-                        <option ng-repeat="project in projects"
-                                value="{{project.id}}">
-                            {{project.name}}
-                        </option>
+                    <div class="form-group"
+                         data-ng-class="{
+                                                                        'has-error' : newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus,
+                                                                        'has-success': newForm.project.$valid && !newForm.project.$pristine && !newForm.project.$focus
+                                                                     }">
+                        <label for="">Add To Project</label>
+                        <select ng-model="project1" name="project" ng-change="selectproject()"
+                                class="dropdown form-control" id="editcontact_project" required>
+                            <option value="" selected>Select Project</option>
+                            <option ng-repeat="project in projects"
+                                    value="{{project.id}}">
+                                {{project.name}}
+                            </option>
+                         </select>
+                        <div class="text-danger"
+                             data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">
+                            {{ 'Enter valid project to be assigned' | translate }}
+                        </div>
+                        </div>
 
-                    </select>
-                </div>
+                    </div>
 
                 <div class="field-mdl field-mdl2 field-req">*</div>
 
@@ -286,9 +313,9 @@
                                    required />
                             <div class="text-danger"
                                  data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
-                                {{ 'Please enter valid address' | translate }}
+                                {{ 'Enter valid address' | translate }}
                             </div>
-                        </div>
+                        </div><div class="field-mdl field-req">*</div>
                         <div id="editcontact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="editcontact_remove_address" href="javascript:">remove</a></div>
                     </div>
                 </div>
@@ -297,7 +324,7 @@
 
             <div class="clearfix">
                 <div class="form-bx form-bx3">
-                    <select ng-model="state1" ng-change="selectstate(state)" class="dropdown form-control" id="editcontact_state" required>
+                    <select ng-model="state1" ng-change="selectstate(state)" class="dropdown form-control" id="editcontact_state">
                         <option value="" selected>state</option>
                         <option ng-repeat="state in states"
                                 value="{{state.state_id}}">
@@ -310,7 +337,7 @@
                 <div class="field-mdl field-mdl2 field-req"></div>
 
                 <div class="form-bx form-bx3">
-                    <select ng-change="selectcity(city)" ng-model="city1" class="dropdown form-control" id="editcontact_city" required>
+                    <select ng-change="selectcity(city)" ng-model="city1" class="dropdown form-control" id="editcontact_city">
                         <option value="" selected>City</option>
                         <option ng-repeat="city in cities  | filter: filterExpression"
                                 value="{{city.city_id}}">
@@ -333,10 +360,10 @@
                                maxlength="7"
                                input-focus
                                ng-pattern="/^[0-9]{1,7}$/"
-                               required />
+                             />
                         <div class="text-danger"
                              data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
-                            {{ 'Please enter valid pin' | translate }}
+                            {{ 'Enter valid pin' | translate }}
                         </div>
                     </div>
                 </div>

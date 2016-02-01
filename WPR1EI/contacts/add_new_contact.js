@@ -27,6 +27,11 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         }
     });
 
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader.queue.length > 1) {
+            uploader.removeFromQueue(0);
+        }
+    }
    
         //Audit log start															
         $scope.params =
@@ -172,14 +177,24 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                     called = true;
 
                 },
-               function (error) {
+               function (error)
+               {
+                   if (error.status === 400)
+                       alert(error.data.Message);
+                   else
+                       alert("Network issue");
 
                });
 
 
 
             },
-           function (error) {
+           function (error)
+           {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
 
            });
 

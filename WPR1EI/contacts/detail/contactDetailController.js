@@ -40,7 +40,7 @@ angular.module('contacts')
 
     ////end
         contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-        apiService.get(contactUrl).then(function (response) {
+        apiService.getWithoutCaching(contactUrl).then(function (response) {
             $scope.main = response.data;
             $scope.image = $scope.main[0];
 
@@ -58,7 +58,7 @@ angular.module('contacts')
             GetUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             //alert(GetUrl);
 
-            apiService.get(GetUrl).then(function (response) {
+            apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
                 // alert($scope.data);
@@ -110,6 +110,7 @@ angular.module('contacts')
                         }
                     }
                 },
+
                 pageSize: 20
             },
             groupable: true,
@@ -367,20 +368,8 @@ angular.module('contacts')
                 width: "120px",
 
             }, {
-                field: "payment_status",
-                title: "Status",
-                width: "120px",
-
-            }, {
                 field: "duedate",
                 title: "Due Required",
-                width: "120px",
-                format: '{0:dd/MM/yyyy}',
-
-            },
-            {
-                field: "datepaid",
-                title: "Date Paid",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
 
@@ -723,12 +712,19 @@ angular.module('contacts')
             }
         });
 
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'AssignmentToGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+
 
         $scope.$on('REFRESH', function (event, args) {
 
             setTimeout(function () {
 
-                if (args == 'contacts') {
+                if (args == 'contactdetails') {
 
 
                     //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
