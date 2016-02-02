@@ -165,13 +165,17 @@ angular.module('newuser')
                   size: 'md'
               });
           };
-          $scope.GetValue = function (fruit)
+
+
+
+
+
+
+          $scope.GetValue = function (id,name)
           {
 
-              var fruitId = $scope.ddlFruits;
-              var fruitName = $.grep($scope.Fruits, function (fruit) {
-                  return fruit.Id == fruitId;
-              })[0].Name;
+              var fruitId = id;
+              var fruitName = name;
 
               $cookieStore.put('Selected Text', fruitName);
               // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
@@ -216,7 +220,9 @@ angular.module('newuser')
               else if ($cookieStore.get('Selected Text') == "BLOCK") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
-                      $state.go($scope.openSucessfullPopup());
+                    
+                      $state.go($scope.openBlockPopup())
+                      $modalInstance.dismiss();
                   },
       function (error) {
 
@@ -376,10 +382,12 @@ angular.module('newuser')
           };
           $scope.Fruits = [{
               Id: 1,
-              Name: 'BLOCK'
+              Name: 'BLOCK',
+              class: 'fa fa-ban fa-fw'
           }, {
               Id: 2,
-              Name: 'INACTIVATE'
+              Name: 'INACTIVATE',
+              class: 'fa fa-ban fa-fw'
           //}, {
           //    Id: 3,
           //    Name: 'ADD TO TEAM'
@@ -389,7 +397,8 @@ angular.module('newuser')
               //
           }, {
               Id: 3,
-              Name: 'ASSIGN ROLES'
+              Name: 'ASSIGN ROLES',
+              class: 'fa fa-ban fa-fw'
           }
           ];
           $scope.checkedIds = [];
@@ -609,6 +618,17 @@ angular.module('newuser')
               });
           };
 
+          $scope.openBlockPopup = function () {
+              var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'newuser/block.tpl.html',
+                  backdrop: 'static',
+                  controller: BlockController,
+                  size: 'md',
+
+
+              });
+          };
 
           function clearFilters() {
               var gridData = $("#peopleGrid").data("kendoGrid");
