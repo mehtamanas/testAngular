@@ -4,6 +4,7 @@ body {
     color:#727272;
     font-family:"Open Sans", Arial, sans-serif;
     font-size:14px;
+    background:#e7e7e7;
 }
 
 html, body, .container-fluid, .row, .column {
@@ -2127,7 +2128,10 @@ body > header .main-navbar {
 }
 
 #content2 {
-    margin:115px 0 65px;
+    margin:115px 0 0px;
+    background:#ffffff;
+    padding-bottom:50px;
+    padding-top:50px;
 }
 
 #content2 h2 {
@@ -3365,11 +3369,6 @@ body > #footer-bottom.footer-bottom2 {
     padding-top:22px;
 }
 
-#content2.login-wrap {
-    background-color: #f9f9fa;
-    margin:0;
-    padding: 115px 0 25px;
-}
 
 .login-content {
     width:495px;
@@ -5942,11 +5941,6 @@ body > #footer-bottom.footer-bottom2 {
 }
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,600,600italic,700,700italic,400italic);
 
-body {
-    color:#727272;
-    font-family:"Open Sans", Arial, sans-serif;
-    font-size:14px;
-}
 
 html, body, .container-fluid, .row, .column {
     height: 100%
@@ -7265,28 +7259,6 @@ div.k-grid-footer {
     width:970px;
 }
 
-.modal-content {
-    border:none;
-    box-shadow: none;
-    border-radius: 0;
-}
-
-.modal-header {
-    border-bottom: none;
-    background:#f7f7f7;
-    padding:18px 30px;
-    min-height: 0;
-}
-
-.modal-title {
-    color:#4a4a4a;
-    font-size:18px;
-}
-
-.modal-content .form-content  {
-    display:block;
-    padding:12px 30px 15px;
-}
 
 .form-content  .form-group {
     margin-bottom: 20px;
@@ -7319,7 +7291,7 @@ div.k-grid-footer {
 }
 
 .form-content .form-bx {
-    width:285px;
+    width:386px;
     float: left;
     margin-bottom: 12px;
 }
@@ -7337,7 +7309,7 @@ div.k-grid-footer {
 }
 
 .form-content .form-bx2 {
-    width:594px;
+    width:791px;
 }
 
 .field-mdl2 {
@@ -7345,7 +7317,7 @@ div.k-grid-footer {
 }
 
 .form-content .form-bx3 {
-    width:188px;
+    width:252px;
 }
 
 .modal-btn-wrap {
@@ -7353,7 +7325,7 @@ div.k-grid-footer {
 }
 
 .modal-btn-wrap .f-btn {
-    width:295px;
+    width:391px;
     float:left;
     margin-right:11px;
     font-size:14px;
@@ -7714,7 +7686,7 @@ h4.form-sub-title {
 }
 
 .form-content .form-bx8 {
-    width:776px;
+    width:797px;
 }
 
 .form-content .form-bx9 {
@@ -7723,7 +7695,7 @@ h4.form-sub-title {
 }
 
 .form-content .form-bx9-1 {
-    width:205px;
+    width:251px;
     margin-right:36px;
 }
 
@@ -7951,10 +7923,7 @@ h4.form-sub-title {
     margin-left: 40px;
 }
 
-#content .pg-inner-content {
-    padding:32px 30px;   
-    background:#e7e7e7;
-}
+
 
 #content  .pg-inner-header{
     /*margin-left:-30px;
@@ -8093,12 +8062,7 @@ header .reg-wrap {
     border-bottom-color:#2799e7;
 }
 
-#content2 {
 
-    background-color:fff;
-    margin-bottom:90px;
-    margin-top:130px;
-}
 
 #content2 h2 {
     font:normal 24px "open sans", arial, sans-serif;
@@ -9311,7 +9275,7 @@ form.callback  {
 }
 
 .form-content .form-bx11 {
-    width: 500px;
+    width: 383px;
 }
 
 .form-content .form-bx11-1 {
@@ -9371,6 +9335,14 @@ form.callback  {
     margin:0;
     padding: 115px 0 65px;
 }
+
+#content2.signup-wrap {
+    background-color: #ffffff;
+    margin:0;
+    padding: 115px 0 65px;
+}
+
+
 
 #content2.builde-directory-wrap {
     background-color: #f0f0f0;
@@ -9506,7 +9478,7 @@ form.callback  {
  /*** signup start ***/
 
  .signup {
-  margin-top: 15px;
+  padding-bottom: 95px;
   /*margin-bottom: 100px;*/
 }
 .signup .title {
@@ -11775,9 +11747,12 @@ LEFT
   color: #289ff1;
 }
 .payment-method-container {
-  margin-top: 40px;
+  margin-top: 75px;
   margin-left:30px;
 }
+
+
+
 .payment-method-container ul {
   list-style: none;
 }
@@ -12180,12 +12155,12 @@ LEFT
     
     }
 .login-thanks {
-       max-width: 89%;
-    max-height: 100%;
-    margin: 50px auto;
-    /* height: 700px; */
-    border: 1px solid !important;
-    padding: 61px;
+    background:#ffffff;
+    padding: 50px;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0 0 9px rgba(0,0,0,0.085);
+    margin-top:50px;
+    margin-bottom:50px;
     }
 
 
@@ -13340,14 +13315,23 @@ LEFT
 }
 
 .process-icons div {
-float:left;
-width:30%;
 
+    width:33%;
+   float:left;
+}
+
+.divThnksSocialIcons
+{
+    float:left;
+    width:50%;
+    padding:30px;
 }
 
 .process-icons 
 {
-    display:block;
+    margin:auto;
+    text-align:center;
+    width:100%;
 }
 
 #newuseradd_email{
