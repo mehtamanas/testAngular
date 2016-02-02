@@ -89,73 +89,8 @@ a:focus {
     margin-left:5px;
 }
 
-#content {	
-    position:relative;
-    height:100%;
-}
 
-#content #sidebar {
-    background-color: #efefef;
-    height: 100%;
-    width: 258px;
-    float:left;
-    padding:60px 0 0;
-}
 
-#content #main-content {
-    background-color: #fff;
-    float: none;
-    height: 100%;
-    overflow: hidden;
-    overflow-y:auto;
-    width: auto;
-    padding:60px 0 0;
-}
-
-#sidebar .navbar-default {
-    border:none;
-    background:transparent;
-    border-radius:0;
-}
-
-#sidebar .navbar-default .navbar-collapse {
-    padding:0;
-}
-
-#sidebar .navbar-default .navbar-nav {
-    display:block;
-    width:100%;
-    float:none;
-    margin:45px 0 0;
-}
-
-#sidebar .navbar-default .navbar-nav ul {
-}
-
-#sidebar .navbar-default .navbar-nav > li {
-    float:none;
-    display:block;
-}
-
-#sidebar .navbar-default .navbar-nav > li a {
-    display:block;
-    padding:14px 10px 14px 38px;
-    color:#7e7e7e;
-    font-size:15px;
-}
-
-#sidebar .navbar-default .navbar-nav > li a .fa {
-    font-size:17px;
-    margin-right:10px;
-}
-
-#sidebar .navbar-default .navbar-nav > li a:hover,
-#sidebar .navbar-default .navbar-nav > li a:focus,
-#sidebar .navbar-default .navbar-nav > li.active a {
-    background:#fff;
-    color:#2899e7;
-    border-right:5px solid #2899e7;
-}
 
 #main-content .content-inner {
     padding:22px 30px;	
@@ -1975,10 +1910,6 @@ h4.form-sub-title {
 
 #sidebar .navbar-default .navbar-nav > li a {
     border-right: 5px solid #efefef;
-}
-
-#content #sidebar {
-    overflow: auto;
 }
 
 #content h2.pg-inner-title {
@@ -6052,10 +5983,12 @@ a:focus {
 
 #content #sidebar {
     background-color: #efefef;
-    /*height: 100%;*/
+    height: 100%;
     width: 258px;
     float:left;
     padding:60px 0 0;
+    position: fixed;
+    
 }
 
 #content #main-content {
@@ -6065,14 +5998,16 @@ a:focus {
     overflow: hidden;
     overflow-y:auto;
     width: auto;
-    padding: 60px 0 0;
-
+    padding:60px 0 0;
+    margin-left:258px;
+    
 }
 
 #sidebar .navbar-default {
     border:none;
     background:transparent;
     border-radius:0;
+   
 }
 
 #sidebar .navbar-default .navbar-collapse {
@@ -7912,9 +7847,6 @@ h4.form-sub-title {
     border-right: 5px solid #efefef;
 }
 
-#content #sidebar {
-    overflow: auto;
-}
 
 #content h2.pg-inner-title {
     font:600 20px 'Open Sans', arial, sans-serif;
@@ -13208,6 +13140,15 @@ LEFT
     font-size:11px;
     padding:2px 4px;
     margin-right:2px;
+}
+
+.dropDownBlock-icon
+{
+    background: url(../images/blockUser_small_icon.png) no-repeat;
+    height:20px;
+    width:20px;
+    float: left;
+    display: block;
 }
 
 .marketing-c .marketing-i {
