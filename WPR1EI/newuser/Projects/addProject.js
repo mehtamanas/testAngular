@@ -5,9 +5,9 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
     //alert("ff");
     $scope.ProjectsInUser = undefined;
     $scope.orgProjects = undefined;
-
+    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var currentlyLoggedInUserId = $cookieStore.get('userId');
-
+    var selectedcustomer = $scope.seletedCustomerId;
     var loadProjects = function () {
         var userID = $cookieStore.get('userId');
         // Use $q.all to get both the result and then process the result
@@ -99,7 +99,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
         var updatePromisses = [];
         angular.forEach(projectsToAdd, function (projectId) {
             var newMember = {};
-            newMember.mapping_id = currentlyLoggedInUserId;
+            newMember.mapping_id = selectedcustomer;
             newMember.project_id = projectId;
             newMember.user_id = currentlyLoggedInUserId;
             newMember.organization_id = newuserData.orgId;
@@ -111,7 +111,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
         var removePromisses = [];
         angular.forEach(projectsToRemove, function (userId) {
             var existingMember = {};
-            existingMember.mapping_id = currentlyLoggedInUserId;
+            existingMember.mapping_id = selectedcustomer;
             existingMember.project_id = userId;
             existingMember.user_id = currentlyLoggedInUserId;
             existingMember.organization_id = newuserData.orgId;
