@@ -26,11 +26,12 @@
                                        maxlength="20"
                                        ng-pattern="/^[\w -]*$/"
                                        required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.street.$invalid && (!addNewForm.street.$pristine || showValid) && !addNewForm.street.$focus">
+                                    {{ 'Enter valid Wing Name' | translate }}
+                                </div>
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.street.$invalid && (!addNewForm.street.$pristine || showValid) && !addNewForm.street.$focus">
-                                {{ 'Enter valid Wing Name' | translate }}
-                            </div>
+                          
                         </div>
                     </div>
                     <div class="clearfix">
@@ -49,11 +50,12 @@
                                        ng-pattern="/^([1-9][0-9]*)$/"
                                        input-focus
                                        required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">
+                                    {{'Enter valid Number of Floors' | translate }}
+                                </div>
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">
-                                {{'Enter valid Number of Floors' | translate }}
-                            </div>
+                           
                         </div>
                     </div>
 
@@ -77,11 +79,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                                <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                            </div>
+                            <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
+                                <div class="image-upload-link">
+                                    <div class="browse-title">Browse</div>
+                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                </div>
                             </div>
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -103,11 +105,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip"  nv-file-select="" uploader="uploader1" />
-                                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
-                            </div>
+                            <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
+                                <div class="image-upload-link">
+                                    <div class="browse-title">Browse</div>
+                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                                </div>
                             </div>
                    </div>
 
