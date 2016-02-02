@@ -168,6 +168,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
     $scope.selectstate = function () {
         $scope.params.state = $scope.state1;
+        $scope.city1 = "";
 
     };
 

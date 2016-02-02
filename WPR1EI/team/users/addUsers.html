@@ -18,11 +18,11 @@
 
         <div class="row row_content" ng-repeat="user in orgUsers">
             <div class="col-lg-1 col-md-2 col-sm-3">
-                <div class='user-photo pull_left'><img src='assets/images/Downey.jpg'/></div>
+                <div class='user-photo pull_left'><img src="{{user.media_url}}" /></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <p class="user_name">
-                    {{user.first_name + ' ' + user.last_name}}
+                    {{user.name}}
                 </p>
 
                 <p class="user_mail">
@@ -42,7 +42,7 @@
         <div class="user_list_item">
             <span class="user_items" ng-repeat="user in orgUsers">
                 <span class="btn btn-info btn_pad" ng-if="user.isTeamMember">
-                    {{user.first_name + ' ' + user.last_name}}
+                    {{user.name}}
                     <span class="icon_space glyphicon glyphicon-remove" ng-click="removeUser(user)"></span>
                 </span>
             </span>
