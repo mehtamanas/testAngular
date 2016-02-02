@@ -24,10 +24,9 @@
 
             <div class="clearfix">
                 <div class="pull-left actions-wrap">
-                    <select id="actions-option" class="form-control actions-option">
-                        <option>ACTIONS</option>
-                        <option>EDIT</option>
-                        <option>DELETE</option>
+                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                            ng-change="GetValue();addUser()">
+                        <option value="" selected> ACTION </option>
                     </select>
                     
                     <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"

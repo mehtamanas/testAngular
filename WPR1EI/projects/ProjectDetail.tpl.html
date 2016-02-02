@@ -382,7 +382,7 @@
                                 <div class="payment-list-head clearfix">
                                     <div class="pull-left payment-list-title">
                                         {{user.type_of_payment}}<a data-toggle="modal"></a>
-                                        <a ng-click="openEditPaymentSchemePopup(user.PaymentScheduleDetailsList[0].payment_schedule_id)" data-toggle="modal"><span class="edit-icon"></span></a>
+                                        <a ng-click="openEditPaymentSchemePopup(user.PaymentScheduleDetailsList[0].payment_schedule_id)" style="cursor:pointer" data-toggle="modal"><span class="edit-icon"></span></a>
                                     </div>
                                     <div class="pull-right">
                                         <label ng-click="toggleClass($index)">{{isVisible[$index] ? '-' : '+'}}</label>

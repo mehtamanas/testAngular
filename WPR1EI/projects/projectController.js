@@ -8,6 +8,7 @@ angular.module('project')
     {
           $rootScope.title = 'Dwellar./Projects';
           var userID = $cookieStore.get('userId');
+          var organization_id = $cookieStore.get('orgID');
           //alert($cookieStore.get('userId'));
 
             $('#btnSave').hide();
@@ -118,8 +119,8 @@ angular.module('project')
             },
             columns: [
                 {
-                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                    title: "<input id='checkAll', type='checkbox', class='check-box' />",
+                    template: " <input type='checkbox' , class='checkbox', data-id='#= name #', ng-click='projectSelected($event,dataItem)'  />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='submit(dataItem)'  />",
                     width: "60px",
                     attributes:
                       {
@@ -241,6 +242,110 @@ angular.module('project')
             $state.go('app.projectdetail');
 
         };
+
+
+        
+          $scope.submit = function (e) {
+
+              if ($('.check-box:checked').length > 0)
+                  $('.checkbox').prop('checked', true);
+              else
+                  $('.checkbox').prop('checked', false);
+          }
+
+
+          $scope.projectSelected = function (e,data) {
+              console.log(e);
+              var element = $(e.currentTarget);
+              var checked = element.is(':checked')
+              row = element.closest("tr")
+              var id = data.id;
+              var fnd = 0;
+              for (var i in $scope.checkedIds) {
+                  if (id == $scope.checkedIds[i]) {
+                      $scope.checkedIds.splice(i, 1);
+                      fnd = 1;
+                  }
+
+              }
+              if (fnd == 0) {
+                  $scope.checkedIds.push(id);
+              }
+              if (checked) {
+                  row.addClass("k-state-selected");
+              } else {
+                  row.removeClass("k-state-selected");
+              }
+          }
+
+
+          $scope.GetValue = function (fruit) {
+
+              var fruitId = $scope.ddlFruits;
+              var fruitName = $.grep($scope.Fruits, function (fruit) {
+                  return fruit.Id == fruitId;
+              })[0].Name;
+
+              $cookieStore.put('Selected Text', fruitName);
+              // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
+
+
+
+
+          }
+
+          $scope.addUser = function () {
+
+              var usersToBeAddedOnServer = [];
+              $cookieStore.remove('checkedIds');
+              $cookieStore.put('checkedIds', $scope.checkedIds);
+              // Add the new users
+              for (var i in $scope.checkedIds) {
+                  var newMember = {};
+                  newMember.project_id = $scope.checkedIds[i];
+                  newMember.organization_id = $cookieStore.get('orgID');
+                 
+                  usersToBeAddedOnServer.push(newMember);
+              }
+
+              if (usersToBeAddedOnServer.length == 0) {
+                  return;
+              }
+             
+              
+              
+              apiService.post("Project/DeleteMultipleProject", usersToBeAddedOnServer).then(function (response)
+              {
+                      var loginSession = response.data;
+                      $rootScope.$broadcast('REFRESH', 'projectGrid');
+                      alert("Deleted...");
+              },
+      function (error)
+      {
+          if (error.status === 400)
+              alert(error.data.Message);
+          else
+              alert("Network issue");
+      });
+
+              
+          
+          }
+
+          $scope.Fruits = [{
+              Id: 1,
+              Name: 'DELETE'
+          
+          }];
+          $scope.checkedIds = [];
+          $scope.showCheckboxes = function () {
+
+
+              for (var i in $scope.checkedIds) {
+
+                  // alert($scope.checkedIds[i]);
+              }
+          };
 
 
 
