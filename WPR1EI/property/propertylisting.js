@@ -220,6 +220,7 @@
                      }
                 },
             {
+                
                 field: "available_status",
                 title: "STATUS",
                 width: "120px",

@@ -29,9 +29,9 @@
                                            ng-pattern="/^([1-9][0-9]*)$/"
                                            input-focus
                                            required />
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.amount.$invalid && (!addNewForm.amount.$pristine || showValid) && !addNewForm.amount.$focus">
-                                        {{ 'Enter valid payment amount' | translate }}
+                                    <div ng-messages="addNewForm.amount.$error" style="color:maroon" role="alert">
+                                        <div ng-message="required" data-ng-if="addNewForm.amount.$invalid && (!addNewForm.amount.$pristine || showValid) && !addNewForm.amount.$focus">This field should not be empty </div>
+                                        <div ng-message="pattern">Enter valid payment amount</div>
                                     </div>
                                 </div>
                                 </div>
@@ -49,10 +49,11 @@
                                             {{pay.payment_type1}}
                                         </option>
                                     </select>
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.paymenttype.$invalid && (!addNewForm.paymenttype.$pristine || showValid) && !addNewForm.paymenttype.$focus">
-                                        {{ 'Enter valid payment type' | translate }}
+                                    <div ng-messages="addNewForm.paymenttype.$error" style="color:maroon" role="alert">
+                                        <div ng-message="required" data-ng-if="addNewForm.paymenttype.$invalid && (!addNewForm.paymenttype.$pristine || showValid) && !addNewForm.paymenttype.$focus">This field should not be empty </div>
+                                        <div ng-message="pattern">Enter valid payment type</div>
                                     </div>
+                                  
                                 </div>
                               
                                 </div>
@@ -73,10 +74,11 @@
                                            ng-pattern='/^[0,1]?\d{1}\/(([0-2]?\d{1})|([3][0,1]{1}))\/(([1]{1}[9]{1}[9]{1}\d{1})|([2-9]{1}\d{3}))$/'
                                            input-focus
                                            required />
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.paymentdate.$invalid && (!addNewForm.paymentdate.$pristine || showValid) && !addNewForm.paymentdate.$focus">
-                                        {{ 'Enter valid due date' | translate }}
+                                    <div ng-messages="addNewForm.paymentdate.$error" style="color:maroon" role="alert">
+                                        <div ng-message="required" data-ng-if="addNewForm.paymentdate.$invalid && (!addNewForm.paymentdate.$pristine || showValid) && !addNewForm.paymentdate.$focus">This field should not be empty </div>
+                                        <div ng-message="pattern">Enter valid due date</div>
                                     </div>
+                                    
                                 </div>
 
                                 </div>
