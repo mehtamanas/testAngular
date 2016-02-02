@@ -1,6 +1,5 @@
 ﻿angular.module('newuser')
 
-
 .controller('newuserdetailController',
     function ($scope, $state, security, $cookieStore, $modal,$rootScope, apiService, $window, $rootScope, newuserService) {
         console.log('newuserdetailController');
@@ -454,7 +453,7 @@
                     model: {
                         fields: {
                            
-                            possession_date: { type: "date" },
+                            possesion_date: { type: "date" },
                             assigned_date: { type: "date" },
 
                         }
@@ -505,7 +504,7 @@
      "style": "text-align:right"
  }
             }, {
-                field: "Year",
+                field: "year",
                 title: "year",
                 width: "120px",
                 attributes:
@@ -522,16 +521,8 @@
      "class": "UseHand",
      "style": "text-align:center"
  }
-            }, {
-                field: "total_project_area",
-                title: "Project Area",
-                width: "120px",
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:right"
- }
-            }, {
+            }, 
+             {
                 field: "project_website",
                 title: "Project Website",
                 width: "120px",
@@ -550,7 +541,7 @@
      "style": "text-align:center"
  }
             }, {
-                field: "possession_date",
+                field: "possesion_date",
                 title: "Possession Date",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',

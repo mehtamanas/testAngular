@@ -16,7 +16,7 @@
                 <span class="upload-text">Add Photo</span>
             </div>-->
             <div class="clearfix image-upload-container">
-                <div class="image-upload-wrap">
+                <div class="modal-body image-upload-wrap">
                     <!--<div class="image-upload-title">Upload Organization Image</div>-->
                     <div class="dropzone dropzone-bx image-upload-bx">
                         <div class="fallback">
@@ -253,6 +253,7 @@
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
                             <label for="">Organization ID</label>
+                            <span></span>
                             <input type="text" disabled name="orgid" class="form-control"
                                    placeholder="Organization ID"
                                    data-ng-model="params.organization_id"
@@ -272,6 +273,7 @@
                                         'has-success': newForm.Divisions.$valid && !newForm.Divisions.$pristine && !newForm.Divisions.$focus
                                     }">
                                 <label for="">Divisions: </label>
+                               <span></span>
                                 <input type="text" name="Divisions" class="form-control"
                                        placeholder="Divisions"
                                        data-ng-model="divisions"
@@ -397,12 +399,13 @@
 
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
+                            <label for="">Pan No.</label>
                             <div class="form-group"
                                  data-ng-class="{
                                                             'has-error' : newForm.pan_no.$invalid && (!newForm.pan_no.$pristine || showValid) && !newForm.pan_no.$focus,
                                                             'has-success': newForm.pan_no.$valid && !newForm.pan_no.$pristine && !newForm.pan_no.$focus
                                                          }">
-                                <label for="">Pan No.</label>
+                              
                                 <input type="text" name="pan_no" class="form-control"
                                        placeholder="PAN No"
                                        data-ng-model="pan_no"
@@ -422,12 +425,13 @@
 
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
+                            <label for="">Tan No.</label>
                             <div class="form-group"
                                  data-ng-class="{
                                                              'has-error' : newForm.Tan_No.$invalid && (!newForm.Tan_No.$pristine || showValid) && !newForm.Tan_No.$focus,
                                                             'has-success': newForm.Tan_No.$valid && !newForm.Tan_No.$pristine && !newForm.Tan_No.$focus
                                                         }">
-                                <label for="">Tan No.</label>
+                               
                                 <input type="text" name="Tan_No" class="form-control"
                                        placeholder="TAN No"
                                        data-ng-model="tan_no"
@@ -447,12 +451,13 @@
 
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
+                            <label for="">Service Tax No.</label>
                             <div class="form-group"
                                  data-ng-class="{
                                                           'has-error' : newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus,
                                                            'has-success': newForm.service_tax_no.$valid && !newForm.service_tax_no.$pristine && !newForm.service_tax_no.$focus
                                                          }">
-                                <label for="">Service Tax No.</label>
+                              
                                 <input type="text" name="service_tax_no" class="form-control"
                                        placeholder="Service Tax No"
                                        data-ng-model="service_tax_no"
@@ -472,12 +477,13 @@
 
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
+                            <label for="">Cin No.</label>
                             <div class="form-group"
                                  data-ng-class="{
                                                              'has-error' : newForm.cin_no.$invalid && (!newForm.cin_no.$pristine || showValid) && !newForm.cin_no.$focus,
                                                              'has-success': newForm.cin_no.$valid && !newForm.cin_no.$pristine && !newForm.cin_no.$focus
                                                           }">
-                                <label for="">Cin No.</label>
+                               
                                 <input type="text" name="cin_no" class="form-control"
                                        placeholder="CIN No"
                                        data-ng-model="cin_no"
