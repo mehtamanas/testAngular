@@ -3,14 +3,17 @@
      .config(function config($stateProvider) {
          $stateProvider
              .state('Forgetpassword', {
-                 url: '/Forgetpassword',
+                 url: '/RecoverPassword',
                  templateUrl: 'login/Forgetpassword.tpl.html',
                  controller: 'ForgetpasswordController',
                  data: { pageTitle: 'Forgetpassword' }
              });
      })
 .controller('ForgetpasswordController',
-    function ($scope, apiService, $state, security) {
+    function ($scope, apiService, $state, security, $rootScope) {
+
+        $rootScope.title = 'Dwellar./RecoverPassword';
+
            $scope.params = {
                account_email: $scope.account_email
                };
@@ -34,7 +37,7 @@
 
                },
           function (error) {
-              alert("Error " + error.state);
+              alert("Inactive");
           });
            };
 

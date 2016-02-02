@@ -52,7 +52,7 @@ angular.module('app.guest.login')
                             return;
                         }
                         Idle.watch();
-                        $state.go('app.project');
+                        $state.go('app.property');
                     }
 
                 },
