@@ -37,7 +37,7 @@
 
                },
           function (error) {
-              alert("Inactive");
+              alert("Entered email address belongs to inactive user");
           });
            };
 

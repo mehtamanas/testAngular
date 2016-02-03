@@ -3677,8 +3677,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    background-color: #2899E7;
+    border-color: #2899E7;
 }
 
     .btn-primary.focus, .btn-primary:focus {
@@ -4491,7 +4491,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
             .nav > li > a:focus, .nav > li > a:hover {
                 text-decoration: none;
-                background-color: #eee;
+                background-color: #2899e7;
             }
 
         .nav > li.disabled > a {
@@ -4523,6 +4523,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
 .nav-tabs {
     border-bottom: 1px solid #ddd;
+    border:none;
 }
 
     .nav-tabs > li {
@@ -4534,19 +4535,21 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
             margin-right: 2px;
             line-height: 1.42857143;
             border: 1px solid transparent;
-            border-radius: 4px 4px 0 0;
+          
+             border:none;
         }
 
             .nav-tabs > li > a:hover {
                 border-color: #eee #eee #ddd;
+                border:none;
             }
 
         .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-            color: #555;
+            color: #fff;
             cursor: default;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-bottom-color: transparent;
+            background-color: #2899e7;
+             border:none;
+
         }
 
     .nav-tabs.nav-justified {
