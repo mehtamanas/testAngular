@@ -56,7 +56,7 @@ angular.module('newuser')
             // Remove users
             this.removeProjectsFromUser = function (projectsTobeRemoved) {
                 return $http({
-                    method: 'DELETE', url: apiService.baseUrl + 'User/DeleteMultipleUserFromProject',
+                    method: 'DELETE', url: apiService.baseUrl + 'Mapping/DeleteMultipleUserFromProject',
                     data: projectsTobeRemoved, headers: { 'Content-Type': 'application/json' }
                 });
             };

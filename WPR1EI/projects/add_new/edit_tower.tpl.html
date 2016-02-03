@@ -30,11 +30,12 @@
                                                maxlength="10"
                                                ng-pattern="/^(0|[1-9][0-9]*)$/"
                                                required />
+                                        <div class="text-danger"
+                                             data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
+                                            {{'Enter valid No of Wings' | translate }}
+                                        </div>
                                     </div>
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
-                                        {{'Enter valid No of Wings' | translate }}
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -54,11 +55,12 @@
                                        maxlength="30"
                                        ng-pattern="/^[\w -]*$/"
                                        required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
+                                    {{ 'Enter valid Tower Name' | translate }}
+                                </div>
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
-                                {{ 'Enter valid Tower Name' | translate }}
-                            </div>
+                           
                         </div>
                     </div>
 
@@ -82,12 +84,13 @@
                                                    ng-pattern="/^[0-9_\-,;]*$/"
                                                    required />
                                             <span class="area-txt">/sq.ft</span>
+                                            <div class="text-danger"
+                                                 data-ng-if="addNewForm.bprice.$invalid && (!addNewForm.bprice.$pristine || showValid) && !addNewForm.bprice.$focus">
+                                                {{'Enter valid Base Price' | translate }}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.bprice.$invalid && (!addNewForm.bprice.$pristine || showValid) && !addNewForm.bprice.$focus">
-                                        {{'Enter valid Base Price' | translate }}
-                                    </div>
+                                 
                                 </div>
 
                             </div>
@@ -108,11 +111,12 @@
                                                maxlength="10"
                                                ng-pattern="/^[0-9_\-,;]*$/"
                                                required />
+                                        <div class="text-danger"
+                                             data-ng-if="addNewForm.carprice.$invalid && (!addNewForm.carprice.$pristine || showValid) && !addNewForm.carprice.$focus">
+                                            {{'Enter valid Car Price' | translate }}
+                                        </div>
                                     </div>
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.carprice.$invalid && (!addNewForm.carprice.$pristine || showValid) && !addNewForm.carprice.$focus">
-                                        {{'Enter valid Car Price' | translate }}
-                                    </div>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -134,11 +138,12 @@
                                                    ng-pattern="/^[0-9_\-,;]*$/"
                                                    required />
                                             <span class="area-txt">/sq.ft</span>
+                                            <div class="text-danger"
+                                                 data-ng-if="addNewForm.floorprice.$invalid && (!addNewForm.floorprice.$pristine || showValid) && !addNewForm.floorprice.$focus">
+                                                {{'Enter valid Floor Price' | translate }}
+                                            </div>
                                         </div>
-                                        <div class="text-danger"
-                                             data-ng-if="addNewForm.floorprice.$invalid && (!addNewForm.floorprice.$pristine || showValid) && !addNewForm.floorprice.$focus">
-                                            {{'Enter valid Floor Price' | translate }}
-                                        </div>
+                                   
                                     </div>
                                 </div>
 
@@ -162,11 +167,12 @@
                                                    ng-pattern="/^(0|[1-9][0-9]*)$/"
                                                    required />
                                             <span class="area-txt">Floor</span>
+                                            <div class="text-danger"
+                                                 data-ng-if="addNewForm.floorstart.$invalid && (!addNewForm.floorstart.$pristine || showValid) && !addNewForm.floorstart.$focus">
+                                                {{'Enter valid Floor Start' | translate }}
+                                            </div>
                                         </div>
-                                        <div class="text-danger"
-                                             data-ng-if="addNewForm.floorstart.$invalid && (!addNewForm.floorstart.$pristine || showValid) && !addNewForm.floorstart.$focus">
-                                            {{'Enter valid Floor Start' | translate }}
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -194,12 +200,12 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="image-upload-link">
-                            <div class="browse-title">Browse</div>
-                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                            <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                        </div>
+                        <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
+                            <div class="image-upload-link">
+                                <div class="browse-title">Browse</div>
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                             </div>
+                        </div>
 
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
                                 <div class="image-upload-title">Upload 3D Zip</div>
@@ -220,13 +226,12 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                    <div class="image-upload-link">
-                                        <div class="browse-title">Browse</div>
-                                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip"  nv-file-select="" uploader="uploader1" />
-                                        <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
-                                    </div>
-                                </div>
+                        <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
+                            <div class="image-upload-link">
+                                <div class="browse-title">Browse</div>
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                            </div>
+                        </div>
 
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
                                     <div class="image-upload-title">Upload 3D Image</div>
@@ -247,13 +252,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <div class="image-upload-link">
-                                            <div class="browse-title">Browse</div>
-                                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
-                                            <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p>
-                                        </div>
-                                </div>
-
+                         <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>   
+                               <div class="image-upload-link">
+                               <div class="browse-title">Browse</div>
+                               <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                             </div>
+                        </div>
                     </div>
 
                                 <h4 class="form-title form-title2">Assign Wing Type</h4>

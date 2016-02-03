@@ -30,11 +30,12 @@
                                            ng-pattern="/^[\w -]*$/"
                                            input-focus
                                            required />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.schemename.$invalid && (!newForm.schemename.$pristine || showValid) && !newForm.schemename.$focus">
+                                        {{ 'Please enter Payment Scheme name ' | translate }}
+                                    </div>
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="newForm.schemename.$invalid && (!newForm.schemename.$pristine || showValid) && !newForm.schemename.$focus">
-                                    {{ 'Please enter Payment Scheme name ' | translate }}
-                                </div>
+                            
                             </div>
 
 
@@ -55,12 +56,13 @@
                                                input-focus
                                                required />
                                         <span class="area-txt">/sq.ft</span>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus">
+                                            {{ 'Please enter Base Rate' | translate }}
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus">
-                                    {{ 'Please enter Base Rate' | translate }}
-                                </div>
+                              
                             </div>
 
                         </div>
@@ -85,11 +87,12 @@
                                            ng-pattern="/^[\w -]*$/"
                                            input-focus
                                            required />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Milestone.$invalid && (!newForm.Milestone.$pristine || showValid) && !newForm.Milestone.$focus">
+                                        {{ 'Please enter Valid Milestone' | translate }}
+                                    </div>
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="newForm.Milestone.$invalid && (!newForm.Milestone.$pristine || showValid) && !newForm.Milestone.$focus">
-                                    {{ 'Please enter Valid Milestone' | translate }}
-                                </div>
+                              
                             </div>
 
                             <div class="form-group"
@@ -109,12 +112,13 @@
                                                input-focus
                                                required />
                                         <span class="area-txt">%</span>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus">
+                                            {{ 'Please enter valid percentage' | translate }}
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="text-danger"
-                                     data-ng-if="newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus">
-                                    {{ 'Please enter valid percentage' | translate }}
-                                </div>
+                             
                             </div>
 
                             <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">remove</a></div>

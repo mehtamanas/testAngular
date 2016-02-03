@@ -98,6 +98,24 @@
 
         callApis();//callall the Apis
 
+        $scope.openAddUserPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'project/users/addUsers.html',
+                backdrop: 'static',
+                controller: AddProjectUsersController,
+                windowClass: 'addUser',
+                resolve: {
+                    teamService: teamService,
+                    teamData: {
+                        teamId: window.sessionStorage.selectedCustomerID,
+                        orgId: $cookieStore.get('orgID')
+                    }
+                }
+            });
+        };
+
+
         $scope.openNewPaymentSchemePopup = function () {
             var modalInstance = $modal.open({
                 animation: true,

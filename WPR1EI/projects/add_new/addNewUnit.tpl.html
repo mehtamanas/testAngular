@@ -27,14 +27,15 @@
                                                                    data-ng-model="unit_type_desc"
                                                                    minlength="1"
                                                                    maxlength="20"
-                                                                   ng-pattern="/^[a-z 1-9\s]+$/i"
+                                                                   ng-pattern="/^[a-z 1-9.\s]+$/i"
                                                                    input-focus
                                                                    required />
+                                                            <div class="text-danger"
+                                                                 data-ng-if="addNewForm.unitdesc.$invalid && (!addNewForm.unitdesc.$pristine || showValid) && !addNewForm.unitdesc.$focus">
+                                                                {{'Enter valid Unit Type' | translate }}
+                                                            </div>
                                                         </div>
-                                                        <div class="text-danger"
-                                                             data-ng-if="addNewForm.unitdesc.$invalid && (!addNewForm.unitdesc.$pristine || showValid) && !addNewForm.unitdesc.$focus">
-                                                            {{'Enter valid Unit Type' | translate }}
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -61,13 +62,13 @@
                                                                        ng-pattern="/^([1-9][0-9]*)$/"
                                                                        input-focus
                                                                        required />
-
+                                                                <div class="text-danger"
+                                                                     data-ng-if="addNewForm.bedrooms.$invalid && (!addNewForm.bedrooms.$pristine || showValid) && !addNewForm.bedrooms.$focus">
+                                                                    {{'Enter valid value for bedrooms' | translate }}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="text-danger"
-                                                             data-ng-if="addNewForm.bedrooms.$invalid && (!addNewForm.bedrooms.$pristine || showValid) && !addNewForm.bedrooms.$focus">
-                                                            {{'Enter valid value for bedrooms' | translate }}
-                                                        </div>
+                                                     
                                                     </div>
 
                                                 </div>
@@ -91,13 +92,14 @@
                                                                        ng-pattern="/^([1-9][0-9]*)$/"
                                                                        input-focus
                                                                        required />
+                                                                <div class="text-danger"
+                                                                     data-ng-if="addNewForm.bathrooms.$invalid && (!addNewForm.bathrooms.$pristine || showValid) && !addNewForm.bathrooms.$focus">
+                                                                    {{'Enter valid value for bathrooms' | translate }}
+                                                                </div>
 
                                                             </div>
                                                         </div>
-                                                        <div class="text-danger"
-                                                             data-ng-if="addNewForm.bathrooms.$invalid && (!addNewForm.bathrooms.$pristine || showValid) && !addNewForm.bathrooms.$focus">
-                                                            {{'Enter valid value for bathrooms' | translate }}
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,12 +131,14 @@
                                                                        input-focus
                                                                        required />
                                                                 <span class="area-txt">sq.ft</span>
+                                                                <div class="text-danger"
+                                                                     data-ng-if="addNewForm.carpetarea.$invalid && (!addNewForm.carpetarea.$pristine || showValid) && !addNewForm.carpetarea.$focus">
+                                                                    {{'Enter valid value for Carpet Area' | translate }}
+                                                                </div>
+                                                               
                                                             </div>
                                                         </div>
-                                                        <div class="text-danger"
-                                                             data-ng-if="addNewForm.carpetarea.$invalid && (!addNewForm.carpetarea.$pristine || showValid) && !addNewForm.carpetarea.$focus">
-                                                            {{'Enter valid value for Carpet Area' | translate }}
-                                                        </div>
+                                                      
                                                     </div>
 
                                                 </div>
@@ -159,12 +163,13 @@
                                                                        input-focus
                                                                        required />
                                                                 <span class="area-txt">sq.ft</span>
+                                                                <div class="text-danger"
+                                                                     data-ng-if="addNewForm.saleablearea.$invalid && (!addNewForm.saleablearea.$pristine || showValid) && !addNewForm.saleablearea.$focus">
+                                                                    {{'Enter valid value for Saleable Area' | translate }}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="text-danger"
-                                                             data-ng-if="addNewForm.saleablearea.$invalid && (!addNewForm.saleablearea.$pristine || showValid) && !addNewForm.saleablearea.$focus">
-                                                            {{'Enter valid value for Saleable Area' | translate }}
-                                                        </div>
+                                                      
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,11 +196,12 @@
                                                                    data-ng-model="cark_park"
                                                                    input-focus
                                                                    required />
+                                                            <div class="text-danger"
+                                                                 data-ng-if="addNewForm.carkpark.$invalid && (!addNewForm.carkpark.$pristine || showValid) && !addNewForm.carkpark.$focus">
+                                                                {{'Enter valid value for Car Park' | translate }}
+                                                            </div>
                                                         </div>
-                                                        <div class="text-danger"
-                                                             data-ng-if="addNewForm.carkpark.$invalid && (!addNewForm.carkpark.$pristine || showValid) && !addNewForm.carkpark.$focus">
-                                                            {{'Enter valid value for Car Park' | translate }}
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,13 +233,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
                                                 <div class="image-upload-link">
                                                     <div class="browse-title">Browse</div>
                                                     <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                                                    <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                                                </div>
-
-                                            </div>
+                                              </div>
+                                           </div>
                                             
 
                                             <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -259,15 +264,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
                                                 <div class="image-upload-link">
                                                     <div class="browse-title">Browse</div>
                                                     <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                                                    <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
                                                 </div>
-                                            </div>
+                                              </div>
+                                        
                                        </div>
 
-                                            <div class="progress" ng-show="showProgress">
+                                            <div class="progress" ng-show="((uploader.progress+uploader1.progress)/2)>0">
                                                 <div class="progress-bar" role="progressbar"
                                                      ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                                             </div>
@@ -276,7 +282,7 @@
 
                                         <div class="modal-btn-wrap3 clearfix">
                                             
-                                            <button type="submit" class="f-btn" ng-class="showProgress=true" id="btn_addnewunit_save">
+                                            <button type="submit" class="f-btn"  id="btn_addnewunit_save">
                                                     Save
                                             </button>
                                         </div>

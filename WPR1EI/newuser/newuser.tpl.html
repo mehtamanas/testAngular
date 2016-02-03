@@ -28,10 +28,22 @@
             <div class="clearfix">
                 <div class="pull-left actions-wrap">
                     
-                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                    <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
                             ng-change="GetValue();addUser()" >
                     <option value="" selected> ACTION </option>
-                    </select>
+                        <option ng-repeat="fruit in Fruits" value="{{fruit.Id}}"><i class="fa fa-ban fa-fw"></i>{{fruit.Name}}</option>
+                    </select>-->
+                    <div class="btn-group">
+                        <a class="btn btn-primary"><i class="fa fa-user fa-fw"></i>Actions</a>
+                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <span class="fa fa-caret-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a ng-click="GetValue(1,'BLOCK');addUser()"><i class="fa fa-ban fa-fw"></i> BLOCK</a></li>
+                            <li><a ng-click="GetValue(2,'INACTIVATE');addUser()"><i class="fa fa-trash-o fa-fw"></i> INACTIVATE</a></li>
+                            <li><a ng-click="GetValue(3,'ASSIGN ROLES');addUser()"><i class="fa fa-ban fa-fw"></i> ASSIGN ROLES</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="pull-right btn-wrap-right">

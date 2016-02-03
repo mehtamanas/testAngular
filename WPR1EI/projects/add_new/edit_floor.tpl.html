@@ -27,14 +27,15 @@
                                            data-ng-model="params.no_of_units"
                                            minlength="1"
                                            maxlength="10"
-                                           ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                           ng-pattern="/^[a-z 1-9\s.]+$/i"
                                            required />
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
+                                        {{ 'Please enter valid floor number' | translate }}
+                                    </div>
                                 </div>
                                </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
-                                {{ 'Please enter valid floor number' | translate }}
-                            </div>
+                           
                         </div>
                     </div>
 
@@ -52,13 +53,14 @@
                                        data-ng-model="params.Unit_Type_desc"
                                        minlength="1"
                                        maxlength="40"
-                                       ng-pattern="/^[\w -]*$/"
+                                       ng-pattern="/^[a-z 1-9\s.]+$/i"
                                        required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.tname.$focus">
+                                    {{ 'Please enter valid floor name' | translate }}
+                                </div>
                             </div>
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.tname.$focus">
-                                {{ 'Please enter valid floor name' | translate }}
-                            </div>
+                          
                         </div>
                     </div>
 
@@ -82,10 +84,11 @@
                                     </div>
                                 </div>
                             </div>
+                       <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
                        <div class="image-upload-link">
                            <div class="browse-title">Browse</div>
                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                           <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+
                        </div>
                             </div>
 
@@ -108,10 +111,11 @@
                                         </div>
                                     </div>
                                 </div>
+                        <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
                         <div class="image-upload-link">
                             <div class="browse-title">Browse</div>
                             <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip*" nv-file-select="" uploader="uploader1" />
-                            <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
+
                         </div>
                             </div>
 

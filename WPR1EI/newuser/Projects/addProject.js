@@ -45,8 +45,8 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
             var existingProjects = _.pluck($scope.ProjectsInUser, 'id');
 
             // Do not add to remove list if the user is not already present in the server.
-            if (existingProjects.indexOf(Project.id) > -1 && usersToBeRemoved.indexOf(Project.id) == -1)
-                usersToBeRemoved.push(Project.id);
+            if (existingProjects.indexOf(Project.id) > -1 && projectsTobeRemoved.indexOf(Project.id) == -1)
+                projectsTobeRemoved.push(Project.id);
 
             // Remove the user if just added
             projectsTobeAdded = _.remove(projectsTobeAdded, function (removeMe) {
@@ -109,10 +109,10 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
 
         // Remove the selected users
         var removePromisses = [];
-        angular.forEach(projectsToRemove, function (userId) {
+        angular.forEach(projectsToRemove, function (projectId) {
             var existingMember = {};
             existingMember.mapping_id = selectedcustomer;
-            existingMember.project_id = userId;
+            existingMember.project_id = projectId;
             existingMember.user_id = currentlyLoggedInUserId;
             existingMember.organization_id = newuserData.orgId;
 
@@ -133,4 +133,4 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
             alert('User members are failed to update.')
         });
     };
-};
+};  
