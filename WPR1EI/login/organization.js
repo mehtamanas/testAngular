@@ -77,6 +77,7 @@ angular.module('app.guest.login')
         $scope.params.street_2 = $cookieStore.get('Street_2');
         $scope.params.street_3 = $cookieStore.get('Street_3');
        
+        $scope.params.state = $cookieStore.get('State');
         $scope.state1 = $cookieStore.get('State');
         $scope.params.city = $cookieStore.get('City');
         $scope.city1 = $cookieStore.get('City');
@@ -119,6 +120,7 @@ angular.module('app.guest.login')
 
         $scope.selectstate = function () {
             $scope.params.state = $scope.state1;
+            $scope.city1 = "";
             //alert($scope.params.state);
         };
 

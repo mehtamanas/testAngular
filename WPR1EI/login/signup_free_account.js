@@ -8,7 +8,7 @@ angular.module('app.guest.login')
         },
         link: function(scope, element, attributes, ngModel) {
              
-            ngModel.$validators.compareTo = function(modelValue) {
+            ngModel.$validators.compareto = function(modelValue) {
                 return modelValue == scope.otherModelValue;
             };
  

@@ -176,7 +176,7 @@
                                                     </option>
                                                 </select>
                                                 <div class="text-danger"
-                                                     data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
+                                                     data-ng-if="newForm.country.$invalid && (!newForm.country.$pristine || showValid) && !newForm.country.$focus">
                                                     {{ ' Enter Valid Country' | translate }}
                                                 </div>
                                             </div><div class="field-mdl field-req" style="margin-top:17px">*</div>
@@ -206,7 +206,7 @@
                                                 </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.password.$invalid && (!newForm.password.$pristine || showValid) && !newForm.password.$focus">
-                                                    {{ 'password is weak...'| translate }}
+                                                    {{ 'Enter valid password'| translate }}
                                                 </div>
                                             </div><div class="field-mdl field-req">*</div>
                                         </div>
@@ -227,11 +227,11 @@
                                                            input-focus
                                                            required>
                                                 </label>
-                                                <div ng-if="newForm.confirmPassword.$error"></div>
-                                                <div class="text-danger"
-                                                     data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">
-                                                    {{ ' Enter Valid Password' | translate }}
+                                                <div class="text-danger" ng-messages="newForm.confirmPassword.$error" role="alert">
+                                                    <div ng-message="required" data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">This field should not be empty </div>
+                                                    <div ng-message="compareto">Password doesn't match</div>
                                                 </div>
+                                                
                                             </div><div class="field-mdl field-req">*</div>
                                         </div>
                                     </div>
