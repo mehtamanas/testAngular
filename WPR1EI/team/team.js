@@ -193,7 +193,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-                                   "style": "text-align:right"
+                                   "style": "text-align:center"
                                }
 
                            }, {
@@ -202,7 +202,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-                                   "style": "text-align:right"
+                                   "style": "text-align:center"
                                }
 
                            }, {
@@ -211,7 +211,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-                                   "style": "text-align:right"
+                                   "style": "text-align:center"
                                }
 
                            }, {
@@ -220,7 +220,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-                                   "style": "text-align:right"
+                                   "style": "text-align:center"
                                }
 
                            }, {
@@ -229,7 +229,7 @@ angular.module('team')
                                width: "120px",
                                attributes: {
                                    "class": "UseHand",
-                                   "style": "text-align:right"
+                                   "style": "text-align:center"
                                }
 
                            }]

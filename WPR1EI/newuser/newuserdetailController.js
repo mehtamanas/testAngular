@@ -57,7 +57,8 @@
 
 
         });
-        $rootScope.title = 'Dwellar./UserDetails';
+        //   $rootScope.title = 'Dwellar./UserDetails';
+        $rootScope.title = 'Dwellar./users/details';
         //Audit log start															
         $scope.params =
             {
@@ -97,7 +98,7 @@
             GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             //alert(GetUrl);
 
-            apiService.get(GetUrl).then(function (response) {
+            apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
                 // alert($scope.data);
@@ -170,54 +171,8 @@
 
 
         var orgID = $cookieStore.get('orgID');
-        $scope.ProjectGrid = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    
-                    read: apiService.baseUrl + "User/GetProjectsByUser/" + $scope.seletedCustomerId
 
-                },
-                pageSize:20
-
-                //group: {
-                //    field: 'sport'
-                //}
-            },
-            groupable: true,
-            sortable: true,
-            selectable: "multiple",
-            reorderable: true,
-            resizable: true,
-            filterable: true,
-            pageable: {
-                refresh: true,
-                pageSizes: true,
-                buttonCount: 5
-            },
-            columns: [{
-                field: "name",
-                title: "Name",
-                width: "120px",
-                attributes:
-                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-                
-            }, {
-                field: "description",
-                title: "Description",
-                width: "120px",
-                attributes:
-                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-              
-            }]
-        };
-
+     
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
@@ -329,7 +284,7 @@
                 attributes:
                     {
                         "class": "UseHand",
-                        "style": "text-align:right"
+                        "style": "text-align:center"
                     }
             }, {
                 field: "Location",
@@ -349,7 +304,7 @@
                 attributes:
                     {
                         "class": "UseHand",
-                        "style": "text-align:right"
+                        "style": "text-align:center"
                     }
             },
             {
@@ -421,7 +376,7 @@
                 attributes:
   {
       "class": "UseHand",
-      "style": "text-align:right"
+      "style": "text-align:center"
   }
 
             },
@@ -475,7 +430,19 @@
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [{
+            columns: [
+
+                 {
+                     template: "<img height='40px' width='40px' src='#= media_url #'/>" +
+                     "<span style='padding-left:10px' class='property-photo'> </span>",
+                     title: "PROJECT LOGO",
+                     width: "120px",
+                     attributes:
+                       {
+                           "class": "UseHand",
+                       }
+                 },
+                {
                 field: "name",
                 title: "Name",
                 width: "120px",
@@ -491,7 +458,7 @@
                 attributes:
    {
        "class": "UseHand",
-       "style": "text-align:right"
+       "style": "text-align:center"
    }
             }, {
                 field: "assigned_date",
@@ -501,7 +468,7 @@
                 attributes:
  {
      "class": "UseHand",
-     "style": "text-align:right"
+     "style": "text-align:center"
  }
             }, {
                 field: "year",
@@ -510,7 +477,7 @@
                 attributes:
                  {
                      "class": "UseHand",
-                     "style": "text-align:right"
+                     "style": "text-align:center"
                  }
             }, {
                 field: "assigned_by",
@@ -542,13 +509,15 @@
  }
             }, {
                 field: "possesion_date",
+
+
                 title: "Possession Date",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
                 attributes:
  {
      "class": "UseHand",
-     "style": "text-align:right"
+     "style": "text-align:center"
  }
             }]
 
@@ -605,7 +574,7 @@
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
             }, {
                 field: "description",
@@ -710,7 +679,7 @@
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
             },
             {
@@ -743,6 +712,7 @@
 }
             }]
         };
+
         $scope.ContactsGrid = {
             dataSource: {
                 type: "json",
@@ -815,7 +785,7 @@
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
                
             },
@@ -910,7 +880,7 @@
                  attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
              },
               {
@@ -920,7 +890,7 @@
                   attributes:
   {
       "class": "UseHand",
-      "style": "text-align:right"
+      "style": "text-align:center"
   }
               },
               {
@@ -930,7 +900,7 @@
                   attributes:
   {
       "class": "UseHand",
-      "style": "text-align:right"
+      "style": "text-align:center"
   }
               },
               {
@@ -940,7 +910,7 @@
                   attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
               },
             {
@@ -950,7 +920,7 @@
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
             },
             {
@@ -961,7 +931,7 @@
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
             },
               {
@@ -972,7 +942,7 @@
                   attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
               },
                {
@@ -982,7 +952,7 @@
                    attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
                },
                 {
@@ -1061,7 +1031,7 @@
                 attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
             }, {
                 field: "assigned_by",
@@ -1074,6 +1044,7 @@
             }
             }]
         };
+
         $scope.AuditGrid = {
             dataSource: {
 
@@ -1130,7 +1101,7 @@
                 attributes:
   {
       "class": "UseHand",
-      "style": "text-align:right"
+      "style": "text-align:center"
   }
 
             },
@@ -1214,7 +1185,7 @@
                 controller: AddProjectController,
                 size: 'md',
                 resolve: {
-                    8: newuserService,
+                    newuserService: newuserService,
                     newuserData: {
                         userId: window.sessionStorage.selectedCustomerID,
                         orgId: $cookieStore.get('orgID')
@@ -1222,6 +1193,24 @@
                 }
             });
         };
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'ProjectsGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+
+        $scope.openUserPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'newuser/edituser.tpl.html',
+                backdrop: 'static',
+                controller: EditUserPopUpController,
+                size: 'md'
+            });
+        };
+
 
         $scope.$on('REFRESH', function (event, args) {
 
@@ -1272,20 +1261,7 @@
 
                 }
 
-            }, 1500);
+            }, 1000);
         });
-
-        $scope.openUserPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'newuser/edituser.tpl.html',
-                backdrop: 'static',
-                controller: EditUserPopUpController,
-                size: 'md'
-            });
-        };
-
-       
-
 
     });
