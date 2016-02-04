@@ -179,7 +179,7 @@
                                                      data-ng-if="newForm.country.$invalid && (!newForm.country.$pristine || showValid) && !newForm.country.$focus">
                                                     {{ ' Enter Valid Country' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req" style="margin-top:17px">*</div>
+                                            </div><div class="field-mdl field-req">*</div>
                                         </div>
                                     </div>
                                     
@@ -228,8 +228,8 @@
                                                            required>
                                                 </label>
                                                 <div class="text-danger" ng-messages="newForm.confirmPassword.$error" role="alert">
-                                                    <div ng-message="required" data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">This field should not be empty </div>
-                                                    <div ng-message="compareto">Password doesn't match</div>
+                                                    <div ng-message="required"  data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">This field should not be empty </div>
+                                                    <div ng-message="compareto" data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">Password doesn't match</div>
                                                 </div>
                                                 
                                             </div><div class="field-mdl field-req">*</div>
@@ -264,7 +264,7 @@
                                                      data-ng-if="newForm.phone.$invalid && (!newForm.phone.$pristine || showValid) && !newForm.phone.$focus">
                                                     {{ 'Enter 10 Digit Phone Number' | translate }}
                                                 </div>
-                                            </div><div clss="field-mdl field-areq">*</div>
+                                            </div><div class="field-mdl field-req">*</div>
                                         </div>
                                     </div>
                                 </div>
@@ -353,7 +353,7 @@
                             <div class="sales-enquiries">
                                 <div class="form-group">
                                     <div class="sale-icon"></div>
-                                    <div class="content-icon"><b style="color: #289ff1;">Sales Enquiries </b></div>
+                                    <div class="content-icon"><b>Sales Enquiries </b></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="from-india">

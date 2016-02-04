@@ -255,7 +255,7 @@
                             <option value="" selected>Select User</option>
                             <option ng-repeat="User in users"
                                     value="{{User.id}}">
-                                {{User.name}}
+                                {{User.first_name}}
                             </option>
                         </select>
                         <div ng-messages="newForm.user.$error" style="color:maroon" role="alert">

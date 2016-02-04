@@ -44,51 +44,91 @@
             },
             columns: [{
                 field: "user_email",
-                title: "user_email",
-                width: "120px"
+                title: "USER EMAIL",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }, {
                 field: "device_os",
-                title: "device_os",
-                width: "120px"
+                title: "DEVICE O.S",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }, {
                 field: "device_type",
-                title: "device_type",
-                width: "120px"
+                title: "DEVICE TYPE",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }, {
                 field: "device_mac_id",
-                title: "device_mac_id",
-                width: "120px"
+                title: "DEVICE MAC ID",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
             {
                 field: "application",
-                title: "application",
-                width: "120px"
+                title: "APPLICATION",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             }, {
                 field: "browser",
-                title: "browser",
-                width: "120px"
+                title: "BROWSER",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
             {
                 field: "ip_address",
-                title: "ip_address",
-                width: "120px"
+                title: "IP ADDRESS",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
             {
                 field: "location",
-                title: "location",
-                width: "120px"
+                title: "LOCATION",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
            
             {
                 field: "details",
-                title: "details",
-                width: "120px"
+                title: "DETAILS",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
              {
                  field: "timestamp",
-                 title: "timestamp",
+                 title: "TIMESTAMP",
                  width: "120px",
-                 format: '{0:dd/MM/yyyy}'
+                 format: '{0:dd/MM/yyyy}',
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
              }
             
             ]
