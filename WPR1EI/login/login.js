@@ -100,11 +100,9 @@ angular.module('app.guest.login')
                         $cookieStore.put('Country', $scope.loginSession1.country);
                         $cookieStore.put('Platform', $scope.loginSession1.ip);
                         $cookieStore.put('Device', vm.data.device);
-                        if (vm.data.device === "unknown")
-                            $cookieStore.put('Device_os', vm.data.os);
-                        else
-                            $cookieStore.put('Device_os', vm.data.os_version);
-
+                        if (vm.data.os_version === "unknown")
+                            vm.data.os_version = vm.data.os
+                        $cookieStore.put('Device_os', vm.data.os_version);
                         url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + $cookieStore.get('LatLon') + '&sensor=true',
                             $http.get(url).success(function (data) {
                                 add = data.results[0].formatted_address;

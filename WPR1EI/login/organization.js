@@ -145,6 +145,96 @@ angular.module('app.guest.login')
             //alert($scope.params.city);
         };
 
+
+        UserCreate = function (param) {
+            //     alert('inuserCreate');
+            var userNorg = "";
+
+            userNorg = 'Register/UserWithOrg';
+            apiService.post(userNorg, param).then(function (response) {
+                var loginSession = response.data;
+                //alert("Email has been sent for Approval..!! Login to Continue...");
+
+                //                   alert("org_id" + loginSession.Organization_Id);
+                $scope.organization.Id = loginSession.Organization_Id;
+                $scope.subscription.organization_id = loginSession.Organization_Id;
+                // alert('Org id - :' + $scope.organization.Id);
+                $cookieStore.put('Organization_id', $scope.subscription.organization_id);
+                new OrganizationEdit($scope.organization);
+
+
+            },
+               function (error) {
+                   console.log("Error" + error.state);
+               });
+        };
+
+        OrganizationEdit = function (paramsOrg) {
+            //   alert('inOrgEdit');
+            var orgEdit = "";
+            orgEdit = 'Organization/CreateOrgAddress';
+            apiService.post(orgEdit, paramsOrg).then(function (response) {
+                var loginSession = response.data;
+                //   alert("Organization has been Created..!!");   
+
+                new SubscriptionCreate();
+
+            },
+                function (error) {
+                    alert("User Already Exists.....Choose Another Email-id");
+                });
+        };
+
+        SubscriptionCreate = function () {
+            //  alert('inSubscription');
+            var subCreate = "";
+            subCreate = 'OrgSubscription/Create';
+
+
+            //   alert($scope.subscription.organization_id);
+            //alert($scope.subscription.Subscription_Name);
+
+            apiService.post(subCreate, $scope.subscription).then(function (response) {
+                var loginSession = response.data;
+
+                //alert("Subscription has been Created..!!");
+
+            },
+                function (error) {
+                    console.log("Error" + error.state);
+                });
+            $state.go('thanks');
+        };
+
+        $scope.organization = {
+            Id: '',
+            street_1: $cookieStore.get('Street_1'),
+            street_2: $cookieStore.get('Street_2'),
+            street_3: $cookieStore.get('Street_3'),
+            city: $cookieStore.get('City'),
+            state: $cookieStore.get('State'),
+            zip_code: $cookieStore.get('zip_code'),
+            country: $cookieStore.get('Country')
+        };
+        $scope.subscription = {
+            organization_id: '',
+            Subscription_Name: $scope.Sub_Name
+        };
+
+        $scope.params = {
+            first_name: $cookieStore.get('First_Name'),
+            last_name: $cookieStore.get('Last_Name'),
+            account_email: $cookieStore.get('Account_Email'),
+            account_phone: $cookieStore.get('Phone'),
+            account_country: $cookieStore.get('Account_Country'),
+            Password: $cookieStore.get('Hash'),
+            OrgName: $cookieStore.get('orgName'),
+            who_am_i: $cookieStore.get('who_am_i')
+            //   Organization_Id: ''
+
+        };
+
+
         $scope.addPersonalInfo = function (isValid) {
             $scope.showValid = true;
             if (isValid)
@@ -167,98 +257,7 @@ angular.module('app.guest.login')
                 else {
                     ($cookieStore.put("who_am_i", "Builder"));
                 }
-
                 
-                
-
-                $scope.organization = {
-                    Id: '',
-                    street_1: $cookieStore.get('Street_1'),
-                    street_2: $cookieStore.get('Street_2'),
-                    street_3: $cookieStore.get('Street_3'),
-                    city: $cookieStore.get('City'),
-                    state: $cookieStore.get('State'),
-                    zip_code: $cookieStore.get('zip_code'),
-                    country: $cookieStore.get('Country')
-                };
-                $scope.subscription = {
-                    organization_id: '',
-                    Subscription_Name: $scope.Sub_Name
-                };
-
-                $scope.params = {
-                    first_name: $cookieStore.get('First_Name'),
-                    last_name: $cookieStore.get('Last_Name'),
-                    account_email: $cookieStore.get('Account_Email'),
-                    account_phone: $cookieStore.get('Phone'),
-                    account_country: $cookieStore.get('Account_Country'),
-                    Password: $cookieStore.get('Hash'),
-                    OrgName: $cookieStore.get('orgName'),
-                    who_am_i: $cookieStore.get('who_am_i')
-                    //   Organization_Id: ''
-
-                };
-
-
-                UserCreate = function (param) {
-                    //     alert('inuserCreate');
-                    var userNorg = "";
-
-                    userNorg = 'Register/UserWithOrg';
-                    apiService.post(userNorg, param).then(function (response) {
-                        var loginSession = response.data;
-                        //alert("Email has been sent for Approval..!! Login to Continue...");
-
-                        //                   alert("org_id" + loginSession.Organization_Id);
-                        $scope.organization.Id = loginSession.Organization_Id;
-                        $scope.subscription.organization_id = loginSession.Organization_Id;
-                        // alert('Org id - :' + $scope.organization.Id);
-                        $cookieStore.put('Organization_id', $scope.subscription.organization_id);
-                        new OrganizationEdit($scope.organization);
-
-
-                    },
-                       function (error) {
-                           console.log("Error" + error.state);
-                       });
-                };
-
-                OrganizationEdit = function (paramsOrg) {
-                    //   alert('inOrgEdit');
-                    var orgEdit = "";
-                    orgEdit = 'Organization/CreateOrgAddress';
-                    apiService.post(orgEdit, paramsOrg).then(function (response) {
-                        var loginSession = response.data;
-                        //   alert("Organization has been Created..!!");   
-
-                        new SubscriptionCreate();
-
-                    },
-                        function (error) {
-                            alert("User Already Exists.....Choose Another Email-id");
-                        });
-                };
-
-                SubscriptionCreate = function () {
-                    //  alert('inSubscription');
-                    var subCreate = "";
-                    subCreate = 'OrgSubscription/Create';
-
-
-                    //   alert($scope.subscription.organization_id);
-                    //alert($scope.subscription.Subscription_Name);
-
-                    apiService.post(subCreate, $scope.subscription).then(function (response) {
-                        var loginSession = response.data;
-
-                        //alert("Subscription has been Created..!!");
-
-                    },
-                        function (error) {
-                            console.log("Error" + error.state);
-                        });
-                    $state.go('thanks');
-                };
                 $cookieStore.get('who_am_i')
                 if ($rootScope.subscriptionType == "Basic")
                 {

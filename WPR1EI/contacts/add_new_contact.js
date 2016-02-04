@@ -374,7 +374,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
           alert("Error " + error.state);
       });
   
-       $scope.selectuser = function () {
+       $scope.selectuser = function ()
+       {
            $scope.params.mappinguser_id = $scope.user1;
            //alert($scope.params.user_id);
        };

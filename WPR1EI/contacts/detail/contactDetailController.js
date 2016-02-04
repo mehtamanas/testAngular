@@ -128,17 +128,29 @@ angular.module('contacts')
                 field: "Document_Name",
                 title: "Document Name",
                 width: "150px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
                
             }, {
                 field: "Document_Category",
                 title: "Category",
                 width: "150px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
               
             }, {
                 field: "Date_Modified",
                 title: "Last Modified ",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
                
             }, {
                 template: "<div><a href='#= Attachment_URL#'>" +
@@ -188,6 +200,7 @@ angular.module('contacts')
                     width: "60px",
                     attributes: {
                         "class": "UseHand",
+                        "style": "text-align:center"
 
                     }
                 },
@@ -200,6 +213,7 @@ angular.module('contacts')
                     attributes:
                       {
                           "class": "UseHand",
+                          "style": "text-align:center"
                       }
                 },
 
@@ -211,6 +225,7 @@ angular.module('contacts')
     {
         "class": "UseHand",
         "style": "text-align:center"
+       
     }
                 },
              {
@@ -220,7 +235,8 @@ angular.module('contacts')
                  attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
+   
 }
              },
               {
@@ -230,7 +246,7 @@ angular.module('contacts')
                   attributes:
   {
       "class": "UseHand",
-      "style": "text-align:right"
+      "style": "text-align:center"
   }
               },
               {
@@ -240,7 +256,7 @@ angular.module('contacts')
                   attributes:
   {
       "class": "UseHand",
-      "style": "text-align:right"
+      "style": "text-align:center"
   }
               },
               {
@@ -250,7 +266,7 @@ angular.module('contacts')
                   attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
               },
             {
@@ -260,7 +276,7 @@ angular.module('contacts')
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
             },
             {
@@ -271,7 +287,7 @@ angular.module('contacts')
                 attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
             },
               {
@@ -282,7 +298,7 @@ angular.module('contacts')
                   attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
               },
                {
@@ -292,7 +308,7 @@ angular.module('contacts')
                    attributes:
 {
     "class": "UseHand",
-    "style": "text-align:right"
+    "style": "text-align:center"
 }
                },
                 {
@@ -361,17 +377,29 @@ angular.module('contacts')
                 field: "amount",
                 title: "Amount",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
 
             }, {
                 field: "payment_type_id",
                 title: "Type",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
 
             }, {
                 field: "duedate",
                 title: "Due Required",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
 
             }]
         };

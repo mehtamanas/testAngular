@@ -196,7 +196,8 @@ angular.module('contacts')
                      width: "60px",
                      attributes:
                       {
-                         "class": "UseHand",
+                          "class": "UseHand",
+                          "style": "text-align:center"
                       }
                  },
                 {
@@ -206,7 +207,8 @@ angular.module('contacts')
                     title:"Picture",
                      attributes:
                      {
-                        "class": "UseHand",
+                         "class": "UseHand",
+                         "style": "text-align:center"
                      }
                 },
                  {
@@ -236,7 +238,7 @@ angular.module('contacts')
                     width: "120px",
                     attributes: {
                         "class": "UseHand",
-                        "style": "text-align:right"
+                        "style": "text-align:center"
 
                     }
                 },

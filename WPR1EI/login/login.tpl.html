@@ -65,12 +65,20 @@
                         'has-success': loginForm.email.$valid && !loginForm.email.$pristine && !loginForm.email.$focus
                     }">
                                 <label for="exampleInputEmail1">Email Address</label>
+
                                 <input type="email" name="email" class="form-control" id="username"
+                                       placeholder="user@dwellar.com"
+                                       data-ng-model="params.email"                                       
+                                       ng-pattern="/^[a-zA-Z\s]+[a-zA-Z\s0-9._-]+@[a-zA-Z\sa-z]+\.[a-zA-Z\s.]{2,5}$/"
+                                       ng-model-options="{ updateOn: 'blur' }"
+                                       required />
+
+                                <!--<input type="email" name="email" class="form-control" id="username"
                                        placeholder="user@dwellar.com"
                                        data-ng-model="params.email"                                       
                                        ng-pattern="/^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$/"
                                        
-                                       required />
+                                       required />-->
                               
 
                                 <div class="text-danger"
