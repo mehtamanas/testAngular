@@ -269,11 +269,22 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-        var uploadResult = response[0];
+        // var uploadResult = response[0];
+        $scope.params.media_url = response[0].Location;
+        uploader_done = true;
+        if (uploader_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+    };
 
 
-
-
+   
+    var called = false;
+    $scope.finalpost = function () {
+        if (called == true) {
+            return;
+        }
         var address = [];
 
         var newadd = {};
@@ -291,12 +302,10 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
         }
 
-
-
         var postData =
             {
                 // media_name: uploadResult.media_name,
-                media_url: uploadResult.Location,
+                media_url: $scope.params.media_url,
                 class_type: "Organization",
                 organization_id: $cookieStore.get('orgID'),
                 User_ID: window.sessionStorage.selectedCustomerID,
@@ -353,9 +362,11 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
-
+                called = true;
 
             },
+
+
            function (error) {
                if (error.status === 400)
                    alert(error.data.Message);
@@ -365,11 +376,11 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
             //$modalInstance.dismiss();
             //$scope.openSucessfullPopup();
-            //$rootScope.$broadcast('REFRESH', 'newuser');
+            
         }
     }
 
-
+  
     $(document).on("click", ".remove-field", function () {
         var removedElement = $(this).parent().find('#edituser_mail').val();
         var removedElement1 = $(this).parent().find('#edituser_phno').val();
@@ -401,13 +412,28 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             size: 'md',
             resolve: { items: { title: "User" } }
         });
-
+        $rootScope.$broadcast('REFRESH', 'newuser');
     }
 
     $scope.CanceUpload = function () {
         uploader.cancelAll();
         console.log("UploadCancelled");
 
+    }
+    $scope.addNewUser = function (isValid) {
+
+        $scope.showValid = true;
+
+        if (isValid) {
+
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader.queue.length == 0)
+                $scope.finalpost();
+
+            $scope.showValid = false;
+
+        }
     }
 
 };

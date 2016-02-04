@@ -280,6 +280,7 @@ angular.module('newuser')
                   attributes:
                       {
                           "class": "UseHand",
+                          "style": "text-align:center"
                       }
               },
 
@@ -290,7 +291,7 @@ angular.module('newuser')
                         width: "100px",
                         attributes: {
                             "class": "UseHand",
-
+                            "style": "text-align:center"
                         }
                     },
       {
@@ -300,6 +301,7 @@ angular.module('newuser')
 
           attributes: {
               "class": "UseHand",
+              "style": "text-align:center"
 
           }
 
@@ -312,6 +314,7 @@ angular.module('newuser')
 
                  attributes: {
                      "class": "UseHand",
+                     "style": "text-align:center"
 
                  }
 
@@ -322,6 +325,7 @@ angular.module('newuser')
 
                    attributes: {
                        "class": "UseHand",
+                       "style": "text-align:center"
 
                    }
 
@@ -334,7 +338,7 @@ angular.module('newuser')
                 
                   attributes: {
                       "class": "UseHand",
-                      "style":"text-align:right;"
+                      "style": "text-align:center"
 
                   }
 
@@ -345,7 +349,7 @@ angular.module('newuser')
                   width: "100px",
                   attributes: {
                       "class": "UseHand",
-                      "style": "text-align:right;"
+                      "style": "text-align:center"
                   }
 
               },
@@ -355,7 +359,7 @@ angular.module('newuser')
                   width: "100px",
                   attributes: {
                       "class": "UseHand",
-                      "style": "text-align:right;"
+                      "style": "text-align:center"
                   }
 
               },
@@ -365,19 +369,11 @@ angular.module('newuser')
                  width: "100px",
                  attributes: {
                      "class": "UseHand",
-                     "style": "text-align:right;"
+                     "style": "text-align:center"
                  }
 
              }
-              //{
-              //    field: "Task_count",
-              //    title: "Tasks",
-              //    width: "100px",
-              //    attributes: {
-              //        "class": "UseHand",
-              //    }
-
-              //}
+              
               ]
           };
           $scope.Fruits = [{
@@ -629,6 +625,19 @@ angular.module('newuser')
 
               });
           };
+
+          $scope.openInactivePopup = function () {
+              var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'newuser/inactive.html',
+                  backdrop: 'static',
+                  controller: InactiveController,
+                  size: 'md',
+
+
+              });
+          };
+
 
           function clearFilters() {
               var gridData = $("#peopleGrid").data("kendoGrid");
