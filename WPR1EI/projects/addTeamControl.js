@@ -13,7 +13,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
     var loadProjects = function () {
         var userID = $cookieStore.get('userId');
         // Use $q.all to get both the result and then process the result
-        var userPromise = projectService.getusersInTeam(selectedcustomer);//this user all projects
+        var userPromise = projectService.getUsersInTeam(selectedcustomer);//this user all projects
         var orgPromise = projectService.getOrgTeams(orgID); // organisation all project
         //  alert(teamPromise);
         //alert(orgPromise);
@@ -24,7 +24,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
 
         $q.all(promises).then(function (values) {
             $scope.usersInTeam = values[0].data; //this user  all  project
-            $scope.OrgTeams = values[1].data;; //organisation all project
+            $scope.OrgTeams = values[1].data; //organisation all project
 
             // Now, find out the users already in the team and mark them
             angular.forEach($scope.usersInTeam, function (existingUser) {    //this user all prokect loop
@@ -82,7 +82,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
     };
 
     // Final update to the server
-    $scope.updateUserProjects = function () {
+    $scope.updateTeamUsers = function () {
 
         // remove already existing user if they are removed and added again
         var projectsToAdd = projectsTobeAdded;
@@ -94,8 +94,8 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
         projectsTobeAdded = [];
         projectsTobeRemoved = [];
 
-        var projectsToBeAddedOnServer = [];
-        var projectsToBeRemovedOnServer = [];
+        var projectsTobeAddedOnServer = [];
+        var projectsTobeRemovedOnServer = [];
 
         // Add the new users
         var updatePromisses = [];
@@ -105,8 +105,8 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
             newMember.project_id = selectedcustomer;
             newMember.user_id = currentlyLoggedInUserId;
             newMember.organization_id = projectData.orgId;
-            newMember.isteam = 0;
-            projectsToBeAddedOnServer.push(newMember)
+            newMember.isteam = 1;
+            projectsTobeAddedOnServer.push(newMember)
         });
 
         // Remove the selected users
@@ -118,13 +118,13 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
             existingMember.user_id = currentlyLoggedInUserId;
             existingMember.organization_id = projectData.orgId;
 
-            projectsToBeRemovedOnServer.push(existingMember)
+            projectsTobeRemovedOnServer.push(existingMember)
         });
 
-        if (projectsToBeAddedOnServer.length > 0)
-            updatePromisses.push(projectService.usersInTeam(projectsToBeAddedOnServer));
-        if (projectsToBeRemovedOnServer.length > 0)
-            updatePromisses.push(projectService.removeProjectsFromUser(projectsToBeRemovedOnServer));
+        if (projectsTobeAddedOnServer.length > 0)
+            updatePromisses.push(projectService.usersInTeam(projectsTobeAddedOnServer));
+        if (projectsTobeRemovedOnServer.length > 0)
+            updatePromisses.push(projectService.removeProjectsFromUser(projectsTobeRemovedOnServer));
 
         $q.all(updatePromisses).then(function (results) {
             if (results.length > 0) {

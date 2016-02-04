@@ -255,7 +255,7 @@
                 attributes:
                    {
                        "class": "UseHand",
-                       "style": "text-align:right"
+                       "style": "text-align:center"
                    }
             },
             {
@@ -356,7 +356,7 @@
                 attributes:
                   {
                       "class": "UseHand",
-                      "style": "text-align:right"
+                      "style": "text-align:center"
                   }
 
             }, {
@@ -366,7 +366,7 @@
                 attributes:
                   {
                       "class": "UseHand",
-                      "style": "text-align:right"
+                      "style": "text-align:center"
                   }
             }, {
                 field: "floor_number",
@@ -375,7 +375,7 @@
                 attributes:
                   {
                       "class": "UseHand",
-                      "style": "text-align:right"
+                      "style": "text-align:center"
                   }
             },
                 {
@@ -385,7 +385,7 @@
                     attributes:
                   {
                       "class": "UseHand",
-                      "style": "text-align:right"
+                      "style": "text-align:center"
                   }
                 }]
 
@@ -441,7 +441,7 @@
                 attributes:
                  {
                      "class": "UseHand",
-                     "style": "text-align:right"
+                     "style": "text-align:center"
                  }
             }, {
                 field: "email",
@@ -655,7 +655,7 @@
                   attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
               },
             {
@@ -665,7 +665,7 @@
                 attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
             },
             {
@@ -675,7 +675,7 @@
                 attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
             },
               {
@@ -685,7 +685,7 @@
                   attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
               },
                {
@@ -695,7 +695,7 @@
                      attributes:
                   {
                       "class": "UseHand",
-                      "style": "text-align:right"
+                      "style": "text-align:center"
                   }
                },
             {
@@ -715,7 +715,7 @@
                   attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
               },
                 {
@@ -725,7 +725,7 @@
                     attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
                 },
                   {
@@ -735,7 +735,7 @@
                       attributes:
                 {
                     "class": "UseHand",
-                    "style": "text-align:right"
+                    "style": "text-align:center"
                 }
                   }]
 
