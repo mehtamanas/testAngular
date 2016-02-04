@@ -1540,7 +1540,8 @@ div.k-window-iframecontent {
 }
 
 .k-tabstrip-items {
-    padding: .3em .3em 0;
+    padding: .0em .0em 0;
+    background:#e7e7e7;
 }
 
 .k-tabstrip-scrollable .k-tabstrip-items {

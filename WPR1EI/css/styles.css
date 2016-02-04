@@ -93,7 +93,7 @@ a:focus {
 
 
 #main-content .content-inner {
-    padding:22px 30px;	
+    
 }
 
 .page-title {
@@ -1229,6 +1229,9 @@ div.k-grid-footer {
     border:none;
     box-shadow: none;
     border-radius: 0;
+    margin:auto;
+    text-align:center;
+    width:950px;
 }
 
 .modal-header {
@@ -2406,10 +2409,10 @@ body > #footer-bottom a {
 .project-detail-info .project-detail-photo {
     background:#efefef;
     text-align: center;
-    width:220px;
-    /*height:224px;*/
-    line-height:180px;
-    padding:20px;
+    width:250px;
+   height:250px;
+   vertical-align:middle;
+
 }
 
 .project-detail-info .project-detail-photo img {
@@ -2417,7 +2420,7 @@ body > #footer-bottom a {
 }
 
 .project-detail-info .project-detail-txt {
-    padding:24px 30px;
+    padding:22px 30px;
     color:#434343;
     line-height: 28px;
     font-family: arial;
@@ -2472,98 +2475,8 @@ body > #footer-bottom a {
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/**** responsive tabs css - start ****/
-.responsive-tabs-container {
-    position: relative; 
-}
 
-.responsive-tabs-container .responsive-tabs {
-    padding-right: 102px; 
-}
 
-.responsive-tabs-container .tabs-dropdown {
-    position: absolute;
-    right: 0;
-    margin-right: 0 !important; 
-}
-
-.responsive-tabs-container .tabs-dropdown.navbar-nav {
-    margin: 0 !important; 
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle {
-    width: 102px;
-    position: relative;
-    display: block;
-    padding: 10px 15px; 
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle .count {
-    margin-right: 5px; 
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle .caret {
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    border-left: 6px solid;
-    margin-left: 0;
-    vertical-align: initial; 
-}
-/**** responsive tabs css - ended ****/
-
-.responsive-tabs-container .tabs-dropdown {
-    top:0px;
-}
-
-.pg-tabs .nav-tabs > li > a {
-    font-size: 11px;
-    background-color:#696969;
-    color:#fff;
-    text-transform: uppercase;
-    text-align: center;
-    padding:12px 8px;
-    border-radius: 0;
-    margin-right: 0;
-    border:0;
-    border-right:1px solid #fff;
-    font-weight:bold;
-}
-
-.pg-tabs .nav-tabs > li > a:hover  {      
-    background-color:#2799e7;
-    color:#fff;
-}
-
-.pg-tabs .nav-tabs > li.active > a,
-.pg-tabs .nav-tabs > li.active > a:focus, 
-.pg-tabs .nav-tabs > li.active > a:hover {
-    background-color:#fff;
-    color:#2799e7;
-    border:0;
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle {
-    font-size: 11px;
-    background-color:#696969;
-    color:#fff;
-    text-transform: uppercase;
-    text-align: center;
-    padding:12px 8px;
-    font-weight:bold;
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle .caret {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 8px solid;
-    vertical-align: initial;
-    position: relative;
-    top:4px;
-}
-
-.pg-tabs .tab-content {
-    padding:46px 30px;
-}
 
 .project-name .edit-lk {
     background: transparent url("../images/edit.png") no-repeat scroll 0 0;
@@ -6050,7 +5963,7 @@ a:focus {
 }
 
 #main-content .content-inner {
-    padding:22px 30px;	
+    
 }
 
 .page-title {
@@ -6262,7 +6175,8 @@ a:focus {
 }
 
 .k-widget {
-    border-color: #f4f4f6	
+    border-color: #f4f4f6;
+    border:none;
 }
 
 .k-grouping-header {
@@ -7441,7 +7355,7 @@ div.k-grid-footer {
     margin:39px 0 0 6px;
 }
 
-.modal.fade .modal-dialog {
+/*.modal.fade .modal-dialog {
     -webkit-transform: scale(0.1);
     -moz-transform: scale(0.1);
     -ms-transform: scale(0.1);
@@ -7461,7 +7375,7 @@ div.k-grid-footer {
     -webkit-transform: translate3d(0, -150px, 0);
     transform: translate3d(0, -150px, 0);
     opacity: 1;
-}
+}*/
 
 .form-content h4.form-title {
     font-size:18px;
@@ -7851,7 +7765,8 @@ h4.form-sub-title {
 #content h2.pg-inner-title {
     font:600 20px 'Open Sans', arial, sans-serif;
     color:#3c3c3c;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
+    margin-top:20px;
     margin-left: 40px;
 }
 
@@ -8346,14 +8261,9 @@ form.callback  {
 
 .project-detail-info .project-detail-photo img {
     display: inline-block;
+    vertical-align:middle;
 }
 
-.project-detail-info .project-detail-txt {
-    padding:24px 30px;
-    color:#434343;
-    line-height: 28px;
-    font-family: arial;
-}
 
 .project-detail-txt .project-name {
     position: relative;
@@ -8390,98 +8300,7 @@ form.callback  {
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/**** responsive tabs css - start ****/
-.responsive-tabs-container {
-    position: relative; 
-}
 
-.responsive-tabs-container .responsive-tabs {
-    padding-right: 102px; 
-}
-
-.responsive-tabs-container .tabs-dropdown {
-    position: absolute;
-    right: 0;
-    margin-right: 0 !important; 
-}
-
-.responsive-tabs-container .tabs-dropdown.navbar-nav {
-    margin: 0 !important; 
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle {
-    width: 102px;
-    position: relative;
-    display: block;
-    padding: 10px 15px; 
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle .count {
-    margin-right: 5px; 
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle .caret {
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    border-left: 6px solid;
-    margin-left: 0;
-    vertical-align: initial; 
-}
-/**** responsive tabs css - ended ****/
-
-.responsive-tabs-container .tabs-dropdown {
-    top:0px;
-}
-
-.pg-tabs .nav-tabs > li > a {
-    font-size: 11px;
-    background-color:#696969;
-    color:#fff;
-    text-transform: uppercase;
-    text-align: center;
-    padding:12px 8px;
-    border-radius: 0;
-    margin-right: 0;
-    border:0;
-    border-right:1px solid #fff;
-    font-weight:bold;
-}
-
-.pg-tabs .nav-tabs > li > a:hover  {      
-    background-color:#2799e7;
-    color:#fff;
-}
-
-.pg-tabs .nav-tabs > li.active > a,
-.pg-tabs .nav-tabs > li.active > a:focus, 
-.pg-tabs .nav-tabs > li.active > a:hover {
-    background-color:#fff;
-    color:#2799e7;
-    border:0;
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle {
-    font-size: 11px;
-    background-color:#696969;
-    color:#fff;
-    text-transform: uppercase;
-    text-align: center;
-    padding:12px 8px;
-    font-weight:bold;
-}
-
-.responsive-tabs-container .tabs-dropdown .dropdown-toggle .caret {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 8px solid;
-    vertical-align: initial;
-    position: relative;
-    top:4px;
-}
-
-.pg-tabs .tab-content {
-    padding:46px 30px;
-}
 
 .project-name .edit-lk {
     background: transparent url("../images/edit.png") no-repeat scroll 0 0;
@@ -9735,7 +9554,11 @@ form.callback  {
 
 .signup ul.state-bar li.current {
   color: #289ff1;
+   
 }
+
+
+
 
 ul.state-bar {
   list-style: none;
@@ -9768,6 +9591,8 @@ ul.state-bar li:after {
   top: 0;
   right: 0;
 }
+
+
 ul.state-bar li.selected {
   color: #289ff1;
 }
@@ -10218,6 +10043,7 @@ ul.state-bar li.selected:after {
     .project-detail-info .project-detail-photo {
         width:auto;
         display: block;
+        height:auto;
     }
     .tab-content .properties-list .properties-bx {
         width:33.33%;
@@ -10261,6 +10087,7 @@ ul.state-bar li.selected:after {
     }
     #content #main-content {
         padding:0;
+        margin:0px;
     }
     #sidebar .navbar-default .navbar-nav  {
         margin-top:0;
@@ -10412,6 +10239,7 @@ ul.state-bar li.selected:after {
     }
     #content #sidebar {
         overflow: auto;
+        position:relative;
     }
     #content {
         height:auto;
@@ -10672,6 +10500,7 @@ ul.state-bar li.selected:after {
     .project-detail-info .project-detail-photo {
         width:auto;
         display: block;
+        height:auto;
     }
     .tab-content .properties-list .properties-bx {
         width:33.33%;
