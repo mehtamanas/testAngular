@@ -2,7 +2,7 @@
 
 
 .controller('ProjectDetailController',
-    function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope) {
+    function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, projectService) {
         console.log('ProjectDetailController');
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -98,22 +98,7 @@
 
         callApis();//callall the Apis
 
-        $scope.openAddUserPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'project/users/addUsers.html',
-                backdrop: 'static',
-                controller: AddProjectUsersController,
-                windowClass: 'addUser',
-                resolve: {
-                    teamService: teamService,
-                    teamData: {
-                        teamId: window.sessionStorage.selectedCustomerID,
-                        orgId: $cookieStore.get('orgID')
-                    }
-                }
-            });
-        };
+     
 
 
         $scope.openNewPaymentSchemePopup = function () {
@@ -205,25 +190,7 @@
             gridData.dataSource.filter({});
         }
 
-        $scope.openAddPopup = function () {
-            //   alert("abc");
-            var modalInstance = $modal.open({
-
-                animation: true,
-                templateUrl: 'projects/users/addTeam.html',
-                backdrop: 'static',
-                controller: AddUsersController,
-                windowClass: 'addUser',
-                resolve: {
-                    teamService: teamService,
-                    teamData: {
-                        teamId: window.sessionStorage.selectedCustomerID,
-                        orgId: $cookieStore.get('orgID')
-                    }
-                }
-            });
-        };
-
+ 
         $scope.UserGrid = {
             dataSource: {
 
@@ -656,6 +623,7 @@
                     width: "60px",
                     attributes: {
                         "class": "UseHand",
+                        "style": "text-align:center"
 
                     }
                 },
@@ -667,6 +635,7 @@
                 width: "120px",
                 attributes: {
                     "class": "UseHand",
+                    "style": "text-align:center"
 
                 }
             }, {
@@ -775,7 +744,41 @@
         
       
 
+        $scope.openAddPopup = function () {
+            //   alert("abc");
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/addProject.tpl.html',
+                backdrop: 'static',
+                controller: AddUserProjectController,
+                size: 'md',
+                resolve: {
+                    projectService: projectService,
+                    projectData: {
+                        userId: window.sessionStorage.selectedCustomerID,
+                        orgId: $cookieStore.get('orgID')
+                    }
+                }
+            });
+        };
 
+        $scope.openTeamPopup = function () {
+            //   alert("abc");
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/addTeam.html',
+                backdrop: 'static',
+                controller: AddTeamController,
+                size: 'md',
+                resolve: {
+                    projectService: projectService,
+                    projectData: {
+                        userId: window.sessionStorage.selectedCustomerID,
+                        orgId: $cookieStore.get('orgID')
+                    }
+                }
+            });
+        };
         $scope.openNewFloorPopup = function () {
            
                 var modalInstance = $modal.open({
@@ -933,7 +936,7 @@
         //for tower drop town
         Url = "Tower/GetByProjectID/" + $scope.seletedCustomerId;
 
-        apiService.get(Url).then(function (response) {
+        apiService.getWithoutCaching(Url).then(function (response) {
             $scope.towers = response.data;
 
         },
@@ -1013,7 +1016,7 @@
 
             //callingWingApi
             projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.builder = response.data;
 
             },
@@ -1028,7 +1031,7 @@
 
             //calling Tower
             projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.built = response.data;
             },
        function (error) {
@@ -1040,7 +1043,7 @@
 
             //calling brochure  pdf start
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.Gallery2 = response.data;
             },
        function (error) {
@@ -1051,7 +1054,7 @@
        });
             //calling brochure pdf end
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.Gallery1 = response.data;
             },
        function (error)
@@ -1063,7 +1066,7 @@
        });
             // calling panoramic views api
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/View_Type_Full_2D";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.view = response.data;
             },
        function (error)
@@ -1077,7 +1080,7 @@
 
             //calling Amenities
             projectUrl = "Amenities/GetAmenities?id=" + $scope.seletedCustomerId;
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgAmenities = response.data;
             },
        function (error)
@@ -1090,7 +1093,7 @@
 
             //calling Floors
             projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.builddetail = response.data;
             },
        function (error)
@@ -1113,7 +1116,7 @@
 
             //calling Payment
             projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;//d028defd-319f-4b89-a51b-55ed9b327200 ";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgpayment = response.data;
 
             },
@@ -1139,7 +1142,7 @@
 
             //calling getImage
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId +"/Gallery_Type_Full_2D";
-            apiService.get(projectUrl).then(function (response) {
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.Gallery = response.data;
             },
        function (error)
@@ -1151,7 +1154,7 @@
        });
 
             GetUrl = "Tower/GetTowerSummary?id=" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
-             apiService.get(GetUrl).then(function (response) {
+            apiService.getWithoutCaching(GetUrl).then(function (response) {
                  $scope.buildsummary = response.data;
                      },
                         function (error)
@@ -1168,7 +1171,7 @@
                  //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
                  GetUrl = "Project/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
 
-                 apiService.get(GetUrl).then(function (response) {
+                 apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                      $scope.data = response.data;
                      $scope.media_url = $scope.data[0].media_url;
@@ -1319,7 +1322,7 @@
             {
 
                 projectUrl = "Project/GetVideoByProjectID/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
-                apiService.get(projectUrl).then(function (response) {
+                apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Videos = response.data;
 
                 },
@@ -1335,7 +1338,7 @@
             else if (args == 'panoramic')
             {
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/View_Type_Full_2D";
-                apiService.get(projectUrl).then(function (response) {
+                apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.view = response.data;
                 },
            function (error)
@@ -1349,7 +1352,7 @@
             else if (args == 'brochure')
             {
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
-                apiService.get(projectUrl).then(function (response) {
+                apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery = response.data;
                 },
            function (error)
@@ -1361,7 +1364,7 @@
            });
                 //calling brochure pdf end
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
-                apiService.get(projectUrl).then(function (response) {
+                apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery1 = response.data;
                 },
            function (error)

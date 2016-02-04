@@ -264,21 +264,21 @@
                         <div class="form-group form-bx form-bx11 form-bx11-1">
 
                             <label for="">Price range From:</label>
-                            <input class="form-control" name="price1" id="addnewproject_project_website"
-                                   minlength="1"
-                                   maxlength="10"
-                                   data-ng-model="params.Rangefrom"
-                                   ng-pattern="/^([1-9][0-9+./]*)$/"
-                                   input-focus />
+                            <div class="area-f">
+                                <input class="form-control" name="price1" id="addnewproject_project_website"
+                                       minlength="1"
+                                       maxlength="10"
+                                       data-ng-model="params.Rangefrom"
+                                       ng-pattern="/^([1-9][0-9+./]*)$/"
+                                       input-focus />
+                                <span class="area-txt"><i class="fa fa-inr"></i></span>
+                                </div>
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.price1.$invalid && (!addNewForm.price1.$pristine || showValid) && !newForm.price1.$focus">
+                                    {{ 'Enter correct price range' | translate }}
+                                </div>
 
-
-
-                            <div class="text-danger"
-                                 data-ng-if="addNewForm.price1.$invalid && (!addNewForm.price1.$pristine || showValid) && !newForm.price1.$focus">
-                                {{ 'Enter correct price range' | translate }}
                             </div>
-
-                        </div>
 
 
 
@@ -296,7 +296,7 @@
                                            data-ng-model="params.Rangeto"
                                            ng-pattern="/^([1-9][0-9+./]*)$/"
                                            input-focus />
-                                    <!--<span class="area-txt">/sq.ft</span>-->
+                                   <span class="area-txt"><i class="fa fa-inr"></i></span>
                                 </div>
                                 <div class="text-danger"
                                      data-ng-if="addNewForm.price2.$invalid && (!addNewForm.price2.$pristine || showValid) && !addNewForm.price2.$focus">
@@ -554,10 +554,15 @@
                 </div>
                <!--<a ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
-                <div class="modal-btn-wrap4 clearfix">
-                    <button type="submit" class="f-btn " id="btn_addnewproject_save">
-                        <!--<span class="glyphicon glyphicon-upload"></span>--> SAVE
-                    </button>
+                <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                    <div class="btn-f-c">
+                        <button type="submit" class="f-btn " id="btn_addnewproject_save">
+                            <!--<span class="glyphicon glyphicon-upload"></span>--> SAVE
+                        </button>
+                    </div>
+                    <div class="btn-f-c">
+                        <button type="button" class="f-btn f-btn2" id="btn_edituser_cancle" ng-click="$dismiss('cancel')">CANCEL</button>
+                    </div>
                 </div>
 
             </form>
