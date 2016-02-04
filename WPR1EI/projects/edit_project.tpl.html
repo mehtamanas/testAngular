@@ -147,6 +147,7 @@
                                     <div ng-message="pattern">Enter valid project name</div>
                                 </div>
                             </div>
+                            <div class="field-mdl field-req" style="margin-top: 25px; margin-left:10px">*</div>
                         </div>
                       
                     </div>
@@ -240,21 +241,21 @@
                             <div class="form-group form-bx form-bx11 form-bx11-1">
 
                                 <label for="">Price range From:</label>
-                                <input class="form-control" name="price1" id="addnewproject_project_website"
-                                       minlength="1"
-                                       maxlength="10"
-                                       data-ng-model="params.Rangefrom"
-                                       ng-pattern="/^([1-9][0-9+./]*)$/"
-                                       input-focus />
-
-
-
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.price1.$invalid && (!addNewForm.price1.$pristine || showValid) && !newForm.price1.$focus">
-                                    {{ 'Enter correct price range' | translate }}
+                                <div class="area-f">
+                                    <input class="form-control" name="price1" id="addnewproject_project_website"
+                                           minlength="1"
+                                           maxlength="10"
+                                           data-ng-model="params.Rangefrom"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/"
+                                           input-focus />
+                                    <span class="area-txt"><i class="fa fa-inr"></i></span>
                                 </div>
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.price1.$invalid && (!addNewForm.price1.$pristine || showValid) && !newForm.price1.$focus">
+                                        {{ 'Enter correct price range' | translate }}
+                                    </div>
 
-                            </div>
+                                </div>
 
 
 
@@ -272,7 +273,7 @@
                                                data-ng-model="params.Rangeto"
                                                ng-pattern="/^([1-9][0-9+./]*)$/"
                                                input-focus />
-                                        <!--<span class="area-txt">/sq.ft</span>-->
+                                        <span class="area-txt"><i class="fa fa-inr"></i></span>
                                     </div>
                                     <div class="text-danger"
                                          data-ng-if="addNewForm.price2.$invalid && (!addNewForm.price2.$pristine || showValid) && !addNewForm.price2.$focus">

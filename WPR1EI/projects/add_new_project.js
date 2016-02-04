@@ -7,24 +7,24 @@ var uploader3_done = false;
 var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ProjectPopUpController');
 
-   
+
 
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
-        
+
     });
 
     var uploader1 = $scope.uploader1 = new FileUploader({
         url: apiService.uploadURL,
-        
+
     });
     var uploader2 = $scope.uploader2 = new FileUploader({
         url: apiService.uploadURL,
-        
+
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
         url: apiService.uploadURL,
-        
+
     });
 
     $scope.showProgress = false;
@@ -119,7 +119,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-       // alert("uploader called");
+        // alert("uploader called");
         $scope.media_url1 = response[0].Location;
         uploader_done = true;
 
@@ -127,7 +127,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             $scope.showProgress = false;
             $scope.finalpost();
         }
-   
+
     };
 
 
@@ -166,19 +166,19 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         uploader3_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
-            $scope.finalpost(); 
-          }
+            $scope.finalpost();
+        }
     };
 
 
     var called = false;
 
     $scope.finalpost = function () {
-        if (called == true){
+        if (called == true) {
             return;
         }
 
-        
+
 
         var address = [];
 
@@ -216,7 +216,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             media_url4: $scope.media_url4,
             possession_date: $scope.params.month,
             total_area: $scope.params.totalProjectArea,
-            year:$scope.params.project_year,
+            year: $scope.params.project_year,
             class_type: "Project",
             Street_1: newadd.Street_1,
             Street_2: newadd.Street_2,
@@ -225,7 +225,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
             state: $scope.params.state,
             Rangefrom: $scope.params.Rangefrom,
             Rangeto: $scope.params.Rangeto,
-            ZipCode:$scope.ZipCode,
+            ZipCode: $scope.ZipCode,
             project_type: $scope.params.project_type,
             project_website: $scope.params.project_website,
             builder_website: $scope.params.builder_website,
@@ -267,16 +267,16 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
         var address = [];
-        
-        for (var i in $scope.choices2) {     
 
-            var newadd = {};     
+        for (var i in $scope.choices2) {
+
+            var newadd = {};
             newadd.Street_1 = $scope.choices2[i].Street_1;
-         
+
             newadd.Street_2 = $scope.choices2[i].Street_2;
             address.push(newadd);
-           
-            
+
+
         }
     };
 
@@ -291,11 +291,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
     uploader2.onErrorItem = function (fileItem, response, status, headers) {
-      console.log('Unable to upload file.');
+        console.log('Unable to upload file.');
     };
 
     uploader3.onErrorItem = function (fileItem, response, status, headers) {
-       console.log('Unable to upload file.');
+        console.log('Unable to upload file.');
     };
 
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
@@ -333,8 +333,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
         },
-   function (error)
-   {
+   function (error) {
        if (error.status === 400)
            alert(error.data.Message);
        else
@@ -350,8 +349,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
     apiService.get(Url).then(function (response) {
         $scope.states = response.data;
     },
-function (error)
-{
+function (error) {
     if (error.status === 400)
         alert(error.data.Message);
     else
@@ -368,8 +366,7 @@ function (error)
     apiService.get(Url).then(function (response) {
         $scope.cities = response.data;
     },
-function (error)
-{
+function (error) {
     if (error.status === 400)
         alert(error.data.Message);
     else
@@ -393,8 +390,7 @@ function (error)
         $scope.month = response.data;
 
     },
-function (error)
-{
+function (error) {
     if (error.status === 400)
         alert(error.data.Message);
     else
@@ -433,7 +429,7 @@ function (error)
         }
 
     };
- 
+
     $scope.selectedproject = -1;
 
     $scope.selectapartment = function () {
@@ -471,7 +467,7 @@ function (error)
     }
 
 
-  
+
     var emp = {
         //id: $cookieStore.get('projectid'),
         name: $scope.name,
@@ -492,16 +488,16 @@ function (error)
         User_ID: $cookieStore.get('userId')
     };
 
-    
+
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 
-   $scope.reset = function() {
-    $scope.params = {};
-}
- 
+    $scope.reset = function () {
+        $scope.params = {};
+    }
+
     $scope.orgList = ['ABC Real Estate Ltd'];
 
     $scope.addNew = function (isValid) {
@@ -517,10 +513,10 @@ function (error)
                 uploader2.uploadAll();
             if (uploader3.queue.length != 0)
                 uploader3.uploadAll();
-            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0 )
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0)
                 $scope.finalpost();
-            
-        
+
+
 
 
             $scope.showValid = false;

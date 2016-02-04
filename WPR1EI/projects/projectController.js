@@ -135,7 +135,8 @@ angular.module('project')
                      width: "120px",
                      attributes:
                        {
-                         "class": "UseHand",
+                           "class": "UseHand",
+                           "style": "text-align:center"
                        }
                  },
                {
@@ -304,32 +305,42 @@ angular.module('project')
                   var newMember = {};
                   newMember.project_id = $scope.checkedIds[i];
                   newMember.organization_id = $cookieStore.get('orgID');
-                 
+
                   usersToBeAddedOnServer.push(newMember);
               }
 
               if (usersToBeAddedOnServer.length == 0) {
                   return;
               }
-             
-              
-              
-              apiService.post("Project/DeleteMultipleProject", usersToBeAddedOnServer).then(function (response)
-              {
-                      var loginSession = response.data;
-                      $rootScope.$broadcast('REFRESH', 'projectGrid');
-                      alert("Deleted...");
+
+
+
+              apiService.post("Project/DeleteMultipleProject", usersToBeAddedOnServer).then(function (response) {
+                  var loginSession = response.data;
+                  $scope.openSucessfullPopup();
+                  $rootScope.$broadcast('REFRESH', 'projectGrid');
+            
+
               },
-      function (error)
-      {
+      function (error) {
           if (error.status === 400)
               alert(error.data.Message);
           else
               alert("Network issue");
       });
 
-              
-          
+              $scope.openSucessfullPopup = function () {
+                  var modalInstance = $modal.open({
+                      animation: true,
+                      templateUrl: 'newuser/delete.html',
+                      backdrop: 'static',
+                      controller: DeleteController,
+                      size: 'md',
+                      resolve: { items: { title: "Project " } }
+
+                  });
+                  $rootScope.$broadcast('REFRESH', 'projectGrid');
+              }
           }
 
           $scope.Fruits = [{

@@ -142,60 +142,120 @@
             columns: [{
                 field: "flat_no",
                 title: "Flat No",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+
+        }
             }, {
                 field: "tower_name",
                 title: "Tower Name",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+
+                }
             }, {
                 field: "floor_num",
                 title: "Floor",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+
+                }
             }, {
                 field: "unit_no",
                 title: "Unit No",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+
+                }
             },
               {
                   field: "no_of_units",
                   title: "Type",
-                  width: "120px"
+                  width: "120px",
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+
+                  }
               },
             {
                 field: "super_built_up_area",
                 title: "Saleable Area",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+
+                }
             },
             {
                 field: "carpet_area",
                 title: "Carpet Area",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+
+                }
             },
               {
                   field: "floor_rise_applicable",
                   title: "Floor Rise Applicable",
-                  width: "120px"
+                  width: "120px",
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+
+                  }
               },
 
               {
                   field: "floor_rise_rate",
                   title: "Floor Rise Rate",
-                  width: "120px"
+                  width: "120px",
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+
+                  }
               },
                {
                    field: "cp_offered",
                    title: "CP Offered",
-                   width: "120px"
+                   width: "120px",
+                   attributes: {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+
+                   }
                },
                 {
                     field: "cp_post",
                     title: "CP Cost",
-                    width: "120px"
+                    width: "120px",
+                    attributes: {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+
+                    }
                 },
                  {
                      field: "total_consideration",
                      title: "Total Consideration in 20:40:40",
-                     width: "120px"
+                     width: "120px",
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+
+                     }
                  }
 
             ]
