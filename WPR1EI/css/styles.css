@@ -1978,9 +1978,9 @@ h4.form-sub-title {
     color: #4f4f4f;
 }
 
-.properties-content .k-header .k-link {
+/*.properties-content .k-header .k-link {
     color: #4f4f4f;    
-}
+}*/
 
 .properties-content tr td {
     font-size: 13px;
@@ -5783,6 +5783,8 @@ body > #footer-bottom.footer-bottom2 {
         margin:18px 0 0 14px;
     }
 }
+
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,600,600italic,700,700italic,400italic);
 
 
@@ -7828,7 +7830,8 @@ h4.form-sub-title {
 }
 
 .properties-content .k-header .k-link {
-    color: #4f4f4f;    
+    color: #4f4f4f; 
+    font-weight: bold;   
 }
 
 .properties-content tr td {
@@ -7842,6 +7845,7 @@ h4.form-sub-title {
 
 .properties-content  .k-grid-header th.k-header {
     vertical-align: middle;
+    text-align:center;
 }
 
 header {
@@ -12974,6 +12978,23 @@ LEFT
 .dropDownBlock-icon
 {
     background: url(../images/blockUser_small_icon.png) no-repeat;
+    height:20px;
+    width:20px;
+    float: left;
+    display: block;
+}
+
+.dropDownInactivate-icon
+{
+    background: url(../images/inactiveUser_small_icon.png) no-repeat;
+    height:20px;
+    width:20px;
+    float: left;
+    display: block;
+}
+.dropDownAssignrole-icon
+{
+    background: url(../images/assingRole_small_icon.png) no-repeat;
     height:20px;
     width:20px;
     float: left;
