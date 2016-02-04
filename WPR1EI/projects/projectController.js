@@ -124,7 +124,8 @@ angular.module('project')
                     width: "60px",
                     attributes:
                       {
-                        "class": "UseHand",
+                          "class": "UseHand",
+                          "style": "text-align:center"
                     }
                 },
 
@@ -174,7 +175,7 @@ angular.module('project')
                    attributes:
                     {
                         "class": "UseHand",
-                        "style":"text-align:right"
+                        "style": "text-align:center"
                    }
                }, {
                    field: "available",
@@ -183,7 +184,7 @@ angular.module('project')
                    attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
                }, {
                    field: "area",
@@ -192,7 +193,7 @@ angular.module('project')
                    attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
                },
 
@@ -202,8 +203,7 @@ angular.module('project')
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
-                       "style": "text-align:right"
-
+                       "style": "text-align:center"
                    }
                },
                
@@ -213,7 +213,7 @@ angular.module('project')
                    width: "120px",
                    attributes: {
                        "class": "UseHand",
-                       "style": "text-align:right"
+                       "style": "text-align:center"
 
                    },
 
