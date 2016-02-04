@@ -2,14 +2,14 @@
     console.log('OptionPopUpController');
 
 
-    $scope.openSucessfullPopup = function () {
+    $scope.openRolePopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'newuser/role.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: RoleController,
             size: 'md',
-            resolve: { items: { title: "Role" } }
+           
 
         });
     }
@@ -234,7 +234,7 @@ function (error)
         apiService.post(Url, usersToBeAddedOnServer).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
-            $scope.openSucessfullPopup();
+            $scope.openRolePopup();
             $rootScope.$broadcast('REFRESH', 'mainGridOptions');
         },
    function (error)

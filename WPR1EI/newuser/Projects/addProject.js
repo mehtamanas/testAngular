@@ -1,7 +1,7 @@
 ﻿/**
  * Created by User on 10/28/2015.
  */
-var AddProjectController = function ($scope, $q, $cookieStore, newuserService, newuserData) {
+var AddProjectController = function ($scope, $q, $cookieStore, newuserService, newuserData, $rootScope, $modal, $modalInstance) {
     //alert("ff");
     $scope.ProjectsInUser = undefined;
     $scope.orgProjects = undefined;
@@ -107,6 +107,8 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
             projectsToBeAddedOnServer.push(newMember)
         });
 
+
+       
         // Remove the selected users
         var removePromisses = [];
         angular.forEach(projectsToRemove, function (projectId) {
@@ -127,10 +129,26 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
         $q.all(updatePromisses).then(function (results) {
             if (results.length > 0) {
                 loadProjects();
-                alert('User members updated successfully.')
+                // alert('User members updated successfully.')
+                $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
+                $rootScope.$broadcast('REFRESH', 'ProjectsGrid');
+               
             }
         }, function (errors) {
             alert('User members are failed to update.')
         });
     };
+
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'newuser/sucessfull.tpl.html',
+            backdrop: 'static',
+            controller: sucessfullController,
+            size: 'md',
+            resolve: { items: { title: "Project" } }
+
+        });
+    }
 };  

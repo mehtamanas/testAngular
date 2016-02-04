@@ -37,7 +37,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.choices2[0].Street_1 = response.data[0].street_1;
             $scope.choices2[0].Street_2 = response.data[0].Street_2;
             $scope.params.role_name = response.data[0].role_id;
-            $scope.role_name.push(response.data[0].role_id);
+            $scope.role_name= response.data[0].role_id.split(','),
             //    $scope.state = $scope.data[0].state_id;
             //  $scope.city = $scope.data[0].city_id
             // $scope.street_1 = response.data[0].street_1;

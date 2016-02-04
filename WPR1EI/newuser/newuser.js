@@ -232,7 +232,8 @@ angular.module('newuser')
               else if ($cookieStore.get('Selected Text') == "INACTIVATE") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
-                      $state.go($scope.openSucessfullPopup())
+                      $state.go($scope.openInactivePopup())
+                      $rootScope.$broadcast('REFRESH', 'mainGridOptions');
                   },
       function (error) {
 
@@ -379,11 +380,11 @@ angular.module('newuser')
           $scope.Fruits = [{
               Id: 1,
               Name: 'BLOCK',
-              class: 'fa fa-ban fa-fw'
+            
           }, {
               Id: 2,
               Name: 'INACTIVATE',
-              class: 'fa fa-ban fa-fw'
+             
           //}, {
           //    Id: 3,
           //    Name: 'ADD TO TEAM'
@@ -394,7 +395,7 @@ angular.module('newuser')
           }, {
               Id: 3,
               Name: 'ASSIGN ROLES',
-              class: 'fa fa-ban fa-fw'
+             
           }
           ];
           $scope.checkedIds = [];
