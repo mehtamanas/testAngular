@@ -1,5 +1,5 @@
-﻿var InactiveController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope) {
-    console.log('InactiveController');
+﻿var RoleController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope) {
+    console.log('RoleController');
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -9,5 +9,5 @@
     $scope.reset = function () {
         $scope.params = {};
     }
-  
+
 };

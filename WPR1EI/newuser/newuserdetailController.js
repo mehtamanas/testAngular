@@ -507,18 +507,18 @@
      "class": "UseHand",
      "style": "text-align:center"
  }
-            }, {
-                field: "possesion_date",
+ //           }, {
+ //               field: "possesion_date",
 
 
-                title: "Possession Date",
-                width: "120px",
-                format: '{0:dd/MM/yyyy}',
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:center"
- }
+ //               title: "Possession Date",
+ //               width: "120px",
+ //               format: '{0:dd/MM/yyyy}',
+ //               attributes:
+ //{
+ //    "class": "UseHand",
+ //    "style": "text-align:center"
+ //}
             }]
 
         };
