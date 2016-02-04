@@ -190,16 +190,7 @@ angular.module('contacts')
             },
 
             columns: [
-                 {
-                     template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                     title:"<input id='checkAll', type='checkbox', class='check-box' />",
-                     width: "60px",
-                     attributes:
-                      {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                 },
+                
                 {
                     template: "<img height='40px' width='40px'  class='user-photo' src='#= Contact_Image #'/>" +
                     "<span style='padding-left:10px' class='customer-name'> </span>",
