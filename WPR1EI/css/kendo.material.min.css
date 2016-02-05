@@ -189,7 +189,7 @@
 }
 
 .k-header, .k-treemap-title, .k-grid-header .k-header > .k-link {
-    color: #fff;
+    color: #4f4f4f;
 }
 
 .k-header, .k-grid-header, .k-toolbar, .k-dropdown-wrap, .k-picker-wrap, .k-numeric-wrap, .k-grouping-header, .k-pager-wrap, .k-textbox, .k-button, .k-progressbar, .k-draghandle, .k-autocomplete, .k-state-highlight, .k-tabstrip-items .k-item, .k-panelbar .k-tabstrip-items .k-item, .km-pane-wrapper > .km-pane > .km-view > .km-content {
@@ -2074,11 +2074,11 @@ td.k-state-focused.k-state-selected {
 }
 
 .k-grid tr.k-state-selected, .k-grid td.k-state-selected, .k-listview > .k-state-selected, .k-state-selected .k-progress-status {
-    color: #fff;
+    color: #333;
 }
 
 .k-grid-header .k-header .k-link, .k-grid-header .k-header, .k-grid-header .k-link, .k-grid-header .k-link:link, .k-pager-info, .k-scheduler-header, .k-scheduler-agendaview .k-scheduler-datecolumn {
-    color: #a8a8a8;
+    color: #4f4f4f;
 }
 
 .k-gantt .k-task-draghandle {

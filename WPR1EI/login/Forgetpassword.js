@@ -25,7 +25,10 @@
            $scope.confirms = {
                hash: $scope.hash
            };
-
+           if ($scope.account_email === "" && $scope.account_phone === "")
+           {
+               return;
+           }
            projectUrl = "Register/RecoverPasswordByEmail";
            ProjectCreate = function (param) {
                
@@ -37,7 +40,7 @@
 
                },
           function (error) {
-              alert("Entered email address belongs to inactive user");
+              alert("Entered email address belongs to inactive user and/or ");
           });
            };
 
@@ -45,6 +48,12 @@
 
            $scope.loginemail = function (isValid) {
                $scope.showValid = true;
+               if ($scope.params.account_email == undefined) {
+                   return;
+               }
+               if ($scope.params.account_email == "") {
+                   return;
+               }
                if (isValid) {
                    new ProjectCreate($scope.params).then(function (response) {
                        console.log(response);
@@ -81,6 +90,12 @@
 
 
            $scope.loginphone = function (isValid) {
+               if ($scope.params.account_phone == undefined) {
+                   return;
+               }
+               if ($scope.params.account_phone == "") {
+                   return;
+               }
                $scope.showValid = true;
                if (isValid) {
                    new PasswordCreate($scope.post).then(function (response) {
