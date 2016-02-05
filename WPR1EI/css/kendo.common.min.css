@@ -2090,7 +2090,7 @@ ul.k-menu-vertical .k-separator, .k-menu .k-menu-group .k-separator {
     padding: .5em .6em .4em .6em;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight:bold:
+    font-weight:bold;
 }
 
 .k-grid-header th.k-with-icon .k-link {

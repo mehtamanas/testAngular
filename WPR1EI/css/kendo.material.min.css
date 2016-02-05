@@ -160,6 +160,7 @@
         .k-input, input.k-textbox, textarea.k-textbox, input.k-textbox:hover, textarea.k-textbox:hover, .k-textbox > input, .k-multiselect-wrap {
             background-color: #fff;
             color: #444;
+
         }
 
             .k-input[readonly] {
@@ -202,7 +203,7 @@
 }
 
 .k-block, .k-header, .k-grid-header, .k-toolbar, .k-grouping-header, .k-pager-wrap, .k-button, .k-draghandle, .k-treemap-tile, html .km-pane-wrapper .k-header {
-    background-color: #3f51b5;
+    
 }
 
 .k-icon:hover, .k-state-hover .k-icon, .k-state-selected .k-icon, .k-state-focused .k-icon, .k-column-menu .k-state-hover .k-sprite, .k-column-menu .k-state-active .k-sprite, .k-pager-numbers .k-current-page .k-link:hover:after, .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view.k-state-hover > .k-link:after {
