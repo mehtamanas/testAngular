@@ -1,5 +1,21 @@
 
 
+<script type="text/javascript">
+var current = document.getElementById('leftMenu');
+
+function highlite(li)
+  {
+     if (current != null)
+     {
+         current.className = "";
+     }
+     li.className = "active";
+     current = li;
+  }
+</script> 
+
+
+
 <div class="container-fluid">
 
     <div id="header" class="navbar-fixed-top clearfix">
@@ -53,8 +69,8 @@
                                     <div><a ui-sref="app.campaigns" href="">Campaigns</a></div>
                                 </div>
                             </li>-->
-                            <li ng-class="{'active':activeBar==1}" ng-if="projects.read"><a href="#" ui-sref="app.project" ng-click="activeBar=1"><span class="nav-icon nav-01"></span> Projects</a></li>
-                            <li ng-class="{'active':activeBar==2}"><a href="" ui-sref="app.property" ng-click="activeBar=2"><span class="nav-icon nav-11"></span>Properties</a></li>
+                            <li id="leftMenu" onclick="highlite(this);" ng-if="projects.read"><a href="#" ui-sref="app.project" ><span class="nav-icon nav-01"></span> Projects</a></li>
+                            <li onclick="highlite(this);"><a href="" ui-sref="app.property"><span class="nav-icon nav-11"></span>Properties</a></li>
                             <!--<li class="nav-sub-dropdown" ng-class="{'active':activeBar==3}">
                                 <a href="#" ng-click="activeBar=3"><span class="nav-icon nav-20"></span> Bookings <span class="nav-no">7</span> <span class="d-arr"></span></a>
                                 <div class="nav-sub-bx">
@@ -62,9 +78,9 @@
                                     <div><a href="#">Completed</a></div>
                                 </div>
                             </li>-->
-                            <li ng-class="{'active':activeBar==4}" ng-if="users.read"><a href="#" ui-sref="app.newuser" ng-click="activeBar=4"><span class="nav-icon nav-02"></span> Users</a></li>
-                            <li ng-class="{'active':activeBar==5}" ng-if="teams.read"><a href="#" ui-sref="app.team" ng-click="activeBar=5"><span class="nav-icon nav-13"></span> Teams</a></li>
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==6}">
+                            <li onclick="highlite(this);" ng-if="users.read"><a href="#" ui-sref="app.newuser"><span class="nav-icon nav-02"></span> Users</a></li>
+                            <li onclick="highlite(this);" ng-if="teams.read"><a href="#" ui-sref="app.team" ><span class="nav-icon nav-13"></span> Teams</a></li>
+                            <li onclick="highlite(this);" class="nav-sub-dropdown" >
                                 <!--<a href="#" ng-click="activeBar=6"><span class="nav-icon nav-05"></span> People <span class="nav-no">8</span> <span class="d-arr"></span></a>
                                 <div class="nav-sub-bx">
                                     <div><a href="#">Leads</a></div>-->
@@ -86,13 +102,13 @@
                                     <div><a href="#" ui-sref="app.current">Current Partners</a></div>
                                 </div>
                             </li>-->
-                            <li ng-class="{'active':activeBar==13}"><a href="#" ui-sref="app.organization" ng-click="activeBar=13"><span class="nav-icon nav-23"></span> Organization</a></li>
-                            <li ng-class="{'active':activeBar==14}"><a href="#" ui-sref="app.setting"  ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a></li>
+                            <li onclick="highlite(this);"><a href="#" ui-sref="app.organization"><span class="nav-icon nav-23"></span> Organization</a></li>
+                            <li onclick="highlite(this);"><a href="#" ui-sref="app.setting" ><span class="nav-icon nav-16"></span> Settings</a></li>
                             <!--<li ng-class="{'active':activeBar==15}"><a href="#" ng-click="activeBar=15"><span class="nav-icon nav-08"></span> Security</a></li>-->
-                            <li ng-class="{'active':activeBar==16}"><a href="#" ui-sref="app.audit" ng-click="activeBar=16"><span class="nav-icon nav-17"></span> Audit Trail</a></li>
+                            <li onclick="highlite(this);"><a href="#" ui-sref="app.audit" ><span class="nav-icon nav-17"></span> Audit Trail</a></li>
                             <!--<li ng-class="{'active':activeBar==17}"><a href="#" ng-click="activeBar=17"><span class="nav-icon nav-09"></span> Support</a></li>-->
                             <!--<li ng-class="{'active':activeBar==18}"><a href="#" ui-sref="app.plot" ng-click="activeBar=18"><span class="nav-icon nav-07"></span>Plot</a></li>-->
-                            <li ng-class="{'active':activeBar==19}"><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li>
+                            <li onclick="highlite(this);"><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
