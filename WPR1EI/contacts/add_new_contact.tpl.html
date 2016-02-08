@@ -197,8 +197,8 @@
                                                                minlength="1"
                                                                maxlength="30"
                                                                input-focus
-                                                               data-ng-pattern="patternRegexs.email"
-                                                               ng-pattern="/^(?=[A-Z0-9][A-Z0-9._%+-]{5,253}$)[A-Z0-9._%+-]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,8}[A-Z]{2,63}$/"
+                                                              
+                                                               ng-pattern="/^[a-zA-Z\s]+[a-zA-Z\s0-9._-]+@[a-zA-Z\sa-z]+\.[a-zA-Z\s.]{2,5}$/"
                                                                required />
                                                         <div ng-messages="newForm.email.$error" style="color:maroon" role="alert">
                                                             <div ng-message="required" data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">This field should not be empty </div>

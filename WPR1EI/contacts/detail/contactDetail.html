@@ -46,10 +46,9 @@
                             <li id="contact_payment"><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>-->
                             <!--<li id="contact_tasks"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
                             <li id="contact_engagement"><a aria-controls="summary" role="tab" data-toggle="tab">ENGAGEMENT</a></li>
-                            <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
                             <li id="contact_quotes"><a aria-controls="summary" role="tab" data-toggle="tab">QUOTES</a></li>-->
                             <li id="contact_assignedto"><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
-
+                            <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
                         </ul>
 
                         <div class="content-inner-bx">
@@ -158,6 +157,13 @@
 
                             </div>
                         </div>  <!--AssignmentTo-->
+
+                        <div class="leads_group" id="record-content">
+                            <div class="tab-content-title">Notes <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()" style="cursor:pointer">+</a></div>
+                            <div kendo-grid k-options="NotesGrid" selectable="true" k-on-change="myGridChangeNote(dataItem)">
+
+                            </div>
+                        </div>
 
                     </div>
                 </div>

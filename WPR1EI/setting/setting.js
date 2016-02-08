@@ -249,7 +249,7 @@
 
                 var loginSession = response.data;
 
-                $scope.openSucessfullPopup();
+                $scope.openSavePopup();
 
                 $rootScope.$broadcast('REFRESH', 'projectGrid');
 
@@ -261,14 +261,14 @@
 
         }
 
-        $scope.openSucessfullPopup = function () {
+        $scope.openSavePopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/sucessfull.tpl.html',
+                templateUrl: 'setting/save.html',
                 backdrop: 'static',
-                controller: sucessfullController,
+                controller: SaveController,
                 size: 'md',
-                resolve: { items: { title: "Settings" } }
+
             });
 
 

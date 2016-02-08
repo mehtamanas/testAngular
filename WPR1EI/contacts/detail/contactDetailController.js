@@ -1,6 +1,6 @@
-/**
- * Created by karuna on 24/10/15.
- */
+//no/**
+// * Created by karuna on 24/10/15.
+// */
 angular.module('contacts')
 .controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope)
     {
@@ -530,14 +530,10 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId
-
+                    read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId + "/Person"
                 },
                 pageSize: 20
 
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -551,16 +547,40 @@ angular.module('contacts')
                 buttonCount: 5
             },
             columns: [{
-                field: "class_type",
-                title: "Type",
+                field: "Contact_name",
+                title: "Contact",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
 
             }, {
                 field: "text",
                 title: "TEXT",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
 
-            }, ]
+            }, {
+                field: "date",
+                title: "Date",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            }, {
+                field: "time",
+                title: "Time",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            }]
         };
 
         $scope.QuotesGrid = {
@@ -727,12 +747,34 @@ angular.module('contacts')
 
         };
 
+
+        $scope.openAddNewNotes = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/add_new_notes.html',
+                backdrop: 'static',
+                controller: AddNewNotesControllerdm,
+                size: 'md'
+            });
+        };
+
+
+
+
+
        
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'NotesGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'PaymentGrid') {
                 $('.k-i-refresh').trigger("click");
             }
         });
+
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'DocumentGrid') {
