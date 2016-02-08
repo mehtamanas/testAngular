@@ -948,6 +948,29 @@
             alert("Network issue");
     });
 
+        $scope.removeImage = function (index) {
+            var id = $scope.Gallery[index].id;
+            $scope.Gallery[index] = undefined;
+            var postdata = {id:id}
+
+            apiService.post("MediaElement/Delete", postdata).then(function (response) {
+                var loginSession = response.data;
+               alert(" Deleted Successfully...");
+                $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
+            },
+
+
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
+           
+        }
+
+
         $scope.openNewAmenityPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -1199,6 +1222,19 @@
         }
 
         };
+
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'UserGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'TeamsGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
 
         $scope.$on('REFRESH', function (event, args)
         {

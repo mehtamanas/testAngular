@@ -1,7 +1,7 @@
 ﻿/**
  * Created by User on 10/28/2015.
  */
-var AddUserProjectController = function ($scope, $q, $cookieStore, projectService, projectData) {
+var AddUserProjectController = function ($scope, $q, $cookieStore, projectService, projectData, $modalInstance, $rootScope) {
     //alert("ff");
     $scope.ProjectsInUser = undefined;
     $scope.orgProjects = undefined;
@@ -129,6 +129,8 @@ var AddUserProjectController = function ($scope, $q, $cookieStore, projectServic
             if (results.length > 0) {
                 loadProjects();
                 alert('User members updated successfully.')
+                $modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH', 'UserGrid');
             }
         }, function (errors) {
             alert('User members are failed to update.')

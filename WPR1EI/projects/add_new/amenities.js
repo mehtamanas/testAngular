@@ -30,7 +30,7 @@
     projectUrl = "Amenities/GetAmenitiesall?id=" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
 
     // alert(param.name);
-    apiService.get(projectUrl).then(function (response) {
+    apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.orgAmenities = response.data;
         $scope.isChecked = [];
         for (var a in $scope.orgAmenities) {

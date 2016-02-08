@@ -30,9 +30,9 @@
                                                                    ng-pattern="/^[a-z 1-9.\s]+$/i"
                                                                    input-focus
                                                                    required />
-                                                            <div class="text-danger"
-                                                                 data-ng-if="addNewForm.unitdesc.$invalid && (!addNewForm.unitdesc.$pristine || showValid) && !addNewForm.unitdesc.$focus">
-                                                                {{'Enter valid Unit Type' | translate }}
+                                                            <div ng-messages="addNewForm.unitdesc.$error" style="color:maroon" role="alert">
+                                                                <div ng-message="required" data-ng-if="addNewForm.unitdesc.$invalid && (!addNewForm.unitdesc.$pristine || showValid) && !addNewForm.unitdesc.$focus">This field should not be empty </div>
+                                                                <div ng-message="pattern">Enter valid value for unit type</div>
                                                             </div>
                                                         </div>
                                                         
@@ -62,9 +62,9 @@
                                                                        ng-pattern="/^([1-9][0-9]*)$/"
                                                                        input-focus
                                                                        required />
-                                                                <div class="text-danger"
-                                                                     data-ng-if="addNewForm.bedrooms.$invalid && (!addNewForm.bedrooms.$pristine || showValid) && !addNewForm.bedrooms.$focus">
-                                                                    {{'Enter valid value for bedrooms' | translate }}
+                                                                <div ng-messages="addNewForm.bedrooms.$error" style="color:maroon" role="alert">
+                                                                    <div ng-message="required" data-ng-if="addNewForm.bedrooms.$invalid && (!addNewForm.bedrooms.$pristine || showValid) && !addNewForm.bedrooms.$focus">This field should not be empty </div>
+                                                                    <div ng-message="pattern">Enter valid value for bedroom</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -92,9 +92,9 @@
                                                                        ng-pattern="/^([1-9][0-9]*)$/"
                                                                        input-focus
                                                                        required />
-                                                                <div class="text-danger"
-                                                                     data-ng-if="addNewForm.bathrooms.$invalid && (!addNewForm.bathrooms.$pristine || showValid) && !addNewForm.bathrooms.$focus">
-                                                                    {{'Enter valid value for bathrooms' | translate }}
+                                                                <div ng-messages="addNewForm.bathrooms.$error" style="color:maroon" role="alert">
+                                                                    <div ng-message="required" data-ng-if="addNewForm.bathrooms.$invalid && (!addNewForm.bathrooms.$pristine || showValid) && !addNewForm.bathrooms.$focus">This field should not be empty </div>
+                                                                    <div ng-message="pattern">Enter valid value for bathroom</div>
                                                                 </div>
 
                                                             </div>
@@ -131,9 +131,9 @@
                                                                        input-focus
                                                                        required />
                                                                 <span class="area-txt">sq.ft</span>
-                                                                <div class="text-danger"
-                                                                     data-ng-if="addNewForm.carpetarea.$invalid && (!addNewForm.carpetarea.$pristine || showValid) && !addNewForm.carpetarea.$focus">
-                                                                    {{'Enter valid value for Carpet Area' | translate }}
+                                                                <div ng-messages="addNewForm.carpetarea.$error" style="color:maroon" role="alert">
+                                                                    <div ng-message="required" data-ng-if="addNewForm.carpetarea.$invalid && (!addNewForm.carpetarea.$pristine || showValid) && !addNewForm.carpetarea.$focus">This field should not be empty </div>
+                                                                    <div ng-message="pattern">Enter valid value for carpet area</div>
                                                                 </div>
                                                                
                                                             </div>
@@ -163,10 +163,11 @@
                                                                        input-focus
                                                                        required />
                                                                 <span class="area-txt">sq.ft</span>
-                                                                <div class="text-danger"
-                                                                     data-ng-if="addNewForm.saleablearea.$invalid && (!addNewForm.saleablearea.$pristine || showValid) && !addNewForm.saleablearea.$focus">
-                                                                    {{'Enter valid value for Saleable Area' | translate }}
+                                                                <div ng-messages="addNewForm.saleablearea.$error" style="color:maroon" role="alert">
+                                                                    <div ng-message="required" data-ng-if="addNewForm.saleablearea.$invalid && (!addNewForm.saleablearea.$pristine || showValid) && !addNewForm.saleablearea.$focus">This field should not be empty </div>
+                                                                    <div ng-message="pattern">Enter valid value for saleable area</div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                       
@@ -196,9 +197,9 @@
                                                                    data-ng-model="cark_park"
                                                                    input-focus
                                                                    required />
-                                                            <div class="text-danger"
-                                                                 data-ng-if="addNewForm.carkpark.$invalid && (!addNewForm.carkpark.$pristine || showValid) && !addNewForm.carkpark.$focus">
-                                                                {{'Enter valid value for Car Park' | translate }}
+                                                            <div ng-messages="addNewForm.carkpark.$error" style="color:maroon" role="alert">
+                                                                <div ng-message="required" data-ng-if="addNewForm.carkpark.$invalid && (!addNewForm.carkpark.$pristine || showValid) && !addNewForm.carkpark.$focus">This field should not be empty </div>
+                                                                <div ng-message="pattern">Enter valid value for car park</div>
                                                             </div>
                                                         </div>
                                                        
@@ -249,7 +250,7 @@
                                                         <div class="panel panel-success" uploader="uploader1" nv-file-over="">
                                                             <div class="panel-body image-upload-panel">
                                                                 <div class="row" ng-hide="uploader1.queue.length">
-                                                                    <img ng-src={{media2}}  class="img-responsive" /> 
+                                                                    <img ng-src={{media2}} alt="3D Zip" class="img-responsive" /> 
                                                                 </div>
                                                                 <div class="row" ng-show="uploader1.queue.length">
                                                                     <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">

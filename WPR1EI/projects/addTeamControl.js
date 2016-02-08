@@ -1,7 +1,7 @@
 /**
  * Created by User on 10/28/2015.
  */
-var AddTeamController = function ($scope, $q, $cookieStore, projectService, projectData, $modalInstance) {
+var AddTeamController = function ($scope, $q, $cookieStore, projectService, projectData, $modalInstance, $rootScope) {
   //  alert("ff");
     $scope.usersInTeam = undefined;
     $scope.OrgTeams = undefined;
@@ -130,6 +130,8 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
             if (results.length > 0) {
                 loadProjects();
                 alert('User members updated successfully.')
+                $modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH', 'TeamsGrid');
             }
         }, function (errors) {
             alert('User members are failed to update.')
