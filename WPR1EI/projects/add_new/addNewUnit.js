@@ -146,7 +146,7 @@
                 num_bathrooms: $scope.num_bathrooms
 
             };
-            if ($scope.super_built_up_area >= $scope.carpet_area)
+            if (parseInt($scope.super_built_up_area) >= parseInt($scope.carpet_area))
             {
 
                 apiService.post("UnitTypes/CreateNewUnitType", postData).then(function (response)

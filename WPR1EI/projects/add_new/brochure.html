@@ -22,7 +22,7 @@
                                                 <div class="row" ng-hide="uploader.queue.length">
                                                     <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                        <span class="page-center">Drag And Drop</span>
+                                        
                                                     </div>
                                                     <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                                 </div>
@@ -42,7 +42,7 @@
                                     <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                                 </div>
                             </div>
-                        </div>
+                        
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
                             <div class="image-upload-title">Upload Pdf End</div>
@@ -53,7 +53,7 @@
                                             <div class="row" ng-hide="uploader1.queue.length">
                                                 <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                                    <span class="page-center">Drag And Drop</span>
+                       
                                                 </div>
                                                 <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                             </div>
@@ -72,9 +72,11 @@
                                 <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/pdf"  nv-file-select="" uploader="uploader1" />
                                 <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
                             </div>
+
                         </div>
 
                     </div>
+                        </div>
 
                     <div class="progress" ng-show="showProgress">
                         <div class="progress-bar" role="progressbar"
