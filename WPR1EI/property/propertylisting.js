@@ -101,7 +101,7 @@
                     width: "60px",
                     attributes: {
                         "class": "UseHand",
-                        "style": "text-align:center"
+
                     }
                 },
 
@@ -134,7 +134,7 @@
                  attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
              },
               {
@@ -144,7 +144,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
               },
               {
@@ -154,7 +154,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
               },
               {
@@ -164,7 +164,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
               },
             {
@@ -174,7 +174,7 @@
                 attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
             },
             {
@@ -185,7 +185,7 @@
                 attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
             },
               {
@@ -196,7 +196,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
               },
                {
@@ -206,7 +206,7 @@
                    attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:center"
+                         "style": "text-align:right"
                      }
                },
                 {
@@ -220,7 +220,7 @@
                      }
                 },
             {
-               
+                
                 field: "available_status",
                 title: "STATUS",
                 width: "120px",
