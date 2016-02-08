@@ -29,9 +29,9 @@
                                            maxlength="10"
                                            ng-pattern="/^[a-z 1-9\s.]+$/i"
                                            required />
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
-                                        {{ 'Please enter valid floor number' | translate }}
+                                    <div ng-messages="addNewForm.floors.$error" style="color:maroon" role="alert">
+                                        <div ng-message="required" data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">This field should not be empty </div>
+                                        <div ng-message="pattern">Enter valid value for floor number</div>
                                     </div>
                                 </div>
                                </div>
@@ -55,9 +55,9 @@
                                        maxlength="40"
                                        ng-pattern="/^[a-z 1-9\s.]+$/i"
                                        required />
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.tname.$focus">
-                                    {{ 'Please enter valid floor name' | translate }}
+                                <div ng-messages="addNewForm.tname.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.tname.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern">Enter valid value for floor name</div>
                                 </div>
                             </div>
                           

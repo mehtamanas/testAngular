@@ -424,6 +424,7 @@ angular.module('project')
             if (args == 'projectGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.ddlFruits = "ACTION";
         });
 
         $scope.openProjectPopup = function () {

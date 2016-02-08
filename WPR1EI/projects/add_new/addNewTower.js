@@ -197,7 +197,8 @@ function (error) {
 
             if ($scope.wings[i].total_no_of_floors_new != null) {
                 fnd = 1;
-                break;
+                totfound = totfound+1;
+
             }
         }
         if (fnd == 0) {
@@ -205,7 +206,7 @@ function (error) {
             return;
         }
         if (parseInt($scope.params.no_of_wings) != parseInt(totfound)) {
-            alert("No of wings not match properly....");
+            alert("Number Of wings not assigned properly...");
             return;
         }
        

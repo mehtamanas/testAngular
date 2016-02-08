@@ -365,6 +365,7 @@ function (error)
 
     $scope.selectcity = function () {
         $scope.params.city = $scope.city1;
+    
         //alert($scope.params.city);
     };
 
@@ -386,6 +387,7 @@ function (error)
 
     $scope.selectstate = function () {
         $scope.params.state = $scope.state1;
+        $scope.city1 = "";
         //alert($scope.params.state);
     };
 
@@ -480,6 +482,7 @@ function (error)
         $scope.params.monthid = response.data[0].monthid;
    
         $scope.year1 = response.data[0].year;
+        $scope.params.project_year = response.data[0].year; 
         if (response.data[0].project_type == "Family And Home") $scope.selecthome();
         if (response.data[0].project_type == "Villa") $scope.selectvilla();
         if (response.data[0].project_type == "Plot") $scope.selectplot();

@@ -212,16 +212,21 @@ function (error)
 
 
         var fnd = 0;
+        var totfound = 0;
         for (var i in $scope.wings) {
 
             if ($scope.wings[i].wing_no != null) {
                 fnd = 1;
-                break;
+                totfound = totfound + 1;
             }
         }
         if (fnd == 0) {
             alert("No Wing Mapped.....");
            return;
+        }
+        if (parseInt($scope.params.no_of_wings) != parseInt(totfound)) {
+            alert("Number Of wings not assigned properly...");
+            return;
         }
 
         apiService.post("Tower/EditTowerWing", postData).then(function (response) {

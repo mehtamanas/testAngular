@@ -14,21 +14,21 @@
                     <div class="clearfix">
                         <div class="form-group"
                              data-ng-class="{
-                                                    'has-error' : addNewForm.street.$invalid && (!addNewForm.street.$pristine || showValid),
-                                                    'has-success': addNewForm.street.$valid && !addNewForm.street.$pristine
+                                                    'has-error' : addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid),
+                                                    'has-success': addNewForm.wingname.$valid && !addNewForm.wingname.$pristine
                                                  }">
                             <div class="form-group form-bx form-bx2">
                                 <label for="">Enter Wing Name:</label>
-                                <input type="text" autofocus name="street" class="form-control"  id="editnewwing_wing_code"
+                                <input type="text" autofocus name="wingname" class="form-control"  id="editnewwing_wing_code"
                                        placeholder="Wing Name"
                                        data-ng-model="params.wing_name"
                                        minlength="1"
                                        maxlength="20"
                                        ng-pattern="/^[\w -]*$/"
                                        required />
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.street.$invalid && (!addNewForm.street.$pristine || showValid) && !addNewForm.street.$focus">
-                                    {{ 'Enter valid Wing Name' | translate }}
+                                <div ng-messages="addNewForm.wingname.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern">Enter valid value for wing name</div>
                                 </div>
                             </div>
                           
@@ -50,9 +50,9 @@
                                        ng-pattern="/^([1-9][0-9]*)$/"
                                        input-focus
                                        required />
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">
-                                    {{'Enter valid Number of Floors' | translate }}
+                                <div ng-messages="addNewForm.totalfloors.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern">Enter valid value for Number of Floors </div>
                                 </div>
                             </div>
                            
