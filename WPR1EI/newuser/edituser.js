@@ -37,7 +37,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.choices2[0].Street_1 = response.data[0].street_1;
             $scope.choices2[0].Street_2 = response.data[0].Street_2;
             $scope.params.role_name = response.data[0].role_id;
-            $scope.role_name= response.data[0].role_id.split(','),
+            $scope.role_name = response.data[0].role_id.split(',');
             //    $scope.state = $scope.data[0].state_id;
             //  $scope.city = $scope.data[0].city_id
             // $scope.street_1 = response.data[0].street_1;
@@ -374,10 +374,31 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                    alert("Network issue");
            });
 
-            //$modalInstance.dismiss();
-            //$scope.openSucessfullPopup();
+            var usersToBeAddedOnServer = [];
+
+            for (var i in $scope.role_name) {
+                var newMember = {};
+                newMember.role_user_id = $scope.choices1[0].account_email;
+                newMember.role_id = $scope.params.role_name[i];
+                newMember.user_id = $cookieStore.get('userId');
+                newMember.organization_id = $cookieStore.get('orgID');
+                usersToBeAddedOnServer.push(newMember);
+            }
+            apiService.post("Mapping/UserToRoleEdit", usersToBeAddedOnServer).then(function (response) {
+                var loginSession = response.data;
+               
+
+            },
+           function (error)
+           {
+              if (error.status === 400)
+             alert(error.data.Message);
+              else
+              alert("Network issue");
+          });
             
         }
+
     }
 
   

@@ -1053,6 +1053,7 @@
 
                     read: apiService.baseUrl + "AuditLog/GetAuditByUserID/" + $scope.seletedCustomerId
 
+
                 },
 
                 pageSize: 20

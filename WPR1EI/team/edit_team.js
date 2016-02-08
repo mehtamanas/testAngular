@@ -81,7 +81,7 @@ function (error) {
             resolve: { items: { title: "Edit" } }
         });
 
-
+        $rootScope.$broadcast('REFRESH', 'team');
     }
 
     $scope.editTeam = function (isValid) {

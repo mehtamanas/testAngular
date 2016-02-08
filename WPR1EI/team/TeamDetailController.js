@@ -53,7 +53,7 @@
             GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             //alert(GetUrl);
 
-            apiService.get(GetUrl).then(function (response) {
+            apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
                 // alert($scope.data);
@@ -493,5 +493,62 @@
                 size: 'md'
             });
         };
+
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'UserGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+        $scope.openTeamPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'team/edit_team.html',
+                backdrop: 'static',
+                controller: EditTeamPopUpController,
+                size: 'md'
+            });
+        };
+
+
+        $scope.$on('REFRESH', function (event, args) {
+
+            setTimeout(function () {
+
+                if (args == 'team') {
+
+                    //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+                    GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+                    //alert(GetUrl);
+
+                    apiService.getWithoutCaching(GetUrl).then(function (response) {
+
+                        $scope.data = response.data;
+                        // alert($scope.data);
+                        //   alert($scope.seletedCustomerId);
+
+
+                        $scope.name = $scope.data[0].name;
+                        $scope.description = $scope.data[0].description;
+
+                        if ($scope.data.contact_mobile !== '') {
+                            $scope.mobile = $scope.data.contact_mobile;
+                        }
+                        if ($scope.data.contact_email !== '') {
+                            $scope.email = $scope.data.contact_Email;
+                        }
+                        $state.go('app.teamdetail', {}, { reload: false });
+                    },
+                                function (error) {
+                                    deferred.reject(error);
+                                    alert("not working");
+                                });
+
+
+                }
+
+            }, 1000);
+        });
         //end
     });
