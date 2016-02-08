@@ -1681,12 +1681,7 @@ div.k-grid-footer {
     font-size:15px;
 }
 
-h4.form-sub-title {
-    font-size:15px;
-    font-weight:700;
-    color:#3a3a3a;
-    margin:40px 0 15px;
-}
+
 
 .form-content .form-bx8 {
     width:800px;
@@ -7290,6 +7285,7 @@ div.k-grid-footer {
 
 .form-content .form-bx6 {
     width:330px;
+    margin-bottom:20px;
 }
 
 .form-content .form-bx7 {
@@ -7421,10 +7417,15 @@ div.k-grid-footer {
 }
 
 .image-upload-wrap .image-upload-title {
-    font-size:14px;
+    /*font-size:14px;
     font-weight:500;
     color:#595959;    
+    margin-bottom: 7px;*/
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
     margin-bottom: 7px;
+    margin-left: -7px;
 }
 
 /*.image-upload-wrap .image-upload-bx {
@@ -9555,15 +9556,14 @@ form.callback  {
 .signup ul.state-bar li.selected:after {
   background-position: -2px -67px;
 }
+.signup ul.state-bar li.current:after {
+  background-position: -56px -67px;
+}
 
 .signup ul.state-bar li.current {
   color: #289ff1;
    
 }
-
-
-
-
 ul.state-bar {
   list-style: none;
   padding: 0;
@@ -9595,8 +9595,6 @@ ul.state-bar li:after {
   top: 0;
   right: 0;
 }
-
-
 ul.state-bar li.selected {
   color: #289ff1;
 }
@@ -11138,7 +11136,7 @@ select:focus {
   margin-bottom: 30px;
 }
 .signup .form-horizontal .form-group .form-control {
-  color: #000000;
+  /*color: #000000;*/
 }
 .signup .form-horizontal .form-group .dropdown.dropdown-default .dropdown-toggle,
 .signup .form-horizontal .form-group .dropdown.dropdown-default .dropdown-toggle:hover,
@@ -13221,3 +13219,30 @@ overflow: hidden;
 
 
 /*end campaign type category*/
+
+
+    /*  active user */
+     
+
+.user_status_active {
+    background:#40c66f;
+    border-radius: 10px;
+    color:#ffffff;
+}
+
+.user_status_pending
+{
+    background:#fdbd39;
+    border-radius: 10px;
+    color:#ffffff;
+
+}
+
+
+.user_status_inactive {
+     background:#979797;
+    border-radius: 10px;
+    color:#ffffff;
+
+}
+  
