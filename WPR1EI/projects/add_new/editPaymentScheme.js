@@ -5,44 +5,44 @@
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     var payment_sch_id = $cookieStore.get('payment_schedule_id');
-   
+
     //alert(payment_sch_id);
-   
+
 
     $scope.showProgress = false;
 
     // FILTERS
-  
+
 
     //Audit log start
-   // $scope.params = {
+    // $scope.params = {
 
-   //     device_os: "windows10",
-   //     device_type: "mobile",
-   //     device_mac_id: "34:#$::43:434:34:45",
-   //     module_id: "Wing",
-   //     action_id: "Wing View",
-   //     details: "ProjectDetail",
-   //     application: "angular",
-   //     browser: $cookieStore.get('browser'),
-   //     ip_address: $cookieStore.get('IP_Address'),
-   //     location: $cookieStore.get('Location'),
-   //     organization_id: $cookieStore.get('orgID'),
-   //     User_ID: $cookieStore.get('userId')
-   // };
+    //     device_os: "windows10",
+    //     device_type: "mobile",
+    //     device_mac_id: "34:#$::43:434:34:45",
+    //     module_id: "Wing",
+    //     action_id: "Wing View",
+    //     details: "ProjectDetail",
+    //     application: "angular",
+    //     browser: $cookieStore.get('browser'),
+    //     ip_address: $cookieStore.get('IP_Address'),
+    //     location: $cookieStore.get('Location'),
+    //     organization_id: $cookieStore.get('orgID'),
+    //     User_ID: $cookieStore.get('userId')
+    // };
 
 
-   // AuditCreate = function (param) {
+    // AuditCreate = function (param) {
 
-   //     apiService.post("AuditLog/Create", param).then(function (response) {
-   //         var loginSession = response.data;
+    //     apiService.post("AuditLog/Create", param).then(function (response) {
+    //         var loginSession = response.data;
 
-   //     },
-   //function (error) {
+    //     },
+    //function (error) {
 
-   //});
-   // };
-   // AuditCreate($scope.params);
+    //});
+    // };
+    // AuditCreate($scope.params);
 
     //end
 
@@ -54,10 +54,9 @@
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
 
-     
+
     },
-function (error)
-{
+function (error) {
     if (error.status === 400)
         alert(error.data.Message);
     else
@@ -72,12 +71,11 @@ function (error)
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.choices2 = response.data;
 
-    
+
 
 
     },
-function (error)
-{
+function (error) {
     if (error.status === 400)
         alert(error.data.Message);
     else
@@ -86,9 +84,19 @@ function (error)
     );
 
 
-   
+
     $scope.choices2 = [{ id: 'choice1' }];
     $(document).on("click", ".remove-field", function () {
+        var removed = $(this).parent().find('#editnewpayement_milestone').val();
+        var removed1 = $(this).parent().find('#editnewpayement_percentage').val();
+        var fnd = 0;
+        for (var i in $scope.choices2) {
+            if (removed == $scope.choices2[i].description && removed1 == $scope.choices2[i].percentage) {
+                $scope.choices2.splice(i, 1);
+                fnd = 1;
+            }
+
+        }
         $(this).parent().remove();
     });
 
@@ -109,7 +117,7 @@ function (error)
 
 
 
-    paymentCreate = function (param) {
+    $scope.paymentCreate = function () {
 
         var schemeupdate = [];
         var tot = 0;
@@ -127,10 +135,24 @@ function (error)
             return;
         }
 
+        $scope.datapost = {
+            type_of_payment: $scope.type_of_payment,
+            base_rate: $scope.base_rate,
+            payment_sch_id: $cookieStore.get('payment_schedule_id'),
+            organization_id: $cookieStore.get('orgID'),
+            user_id: $cookieStore.get('userId')
+        };
 
-      
+        var postData = {
 
-        apiService.post("Payment/EditPaymentScheme", param).then(function (response) {
+            id: $scope.params.payment_sch_id,
+            type_of_payment: $scope.params.type_of_payment,
+            base_rate: $scope.params.base_rate,
+
+
+        };
+
+        apiService.post("Payment/EditPaymentScheme", postData).then(function (response) {
             var loginSession = response.data;
             var schemeupdate = [];
             for (var i in $scope.choices2) {
@@ -150,26 +172,24 @@ function (error)
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
             },
-         function (error)
-         {
+         function (error) {
              if (error.status === 400)
                  alert(error.data.Message);
              else
                  alert("Network issue");
          });
 
-            
+
 
         },
-   function (error)
-   {
+   function (error) {
        if (error.status === 400)
            alert(error.data.Message);
        else
            alert("Network issue");
    });
     }
-   
+
 
 
 
@@ -199,19 +219,13 @@ function (error)
         });
         $rootScope.$broadcast('REFRESH', 'payment');
     };
-    $scope.params = {
-        type_of_payment: $scope.type_of_payment,
-        base_rate: $scope.base_rate,
-        payment_sch_id : $cookieStore.get('payment_schedule_id'),
-        organization_id: $cookieStore.get('orgID'),
-        user_id: $cookieStore.get('userId')
-    };
+
 
     var emp = {
 
         type_of_payment: $scope.type_of_payment,
         base_rate: $scope.base_rate,
-       
+
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId')
     };
@@ -236,22 +250,9 @@ function (error)
         $scope.showValid = true;
         if (isValid) {
 
-            var postData = {
 
-                id: $scope.params.payment_sch_id,
-                type_of_payment: $scope.params.type_of_payment,
-                base_rate: $scope.params.base_rate,
+            $scope.paymentCreate();
 
-
-            };
-
-            new paymentCreate(postData).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
 
             $scope.showValid = false;
 

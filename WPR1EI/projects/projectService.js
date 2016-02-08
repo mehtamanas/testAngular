@@ -31,7 +31,7 @@ angular.module('project')
 
 
 
-            this.getUsersInTeam = function (teamId) {
+            this.getusersInTeam = function (teamId) {
                 return $http.get(apiService.baseUrl + 'Project/GetProjectTeamList/' + teamId)
             };
 
@@ -42,6 +42,17 @@ angular.module('project')
             //      return $http.get(apiService.baseUrl + 'Project/Get/' + orgId)
             //    return $http.get(apiService.baseUrl + "Project/GetUsersInOrg/" + userID)
 
+            //};
+
+            //this.addUsersInTeam = function (projectsTobeAdded) {
+
+            //    //alert(projectsTobeAdded.organization_id);
+            //    //alert(projectsTobeAdded.user_id);
+            //    //                
+            //    //alert(projectsTobeAdded.project_id);
+            //    //alert(projectsTobeAdded.mapping_id);
+
+            //    return $http.post(apiService.baseUrl + 'Mapping/UserToProject', projectsTobeAdded);
             //};
 
             this.addProjectsInUser = function (projectsTobeAdded) {
@@ -55,11 +66,30 @@ angular.module('project')
                 return $http.post(apiService.baseUrl + 'Mapping/UserToProject', projectsTobeAdded);
             };
 
+            this.addTeamtoProject = function (projectsTobeAdded) {
+
+                //alert(projectsTobeAdded.organization_id);
+                //alert(projectsTobeAdded.user_id);
+                //                
+                //alert(projectsTobeAdded.project_id);
+                //alert(projectsTobeAdded.mapping_id);
+
+                return $http.post(apiService.baseUrl + 'Mapping/TeamToProject', projectsTobeAdded);
+            };
 
             // Remove users
             this.removeProjectsFromUser = function (projectsTobeRemoved) {
                 return $http({
                     method: 'DELETE', url: apiService.baseUrl + 'Mapping/DeleteMultipleUserFromProject',
+                    data: projectsTobeRemoved, headers: { 'Content-Type': 'application/json' }
+                });
+            };
+
+
+            // Remove users
+            this.removeTeamFromProject = function (projectsTobeRemoved) {
+                return $http({
+                    method: 'DELETE', url: apiService.baseUrl + 'Mapping/DeleteMultipleTeamFromProject',
                     data: projectsTobeRemoved, headers: { 'Content-Type': 'application/json' }
                 });
             };

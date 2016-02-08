@@ -13,7 +13,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
     var loadProjects = function () {
         var userID = $cookieStore.get('userId');
         // Use $q.all to get both the result and then process the result
-        var userPromise = projectService.getUsersInTeam(selectedcustomer);//this user all projects
+        var userPromise = projectService.getusersInTeam(selectedcustomer);//this user all projects
         var orgPromise = projectService.getOrgTeams(orgID); // organisation all project
         //  alert(teamPromise);
         //alert(orgPromise);
@@ -40,7 +40,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
     var projectsTobeAdded = [];
 
     // Get the collection of users to be removed
-    $scope.removeProject = function (Project) {
+    $scope.removeTeam = function (Project) {
         if (Project.isUserMember) {
             Project.isUserMember = false;
 
@@ -105,7 +105,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
             newMember.project_id = selectedcustomer;
             newMember.user_id = currentlyLoggedInUserId;
             newMember.organization_id = projectData.orgId;
-            newMember.isteam = 1;
+            newMember.isteam = 0;
             projectsTobeAddedOnServer.push(newMember)
         });
 
@@ -122,9 +122,9 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
         });
 
         if (projectsTobeAddedOnServer.length > 0)
-            updatePromisses.push(projectService.usersInTeam(projectsTobeAddedOnServer));
+            updatePromisses.push(projectService.addTeamtoProject(projectsTobeAddedOnServer));
         if (projectsTobeRemovedOnServer.length > 0)
-            updatePromisses.push(projectService.removeProjectsFromUser(projectsTobeRemovedOnServer));
+            updatePromisses.push(projectService.removeTeamFromProject(projectsTobeRemovedOnServer));
 
         $q.all(updatePromisses).then(function (results) {
             if (results.length > 0) {
