@@ -281,7 +281,7 @@ a:focus {
 
 .k-header .k-link {
     color:#9b9b9b;
-    font-weight:600;
+    /*font-weight:600;*/
 }
 
 .user-photo {
@@ -317,7 +317,7 @@ a:focus {
 
 .k-grid .k-header,
 .k-grid td {
-    border-color: #f4f4f6	
+    /*border-color: #f4f4f6*/	
 }
 
 .k-grid td {
@@ -1231,7 +1231,7 @@ div.k-grid-footer {
     border-radius: 0;
     margin:auto;
     text-align:center;
-    width:950px;
+    width:960px;
 }
 
 .modal-header {
@@ -1575,7 +1575,7 @@ div.k-grid-footer {
     overflow: hidden;
 }
 .image-upload-wrap .photo-upload-bx {
-  background: url("../images/plus_icon.png") no-repeat 76px 44px #f4f4f4;
+  background: url("../images/upload-photo.png") no-repeat 76px 64px #f4f4f4;
     border: 1px dashed #cccccc;
     height: 110px;
     line-height: 102px;
@@ -6153,7 +6153,7 @@ a:focus {
 
 .k-header .k-link {
     color:#9b9b9b;
-    font-weight:600;
+    /*font-weight:600;*/
 }
 
 .user-photo {
@@ -11588,8 +11588,8 @@ LEFT
 }
 .support .sale-icon {
   float: left;
-  height: 32px;
-  width: 32px;
+  height: 35px;
+  width: 35px;
   background-repeat: no-repeat;
   background-size: initial;
   background-image: url("icons/sale.png");
@@ -11899,8 +11899,8 @@ LEFT
     position: relative;
     vertical-align: middle;
     display: inline-block;
-    width:20px;
-    height:20px;
+    width:23px;
+    height:23px;
     margin-right:10px;
     background:url("../images/edit.png") center center transparent;
 }
@@ -13147,3 +13147,77 @@ padding-top: 5px;
 width: 190px;
 overflow: hidden;
 }
+
+
+
+/*start campaign type category*/
+
+.eventType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+
+.google-adsType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+.twitterType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+.facebookType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+
+.emailType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+
+.outdoorType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+
+.TVType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+.youtubeType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+.newspapperType-campaign
+{
+    background:red;
+    height:20px;
+    width:20px;
+}
+
+
+/*end campaign type category*/
