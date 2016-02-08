@@ -217,7 +217,7 @@ angular.module('newuser')
                   $state.go($scope.optionPopup())
 
               }
-              else if ($cookieStore.get('Selected Text') == "BLOCK") {
+              else if ($cookieStore.get('Selected Text') == "Block") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
                     
@@ -229,7 +229,7 @@ angular.module('newuser')
       });
 
               }
-              else if ($cookieStore.get('Selected Text') == "INACTIVATE") {
+              else if ($cookieStore.get('Selected Text') == "Inactive") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
                       $state.go($scope.openInactivePopup())
@@ -245,7 +245,7 @@ angular.module('newuser')
 
 
           var orgID = $cookieStore.get('orgID');
-     //     alert(orgID);
+          //     alert(orgID);
           $scope.mainGridOptions = {
               dataSource: {
                   type: "json",
@@ -306,20 +306,31 @@ angular.module('newuser')
 
           }
 
+      }, {
+          // template: '<p class="#:Status==\"Active\"? \"user_status_active\" : \"("#:Status==\"INACTIVATE\"? \"user_status_inactive\" : \"user_status_pending\"#")\"#">#= Status #</p>',
+          template: '<p id="#= Status #" class="#:Status==\"Active\"? \"user_status_active\" : (\"user_status_inactive\")#">#= Status #</p>',
+          width: "80px",
+          title: "Status",
+          attributes:
+          {
+              "class": "UseHand",
+              "style": "text-align:center"
+          }
       },
 
+             //{
+             //    field: "Status",
+             //    title: "Status",
+             //    width: "80px",
+
+             //    attributes: {
+             //        "class": "UseHand",
+             //        "style": "text-align:center"
+
+             //    }
+
+             //},
              {
-                 field: "Status",
-                 title: "Status",
-                 width: "80px",
-
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:center"
-
-                 }
-
-             },{
                    field: "Role_name",
                    title: "Role",
                    width: "80px",
@@ -383,7 +394,7 @@ angular.module('newuser')
             
           }, {
               Id: 2,
-              Name: 'INACTIVATE',
+              Name: 'Inactive',
              
           //}, {
           //    Id: 3,
