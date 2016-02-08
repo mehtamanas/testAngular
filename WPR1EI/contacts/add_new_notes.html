@@ -1,0 +1,47 @@
+﻿<div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Create New Notes</h4>
+            </div>
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNewNotes(addNewForm.$valid)" autocomplete="off">
+               
+                 <div class="clearfix">
+                     <div class="form-group"
+                          data-ng-class="{ 'has-error' : addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus,
+                                                  'has-success': addNewForm.notes.$valid && !addNewForm.notes.$pristine && !addNewForm.notes.$focus
+                                                 }">
+
+                         <div class="form-group form-bx form-bx5">
+                             <label for="">Add Notes</label>
+                             <textarea cols="100" rows="5" name="notes"
+                                       data-ng-model="params.text"
+                                       minlength="1"
+                                       maxlength="500"
+                                       input-focus
+                                       required />
+                             <div class="text-danger"
+                                  data-ng-if="addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus">
+                                 {{ 'This field should not be empty' | translate }}
+                             </div>
+                         </div>
+                         
+                         </div>
+
+                     </div>
+
+                <div class="modal-btn-wrap clearfix">
+                    <!--<button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()"
+                            ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length && !uploader3.getNotUploadedItems().length">
+                        Save
+                    </button>-->
+                    <button type="submit" class="f-btn">Save</button>
+
+                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
