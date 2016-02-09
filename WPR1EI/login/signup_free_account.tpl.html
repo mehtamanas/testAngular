@@ -229,7 +229,7 @@
                                                 </label>
                                                 <div class="text-danger" ng-messages="newForm.confirmPassword.$error" role="alert">
                                                     <div ng-message="required"  data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">This field should not be empty </div>
-                                                    <div ng-message="compareto" data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">Password doesn't match</div>
+                                                    <div ng-message="compareto" data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">These passwords don't match. Try again?</div>
                                                 </div>
                                                 
                                             </div><div class="field-mdl field-req">*</div>
