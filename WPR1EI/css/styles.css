@@ -1333,9 +1333,9 @@ div.k-grid-footer {
     opacity: 0.85;
 }
 
-.add-input {
+/*.add-input {
     float:left;
-}
+}*/
 
 .add-input a {
     display:inline-block;
@@ -1361,7 +1361,7 @@ div.k-grid-footer {
 }
 
 .close-btn-wrap {
-    postion:relative;
+    position:relative;
     height:30px;
 }
 
@@ -1491,9 +1491,9 @@ div.k-grid-footer {
     font-size:14px;
 }
 
-.edit-organization-setting .add-input a {
+/*.edit-organization-setting .add-input a {
     margin:39px 0 0 6px;
-}
+}*/
 
 /*.modal.fade .modal-dialog {
     -webkit-transform: scale(0.1);
@@ -1701,9 +1701,9 @@ div.k-grid-footer {
     margin-top:19px;
 }
 
-.form-content2.edit-organization-setting .add-input a {
+/*.form-content2.edit-organization-setting .add-input a {
     margin-top:52px;
-}
+}*/
 
 .form-content .form-bx3-1 {
     margin-right: 15px;
@@ -7188,11 +7188,11 @@ div.k-grid-footer {
     opacity: 0.85;
 }
 
-.add-input {
+/*.add-input {
     float:left;
     margin-top:-27px;
 
-}
+}*/
 
 .add-input a {
     display:inline-block;
@@ -7214,7 +7214,7 @@ div.k-grid-footer {
 }
 
 .add-input2 a {
-    margin-top:42px;
+    margin-top:9px;
 }
 
 .close-btn-wrap {
@@ -7349,9 +7349,9 @@ div.k-grid-footer {
     font-size:14px;
 }
 
-.edit-organization-setting .add-input a {
+/*.edit-organization-setting .add-input a {
     margin:39px 0 0 6px;
-}
+}*/
 
 /*.modal.fade .modal-dialog {
     -webkit-transform: scale(0.1);
@@ -7555,9 +7555,9 @@ h4.form-sub-title {
     margin-top:19px;
 }
 
-.form-content2.edit-organization-setting .add-input a {
+/*.form-content2.edit-organization-setting .add-input a {
     margin-top:52px;
-}
+}*/
 
 .form-content .form-bx3-1 {
     margin-right: 15px;
@@ -8397,6 +8397,7 @@ form.callback  {
     border-radius: 10px;    
     padding-right: 10px;
     text-align: right;
+
 }
 
 .tab-content-title {
@@ -10202,24 +10203,24 @@ ul.state-bar li.selected:after {
         float:none;
         display:inline-block;
     }
-    .add-input {
+    /*.add-input {
         float:none;
         display:inline-block;
         vertical-align: top;
     }
     .add-input a {
         margin-left:0;
-    }
+    }*/
     .modal-btn-wrap .f-btn {
         width:84%;
         margin-right:0;
     }
-    .remove-field {
+    /*.remove-field {
         display: inline-block;
         font-size: 11px;
         margin: 14px 0 5px;
         vertical-align: top;
-    }
+    }*/
     .remove-field a {
         margin-left:3px;
     }
@@ -13245,4 +13246,10 @@ overflow: hidden;
     color:#ffffff;
 
 }
-  
+ #sucessful-popup{
+
+     width:591px;
+
+ }
+
+
