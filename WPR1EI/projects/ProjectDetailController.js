@@ -561,7 +561,7 @@
             //var grid = document.getElementById('gridInventory');
             //grid.data('kendoGrid').refresh();
             $('.k-i-refresh').trigger("click");
-
+  
            
 
         };
@@ -1223,6 +1223,45 @@
 
         };
 
+        //$scope.$on('REFRESH1', function (event, args) {
+
+        //    setTimeout(function () {
+        //        if (args == 'projectImage') {
+                   
+                  
+        //                //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
+        //                GetUrl = "Project/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
+
+        //                apiService.getWithoutCaching(GetUrl).then(function (response) {
+
+        //                    $scope.data = response.data;
+        //                    $scope.media_url = $scope.data[0].media_url;
+        //                    $scope.media_name = $scope.data[0].media_name;
+        //                    $scope.media_url1 = $scope.data[0].media_url1;
+        //                    $scope.media_url2 = $scope.data[0].media_url2;
+        //                    $scope.media_url3 = $scope.data[0].media_url3;
+        //                    $scope.media_url4 = $scope.data[0].media_url4;
+        //                    if ($scope.data[0].contact_mobile !== '') {
+        //                        $scope.mobile = $scope.data[0].contact_mobile;
+        //                    }
+        //                    if ($scope.data[0].contact_email !== '') {
+        //                        $scope.email = $scope.data[0].contact_Email;
+        //                    }
+        //                },
+        //                            function (error) {
+        //                                if (error.status === 400)
+        //                                    alert(error.data.Message);
+        //                                else
+        //                                    alert("Network issue");
+        //                            });
+        //            }
+
+    
+        //    }, 1500);
+
+        //});
+      
+
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'UserGrid') {
@@ -1239,7 +1278,7 @@
         $scope.$on('REFRESH', function (event, args)
         {
 
-            if (args == 'unit')
+          if (args == 'unit')
             {
                 projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
