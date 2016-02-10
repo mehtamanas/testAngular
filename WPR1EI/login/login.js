@@ -1,7 +1,7 @@
 angular.module('app.guest.login')
 
 .controller('LoginController',
-    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, $window, Idle, $cookies, $filter, apiService) {
+    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, $window, Idle, $cookies, $filter, apiService, usSpinnerService) {
         // Init model
         $scope.params = {
             email: '',
@@ -171,6 +171,34 @@ angular.module('app.guest.login')
             // you can let them resume their session by calling Idle.watch()
             console.log("IdleWarn");
         });
+
+        /*start   edited by pradip */
+
+        $scope.startcounter = 0;
+        $scope.$on('spinnerStart', function (event, key) {
+            if (!$scope.spinneractive) {
+                usSpinnerService.spin('spinner-1');
+                $scope.startcounter++;
+            }
+        })
+
+        $scope.$on('spinnerStop', function (event, key) {
+            if ($scope.spinneractive) {
+                usSpinnerService.stop('spinner-1');
+            }
+        })
+
+        $scope.spinneractive = false;
+
+        $rootScope.$on('us-spinner:spin', function (event, key) {
+            $scope.spinneractive = true;
+        });
+
+        $rootScope.$on('us-spinner:stop', function (event, key) {
+            $scope.spinneractive = false;
+        });
+
+        /*end   edited by pradip */
 
         $rootScope.$on('IdleTimeout', function () {
             // the user has timed out (meaning idleDuration + timeout has passed without any activity)
