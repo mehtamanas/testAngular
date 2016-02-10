@@ -96,12 +96,12 @@
                 {
                     //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
                     //"<span style='padding-left:10px' class='property-photo'> </span>",
-                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                    title: "",
+                    template: " <input type='checkbox' , class='checkbox', data-id='#= name #', ng-click='propertySelected($event,dataItem)'  />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='submit(dataItem)' />",
                     width: "60px",
                     attributes: {
                         "class": "UseHand",
-
+                        "style": "text-align:center"
                     }
                 },
 
@@ -134,7 +134,7 @@
                  attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
              },
               {
@@ -144,7 +144,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
               },
               {
@@ -154,7 +154,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
               },
               {
@@ -164,7 +164,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
               },
             {
@@ -174,7 +174,7 @@
                 attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
             },
             {
@@ -185,7 +185,7 @@
                 attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
             },
               {
@@ -196,7 +196,7 @@
                   attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
               },
                {
@@ -206,7 +206,7 @@
                    attributes:
                      {
                          "class": "UseHand",
-                         "style": "text-align:right"
+                         "style": "text-align:center"
                      }
                },
                 {
@@ -220,7 +220,7 @@
                      }
                 },
             {
-                
+               
                 field: "available_status",
                 title: "STATUS",
                 width: "120px",
@@ -279,6 +279,122 @@
 
         };
 
+
+
+        $scope.submit = function (e) {
+
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        }
+
+        $scope.propertySelected = function (e, data) {
+            console.log(e);
+            var element = $(e.currentTarget);
+            var checked = element.is(':checked')
+            row = element.closest("tr")
+            var id = data.tower_id;
+            var fnd = 0;
+            for (var i in $scope.checkedIds) {
+                if (id == $scope.checkedIds[i]) {
+                    $scope.checkedIds.splice(i, 1);
+                    fnd = 1;
+                }
+
+            }
+            if (fnd == 0) {
+                $scope.checkedIds.push(id);
+            }
+            if (checked) {
+                row.addClass("k-state-selected");
+            } else {
+                row.removeClass("k-state-selected");
+            }
+        }
+
+        $scope.GetValue = function (fruit) {
+
+            var fruitId = $scope.ddlFruits;
+            var fruitName = $.grep($scope.Fruits, function (fruit) {
+                return fruit.Id == fruitId;
+            })[0].Name;
+
+            $cookieStore.put('Selected Text', fruitName);
+            // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
+            alert("hiii");
+
+
+
+        }
+
+        $scope.soldProperty = function () {
+
+            var usersToBeAddedOnServer = [];
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', $scope.checkedIds);
+            // Add the new users
+            for (var i in $scope.checkedIds) {
+                var newMember = {};
+                newMember.id = $scope.checkedIds[i];
+                newMember.organization_id = $cookieStore.get('orgID');
+                newMember.available_status = 1;
+             
+                usersToBeAddedOnServer.push(newMember);
+            }
+
+            if (usersToBeAddedOnServer.length == 0) {
+                return;
+            }
+
+
+
+            apiService.post("Floors/StatusChange", usersToBeAddedOnServer).then(function (response) {
+                var loginSession = response.data;
+                $scope.openSucessfullPopup();
+                $rootScope.$broadcast('REFRESH', 'projectGrid');
+
+
+            },
+    function (error) {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
+    });
+
+            $scope.openSucessfullPopup = function () {
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'newuser/delete.html',
+                    backdrop: 'static',
+                    controller: DeleteController,
+                    size: 'md',
+                    resolve: { items: { title: "Project " } }
+
+                });
+                $rootScope.$broadcast('REFRESH', 'projectGrid');
+            }
+        }
+
+        $scope.Fruits = [{
+            Id: 1,
+            Name: 'SOLD'
+
+        }];
+        $scope.checkedIds = [];
+        $scope.showCheckboxes = function () {
+
+
+            for (var i in $scope.checkedIds) {
+
+               alert($scope.checkedIds[i]);
+            }
+        };
+
+
+     
+      
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);

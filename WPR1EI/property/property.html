@@ -21,14 +21,15 @@
         <form action="">
 
             <div class="clearfix">
+                <div class="pull-left actions-wrap">
+                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                            ng-change="GetValue();soldProperty()">
+                        <option value="" selected> ACTION </option>
+                    </select>
 
-                <!--<div class="pull-left actions-wrap">
-                    <select id="actions-option" class="form-control actions-option">
-                        <option>ACTIONS</option>
-                        <option>EDIT</option>
-                        <option>DELETE</option>
-                    </select> 
-                </div>-->
+                    <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                ng-change="GetValue()"></select>-->
+                </div>
             </div>
 
             <div id="record-content" class="properties-content">
