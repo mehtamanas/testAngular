@@ -263,6 +263,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
 
             });
             $rootScope.$broadcast('REFRESH', 'summery');
+         //   $rootScope.$broadcast('REFRESH1', 'projectImage');
         }
       
     };
