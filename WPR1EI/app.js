@@ -20,7 +20,7 @@ angular.module('MainApp', [
       'team',
     'contacts',
     'flow',
-   
+   'angularSpinner',
     'newuser',
    'organization',
    'subscription_list',

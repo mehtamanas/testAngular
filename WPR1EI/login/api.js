@@ -12,6 +12,9 @@ angular.module('services.api', ['restangular'])
 
         Restangular.addResponseInterceptor(function (response, operation, what, url) {    //inventory loader
             $rootScope.$broadcast('API:loading:ended');
+            if (what.indexOf("Authorization/Login") != -1) {
+                $rootScope.$broadcast('spinnerStop', 0);
+            }
             if (what.indexOf("Floors/GenerateTowerGrid") != -1) {
                 $rootScope.$broadcast('inventoryLoaded', 0);
             }
@@ -39,6 +42,9 @@ angular.module('services.api', ['restangular'])
                 what: what,
                 url: url
             };
+            if (what.indexOf("Authorization/Login") != -1) {
+                $rootScope.$broadcast('spinnerStart', 1);
+            }
 
             if (what.indexOf("Floors/GenerateTowerGrid") != -1) {
                 $rootScope.$broadcast('inventoryLoading', 1);
