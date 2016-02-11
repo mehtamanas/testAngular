@@ -24,7 +24,7 @@
                           
                         </div>
 
-                        <div class="project-detail-txt">
+                        <div  id ="btnAdd"class="project-detail-txt">
 
 
                             <div class="project-name">Name:  {{image.Contact_First_Name}} {{image.Contact_Last_Name}} <a id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
@@ -158,8 +158,8 @@
                             </div>
                         </div>  <!--AssignmentTo-->
 
-                        <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Notes <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()" style="cursor:pointer">+</a></div>
+                        <div class="leads_group" >
+                            <div class="tab-content-title">Notes <a  id ="btnAdd" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()" style="cursor:pointer">+</a></div>
                             <div kendo-grid k-options="NotesGrid" selectable="true" k-on-change="myGridChangeNote(dataItem)">
 
                             </div>

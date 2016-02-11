@@ -19,9 +19,7 @@ angular.module('contacts')
             if (nav.length > 0) {
 
                 for (i = 0; i < nav.length; i++) {
-                    if (nav[i].resource === "Projects") {
-                        $rootScope.projects = nav[i];
-                    }
+                    if (nav[i].resource === "Projects") $rootScope.projects = nav[i];
                     if (nav[i].resource === "Users") $rootScope.users = nav[i];
                     if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
                     if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
@@ -40,11 +38,11 @@ angular.module('contacts')
                 }
             }
 
-            if ($rootScope.projects.write) {
-                event.preventDefault();
+            if ($rootScope.contacts.write) {
+                
                 $('#btnSave').show();
-                $('#iconEdit').hide();
-                $('#btnAdd').hide();
+                $('#iconEdit').show();
+                $('#btnAdd').show();
             }
         });
 

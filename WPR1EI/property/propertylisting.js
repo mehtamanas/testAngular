@@ -24,10 +24,7 @@
             if (nav.length > 0) {
 
                 for (i = 0; i < nav.length; i++) {
-                    if (nav[i].resource === "Projects") {
-                        $rootScope.projects = nav[i];
-
-                    }
+                    if (nav[i].resource === "Projects")  $rootScope.projects = nav[i];
                     if (nav[i].resource === "Users") $rootScope.users = nav[i];
                     if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
 
@@ -53,11 +50,10 @@
 
 
 
-            if ($rootScope.projects.write) {
-                event.preventDefault();
+            if ($rootScope.property.write) {
                 $('#btnSave').show();
-                $('#iconEdit').hide();
-                $('#btnAdd').hide();
+                $('#iconEdit').show();
+                $('#btnAdd').show();
             }
 
 
@@ -322,7 +318,7 @@
 
             $cookieStore.put('Selected Text', fruitName);
             // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
-            alert("hiii");
+        //    alert("hiii");
 
 
 
@@ -351,8 +347,10 @@
 
             apiService.post("Floors/StatusChange", usersToBeAddedOnServer).then(function (response) {
                 var loginSession = response.data;
+          
                 $scope.openSucessfullPopup();
-                $rootScope.$broadcast('REFRESH', 'projectGrid');
+            //    $modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH', 'TowerListGrid');
 
 
             },
@@ -366,14 +364,14 @@
             $scope.openSucessfullPopup = function () {
                 var modalInstance = $modal.open({
                     animation: true,
-                    templateUrl: 'newuser/delete.html',
+                    templateUrl: 'property/sold.html',
                     backdrop: 'static',
-                    controller: DeleteController,
+                    controller: SoldController,
                     size: 'md',
-                    resolve: { items: { title: "Project " } }
+                    resolve: { items: { title: "Property " } }
 
                 });
-                $rootScope.$broadcast('REFRESH', 'projectGrid');
+                $rootScope.$broadcast('REFRESH', 'TowerListGrid');
             }
         }
 
@@ -392,7 +390,12 @@
             }
         };
 
-
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'TowerListGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+            $scope.ddlFruits = "ACTION";
+        });
      
       
         $scope.filterNow = function () {
