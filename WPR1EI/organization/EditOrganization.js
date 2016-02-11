@@ -16,7 +16,7 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
     if (orgID !== '') {
        
         GetUrl = "Organization/Get/" + orgID;
-        apiService.get(GetUrl).then(function (response) {
+        apiService.getWithoutCaching(GetUrl).then(function (response) {
 
             $scope.data = response.data[0];
 
@@ -50,7 +50,7 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
 
             $scope.country1 = response.data[0].country_id;
             $scope.city1 = response.data[0].city_id;
-
+            $scope.params.city = response.data[0].city_id;
             $scope.state1 = response.data[0].state_id;
             $scope.zip_code = $scope.data.zip_code;
 
@@ -130,7 +130,7 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
 
     Url = "ElementInfo/GetElementInfo?Id=" + orgID + "&&type=Organization";
 
-    apiService.get(Url).then(function (response) {
+    apiService.getWithoutCaching(Url).then(function (response) {
         data = response.data;
         a = 0, b = 0;
         for (i = 0; i < data.length; i++) {
