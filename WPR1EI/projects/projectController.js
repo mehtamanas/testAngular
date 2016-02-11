@@ -48,10 +48,9 @@ angular.module('project')
 
                 if ($rootScope.projects.write)
                 {
-                    event.preventDefault();
                     $('#btnSave').show();
-                    $('#iconEdit').hide();
-                    $('#btnAdd').hide();
+                    $('#iconEdit').show();
+                    $('#btnAdd').show();
                 }
           });
 

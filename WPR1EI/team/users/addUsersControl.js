@@ -1,7 +1,7 @@
 /**
  * Created by User on 10/28/2015.
  */
-var AddUsersController = function ($scope, $q, $cookieStore, teamService, teamData, $modalInstance) {
+var AddUsersController = function ($scope, $q, $cookieStore, teamService, $modal,teamData,$rootScope, $modalInstance) {
     //  alert("ff");
     $scope.usersInTeam = undefined;
     $scope.orgUsers = undefined;
@@ -121,11 +121,26 @@ var AddUsersController = function ($scope, $q, $cookieStore, teamService, teamDa
         $q.all(updatePromisses).then(function (results) {
             if (results.length > 0) {
                 loadUsers();
-                alert('Team members updated successfully.')
+               // alert('Team members updated successfully.')
                 $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
             }
         }, function (errors) {
-            alert('Team members are failed to update.')
+            //alert('Team members are failed to update.')
         });
     };
+
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'projects/AddSuccessful.html',
+            backdrop: 'static',
+            controller: AddController,
+            size: 'md',
+            resolve: { items: { title: "User" } }
+        });
+
+        $rootScope.$broadcast('REFRESH', 'UserGrid');
+    };
+
 };

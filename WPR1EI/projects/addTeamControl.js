@@ -1,7 +1,7 @@
 /**
  * Created by User on 10/28/2015.
  */
-var AddTeamController = function ($scope, $q, $cookieStore, projectService, projectData, $modalInstance, $rootScope) {
+var AddTeamController = function ($scope, $q, $cookieStore, projectService, projectData, $modal,$modalInstance, $rootScope) {
   //  alert("ff");
     $scope.usersInTeam = undefined;
     $scope.OrgTeams = undefined;
@@ -129,12 +129,26 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
         $q.all(updatePromisses).then(function (results) {
             if (results.length > 0) {
                 loadProjects();
-                alert('User members updated successfully.')
+              // alert('User members updated successfully.')
                 $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
                 $rootScope.$broadcast('REFRESH', 'TeamsGrid');
             }
         }, function (errors) {
-            alert('User members are failed to update.')
+           // alert('User members are failed to update.')
         });
+    };
+
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'projects/AddSuccessful.html',
+            backdrop: 'static',
+            controller: AddController,
+            size: 'md',
+            resolve: { items: { title: "Team" } }
+        });
+
+        $rootScope.$broadcast('REFRESH', 'TeamsGrid');
     };
 };
