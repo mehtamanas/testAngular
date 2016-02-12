@@ -204,6 +204,10 @@
                                                            ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/"
                                                            required />
                                                 </label>
+                                                <label class="normal-message"
+                                                       data-ng-if="!(newForm.email.$invalid && (!newForm.email.$pristine || showValid))">
+                                                    Use at least 8 characters which must contain atleast one uppercase,one lowercase,one number and special character.
+                                                </label>
                                                 <div class="text-danger"
                                                      data-ng-if="newForm.password.$invalid && (!newForm.password.$pristine || showValid) && !newForm.password.$focus">
                                                     {{ 'Enter valid password'| translate }}

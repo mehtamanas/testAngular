@@ -14,13 +14,16 @@ angular.module('app.guest.login')
     function ($scope, $state, COUNTRIES, apiService, $cookieStore, $rootScope) {
         $scope.countryList = COUNTRIES;
         $scope.breadcrumb = 1;
-
+        
         $(document).ready(function () {
             $("#orgz_name").focus();
         });
-         
+
         $scope.Sub_Name = $cookieStore.get('Sub_Name');
         $scope.radioValue = "1";
+
+       
+
 
         $rootScope.title = 'Dwellar./Organization';
         $scope.signup = function () {
@@ -77,7 +80,6 @@ angular.module('app.guest.login')
         $scope.params.street_2 = $cookieStore.get('Street_2');
         $scope.params.street_3 = $cookieStore.get('Street_3');
        
-        $scope.params.state = $cookieStore.get('State');
         $scope.state1 = $cookieStore.get('State');
         $scope.params.city = $cookieStore.get('City');
         $scope.city1 = $cookieStore.get('City');
@@ -120,7 +122,6 @@ angular.module('app.guest.login')
 
         $scope.selectstate = function () {
             $scope.params.state = $scope.state1;
-            $scope.city1 = "";
             //alert($scope.params.state);
         };
 
@@ -144,7 +145,6 @@ angular.module('app.guest.login')
             $scope.params.city = $scope.city1;
             //alert($scope.params.city);
         };
-
 
         UserCreate = function (param) {
             //     alert('inuserCreate');
@@ -206,34 +206,6 @@ angular.module('app.guest.login')
             $state.go('thanks');
         };
 
-        $scope.organization = {
-            Id: '',
-            street_1: $cookieStore.get('Street_1'),
-            street_2: $cookieStore.get('Street_2'),
-            street_3: $cookieStore.get('Street_3'),
-            city: $cookieStore.get('City'),
-            state: $cookieStore.get('State'),
-            zip_code: $cookieStore.get('zip_code'),
-            country: $cookieStore.get('Country')
-        };
-        $scope.subscription = {
-            organization_id: '',
-            Subscription_Name: $scope.Sub_Name
-        };
-
-        $scope.params = {
-            first_name: $cookieStore.get('First_Name'),
-            last_name: $cookieStore.get('Last_Name'),
-            account_email: $cookieStore.get('Account_Email'),
-            account_phone: $cookieStore.get('Phone'),
-            account_country: $cookieStore.get('Account_Country'),
-            Password: $cookieStore.get('Hash'),
-            OrgName: $cookieStore.get('orgName'),
-            who_am_i: $cookieStore.get('who_am_i')
-            //   Organization_Id: ''
-
-        };
-
 
         $scope.addPersonalInfo = function (isValid) {
             $scope.showValid = true;
@@ -257,7 +229,40 @@ angular.module('app.guest.login')
                 else {
                     ($cookieStore.put("who_am_i", "Builder"));
                 }
+
                 
+                
+
+                $scope.organization = {
+                    Id: '',
+                    street_1: $cookieStore.get('Street_1'),
+                    street_2: $cookieStore.get('Street_2'),
+                    street_3: $cookieStore.get('Street_3'),
+                    city: $cookieStore.get('City'),
+                    state: $cookieStore.get('State'),
+                    zip_code: $cookieStore.get('zip_code'),
+                    country: $cookieStore.get('Country')
+                };
+                $scope.subscription = {
+                    organization_id: '',
+                    Subscription_Name: $scope.Sub_Name
+                };
+
+                $scope.params = {
+                    first_name: $cookieStore.get('First_Name'),
+                    last_name: $cookieStore.get('Last_Name'),
+                    account_email: $cookieStore.get('Account_Email'),
+                    account_phone: $cookieStore.get('Phone'),
+                    account_country: $cookieStore.get('Account_Country'),
+                    Password: $cookieStore.get('Hash'),
+                    OrgName: $cookieStore.get('orgName'),
+                    who_am_i: $cookieStore.get('who_am_i')
+                    //   Organization_Id: ''
+
+                };
+
+
+               
                 $cookieStore.get('who_am_i')
                 if ($rootScope.subscriptionType == "Basic")
                 {
