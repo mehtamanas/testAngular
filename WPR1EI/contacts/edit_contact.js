@@ -80,7 +80,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Contact";
 
-    apiService.get(Url).then(function (response) {
+    apiService.getWithoutCaching(Url).then(function (response) {
         data = response.data;
         a = 0, b = 0, c = 0;
         for (i = 0; i < data.length; i++) {
@@ -114,7 +114,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
 
-        $scope.params.media_url = response[0].Location;
+        $scope.params.Contact_Image = response[0].Location;
         uploader_done = true;
         if (uploader_done == true) {
             $scope.showProgress = false;
@@ -156,7 +156,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            organization_id: $cookieStore.get('orgID'),
            class_type: "Contact",
            //media_name: uploadResult.Name,
-           media_url: $scope.params.media_url,
+           media_url: $scope.params.Contact_Image,
            age: $scope.params.age,
            gender: $scope.gender,
            people_type: $scope.people_type,

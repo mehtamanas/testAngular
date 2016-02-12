@@ -547,7 +547,7 @@
         });
         $scope.$on('inventoryLoading', function (event, args) {
             if (args == 1) {
-                $scope.width = 5;
+                $scope.width = 100;
                 //setInterval($scope.width + 2, 2000);
             }
         });
@@ -948,27 +948,12 @@
             alert("Network issue");
     });
 
-        $scope.removeImage = function (index) {
-            var id = $scope.Gallery[index].id;
-            $scope.Gallery[index] = undefined;
-            var postdata = {id:id}
-
-            apiService.post("MediaElement/Delete", postdata).then(function (response) {
-                var loginSession = response.data;
-               alert(" Deleted Successfully...");
-                $modalInstance.dismiss();
-                $scope.openSucessfullPopup();
-            },
 
 
-        function (error) {
-            if (error.status === 400)
-                alert(error.data.Message);
-            else
-                alert("Network issue");
-        });
-           
-        }
+
+    
+
+
 
 
         $scope.openNewAmenityPopup = function () {
@@ -1012,8 +997,43 @@
             });
         };
 
+        $scope.removeImage = function (index) {
+            var id = $scope.Gallery[index].id;
+            $scope.Gallery[index] = undefined;
+            var postdata = { id: id }
 
+            apiService.post("MediaElement/Delete", postdata).then(function (response) {
+                var loginSession = response.data;
+                //$modalInstance.dismiss();
+                $scope.openSucessfullPopup();
+
+            },
+
+
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
+            $scope.openSucessfullPopup = function () {
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'newuser/delete.html',
+                    backdrop: 'static',
+                    controller: DeleteController,
+                    size: 'md',
+                    resolve: { items: { title: "Image" } }
+                   
+                    
+                });
+                $rootScope.$broadcast('REFRESH', 'images');
+            }
+
+    }
       
+       
+
 
         function callApis() {
 
