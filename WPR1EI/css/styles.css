@@ -6628,7 +6628,7 @@ div.k-grid-footer {
     border:1px solid #e1e1e1;
     border-radius: 3px;
     overflow: hidden;
-    background:#f5f5f5;
+    /*background:#f5f5f5;*/
     position:relative;
     
 }
@@ -7217,6 +7217,14 @@ div.k-grid-footer {
     margin-top:9px;
 }
 
+.add-input3 a {
+    margin-top:34px;
+}
+.add-input4 a{
+
+  margin-top:44px;
+
+}
 .close-btn-wrap {
     position:relative;
     height:30px;
@@ -7295,7 +7303,7 @@ div.k-grid-footer {
 .form-content .form-bx6 label {
     font-weight: normal;
     color:#b4b4b4;
-    font-size: 15px;
+    /*font-size: 15px;*/
     display:block;
 } 
 
@@ -11966,7 +11974,14 @@ LEFT
 .bx-h1 {
     margin-bottom: 24px;
 }
-
+.bx-h2 {
+   height:500px;  
+    background:#e7e7e7;
+      border-width: 1px; 
+      margin-bottom:24px; 
+      width:600px;
+       margin-left:20px;
+}
 .bx-h1-head {
     background:#2799e7;
     color:#fff;
@@ -13253,3 +13268,53 @@ overflow: hidden;
  }
 
 
+ /*start kiosk setting*/
+
+  .kiosk-f-btn1{
+
+   width: 233px;
+   float: left;
+   margin-right: 11px;
+   font-size: 14px;
+   margin-left: 21px;
+   background:#11abec;
+   border:none;
+   color:#fff;
+   font-weight:bold;
+   display:block;
+   padding:16px 25px;
+   border-radius:4px;
+  }
+
+  .kiosk-f-btn3 {
+    background:#646464;
+    width: 233px;
+   float: left;
+   margin-right: 11px;
+   font-size: 14px;
+   margin-left: 21px;
+    border:none;
+   color:#fff;
+   font-weight:bold;
+   display:block;
+   padding:16px 25px;
+   border-radius:4px;
+}
+
+
+  .bx-h2 {
+   height:500px;  
+    background:#e7e7e7;
+      border-width: 1px; 
+      margin-bottom:24px; 
+      width:600px;
+       margin-left:20px;
+}
+  /*end kiosk setting*/
+
+
+  .user_list_item{
+
+   text-align:left;
+
+  }
