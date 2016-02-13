@@ -21,10 +21,11 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
         $state.go('newuser.sucessfull');
     }
     $scope.newuse = function () {
-        var schemeupdate = [];
+        var im = 0;
         email = $scope.params.account_email;
         var emails = email.split(",");
         for (i = 0; i < emails.length; i++) {
+            var schemeupdate = [];
             var userscheme = {};
             userscheme.first_name = $scope.first_name,
             userscheme.last_name = $scope.last_name,
@@ -33,18 +34,25 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
             userscheme.organization_id = $scope.Organization,
 
             schemeupdate.push(userscheme);
-        }
-        Url = "Register/InviteUser";
-        apiService.post(Url, schemeupdate).then(function (response) {
-            var loginSession = response.data;
-            $scope.opendonePopup();
-            $modalInstance.dismiss();
-            $rootScope.$broadcast('REFRESH', 'mainGridOptions');
-        },
-   function (error) {
-       alert("User Already Exists ");
 
-   });
+            Url = "Register/InviteUser";
+            apiService.post(Url, schemeupdate).then(function (response) {
+                var loginSession = response.data;
+                im++;
+                if (im == emails.length) {
+                    $scope.opendonePopup();
+                    $modalInstance.dismiss();
+                    $rootScope.$broadcast('REFRESH', 'mainGridOptions');
+                }
+            },
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
+        }
+       
     }
 
     //Audit log start															

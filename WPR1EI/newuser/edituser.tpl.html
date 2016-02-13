@@ -4,7 +4,7 @@
   
 
             <div class="modal-body">
-                <form class="form-content" name="newForm" autocomplete="off" novalidate
+                <form class="form-content" name="newForm" autocomplete="off" 
                       data-ng-submit="addNewUser(newForm.$valid)">
 
                     <!--<div class="modal-header">-->
@@ -171,17 +171,18 @@
 
 
                         <div class="form-bx2">
+                            <div class="form-group">
+                                <select kendo-multi-select k-options="selectOptions" name="role" id="edituser_role" k-ng-model="role_name" k-on-change="selectrole()" class="dropdown form-control" required></select>
+                                <div class="field-mdl field-req">*</div>
 
-                            <select kendo-multi-select k-options="selectOptions" id="edituser_role" k-ng-model="role_name" k-on-change="selectrole()" class="dropdown form-control"></select>
-                            <div class="field-mdl field-req">*</div>
-                        </div>
 
-                        <div ng-messages="newForm.role_name.$error" style="color:maroon" role="alert">
-                            <div ng-message="required" data-ng-if="newForm.role_name.$invalid && (!newForm.role_name.$pristine || showValid) && !newForm.role_name.$focus">This field should not be empty </div>
-                            <div ng-message="pattern">Enter valid last name</div>
-                        </div>
+                                <div ng-messages="newForm.role.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="newForm.role.$invalid && (!newForm.role.$pristine || showValid)">This field should not be empty </div>
+                                
+                                </div>
+                            </div>
+                            </div>
                     </div>
-                    
 
 
                     <div ng-repeat="choice in choices2">
@@ -214,7 +215,7 @@
 
                     <div class="clearfix">
                         <div class="form-bx form-bx3">
-                            <select ng-model="state1" ng-change="selectstate()" id="edituser_state" class="dropdown form-control" required>
+                            <select ng-model="state1" ng-change="selectstate()" id="edituser_state" class="dropdown form-control">
                                 <option value="" selected>state</option>
                                 <option ng-repeat="state in states"
                                         value="{{state.state_id}}">
@@ -226,7 +227,7 @@
 
                         <div class="field-mdl field-mdl2 field-req"></div>
                         <div class="form-bx form-bx3">
-                            <select ng-change="selectcity()" ng-model="city1" id="edituser_city" class="dropdown form-control" required>
+                            <select ng-change="selectcity()" ng-model="city1" id="edituser_city" class="dropdown form-control">
                                 <option value="" selected>City</option>
                                 <option ng-repeat="city in cities  | filter:filterExpression"
                                         value="{{city.city_id}}">
@@ -260,7 +261,7 @@
                     </div>
 
 
-                    <div class="progress" ng-show="showProgress">
+                    <div class="progress" ng-show="((uploader.progress)/1)>0">
                         <div class="progress-bar" role="progressbar"
                              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                     </div>

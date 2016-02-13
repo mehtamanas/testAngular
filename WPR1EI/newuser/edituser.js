@@ -59,7 +59,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
     Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=User";
 
-    apiService.get(Url).then(function (response) {
+    apiService.getWithoutCaching(Url).then(function (response) {
         data = response.data;
         a = 0, b = 0, c = 0;
         for (i = 0; i < data.length; i++) {

@@ -14,16 +14,13 @@ angular.module('app.guest.login')
     function ($scope, $state, COUNTRIES, apiService, $cookieStore, $rootScope) {
         $scope.countryList = COUNTRIES;
         $scope.breadcrumb = 1;
-        
+
         $(document).ready(function () {
             $("#orgz_name").focus();
         });
-
+         
         $scope.Sub_Name = $cookieStore.get('Sub_Name');
         $scope.radioValue = "1";
-
-       
-
 
         $rootScope.title = 'Dwellar./Organization';
         $scope.signup = function () {
@@ -80,6 +77,7 @@ angular.module('app.guest.login')
         $scope.params.street_2 = $cookieStore.get('Street_2');
         $scope.params.street_3 = $cookieStore.get('Street_3');
        
+        $scope.params.state = $cookieStore.get('State');
         $scope.state1 = $cookieStore.get('State');
         $scope.params.city = $cookieStore.get('City');
         $scope.city1 = $cookieStore.get('City');
@@ -122,6 +120,7 @@ angular.module('app.guest.login')
 
         $scope.selectstate = function () {
             $scope.params.state = $scope.state1;
+            $scope.city1 = "";
             //alert($scope.params.state);
         };
 
@@ -145,67 +144,6 @@ angular.module('app.guest.login')
             $scope.params.city = $scope.city1;
             //alert($scope.params.city);
         };
-
-        UserCreate = function (param) {
-            //     alert('inuserCreate');
-            var userNorg = "";
-
-            userNorg = 'Register/UserWithOrg';
-            apiService.post(userNorg, param).then(function (response) {
-                var loginSession = response.data;
-                //alert("Email has been sent for Approval..!! Login to Continue...");
-
-                //                   alert("org_id" + loginSession.Organization_Id);
-                $scope.organization.Id = loginSession.Organization_Id;
-                $scope.subscription.organization_id = loginSession.Organization_Id;
-                // alert('Org id - :' + $scope.organization.Id);
-                $cookieStore.put('Organization_id', $scope.subscription.organization_id);
-                new OrganizationEdit($scope.organization);
-
-
-            },
-               function (error) {
-                   console.log("Error" + error.state);
-               });
-        };
-
-        OrganizationEdit = function (paramsOrg) {
-            //   alert('inOrgEdit');
-            var orgEdit = "";
-            orgEdit = 'Organization/CreateOrgAddress';
-            apiService.post(orgEdit, paramsOrg).then(function (response) {
-                var loginSession = response.data;
-                //   alert("Organization has been Created..!!");   
-
-                new SubscriptionCreate();
-
-            },
-                function (error) {
-                    alert("User Already Exists.....Choose Another Email-id");
-                });
-        };
-
-        SubscriptionCreate = function () {
-            //  alert('inSubscription');
-            var subCreate = "";
-            subCreate = 'OrgSubscription/Create';
-
-
-            //   alert($scope.subscription.organization_id);
-            //alert($scope.subscription.Subscription_Name);
-
-            apiService.post(subCreate, $scope.subscription).then(function (response) {
-                var loginSession = response.data;
-
-                //alert("Subscription has been Created..!!");
-
-            },
-                function (error) {
-                    console.log("Error" + error.state);
-                });
-            $state.go('thanks');
-        };
-
 
         $scope.addPersonalInfo = function (isValid) {
             $scope.showValid = true;
@@ -262,7 +200,65 @@ angular.module('app.guest.login')
                 };
 
 
-               
+                UserCreate = function (param) {
+                    //     alert('inuserCreate');
+                    var userNorg = "";
+
+                    userNorg = 'Register/UserWithOrg';
+                    apiService.post(userNorg, param).then(function (response) {
+                        var loginSession = response.data;
+                        //alert("Email has been sent for Approval..!! Login to Continue...");
+
+                        //                   alert("org_id" + loginSession.Organization_Id);
+                        $scope.organization.Id = loginSession.Organization_Id;
+                        $scope.subscription.organization_id = loginSession.Organization_Id;
+                        // alert('Org id - :' + $scope.organization.Id);
+                        $cookieStore.put('Organization_id', $scope.subscription.organization_id);
+                        new OrganizationEdit($scope.organization);
+
+
+                    },
+                       function (error) {
+                           console.log("Error" + error.state);
+                       });
+                };
+
+                OrganizationEdit = function (paramsOrg) {
+                    //   alert('inOrgEdit');
+                    var orgEdit = "";
+                    orgEdit = 'Organization/CreateOrgAddress';
+                    apiService.post(orgEdit, paramsOrg).then(function (response) {
+                        var loginSession = response.data;
+                        //   alert("Organization has been Created..!!");   
+
+                        new SubscriptionCreate();
+
+                    },
+                        function (error) {
+                            alert("User Already Exists.....Choose Another Email-id");
+                        });
+                };
+
+                SubscriptionCreate = function () {
+                    //  alert('inSubscription');
+                    var subCreate = "";
+                    subCreate = 'OrgSubscription/Create';
+
+
+                    //   alert($scope.subscription.organization_id);
+                    //alert($scope.subscription.Subscription_Name);
+
+                    apiService.post(subCreate, $scope.subscription).then(function (response) {
+                        var loginSession = response.data;
+
+                        //alert("Subscription has been Created..!!");
+
+                    },
+                        function (error) {
+                            console.log("Error" + error.state);
+                        });
+                    $state.go('thanks');
+                };
                 $cookieStore.get('who_am_i')
                 if ($rootScope.subscriptionType == "Basic")
                 {

@@ -17,55 +17,7 @@
 
                    
 
-                    <!--<div class="clearfix">
-
-                        <div class="form-bx">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                                        'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
-                                                                        'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
-                                                                    }">
-                                <input type="text" autofocus name="firstName" class="form-control"
-                                       placeholder="First Name"
-                                       data-ng-model="params.first_name"
-                                       minlength="1"
-                                       maxlength="40"
-                                       alphabets-only
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
-                                    {{ 'Please enter alphabets only' | translate }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field-mdl field-req">*</div>
-
-                        <div class="form-bx">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                                        'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
-                                                                        'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
-                                                                     }">
-                                <input type="text" name="lastName" class="form-control"
-                                       placeholder="Last Name"
-                                       data-ng-model="params.last_name"
-                                       minlength="1"
-                                       maxlength="50"
-                                       alphabets-only
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
-                                    {{ 'Please enter alphabets only' | translate }}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>-->
+                
                     <div class="clearfix">
                         <div class="form-group"
                              data-ng-class="{
@@ -79,7 +31,7 @@
                                     <input autofocus name="email" class="form-control" id="newuseradd_email" type="text"
                                            placeholder="Enter the Email Address"
                                            data-ng-model="params.account_email"
-                                           ng-pattern="/^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$/"
+                                          
                                            required />
                                   
                                     <div class="text-danger"
