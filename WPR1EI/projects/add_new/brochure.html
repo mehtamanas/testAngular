@@ -9,7 +9,34 @@
 
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
-                    <h4 class="form-title">Upload PDF Brochure</h4>
+
+                    <h4 class="form-title">Add Brochure</h4>
+
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
+                                                    'has-error' : addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid),
+                                                    'has-success': addNewForm.notes.$valid && !addNewForm.notes.$pristine
+                                                 }">
+
+                            <div class="form-group form-bx form-bx8">
+                                <label for="">Notes</label>
+                                <input type="text" autofocus name="notes" class="form-control" id="gallery_notes"
+                                       placeholder="Add Notes "
+                                       data-ng-model="params.notes"
+                                       minlength="1"
+                                       maxlength="50"
+                                       alphabets-only
+                                       required />
+                            </div>
+                            <div class="text-danger"
+                                 data-ng-if="addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus">
+                                {{ 'Enter a proper note' | translate }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<h4 class="form-title">Upload PDF Brochure</h4>-->
                     <div class="row">
 
                         <div class="clearfix image-upload-container">

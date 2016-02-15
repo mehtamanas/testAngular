@@ -73,6 +73,7 @@
             organization_id: $cookieStore.get('orgID'),
             class_id: window.sessionStorage.selectedCustomerID,
             media_name: uploadResult.Name,
+            notes: $scope.params.notes,
             class_type: "Project",
             media_type: "Pdf_start",
         
@@ -110,7 +111,7 @@
         // TODO: Need to get these values dynamically
         
         var postData1 = {
-
+            notes: $scope.params.notes,
             media_url: uploadResult1.Location,
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
@@ -201,7 +202,7 @@
 
 
     $scope.params = {
-        
+        notes: $scope.notes,
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId')
     };

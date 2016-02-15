@@ -92,7 +92,9 @@ angular.module('security', [
 
                 if (error.status === 400)
                 {
+                    $rootScope.$broadcast('spinnerStop', 0);
                     var modalInstance = $modal.open({
+
                         animation: true,
                         templateUrl: 'login/error.tpl.html',
                         backdrop: 'static',

@@ -276,6 +276,8 @@ angular.module('project')
               } else {
                   row.removeClass("k-state-selected");
               }
+
+           
           }
 
 
