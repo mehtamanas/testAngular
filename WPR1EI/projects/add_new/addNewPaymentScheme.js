@@ -29,7 +29,7 @@
         device_mac_id: "34:#$::43:434:34:45",
         module_id: "Wing",
         action_id: "Wing View",
-        details: "ProjectDetail",
+        details: "PaymentAdd",
         application: "angular",
         browser: $cookieStore.get('browser'),
         ip_address: $cookieStore.get('IP_Address'),

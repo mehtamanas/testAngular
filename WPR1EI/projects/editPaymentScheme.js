@@ -152,13 +152,13 @@ function (error) {
             for (var i in $scope.choices2) {
                 var newscheme = {};
 
-                newscheme.user_id = $cookieStore.get('userId');
-                newscheme.organization_id = $cookieStore.get('orgID');
+                 newscheme.user_id = $cookieStore.get('userId');
+                 newscheme.organization_id = $cookieStore.get('orgID');
                 newscheme.description = $scope.choices2[i].description;
                 newscheme.percentage = $scope.choices2[i].percentage;
-                newscheme.project_id = window.sessionStorage.selectedCustomerID;
+                  newscheme.project_id = window.sessionStorage.selectedCustomerID;
                 newscheme.id = $scope.choices2[i].payment_schedule_Detail_id;
-                newscheme.payment_schedule_id = $cookieStore.get('payment_schedule_id');
+                newscheme.payment_schedule_id =$cookieStore.get('payment_schedule_id');
 
                 schemeupdate.push(newscheme);
             }

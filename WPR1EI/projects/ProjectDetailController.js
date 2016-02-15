@@ -1448,7 +1448,7 @@
             {
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
-                    $scope.Gallery = response.data;
+                    $scope.Gallery2 = response.data;
                 },
            function (error)
            {

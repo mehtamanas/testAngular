@@ -64,17 +64,20 @@
 
 
         };
+
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/sucessfull.tpl.html',
+                templateUrl: 'projects/Added.tpl.html',
                 backdrop: 'static',
-                controller: sucessfullController,
+                controller: AddController,
                 size: 'md',
                 resolve: { items: { title: "Image" } }
             });
+
             $rootScope.$broadcast('REFRESH', 'images');
         };
+
 
         //alert(user_id);
 
