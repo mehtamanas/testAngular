@@ -469,7 +469,7 @@ html body .k-button-bare {
 }
 
 .k-i-close, .k-delete, .k-group-delete {
-    background-position: -32px -16px;
+    background-position: -15px -16px;
 }
 
 .k-link:not(.k-state-disabled):hover > .k-i-close, .k-link:not(.k-state-disabled):hover > .k-delete, .k-link:not(.k-state-disabled):hover > .k-group-delete, .k-state-hover > .k-i-close, .k-state-hover > .k-delete, .k-state-hover > .k-group-delete, .k-state-hover > * > .k-i-close, .k-state-hover > * > .k-delete, .k-state-hover > * > .k-group-delete, .k-button:not(.k-state-disabled):hover .k-i-close, .k-button:not(.k-state-disabled):hover .k-delete, .k-button:not(.k-state-disabled):hover .k-group-delete, .k-textbox:hover .k-i-close, .k-textbox:hover .k-delete, .k-textbox:hover .k-group-delete, .k-button:active .k-i-close, .k-button:active .k-delete, .k-button:active .k-group-delete {
