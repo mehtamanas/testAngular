@@ -298,7 +298,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.choices = [{ id: 'choice1' }];
 
-    $(document).on("click", ".remove-field", function () {
+    $(document).on("click", ".remove-field2", function () {
         var removedElement = $(this).parent().find('#editcontact_email').val();
         var removedElement1 = $(this).parent().find('#editcontact_phone').val();
         var fnd = 0;
@@ -325,7 +325,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     $scope.choices = [{ id: 'choice1' }];
     $scope.addNewChoice = function (e) {
         var classname = e.currentTarget.className;
-        if (classname == 'remove-field') {
+        if (classname == 'remove-field2') {
 
         }
         else if ($scope.choices.length) {
@@ -337,7 +337,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.addNewChoice1 = function (e) {
         var classname = e.currentTarget.className;
-        if (classname == 'remove-field') {
+        if (classname == 'remove-field2') {
 
         }
         else if ($scope.choices1.length) {
@@ -352,7 +352,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
-        if (classname == 'remove-field') {
+        if (classname == 'remove-field2') {
             var wrappedResult = angular.element(this);
             wrappedResult.parent().remove();
             $scope.choices2.pop();

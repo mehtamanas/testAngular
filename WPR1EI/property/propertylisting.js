@@ -307,6 +307,7 @@
             } else {
                 row.removeClass("k-state-selected");
             }
+
         }
 
         $scope.GetValue = function (fruit) {

@@ -201,8 +201,17 @@ angular.module('contacts')
                      }
                 },
                  {
-                     field: "Name",
-                     title: "Name",
+                     field: "Contact_First_Name",
+                     title: "First Name",
+                     width: "120px",
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+
+                     }
+                 }, {
+                     field: "Contact_First_Name",
+                     title: "Last Name",
                      width: "120px",
                      attributes: {
                          "class": "UseHand",

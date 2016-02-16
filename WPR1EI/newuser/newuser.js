@@ -155,6 +155,18 @@ angular.module('newuser')
 
           }
 
+          $scope.inactive = function () {
+              var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'newuser/inactive.html',
+                  backdrop: 'static',
+                  controller: InactiveController,
+                  size: 'md',
+                 resolve: { items: { title: "User" } }
+              });
+
+          }
+
 
           $scope.optionPopup = function () {
               var modalInstance = $modal.open({
@@ -171,16 +183,17 @@ angular.module('newuser')
 
 
 
-          $scope.GetValue = function (id,name)
-          {
+          $scope.GetValue = function (fruit) {
 
-              var fruitId = id;
-              var fruitName = name;
+              var fruitId = $scope.ddlFruits;
+              var fruitName = $.grep($scope.Fruits, function (fruit) {
+                  return fruit.Id == fruitId;
+              })[0].Name;
 
               $cookieStore.put('Selected Text', fruitName);
               // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
 
-             
+
 
 
           }
@@ -217,23 +230,10 @@ angular.module('newuser')
                   $state.go($scope.optionPopup())
 
               }
-              else if ($cookieStore.get('Selected Text') == "Block") {
+              else if ($cookieStore.get('Selected Text') == "INACTIVE") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
-                    
-                      $state.go($scope.openBlockPopup())
-                      $modalInstance.dismiss();
-                  },
-      function (error) {
-
-      });
-
-              }
-              else if ($cookieStore.get('Selected Text') == "Inactive") {
-                  apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
-                      var loginSession = response.data;
-                      $state.go($scope.openInactivePopup())
-                      $rootScope.$broadcast('REFRESH', 'mainGridOptions');
+                      $state.go($scope.inactive())
                   },
       function (error) {
 
@@ -283,18 +283,29 @@ angular.module('newuser')
                           "class": "UseHand",
                           "style": "text-align:center"
                       }
-              },
+              }, {
+                    field: "first_name",
+                        title: "First Name",
 
-                    {
-                        field: "first_name",
-                        title: "Name",
-
-                        width: "100px",
-                        attributes: {
+                      width: "100px",
+                      attributes: {
                             "class": "UseHand",
                             "style": "text-align:center"
-                        }
-                    },
+                       }
+              }, {
+                  field: "last_name",
+                  title: "Last Name",
+                  width: "100px",
+
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+
+                  }
+
+              },
+
+
       {
           field: "account_email",
           title: "Email",
@@ -309,7 +320,7 @@ angular.module('newuser')
       }, {
           // template: '<p class="#:Status==\"Active\"? \"user_status_active\" : \"("#:Status==\"INACTIVATE\"? \"user_status_inactive\" : \"user_status_pending\"#")\"#">#= Status #</p>',
           template: '<p id="#= Status #" class="#:Status==\"Active\"? \"user_status_active\" : (\"user_status_inactive\")#">#= Status #</p>',
-          width: "80px",
+          width: "100px",
           title: "Status",
           attributes:
           {
@@ -388,13 +399,9 @@ angular.module('newuser')
               
               ]
           };
-          $scope.Fruits = [{
-              Id: 1,
-              Name: 'BLOCK',
-            
-          }, {
+          $scope.Fruits = [ {
               Id: 2,
-              Name: 'Inactive',
+              Name: 'INACTIVE',
              
           //}, {
           //    Id: 3,
@@ -449,6 +456,7 @@ angular.module('newuser')
               } else {
                   row.removeClass("k-state-selected");
               }
+             
           }
 
           function RefreshGrid() {
@@ -462,85 +470,12 @@ angular.module('newuser')
               if (args == 'mainGridOptions') {
                   $('.k-i-refresh').trigger("click");
               }
+              $scope.ddlFruits = "ACTION";
           });
 
 
+       
 
-          
-
-          //        //group: {
-          //        //    field: 'sport'
-          //        //}
-          //    },
-          //    groupable: true,
-          //    sortable: true,
-          //    selectable: "multiple",
-          //    reorderable: true,
-          //    resizable: true,
-          //    filterable: true,
-          //    pageable: {
-          //        refresh: true,
-          //        pageSizes: true,
-          //        buttonCount: 5
-          //    },
-          //    columns: [
-          //                   {
-          //                       //template: "<img height='40px' width='40px' src='assets/images/image-2.jpg' />" +
-          //                       //"<span style='padding-left:10px' class='customer-name'>#: first_name #</span>",
-          //                       field: "Name",
-          //                       title: " Name",
-          //                       width: "120px",
-          //                       attributes: {
-          //                           "class": "UseHand",
-
-          //                       }
-          //                   }, {
-          //                       field: "User_Count",
-          //                       title: "Users",
-          //                       width: "120px",
-          //                       attributes: {
-          //                           "class": "UseHand",
-
-          //                       }
-
-          //                   }, {
-          //                       field: "Project_Count",
-          //                       title: "Projects",
-          //                       width: "120px",
-          //                       attributes: {
-          //                           "class": "UseHand",
-
-          //                       }
-
-          //                   }, {
-          //                       field: "Property_Count",
-          //                       title: "Property Listings",
-          //                       width: "120px",
-          //                       attributes: {
-          //                           "class": "UseHand",
-
-          //                       }
-
-          //                   }, {
-          //                       field: "People_Count",
-          //                       title: "People",
-          //                       width: "120px",
-          //                       attributes: {
-          //                           "class": "UseHand",
-
-          //                       }
-
-          //                   }, {
-          //                       field: "Task_Count",
-          //                       title: "Tasks",
-          //                       width: "120px",
-          //                       attributes: {
-          //                           "class": "UseHand",
-
-          //                       }
-
-          //                   }]
-          //};
 
           // Kendo Grid on change
           $scope.myGridChange = function (dataItem) {
@@ -638,17 +573,17 @@ angular.module('newuser')
               });
           };
 
-          $scope.openInactivePopup = function () {
-              var modalInstance = $modal.open({
-                  animation: true,
-                  templateUrl: 'newuser/inactive.html',
-                  backdrop: 'static',
-                  controller: InactiveController,
-                  size: 'md',
+          //$scope.openInactivePopup = function () {
+          //    var modalInstance = $modal.open({
+          //        animation: true,
+          //        templateUrl: 'newuser/inactive.html',
+          //        backdrop: 'static',
+          //        controller: InactiveController,
+          //        size: 'md',
 
 
-              });
-          };
+          //    });
+          //};
 
 
           function clearFilters() {

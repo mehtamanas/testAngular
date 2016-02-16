@@ -34,17 +34,14 @@
                     <option value="" selected> ACTION </option>
                         <option ng-repeat="fruit in Fruits" value="{{fruit.Id}}"><i class="fa fa-ban fa-fw"></i>{{fruit.Name}}</option>
                     </select>-->
-                    <div class="btn-group">
-                        <a class="btn btn-primary"><i class="fa fa-user fa-fw"></i>ACTIONS</a>
-                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <span class="fa fa-caret-down"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a  style="cursor:pointer">ACTIONS</a></li>
-                            <!--<li><a ng-click="GetValue(1,'BLOCK');addUser()"  style="cursor:pointer"><i class="fa fa-ban fa-fw"></i> BLOCK</a></li>-->
-                            <li><a ng-click="GetValue(2,'Inactive');addUser()" style="cursor:pointer"><i class="dropDownInactivate-icon"></i> INACTIVATE</a></li>
-                            <li><a ng-click="GetValue(3,'ASSIGN ROLES');addUser()" style="cursor:pointer"><i class="dropDownAssignrole-icon"></i> ASSIGN ROLES</a></li>
-                        </ul>
+                    <div class="pull-left actions-wrap" id="dropfresh">
+                        <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                                ng-change="GetValue();addUser()" id="dfresh">
+                            <option value="" selected> ACTION </option>
+                        </select>
+
+                        <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+        ng-change="GetValue()"></select>-->
                     </div>
                 </div>
 

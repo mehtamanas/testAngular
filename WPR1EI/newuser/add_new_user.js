@@ -55,6 +55,8 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
        
     }
 
+
+
     //Audit log start															
     $scope.params =
         {

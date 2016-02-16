@@ -47,6 +47,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.params.state = response.data[0].state_id;
             $scope.city1 = response.data[0].city_id;
             $scope.params.city = response.data[0].city_id;
+           
 
         },
                    function (error) {

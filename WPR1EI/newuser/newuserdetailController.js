@@ -1,7 +1,7 @@
 ﻿angular.module('newuser')
 
 .controller('newuserdetailController',
-    function ($scope, $state, security, $cookieStore, $modal,$rootScope, apiService, $window, $rootScope, newuserService) {
+    function ($scope, $state, security, $cookieStore, $modal, $rootScope, apiService, $window, $rootScope, newuserService) {
         console.log('newuserdetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
@@ -80,8 +80,7 @@
             apiService.post("AuditLog/Create", param).then(function (response) {
                 var loginSession = response.data;
             },
-       function (error)
-       {
+       function (error) {
            if (error.status === 400)
                alert(error.data.Message);
            else
@@ -91,8 +90,7 @@
         AuditCreate($scope.params);
 
         //end
-        if ($scope.seletedCustomerId != "undefined")
-        {
+        if ($scope.seletedCustomerId != "undefined") {
 
             //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
@@ -103,13 +101,13 @@
                 $scope.data = response.data;
                 // alert($scope.data);
                 //   alert($scope.seletedCustomerId);
-              
-                
+
+
                 $scope.first_name = $scope.data[0].first_name;
                 $scope.last_name = $scope.data[0].last_name;
                 $scope.status = $scope.data[0].status;
-                $scope.account_email = $scope.data[0].account_email;
-                $scope.account_phone = $scope.data[0].account_phone;
+                $scope.choices1[0].account_email = response.data[0].account_email;
+                $scope.choices[0].account_phone = response.data[0].account_phone;
                 $scope.account_country = $scope.data[0].account_country;
                 $scope.street_1 = $scope.data[0].street_1;
                 $scope.role_name = $scope.data[0].role_name;
@@ -118,7 +116,7 @@
                 $scope.city = $scope.data[0].city;
                 $scope.media_url = $scope.data[0].media_url;
                 // alert($scope.media_url);
-      
+
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
                 }
@@ -126,8 +124,7 @@
                     $scope.email = $scope.data.contact_Email;
                 }
             },
-                        function (error)
-                        {
+                        function (error) {
                             if (error.status === 400)
                                 alert(error.data.Message);
                             else
@@ -135,11 +132,75 @@
                         });
         }
 
+        Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=User";
+
+        apiService.getWithoutCaching(Url).then(function (response) {
+            data = response.data;
+            a = 0, b = 0, c = 0;
+            for (i = 0; i < data.length; i++) {
+                if (data[i].element_type == "email_user") {
+                    if (a > 0) { $scope.choices1.push({ 'id': 'choice' + (a + 1) }); }
+                    $scope.choices1[a].account_email = data[i].element_info1;
+                    $scope.choices1[a].class_id = data[i].class_id;
+                    a++;
+                }
+                if (data[i].element_type == "phone_user") {
+                    if (b > 0) { $scope.choices.push({ 'id': 'choice' + (b + 1) }); }
+                    $scope.choices[b].account_phone = data[i].element_info1;
+                    $scope.choices[b].class_id = data[i].class_id;
+                    b++;
+                }
+
+            }
+
+        },
+       function (error) {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
+
+
+
+        $scope.choices = [{ id: 'choice1' }];
+
+
+
+
+
+        $scope.choices = [{ id: 'choice1' }];
+        $scope.addNewChoice = function (e) {
+            var classname = e.currentTarget.className;
+            if (classname == 'remove-field') {
+
+            }
+            else if ($scope.choices.length) {
+                var newItemNo = $scope.choices.length + 1;
+                $scope.choices.push({ 'id': 'choice' + newItemNo });
+            }
+
+        };
+
+        $scope.choices1 = [{ id: 'choice1' }];
+        $scope.addNewChoice1 = function (e) {
+            var classname = e.currentTarget.className;
+            if (classname == 'remove-field') {
+
+            }
+            else if ($scope.choices1.length) {
+                var newItemNo = $scope.choices1.length + 1;
+                $scope.choices1.push({ 'id': 'choice' + newItemNo });
+            }
+
+        };
+
+
         $scope.goToDocument = function () {
             $state.go('loggedIn.modules.team.document');
         };
 
-        $scope.goToUpload = function(){
+        $scope.goToUpload = function () {
             $state.go('loggedIn.modules.contact.upload');
         };
 
@@ -167,12 +228,12 @@
 
         //};
 
-       
+
 
 
         var orgID = $cookieStore.get('orgID');
 
-     
+
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
@@ -229,7 +290,7 @@
             var gridData = $("#DocumentGrid").data("kendoGrid");
             gridData.dataSource.filter({});
         }
-        
+
 
 
         $scope.TeamGrid = {
@@ -311,12 +372,12 @@
                 field: "creator_first_name",
                 title: "Creator",
                 width: "120px",
-                    attributes:
-        {
-            "class": "UseHand",
-            "style": "text-align:center"
-        }
-               
+                attributes:
+    {
+        "class": "UseHand",
+        "style": "text-align:center"
+    }
+
             }]
         };
 
@@ -326,7 +387,7 @@
 
                 type: "json",
                 transport: {
-                   
+
                     read: apiService.baseUrl + "User/GetDetailDevices/" + $scope.seletedCustomerId
                 },
 
@@ -399,7 +460,7 @@
                 type: "json",
                 transport: {
 
-                   
+
 
                     read: apiService.baseUrl + "User/GetProjectsByUser/" + $scope.seletedCustomerId
                 },
@@ -407,7 +468,7 @@
                 schema: {
                     model: {
                         fields: {
-                           
+
                             possesion_date: { type: "date" },
                             assigned_date: { type: "date" },
 
@@ -443,83 +504,83 @@
                        }
                  },
                 {
-                field: "name",
-                title: "Name",
-                width: "120px",
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:center"
- }
-            }, {
-                field: "Possession_Month",
-                title: "Possession Month",
-                width: "120px",
-                attributes:
-   {
-       "class": "UseHand",
-       "style": "text-align:center"
-   }
-            }, {
-                field: "assigned_date",
-                title: "Assigned Date",
-                width: "120px",
-                format: '{0:dd/MM/yyyy}',
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:center"
- }
-            }, {
-                field: "year",
-                title: "year",
-                width: "120px",
-                attributes:
-                 {
-                     "class": "UseHand",
-                     "style": "text-align:center"
-                 }
-            }, {
-                field: "assigned_by",
-                title: "Assigned By",
-                width: "120px",
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:center"
- }
-            }, 
+                    field: "name",
+                    title: "Name",
+                    width: "120px",
+                    attributes:
+     {
+         "class": "UseHand",
+         "style": "text-align:center"
+     }
+                }, {
+                    field: "Possession_Month",
+                    title: "Possession Month",
+                    width: "120px",
+                    attributes:
+       {
+           "class": "UseHand",
+           "style": "text-align:center"
+       }
+                }, {
+                    field: "assigned_date",
+                    title: "Assigned Date",
+                    width: "120px",
+                    format: '{0:dd/MM/yyyy}',
+                    attributes:
+     {
+         "class": "UseHand",
+         "style": "text-align:center"
+     }
+                }, {
+                    field: "year",
+                    title: "year",
+                    width: "120px",
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "assigned_by",
+                    title: "Assigned By",
+                    width: "120px",
+                    attributes:
+     {
+         "class": "UseHand",
+         "style": "text-align:center"
+     }
+                },
              {
-                field: "project_website",
-                title: "Project Website",
-                width: "120px",
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:center"
- }
-            }, {
-                field: "builder_website",
-                title: "Builder Website",
-                width: "120px",
-                attributes:
- {
-     "class": "UseHand",
-     "style": "text-align:center"
- }
- //           }, {
- //               field: "possesion_date",
+                 field: "project_website",
+                 title: "Project Website",
+                 width: "120px",
+                 attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
+             }, {
+                 field: "builder_website",
+                 title: "Builder Website",
+                 width: "120px",
+                 attributes:
+  {
+      "class": "UseHand",
+      "style": "text-align:center"
+  }
+                 //           }, {
+                 //               field: "possesion_date",
 
 
- //               title: "Possession Date",
- //               width: "120px",
- //               format: '{0:dd/MM/yyyy}',
- //               attributes:
- //{
- //    "class": "UseHand",
- //    "style": "text-align:center"
- //}
-            }]
+                 //               title: "Possession Date",
+                 //               width: "120px",
+                 //               format: '{0:dd/MM/yyyy}',
+                 //               attributes:
+                 //{
+                 //    "class": "UseHand",
+                 //    "style": "text-align:center"
+                 //}
+             }]
 
         };
 
@@ -527,11 +588,11 @@
             dataSource: {
                 type: "json",
                 transport: {
-                  
+
                     read: apiService.baseUrl + "User/GetContactInUser/" + $scope.seletedCustomerId
                 },
                 pageSize: 20,
-                refresh:true,
+                refresh: true,
                 schema: {
                     model: {
                         fields: {
@@ -615,7 +676,7 @@
 
                 },
                 pageSize: 20,
-                refresh:true,
+                refresh: true,
                 schema: {
                     model: {
                         fields: {
@@ -642,7 +703,7 @@
                 pageSizes: true,
                 buttonCount: 5
             },
-         
+
             columns: [{
                 field: "name",
                 title: "Name",
@@ -661,7 +722,7 @@
     "class": "UseHand",
     "style": "text-align:center"
 }
-            },{
+            }, {
                 field: "status",
                 title: "Status",
                 width: "120px",
@@ -749,7 +810,7 @@
                 buttonCount: 5
             },
 
-            columns: [  {
+            columns: [{
                 field: "first_name",
                 title: "Name",
                 width: "120px",
@@ -787,7 +848,7 @@
     "class": "UseHand",
     "style": "text-align:center"
 }
-               
+
             },
             {
                 field: "city",
@@ -798,8 +859,8 @@
     "class": "UseHand",
     "style": "text-align:center"
 }
-               
-            },{
+
+            }, {
                 field: "people_type",
                 title: "Type",
                 width: "120px",
@@ -819,7 +880,7 @@
                 type: "json",
                 transport: {
 
-                    
+
                     read: apiService.baseUrl + "UnitTypes/GetTowerunitpropertiesall/" + $scope.seletedCustomerId
                 },
                 pageSize: 20
@@ -992,7 +1053,7 @@
                         fields: {
 
                             assigned_date: { type: "date" },
-                           
+
 
                         }
                     }
@@ -1234,8 +1295,8 @@
                         $scope.first_name = $scope.data[0].first_name;
                         $scope.last_name = $scope.data[0].last_name;
                         $scope.status = $scope.data[0].status;
-                        $scope.account_email = $scope.data[0].account_email;
-                        $scope.account_phone = $scope.data[0].account_phone;
+                        $scope.choices1[0].account_email = response.data[0].account_email;
+                        $scope.choices[0].account_phone = response.data[0].account_phone;
                         $scope.account_country = $scope.data[0].account_country;
                         $scope.street_1 = $scope.data[0].street_1;
                         $scope.role_name = $scope.data[0].role_name;
@@ -1259,6 +1320,36 @@
                                     else
                                         alert("Network issue");
                                 });
+
+                    Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=User";
+
+                    apiService.getWithoutCaching(Url).then(function (response) {
+                        data = response.data;
+                        a = 0, b = 0, c = 0;
+                        for (i = 0; i < data.length; i++) {
+                            if (data[i].element_type == "email_user") {
+                                if (a > 0) { $scope.choices1.push({ 'id': 'choice' + (a + 1) }); }
+                                $scope.choices1[a].account_email = data[i].element_info1;
+                                $scope.choices1[a].class_id = data[i].class_id;
+                                a++;
+                            }
+                            if (data[i].element_type == "phone_user") {
+                                if (b > 0) { $scope.choices.push({ 'id': 'choice' + (b + 1) }); }
+                                $scope.choices[b].account_phone = data[i].element_info1;
+                                $scope.choices[b].class_id = data[i].class_id;
+                                b++;
+                            }
+
+                        }
+
+                    },
+                   function (error) {
+                       if (error.status === 400)
+                           alert(error.data.Message);
+                       else
+                           alert("Network issue");
+                   });
+
 
                 }
 
