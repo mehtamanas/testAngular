@@ -1647,7 +1647,7 @@ div.k-window-iframecontent {
 
 .k-tabstrip > .k-content {
     display: none;
-    overflow: auto;
+    //overflow: auto;
 }
 
     .k-tabstrip > .k-content.km-scroll-wrapper {
