@@ -34,7 +34,8 @@ angular.module('MainApp', [
     'plot',
     'ng.deviceDetector',
     'setting',
-    'ngMessages'
+    'ngMessages',
+     'ngSanitize',
 
 
    

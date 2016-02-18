@@ -106,6 +106,8 @@
                 $scope.first_name = $scope.data[0].first_name;
                 $scope.last_name = $scope.data[0].last_name;
                 $scope.status = $scope.data[0].status;
+                $scope.account_email = $scope.data[0].account_email;
+                $scope.account_phone = $scope.data[0].account_phone;
                 $scope.choices1[0].account_email = response.data[0].account_email;
                 $scope.choices[0].account_phone = response.data[0].account_phone;
                 $scope.account_country = $scope.data[0].account_country;
@@ -154,6 +156,8 @@
             }
 
         },
+
+
        function (error) {
            if (error.status === 400)
                alert(error.data.Message);
@@ -1295,6 +1299,8 @@
                         $scope.first_name = $scope.data[0].first_name;
                         $scope.last_name = $scope.data[0].last_name;
                         $scope.status = $scope.data[0].status;
+                        $scope.account_email = $scope.data[0].account_email;
+                        $scope.account_phone = $scope.data[0].account_phone;
                         $scope.choices1[0].account_email = response.data[0].account_email;
                         $scope.choices[0].account_phone = response.data[0].account_phone;
                         $scope.account_country = $scope.data[0].account_country;
@@ -1349,6 +1355,38 @@
                        else
                            alert("Network issue");
                    });
+
+                    $scope.choices = [{ id: 'choice1' }];
+
+
+
+
+
+                    $scope.choices = [{ id: 'choice1' }];
+                    $scope.addNewChoice = function (e) {
+                        var classname = e.currentTarget.className;
+                        if (classname == 'remove-field') {
+
+                        }
+                        else if ($scope.choices.length) {
+                            var newItemNo = $scope.choices.length + 1;
+                            $scope.choices.push({ 'id': 'choice' + newItemNo });
+                        }
+
+                    };
+
+                    $scope.choices1 = [{ id: 'choice1' }];
+                    $scope.addNewChoice1 = function (e) {
+                        var classname = e.currentTarget.className;
+                        if (classname == 'remove-field') {
+
+                        }
+                        else if ($scope.choices1.length) {
+                            var newItemNo = $scope.choices1.length + 1;
+                            $scope.choices1.push({ 'id': 'choice' + newItemNo });
+                        }
+
+                    };
 
 
                 }

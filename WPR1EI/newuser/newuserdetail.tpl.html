@@ -29,9 +29,9 @@
                     <div class="project-name">{{first_name}} {{last_name}} <a ng-click="openUserPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
                     <!--<div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.ZipCode}}</div>-->
                     <div class="project-d02">Role: {{role_name}}</div>
-                    <br />
-                    <div class="project-name">Phone:{{account_phone}} </div>
-                    <div class="project-d02">Email: {{account_email}}</div>
+
+                    <div class="project-d02" >Phone No: {{account_phone}} </div>
+                    <div class="project-d02" >Email: {{account_email}}</div>
                     <div class="project-d05">{{status}}</div>
                     <!--<!--<div class="project-d03">Company Website:{{builder_website}}</div>-->
 
@@ -82,11 +82,13 @@
                             </div>
 
                             <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Account Phone</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <h4 ng-bind="account_phone"></h4>
-                                    </label>
+                                <div class="company-profile-row clearfix" ng-repeat="choice in choices">
+                                    <div class="pull-left profile-row1">Phone No {{$index + 1}}:</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <h4>{{choice.account_phone}}</h4> &nbsp;
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 
@@ -120,14 +122,16 @@
                                 </div>
                             </div>
 
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Account Email</div>
+                            <div class="company-profile-row clearfix" ng-repeat="choice1 in choices1">
+                                <div class="pull-left profile-row1">Email Id {{$index + 1}}:</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="account_email"></h4>
+                                        <h4>{{choice1.account_email}}</h4> &nbsp;
                                     </label>
                                 </div>
                             </div>
+
+
 
                             <div class="company-profile-row clearfix">
                                 <div class="pull-left profile-row1">Address</div>

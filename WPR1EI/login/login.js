@@ -256,7 +256,6 @@ angular.module('app.guest.login')
             $cookieStore.remove('tower_id');
             $cookieStore.remove('teamid');
             localStorage.clear();
-            $modalInstance.dismiss();
             console.log("loggedout");
             $state.go('login');
         });

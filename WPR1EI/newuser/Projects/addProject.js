@@ -128,10 +128,9 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
 
         $q.all(updatePromisses).then(function (results) {
             if (results.length > 0) {
-                loadProjects();
-                // alert('User members updated successfully.')
+               
                 $modalInstance.dismiss();
-                $scope.openSucessfullPopup();
+                $scope.openUpdatefullPopup();
                 $rootScope.$broadcast('REFRESH', 'ProjectsGrid');
                
             }
@@ -140,12 +139,12 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
         });
     };
 
-    $scope.openSucessfullPopup = function () {
+    $scope.openUpdatefullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'projects/UpdateSuccessful.tpl.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: UpdateController,
             size: 'md',
             resolve: { items: { title: "Project" } }
 

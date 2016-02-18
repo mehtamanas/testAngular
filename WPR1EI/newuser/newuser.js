@@ -235,9 +235,12 @@ angular.module('newuser')
                       var loginSession = response.data;
                       $state.go($scope.inactive())
                   },
-      function (error) {
-
-      });
+     function (error) {
+         if (error.status === 400)
+             alert(error.data.Message);
+         else
+             alert("Network issue");
+     });
 
               }
           }
@@ -435,11 +438,21 @@ angular.module('newuser')
           }
 
           $scope.onClick = function (e) {
+              var allListElements = $(".checkbox").toArray();
+              for (var i in allListElements) {
+                  if (!allListElements[i].checked){
+                      $('#checkAll').prop('checked', false);
+                      break;
+                  }
+                  if (i == allListElements.length-1)
+                      $('#checkAll').prop('checked', true);
+              }
               var element = $(e.currentTarget);
               var checked = element.is(':checked')
               row = element.closest("tr")
               var id = $(e.target).data('id');
               var fnd = 0;
+              var allListElements = $(".checkbox");
               for (var i in $scope.checkedIds) {
                   if(id== $scope.checkedIds[i])
                   {
@@ -456,7 +469,8 @@ angular.module('newuser')
               } else {
                   row.removeClass("k-state-selected");
               }
-             
+
+              
           }
 
           function RefreshGrid() {
