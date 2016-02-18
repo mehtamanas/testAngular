@@ -170,18 +170,17 @@
                     <div class="clearfix">
 
 
-                        <div class="form-bx2">
-                            <div class="form-group">
+                        <div class="form-bx form-bx2" style="border: 1px solid #e7e7e7;border-radius: 2px;">
+                            
                                 <select kendo-multi-select k-options="selectOptions" name="role" id="edituser_role" k-ng-model="role_name" k-on-change="selectrole()" class="dropdown form-control" required></select>
-                                <div class="field-mdl field-req">*</div>
-
-
-                                <div ng-messages="newForm.role.$error" style="color:maroon" role="alert">
+                        </div><div class="field-mdl field-req">*</div>
+                            
+                            <div ng-messages="newForm.role.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="newForm.role.$invalid && (!newForm.role.$pristine || showValid)">This field should not be empty </div>
                                 
                                 </div>
-                            </div>
-                            </div>
+                         
+                         
                     </div>
 
 
@@ -271,7 +270,7 @@
                     <div class="modal-btn-wrap clearfix">
                         <button type="submit" class="f-btn" id="btn_edituser_update" >UPDATE</button>
 
-                        <button type="button" class="f-btn f-btn2" id="btn_edituser_cancle" ng-click="$dismiss('cancel')">CANCEL</button>
+                        <button type="button" class="f-btn2" id="btn_edituser_cancle" ng-click="$dismiss('cancel')">CANCEL</button>
                     </div>
 
                 </form>

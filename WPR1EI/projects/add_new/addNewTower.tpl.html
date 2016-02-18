@@ -34,8 +34,9 @@
                                                                  data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
                                                                 {{'Enter valid No of Wings' | translate }}
                                                             </div>
+                                                            
                                                         </div>
-                                                     
+                                                        <div class="field-md2 field-req">*</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -47,7 +48,7 @@
                                      'has-error' : addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid),
                                      'has-success': addNewForm.tname.$valid && !addNewForm.tname.$pristine
                                                 }">
-                                                <div class="form-group form-bx form-bx2">
+                                                <div class="form-group form-bx form-bx3-2 ">
                                                     <label for="">Enter Tower Name:</label>
                                                     <input type="text" class="form-control" name="tname" placeholder="Tower A" id="addnewtower_tower_name"
                                                            data-ng-model="params.tower_name"
@@ -59,8 +60,9 @@
                                                          data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
                                                         {{ 'Enter valid Tower Name' | translate }}
                                                     </div>
+                                                    
                                                 </div>
-                                               
+                                                <div class="field-md2 field-req">*</div>
                                             </div>
                                         </div>
 
@@ -89,8 +91,9 @@
                                                                     {{'Enter valid Base Price' | translate }}
                                                                 </div>
                                                             </div>
+                                                           
                                                         </div>
-                                                       
+                                                        <div class="field-md2 field-req">*</div>
                                                     </div>
 
                                                 </div>
@@ -116,7 +119,7 @@
                                                                 {{'Enter valid Car Price' | translate }}
                                                             </div>
                                                         </div>
-                                                      
+                                                        <div class="field-md2 field-req">*</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,6 +148,7 @@
                                                             </div>
                                                             
                                                         </div>
+                                                        <div class="field-md2 field-req">*</div>
                                                     </div>
 
                                                 </div>
@@ -174,6 +178,7 @@
                                                             </div>
                                                          
                                                         </div>
+                                                        <div class="field-md2 field-req">*</div>
                                                     </div>
                                                 </div>
                                             </div>

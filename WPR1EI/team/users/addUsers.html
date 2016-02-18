@@ -1,5 +1,5 @@
 
-<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+<button type="button" class="close" style="padding: 10px;" ng-click="$dismiss('cancel')">&times;</button>
 
 <div class="contain">
     <div class="add_user_header" align="center">Add Users to Team</div>
@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-1"></div>
     </div>-->
-    <hr/>
+   
 
     <div class="user_details">
 
@@ -30,18 +30,18 @@
                 </p>-->
             </div>
             <div class="col-lg-8 col-md-6 col-sm-3">
-                <span class="pull-right" ng-click="addUser(user)">
+                <span class="pull-right" style="margin-top: 3%;" ng-click="addUser(user)">
                     <img ng-src="assets/images/{{user.isTeamMember ? 'ok': 'plus'}}_icon.png"/>
                 </span>
             </div>
         </div>
     </div>
-    <hr/>
+  
     <div class="user_list_content">
 
         <div class="user_list_item">
             <span class="user_items" ng-repeat="user in orgUsers">
-                <span class="btn btn-info btn_pad" ng-if="user.isTeamMember">
+                <span class="btn btn-info1 btn_pad" ng-if="user.isTeamMember">
                     {{user.name}}
                     <span class="icon_space glyphicon glyphicon-remove" ng-click="removeUser(user)"></span>
                 </span>

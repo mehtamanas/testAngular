@@ -18,20 +18,21 @@
                                                     'has-error' : addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid),
                                                     'has-success': addNewForm.wingname.$valid && !addNewForm.wingname.$pristine
                                                  }">
-                                                    <div class="form-group form-bx form-bx2">
+                                                <div class="form-group form-bx form-bx3-2 ">
                                                     <label for="">Enter Wing Name:</label>
                                                     <input type="text" autofocus name="wingname" class="form-control" id="addnewwing_wing_code"
-                                                       placeholder="Wing Name"
-                                                       data-ng-model="params.wing_code"
-                                                       minlength="1"
-                                                       maxlength="20"
-                                                       ng-pattern="/^[\w -]*$/"
-                                                       required />
-                                                        <div ng-messages="addNewForm.wingname.$error" style="color:maroon" role="alert">
-                                                            <div ng-message="required" data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">This field should not be empty </div>
-                                                            <div ng-message="pattern">Enter valid value for wing name</div>
-                                                        </div>
+                                                           placeholder="Wing Name"
+                                                           data-ng-model="params.wing_code"
+                                                           minlength="1"
+                                                           maxlength="20"
+                                                           ng-pattern="/^[\w -]*$/"
+                                                           required />
+                                                    <div ng-messages="addNewForm.wingname.$error" style="color:maroon" role="alert">
+                                                        <div ng-message="required" data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid value for wing name</div>
+                                                    </div>
                                                 </div>
+                                            <div class="field-md2 field-req">*</div>
                                                
                                             </div>
                                         </div>
@@ -41,20 +42,20 @@
                                                     'has-error' : addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid),
                                                     'has-success': addNewForm.totalfloors.$valid && !addNewForm.totalfloors.$pristine
                                                  }">
-                                                <div class="form-group form-bx form-bx2">
+                                                <div class="form-group form-bx form-bx3-2">
                                                     <label for="">How many floors are there in this wing?</label>
                                                     <input type="text" autofocus name="totalfloors" class="form-control" id="addnewwing_totalnooffloors"
-                                                       placeholder="How many floors are there in this wing?"
-                                                       data-ng-model="params.total_no_of_floors"
-                                                       ng-pattern="/^([1-9][0-9]*)$/"
-                                                       input-focus
-                                                       required />
+                                                           placeholder="How many floors are there in this wing?"
+                                                           data-ng-model="params.total_no_of_floors"
+                                                           ng-pattern="/^([1-9][0-9]*)$/"
+                                                           input-focus
+                                                           required />
                                                     <div ng-messages="addNewForm.totalfloors.$error" style="color:maroon" role="alert">
                                                         <div ng-message="required" data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">This field should not be empty </div>
                                                         <div ng-message="pattern">Enter valid value for Number of Floors </div>
                                                     </div>
                                                 </div>
-                                               
+                                           <div class="field-md2 field-req">*</div>
                                             </div>
                                             </div>
                                         
@@ -126,7 +127,7 @@
 
                                                     <div class="clearfix">
 
-                                                        <div class="pull-left f-half-3">
+                                                        <div class="pull-left f-half-7">
                                                             <div class="clearfix">
                                                                 <div class="form-group form-bx">
                                                                     <label for="">Floor Type</label>
@@ -139,7 +140,7 @@
 
                                                         </div>
 
-                                                        <div class="pull-left f-half-4">
+                                                        <div class="pull-left f-half-8">
                                                             <div class="clearfix">
                                                                 <div class="form-group form-bx">
                                                                     <label for="">Floor No.</label>
