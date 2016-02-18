@@ -38,14 +38,14 @@ angular.module('MainApp', [
      'ngSanitize',
 
 
-   
+
 
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/login');
     }])
     .constant('appConstants', {
-        
+
     }).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
         //cfpLoadingBarProvider.latencyThreshold = 500;
         cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
@@ -60,4 +60,3 @@ angular.module('MainApp', [
         }
     })
 });
-    

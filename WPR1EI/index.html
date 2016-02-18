@@ -6,7 +6,8 @@
 <!--[if IE 8]>
 <html lang="en" ng-app="MainApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="MainApp" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="MainApp" class="no-js">
+ <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,10 +41,10 @@
 
 </head>
 <body>
-<div ui-view id="content"></div>
-<!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
+    <div ui-view id="content"></div>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
     <script src="lib/jquery/jquery.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular-messages.js"></script>
@@ -57,7 +58,9 @@
     <script src="lib/angular-loading-bar/loading-bar.js" defer></script>
     <script src="lib/ng-flow-standalone/ng-flow-standalone.min.js" defer></script>
     <script src="lib/restangular/restangular.min.js" defer></script>
-
+    <script src="assets/js/spin.min.js"></script>
+    <script src="assets/js/angular-spinner.min.js"></script>
+    <script src="assets/js/textAngular-sanitize.min.js"></script>
     <script src="lib/lodash/lodash.min.js" defer></script>
     <!--<script src="lib/angular-material/angular-material.js" defer></script>-->
     <!--<script src="lib/angular-animate/angular-animate.js" defer></script>-->
@@ -71,7 +74,7 @@
     <script src="login/api.js" defer></script>
 
     <script src="login/loginModule.js" defer></script>
-    
+
     <script src="login/login.js" defer></script>
     <script src="assets/js/angular-idle.min.js"></script>
     <script src="login/security.js" defer></script>
@@ -97,7 +100,7 @@
     <script src="login/error.js"></script>
     <script src="assets/js/re-tree.min.js" defer></script>
     <script src="assets/js/ng-device-detector.min.js" defer></script>
-    <script src="assets/js/textAngular-sanitize.min.js"></script>
+
 
 
     <script src="plot/module.js" defer></script>
@@ -106,12 +109,15 @@
 
     <script src="setting/module.js" defer></script>
     <script src="setting/setting.js" defer></script>
+    <script src="setting/save.js"></script>
+
 
     <script src="property/module.js" defer></script>
     <script src="property/propertyService.js" defer></script>
     <script src="property/detail/propertyDetailController.js" defer></script>
     <script src="property/propertylisting.js" defer></script>
     <script src="property/add_new_property.js" defer></script>
+    <script src="property/sold.js"></script>
 
 
     <script src="contacts/module.js" defer></script>
@@ -124,7 +130,7 @@
     <script src="contacts/addpayment.js" defer></script>
     <script src="contacts/edit_contact.js" defer></script>
     <script src="contacts/add_new_doc.js" defer></script>
-
+    <script src="contacts/add_new_notes.js"></script>
 
     <script src="lib/angular-swipebox/angular-swipebox.min.js" defer></script>
     <script src="lib/angular-swipebox/jquery.swipebox.min.js" defer></script>
@@ -159,7 +165,8 @@
     <script src="projects/panoramic.js" defer></script>
     <script src="projects/addTeamControl.js"></script>
     <script src="projects/addProject.js"></script>
-    -
+    <script src="projects/UpdateSuccessful.js"></script>
+    <script src="projects/Added.js"></script>
 
     <script src="team/module.js" defer></script>
     <script src="team/team.js" defer></script>
@@ -169,8 +176,11 @@
     <script src="team/TeamDetailController.js" defer></script>
     <script src="team/teamService.js" defer></script>
     <script src="team/add_new_notes.js" defer></script>
+    <script src="team/TeamAddProject.js"></script>
+    <script src="team/assign.js"></script>
+    <script src="team/teamEdit.js"></script>
     <script src="team/addProject.js"></script>
-
+    <script src="team/edit_team.js"></script>
 
     <script src="newuser/module.js" defer></script>
     <script src="newuser/newuser.js" defer></script>
@@ -190,7 +200,10 @@
     <script src="newuser/Projects/addProject.js" defer></script>
     <script src="newuser/Edited.js"></script>
     <script src="newuser/invite.js"></script>
-  
+    <script src="newuser/delete.js"></script>
+    <script src="newuser/role.js"></script>
+    <script src="newuser/inactive.js"></script>
+
 
     <script src="organization/module.js" defer></script>
     <script src="organization/organization.js" defer></script>
@@ -245,6 +258,6 @@
     <!--upload module-->
     <script src="property/detail/upload/imageUpload/imageUploadCtrl.js" defer></script>
     <script src="property/detail/upload/videoUpload/videoUploadCtrl.js" defer></script>
-  
+
 </body>
 </html>
