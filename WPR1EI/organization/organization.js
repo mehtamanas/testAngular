@@ -69,7 +69,7 @@ angular.module('organization')
                   $scope.divisions = $scope.data.divisions;
                   $scope.description = $scope.data.description;
                   $scope.phone_no = $scope.data.phone_no;
-                  $scope.list_in_builder_directory = $scope.data.list_in_builder_directory;
+                  $scope.list_in_builder_directoryd = $scope.data.list_in_builder_directoryd;
                   $scope.pan_no = $scope.data.pan_no;
                   $scope.tan_no = $scope.data.tan_no;
                   $scope.service_tax_no = $scope.data.service_tax_no;
@@ -248,7 +248,7 @@ angular.module('organization')
                           $scope.divisions = $scope.data.divisions;
                           $scope.description = $scope.data.description;
                           $scope.phone_no = $scope.data.phone_no;
-                          $scope.list_in_builder_directory = $scope.data.list_in_builder_directory;
+                          $scope.list_in_builder_directoryd = $scope.data.list_in_builder_directoryd;
                           $scope.pan_no = $scope.data.pan_no;
                           $scope.tan_no = $scope.data.tan_no;
                           $scope.service_tax_no = $scope.data.service_tax_no;

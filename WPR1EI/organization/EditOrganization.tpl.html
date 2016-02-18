@@ -82,7 +82,7 @@
                             <input type="text" name="Street_1" class="form-control" id="orgz_street1"
                                    placeholder="Street 1"
                                    data-ng-model="street_1"
-                                    
+                                    ng-pattern="/^[a-zA-Z 0-9 ',_#/:.&()-\s]*$/"
                                    />
 
                             <div class="text-danger"
@@ -151,7 +151,7 @@
                             <input type="text" name="Street_2" class="form-control" id="orgz_street2"
                                    placeholder="Street 2"
                                    data-ng-model="street_2"
-                                  
+                                     ng-pattern="/^[a-zA-Z 0-9 ',_#/:.&()-\s]*$/"
                                     />
 
                             <div class="text-danger"
@@ -201,6 +201,9 @@
                         <input type="text" name="ZipCode" class="form-control" id="orgz_zip"
                                placeholder="Postal Code"
                                data-ng-model="zip_code"
+                                ng-pattern="/^([1-9][0-9]*)$/"
+                                minlength="6"
+                                maxlength="6"
                               />
 
                         <div class="text-danger"
@@ -309,7 +312,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a href="javascript:">Remove</a></div>
+                            <div id="add-address" ng-class="{'add-input add-input5': $index==0,'remove-field5': $index>0}" ng-click="addNewChoice1($event)"><a href="javascript:">Remove</a></div>
                         </div>
                     </div>
 
@@ -336,7 +339,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a href="javascript:">Remove</a></div>
+                            <div id="add-address" ng-class="{'add-input add-input5': $index==0,'remove-field5': $index>0}" ng-click="addNewChoice($event)"><a href="javascript:">Remove</a></div>
                         </div>
                     </div>
 
@@ -418,7 +421,7 @@
 
 
                     <div class="clearfix">
-                        <div class="form-bx form-bx6">
+                        <div class="form-bx form-bx6" style="margin-top: -12px;">
                             <label for="">Tan No.</label>
                             <div class="form-group"
                                  data-ng-class="{
@@ -470,7 +473,7 @@
                     </div>
 
 
-                    <div class="clearfix">
+                    <div class="clearfix" style="margin-top:12px;">
                         <div class="form-bx form-bx6">
                             <label for="">Cin No.</label>
                             <div class="form-group"
@@ -511,7 +514,7 @@
                     </div>
 
 
-                    <div class="clearfix">
+                    <div class="clearfix" style="margin-top: 10px;">
                         <div class="form-bx form-bx6">
                             <label for="">Time Zone</label>
                             <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" required>

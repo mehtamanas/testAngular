@@ -287,12 +287,12 @@
                                              'has-error' : addNewForm.price2.$invalid && (!addNewForm.price2.$pristine || showValid) && !addNewForm.price2.$focus,
                                              'has-success': addNewForm.price2.$valid && !addNewForm.price2.$pristine && !addNewForm.price2.$focus
                                                                  }">
-                            <div class="form-group form-bx form-bx-11" style="margin-top: 2%;">
-                                <div class="form-group form-inline">
+                            <div class="form-group form-bx form-bx-11" style="margin-top: 4%;">
+                                <label for=""class="to-lab-add-project">To</label>
                                     <div class="area-f">
-                                        <label for="">To</label>
+                                        
 
-                                        <input class="form-control" style="width:90%;float: right;" name="price2" id="addnewproject_builder_website"
+                                        <input class="form-control to-lab-add-project-1" name="price2" id="addnewproject_builder_website"
                                                minlength="1"
                                                maxlength="10"
                                                data-ng-model="params.Rangeto"
@@ -305,7 +305,7 @@
                                          data-ng-if="addNewForm.price2.$invalid && (!addNewForm.price2.$pristine || showValid) && !addNewForm.price2.$focus">
                                         {{ 'Enter correct price range' | translate }}
                                     </div>
-                                </div>
+                                
                             </div>
 
                         </div>
@@ -320,7 +320,7 @@
                                                                  }">
                         <div id="address-wrap" class="clearfix">
                             <div id="address-no" class="form-bx form-bx8">
-                                <label ng-show="$index==0" for="" style="padding-top:5px;"><b >Address</b></label>
+                                <label ng-show="$index==0" for="" style="padding-top:5px;"><b style="font-size: 17px" >Address</b></label>
                                 <input type="text" name="Address" id="addnewproject_street1" class="form-control"
                                        placeholder="Address Line"
                                        data-ng-model="choice.Street_1"
@@ -507,7 +507,7 @@
                 
                 <br />
 
-                <h4 class="form-sub-title">Select Project Type</h4>
+                <h4 class="form-sub-title sel-project-type">Select Project Type</h4>
 
                 <div class="project-type-list clearfix">
 

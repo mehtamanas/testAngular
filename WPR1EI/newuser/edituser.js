@@ -36,7 +36,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.choices[0].account_phone = response.data[0].account_phone;
             $scope.choices2[0].Street_1 = response.data[0].street_1;
             $scope.choices2[0].Street_2 = response.data[0].Street_2;
-            $scope.params.role_name = response.data[0].role_id;
+            $scope.params.role_name = response.data[0].role_id.split(',');
             $scope.role_name = response.data[0].role_id.split(',');
             //    $scope.state = $scope.data[0].state_id;
             //  $scope.city = $scope.data[0].city_id
@@ -47,7 +47,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             $scope.params.state = response.data[0].state_id;
             $scope.city1 = response.data[0].city_id;
             $scope.params.city = response.data[0].city_id;
-           
+
 
         },
                    function (error) {
@@ -109,7 +109,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
     $scope.choices = [{ id: 'choice1' }];
 
-   
+
 
 
 
@@ -242,7 +242,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         name: 'imageFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-           // return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            // return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
 
             var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
             if (im === -1) {
@@ -280,7 +280,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     };
 
 
-   
+
     var called = false;
     $scope.finalpost = function () {
         if (called == true) {
@@ -387,22 +387,21 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             }
             apiService.post("Mapping/UserToRoleEdit", usersToBeAddedOnServer).then(function (response) {
                 var loginSession = response.data;
-               
+
 
             },
-           function (error)
-           {
-              if (error.status === 400)
-             alert(error.data.Message);
-              else
-              alert("Network issue");
-          });
-            
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+           });
+
         }
 
     }
 
-  
+
     $(document).on("click", ".remove-field", function () {
         var removedElement = $(this).parent().find('#edituser_mail').val();
         var removedElement1 = $(this).parent().find('#edituser_phno').val();

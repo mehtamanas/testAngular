@@ -45,7 +45,7 @@
 
 
         var postData = {
-
+            notes: $scope.params.notes,
             media_url: uploadResult.Location,
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),

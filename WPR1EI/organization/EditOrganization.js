@@ -67,13 +67,13 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
             $scope.timezone1 = response.data[0].timezone_id
 
             $scope.country1 = response.data[0].country_id;
+            
+            $scope.state1 = response.data[0].state_id;
+            $scope.params.state = response.data[0].state_id;
             $scope.city1 = response.data[0].city_id;
             $scope.params.city = response.data[0].city_id;
-            $scope.state1 = response.data[0].state_id;
             $scope.zip_code = $scope.data.zip_code;
-            $scope.list_in_builder_directory = response.data[0].list_in_builder_directory;
-            $scope.directory1 = response.data[0].list_in_builder_directory;
-           $scope.params.list_in_builder_directory = response.data[0].list_in_builder_directory;
+            $scope.directory1 = $scope.data.list_in_builder_directory;
 
 
         },
@@ -266,14 +266,14 @@ function (error)
 
         $scope.choices = [{ id: 'choice1' }];
 
-        $(document).on("click", ".remove-field", function () {
+        $(document).on("click", ".remove-field5", function () {
             $(this).parent().remove();
         });
 
         $scope.choices = [{ id: 'choice1' }];
         $scope.addNewChoice = function (e) {
             var classname = e.currentTarget.className;
-            if (classname == 'remove-field') {
+            if (classname == 'remove-field5') {
 
             }
             else if ($scope.choices.length) {
@@ -288,7 +288,7 @@ function (error)
         $scope.choices1 = [{ id: 'choice1' }];
         $scope.addNewChoice1 = function (e) {
             var classname = e.currentTarget.className;
-            if (classname == 'remove-field') {
+            if (classname == 'remove-field5') {
 
             }
             else if ($scope.choices1.length) {
