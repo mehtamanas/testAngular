@@ -59,7 +59,7 @@
                                maxlength="30"
                                alphabets-only
                                input-focus
-                               ng-pattern="/^[a-zA-Z\s]*$/" />
+                                />
                         <div class="text-danger"
                              data-ng-if="newForm.Organization.$invalid && (!newForm.Organization.$pristine || showValid) && !newForm.Organization.$focus">
                             {{ 'Please Enter Alphabets' | translate }}
@@ -82,8 +82,8 @@
                             <input type="text" name="Street_1" class="form-control" id="orgz_street1"
                                    placeholder="Street 1"
                                    data-ng-model="street_1"
-                                   ng-pattern="/^[a-z 0-9\s]+$/i"
-                                   required />
+                                    
+                                   />
 
                             <div class="text-danger"
                                  data-ng-if="newForm.Street_1.$invalid && (!newForm.Street_1.$pristine || showValid) && !newForm.Street_1.$focus">
@@ -104,7 +104,7 @@
                         <div class="form-group">
                             <label for="">Country</label>
 
-                            <select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control" required>
+                            <select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control">
                                 <option value="" selected> Country</option>
                                 <option ng-repeat="country in countries  "
                                         value="{{country.id}}">
@@ -122,7 +122,7 @@
                             <label for="">City</label>
 
                             
-                            <select ng-model="city1" id="orgz_city" ng-change="selectcity()" class="dropdown form-control" required>
+                            <select ng-model="city1" id="orgz_city" ng-change="selectcity()" class="dropdown form-control">
                                 <option value="" selected>City</option>
                                 <option ng-repeat="city in cities | filter:filterExpression"
                                         value="{{city.city_id}}">
@@ -151,8 +151,8 @@
                             <input type="text" name="Street_2" class="form-control" id="orgz_street2"
                                    placeholder="Street 2"
                                    data-ng-model="street_2"
-                                   ng-pattern="/^[a-z 0-9\s]+$/i"
-                                   required />
+                                  
+                                    />
 
                             <div class="text-danger"
                                  data-ng-if="newForm.Street_2.$invalid && (!newForm.Street_2.$pristine || showValid) && !newForm.Street_2.$focus">
@@ -173,7 +173,7 @@
                             <label for="">State</label>
 
                             
-                            <select ng-model="state1" id="orgz_state" ng-change="selectstate()" class="dropdown form-control" required>
+                            <select ng-model="state1" id="orgz_state" ng-change="selectstate()" class="dropdown form-control">
                                 <option value="" selected> State</option>
                                 <option ng-repeat="state in states"
                                         value="{{state.state_id}}">
@@ -201,10 +201,7 @@
                         <input type="text" name="ZipCode" class="form-control" id="orgz_zip"
                                placeholder="Postal Code"
                                data-ng-model="zip_code"
-                               ng-pattern="/^([1-9][0-9]*)$/"
-                               minlength="6"
-                               maxlength="6"
-                               required />
+                              />
 
                         <div class="text-danger"
                              data-ng-if="newForm.ZipCode.$invalid && (!newForm.ZipCode.$pristine || showValid)">
@@ -257,11 +254,8 @@
                             <input type="text" disabled name="orgid" class="form-control"
                                    placeholder="Organization ID"
                                    data-ng-model="params.organization_id"
-                                   minlength="1"
-                                   maxlength="30"
-                                   alphabets-only
-                                   input-focus
-                                   ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                  input-focus
+                               />
                         </div>
                     </div>
 
@@ -306,7 +300,7 @@
                                            data-ng-model="choice1.email"
                                            minlength="1"
                                            maxlength="30"
-                                           alphabets-only
+                                          
                                            input-focus
                                            ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" />
                                     <div class="text-danger"
@@ -333,7 +327,7 @@
                                            data-ng-model="choice.phone_no"
                                            minlength="10"
                                            maxlength="10"
-                                           alphabets-only
+                                           
                                            input-focus
                                            ng-pattern="/^([1-9][0-9]*)$/" />
                                     <div class="text-danger"
@@ -361,7 +355,7 @@
                     <div class="pull-left f-half-5">
                         <div class="form-bx form-bx6">
                             <label for="">List In Builder Directory</label>
-                            <select id="year_select" ng-change="selectbuilder()" ng-model="list_in_builder_directory" class="dropdown form-control" required>
+                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" required>
                                 <option value="" selected>--Select Yes or No--</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -382,7 +376,7 @@
                                        data-ng-model="language"
                                        minlength="1"
                                        maxlength="30"
-                                       alphabets-only
+                                      
                                        input-focus
                                        ng-pattern="/^[a-zA-Z\s]*$/" />
                                 <div class="text-danger"
@@ -411,7 +405,7 @@
                                        data-ng-model="pan_no"
                                        minlength="10"
                                        maxlength="10"
-                                       alphabets-only
+                                     
                                        input-focus
                                        ng-pattern="/^[A-Z0-9\.]*$/" />
                                 <div class="text-danger"
@@ -437,7 +431,7 @@
                                        data-ng-model="tan_no"
                                        minlength="10"
                                        maxlength="10"
-                                       alphabets-only
+                                       
                                        input-focus
                                        ng-pattern="/^[A-Z0-9\.]*$/" />
                                 <div class="text-danger"
@@ -463,9 +457,10 @@
                                        data-ng-model="service_tax_no"
                                        minlength="15"
                                        maxlength="15"
-                                       alphabets-only
+                                       
                                        input-focus
-                                       ng-pattern="/^[A-Z0-9\.]*$/" />
+                                       ng-pattern="/^[A-Z0-9\.]*$/" 
+                                       />
                                 <div class="text-danger"
                                      data-ng-if="newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus">
                                     {{ 'Please Enter Valid Service Tax No' | translate }}
@@ -489,9 +484,10 @@
                                        data-ng-model="cin_no"
                                        minlength="21"
                                        maxlength="21"
-                                       alphabets-only
+                                      
                                        input-focus
-                                       ng-pattern="/^[A-Z0-9\.]*$/" />
+                                       ng-pattern="/^[A-Z0-9\.]*$/"
+                                        />
                                 <div class="text-danger"
                                      data-ng-if="newForm.cin_no.$invalid && (!newForm.cin_no.$pristine || showValid) && !newForm.cin_no.$focus">
                                     {{ 'Please Enter Valid CIN No' | translate }}
@@ -505,7 +501,7 @@
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
                             <label for="">First month of financial year</label>
-                            <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control" required>
+                            <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control">
                                 <option value="" selected>--Select Month--</option>
                                 <option ng-repeat="month in month"
                                         value="{{month.id}}">
@@ -535,7 +531,7 @@
 
             </div>
 
-            <div class="progress" ng-show="showProgress">
+            <div class="progress" ng-show="((uploader.progress)/1)>0">
                 <div class="progress-bar" role="progressbar"
                      ng-style="{ 'width': uploader.progress + '%' }"></div>
             </div>
@@ -543,7 +539,7 @@
             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
             <div class="modal-btn-wrap clearfix">
-                <button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll()" style="width:390px">SAVE</button>
+                <button type="submit" class="f-btn" style="width:390px">SAVE</button>
 
                 <button type="button" class="f-btn f-btn2"  style="width:390px" ng-click="$dismiss('cancel')">CANCEL</button>
             </div>

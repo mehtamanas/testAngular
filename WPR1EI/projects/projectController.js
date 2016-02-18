@@ -254,13 +254,25 @@ angular.module('project')
           }
 
 
-          $scope.projectSelected = function (e,data) {
+          $scope.projectSelected = function (e, data) {
+
               console.log(e);
+
+              var allListElements = $(".checkbox").toArray();
+              for (var i in allListElements) {
+                  if (!allListElements[i].checked) {
+                      $('#checkAll').prop('checked', false);
+                      break;
+                  }
+                  if (i == allListElements.length - 1)
+                      $('#checkAll').prop('checked', true);
+              }
               var element = $(e.currentTarget);
               var checked = element.is(':checked')
               row = element.closest("tr")
               var id = data.id;
               var fnd = 0;
+              var allListElements = $(".checkbox");
               for (var i in $scope.checkedIds) {
                   if (id == $scope.checkedIds[i]) {
                       $scope.checkedIds.splice(i, 1);
