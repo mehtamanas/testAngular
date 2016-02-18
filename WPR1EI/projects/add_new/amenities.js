@@ -121,7 +121,7 @@
             
             //alert(" Done...");
             $modalInstance.dismiss();
-            $scope.openSucessfullPopup();
+            $scope.openUpdatedfullPopup();
         },
 
 
@@ -140,8 +140,6 @@
 
 
 
-
-
     //var amenityToBeAddedOnServer = [];
     //var newMember = {};
 
@@ -156,7 +154,7 @@
 
     //    Url = "AmenitiesType/CreateNew_AmenitiesType";
 
-    $scope.openSucessfullPopup = function () {
+    $scope.openUpdatedfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'projects/UpdateSuccessful.tpl.html',
