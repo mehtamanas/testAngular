@@ -195,6 +195,7 @@ function (error) {
         var totfound = 0;
         for (var i in $scope.wings) {
 
+            alert($scope.wings[i].total_no_of_floors_new);
             if ($scope.wings[i].total_no_of_floors_new != null) {
                 fnd = 1;
                 totfound = totfound+1;

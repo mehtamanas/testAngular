@@ -23,7 +23,7 @@
                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                 <div class="panel-body image-upload-panel">
                                     <div class="row" ng-hide="uploader.queue.length">
-                                        <img ng-src={{data.media_url}} alt="Drag and Drop" class="img-responsive" />
+                                        <img ng-src={{data.media_url}}  class="img-responsive" />
                                     </div>
                                     <div class="row" ng-show="uploader.queue.length">
                                         <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
@@ -358,7 +358,7 @@
                     <div class="pull-left f-half-5">
                         <div class="form-bx form-bx6">
                             <label for="">List In Builder Directory</label>
-                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" required>
+                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" >
                                 <option value="" selected>--Select Yes or No--</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -517,7 +517,7 @@
                     <div class="clearfix" style="margin-top: 10px;">
                         <div class="form-bx form-bx6">
                             <label for="">Time Zone</label>
-                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" required>
+                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control">
                                 <option value="" selected>--Select Timezone--</option>
                                 <option ng-repeat="Time in timezone | orderBy:'timezone'"
                                         value="{{Time.id}}">
