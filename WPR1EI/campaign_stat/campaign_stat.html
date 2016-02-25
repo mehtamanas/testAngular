@@ -1,0 +1,151 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="pg-inner-title">Campaign Statistics</h2>
+                </div>
+
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-head-1">
+                            <div class="title">Summary</div>
+                        </div>
+                        <div class="bx-h1-content clearfix">
+                            <div class="cxo-wrap3-1">
+                                <div class="row">
+                                   <div class="marketing-bx-title stats-label2">Campaign Name:</div>
+                                   <div class="marketing-bx-txt stats-label3">{{summary.name}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Project:</div>
+                                    <div class="marketing-bx-txt stats-label3">{{}}</div>
+                                  </div>
+
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Budget:</div>
+                                    <div class="marketing-bx-txt stats-label3">{{summary.budget | currency:'&#8377;'}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>  
+
+                <div class="col-md-2">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-head-1">
+                            <div class="title">Goals</div>
+                        </div>
+                        <div class="bx-h1-content clearfix">
+                            <div class="cxo-wrap3-1">
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Leads:</div>
+                                    <div class="marketing-bx-txt stats-label3">{{goal.leads | number}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Sales:</div>
+                                    <div class="marketing-bx-txt stats-label3">{{goal.sales | currency:'&#8377;'}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div> 
+                 
+                <div class="col-md-5">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-head-1">
+                            <div class="title">Results</div>
+                        </div>
+                        <div class="bx-h1-content clearfix">
+                            <div class="cxo-wrap3-1">
+                                <div class="row">
+                                     <div class="marketing-bx-sub stats-label2">Leads:</div>
+                                        <div class="marketing-bx-txt stats-label3">{{result.leads | number}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Sales:</div>
+                                    <div class="marketing-bx-txt stats-label3">{{result.sales | currency:'&#8377;'}}</div>
+                                </div>
+                                <div class="row">
+                                        <div class="marketing-bx-sub stats-label2">Conversion :</div>
+                                        <div class="marketing-bx-txt stats-label3">{{result.conversion_rate | currency:'&#8377;'}}</div>
+                                 </div>
+                                
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>     
+            </div>
+
+            <div class="row" style="text-align:center">
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.opens | number}}</div>
+                                <div class="marketing-bx-txt stats-label">Opened</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{0 | number}}</div>
+                                <div class="marketing-bx-txt stats-label">Unopened</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.clicks | number}}</div>
+                                <div class="marketing-bx-txt stats-label">Clicked</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.unsubscribes | number}}</div>
+                                <div class="marketing-bx-txt stats-label">Unsubscribed</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-5">
+            <div id="chart"></div>
+           </div>
+            <div class="col-md-3 stats_tem_div">
+                </div>
+            <div class="col-md-2 stats_tem_div">
+            </div>
+            <div class="col-md-2 stats_tem_div">
+            </div>
+        </div>
+
+            </div><!-- project-detail ended -->
+
+    </div><!-- pg-inner-content ended -->
+
+

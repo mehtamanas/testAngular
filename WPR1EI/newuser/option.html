@@ -1,0 +1,36 @@
+﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+<form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
+    <div class="main-content project add-new">
+        <h3>Options</h3>
+
+        <div class="col-sm-8">
+            <!--<label>Option</label>-->
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input type="hidden" name="Select Project" data-ng-model="params.country">
+
+                    <select ng-change="selectcity()" ng-model="city1" id="option_project" class="dropdown form-control" required>
+                        <option value="" selected>-- Option --</option>
+                        <option ng-repeat="project in states"
+                                value="{{project.id}}">
+                            {{project.name}}
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+
+            </div>
+            <button class="btn btn-default  login-btn" id="option_sub" type="submit">Submit</button>
+        </div>
+
+        <!--<button class="btn organization-btn" type="submit">Submit</button>-->
+
+    </div>
+    </form>
+

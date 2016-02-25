@@ -1,0 +1,119 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title model-title1" id="exampleModalLabel">Follow Up</h4>
+    </div>
+
+    <form class="form-content form-content2 edit-organization-setting" name="agrrementForm" novalidate data-ng-submit="addNew(agrrementForm.$valid)" autocomplete="off">
+        <div class="clearfix">
+            <div class="company-profile-row clearfix">
+                <div class="pull-left profile-row1">Lead Name:</div>
+                <div class="pull_left_day profile-row2">
+                    <div class="project-name">
+                        <h4 ng-bind="leadName">{{leadName}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="company-profile-row clearfix">
+                <div class="pull-left profile-row1">Company Name:</div>
+                <div class="pull_left_day profile-row2">
+                    <div class="project-name">
+                        <h4 ng-bind="companyName">{{companyName}}</h4>
+                    </div>
+                    </div>
+            </div>
+
+            <!--<div class="day-info-btn clearfix" ng-class="{'div_call_selected' : emailChecked,'div_call':emailChecked}" ng-click="emailSelected()">
+                Email
+                <span class="pull-right"></span>
+            </div>
+            <div class="day-info-btn clearfix" ng-class="{'div_call_selected' : callChecked,'div_call':callChecked}" ng-click="callSelected()">
+              Call
+                <span class="pull-right"></span>
+            </div>-->
+
+            <div class="pull-left">
+            
+           <input type="button" ng-class="{'div_email_selected' : emailChecked,'div_email':!emailChecked}" ng-click="emailSelected()" value="Email"/>
+            <input type="button" ng-class="{'div_call_selected' : callChecked,'div_call':!callChecked}" ng-click="callSelected()" value="Call" />
+        </div>
+
+        </div>
+        <strong class="duration_time form-content form-bx8"> </strong>
+
+        <div class="clearfix form-bx13 ">
+
+        <div class="pull_left_day">
+
+            <div class="day-info-btn clearfix" ng-click="setFollowUp('hour')" ng-class="{'div_calender_selected':followSelect==1}">
+               In An Hour
+                <span class="pull-right"></span>
+            </div>
+
+            <div class="day-info-btn clearfix" ng-click="setFollowUp('tomorrow')" ng-class="{'div_calender_selected':followSelect==2}">
+               Tomorrow
+                <span class="pull-right"></span>
+            </div>
+
+            <div class="day-info-btn clearfix" ng-click="setFollowUp('week')" ng-class="{'div_calender_selected':followSelect==3}">
+               In A Week
+                <span class="pull-right"></span>
+            </div>
+
+            <div class="day-info-btn clearfix" ng-click="setFollowUp('month')" ng-class="{'div_calender_selected':followSelect==4}">
+              In A Month
+                <span class="pull-right"></span>
+            </div>
+        </div><!-- profile-side-txt ended-->
+
+          </div>  
+
+        <div class="clearfix form-bx13 ">
+            <div class="pull-left f-half-6">
+                <div class="form-group form-bx4 form-bx3-1">
+                    <label for="">Choose Date</label>
+                    <input kendo-date-time-picker class="form-control"
+                           ng-model="due_date"
+                           k-ng-model="k_start_date"
+                           k-format="'dd/MM/yyyy hh:mm tt'" />
+                </div>
+            </div>
+          
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="">Select Time</label>
+                        <select data-ng-model="reminder_time" class="dropdown form-control" >
+                            <option value="" selected>Select Time</option>
+                            <option value="15 min">15 min</option>
+                            <option value="30 min">30 min</option>
+                            <option value="45 min">45 min</option>
+                            <option value="60 min">60 min</option>
+                            <option value="no reminder">no reminder</option>
+                        </select>
+                    </div>
+                </div>
+         
+        </div>
+        <div class="clearfix form-bx13 ">
+            <div class="form-group form-bx form-bx5">
+                <label for="">Add Notes</label>
+                <textarea cols="100" rows="5" name="description"
+                          data-ng-model="text"
+                          minlength="1"
+                          maxlength="500"
+                          input-focus />
+            </div>
+        </div>
+
+        <div class="form-group form-bx13 ">
+            <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true"></label>
+            <label>Remind Me</label>
+        </div>
+       
+
+        <div class="modal-btn-wrap clearfix">
+            <button type="submit" class="f-btn">Save</button>
+            <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿<div id="add_new_document" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+    <div class="modal-header">
+        <button id="btn_contactdoc_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Add Tag</h4>
+    </div><!-- modal-header ended -->
+
+    <div class="modal-body">
+
+        <form class="form-content" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+            <div class="society-amenities-wrap clearfix">
+                <ul class="list-unstyled society-amenities-list">
+                    <li ng-repeat="tag in tags">
+                        <div class="amenities-bg clearfix">
+
+
+                            <div class="amenities-btn amenities-add" ng-class="{'amenities-selected': isChecked[$index]}" data-id={{tag.id}} ng-click='onClick($event);toggleClass($index)' k-on-change="myGridChange(dataItem)">
+                                <h4 ng-if={{}}></h4>
+                            </div>
+
+                            {{tag.name}}
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div><!-- society-amenities-wrap ended -->
+
+
+
+            <button type="submit" class="f-btn f-btn cxo-f3" ng-click="addTag()">Ok</button>
+            <button type="submit" class="f-btn f-btn2 cxo-f3" ng-click="cancel()">CANCEL</button>
+
+
+
+
+
+        </form>
+    </div><!-- modal-body ended -->
+
+
+</div>

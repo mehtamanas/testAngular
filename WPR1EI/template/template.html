@@ -1,0 +1,73 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Templates</h2>
+                </div>
+            </div>
+
+            <div class="pg-inner-content">
+                <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                    <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                        <li class="k-state-active"> <a aria-controls="quotes" role="tab" data-toggle="tab">QUOTES</a></li>
+                        <li><a aria-controls="agreement" role="tab" data-toggle="tab">AGREEMENTS</a></li>
+                        <li><a aria-controls="invoices" role="tab" data-toggle="tab">INVOICES</a></li>
+                        <li><a aria-controls="channel_partner" role="tab" data-toggle="tab">CHANNEL PARTNER</a></li>
+                        <li><a aria-controls="people" role="tab" data-toggle="tab">PEOPLE</a></li>
+                        <li><a aria-controls="quote" role="tab" data-toggle="tab">QUOTE</a></li>
+                        <li><a aria-controls="email_template" role="tab" data-toggle="tab">EMAIL TEMPLATE</a></li>
+                    </ul>
+
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">Quotes <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('quotes')" style="cursor:pointer">+</a></div>
+                        </div>
+
+                    </div>  <!--quotes-->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">Agreement <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('agreement')" style="cursor:pointer">+</a></div>
+                        </div>
+
+                    </div>  <!--agreement-->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">Invoice <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('invoice')" style="cursor:pointer">+</a></div>
+                        </div>
+                    </div>  <!--invoice-->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">Channel <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('channel')" style="cursor:pointer">+</a></div>
+                        </div>
+
+                    </div>  <!--channel partner-->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">People <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('people')" style="cursor:pointer">+</a></div>
+                        </div>
+
+                    </div>  <!--people-->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">Quote <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('quote')" style="cursor:pointer">+</a></div>
+
+
+                        </div>
+
+                    </div>  <!--quote-->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active">
+                            <div class="tab-content-title">Emails <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('email')" style="cursor:pointer">+</a></div>
+                        </div>
+                        <div kendo-grid k-options="EmailTemplateGrid" selectable="true" k-on-change="EditTemplate( dataItem )"></div>
+                        </div>  <!--email template-->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

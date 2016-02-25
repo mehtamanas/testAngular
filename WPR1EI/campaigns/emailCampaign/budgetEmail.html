@@ -1,0 +1,89 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Event Campaign</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content" style="">
+
+        <div class="project-detail">
+
+
+            <div class="top-row" style="width:100%; background:#fff; padding:60px">
+
+                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx8">
+                            <h2 class="pg-inner-title">Set Budget</h2>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+                            <label for="">Budget</label>
+                            <input type="text" format class="form-control text-bold" autofocus name="Budget"
+                                   placeholder="Budget"
+                                   data-ng-model="params.budget"
+                                   input-focus
+                                   required />
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        
+                            <label for="" style="font-weight:bold">Goal</label>
+                       
+                    </div>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+                            <label for="">Leads</label>
+                            <input type="text" format class="form-control" name="Leads"
+                                   placeholder="Leads"
+                                   data-ng-model="params.no_of_leads"
+                                   input-focus
+                                   required />
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+
+                            <label for="">Sales</label>
+                            <input type="text" format class="form-control" name="sales"
+                                   placeholder="sales"
+                                   data-ng-model="params.sales"
+                                   input-focus
+                                   required />
+                        </div>
+                    </div>
+
+                    
+                    <div class="modal-btn-wrap5 modal-btn-wrap6" style="text-align:right;" >
+                        <button type="submit" class="btn organization-btn" id="btn_next" ><b> Next ></b></button>
+                        <button class="btn organization-btn f-btn2" id="campaign_cancel" type="button" ng-click="cancel()">
+                            CANCEL
+                        </button>
+                   </div>
+                 
+
+</form>
+        </div>
+            <!--</div>--><!-- project-detail ended -->
+
+        </div><!-- pg-inner-content ended -->
+
+    </div><!-- main-content ended -->
+
+
+</div>
