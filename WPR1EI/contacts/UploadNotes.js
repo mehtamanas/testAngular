@@ -10,22 +10,46 @@
 
     $scope.showProgress = false;
 
-    // FILTERS
-    //uploader.filters.push({
-    //    name: 'imageFilter',
-    //    fn: function (item /*{File|FileLikeObject}*/, options) {
-    //        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-    //        return '||csv|'.indexOf(type) !== -1;
-    //    }
-    //});
+    //Audit log start               
 
+   
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: "UploadNote",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+       AuditCreate();
+
+    //end
 
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         if (uploader.queue.length > 1) {
             uploader.removeFromQueue(0);
         }
     }
-
 
     uploader.onSuccessItem = function (files, response, status, headers) {
         // post image upload call the below api to update the database
@@ -41,7 +65,6 @@
             media_name: uploadResult.Name,
             class_type: "Contact",
             media_type: "LeadNotesUploadZoho",
-
         };
 
         apiService.post("MediaElement/Create", postData).then(function (response) {
@@ -68,7 +91,6 @@
 
     };
 
-
     uploader.onErrorItem = function (fileItem, response, status, headers) {
         console.log('Unable to upload file.');
     };
@@ -83,16 +105,10 @@
         User_ID: $cookieStore.get('userId')
     };
 
-    $scope.orgList = ['ABC Real Estate Ltd'];
-
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
 
-
         $scope.showValid = false;
-
-
-
     }
 
 };

@@ -5,8 +5,7 @@ angular.module('team')
         $rootScope.title = 'Dwellar./Teams';
 
         var userID = $cookieStore.get('userId');
-        //alert($cookieStore.get('userId'));
-
+      
         $('#btnSave').hide();
         $('#iconEdit').hide();
         $('#btnAdd').hide();
@@ -40,13 +39,8 @@ angular.module('team')
                     if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
                     if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
 
-
-
-
                 }
             }
-
-
 
             if ($rootScope.teams.write) {
                 event.preventDefault();
@@ -55,8 +49,6 @@ angular.module('team')
                 $('#btnAdd').show();
             }
 
-
-
         });
 
         var loginSession1;
@@ -64,13 +56,11 @@ angular.module('team')
         $scope.delete1 = function (id) {
             apiService.remove('team/Delete/' + id).then(function (response) {
                 $scope.loginSession2 = response.data;
-                //alert('Login Session : ' + loginSession.user_id);
                 $state.go('loggedIn.modules.team');
 
             },
                   function (error) {
                       alert('Hi1');
-                      // deferred.reject(error);
                       return deferred.promise;
                   });
 
@@ -96,12 +86,8 @@ angular.module('team')
             //alert('Login Session : ' + loginSession.user_id);
         },
 
-    
-
-
     function (error) {
-       // alert('Hi3');
-        // deferred.reject(error);
+     
         return deferred.promise;
     });
 
@@ -114,33 +100,36 @@ angular.module('team')
         };
 
 
+        //Audit log start               
 
-        //Audit log start															
-        $scope.params =
-            {
-                device_os: $cookieStore.get('Device_os'),
-                device_type: $cookieStore.get('Device'),
-                device_mac_id: "34:#$::43:434:34:45",
-                module_id: "Contact",
-                action_id: "Contact View",
-                details: "TeamView",
-                application: "angular",
-                browser: $cookieStore.get('browser'),
-                ip_address: $cookieStore.get('IP_Address'),
-                location: $cookieStore.get('Location'),
-                organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
-            };
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
+              // device_mac_id: "34:#$::43:434:34:45",
+               module_id: "Contact",
+               action_id: "Contact View",
+               details: "TeamGridView",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
 
-        AuditCreate = function (param) {
-            apiService.post("AuditLog/Create", param).then(function (response) {
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
                 var loginSession = response.data;
             },
        function (error) {
-
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
        });
         };
-        AuditCreate($scope.params);
+        AuditCreate();
 
         //end
         $scope.$on('REFRESH', function (event, args) {
@@ -155,15 +144,11 @@ angular.module('team')
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: apiService.baseUrl +"Team/GetTeamDetails/" + orgID
                     read: apiService.baseUrl +"Team/GetTeamDetails/" + userID
                     
                 },
                 pageSize: 20
 
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -178,8 +163,6 @@ angular.module('team')
             },
             columns: [
                            {
-                               //template: "<img height='40px' width='40px' src='assets/images/image-2.jpg' />" +
-                               //"<span style='padding-left:10px' class='customer-name'>#: first_name #</span>",
                                field: "Name",
                                title: " Name",
                                width: "120px",
@@ -237,7 +220,6 @@ angular.module('team')
 
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
-            // dataItem will contain the row that was selected
             window.sessionStorage.selectedCustomerID = dataItem.id;
             $state.go('app.teamdetail');
 

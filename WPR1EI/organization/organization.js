@@ -43,15 +43,11 @@ angular.module('organization')
               }
           });
 
-
-
-
-       //  alert(orgID);
-    //      orgID=   "820a5ec4-5901-4488-a727-74716d13fe83";
+      
           if (orgID !== '') {
 
            
-              GetUrl = "Organization/Get/" + orgID;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+              GetUrl = "Organization/Get/" + orgID;
 
               apiService.get(GetUrl).then(function (response) {
 
@@ -83,10 +79,7 @@ angular.module('organization')
                  
               },
                           function (error) {
-                              if (error.status === 400)
-                                  alert(error.data.Message);
-                              else
-                                  alert("Network issue");
+                             
                           });
           }
 
@@ -105,31 +98,9 @@ angular.module('organization')
           },
       function (error)
       {
-          if (error.status === 400)
-              alert(error.data.Message);
-          else
-              alert("Network issue");
+         
       });
-
-
-          //if (orgID !== '') {
-
-          //    GetUrl = "Project/GetProjectCount/" + orgID;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-
-          //    apiService.get(GetUrl).then(function (response) {
-
-          //        $scope.data1 = response.data1;
-
-          //        $scope.project_count = $scope.data1[0].project_count;
-          //        $scope.user_count = $scope.data1.user_count;
-
-          //    },
-          //                function (error) {
-
-          //                    alert("not working");
-          //                });
-          //}
-             
+      
           // Init model
           $scope.params = {
               name: ''
@@ -152,10 +123,6 @@ angular.module('organization')
               apiService.post('Organization/Create', params).then(function (response) {
 
                   var loginSession = response.data;
-                  //alert('Login Session : ' + loginSession.user_id);
-
-                  //alert("hi");
-
 
               },
 
@@ -170,42 +137,40 @@ angular.module('organization')
               return deferred.promise;
           };
 
-          //Audit log start
-          $scope.params = {
+          //Audit log start               
+          AuditCreate = function () {
+              var postdata =
+             {
+                 device_os: $cookieStore.get('Device_os'),
+                 device_type: $cookieStore.get('Device'),
+                 //device_mac_id: "34:#$::43:434:34:45",
+                 module_id: "Contact",
+                 action_id: "Contact View",
+                 details: "organizationDetail",
+                 application: "angular",
+                 browser: $cookieStore.get('browser'),
+                 ip_address: $cookieStore.get('IP_Address'),
+                 location: $cookieStore.get('Location'),
+                 organization_id: $cookieStore.get('orgID'),
+                 User_ID: $cookieStore.get('userId')
+             };
 
-              device_os: "windows10",
-              device_type: "mobile",
-              device_mac_id: "34:#$::43:434:34:45",
-              module_id: "Organization",
-              action_id: "Organization View",
-              details: "Organization detail",
-              application: "angular",
-              browser: $cookieStore.get('browser'),
-              ip_address: $cookieStore.get('IP_Address'),
-              location: $cookieStore.get('Location'),
-              organization_id: $cookieStore.get('orgID'),
-              User_ID: $cookieStore.get('userId')
-          };
 
-
-          AuditCreate = function (param) {
-
-              apiService.post("AuditLog/Create", param).then(function (response) {
+              apiService.post("AuditLog/Create", postdata).then(function (response) {
                   var loginSession = response.data;
-
               },
-         function (error)
-         {
+         function (error) {
              if (error.status === 400)
                  alert(error.data.Message);
              else
                  alert("Network issue");
          });
           };
-          AuditCreate($scope.params);
 
+          AuditCreate();
           //end
-          
+
+
           // Login
           $scope.organization = function (isValid) {
               $scope.isSubmitted = true;
@@ -264,10 +229,8 @@ angular.module('organization')
                       },
                           function (error)
                           {
-                              if (error.status === 400)
-                                  alert(error.data.Message);
-                              else
-                                  alert("Network issue");
+                             
+
                           }
                       );
                   }

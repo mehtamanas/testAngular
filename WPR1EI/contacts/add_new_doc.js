@@ -7,6 +7,40 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
         
     });
 
+    //Audit log start               
+
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.params.Document_Name + "AddNewDoc",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+   
+
+    //end
+
     $scope.showProgress = false;
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -44,8 +78,6 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
             $scope.showProgress = false;
             $scope.finalpost();
         }
-       
-
     }
        
     var called = false;
@@ -62,7 +94,6 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             contact_id: $scope.seletedCustomerId,
-            //media_name: uploadResult.Name,
             media_url: $scope.media_url,
             Document_Category: $scope.params.documenttype,
             Document_Name: $scope.params.Document_Name,
@@ -70,12 +101,11 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
 
         };
 
-
         apiService.post("DocumentType/DocumentCreate", postData).then(function (response) {
             var loginSession = response.data;
-            // alert("Document done");
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
+            AuditCreate();
             $rootScope.$broadcast('REFRESH', 'DocumentGrid');
             called = true;
         },
@@ -83,15 +113,12 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
 
         });
     }
-       
-    
-
+   
     $scope.CanceUpload = function () {
         uploader.cancelAll();
 
         console.log("UploadCancelled");
     }
-
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
@@ -112,7 +139,6 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
         $scope.showProgress = false;
     };
 
-
     $scope.params = {
 
         documenttype: $scope.documenttype,
@@ -124,13 +150,9 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
 
     };
 
-
-
-
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-
 
     Url = "DocumentType/Get";
     apiService.get(Url).then(function (response) {
@@ -142,24 +164,18 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
 
     $scope.selectCategory = function () {
         $scope.params.documenttype = $scope.category1;
-        //alert($scope.params.project_id);
     };
-
 
     $scope.addNewUser = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-
-            
+  
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
             if (uploader.queue.length == 0)
                 $scope.finalpost();
 
             $scope.showValid = false;
-
         }
-
     }
-
 };

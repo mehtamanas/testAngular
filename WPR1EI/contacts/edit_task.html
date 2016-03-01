@@ -1,8 +1,7 @@
 ﻿
 <div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+  
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Edit Task</h4>
@@ -97,80 +96,79 @@
                     </div>
                 </div>
 
-                <strong class="duration_time form-content form-bx8"> Due Date And Time</strong>
                 <div class="clearfix">
+                    <strong class="duration_time form-content form-bx8"> Due Date And Time</strong>
+                    <div class="clearfix">
 
-                    <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            
-                            <input kendo-date-time-picker
-                                   ng-model="due_date"
-                                   k-ng-model="k_due_date"
-                                    k-format="'dd/MM/yyyy HH:mm tt'"
-                                  />
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+
+                                <input kendo-date-time-picker class="form-control"
+                                       ng-model="due_date"
+                                       k-ng-model="k_due_date"
+                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="clearfix">
-                    <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Select Time</label>
-                            <select data-ng-model="reminder_time" class="dropdown form-control" >
-                                <option value="" selected>Select Time</option>
-                                <option value="15">15 min</option>
-                                <option value="30">30 min</option>
-                                <option value="45">45 min</option>
-                                <option value="60">60 min</option>
-                                <option value="0">no reminder</option>
-                            </select>
+                    <div class="clearfix">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Select Time</label>
+                                <select data-ng-model="reminder_time" class="dropdown form-control">
+                                    <option value="" selected>Select Time</option>
+                                    <option value="15">15 min</option>
+                                    <option value="30">30 min</option>
+                                    <option value="45">45 min</option>
+                                    <option value="60">60 min</option>
+                                    <option value="0">no reminder</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Set Priority</label>
+                                <select ng-model="priority1" ng-change="selectpriority()"
+                                        class="dropdown form-control">
+                                    <option value="" selected>Select Priority</option>
+                                    <option ng-repeat="prio in priority"
+                                            value="{{prio.id}}">
+                                        {{prio.type}}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Set Priority</label>
-                            <select ng-model="priority1" ng-change="selectpriority()"
-                                    class="dropdown form-control" >
-                                <option value="" selected>Select Priority</option>
-                                <option ng-repeat="prio in priority"
-                                        value="{{prio.id}}">
-                                    {{prio.type}}
-                                </option>
-                            </select>
+                    <strong class="duration_time form-content form-bx8">Add Notes</strong>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+
+                            <textarea cols="110" rows="5" name="description"
+                                      data-ng-model="params.text"
+                                      minlength="1"
+                                      maxlength="500"
+                                      input-focus />
                         </div>
                     </div>
-                </div>
 
-                <strong class="duration_time form-content form-bx8">Add Notes</strong>   
-                <div class="clearfix">
-                    <div class="form-group form-bx form-bx5">
-                      
-                        <textarea cols="100" rows="5" name="description"
-                                  data-ng-model="params.text"
-                                  minlength="1"
-                                  maxlength="500"
-                                  input-focus
-                                  />
+                    <div class="form-group">
+                        <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" checked></label>
+                        <label>Remind Me</label>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" checked></label>
-                    <label>Remind Me</label>
-                </div>
+                    <div class="modal-btn-wrap-1 clearfix">
+                        <button type="submit" class="f-btn"> SAVE</button>
+                        <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                        <button type="button" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
+                    </div>
 
-              <div class="modal-btn-wrap-1 clearfix">
-                    <button type="submit" class="f-btn"> SAVE</button>
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
-                    <button type="button" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
-                </div>
-		
-                   
-               
-               
-            </form>
+
+
+
+</form>
 
         </div>
-    </div>
-</div>
+    

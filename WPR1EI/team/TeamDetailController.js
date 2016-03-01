@@ -1,6 +1,5 @@
 ﻿angular.module('team')
 
-
 .controller('TeamDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope, $modal,teamService) {
         console.log('TeamDetailController');
@@ -8,36 +7,41 @@
         $rootScope.title = 'Dwellar./TeamDetails';
         var orgID = $cookieStore.get('orgID');
 
-       // //Audit log start
-       // $scope.params = {
-       //     device_os: "windows10",
-       //     device_type: "mobile",
-       //     device_mac_id: "34:#$::43:434:34:45",
-       //     module_id: "TeamDetail",
-       //     action_id: "TeamDetail View",
-       //     details: "TeamDetail",
-       //     application: "angular",
-       //     browser: $cookieStore.get('browser'),
-       //     ip_address: $cookieStore.get('IP_Address'),
-       //     location: $cookieStore.get('Location'),
-       //     organization_id: $cookieStore.get('orgID'),
-       //     User_ID: $cookieStore.get('userId')
-       // };
-       // AuditCreate = function (param) {
+        //Audit log start               
 
-       //     apiService.post("AuditLog/Create", param).then(function (response) {
-       //         var loginSession = response.data;
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
+              // device_mac_id: "34:#$::43:434:34:45",
+               module_id: "Contact",
+               action_id: "Contact View",
+               details: "TeamDetailView",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
 
-       //     },
-       //function (error) {
-       //});
-       // };
-       // AuditCreate($scope.params);
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
+                var loginSession = response.data;
+            },
+       function (error) {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
+        };
+        AuditCreate();
 
         //end
 
         TeamUrl = "Team/GetById/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
-        apiService.get(TeamUrl).then(function (response) {
+        apiService.getWithoutCaching(TeamUrl).then(function (response) {
             $scope.main = response.data;
             $scope.image = $scope.main[0];
 
@@ -49,17 +53,10 @@
 
         if ($scope.seletedCustomerId != "undefined") {
 
-            //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-            GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-            //alert(GetUrl);
-
+            GetUrl = "Team/GetById/" + $scope.seletedCustomerId;
+          
             apiService.getWithoutCaching(GetUrl).then(function (response) {
-
                 $scope.data = response.data;
-                // alert($scope.data);
-                //   alert($scope.seletedCustomerId);
-
-
                 $scope.name = $scope.data[0].name;
                 $scope.description = $scope.data[0].description;
              
@@ -142,32 +139,54 @@
             columns: [{
                 template: "<img height='40px' width='40px' src='#= media_url #'/>" +
                 "<span style='padding-left:10px' class='property-photo'> </span>",
-                title: "Picture",
+                title: "Photo",
                 width: "120px",
-                attributes: {
+                attributes:
+                 {
                     "class": "UseHand",
-
-                }
-            }, {
+                    
+                 }
+              }, {
                 field: "name",
                 title: "First Name",
                 width: "120px",
+                attributes:
+                      {
+                          "class": "UseHand",
+                          "style": "text-align:center"
 
-            }, {
+                      }
+
+              }, {
                 field: "account_email",
                 title: "Email",
                 width: "120px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
 
-            }, {
+                 }
+              }, {
                 field: "account_phone",
                 title: "Phone",
                 width: "120px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
 
-            },{
+                 }
+             },{
                 field: "date",
                 title: "Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy hh:mm:ss}',
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
             }]
         };
 
@@ -420,7 +439,7 @@
 
         //API functionality start
         if ($scope.seletedCustomerId !== '') {
-            GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+            GetUrl = "Team/GetById/" + $scope.seletedCustomerId;
             apiService.get(GetUrl).then(function (response) {
                 $scope.data = response.data;
                 $scope.name = $scope.data[0].name;
@@ -481,9 +500,6 @@
             });
         };
 
-
-
-
         $scope.openEditTask = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -518,16 +534,14 @@
 
                 if (args == 'team') {
 
-                    //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-                    GetUrl = "Team/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-                    //alert(GetUrl);
+                    GetUrl = "Team/GetById/" + $scope.seletedCustomerId;
 
                     apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                         $scope.data = response.data;
-                        // alert($scope.data);
-                        //   alert($scope.seletedCustomerId);
 
+                        $scope.main = response.data;
+                        $scope.image = $scope.main[0];
 
                         $scope.name = $scope.data[0].name;
                         $scope.description = $scope.data[0].description;
@@ -544,7 +558,6 @@
                                     deferred.reject(error);
                                     alert("not working");
                                 });
-
 
                 }
 

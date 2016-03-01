@@ -1,6 +1,4 @@
-/**
- * Created by dwellarkaruna on 27/10/15.
- */
+
 angular.module('team')
     .service('teamService', ['$http', 'apiService',
         function ($http, apiService) {
@@ -15,7 +13,6 @@ angular.module('team')
             };
 
             this.getOrgTeams = function (orgId) {
-                //   alert(orgId);
 
                 return $http.get(apiService.baseUrl + 'Team/Get?orgID=' + orgId)
             };
@@ -28,9 +25,6 @@ angular.module('team')
 
             this.getOrgProjects = function (userID) {
 
-                //  alert("userID" + userID);
-
-                //  return $http.get(apiService.baseUrl + 'Project/Get/' + orgId)
                 return $http.get(apiService.baseUrl + "Organization/GetProjectDetails?id=" + userID)
 
             };
