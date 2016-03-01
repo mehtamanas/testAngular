@@ -7,8 +7,38 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
        url: apiService.uploadURL,
       
     });
+    //Audit log start               
 
-   
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.name + "EditOrganization",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+    
+    //end
 
     uploader.filters.push({
         name: 'imageFilter',
@@ -78,10 +108,7 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
 
         },
        function (error)
-       { if (error.status === 400)
-         alert(error.data.Message);
-         else
-         alert("Network issue");
+       { 
          });
     }
 
@@ -111,10 +138,6 @@ var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieSt
     },
 function (error)
 {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
 });
 
  uploader.onSuccessItem = function (fileItem, response, status, headers)
@@ -169,14 +192,16 @@ function (error)
                 zip_code: $scope.zip_code,
                 country: $scope.country1,
 
-
-
             };
 
             apiService.post("Organization/Edit", postData).then(function (response)
             {
                 //alert("hi dude");
                 var loginSession = response.data;
+                $scope.openSucessfullPopup();
+                $modalInstance.dismiss();
+                AuditCreate();
+                $rootScope.$broadcast('REFRESH', 'organization');
                 var media = [];
                 for (var i in $scope.choices1) {
                     var postData_email =
@@ -202,8 +227,10 @@ function (error)
                     media.push(postData_phone);
                 }
 
+              
                 apiService.post("ElementInfo/Create", media).then(function (response) {
                     var loginSession = response.data;
+                  
                     //called = true;
                 },
                function (error) {
@@ -224,9 +251,7 @@ function (error)
        });
 
           
-            $scope.openSucessfullPopup();
-            $modalInstance.dismiss();
-            $rootScope.$broadcast('REFRESH', 'organization');
+            
 
         }
 
@@ -304,10 +329,7 @@ function (error)
 
         },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+        
     });
 
 
@@ -335,10 +357,7 @@ function (error)
 
         },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+        
     });
 
         $scope.selectmonth = function () {
@@ -360,10 +379,7 @@ function (error)
             $scope.states = response.data;
         },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+       
     });
 
         $scope.selectstate = function () {
@@ -377,10 +393,7 @@ function (error)
             $scope.cities = response.data;
         },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+      
     });
 
         $scope.selectcity = function () {
@@ -400,10 +413,7 @@ function (error)
 
         },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+        
     });
         $scope.selectcountry = function () {
             $scope.params.country = $scope.country1;

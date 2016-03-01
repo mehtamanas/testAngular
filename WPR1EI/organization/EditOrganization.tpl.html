@@ -11,19 +11,14 @@
         <form class="form-content" name="newForm" autocomplete="off" novalidate
               data-ng-submit="addNewUser(newForm.$valid)">
 
-            <!--<div class="upload-wrap">
-                <input name="upload-photo" id="upload-photo" type="file" />
-                <span class="upload-text">Add Photo</span>
-            </div>-->
             <div class="clearfix image-upload-container">
                 <div class="modal-body image-upload-wrap">
-                    <!--<div class="image-upload-title">Upload Organization Image</div>-->
                     <div class="dropzone dropzone-bx image-upload-bx">
                         <div class="fallback">
                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                 <div class="panel-body image-upload-panel">
                                     <div class="row" ng-hide="uploader.queue.length">
-                                        <img ng-src={{data.media_url}} alt="Drag and Drop" class="img-responsive" />
+                                        <img ng-src={{data.media_url}} class="img-responsive" />
                                     </div>
                                     <div class="row" ng-show="uploader.queue.length">
                                         <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
@@ -37,7 +32,7 @@
                     </div>
                     <div class="image-upload-link">
                         <div class="browse-title">Browse</div>
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader"  style="height:103px;width:202px"/>
                         <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                     </div>
                 </div>
@@ -95,15 +90,10 @@
 
                 </div>
 
-
-               
-                
-                
                 <div class="clearfix">
                     <div class="form-bx form-bx6">
                         <div class="form-group">
                             <label for="">Country</label>
-
                             <select ng-model="country1" id="orgz_country" ng-change="selectcountry()" class="dropdown form-control">
                                 <option value="" selected> Country</option>
                                 <option ng-repeat="country in countries  "
@@ -119,9 +109,7 @@
                 <div class="clearfix">
                     <div class="form-bx form-bx6">
                         <div class="form-group">
-                            <label for="">City</label>
-
-                            
+                            <label for="">City</label>  
                             <select ng-model="city1" id="orgz_city" ng-change="selectcity()" class="dropdown form-control">
                                 <option value="" selected>City</option>
                                 <option ng-repeat="city in cities | filter:filterExpression"
@@ -133,12 +121,9 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="pull-left f-half-2">
-
                 <div class="clearfix">
                     <div class="form-bx form-bx6">
                         <div class="form-group"
@@ -163,16 +148,10 @@
                     </div>
                 </div>
 
-
-
-                
-
                 <div class="clearfix">
                     <div class="form-bx form-bx6">
                         <div class="form-group">
                             <label for="">State</label>
-
-                            
                             <select ng-model="state1" id="orgz_state" ng-change="selectstate()" class="dropdown form-control">
                                 <option value="" selected> State</option>
                                 <option ng-repeat="state in states"
@@ -185,17 +164,12 @@
                     </div>
                 </div>
 
-
-                
-
                 <div class="form-bx form-bx6">
-
 
                     <div class="form-group"
                          data-ng-class="{
                             'has-error' : newForm.ZipCode.$invalid && (!newForm.ZipCode.$pristine || showValid),
                             'has-success': newForm.ZipCode.$valid && !newForm.ZipCode.$pristine }">
-
 
                         <label for="">Postal Code</label>
                         <input type="text" name="ZipCode" class="form-control" id="orgz_zip"
@@ -218,15 +192,6 @@
                     </div>
 
                 </div>
-
-
-
-
-
-
-
-
-
             </div>
 
             <div class="organization_desc_wrap clearfix">
@@ -343,22 +308,10 @@
                         </div>
                     </div>
 
-
-
-                    <!--<div class="clearfix">
-                        <div class="form-bx form-bx6">
-                            <label for="">List In Builder Directory	</label>
-                            <label><input type="radio" name="test" ng-model="radioValue" ng-checked="true" value="1" /> Yes</label>
-                            <label><input type="radio" name="test" ng-model="radioValue"  value="2" /> No</label>
-
-
-
-                        </div>
-                    </div>-->
                     <div class="pull-left f-half-5">
                         <div class="form-bx form-bx6">
                             <label for="">List In Builder Directory</label>
-                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" required>
+                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control">
                                 <option value="" selected>--Select Yes or No--</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -517,7 +470,7 @@
                     <div class="clearfix" style="margin-top: 10px;">
                         <div class="form-bx form-bx6">
                             <label for="">Time Zone</label>
-                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" required>
+                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control">
                                 <option value="" selected>--Select Timezone--</option>
                                 <option ng-repeat="Time in timezone | orderBy:'timezone'"
                                         value="{{Time.id}}">
@@ -526,12 +479,7 @@
                             </select>
                         </div>
                     </div>
-
-
-                    
-
                 </div><!-- f-half-2 ended -->
-
             </div>
 
             <div class="progress" ng-show="((uploader.progress)/1)>0">

@@ -9,8 +9,6 @@
             </div>
         </div>
    </div>
-
-
             <div class="pg-inner-content">
 
                 <div class="project-detail">
@@ -26,7 +24,6 @@
 
                         <div class="project-detail-txt">
 
-
                             <div class="project-name">Name:  {{image.Contact_First_Name}} {{image.Contact_Last_Name}} <a id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
                             <div class="project-d02"> {{image.Title}}</div>
                             <div class="project-d02">Type:{{image.people_type}}</div>
@@ -34,11 +31,9 @@
                             <div class="project-d02">Email: <a href="" ng-click="sendEmail()">{{image.Contact_Email}}</a></div>
                           
  Tag Name:
-                            <label ng-repeat="tag in tags">{{tag.tag_name}}  </label>
+                            <label ng-repeat="tag in tags">{{tag.tag_name}} , </label>
                         </div>
                     </div> <!-- project-detail-info ended -->
-
-
 
                     <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
                         <ul class="nav nav-tabs responsive-tagJS" role="tablist">
@@ -118,10 +113,6 @@
                                                     <h7 ng-bind="Title"> </h7>
                                                 </div>
                                             </div>
-
-
-
-
                                         </div>
                                     </div><!-- bx-h1 ended -->
                                 </div>

@@ -1,6 +1,4 @@
-﻿/**
- * Created by dwellarkaruna on 24/10/15.
- */
+﻿
 var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope,$window) {
     console.log('AddNewTaskController');
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -9,25 +7,27 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
     $scope.reminder_time = "15 min";
 
     $scope.contact1 = $scope.seletedCustomerId;
-    //Audit log start
-    $scope.params = {
+    //Audit log start               
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id:"Contact View",
+           details: $scope.name + "AddNewTask",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
@@ -37,8 +37,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
-
+   
     //end
 
     //API functionality start
@@ -68,6 +67,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            AuditCreate();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
     function (error) {
@@ -180,20 +180,12 @@ function (error) {
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.reset = function () {
-        $scope.params = {};
-    }
-
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
             if ($scope.remind_me === true) {
                 remind_me = "1";
-                //$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
-                //$scope.params.reminder_datetime = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss').subtract($scope.params.reminder_datetime, 'minutes')._d;
-                ////$scope.params.reminder_datetime = moment($scope.params.reminder_datetime, "MM-DD-YYYY HH:");
-                //$scope.due_date = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss')._d;
-                  $scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
+                $scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
                 $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.params.reminder_datetime, 'minutes')._d;
                 var dDate= moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
             }
@@ -230,9 +222,6 @@ function (error) {
         }
 
     }
-
-
-
 
 };
 

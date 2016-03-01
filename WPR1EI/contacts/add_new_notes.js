@@ -7,24 +7,26 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
 
     $scope.contact1 = $scope.seletedCustomerId;
     //Audit log start
-    $scope.params = {
+  
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: "AddNewNote",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
@@ -34,8 +36,7 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
-
+   
     //end
 
 
@@ -56,7 +57,8 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
         if (classname == 'remove-field') {
-            // $scope.choices2.pop();
+           
+            $scope.choices2.pop();
         }
         else if ($scope.choices2.length) {
             var newItemNo2 = $scope.choices2.length + 1;
@@ -65,31 +67,13 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
 
     };
 
-    //API functionality start
-    //$scope.params = {
-    //    project_id: $scope.project1,
-    //    text: $scope.text,
-    //    class_id:$scope.contact1,
-    //    organization_id: $cookieStore.get('orgID'),
-    //    user_id: $cookieStore.get('userId'),
-    //    class_type: "Person",
-        
-    //};
-
-
-   
-
-
-
     projectUrl = "Notes/CreateMultipleNotes";
     ProjectCreate = function () {
         var schemeupdate = [];
+        for (var i in $scope.choices2) {
+           
 
-        for (var i in $scope.choices2)
-        {
-         
-
-            var newscheme = {};
+           var newscheme = {};
 
             newscheme.user_id = $cookieStore.get('userId');
             newscheme.organization_id = $cookieStore.get('orgID');
@@ -97,15 +81,14 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
             newscheme.class_id = window.sessionStorage.selectedCustomerID;
             newscheme.class_type = "Person";
             schemeupdate.push(newscheme);
-
-       
         }
+
         apiService.post(projectUrl, schemeupdate).then(function (response) {
             var choices2 = response.data;
-
-
+            AuditCreate();
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
+            
             $rootScope.$broadcast('REFRESH', 'NotesGrid');
         },
 function (error) {
@@ -113,29 +96,8 @@ function (error) {
         alert(error.data.Message);
     else
         alert("Network issue");
-});
-        }
-       
-
-
-    //projectUrl = "/Notes/Create";
-    //ProjectCreate = function (param) {
-
-    //    apiService.post(projectUrl, param).then(function (response) {
-    //        var loginSession = response.data;
-    //        $scope.openSucessfullPopup();
-    //        $modalInstance.dismiss();
-    //        $rootScope.$broadcast('REFRESH', 'NotesGrid');
-    //    },
-    //function (error) {
-    //    if (error.status === 400)
-    //        alert(error.data.Message);
-    //    else
-    //        alert("Network issue");
-    //})
-    //};
-
-
+})
+    };
 
     //end
     //popup functionality start

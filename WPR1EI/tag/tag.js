@@ -1,11 +1,45 @@
 ﻿angular.module('tag')
 .controller('tagController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope)
+    {
         console.log('tagController');
 
         var userID = $cookieStore.get('userId');
-
         var orgID = $cookieStore.get('orgID');
+
+        //Audit log start               
+
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
+               //device_mac_id: "34:#$::43:434:34:45",
+               module_id: "Contact",
+               action_id: "Contact View",
+               details: "Tags",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
+                var loginSession = response.data;
+            },
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+           });
+        };
+
+        AuditCreate();
+        //end
+
+//grid functionality start
 
         $scope.tagGrid = {
             dataSource: {
@@ -41,19 +75,7 @@
                  },]
         };
 
-        $scope.openTagPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'tag/createTag.html',
-                backdrop: 'static',
-                controller: AddTagPopUpController,
-                size: 'md'
-            });
-        };
-
-
-
-
+     
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
@@ -115,8 +137,21 @@
             }
         });
 
+//grid functionality end
 
+//popup functionality start
 
+        $scope.openTagPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'tag/createTag.html',
+                backdrop: 'static',
+                controller: AddTagPopUpController,
+                size: 'md'
+            });
+        };
+
+        //popup functionality end
 
 
     }

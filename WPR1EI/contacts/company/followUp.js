@@ -1,10 +1,7 @@
-﻿/**
- * Created by dwellarkaruna on 24/10/15.
- */
+﻿
 var FollowUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-   // $scope.seletedCustomerId=$cookieStore.get('ID');
 
     $scope.companyName = $cookieStore.get('company_name');
     $scope.leadName = $cookieStore.get('lead_name');
@@ -58,25 +55,27 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.reminder_time = "15 min";
 
     
-    //Audit log start
-    $scope.params = {
+    //Audit log start               
+ 
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.text + "AddNewFollowUp",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
@@ -86,7 +85,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
+   
 
     //end
 
@@ -115,6 +114,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            AuditCreate();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
     function (error) {

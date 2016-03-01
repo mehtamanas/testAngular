@@ -1,38 +1,38 @@
 ﻿
 var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope,$window)
 {
-
     console.log('AddNewEventContact');   
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     $scope.contact1 = window.sessionStorage.selectedCustomerID;
-    $scope.start_date = moment().format();
-    $scope.end_date = moment().format();
+    //$scope.start_date = moment().format();
+    //$scope.end_date = moment().format();
     $scope.reminder_time = "15 min";
   
 
-    //Audit log start
-    $scope.params = {
+    //Audit log start               
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Wing",
-        action_id: "Wing View",
-        details: "ProjectDetail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
+  
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.name + "AddNewCampaign",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-    AuditCreate = function (param) {
 
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
-
         },
    function (error) {
        if (error.status === 400)
@@ -41,9 +41,9 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
+   
 
-    //end audit log
+    //end
 
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.getWithoutCaching(Url).then(function (response) {
@@ -55,7 +55,7 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
 
     $scope.selectproject = function () {
         $scope.params.project_id = $scope.project1;
-        //alert($scope.params.project_id);
+      
     };
 
     Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
@@ -75,7 +75,6 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
         name: $scope.name,
         location: $scope.location,
         contact_id: $scope.contact1,
-       // class_type: "Contact",
         start_date: $scope.start_date,
         end_date: $scope.end_date,      
         project_id: $scope.project1,
@@ -93,6 +92,7 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            AuditCreate();
             $rootScope.$broadcast('REFRESH', 'EventGrid');
         },
     function (error) {
@@ -121,8 +121,6 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-
-    $scope.orgList = ['ABC Real Estate Ltd'];
 
     $scope.addNew = function (isValid) {
         $scope.showValid = true;

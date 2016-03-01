@@ -1,6 +1,4 @@
-/**
- * Created by dwellarkaruna on 20/10/15.
- */
+
 angular.module('contacts', [])
 
     .config(['$stateProvider', function ($stateProvider) {

@@ -1,9 +1,4 @@
 ﻿
-
-
-/**
- * Created by dwellarkaruna on 24/10/15.
- */
 var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope) {
     console.log('EditContactPopUpController');
 
@@ -11,14 +6,47 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     var orgID = $cookieStore.get('orgID');
 
-    //  alert($scope.seletedCustomerId);
-
     var uploader = $scope.uploader = new FileUploader(
     {
         url: apiService.uploadURL,
     });
 
     $scope.showProgress = false;
+
+    //Audit log start               
+
+   
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.params.Contact_First_Name +  "EditContact",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+       
+
+    //end
 
 
     // FILTERS
@@ -44,8 +72,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         }
     }
 
-   
-
     contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.params = response.data[0];
@@ -54,7 +80,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         $scope.choices[0].Contact_Phone = response.data[0].Contact_Phone;
 
         $scope.choices2[0].Street_1 = response.data[0].street1;
-        //$scope.choices2[0].Street_2 = response.data[0].street2;
+
         if (response.data[0].street2 != undefined)
         { $scope.choices2.push({ 'Street_1': response.data[0].street2 }); }
         $scope.params.State = response.data[0].Stateid;
@@ -67,18 +93,13 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         $scope.project1 = response.data[0].projectid;
         $scope.params.project_id = response.data[0].projectid;
         $scope.people_type = response.data[0].people_type;
-        //$scope.params.radioValue = response.data[0].gender;
         $scope.gender = response.data[0].gender;
         $scope.salutation1 = response.data[0].salutation;
     },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+       
     }
   );
-
 
     Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Contact";
 
@@ -103,19 +124,12 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+       
     });
-
-    
-
 
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-        // post image upload call the below api to update the database
-
+  
         $scope.params.Contact_Image = response[0].Location;
         uploader_done = true;
         if (uploader_done == true) {
@@ -123,7 +137,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             $scope.finalpost();
         }
     };
-
 
     var called = false;
 
@@ -146,8 +159,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                 if ($scope.choices2[1].Street_1 != undefined)
                     newadd.Street_2 = $scope.choices2[1].Street_1;
             }
-
-
         }
 
       
@@ -157,14 +168,12 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            user_id: $cookieStore.get('userId'),
            organization_id: $cookieStore.get('orgID'),
            class_type: "Contact",
-           //media_name: uploadResult.Name,
            media_url: $scope.params.Contact_Image,
            age: $scope.params.age,
            gender: $scope.gender,
            people_type: $scope.people_type,
            first_name: $scope.params.Contact_First_Name,
            last_name: $scope.params.Contact_Last_Name,
-           //people_type: $scope.params.Type,
            designation: $scope.params.designation,
            contact_element_info_email: $scope.choices1[0].Contact_Email,
            contact_element_info_phone: $scope.choices[0].Contact_Phone,
@@ -180,11 +189,11 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            mappinguser_id: $scope.params.mappinguser_id,
            company: $scope.params.company,
            salutation: $scope.params.salutation,
-
        };
 
         apiService.post("Contact/Edit", postData).then(function (response) {
             var loginSession = response.data[0];
+            AuditCreate();
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
 
@@ -213,10 +222,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                 media.push(postData_phone);
             }
 
-
-
-
-
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
                 called = true;
@@ -239,16 +244,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                alert("Network issue");
 
        });
-
-
     }
-
-
-
-
-
-
-
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {
         alert('Unable to upload file.');
@@ -301,10 +297,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.reset = function () {
-        $scope.params = {};
-    }
-
     $scope.choices = [{ id: 'choice1' }];
 
     $(document).on("click", ".remove-field2", function () {
@@ -326,9 +318,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
         }
         $(this).parent().remove();
-
-
-
     });
 
     $scope.choices = [{ id: 'choice1' }];
@@ -355,8 +344,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         }
     };
 
-
-
     $scope.choices2 = [{ id: 'choice1' }];
 
     $scope.addNewChoice2 = function (e) {
@@ -373,8 +360,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     };
 
-
-
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
@@ -385,26 +370,22 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.selectproject = function () {
         $scope.params.project_id = $scope.project1;
-        //alert($scope.params.project_id);
+       
     };
 
     $scope.selectgender = function () {
         $scope.params.gender = $scope.gender;
-        //alert($scope.params.month);
+        
     };
 
     $scope.selectsalutation = function () {
         $scope.params.salutation = $scope.salutation1;
-        //alert($scope.params.month);
+       
     };
-
-
 
     $scope.selecttype = function () {
         $scope.params.people_type = $scope.people_type;
-        //alert($scope.params.month);
     };
-
 
     Url = "user/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
@@ -416,7 +397,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.selectuser = function () {
         $scope.params.mappinguser_id = $scope.user1;
-        //alert($scope.params.user_id);
+        
     };
 
     Url = "GetCSC/state";
@@ -432,7 +413,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         $scope.city1 = "";
     };
 
-
     Url = "GetCSC/city";
     apiService.get(Url).then(function (response) {
         $scope.cities = response.data;
@@ -447,7 +427,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.selectcity = function () {
         $scope.params.City = $scope.city1;
-        //alert($scope.params.city);
     };
 
     $scope.EditContact = function (isValid)
@@ -466,7 +445,6 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
         }
 }
-
 
     Url = "Company/GetAllCompanies/" + orgID;
     apiService.get(Url).then(function (response) {

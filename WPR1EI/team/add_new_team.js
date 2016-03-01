@@ -1,48 +1,43 @@
-/**
- * Created by dwellarkaruna on 24/10/15.
- */
+
 var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope) {
     console.log('TeamPopUpController');
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "AddNewTeamView",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
+    //Audit log start               
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.params.name + "AddNewTeam",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
-
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
+   
 
     //end
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-
-    $scope.reset = function () {
-        $scope.params = {};
-    }
-
-    AuditCreate($scope.params);
-
-    //end
 
 
     $scope.openSucessfullPopup = function () {
@@ -54,8 +49,6 @@ var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $m
             size: 'md',
             resolve: { items: { title: "Team" } }
         });
-
-      
     }
 
             $scope.params = {
@@ -95,6 +88,7 @@ var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $m
                         var loginSession = response.data;
                         $scope.openSucessfullPopup();
                         $modalInstance.dismiss();
+                        AuditCreate();
                         $rootScope.$broadcast('REFRESH', 'teamGrid');
                     },
                function (error) {
@@ -102,8 +96,6 @@ var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $m
                });
                 };
  
-           
-            $scope.orgList = ['ABC Real Estate Ltd'];
 
             $scope.addNew = function (isValid) {
                 $scope.showValid = true;

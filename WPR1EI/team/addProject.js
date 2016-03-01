@@ -1,12 +1,45 @@
-﻿/**
- * Created by User on 10/28/2015.
- */
-var AddProjectTeamController = function ($scope, $q, $cookieStore, newuserService, newuserData) {
-    //alert("ff");
+﻿
+var AddProjectTeamController = function ($scope, $q, $cookieStore, newuserService, newuserData, apiService) {
+    
     $scope.ProjectsInUser = undefined;
     $scope.orgProjects = undefined;
 
     var currentlyLoggedInUserId = $cookieStore.get('userId');
+
+    //Audit log start               
+
+   
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: "AddNewUser",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+    AuditCreate();
+
+    //end
 
     var loadProjects = function () {
         var userID = $cookieStore.get('userId');

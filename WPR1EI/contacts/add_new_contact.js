@@ -1,6 +1,4 @@
-/**
- * Created by dwellarkaruna on 24/10/15.
- */
+
 var ContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ContactPopUpController');
 
@@ -53,25 +51,26 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     }
 
     //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "AddNewContact",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId'),
+  
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.params.first_name + "AddNewContact",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-        };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
@@ -81,8 +80,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
 
+  
     //end
 
 
@@ -160,6 +159,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            AuditCreate();
             $rootScope.$broadcast('REFRESH', 'contactGrid');
 
 
@@ -188,10 +188,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                 media.push(postData_phone);
             }
 
-
-
-
-
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
                 called = true;
@@ -204,9 +200,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                    alert("Network issue");
 
            });
-
-
-
         },
        function (error) {
            if (error.status === 400)
@@ -225,14 +218,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
             newadd.Street_2 = $scope.choices2[i].Street_2;
             address.push(newadd);
-
-
         }
-
-
-
     }
-
 
     uploader.onErrorItem = function (fileItem, response, status, headers) {
         alert('Unable to upload file.');
@@ -241,7 +228,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
         $scope.showProgress = false;
     };
-
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
@@ -252,11 +238,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             size: 'md',
             resolve: { items: { title: "Contact" } }
         });
-
-
     }
-
-
 
     var address = [];
 
@@ -267,12 +249,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         newadd.Street_2 = $scope.choices2[i].Street_2;
         address.push(newadd);
-
-
     }
-
-
-
 
     $scope.params = {
         first_name: $scope.first_name,
@@ -295,18 +272,12 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         designation: $scope.designation,
         company: $scope.company,
         salutation: $scope.salutation
-
-
     };
 
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
-
-    $scope.reset = function () {
-        $scope.params = {};
-    }
 
     $scope.choices = [{ id: 'choice1' }];
 
@@ -329,20 +300,16 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     $scope.selectsalutation = function () {
         $scope.params.salutation = $scope.salutation1;
-        //alert($scope.params.month);
     };
 
     $scope.selectgender = function () {
         $scope.params.radioValue = $scope.directory1;
-        //alert($scope.params.month);
     };
-
 
     $scope.selecttype = function () {
         $scope.params.radioValue = $scope.directory2;
         //alert($scope.params.month);
     };
-
 
     $scope.choices1 = [{ id: 'choice1' }]; // remove code
     $scope.addNewChoice1 = function (e) {
@@ -354,9 +321,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             var newItemNo = $scope.choices1.length + 1;
             $scope.choices1.push({ 'id': 'choice' + newItemNo });
         }
-
     };
-
 
     $scope.choices2 = [{ id: 'choice1' }];
     $scope.addNewChoice2 = function (e) {
@@ -373,9 +338,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     };
 
-
-
-
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
@@ -386,10 +348,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     $scope.selectproject = function () {
         $scope.params.project_id = $scope.project1;
-        //alert($scope.params.project_id);
     };
-
-
 
     Url = "user/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
@@ -417,7 +376,6 @@ function (error) {
         //alert($scope.params.state);
     };
 
-
     Url = "GetCSC/city";
     apiService.get(Url).then(function (response) {
         $scope.cities = response.data;
@@ -425,17 +383,14 @@ function (error) {
 function (error) {
     alert("Error " + error.cities);
 
-
 });
 
     $scope.filterExpression = function (city) {
         return (city.stateid === $scope.params.state);
     };
 
-
     $scope.selectcity = function () {
-        $scope.params.city = $scope.city1;
-        //alert($scope.params.city);
+        $scope.params.city = $scope.city1;  
     };
 
     Url = "Company/GetAllCompanies/" + orgID;
@@ -456,7 +411,6 @@ function (error) {
 function (error) {
     alert("Error " + error.state);
 });
-
 
     $scope.addNewContact = function (isValid) {
         $scope.showValid = true;

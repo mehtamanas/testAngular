@@ -1,45 +1,13 @@
 
-// * Created by karuna on 24/10/15.
-// */
 angular.module('contacts')
 .controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope)
     {
         console.log('ContactDetailControllerdm');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         
-
         $rootScope.title = 'Dwellar./ContactDetails';
      
-        
-    ////Audit log start															
-    //    $scope.params =
-    //        {
-    //            device_os: $cookieStore.get('Device_os'),
-    //            device_type: $cookieStore.get('Device'),
-    //            device_mac_id: "34:#$::43:434:34:45",
-    //            module_id: "Contact",
-    //            action_id: "Contact View",
-    //            details: "ContactDetailView",
-    //            application: "angular",
-    //            browser: $cookieStore.get('browser'),
-    //            ip_address: $cookieStore.get('IP_Address'),
-    //            location: $cookieStore.get('Location'),
-    //            organization_id: $cookieStore.get('orgID'),
-    //            User_ID: $cookieStore.get('userId')
-    //        };
-
-    //    AuditCreate = function (param) {
-    //        apiService.post("AuditLog/Create", param).then(function (response) {
-    //            var loginSession = response.data;
-    //        },
-    //   function (error) {
-
-    //   });
-    //    };
-    //    AuditCreate($scope.params);
-
-    ////end
-        contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+        contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;
         apiService.getWithoutCaching(contactUrl).then(function (response) {
             $scope.main = response.data;
             $scope.image = $scope.main[0];
@@ -50,7 +18,7 @@ angular.module('contacts')
    }
         );
 
-        contactUrl = "Tags/GetTagsByContactId/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+        contactUrl = "Tags/GetTagsByContactId/" + $scope.seletedCustomerId;
         apiService.getWithoutCaching(contactUrl).then(function (response) {
             $scope.tags = response.data;
 
@@ -61,19 +29,48 @@ angular.module('contacts')
    }
         );
 
+    //Audit log start               
+
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
+               device_mac_id: "34:#$::43:434:34:45",
+               module_id: "Contact",
+               action_id: "Contact View",
+               details: "ContactDetailView",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
+
+
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
+                var loginSession = response.data;
+            },
+       function (error) {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
+        };
+
+        AuditCreate();
+    //end
+
         if ($scope.seletedCustomerId != "undefined") {
 
-            //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
             GetUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-            //alert(GetUrl);
-
+          
             apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
-                // alert($scope.data);
-                //   alert($scope.seletedCustomerId);
-
-
+              
                 $scope.Contact_First_Name = $scope.data[0].Contact_First_Name;
                 $scope.area = $scope.data[0].area;
                 $scope.Contact_Last_Name = $scope.data[0].Contact_Last_Name;
@@ -89,9 +86,7 @@ angular.module('contacts')
                 $scope.State = $scope.data[0].State;
                 $scope.City = $scope.data[0].City;
                 $scope.Title = $scope.data[0].Title;
-                //$scope.media_url = $scope.data[0].media_url;
-                // alert($scope.media_url);
-
+              
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
                 }
@@ -101,7 +96,7 @@ angular.module('contacts')
             },
                         function (error) {
                             deferred.reject(error);
-                            alert("not working");
+                            //alert("not working");
                         });
         }
         Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Contact";
@@ -122,15 +117,10 @@ angular.module('contacts')
                     $scope.choices[b].class_id = data[i].class_id;
                     b++;
                 }
-
             }
-
         },
         function (error) {
-            if (error.status === 400)
-                alert(error.data.Message);
-            else
-                alert("Network issue");
+           
         });
 
         $scope.choices = [{ id: 'choice1' }];
@@ -156,8 +146,6 @@ angular.module('contacts')
                 $scope.choices1.push({ 'id': 'choice' + newItemNo });
             }
         };
-
-
 
         $scope.choices2 = [{ id: 'choice1' }];
 
@@ -248,9 +236,7 @@ angular.module('contacts')
         };
 
         $scope.PropertyListGrid = {
-            // $scope.mainGridOptions = {
-
-
+          
             dataSource: {
                 type: "json",
                 transport: {
@@ -418,7 +404,6 @@ angular.module('contacts')
 
         };
             
-       
         $scope.PaymentGrid = {
             dataSource: {
 
@@ -615,10 +600,8 @@ angular.module('contacts')
            }, ]
         };
 
-      $scope.engagementGrid = {
-            // $scope.mainGridOptions = {
-
-
+        $scope.engagementGrid = {
+          
             dataSource: {
                 type: "json",
                 transport: {
@@ -845,19 +828,27 @@ angular.module('contacts')
                 field: "first_name",
                 title: " First Name",
                 width: "120px",
-                attributes: {
-                    "class": "UseHand",
-
-                }
+                attributes:
+           {
+               "style": "text-align:center"
+           }
             }, {
                 field: "last_name",
                 title: "Last Name ",
                 width: "120px",
+                attributes:
+          {
+              "style": "text-align:center"
+          }
                 
             }, {
                 field: "contact_element_info_email",
                 title: "Email",
                 width: "120px",
+                attributes:
+          {
+              "style": "text-align:center"
+          }
               
                
             }]
@@ -1017,12 +1008,6 @@ angular.module('contacts')
              }]
         };
 
-
-
-
-
-     
-
     //popup functionality start
         $scope.openEditContactPopup = function () {
             var modalInstance = $modal.open({
@@ -1033,8 +1018,6 @@ angular.module('contacts')
                 size: 'md'
             });
         };
-
-    //end
 
         $scope.openNewPaymentPopup = function () {
 
@@ -1048,7 +1031,6 @@ angular.module('contacts')
             });
 
         };
-
 
         $scope.openNewDocument = function () {
 
@@ -1234,7 +1216,7 @@ angular.module('contacts')
                     },
                                 function (error) {
                                     deferred.reject(error);
-                                    alert("not working");
+                                   // alert("not working");
                                 });
 
 
@@ -1261,10 +1243,7 @@ angular.module('contacts')
 
                     },
                     function (error) {
-                        if (error.status === 400)
-                            alert(error.data.Message);
-                        else
-                            alert("Network issue");
+                      
                     });
 
                 }

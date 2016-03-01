@@ -16,47 +16,47 @@ angular.module('contacts')
         $scope.percent = 100 * (value / $scope.max);
     }
 
+    //Audit log start               
+ 
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: $scope.rate + "AddNewUser",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-    ////Audit log start															
-    //    $scope.params =
-    //        {
-    //            device_os: $cookieStore.get('Device_os'),
-    //            device_type: $cookieStore.get('Device'),
-    //            device_mac_id: "34:#$::43:434:34:45",
-    //            module_id: "Contact",
-    //            action_id: "Contact View",
-    //            details: "ContactDetailView",
-    //            application: "angular",
-    //            browser: $cookieStore.get('browser'),
-    //            ip_address: $cookieStore.get('IP_Address'),
-    //            location: $cookieStore.get('Location'),
-    //            organization_id: $cookieStore.get('orgID'),
-    //            User_ID: $cookieStore.get('userId')
-    //        };
 
-    //    AuditCreate = function (param) {
-    //        apiService.post("AuditLog/Create", param).then(function (response) {
-    //            var loginSession = response.data;
-    //        },
-    //   function (error) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+  
 
-    //   });
-    //    };
-    //    AuditCreate($scope.params);
-
-    ////end
-
-    contactUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId; //f2294ca0-0fee-4c16-86af-0483a5718991";
+    //end
+    contactUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId; 
     apiService.get(contactUrl).then(function (response) {
         $scope.main = response.data;
         $scope.company = $scope.main[0];
 
     },
 function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
+   
 }
     );
     $scope.saveRating = function () {
@@ -69,8 +69,10 @@ function (error) {
         }
         apiService.post("Company/UpdateRating", postData).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+             
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
     function (error) {
@@ -107,14 +109,9 @@ function (error) {
             }
         },
                     function (error) {
-                        if (error.status === 400)
-                            alert(error.data.Message);
-                        else
-                            alert("Network issue");
+                      
                     });
     }
-
-
 
     $scope.companyGrid = {
          dataSource: {
@@ -223,7 +220,6 @@ function (error) {
     $scope.openFollowUp = function (d) {
         var id = d.Contact_Id;
         window.sessionStorage.selectedCustomerID = id;
-       // $cookieStore.put('ID', window.sessionStorage.selectedCustomerID);
         var modalInstance = $modal.open({
 
             animation: true,
@@ -244,17 +240,12 @@ function (error) {
     }
 
     $scope.myGridChangeFollowUp = function (dataItem) {
-        // dataItem will contain the row that was selected
+     
         window.sessionStorage.selectedCustomerID = dataItem.Contact_Id;
         $cookieStore.put('email', dataItem.Contact_Email);
         $cookieStore.put('phone', dataItem.Contact_Phone);
         $cookieStore.put('name', dataItem.Name);
-       
-      
-
+     
     };
-
- 
-
 
 });

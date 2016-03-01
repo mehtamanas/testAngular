@@ -137,7 +137,8 @@ $rootScope.title = 'Dwellar/Client';
              schema: {
                  model: {
                      fields: {
-                         date_of_birth: { type: "date" }
+                        
+                         Contact_Created_Date: { type: "date" },
                      }
                  }
              },
@@ -226,6 +227,26 @@ $rootScope.title = 'Dwellar/Client';
                  field: "company",
                  title: "Company",
                  width: "120px",
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             },
+              {
+                  field: "leadsource",
+                  title: "Lead Source",
+                  width: "120px",
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              },
+             {
+                 field: "Contact_Created_Date",
+                 title: "Updated Date",
+                 width: "120px",
+                 format: '{0:dd-MM-yyyy }',
+                 template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #",
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"

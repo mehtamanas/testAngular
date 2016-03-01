@@ -1,4 +1,4 @@
-﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+﻿
 <div id="add_payment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     
 
@@ -39,7 +39,7 @@
                                  data-ng-class="{ 'has-error' : addNewForm.paymenttype.$invalid && (!addNewForm.paymenttype.$pristine || showValid) && !addNewForm.paymenttype.$focus,
                                                   'has-success': addNewForm.paymenttype.$valid && !addNewForm.paymenttype.$pristine && !addNewForm.paymenttype.$focus
                                                  }">
-                                <div class="form-group form-bx form-bx11 form-bx11-1 ">
+                                <div class="form-group form-bx11-2 ">
                                     <label for="">Payment Type</label>
                                     <select ng-model="pay1" ng-change="selectpay()" name="paymenttype"
                                             class="dropdown form-control" id="contactpayment_amount" required>
@@ -82,9 +82,6 @@
                                 </div>
 
                                 </div>
-
-
-
                             </div>
                     </div>
                     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
