@@ -5,7 +5,8 @@
 angular.module('common')
     .controller('HomeController', ['$scope', '$cookieStore', '$location', 'security', '$rootScope', '$cookies', function ($scope, $cookieStore, $location, security, $rootScope, $cookies) {
 
- $scope.loggedUser = $cookieStore.get('loggedUser');
+        $scope.loggedUser = $cookieStore.get('loggedUser');
+        $scope.badge = (($scope.loggedUser).charAt(0)).toUpperCase();
 
         $('.nav-sub-dropdown > a').on('click', function () {
             if ($(this).parent('.nav-sub-dropdown').find('.nav-sub-bx').is(':hidden')) {

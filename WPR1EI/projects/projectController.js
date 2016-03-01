@@ -11,6 +11,8 @@ angular.module('project')
           var organization_id = $cookieStore.get('orgID');
           //alert($cookieStore.get('userId'));
 
+
+        //code for login permissions
             $('#btnSave').hide();
             $('#iconEdit').hide();
             $('#btnAdd').hide();
@@ -60,39 +62,36 @@ angular.module('project')
                         $cookieStore.put('projectid', '');
                         $state.go('app.projects.add_new_project');
                     };
+        //end
 
-                //Audit log start															
-                $scope.params =
-                    {
-                        device_os: $cookieStore.get('Device_os'),
-                        device_type: $cookieStore.get('Device'),
-                        device_mac_id: "34:#$::43:434:34:45",
-                        module_id: "Contact",
-                        action_id: "Contact View",
-                        details: "ProjectView",
-                        application: "angular",
-                        browser: $cookieStore.get('browser'),
-                        ip_address: $cookieStore.get('IP_Address'),
-                        location: $cookieStore.get('Location'),
-                        organization_id: $cookieStore.get('orgID'),
-                        User_ID: $cookieStore.get('userId')
-                    };
+        //Audit log start               
+        
+                   
+                  AuditCreate = function () {
+                        var postdata =
+                       {
+                           device_os: $cookieStore.get('Device_os'),
+                           device_type: $cookieStore.get('Device'),
+                           module_id: "Project",
+                           action_id: "Project View",
+                           details: "ProjectView",
+                           application: "angular",
+                           browser: $cookieStore.get('browser'),
+                           ip_address: $cookieStore.get('IP_Address'),
+                           location: $cookieStore.get('Location'),
+                           organization_id: $cookieStore.get('orgID'),
+                           User_ID: $cookieStore.get('userId')
+                       };
 
-                AuditCreate = function (param)
-                {
-                    apiService.post("AuditLog/Create", param).then(function (response)
-                    {
-                        var loginSession = response.data;
-                    },
-                   function (error)
-                   {
-                       if (error.status === 400)
-                           alert(error.data.Message);
-                       else
-                           alert("Network issue");
+
+                        apiService.post("AuditLog/Create", postdata).then(function (response) {
+                            var loginSession = response.data;
+                        },
+                   function (error) {
+                      
                    });
-               };
-                AuditCreate($scope.params);
+                  };
+                  AuditCreate();
             //end
 
        //grid fuctionality start
@@ -253,6 +252,7 @@ angular.module('project')
                   $('.checkbox').prop('checked', false);
           }
 
+        //for delete project And multiple select checkbox
 
           $scope.projectSelected = function (e, data) {
 
@@ -307,6 +307,7 @@ angular.module('project')
 
 
           }
+        
 
           $scope.addUser = function () {
 
@@ -382,57 +383,6 @@ angular.module('project')
 
         };
 
-        function applyFilter(filterField, filterValue) {
-
-            // get the kendoGrid element.
-            var gridData = $("#peopleGrid").data("kendoGrid");
-
-            // get currently applied filters from the Grid.
-            var currFilterObj = gridData.dataSource.filter();
-
-            // get current set of filters, which is supposed to be array.
-            // if the oject we obtained above is null/undefined, set this to an empty array
-            var currentFilters = currFilterObj ? currFilterObj.filters : [];
-
-            // iterate over current filters array. if a filter for "filterField" is already
-            // defined, remove it from the array
-            // once an entry is removed, we stop looking at the rest of the array.
-            if (currentFilters && currentFilters.length > 0) {
-                for (var i = 0; i < currentFilters.length; i++) {
-                    if (currentFilters[i].field == filterField) {
-                        currentFilters.splice(i, 1);
-                        break;
-                    }
-                }
-            }
-
-            // if "filterValue" is "0", meaning "-- select --" option is selected, we don't
-            // do any further processing. That will be equivalent of removing the filter.
-            // if a filterValue is selected, we add a new object to the currentFilters array.
-            if (filterValue != "0") {
-                currentFilters.push({
-                    field: filterField,
-                    operator: "eq",
-                    value: filterValue
-                });
-            }
-
-            // finally, the currentFilters array is applied back to the Grid, using "and" logic.
-            gridData.dataSource.filter({
-                logic: "and",
-                filters: currentFilters
-            });
-
-        }
-        function clearFilters() {
-            var gridData = $("#peopleGrid").data("kendoGrid");
-            gridData.dataSource.filter({});
-        }
-
-
-
-
-      
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'projectGrid') {

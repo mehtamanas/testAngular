@@ -22,7 +22,7 @@
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                         <div class="panel-body image-upload-panel">
                                             <div class="row" ng-hide="uploader.queue.length">
-                                                <img ng-src={{params.media_url}} alt="Drag and Drop" class="img-responsive" />
+                                                <img ng-src={{params.media_url}} class="img-responsive" />
                                             </div>
                                             <div class="row" ng-show="uploader.queue.length">
                                                 <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
@@ -192,9 +192,9 @@
                                                                  }">
                             <div id="address-wrap" class="clearfix">
                                 <div id="address-no" class="form-bx form-bx2">
-                                    <!--<label ng-show="$index==0" for="" style="padding-top:5px;"><b>Address</b></label>-->
+                                    <label>Street{{$index + 1}}</label>
                                     <input type="text" name="Address" class="form-control" id="edituser_add"
-                                           placeholder="Address Line"
+                                           placeholder="Street{{$index + 1}}"
                                            data-ng-model="choice.Street_1"
                                            minlength="1"
                                            maxlength="50"

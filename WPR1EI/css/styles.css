@@ -73,9 +73,9 @@ a {
         #header .user-sec .avatar {
             background: #1f90e0;
             color: #fff;
-            font-size: 15px;
+            font-size: 13px;
             text-align: center;
-            line-height: 26px;
+            line-height: 20px;
             width: 26px;
             height: 26px;
             margin-right: 10px;
@@ -110,6 +110,7 @@ a {
     font-size: 24px;
     line-height: 30px;
     margin: 0 0 20px;
+    margin-left: 23px;
 }
 
 .field-title {
@@ -593,8 +594,9 @@ div.k-grid-footer {
 }
 
 .builder-header {
-    margin-bottom: -22px;
-    margin-top: -10px;
+    //margin-bottom: -22px;
+    //margin-top: -10px;
+    margin-left: 2%;
 }
 
 .builder-title {
@@ -618,7 +620,7 @@ div.k-grid-footer {
 }
 
     .builder-listing-wrap .builder-item {
-        margin: 18px 0;
+        margin: 24px 34px;
         padding-left: 15px;
         padding-right: 15px;
         float: left;
@@ -657,8 +659,8 @@ div.k-grid-footer {
     position: relative;
     padding-top: 60px;
     background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    border-radius: 2px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
     text-align: center;
 }
 
@@ -846,6 +848,9 @@ div.k-grid-footer {
         margin-bottom: 10px;
         padding: 0;
     }
+    .channel-partner-inner{
+        margin-left:2%
+    }
 
 .h3-heading-wrap {
     border-bottom: 1px solid #e7e7e7;
@@ -979,10 +984,9 @@ div.k-grid-footer {
 }
 
 #content h2.builder-directory-title {
-    font: bold 18px 'Open Sans', arial, sans-serif;
     color: #4a4a4a;
-    margin-bottom: 0;
-    margin-left: 18px;
+    margin-bottom: 21px;
+    margin-left: 51px;
 }
 
 .builder-directory-detail {
@@ -1123,6 +1127,7 @@ div.k-grid-footer {
                 border: none;
                 border-bottom: 2px solid #2799e7;
                 color: #2799e7;
+                background:none;
             }
 
 .builder-tab-content {
@@ -1362,6 +1367,7 @@ div.k-grid-footer {
     margin: 17px 0 0 13px;
 }
 
+
     .remove-field a {
         color: #f66;
     }
@@ -1560,7 +1566,7 @@ div.k-grid-footer {
 }
 
 .modal-content .form-content2 .form-control {
-    //height: 60px;
+    height: 60px;
 }
 
 .f-unit .form-control {
@@ -1747,6 +1753,17 @@ h4.form-sub-title {
 
 .form-content2 .remove-field {
     margin-top: 19px;
+}
+.form-content2 .remove-field0 {
+   
+    margin-top:41px !important;
+    margin-left:2px !important;
+    
+
+}
+.remove-field0 a{
+
+    color:#f66;
 }
 
 /*.form-content2.edit-organization-setting .add-input a {
@@ -1962,7 +1979,7 @@ h4.form-sub-title {
     font: 600 20px 'Open Sans', arial, sans-serif;
     color: #3c3c3c;
     margin-bottom: 20px;
-    margin-top: 20px;
+   // margin-top: 20px;
     margin-left: 40px;
 }
 
@@ -2475,8 +2492,9 @@ form.callback {
 .project-detail-txt .project-name {
     position: relative;
     padding-right: 40px;
-      text-transform: capitalize;
+    //font-weight: bold;
     font-size: 18px;
+    text-transform: capitalize;
 }
 
 .project-detail-txt .project-d01 {
@@ -2485,7 +2503,7 @@ form.callback {
 
 .project-detail-txt .project-d02 {
     font-size: 13px;
-    font-weight: normal;
+   // font-weight: bold;
 }
 
     .project-detail-txt .project-d02 .project-date {
@@ -2503,9 +2521,9 @@ form.callback {
 .project-detail-txt .project-d05 {
     font-size: 12px;
     font-weight: bold;
-    background: #32CD32;
+    //background: #32CD32;
     text-align: center;
-    width: 100px;
+   // width: 100px;
     color: #fff;
     border-radius: 10px;
     margin-top: 3px;
@@ -3246,6 +3264,9 @@ form.callback {
 .form-content .form-bx11 {
     width: 383px;
 }
+.form-content .form-bx11-2{
+width:383px!important;
+}
 
 .form-content .form-bx11-1 {
     margin-right: 25px;
@@ -3292,16 +3313,16 @@ form.callback {
 /*** login start***/
 .header2 {
     background: #f4f4f4;
-     padding: 14px 10px;
+    padding: 14px 10px;
     margin-left: -15px;
     margin-right: -15px;
     border-bottom: 1px solid #e9e9e9;
    
 }
 
-    .header2 .main-navbar {
-        margin-right: 9%;
-    }
+.header2 .main-navbar {
+     margin-right: 9%;
+}
 
 #footer-bottom.footer-bottom2 {
     padding-top: 22px;
@@ -3555,7 +3576,7 @@ form.callback {
         width: 12px;
         height: 12px;
         position: absolute;
-        right: 32px;
+        right: 37px;
         top: 18px;
     }
 
@@ -3987,18 +4008,8 @@ form.callback {
     background-position: -30px -1190px;
 }
 
-.cxo-f1,
-.cxo-f2,
-.cxo-f3,
-.cxo-f4 {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 3px;
-}
 
-.cxo-f1 {
-    width: 205px;
-}
+
 
 .cxo-f2 {
     width: 160px;
@@ -4022,11 +4033,19 @@ form.callback {
     top: 5px;
 }
 
-.pg-inner-hside {
+/*.pg-inner-hside {
     margin-top: -14px;
     margin-bottom: -9px;
     text-align: right;
+    margin-left: 6%;
+}*/
+.pg-inner-hside {
+    margin-top:-16px;
+    margin-bottom: -9px;
+    text-align: right;
+    margin-left: 79px;
 }
+
 
     .pg-inner-hside .form-control {
         text-align: left;
@@ -4307,7 +4326,7 @@ form.callback {
 
 #sidebar .navbar-default .navbar-nav li.nav-sub-dropdown .nav-sub-bx .nav-no {
     background-color: #696969;
-    margin-right: 23px;
+    margin-right: 8px;
 }
 
 #sidebar .navbar-default .navbar-nav li.nav-sub-dropdown .nav-sub-bx a:hover,
@@ -4541,7 +4560,7 @@ form.callback {
 
 .pg-inner-hside2 {
     text-align: left;
-    margin: 21px 68px;
+   // margin: 21px 68px;
 }
 
     .pg-inner-hside2 .form-control {
@@ -4563,6 +4582,8 @@ form.callback {
     padding-bottom: 35px;
     margin-bottom: 25px;
     border-bottom: 1px solid #ededed;
+    margin-left: 2%;
+    padding: 10px 0px 22px 0px;
 }
 
     .marketing-row .marketing-bx {
@@ -5316,14 +5337,16 @@ form.callback {
     }
 
     #content #sidebar {
-        width: auto;
-        float: none;
-        height: auto;
-        padding: 0;
+        width: auto !important;
+        float: none !important;
+        height: auto !important;
+        padding: 0 !important;
+        position:relative !important;
     }
 
     #content #main-content {
-        padding: 0;
+        padding: 0 !important;
+        margin: 0px  !important;
     }
 
     #sidebar .navbar-default .navbar-nav {
@@ -6279,6 +6302,15 @@ form.callback {
         padding: 60px 0 0;
         margin-left: 258px;
     }
+     #content #main-content-1 {
+        background-color: #fff;
+        float: none;
+        height: 100%;
+        overflow: hidden;
+        overflow-y: auto;
+        width: auto;
+        padding: 60px 0 0;
+    }
 
 #sidebar .navbar-default {
     border: none;
@@ -6308,7 +6340,7 @@ form.callback {
             #sidebar .navbar-default .navbar-nav > li a {
                 display: block;
                 padding: 14px 10px 14px 38px;
-                color: #7e7e7e;
+                color: #000000;
                 font-size: 15px;
             }
 
@@ -8167,11 +8199,11 @@ LEFT
     padding: 10px;
 }
 .bx-h1-head {  
-     background: #2799e7;  
-     color: #fff;  
-     padding: 12px 12px 12px 18px;  
-     border-radius: 4px 4px 0 0;  
-     position: relative;  
+     background: #2799e7;		
+    color: #fff;		
+    padding: 12px 12px 12px 18px;		
+    border-radius: 4px 4px 0 0;		
+    position: relative;
  }
 
 
@@ -9060,6 +9092,8 @@ input:focus {
     color: #333;
     background-color: #e7e7e7;
     border-color: #e7e7e7;
+    margin: 19px 18px 5px 1px;
+    float: left;
   }
   .row_content{
     border-bottom: 1px solid #d8d0d0;
@@ -9111,7 +9145,7 @@ input:focus {
     vertical-align: top;
     width:18px; 
     padding-left:5px;
-    margin-top: 29px;
+    margin-top:19px;
 }
 
 .field-md3 {  
@@ -9174,64 +9208,166 @@ input[placeholder], [placeholder], *[placeholder],select {
     font-weight:600;
 }
  .div_email_selected {
-    background:#3CBF3C;
+    background:#3b9251;
     width:120px;
-    height:45px;
+    height:35px;
     color:#fff;
     font-weight:600;
+    cursor: pointer;
     border-radius:5px;
-    border:3px solid #3CBF3C;
+    border:3px solid #3b9251;
 }
 .div_email {
-   border:3px solid #2D812D ;
+   border:2px solid #3b9251 ;
     width:120px;
-    height:45px;
+    height:35px;
     background:#fff;
     color:#2D812D;
     font-weight:600;
+    cursor: pointer;
     border-radius:5px;
 }
 .div_calender_selected{
-    background:#3CBF3C;
-    width:230px;
+    background:#f67a43;
     height:45px;
-    color:#fff;
+    cursor: pointer;
+    color:#fff !important;
     border-radius:5px;
     border:3px solid #3CBF3C;
-    font-weight:600;
 
 }
+.div_calender_selected :after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        margin-left: 6px;
+    }
+.div_calender_hour_selected{
+    background:#9f82bb;
+    height:45px;
+    cursor: pointer;
+    color:#fff !important;
+    border-radius:5px;
+    border:3px solid #3CBF3C;
+
+}
+.div_calender_hour_selected :after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        font-style: normal;
+        cursor: pointer;
+        font-weight: normal;
+        position: absolute;
+        left: 0;
+        margin-left: 6px;
+    }
+.div_calender_tommorow_selected{
+    background:#4895e5;
+    height:45px;
+    cursor: pointer;
+    color:#fff !important;
+    border-radius:5px;
+    border:3px solid #3CBF3C;
+
+}
+.div_calender_tommorow_selected :after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        margin-left: 6px;
+    }
+.div_calender_week_selected{
+    background:#53c870;
+    height:45px;
+    color:#fff !important;
+    border-radius:5px;
+    cursor: pointer;
+    border:3px solid #3CBF3C;
+
+}
+.div_calender_week_selected :after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        position: absolute;
+        cursor: pointer;
+        left: 0;
+        margin-left: 6px;
+    }
 
 
 .div_call_selected {
-    background:#2AFFD4;
+    background:#51dec5;
     width:120px;
-    height:45px;
+    height:35px;
     color:#fff;
     font-weight:600;
+    cursor: pointer;
     border-radius:10px;
-    border:3px solid #2AFFD4;
+    border:3px solid #51dec5;
 }
 .div_call {
-   border:3px solid #2AFFD4 ;
+   border:2px solid #51dec5 ;
     width:120px;
-    height:45px;
+    height:35px;
     background:#fff;
-    color:#2AFFD4;
+    color:#51dec5;
+    cursor: pointer;
     font-weight:600;
     border-radius:5px;
 }
 .pull_left_day {
     float:left;
-    width: 230px;
+    width: 169px;
   
 }
 
  .day-info-btn {
-     border: 1px solid #289ff1;
-    border-radius: 2px;
+     border: 2px solid #9f82bb;
+    border-radius: 5px;
     font-size: 14px;
-    font-weight: bold;
+    cursor: pointer;
+    color:#9f82bb;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin-bottom: 4px;
+}
+    
+ .tommmorow-info-btn {
+     border: 2px solid #4895e5;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color:#4895e5;
+    padding: 10px 15px;
+    margin-bottom: 4px;
+}.week-info-btn {
+     border: 2px solid #53c870;
+    border-radius: 5px;
+    color:#53c870;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin-bottom: 4px;
+}
+ .month-info-btn {
+     border: 2px solid #f67a43;
+    border-radius: 5px;
+    font-size: 14px;
+    color:#f67a43;
+    cursor: pointer;
+    font-weight:500;
     padding: 10px 15px;
     margin-bottom: 4px;
 }
@@ -9255,6 +9391,9 @@ input[placeholder], [placeholder], *[placeholder],select {
      text-align: left;
 
  }  
+ .pull-right-1{
+     margin-left:10%;
+ }
   /*Added by RAMAN*/
 .campaign-container{
     margin-left: 3%;
@@ -9419,16 +9558,18 @@ select {
     margin-bottom: 5px;
     padding: 4px;
 }
-/*.user_status_active {
+.user_status_active {
     background: #40c66f;
     border-radius: 10px;
     color: #ffffff;
+    width: 70px;
 }
 
 .user_status_pending {
     background: #fdbd39;
     border-radius: 10px;
     color: #ffffff;
+    width: 170px;
 }
 
 
@@ -9436,27 +9577,35 @@ select {
     background: #979797;
     border-radius: 10px;
     color: #ffffff;
-}*/
+    width: 70px
+}
+.user_pending_invitation {
+    background: #f66;
+    border-radius: 10px;
+    color: #ffffff;
+    width: 170px;
+}
 /*For user status */
 #Active{
     background: #40c66f;
     border-radius: 10px;
     color: #ffffff;
-    padding: 3px 4px 5px 5px;
 }
 #Inactive{
  background: #979797;
     border-radius: 10px;
     color: #ffffff;
-    padding: 3px 4px 5px 5px;
 }
 #PendingInvitationAcceptance{
      background: #fdbd39;
     border-radius: 10px;
     color: #ffffff;
-    padding: 3px 4px 5px 5px;
 }
-
+#PendingInvitation{
+    background: #f66;
+    border-radius: 10px;
+    color: #ffffff;
+}
 .bx-h1-content-1 {
     background-color: #fff;
     border-radius: 4px 4px 4px 4px;
@@ -9474,7 +9623,177 @@ select {
     font-size: 21px;
     pointer-events: none;
 }
+/*Added 22/2/16*/
+.k-colorpicker .k-tool-icon {
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    padding: 3px 3px 2px;
+    font-size: 0;
+    line-height: 0;
+    margin-right: 3px;
+    margin-left: 2px;
+    margin-bottom: 3px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 35px;
+    height: 16px;
+}
+.error-modal{
+        padding: 15px 17px 17px 12px;
+}
+.channel_label{
+    color:#000 !important;
+    cursor:pointer;
+}
+.modal-btn-wrap7 {
+    width: 752px;
+}
+/*Added at 26/2/2016*/
+.email_tabs_active{
+    background: #a4a4a4;
+    padding: 13px;
+    color: #fff;
+    font-weight: 900;
+    margin-left: 23px;
+    text-align: center;
+}
+.email_tabs2{
+    background: #2799e7;
+    padding: 13px;
+    color: #fff;
+    font-weight: 900;
+   
+    text-align: center;
+}
+.tab_head{
+    width: 110%; 
+}
+.tab-head1{
+    margin-left:13%;
+}
+.tab-head-inner{
+    margin-left:17%;
+        margin-top: 5%;
+}
 
+.tabarrow{
+    width: 0%;
+    z-index: 1;
+}
+.arrow-height{
+    height:46px;
+}
+#newcontact_social{
+
+    background:url(../images/facebook.png) no-repeat scroll 18px 18px ;
+    padding-left:43px;
+    padding-top:-3px;
+}
+
+#newcontact_twitter{
+
+    background:url(../images/twitter.png) no-repeat scroll 18px 18px;
+    padding-left:43px;
+    padding-top:-3px;
+}
+
+
+#newcontact_linked{
+
+
+    background:url(../images/linkedin.png) no-repeat scroll 18px 18px;
+    padding-left:43px;
+    padding-top:-3px;
+}
+
+.add_btn_address{
+    margin-top:19px;
+}
+.user_details2 {
+    background: #fff;
+    padding: 0px 49px 21px 56px;
+    border-bottom: 1px solid #D8D0D0;
+    border-top: 0px solid #D8D0D0;
+    overflow-y: scroll;
+    height: 656px;
+    margin-top: 1px;
+}
+.user_details3 {
+    background: #fff;
+    padding: 0px 49px 21px 56px;
+    border-bottom: 1px solid #D8D0D0;
+    border-top: 0px solid #D8D0D0;
+    margin-top: 1px;
+}
+.h4goals{
+    background: #e7e7e7;
+    color: #000;
+    font-weight: 600;
+    width: 78%;
+    padding: 5px;
+}
+.followup_inner{
+    text-align: left;
+    margin: 8% 1% 8% 1%;
+}
+.charge{
+    margin-right:4px;
+}
+.charge_label{
+    font-size:12px;
+}
+.campaign-container-btn-1-1 {
+    background: #646464;
+    float: left;
+    /* margin-right: 7%; */
+    font-size: 14px;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    display: block;
+    padding: 14px 59px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+.organization-btn-1-2 {
+    background: #289ff1;
+    color: white;
+    text-align: center;
+    padding: 12px 43px;
+    font-weight: 800;
+    float: right;
+}
+.tab_head-2{
+    width:128%;
+}
+#content-builder #main-content-builder {
+    background-color: #fff;
+    float: none;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    width: auto;
+    padding: 60px 0 0;
+}
+#content-builder {
+    position: relative;
+    height: 100%;
+}
+
+/*.reports-tabs{
+       margin: 21px 21px 15px 64px;
+}*/
+
+
+
+/*.modal-content1 {
+    text-align: center;
+    background: #fff;
+    width: 34%;
+    padding: 5px 7px 13px 11px;
+    border-radius: 13px;
+}*/
 /*End of browse button*/
  
 /*own css end*/

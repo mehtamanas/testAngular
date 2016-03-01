@@ -14,35 +14,32 @@
     // FILTERS
 
 
-    //Audit log start
-    // $scope.params = {
+    //Audit log start															
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "EditProject Payment",
+           details: $scope.params.type_of_payment + "AddPayment",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
 
-    //     device_os: "windows10",
-    //     device_type: "mobile",
-    //     device_mac_id: "34:#$::43:434:34:45",
-    //     module_id: "Wing",
-    //     action_id: "Wing View",
-    //     details: "ProjectDetail",
-    //     application: "angular",
-    //     browser: $cookieStore.get('browser'),
-    //     ip_address: $cookieStore.get('IP_Address'),
-    //     location: $cookieStore.get('Location'),
-    //     organization_id: $cookieStore.get('orgID'),
-    //     User_ID: $cookieStore.get('userId')
-    // };
+       };
 
 
-    // AuditCreate = function (param) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+    function (error) {
+    });
+    };
 
-    //     apiService.post("AuditLog/Create", param).then(function (response) {
-    //         var loginSession = response.data;
-
-    //     },
-    //function (error) {
-
-    //});
-    // };
-    // AuditCreate($scope.params);
 
     //end
 
@@ -148,6 +145,7 @@ function (error) {
 
         apiService.post("Payment/EditPaymentScheme", postData).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             var schemeupdate = [];
             for (var i in $scope.choices2) {
                 var newscheme = {};
@@ -185,23 +183,6 @@ function (error) {
            alert("Network issue");
    });
     }
-
-
-
-
-
-
-    //apiService.post("Payment/Add_new_Payment_scheme", param).then(function (response) {
-    //    var loginSession = response.data;
-    //    alert("Floor Updated...");
-    //    $modalInstance.dismiss();
-
-    //},
-    //    function (error) {
-
-    //    });
-
-    //end
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({

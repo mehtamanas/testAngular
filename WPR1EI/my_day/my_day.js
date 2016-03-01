@@ -9,16 +9,14 @@
         console.log('my_dayController');
         console.log(apiService.baseUrl + "ToDoItem/GetTaskByUserId/" + userID);
 
-        var CallApi = function () {
+        var CallApi = function ()
+        {
             mydayUrl = "ToDoItem/GetTaskByUserId/" + userID;//f2294ca0-0fee-4c16-86af-0483a5718991";
             apiService.getWithoutCaching(mydayUrl).then(function (response) {
                 $scope.main = response.data[0];
             },
        function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+         
        }
             );
             
@@ -52,11 +50,11 @@
                 }, {
                     field: "Contact_name",
                     title: "Contact",
-                    width: 85
+                    width: "85px"
                 }, {
                     field: "text",
                     title: "Notes",
-                    width: 85
+                    width: "85px"
                 },
                 {
                     template: " <span class='pull-right contact-ico'> <a href='javascript:' class='ico-msg'></a></span>",
@@ -113,11 +111,11 @@
                 }, {
                     field: "Contact_name",
                     title: "Contact",
-                    width: 85
+                    width: "85px"
                 }, {
                     field: "text",
                     title: "Notes",
-                    width: 85
+                    width: "85px"
                 },
                 {
                     template: " <span class='pull-right contact-ico'> <a href='javascript:' class='ico-msg'></a></span>",
@@ -174,11 +172,11 @@
                 }, {
                     field: "Contact_name",
                     title: "Contact",
-                    width: 85
+                    width: "85px"
                 }, {
                     field: "text",
                     title: "Notes",
-                    width: 85
+                    width: "85px"
                 },
                 {
                     template: " <span class='pull-right contact-ico'> <a href='javascript:' class='ico-msg'></a></span>",
@@ -242,23 +240,23 @@
                 }, {
                     field: "event_date1",
                     title: "Start",
-                    width: 85,
+                    width: "85px",
                     format: '{0:dd/MM/yyyy}'
 
                 }, {
                     field: "end_date",
                     title: "End",
-                    width: 85,
+                    width: "85px",
                     format: '{0:dd/MM/yyyy}'
 
                 }, {
                     field: "project_name",
                     title: "Project",
-                    width: 85
+                    width: "85px",
                 }, {
                     field: "contact_name",
                     title: "Contact",
-                    width: 85
+                    width: "85px",
                 }]
             }
             $scope.eventTomorrowGrid = {
@@ -296,23 +294,23 @@
                 }, {
                     field: "event_date1",
                     title: "Start",
-                    width: 85,
+                    width: "85px",
                     format: '{0:dd/MM/yyyy}'
 
                 }, {
                     field: "end_date",
                     title: "End",
-                    width: 85,
+                    width: "85px",
                     format: '{0:dd/MM/yyyy}'
 
                 }, {
                     field: "project_name",
                     title: "Project",
-                    width: 85
+                    width: "85px",
                 }, {
                     field: "contact_name",
                     title: "Contact",
-                    width: 85
+                    width: "85px",
                 }]
             }
             $scope.eventNext7Grid = {
@@ -401,27 +399,27 @@
                 columns: [{
                     field: "name",
                     title: "Task Name",
-                    width: 176
+                    width: "85px",
                 }, {
                     field: "project_name",
                     title: "Project",
-                    width: 85
+                    width: "85px",
                 }, {
                     field: "user_name",
                     title: "Assigned To",
-                    width: 85
+                    width: "85px",
                 }, {
                     field: "Contact_name",
                     title: "Contact",
-                    width: 85
+                    width: "85px",
                 }, {
                     field: "status",
                     title: "Status",
-                    width: 85
+                    width: "85px",
                 }, {
                     field: "due_date",
                     title: "Due Date",
-                    width: 85,
+                    width: "85px",
                     format: '{0:dd/MM/yyyy}'
                 }, ]
 
@@ -659,21 +657,21 @@
             }, {
                 field: "subject",
                 title: "Subject",
-                width: 85
+                width: "85px",
             }, {
                 field: "date",
                 title: "Date",
-                width: 85,
+                width: "85px",
                 format: '{0:dd/MM/yyyy}'
 
             }, {
                 field: "from_email",
                 title: "From",
-                width: 85
+                width: "85px",
             }, {
                 field: "to_email",
                 title: "To",
-                width: 85
+                width: "85px",
             }]
         }
 

@@ -13,38 +13,34 @@ var AddNewEventproject = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.end_date = moment().format();
 
    
-    //Audit log start
-    $scope.params = {
+    //Audit log start															
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "AddProjectEvent View",
+           details: $scope.name + "AddEvent",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Wing",
-        action_id: "Wing View",
-        details: "ProjectDetail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
+       };
 
 
-    AuditCreate = function (param) {
-
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
-
         },
-   function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-   });
+    function (error) {
+    });
     };
-    AuditCreate($scope.params);
+
+
+    //end
 
     //end
 
@@ -77,7 +73,8 @@ var AddNewEventproject = function ($scope, $state, $cookieStore, apiService, $mo
     projectUrl = "Event/CreateEvents1";
     ProjectCreate = function (param) {
        apiService.post(projectUrl, param).then(function (response) {
-            var loginSession = response.data;
+           var loginSession = response.data;
+           AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'EventGrid');

@@ -39,41 +39,31 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
             alert("Network issue");
     }
   );
-    //Audit log start
-    $scope.params = {
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "User",
+           action_id: "User Task View",
+           details: $scope.params.name + "task edited",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
 
-
-    AuditCreate = function (param) {
-
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
-
         },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+
    });
     };
-    AuditCreate($scope.params);
-
-    //end
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -85,16 +75,16 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
     $scope.params = {
         project_id: $scope.project1,
         priority: $scope.priority1,
-        name: $scope.params.name,
-        text: $scope.params.text,
-        due_date: $scope.params.due_date,
+        name: $scope.name,
+        text: $scope.text,
+        due_date: $scope.due_date,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         assigned_to_id: $scope.contact1,
         class_type: "User",
-        reminder_time: $scope.params.reminder_time,
+        reminder_time: $scope.reminder_time,
         task_type_id_: $scope.event1,
-        time: $scope.params.time,
+        time: $scope.time,
         id: $scope.seletedCustomerId,
        
     };
@@ -121,6 +111,7 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
 
         apiService.post("ToDoItem/EditTaskWithNotes", postData).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');

@@ -40,14 +40,18 @@
                             <div class="project-d03">Company Website:{{image.builder_website}}</div>
 
                         </div>
-                        <!--<div style="float:right; margin-top:210px" >
-                            <a href="https://www.facebook.com/">
-                                <img src="../images/facebook_icon_medium.png" />
+                        <div style="float:right; margin-top:210px" >
+                            <a ng-href="{{facebook}}">
+                               
+                                <img src="images/facebook.png" />
                             </a>
-                            <a href="https://twitter.com/">
-                                <img src="../images/twitter_icon_medium.png" />
-                            </a>
-                        </div>-->
+                            <a ng-href={{twitter}}>
+                                <img src="images/twitter.png" />
+                            </a>   
+                            <a ng-href="{{linkedin}}">
+                                <img src="images/linkedin.png" />
+                            </a>                               
+                        </div>
 
                     </div> <!-- project-detail-info ended -->   
 
@@ -140,7 +144,7 @@
                                                 </div>
                                                 <div class="col-sm-1"></div>
                                                 <div class="pull-left tb-box-img">
-                                                    <h4>Project 3D Image</h4>
+                                                    <h4>Project Podium image</h4>
                                                     <img src="{{media_url4}}" alt="" width="218" height="160"  />
                                                 </div>
                                             </div>
@@ -255,7 +259,7 @@
 
                             <div class="unit-bx" ng-repeat="user in builddetail">
                                
-                                <div class="unit-title">{{user.floor_type}} &nbsp; &nbsp; <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
+                                <div class="unit-title"> <b>{{user.floor_type}}</b> &nbsp; &nbsp; <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
 
                                 <!--<div class="unit-bx" ng-repeat="floor in user.UnitList1">-->
 
@@ -294,7 +298,7 @@
                             <div class="unit-content-wrap">
 
                                 <div class="unit-bx" ng-repeat="user in orgUsers">
-                                    <div class="unit-title"> {{user.unit_type_desc}}<a id="iconEdit" ng-click="openNewUnitPopup(user)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
+                                    <div class="unit-title"> {{user.unit_type_desc}} &nbsp; &nbsp;<a id="iconEdit" ng-click="openNewUnitPopup(user)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
                                     
                                     <div class="unit-content">
                                         <div class="unit-img">
@@ -428,7 +432,7 @@
                                             
                                         </div>
                                         <a class="properties-name">{{image.notes}}</a>
-                                        <a class="properties-name">{{image.tags}}</a>
+                                     
                                     </div>
 
                                 </div><!-- properties-bx-wrap ended -->
@@ -478,11 +482,11 @@
                                     <div class="properties-bx" ng-repeat="image in Gallery2">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
-                                                <img src={{image.media_url}} alt="" width="218" height="160" />
+                                                <img src="images/pdf.jpg" alt="" width="218" height="160" />
                                             </div>
                                             <a class="properties-close"><i class="fa fa-close"></i></a>
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
-                                            <a class="properties-name">Pdf Start</a>
+                                            <a class="properties-name">{{image.notes}} Start</a>
                                         </div>
                                     </div>
 
@@ -492,11 +496,11 @@
                                     <div class="properties-bx" ng-repeat="image in Gallery1">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
-                                                <img src={{image.media_url}} alt="" width="218" height="160" />
+                                                <img src="images/pdf.jpg" alt="" width="218" height="160" />
                                             </div>
                                             <a class="properties-close"><i class="fa fa-close"></i></a>
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
-                                            <a class="properties-name">Pdf End</a>
+                                            <a class="properties-name">{{image.notes}} End</a>
 
                                         </div>
                                     </div>
@@ -517,12 +521,13 @@
                                     <div class="properties-bx" ng-repeat="image in view">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
-                                                <img src={{image.media_url}} alt="" width="218" height="160" />
+                                                <img src="images/Zip-File.jpg" alt="" width="218" height="160" />
                                             </div>
                                             <a class="properties-close"><i class="fa fa-close"></i></a>
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
                                             <!--<a class="properties-name">{{image.notes}}</a>-->
                                         </div>
+                                        <a class="properties-name">{{image.notes}}</a>
                                     </div>
 
                                 </div><!-- properties-bx-wrap ended -->

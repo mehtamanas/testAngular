@@ -5,6 +5,8 @@
         console.log('newuserdetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
+       
+
 
         $('#btnSave').hide();
         $('#iconEdit').hide();
@@ -57,39 +59,39 @@
 
 
         });
-        //   $rootScope.title = 'Dwellar./UserDetails';
+        
         $rootScope.title = 'Dwellar./users/details';
-        //Audit log start															
-        $scope.params =
-            {
-                device_os: $cookieStore.get('Device_os'),
-                device_type: $cookieStore.get('Device'),
-                device_mac_id: "34:#$::43:434:34:45",
-                module_id: "Contact",
-                action_id: "Contact View",
-                details: "UserDetailView",
-                application: "angular",
-                browser: $cookieStore.get('browser'),
-                ip_address: $cookieStore.get('IP_Address'),
-                location: $cookieStore.get('Location'),
-                organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
-            };
 
-        AuditCreate = function (param) {
-            apiService.post("AuditLog/Create", param).then(function (response) {
+        //Audit log start               
+
+       
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
+               //device_mac_id: "34:#$::43:434:34:45",
+               module_id: "User",
+               action_id: "User View",
+               details: $scope.data[0].first_name + " " + $scope.data[0].last_name+ " " + "user viewed",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
+
+
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
                 var loginSession = response.data;
             },
        function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+         
        });
         };
-        AuditCreate($scope.params);
 
-        //end
+       
         if ($scope.seletedCustomerId != "undefined") {
 
             //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
@@ -99,9 +101,8 @@
             apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                 $scope.data = response.data;
-                // alert($scope.data);
-                //   alert($scope.seletedCustomerId);
-
+            
+                AuditCreate();
 
                 $scope.first_name = $scope.data[0].first_name;
                 $scope.area = $scope.data[0].area;
@@ -112,7 +113,9 @@
                 $scope.choices1[0].account_email = response.data[0].account_email;
                 $scope.choices[0].account_phone = response.data[0].account_phone;
                 $scope.account_country = $scope.data[0].account_country;
-                $scope.street_1 = $scope.data[0].street_1;
+                $scope.choices2[0].Street_1 = response.data[0].street_1;
+                if (response.data[0].street_2 != undefined)
+                { $scope.choices2.push({ 'Street_1': response.data[0].street_2 }); }
                 $scope.role_name = $scope.data[0].role_name;
                 $scope.zip_code = $scope.data[0].zip_code;
                 $scope.state = $scope.data[0].state;
@@ -128,10 +131,7 @@
                 }
             },
                         function (error) {
-                            if (error.status === 400)
-                                alert(error.data.Message);
-                            else
-                                alert("Network issue");
+                         
                         });
         }
 
@@ -160,18 +160,8 @@
 
 
        function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+         
        });
-
-
-
-        $scope.choices = [{ id: 'choice1' }];
-
-
-
 
 
         $scope.choices = [{ id: 'choice1' }];
@@ -184,10 +174,9 @@
                 var newItemNo = $scope.choices.length + 1;
                 $scope.choices.push({ 'id': 'choice' + newItemNo });
             }
-
         };
-
         $scope.choices1 = [{ id: 'choice1' }];
+
         $scope.addNewChoice1 = function (e) {
             var classname = e.currentTarget.className;
             if (classname == 'remove-field') {
@@ -196,6 +185,23 @@
             else if ($scope.choices1.length) {
                 var newItemNo = $scope.choices1.length + 1;
                 $scope.choices1.push({ 'id': 'choice' + newItemNo });
+            }
+        };
+
+
+
+        $scope.choices2 = [{ id: 'choice1' }];
+
+        $scope.addNewChoice2 = function (e) {
+            var classname = e.currentTarget.className;
+            if (classname == 'remove-field') {
+                var wrappedResult = angular.element(this);
+                wrappedResult.parent().remove();
+                $scope.choices2.pop();
+            }
+            else if ($scope.choices2.length < 2) {
+                var newItemNo2 = $scope.choices2.length + 1;
+                $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
             }
 
         };
@@ -238,11 +244,7 @@
 
         var orgID = $cookieStore.get('orgID');
 
-  $scope.$on('REFRESH', function (event, args) {
-            if (args == 'TaskGrid') {
-                $('.k-i-refresh').trigger("click");
-            }
-        });
+
  
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
@@ -301,6 +303,23 @@
             gridData.dataSource.filter({});
         }
 
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'TaskGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'ProjectsGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
+
+        $scope.$on('REFRESH1', function (event, args) {
+            if (args == 'RoleGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
 
 
         $scope.TeamGrid = {
@@ -1352,11 +1371,7 @@
             });
         };
 
-        $scope.$on('REFRESH', function (event, args) {
-            if (args == 'ProjectsGrid') {
-                $('.k-i-refresh').trigger("click");
-            }
-        });
+       
 
 
         $scope.openUserPopup = function () {
@@ -1401,25 +1416,28 @@
             $scope.openEditTask();
         };
 
-        $scope.$on('REFRESH', function (event, args) {
+        $scope.$on('REFRESH', function (event, args)
+        {
 
-            setTimeout(function () {
+          
 
-                if (args == 'newuser') {
+                if (args == 'newuser')
+                {
 
 
-                    //   GetUrl = "User/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-                    GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-                    //alert(GetUrl);
+                    
+                    GetUrl = "User/GetUserDetails/" + $scope.seletedCustomerId;
+                  
 
-                    apiService.getWithoutCaching(GetUrl).then(function (response) {
+                    apiService.getWithoutCaching(GetUrl).then(function (response)
+                    {
 
                         $scope.data = response.data;
-                        // alert($scope.data);
-                        //   alert($scope.seletedCustomerId);
 
+                        AuditCreate();
 
                         $scope.first_name = $scope.data[0].first_name;
+                        $scope.area = $scope.data[0].area;
                         $scope.last_name = $scope.data[0].last_name;
                         $scope.status = $scope.data[0].status;
                         $scope.account_email = $scope.data[0].account_email;
@@ -1427,7 +1445,9 @@
                         $scope.choices1[0].account_email = response.data[0].account_email;
                         $scope.choices[0].account_phone = response.data[0].account_phone;
                         $scope.account_country = $scope.data[0].account_country;
-                        $scope.street_1 = $scope.data[0].street_1;
+                        $scope.choices2[0].Street_1 = response.data[0].street_1;
+                        if (response.data[0].street_2 != undefined)
+                        { $scope.choices2.push({ 'Street_1': response.data[0].street_2 }); }
                         $scope.role_name = $scope.data[0].role_name;
                         $scope.zip_code = $scope.data[0].zip_code;
                         $scope.state = $scope.data[0].state;
@@ -1444,10 +1464,7 @@
                         $state.go('app.newuserdetail', {}, { reload: false });
                     },
                                 function (error) {
-                                    if (error.status === 400)
-                                        alert(error.data.Message);
-                                    else
-                                        alert("Network issue");
+                               
                                 });
 
                     Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=User";
@@ -1473,48 +1490,11 @@
 
                     },
                    function (error) {
-                       if (error.status === 400)
-                           alert(error.data.Message);
-                       else
-                           alert("Network issue");
+                     
                    });
-
-                    $scope.choices = [{ id: 'choice1' }];
-
-
-
-
-
-                    $scope.choices = [{ id: 'choice1' }];
-                    $scope.addNewChoice = function (e) {
-                        var classname = e.currentTarget.className;
-                        if (classname == 'remove-field') {
-
-                        }
-                        else if ($scope.choices.length) {
-                            var newItemNo = $scope.choices.length + 1;
-                            $scope.choices.push({ 'id': 'choice' + newItemNo });
-                        }
-
-                    };
-
-                    $scope.choices1 = [{ id: 'choice1' }];
-                    $scope.addNewChoice1 = function (e) {
-                        var classname = e.currentTarget.className;
-                        if (classname == 'remove-field') {
-
-                        }
-                        else if ($scope.choices1.length) {
-                            var newItemNo = $scope.choices1.length + 1;
-                            $scope.choices1.push({ 'id': 'choice' + newItemNo });
-                        }
-
-                    };
-
-
                 }
 
-            }, 1000);
+         
 
 
 

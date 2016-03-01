@@ -13,40 +13,32 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
     $scope.due_date;
     $scope.params = {}
 
-    //Audit log start
-    $scope.params = {
+    //Audit log start															
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "ProjectTaskView",
+           details: $scope.name + "AddTask",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
-
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
+       };
 
 
-    AuditCreate = function (param) {
-
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
-
         },
-   function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-
-   });
+    function (error) {
+    });
     };
-    AuditCreate($scope.params);
+
 
     //end
     $scope.cancel = function () {
@@ -62,20 +54,12 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
 
     projectUrl = "ToDoItem/CreateTask";
     ProjectCreate = function (param) {
-        //if ($scope.realyesno == 1) {
-
-        //    $scope.remind_me = "1";
-        //}
-        //else {
-        //    $scope.remind_me = "0";
-        //}
-
-        //$scope.params.remind_me = $scope.remind_me;
-
+       
       
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            AuditCreate();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
@@ -93,10 +77,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
         $scope.priority = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+       
    });
     $scope.priority1 = "be8072b1-6992-466d-a34b-2fc9d31994a6";
     $scope.selectpriority = function () {
@@ -109,10 +90,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
         $scope.projects = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+      
    });
 
     $scope.selectproject = function () {
@@ -126,10 +104,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
         $scope.contacts = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+      
    });
 
     $scope.selectcontact = function () {
@@ -143,10 +118,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
         $scope.users = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+       
    });
 
     $scope.selectuser = function () {
@@ -160,10 +132,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
         $scope.events = response.data;
     },
 function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
+    
 });
 
     $scope.selectevent = function () {

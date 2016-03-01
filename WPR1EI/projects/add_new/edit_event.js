@@ -8,40 +8,33 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
     var orgID = $cookieStore.get('orgID');
     $scope.project1 = window.sessionStorage.selectedCustomerID;
  
-    //Audit log start
-    $scope.params = {
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "EditEvent",
+           details: $scope.params.name + "EditEvent",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Wing",
-        action_id: "Wing View",
-        details: "ProjectDetail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
+       };
 
 
-    AuditCreate = function (param) {
-
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
-
         },
-   function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-   });
+    function (error) {
+    });
     };
-    AuditCreate($scope.params);
-    //end
 
+
+    //end
 
     contactUrl = "Event/EditGet/" + $scope.seletedCustomerId;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
@@ -139,6 +132,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
 
         apiService.post("Event/EditEvent", postData).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'EventGrid');

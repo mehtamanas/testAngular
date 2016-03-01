@@ -1,17 +1,40 @@
-﻿angular.module('eventcampaign')
+﻿
 
 
-.controller('EventCampaignController',
-    function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope, $modal, teamService) {
+var EventCampaignController= function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope, $modal,$modalInstance) {
         console.log('EventCampaignController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-        $rootScope.title = 'Dwellar./EventCampaign';
+       
         var orgID = $cookieStore.get('orgID');
         var userId = $cookieStore.get('userId');
         $scope.params = {};
 
 
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
 
+               module_id: "Promo Campaign",
+               action_id: "Promo Campaign View",
+               details: $scope.params.token + "promo campaign created",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
+
+
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
+                var loginSession = response.data;
+            },
+       function (error) {
+
+       });
+        };
 
 
         $scope.save = function ()
@@ -31,8 +54,9 @@
             projectUrl = "EventCampaign/CreateCampaign";
             apiService.post(projectUrl, postdata).then(function (response) {
                 var loginSession = response.data;
-                alert(loginSession.token);
-                    alert("Event Campaign Created");
+                AuditCreate();
+                $modalInstance.dismiss();
+                $scope.openSucessfullPopup();
                 },
             function (error) {
                 if (error.status === 400)
@@ -83,6 +107,16 @@
             $scope.params.permission_level_id = $scope.level1;
             //alert($scope.params.project_id);
         };
+        $scope.openSucessfullPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'newuser/sucessfull.tpl.html',
+                backdrop: 'static',
+                controller: sucessfullController,
+                size: 'md',
+                resolve: { items: { title: "Promo Campaign" } }
+            });
+            $rootScope.$broadcast('REFRESH', 'campaigngrid');
+        }
 
-
-    });
+    };

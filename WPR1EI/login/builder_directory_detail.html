@@ -34,7 +34,7 @@
             <div class="pull-right user-sec">
                 <div class="dropdown">
                     <!--<a id="user-dropdown" data-target="#" href="http://example.com" data-toggle="dropdown">-->
-                        <span class="avatar">D</span> <span class="welcome">Welcome</span> Dwellar
+                        <span class="avatar badge">D</span> <span class="welcome">Welcome</span> Dwellar
                         <!--<i class="fa fa-angle-down"></i>-->
                     <!--</a>-->
                     <!--<ul class="dropdown-menu" aria-labelledby="user-dropdown">
@@ -47,10 +47,10 @@
 
         </div><!-- header ended -->
 
-        <div id="content">
+        <div id="content-builder">
             <div class="row">
 
-                <div id="main-content" class="col-xs-12">
+                <div id="main-content-builder" class="col-xs-12">
                     <div class="content-inner">
 
                         <div class="builder-directory-header">
@@ -71,13 +71,16 @@
                         <div class="builder-directory-inner">
                            
                             <img src={{builddetail.meadia_logo}} alt="" class="img-responsive builder-logo" height="60" width="260" />
-                            <div class="builder-logo-side">
-                                <button style="width:100px;text-align:inherit;float:right;cursor:pointer; float:left" class="f-btn" ng-click="openChannelPopup()" type="submit" >Apply </button>
+                            <div class="builder-logo-side" style="width: 50%;">
                                 <h4>{{builddetail.OrganizationName}}</h4>
                                 <p>{{builddetail.Address}}</p>
                             </div>
+                                <div class="builder-logo-side">
+                                    <button style="width:100px;cursor:pointer;" class="f-btn" ng-click="openChannelPopup()" type="submit">Apply </button>
 
-                        </div><!-- builder-directory-inner ended -->
+                                </div>
+
+                            </div><!-- builder-directory-inner ended -->
 
                         <div class="builder-directory-inner">
 
@@ -86,19 +89,19 @@
                                 <div class="builder-direcory-dl">
                                     <div class="dl-box">
                                         <span class="dd-sm">2007</span>
-                                        ESTABLISHED
+                                        <b>ESTABLISHED</b>
                                     </div>
                                     <div class="dl-box">
                                         <span>{{builddetail.totalProjects}}</span>
-                                        TOTAL PROJECTS
+                                        <b>TOTAL PROJECTS</b>
                                     </div>
                                     <div class="dl-box">
                                         <span>{{builddetail.current_project}}</span>
-                                        CURRENT PROJECTS
+                                        <b>CURRENT PROJECTS</b>
                                     </div>
                                     <div class="dl-box">
                                         <span>{{builddetail.UpComing_project}}</span>
-                                        upcoming projects
+                                        <b>UPCOMING PROJECTS</b>
                                     </div>
                                 </div>
 
@@ -128,7 +131,7 @@
                                      
 
                                             <div class="pull-left tb-box-img">
-                                                <img src="{{user.project_image}}" alt="" height="187" width="197" class="img-responsive" />
+                                                <img src="{{user.project_image}}" alt=""  style="height:240px;"  width="197" class="img-responsive" />
                                             </div>
                                             <div class="tb-content clearfix">
                                                 <div class="tb-content-inner">

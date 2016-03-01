@@ -36,7 +36,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
            
             $scope.choices[0].account_phone = response.data[0].account_phone;
             $scope.choices2[0].Street_1 = response.data[0].street_1;
-            $scope.choices2[0].Street_2 = response.data[0].Street_2;
+            if (response.data[0].street_2 != undefined)
+            { $scope.choices2.push({ 'Street_1': response.data[0].street_2 }); }
             $scope.params.role_name = response.data[0].role_id.split(',');
             $scope.role_name = response.data[0].role_id.split(',');
             //    $scope.state = $scope.data[0].state_id;
@@ -52,10 +53,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
         },
                    function (error) {
-                       if (error.status === 400)
-                           alert(error.data.Message);
-                       else
-                           alert("Network issue");
+                       
                    });
     }
 
@@ -82,10 +80,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
 
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+       
    });
 
 
@@ -106,6 +101,36 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             organization_id: $cookieStore.get('orgID'),
             User_ID: window.sessionStorage.selectedCustomerID,
         };
+
+    //Audit log start															
+    $scope.params =
+        {
+            device_os: $cookieStore.get('Device_os'),
+            device_type: $cookieStore.get('Device'),
+            device_mac_id: "34:#$::43:434:34:45",
+            module_id: "Contact",
+            action_id: "Contact View",
+            details: $scope.params.first_name + "EditUser",
+            application: "angular",
+            browser: $cookieStore.get('browser'),
+            ip_address: $cookieStore.get('IP_Address'),
+            location: $cookieStore.get('Location'),
+            organization_id: $cookieStore.get('orgID'),
+            User_ID: $cookieStore.get('userId')
+        };
+
+    AuditCreate = function (param) {
+        apiService.post("AuditLog/Create", param).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+
+   });
+    };
+    AuditCreate($scope.params);
+
+    //end
+
 
 
 
@@ -163,10 +188,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         $scope.states = response.data;
     },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+        
+       
     });
 
     $scope.selectstate = function () {
@@ -180,10 +203,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         $scope.cities = response.data;
     },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+       
     });
 
     $scope.selectcity = function () {
@@ -195,20 +215,6 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         return (city.stateid === $scope.params.state);
     };
 
-
-
-
-    //Url = "Role/Get/442aa5f4-4298-4740-9e43-36ee021df1e7";
-    //apiService.get(Url).then(function (response) {
-    //    $scope.roles = response.data;
-    //},
-    //function (error)
-    //{
-    //    if (error.status === 400)
-    //        alert(error.data.Message);
-    //    else
-    //        alert("Network issue");
-    //});
 
     $scope.selectrole = function () {
         $scope.params.role_name = $scope.role_name;
@@ -328,10 +334,14 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         if ($scope.params.first_name != undefined && $scope.params.last_name != undefined && $scope.params.role_name != undefined) {
             apiService.post("User/Edit", postData).then(function (response) {
                 var loginSession = response.data;
+                AuditCreate();
                 $scope.openSucessfullPopup();
                 $modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH1', 'RoleGrid');
+                $rootScope.$broadcast('REFRESH', 'newuser');
             },
-            function (error) {
+            function (error)
+            {
                 if (error.status === 400)
                     alert(error.data.Message);
                 else
@@ -371,7 +381,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             },
 
 
-           function (error) {
+           function (error)
+           {
                if (error.status === 400)
                    alert(error.data.Message);
                else
@@ -388,12 +399,14 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                 newMember.organization_id = $cookieStore.get('orgID');
                 usersToBeAddedOnServer.push(newMember);
             }
-            apiService.post("Mapping/UserToRoleEdit", usersToBeAddedOnServer).then(function (response) {
+            apiService.post("Mapping/UserToRoleEdit", usersToBeAddedOnServer).then(function (response)
+            {
                 var loginSession = response.data;
 
 
             },
-           function (error) {
+           function (error)
+           {
                if (error.status === 400)
                    alert(error.data.Message);
                else
@@ -405,7 +418,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
     }
 
 
-    $(document).on("click", ".remove-field", function () {
+    $(document).on("click", ".remove-field", function ()
+    {
         var removedElement = $(this).parent().find('#edituser_mail').val();
         var removedElement1 = $(this).parent().find('#edituser_phno').val();
 
@@ -427,6 +441,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         $(this).parent().remove();
     });
 
+
+
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
@@ -436,7 +452,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             size: 'md',
             resolve: { items: { title: "User" } }
         });
-        $rootScope.$broadcast('REFRESH', 'newuser');
+       
+        
     }
 
     $scope.CanceUpload = function () {
@@ -444,6 +461,39 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
         console.log("UploadCancelled");
 
     }
+
+    //Audit log start               
+
+   
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "User",
+           action_id: "User View",
+           details:$scope.params.first_name+ "user edited",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+    };
+
     $scope.addNewUser = function (isValid) {
 
         $scope.showValid = true;

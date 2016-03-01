@@ -79,10 +79,7 @@ function (error) {
 
     },
 function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
+    
 }
     );
 
@@ -371,7 +368,7 @@ function (error) {
 
         apiService.post("FloorType/EditFloorTypeSingle", postData).then(function (response) {
             var loginSession = response.data;
-           
+            AuditCreate();
 
             $modalInstance.dismiss();
             var unitupdate = [];
@@ -457,37 +454,34 @@ function (error) {
 
 
 
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "EditFloor",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "EditFloor View",
+           details: $scope.params.Unit_Type_desc + "EditFloor View",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
+
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
-   function (error)
-   {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+   function (error) {
    });
     };
-    AuditCreate($scope.params);
 
+
+    //end
     //end
 
 
@@ -507,35 +501,7 @@ function (error) {
         User_ID: $cookieStore.get('userId')
     };
 
-    //if ($cookieStore.get('projectid') !== '') {
-    //    apiService.get('Project/GetbyID/' + $cookieStore.get('projectid')).then(function (response) {
-    //        $scope.data = response.data;
-    //        angular.forEach($scope.data, function (value, key) {
-    //            $scope.params.name = value.name;
-    //            $scope.params.description = value.description;
-    //        });
-    //    },
-    //            function (error) {
-    //                deferred.reject(error);
-    //                alert("not working");
-    //            });
-    //}
-
-
-    // projectUrl = "Project/ProjectAddress";
-    // ProjectCreate = function (param) {
-    //     //alert(param.name);
-    //     apiService.post(projectUrl, param).then(function (response) {
-    //         var loginSession = response.data;
-    //         alert("Project Created..!!");
-    //         $modalInstance.dismiss();
-
-
-    //     },
-    //function (error) {
-    //    alert("Error " + error.state);
-    //});
-    // };
+   
 
 
     $scope.cancel = function () {

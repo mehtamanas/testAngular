@@ -124,6 +124,7 @@
 
         apiService.post("MediaElement/Create", postData1).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             upload2 = 1;
             if (upload1 == 1 && upload2 == 1) {
                 $modalInstance.dismiss();
@@ -146,39 +147,34 @@
 
 
    
-   
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "GalleryView",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "Gallery",
+           details: $scope.params.notes + "AddBrochure",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
-   function (error)
-   {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-   });
+    function (error) {
+    });
     };
-    AuditCreate($scope.params);
+
 
     //end
+
 
    
 

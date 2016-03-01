@@ -2,12 +2,14 @@
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
-            .state('app.eventcampaign', {
-                url: '/eventcampaign',
-                templateUrl: 'eventcampaign/eventcampaign.tpl.html',
-                controller: 'EventCampaignController',
 
-            })
-    
+             .state('app.eventcampaigngrid', {
+                 url: '/promoscampaigngrid',
+                 templateUrl: 'eventcampaign/eventcampaigngrid.tpl.html',
+                 controller: 'EventCampaignGridController',
+
+             })
+        
+     
 
     }]);

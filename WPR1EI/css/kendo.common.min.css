@@ -2164,9 +2164,9 @@ div.k-grid-header, div.k-grid-footer {
 .k-grid-content {
     position: relative;
     width: 100%;
-    overflow: auto;
-    overflow-x: auto;
-    overflow-y: scroll;
+    //overflow: auto;
+    //overflow-x: auto;
+   // overflow-y: scroll;
     zoom: 1;
     min-height: 0;
 }

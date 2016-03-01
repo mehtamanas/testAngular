@@ -225,8 +225,7 @@
 
 .dropzone, .dropzone * {
     box-sizing: border-box;
-    margin-top:-7px;
-    margin-left:-7px;
+   
 }
 
 .dropzone {
