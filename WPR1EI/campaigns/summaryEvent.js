@@ -2,17 +2,47 @@
 
      
 .controller('summaryEventController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $filter) {
 
         var userId = $cookieStore.get('userId');
         $scope.params = {};
 
- 
+        //Audit log start               
+        AuditCreate = function () {
+            var postdata =
+           {
+               device_os: $cookieStore.get('Device_os'),
+               device_type: $cookieStore.get('Device'),
+               //device_mac_id: "34:#$::43:434:34:45",
+               module_id: "Contact",
+               action_id: "Contact View",
+               details: "Event Summary",
+               application: "angular",
+               browser: $cookieStore.get('browser'),
+               ip_address: $cookieStore.get('IP_Address'),
+               location: $cookieStore.get('Location'),
+               organization_id: $cookieStore.get('orgID'),
+               User_ID: $cookieStore.get('userId')
+           };
+            apiService.post("AuditLog/Create", postdata).then(function (response) {
+                var loginSession = response.data;
+            },
+            function (error) {
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
+            });
+        };
+        AuditCreate();
+
+        //end
+        console.log($cookieStore.get('End_Date'));
         $scope.params = {
             name:  $cookieStore.get('Name'),
-            end_date: $cookieStore.get('End_Date'),
+            end_date: moment($cookieStore.get('End_Date')).format('DD/MM/YYYY hh:mm A'),
             Street_1: $cookieStore.get('Address'),
-            start_date1: $cookieStore.get('Start_Date'),
+            start_date1: moment($cookieStore.get('Start_Date')).format('DD/MM/YYYY hh:mm A'),
             budget: $cookieStore.get('Budget'),
             no_of_leads: $cookieStore.get('No_of_leads'),
             sales: $cookieStore.get('Sales'),
@@ -21,7 +51,7 @@
              organization_id: $cookieStore.get('orgID'),
              user_id: $cookieStore.get('userId'),
              tag_id:$cookieStore.get('usersToBeAddedOnServer1'),
-		project_id: $cookieStore.get('project_id')
+		     project_id: $cookieStore.get('project_id')
         }
 
 
@@ -71,9 +101,7 @@
             if (isValid) {
                 ProjectCreate($scope.params);
                 $scope.showValid = false;
-
             }
-
         }
       
         $cookieStore.remove('Name');

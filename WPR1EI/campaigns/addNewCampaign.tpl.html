@@ -14,28 +14,38 @@
     </div><!-- content-inner ended -->
 
     <div class="pg-inner-content" style="">
+        <div class="col-md-12 tab_head-2">
+            <div class="row " style="padding: 1px 0px 1px 16px;">
+                <div class="col-md-3 email_tabs2">General</div>
+                <div class="col-md-1 tabarrow"><img src="../images/gray_blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs_active">Budget & Goal</div>
+                <div class="col-md-1 tabarrow"><img src="../images/gray_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs_active">Summary</div>
+
+            </div>
+        </div>
 
         <div class="project-detail">
+            <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                <div class="col-lg-12 pull-left">
+                    <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                        <h2 class="pg-inner-title">General Information</h2>
+                    </div>
+                </div>
 
+            </div>
 
                 <div class="top-row" style="width:100%; background:#fff; padding:60px">
                     <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
-
-
-                        <div class="clearfix">
-                            <div class="form-group form-bx form-bx8">
-                                <h2 class="pg-inner-title">General Information</h2>
-                            </div>
-                        </div>
-                        <div class="clearfix campaign-container">
+                        <div class="clearfix campaign-container tab-head-inner">
                             <div class="clearfix">
                                 <div class="form-group form-bx form-bx5">
-                                    <label for="">Campaign Name</label>
+                                    <label for="">Event Name</label>
                                     <input type="text" class="form-control text-bold" autofocus name="project_name"
-                                           placeholder="Campaign Name"
+                                           placeholder="Event Name"
                                            data-ng-model="params.name"
                                            minlength="1"
-                                           maxlength="30"
+                                           maxlength="50"
                                            ng-pattern="/^[a-z 0-9\s]+$/i"
                                            input-focus
                                            required />
@@ -44,12 +54,12 @@
 
                             <div class="clearfix">
                                 <div class="form-group form-bx form-bx5">
-                                    <label for="">Address</label>
+                                    <label for="">Location</label>
                                     <input type="text" class="form-control text-bold" autofocus name="project_name"
                                            placeholder="Address"
                                            data-ng-model="params.Street_1"
                                            minlength="1"
-                                           maxlength="30"
+                                           maxlength="50"
                                            ng-pattern="/^[a-z 0-9\s]+$/i"
                                            input-focus
                                            required />
@@ -74,60 +84,33 @@
                             <div class="clearfix">
                                 <div class="pull-left f-half-6">
                                     <div class="form-group form-bx4 form-bx3-1" style="width:390px">
-
                                         <label for="">Start Date </label>
                                         <input kendo-date-time-picker class="form-control"
                                                data-ng-model="params.start_date1"
                                                k-ng-model="dateObject"
-                                               k-format="'dd/MM/yyyy hh:mm tt'" />
-                                        <!--<input class="form-control" name="project_website" id="addnewproject_project_website"
-                           placeholder="start date"
-                           data-ng-model="params.start_date1"
-                           minlength="1"
-                           maxlength="30"
-                           input-focus
-                           required />-->
+                                               k-format="'dd/MM/yyyy hh:mm tt'" />                                   
                                     </div>
                                 </div>
 
                                 <div class="pull-left f-half-6">
                                     <div class="form-group form-bx4 form-bx3-1" style="width:390px">
                                         <label for="">End Date</label>
-
                                         <input kendo-date-time-picker class="form-control"
                                                data-ng-model="params.end_date"
                                                k-ng-model="dateObject1"
                                                k-format="'dd/MM/yyyy hh:mm tt'" />
-
-                                        <!--<input class="form-control" name="builder_website" id="addnewproject_builder_website"
-                           placeholder="end date"
-                           data-ng-model="params.end_date"
-                           minlength="1"
-                           maxlength="30"
-                           input-focus
-                           required />-->
-                                        <!--<span class="area-txt">/sq.ft</span>-->
-
                                     </div>
 
                                 </div>
                             </div>
 
-
                             <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;">
-
-                                <button class="btn organization-btn" id="campaign_save" type="submit" style="margin-right: 10px;">
-                                    NEXT
-                                </button>
-                                <!--<button class="btn organization-btn f-btn2" id="campaign_cancel" type="button" ng-click="user()" >
-               BACK
-            </button>-->
-
+                                <button class="btn organization-btn" id="campaign_save" type="submit" style="margin-right: 10px;">NEXT</button>                             
                             </div>
-                            </div>
-</form>
+                        </div>
+                   </form>
                 </div>
-            <!--</div>--><!-- project-detail ended -->
+           
 
         </div><!-- pg-inner-content ended -->
 
