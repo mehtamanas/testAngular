@@ -14,21 +14,36 @@
     </div><!-- content-inner ended -->
 
     <div class="pg-inner-content" style="">
+        <div class="col-md-12 tab_head">
+            <div class="row " style="padding: 1px 0px 1px 16px;">
+                <div class="col-md-2 email_tabs2">Campaign info</div>
+                <div class="col-md-1 tabarrow"><img src="../images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Set Budget</div>
+                <div class="col-md-1 tabarrow"><img src="../images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Select contact</div>
+                <div class="col-md-1 tabarrow"><img src="../images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Add template</div>
+                <div class="col-md-1 tabarrow"><img src="../images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Summary</div>
+            </div>
+        </div>
 
         <div class="project-detail">
+            <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                <div class="col-lg-12 pull-left">
+                    <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                        <h2 class="pg-inner-title"> Summary</h2>
+                    </div>
+                </div>
+
+            </div>
 
 
             <div class="top-row" style="width:100%; background:#fff; padding:60px">
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
                     <div class="project-detail">
                         <div class="content-inner-bx">
-                            <div class="clearfix">
-                                <div class="form-group form-bx form-bx8">
-                                    <h2 class="pg-inner-title">Summary</h2>
-                                </div>
-                            </div>
-
-                            <div class="clearfix">
+                            <div class="clearfix tab-inner" style="margin-left: 5%;">
 
                                 <div class="pull-left company-profile-half">
                                     <div class="company-profile-row clearfix">
@@ -41,7 +56,7 @@
                                     </div>
 
                                     <div class="company-profile-row clearfix">
-                                        <div class="pull-left profile-row1">Campaign Name:</div>
+                                        <div class="pull-left profile-row1">Event Name:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
                                                 <h4 ng-bind="params.name">{{params.name}}</h4>
@@ -50,10 +65,10 @@
                                     </div>
 
                                     <div class="company-profile-row clearfix">
-                                        <div class="pull-left profile-row1">Location:</div>
+                                        <div class="pull-left profile-row1">Project:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.Street_1">{{params.Street_1}}</h4>
+                                                <h4 ng-bind="params.project_id">{{params.project_id}}</h4>
                                             </label>
                                         </div>
                                     </div>
@@ -62,7 +77,7 @@
                                         <div class="pull-left profile-row1">Start Date</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.start_date1">{{params.start_date1 }}</h4>
+                                                <h4 ng-bind="params.start_date1">{{params.start_date1 | date:'dd/MM/yyyy hh:mm:tt'}}</h4>
                                             </label>
                                         </div>
                                     </div>
@@ -70,14 +85,14 @@
                                 </div>
                                 <div class="pull-left company-profile-half company-profile-half-2">
 
-                                    <div class="company-profile-row clearfix">
+                                    <!--<div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1"> End Date:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
                                                 <h4 ng-bind="params.end_date">{{params.end_date}}</h4>
                                             </label>
                                         </div>
-                                    </div>
+                                    </div>-->
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Budget:</div>
@@ -109,17 +124,14 @@
                             </div>
 
                             <div class="col-sm-1"></div>
-                            &nbsp;
-                            <button class="btn organization-btn" type="submit" id="btn_signup"><b>SAVE</b></button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                            <button class="btn organization-btn" id="btn_next"><b>CANCEL</b></button>
                         </div>
                     </div>
+
+                        <button class="btn organization-btn-1-2" type="submit" id="btn_signup" ><b>SAVE &gt;</b></button>
+                        <button class="btn campaign-container-btn-1-1" id="btn_next" type="button" ng-click="cancel()" >
+                            CANCEL
+                        </button>
 
                 </form>
             </div>

@@ -4,6 +4,8 @@ angular.module('campaigns')
 .controller ('EmailTagController', 
 function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, emailService) {
     console.log('EmailTagController');
+
+
     emailData= {
             teamId: window.sessionStorage.selectedCustomerID,
             orgId:$cookieStore.get('orgID')
