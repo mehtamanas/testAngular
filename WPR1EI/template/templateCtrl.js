@@ -1,6 +1,7 @@
 ﻿angular.module('templates')
 .controller('templateCtrl', function ($scope, $modal, apiService, $cookieStore) {
     console.log('templateCtrl');
+    $scope.title = 'Dwellar Template';
 
     $scope.openCreateTemplate = function (args) {
         
@@ -16,7 +17,7 @@
         else if (args === 'agreement') {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'template/create/agreementCreate.html',
+                templateUrl: 'template/create/agreement/agreementCreate.html',
                 backdrop: 'static',
                 controller: agreementCreateCtrl,
                 size: 'md'
@@ -62,7 +63,7 @@
         else if (args === 'email') {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'template/create/emailCreate.html',
+                templateUrl: 'template/create/emails/emailCreate.html',
                 backdrop: 'static',
                 controller: emailCreateCtrl,
                 size: 'md'
@@ -120,16 +121,30 @@
 
     };
 
-    $scope.EditTemplate = function (dataItem) {
+    $scope.emailEdit = function (dataItem) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'template/edit/emailEdit.html',
+            templateUrl: 'template/edit/emails/emailEdit.html',
             backdrop: 'static',
             controller: emailEditCtrl,
             size: 'md',
             resolve:{
                 emailData: dataItem
         }
+        });
+
+    }
+
+    $scope.agreementEdit = function (dataItem) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'template/edit/agreement/agreementEdit.html',
+            backdrop: 'static',
+            controller: agreementEditCtrl,
+            size: 'md',
+            resolve: {
+                agreementData: dataItem
+            }
         });
 
     }
@@ -145,4 +160,5 @@
             $('.k-i-refresh').trigger("click");
         }
     });
+
 });
