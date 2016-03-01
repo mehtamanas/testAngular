@@ -9,20 +9,15 @@
                 <h4 id="exampleModalLabel">Channel Partner Form</h4>
             </div><!-- modal-header ended -->
 
-            <div>
-                <form class="form-content" name="newForm" autocomplete="off" novalidate
-                      data-ng-submit="addNewUser(newForm.$valid)">
 
-                    <h4>Personal Details</h4>
+            <form class="form-content" name="newForm" autocomplete="off" novalidate data-ng-submit="addNewUser(newForm.$valid)" style="text-align: left;">
 
-                    <div>
-                        <br/>
-                    </div>
+                <h4 class="form-title">Personal Details</h4>
 
-                    <label><input type="radio" id="channel_ind" name="test1" ng-model="radioValue7"  value="Individual" />Individual</label>  &nbsp;
-                    <label><input type="radio" id="channel_org" name="test1" ng-model="radioValue7" ng-checked="true" value="Organization" />Organization</label>
+                <label  class="radio-inline channel_label"><input type="radio" id="channel_ind" name="test1" ng-model="radioValue7" value="Individual" /> &nbsp;Individual</label>  &nbsp;
+                <label class="radio-inline channel_label"><input type="radio" id="channel_org" name="test1" ng-model="radioValue7" ng-checked="true" value="Organization" /> &nbsp;Organization</label>
 
-                     <div class="clearfix image-upload-container">
+                <div class="clearfix image-upload-container">
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
                         <div class="image-upload-title">Upload Channel Image</div>
                         <div class="dropzone dropzone-bx image-upload-bx">
@@ -30,12 +25,11 @@
                                 <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                     <div class="panel-body image-upload-panel">
                                         <div class="row" ng-hide="uploader.queue.length">
-                                            <img ng-src={{params.media_url}} alt="Drag and Drop" class="img-responsive" />
+                                            <img ng-src={{params.media_url}} class="img-responsive" />
                                         </div>
                                         <div class="row" ng-show="uploader.queue.length">
                                             <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                                <div ng-show="uploader.isHTML5"
-                                                     ng-thumb="{ file: item._file, height: 200 }"></div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -48,527 +42,556 @@
                             <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
                         </div>
                     </div>
-                         </div>
+                </div>
 
 
-                    <div class="clearfix" style="text-align:left">
 
-                        <div class="form-bx">
-                            <label class="control-label">First Name</label>
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                                        'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
-                                                                        'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
+                <div class="clearfix" style="text-align:left">
+
+                    <div class="form-bx">
+                        <label class="control-label">First Name</label>
+                        <div class="form-group"
+                             data-ng-class="{'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
+                                                 'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
                                                                     }">
-                                <input type="text" autofocus name="firstName" class="form-control" id="channel_fname"
-                                       placeholder="First Name"
-                                       data-ng-model="params.first_name"
-                                       minlength="1"
-                                       maxlength="40"
-                                       alphabets-only
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
-                                    {{ 'Please enter alphabets only' | translate }}
-                                </div>
+                            <input type="text" autofocus name="firstName" class="form-control" id="channel_fname"
+                                   
+                                   data-ng-model="params.first_name"
+                                   minlength="1"
+                                   maxlength="40"
+                                   alphabets-only
+                                   input-focus
+                                   required
+                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                            <div class="text-danger"
+                                 data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
+                                {{ 'Please enter alphabets only' | translate }}
                             </div>
                         </div>
-
-                        <div class="field-mdl field-req">*</div>
-
-                        <div class="form-bx">
-                            <label class="control-label">Last Name</label>
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                                        'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
-                                                                        'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
-                                                                     }">
-                                <input type="text" name="lastName" class="form-control" id="channel_lname"
-                                       placeholder="Last Name"
-                                       data-ng-model="params.last_name"
-                                       minlength="1"
-                                       maxlength="50"
-                                       alphabets-only
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
-                                    {{ 'Please enter alphabets only' | translate }}
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
+                    <div class="field-mdl field-req" style="margin-top: 2%;">*</div>
 
-                    <div class="clearfix">
+                    <div class="form-bx">
+                        <label class="control-label">Last Name</label>
+                        <div class="form-group"
+                             data-ng-class="{'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
+                                                  'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
+                                                                     }">
+                            <input type="text" name="lastName" class="form-control" id="channel_lname"
+                                   
+                                   data-ng-model="params.last_name"
+                                   minlength="1"
+                                   maxlength="50"
+                                   alphabets-only
+                                   input-focus
+                                   required
+                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                            <div class="text-danger"
+                                 data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
+                                {{ 'Please enter alphabets only' | translate }}
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="form-bx">
-                            <label class="control-label">Enrollment No</label>
-                            <div class="form-group"
-                                 data-ng-class="{
+                </div>
+
+
+                <div class="clearfix">
+
+                    <div class="form-bx">
+                        <label class="control-label">Enrollment No</label>
+                        <div class="form-group"
+                             data-ng-class="{
                                                     'has-error' : newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid) && !newForm.enrollno.$focus,
                                                     'has-success': newForm.enrollno.$valid && !newForm.enrollno.$pristine && !newForm.enrollno.$focus
                                                                     }">
-                                <input type="text" autofocus name="enrollno" class="form-control" id="channel_enroll"
-                                       placeholder="Enrollment No"
-                                       data-ng-model="params.enrollment_no"
-                                       minlength="1"
-                                       maxlength="40"                                      
-                                       input-focus
-                                       required
-                                      ng-pattern="/[a-zA-Z0-9\.]*/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid) && !newForm.enrollno.$focus">
-                                    {{ 'Please enter Valid Enrollment No' | translate }}
-                                </div>
+                            <input type="text" autofocus name="enrollno" class="form-control" id="channel_enroll"
+                                 
+                                   data-ng-model="params.enrollment_no"
+                                   minlength="1"
+                                   maxlength="40"
+                                   input-focus
+                                   required
+                                   ng-pattern="/[a-zA-Z0-9\.]*/" />
+                            <div class="text-danger"
+                                 data-ng-if="newForm.enrollno.$invalid && (!newForm.enrollno.$pristine || showValid) && !newForm.enrollno.$focus">
+                                {{ 'Please enter Valid Enrollment No' | translate }}
                             </div>
                         </div>
+                    </div>
 
-                        <div class="field-mdl field-req">*</div>
+                    <div class="field-mdl field-req" style="margin-top: 2%;">*</div>
 
-                        <div class="form-bx">
-                            <label class="control-label">Project Site</label>
-                            <div class="form-group"
-                                 data-ng-class="{
+                    <div class="form-bx">
+                        <label class="control-label">Project Site</label>
+                        <div class="form-group"
+                             data-ng-class="{
                                                                         'has-error' : newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid) && !newForm.projectsite.$focus,
                                                                         'has-success': newForm.projectsite.$valid && !newForm.projectsite.$pristine && !newForm.projectsite.$focus
                                                                      }">
-                                <input type="text" name="projectsite" class="form-control" id="channel_project"
-                                       placeholder="Last Name"
-                                       data-ng-model="params.project_site"
-                                       minlength="1"
-                                       maxlength="50"
-                                       alphabets-only
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[a-zA-Z\s]*$/" />
-                                <div class="text-danger"
-                                     data-ng-if="newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid) && !newForm.projectsite.$focus">
-                                    {{ 'Please enter alphabets only' | translate }}
-                                </div>
+                            <input type="text" name="projectsite" class="form-control" id="channel_project"
+                                   
+                                   data-ng-model="params.project_site"
+                                   minlength="1"
+                                   maxlength="50"
+                                   alphabets-only
+                                   input-focus
+                                   required
+                                   ng-pattern="/^[a-zA-Z\s]*$/" />
+                            <div class="text-danger"
+                                 data-ng-if="newForm.projectsite.$invalid && (!newForm.projectsite.$pristine || showValid) && !newForm.projectsite.$focus">
+                                {{ 'Please enter alphabets only' | translate }}
                             </div>
                         </div>
-
                     </div>
-                    
+
+                </div>
+                <div class="clearfix" style="margin-left:2%">
 
                     <div class="row">
-                        <div class="col-sm-12 field-title">
-                            Types of operations
-                        </div>
+
+                        <h4 class="form-title">Types of operations</h4>
+
                         <div class="col-sm-12">
-                            
-                                <label>
-                                    <input type="radio" id="channel_individual" name="test2" ng-model="radioValue2" ng-checked="true" value="Individual" /> Individual
-                                </label>
-                                <label>
-                                    <input type="radio" id="channel_propritor" name="test2" ng-model="radioValue2" value="Propritorship" />Propritorship
-                                </label>
-                                <label>
-                                    <input type="radio" id="channel_profirm" name="test2" ng-model="radioValue2" value="Propritorship Firm" />Propritorship Firm
-                                </label>
-                                <label>
-                                    <input type="radio" id="channel_limit" name="test2" ng-model="radioValue2" value="Limited Company" />Limited Company
-                                </label>
-                            
+
+                            <label class="radio-inline channel_label">
+                                <input type="radio" id="channel_individual" name="test2" ng-model="radioValue2" ng-checked="true" value="Individual" /> Individual
+                            </label>
+                            <label class="radio-inline channel_label">
+                                <input type="radio" id="channel_propritor" name="test2" ng-model="radioValue2" value="Propritorship" />Propritorship
+                            </label>
+                            <label class="radio-inline channel_label">
+                                <input type="radio" id="channel_profirm" name="test2" ng-model="radioValue2" value="Propritorship Firm" />Propritorship Firm
+                            </label>
+                            <label class="radio-inline channel_label">
+                                <input type="radio" id="channel_limit" name="test2" ng-model="radioValue2" value="Limited Company" />Limited Company
+                            </label>
+
                         </div>
                     </div>
-                    
+                </div>
 
-                    <div class="channel-partner-inner">
+                <div class="channel-partner-inner">
 
-                        <div class="h3-heading-wrap">
-                            <h3>Billing Details</h3>
-                        </div>
+                    <div class="row" style="margin-top: 3%;">
+                        <h4 style="text-align:left" >Billing Details</h4>
+                    </div>
 
-                        <div class="channel-partner-content">
+                    <div class="channel-partner-content">
 
-                            <div class="row">
-                                <div class="col-lg-4 col-md-5 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-6">
+                                
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                 'has-error' : newForm.pan_no.$invalid && (!newForm.pan_no.$pristine || showValid) && !newForm.pan_no.$focus,
                                                                 'has-success': newForm.pan_no.$valid && !newForm.pan_no.$pristine && !newForm.pan_no.$focus
                                                              }">
-                                            <label for="">Pan No.</label>
-                                            <input type="text" name="pan_no" class="form-control" id="channel_panno"
-                                                   placeholder="PAN No"
-                                                   data-ng-model="params.pan_no"
-                                                   minlength="1"
-                                                   maxlength="30"
-                                                   alphabets-only
-                                                   input-focus
-                                                   ng-pattern="/[a-zA-Z0-9\.]*/" />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.pan_no.$invalid && (!newForm.pan_no.$pristine || showValid) && !newForm.pan_no.$focus">
-                                                {{ 'Please Enter Valid PAN No' | translate }}
-                                            </div>
+                                        <label for="">Pan No.</label>
+                                        <input type="text" name="pan_no" class="form-control" id="channel_panno"
+                                             
+                                               data-ng-model="params.pan_no"
+                                               minlength="1"
+                                               maxlength="30"
+                                               alphabets-only
+                                               input-focus
+                                               ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.pan_no.$invalid && (!newForm.pan_no.$pristine || showValid) && !newForm.pan_no.$focus">
+                                            {{ 'Please Enter Valid PAN No' | translate }}
                                         </div>
-                                    </div>
+                                   
                                 </div>
-                                <div class="col-lg-4 col-md-5 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-6" style="margin-left: 2%;">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                'has-error' : newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus,
                                                                'has-success': newForm.service_tax_no.$valid && !newForm.service_tax_no.$pristine && !newForm.service_tax_no.$focus
                                                              }">
-                                            <label for="">Service Tax No.</label>
-                                            <input type="text" name="service_tax_no" class="form-control" id="channel_taxno"
-                                                   placeholder="Service Tax No"
-                                                   data-ng-model="params.servicetaxno"
-                                                   minlength="1"
-                                                   maxlength="30"
-                                                   alphabets-only
-                                                   input-focus
-                                                   ng-pattern="/[a-zA-Z0-9\.]*/" />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus">
-                                                {{ 'Please Enter Valid Service Tax No' | translate }}
-                                            </div>
+                                        <label for="">Service Tax No.</label>
+                                        <input type="text" name="service_tax_no" class="form-control" id="channel_taxno"
+                                              
+                                               data-ng-model="params.servicetaxno"
+                                               minlength="1"
+                                               maxlength="30"
+                                               alphabets-only
+                                               input-focus
+                                               ng-pattern="/[a-zA-Z0-9\.]*/" />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.service_tax_no.$invalid && (!newForm.service_tax_no.$pristine || showValid) && !newForm.service_tax_no.$focus">
+                                            {{ 'Please Enter Valid Service Tax No' | translate }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-lg-8 col-md-10 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-12" style="width: 86%;">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                 'has-error' : newForm.cheque.$invalid && (!newForm.cheque.$pristine || showValid) && !newForm.cheque.$focus,
                                                                 'has-success': newForm.cheque.$valid && !newForm.cheque.$pristine && !newForm.cheque.$focus
                                                              }">
-                                            <label for="">Chaque issued to be name</label>
-                                            <input type="text" autofocus name="cheque" class="form-control" id="channel_name"
-                                                   placeholder="First Name"
-                                                   data-ng-model="params.chequeissuedname"
-                                                   minlength="1"
-                                                   maxlength="40"
-                                                   alphabets-only
-                                                   input-focus
-                                                   required
-                                                   ng-pattern="/^[a-zA-Z\s]*$/" />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.cheque.$invalid && (!newForm.cheque.$pristine || showValid) && !newForm.cheque.$focus">
-                                                {{ 'Please enter alphabets only' | translate }}
-                                            </div>
+                                        <label for="">Chaque issued to be name</label>
+                                        <input type="text" autofocus name="cheque" class="form-control" id="channel_name"
+                                               
+                                               data-ng-model="params.chequeissuedname"
+                                               minlength="1"
+                                               maxlength="40"
+                                               alphabets-only
+                                               input-focus
+                                               required
+                                               ng-pattern="/^[a-zA-Z\s]*$/" />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.cheque.$invalid && (!newForm.cheque.$pristine || showValid) && !newForm.cheque.$focus">
+                                            {{ 'Please enter alphabets only' | translate }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </div><!-- channel-partner-content ended -->
-
-                    </div>
-                    
-
-                    <div class="channel-partner-inner">
-
-                        <div class="h3-heading-wrap">
-                            <h3>Important</h3>
                         </div>
 
-                        <div class="channel-partner-content">
+                    </div><!-- channel-partner-content ended -->
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Are you associate with any other real estate company</label>
-                                        
-                                            <label>
-                                                <input type="radio" id="channel_yes" name="test3" ng-model="realyesno" ng-checked="true" value="Yes" /> Yes
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_no" name="test3" ng-model="realyesno" value="No" /> No
-                                            </label>
-                                       
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-10">
+                </div>
+
+
+                <div class="channel-partner-inner">
+
+                    <div class="row">
+                        <h4>Important</h4>
+                    </div>
+                    <div class="channel-partner-content">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Are you associate with any other real estate company</label>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                    <label class="channel_label">
+                                        <input type="radio" id="channel_yes" name="test3" ng-model="realyesno" ng-checked="true" value="Yes" /> Yes
+                                    </label>
+                                        </div>
+                                    <div class="col-md-3">
+                                        <label class="channel_label">
+                                            <input type="radio" id="channel_no" name="test3" ng-model="realyesno" value="No" /> No
+                                        </label>
+                                        </div>
+                                        <div class="row" style="margin-left: 0px;">
+                                            <div class="col-lg-8 col-md-10"  style="margin-top: 6%;">
                                                 <input type="text" autofocus name="realEstate" class="form-control"
-                                                       placeholder="ABC Realtor"
+                                                      
                                                        data-ng-model="params.company"
                                                        required />
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Primary Occupations</label>
-                                         <br />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Primary Occupations</label>
+                                    <br />
+                                    <div class="col-md-3">
+                                        <label class="channel_label"><input type="radio" id="channel_rad_indv" name="test11" ng-model="yesnoprimary" ng-checked="true" value="Yes" />Individual</label>  &nbsp;
+                                    </div>
+                                         <div class="col-md-3">
+                                            <label class="channel_label"><input type="radio" id="channel_rad_orgz" name="test11" ng-model="yesnoprimary" value="No" />Organization</label>
+                                            </div>
 
-                                            <label><input type="radio" id="channel_rad_indv"name="test11" ng-model="yesnoprimary" ng-checked="true" value="Yes" />Individual</label>  &nbsp;
-                                            <label><input type="radio" id="channel_rad_orgz" name="test11" ng-model="yesnoprimary" value="No" />Organization</label>
-                                            
-                                       
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-10">
-                                                <input type="text" autofocus name="primary" class="form-control"
-                                                       placeholder="Primary Occupation"
-                                                       data-ng-model="params.primary_occupations"
-                                                       required />
+                                            <div class="row" style="margin-left: 0px;" >
+                                                <div class="col-lg-8 col-md-10" style="margin-top: 6%;">
+                                                    <input type="text" autofocus name="primary" class="form-control"
+                                                      
+                                                           data-ng-model="params.primary_occupations"
+                                                           required />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
                             </div>
-
-                            <div class="field-sep clearfix"></div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Area Of Specialization</label>
-                                        <div> <br /></div> 
-                                        
-                                            <label>
-                                                <input type="radio" id="channel_commer" name="test5" ng-model="areatype" ng-checked="true" value="Real Estate" /> Commercial
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_resident" name="test5" ng-model="areatype" value="Residential" /> Residential
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_inbd"name="test5" ng-model="areatype" value="Industry" /> Inbdustry
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_retail"name="test5" ng-model="areatype" value="Retail" /> Retail
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_land" name="test5" ng-model="areatype" value="Land" /> Land
-                                            </label>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Total Turnover</label>
-                                        <div> <br /></div> 
-                                            <label>
-                                                <input type="radio" id="channel_value1" name="test6" ng-model="turnover" ng-checked="true" value="0-3cr" /> 0-3cr
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_value2" name="test6" ng-model="turnover" value="3-10cr" /> 3-10cr
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_value3" name="test6" ng-model="turnover" value="10-25cr" /> 10-25cr
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_value4" name="test6" ng-model="turnover" value="25-40cr" /> 25-40cr
-                                            </label>
-                                            <label>
-                                                <input type="radio" id="channel_value5" name="test6" ng-model="turnover" value="40cr and more" />50cr and more
-                                            </label>
-                                      
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="field-sep clearfix"></div>
-
-
-                        </div><!-- channel-partner-content ended -->
-
-                    </div>
-
-
-                    <div class="channel-partner-inner">
-
-                        <div class="h3-heading-wrap">
-                            <h3>Contact Details</h3>
                         </div>
 
-                        <div class="channel-partner-content">
+                        <div class="field-sep clearfix"></div>
 
-                            <div class="row">
-                                <div class="col-md-10 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label >Area Of Specialization</label>
+                                    <div> <br /></div>
+                                    <div class="col-md-4">
+                                        <label class="channel_label">
+                                            <input type="radio" id="channel_commer" name="test5" ng-model="areatype" ng-checked="true" value="Real Estate" /> Commercial
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="channel_label">
+
+                                            <input type="radio" id="channel_resident" name="test5" ng-model="areatype" value="Residential" /> Residential
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="channel_label">
+                                            <input type="radio" id="channel_inbd" name="test5" ng-model="areatype" value="Industry" /> Inbdustry
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="channel_label">
+                                            <input type="radio" id="channel_retail" name="test5" ng-model="areatype" value="Retail" /> Retail
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="channel_label">
+                                            <input type="radio" id="channel_land" name="test5" ng-model="areatype" value="Land" /> Land
+                                        </label>
+                                    </div>
+
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Total Turnover</label>
+                                    <div> <br /></div>
+                                    <div class="col-md-4">
+                                        <label class="channel_label">
+                                            <input type="radio" id="channel_value1" name="test6" ng-model="turnover" ng-checked="true" value="0-3cr" /> 0-3cr
+                                        </label>
+                                    </div>
+                                  <div class="col-md-3">
+                                            <label class="channel_label">
+                                                <input type="radio" id="channel_value2" name="test6" ng-model="turnover" value="3-10cr" /> 3-10cr
+                                            </label>
+                                </div>
+                                  <div class="col-md-4">
+                                          <label class="channel_label">
+                                              <input type="radio" id="channel_value3" name="test6" ng-model="turnover" value="10-25cr" /> 10-25cr
+                                          </label>
+                                    </div>
+                                 <div class="col-md-4">
+                                          <label class="channel_label">
+                                              <input type="radio" id="channel_value4" name="test6" ng-model="turnover" value="25-40cr" /> 25-40cr
+                                          </label>
+                                     </div>
+                                     <div class="col-md-4">
+                                         <label class="channel_label">
+                                             <input type="radio" id="channel_value5" name="test6" ng-model="turnover" value="40cr and more" /> 50cr and more
+                                         </label>
+                                       </div>
+                                     </div>
+                            </div>
+                        </div>
+
+                        <div class="field-sep clearfix"></div>
+
+
+                    </div><!-- channel-partner-content ended -->
+
+                </div>
+
+
+                <div class="channel-partner-inner">
+
+                    <div class="row">
+                        <h4>Contact Details</h4>
+                    </div>
+
+                    <div class="channel-partner-content">
+
+                        <div class="row">
+                            <div class="col-md-10 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                   'has-error' : newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus,
                                                                   'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
                                                                  }">
-                                            <label for="">Address</label>
-                                            <input type="text" name="Address" class="form-control" id="channel_address"
-                                                   placeholder="Address Line"
-                                                   data-ng-model="params.address"
-                                                   minlength="5"
-                                                   maxlength="50"
-                                                   input-focus
+                                        <label  for="">Address</label>
+                                        <input type="text" name="Address" class="form-control" id="channel_address"
+                                              
+                                               data-ng-model="params.address"
+                                               minlength="5"
+                                               maxlength="50"
+                                               input-focus
+                                               required />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
+                                            {{ 'Please enter valid address' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10 col-sm-12">
+                                <div class="row" style="margin-left: 0px;">
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">City</label>
+                                            <select ng-model="city1" id="channel_city" ng-change="selectcity()" class="dropdown form-control" required>
+                                                <option value="" selected>City</option>
+                                                <option ng-repeat="cities in city"
+                                                        value="{{cities.city_id}}">
+                                                    {{cities.city_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-6" style="margin-left:3%;">
+                                        <div class="form-group">
+                                            <label for="">State</label>
+                                            <select ng-model="state1" id="channel_state" ng-change="selectstate()" class="dropdown form-control" required>
+                                                <option value="" selected>State</option>
+                                                <option ng-repeat="states in state"
+                                                        value="{{states.state_name}}">
+                                                    {{states.state_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6"  style="margin-left:3%;">
+                                        <div class="form-group">
+                                            <label for="">Pin</label>
+                                            <input type="text" autofocus name="Pin" class="form-control" id="channel_pin"
+                                                   
+                                                   data-ng-model="params.pin"
                                                    required />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
-                                                {{ 'Please enter valid address' | translate }}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-10 col-sm-12">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="">City</label>
-                                                <select ng-model="city1" id="channel_city" ng-change="selectcity()" class="dropdown form-control" required>
-                                                    <option value="" selected>City</option>
-                                                    <option ng-repeat="cities in city"
-                                                            value="{{cities.city_id}}">
-                                                        {{cities.city_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="">State</label>
-                                                <select ng-model="state1"  id="channel_state" ng-change="selectstate()" class="dropdown form-control" required>
-                                                    <option value="" selected>State</option>
-                                                    <option ng-repeat="states in state"
-                                                            value="{{states.state_name}}">
-                                                        {{states.state_name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="">Pin</label>
-                                                <input type="text" autofocus name="Pin" class="form-control" id="channel_pin"
-                                                       placeholder="Pin"
-                                                       data-ng-model="params.pin"
-                                                       required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-10 col-sm-12">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                        <div class="row">
+                            <div class="col-lg-10 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
                                                                'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
                                                               }">
-                                            <label for="">Email Id</label>
-                                            <input type="email" name="email" class="form-control" id="channel_emailme"
-                                                   placeholder="Email Address"
-                                                   data-ng-model="params.email"
-                                                   minlength="1"
-                                                   maxlength="30"
-                                                   input-focus
-                                                   ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
-                                                   required />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
-                                                {{ 'Please enter valid email' | translate }}
-                                            </div>
+                                        <label for="">Email Id</label>
+                                        <input type="email" name="email" class="form-control" id="channel_emailme"
+                                             
+                                               data-ng-model="params.email"
+                                               minlength="1"
+                                               maxlength="30"
+                                               input-focus
+                                               ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+"
+                                               required />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
+                                            {{ 'Please enter valid email' | translate }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-lg-10 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="">Website URL</label>
-                                        <input type="text" autofocus name="website_url" class="form-control"
-                                               placeholder="WebSite URL"
-                                               data-ng-model="params.website_url"
-                                               required />
-                                    </div>
+                        <div class="row">
+                            <div class="col-lg-10 col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Website URL</label>
+                                    <input type="text" autofocus name="website_url" class="form-control"
+                                         
+                                           data-ng-model="params.website_url"
+                                           required />
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                        <div class="row">
+                            <div class="col-lg-5 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                 'has-error' : newForm.office_mobile.$invalid && (!newForm.office_mobile.$pristine || showValid) && !newForm.office_mobile.$focus,
                                                                  'has-success': newForm.office_mobile.$valid && !newForm.office_mobile.$pristine && !newForm.office_mobile.$focus
                                                               }">
-                                            <label for="">Office Phone</label>
-                                            <input type="text" name="office_mobile" class="form-control" id="channel_offpn"
-                                                   placeholder="Office Phone"
-                                                   data-ng-model="params.office_phone"
-                                                   minlength="10"
-                                                   maxlength="10"
-                                                   input-focus
-                                                   required />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.office_mobile.$invalid && (!newForm.office_mobile.$pristine || showValid) && !newForm.office_mobile.$focus">
-                                                {{ 'Please enter valid Phone Number' | translate }}
-                                            </div>
+                                        <label for="">Office Phone</label>
+                                        <input type="text" name="office_mobile" class="form-control" id="channel_offpn"
+                                              
+                                               data-ng-model="params.office_phone"
+                                               minlength="10"
+                                               maxlength="10"
+                                               input-focus
+                                               required />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.office_mobile.$invalid && (!newForm.office_mobile.$pristine || showValid) && !newForm.office_mobile.$focus">
+                                            {{ 'Please enter valid Phone Number' | translate }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="form-group"
-                                             data-ng-class="{
+                            </div>
+                            <div class="col-lg-5 col-sm-6" style="margin-left: 4px;">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
                                                                 'has-error' : newForm.Mobile.$invalid && (!newForm.Mobile.$pristine || showValid) && !newForm.Mobile.$focus,
                                                                  'has-success': newForm.Mobile.$valid && !newForm.Mobile.$pristine && !newForm.Mobile.$focus
                                                               }">
-                                            <label for="">Mobile</label>
-                                            <input type="text" autofocus name="Mobile" class="form-control" id="channel_mob"
-                                                   placeholder="Mobile"
-                                                   data-ng-model="params.mobile"
-                                                   minlength="10"
-                                                   maxlength="10"
-                                                   required />
-                                            <div class="text-danger"
-                                                 data-ng-if="newForm.Mobile.$invalid && (!newForm.Mobile.$pristine || showValid) && !newForm.Mobile.$focus">
-                                                {{ 'Please enter valid Phone Number' | translate }}
-                                            </div>
+                                        <label for="">Mobile</label>
+                                        <input type="text" autofocus name="Mobile" class="form-control" id="channel_mob"
+                                               
+                                               data-ng-model="params.mobile"
+                                               minlength="10"
+                                               maxlength="10"
+                                               required />
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.Mobile.$invalid && (!newForm.Mobile.$pristine || showValid) && !newForm.Mobile.$focus">
+                                            {{ 'Please enter valid Phone Number' | translate }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="field-sep2 clearfix"></div>
+                        <div class="field-sep2 clearfix"></div>
 
-                            <div class="progress" ng-show="showProgress">
-                                <div class="progress-bar" role="progressbar"
-                                     ng-style="{ 'width': uploader.progress+ '%' }"></div>
+                        <div class="progress" ng-show="showProgress">
+                            <div class="progress-bar" role="progressbar"
+                                 ng-style="{ 'width': uploader.progress+ '%' }"></div>
+                        </div>
+
+                        <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+                        <div class="row">
+                            <div class="modal-btn-wrap5 modal-btn-wrap7 clearfix">
+                                <div class="btn-f-c">
+                                    <button class="f-btn" id="btn_channel_sub" type="submit" ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">SUBMIT</button>
+                                </div>
+                                <div class="btn-f-c">
+                                    <button class="f-btn f-btn2" id="btn_channel_cancelme" type="button" ng-click="uploader.clearQueue(); reset()" ng-disabled="!uploader.queue.length">CANCEL</button>
+                                </div>
                             </div>
-
-                             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
-
-
-                            <div class="row">
+                        </div>
+                            <!--<div class="row">
                                 <div class="col-md-7 col-sm-6 col-xs-12">
                                     <button class="f-btn" id="btn_channel_sub" type="submit" ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">SUBMIT</button>
                                 </div>
                                 <div class="col-md-3 col-sm-4 col-xs-12">
                                     <button class="f-btn f-btn2" id="btn_channel_cancelme" type="button" ng-click="uploader.clearQueue(); reset()" ng-disabled="!uploader.queue.length">CANCEL</button>
                                 </div>
-                            </div>
+                            </div>-->
 
 
                         </div><!-- channel-partner-content ended -->
 
-                    </div>
+                </div>
 
 
 
-                    
 
 
-                    
 
-                </form>
-            </div><!-- modal-body ended -->
 
-        </div>
+
+            </form>
+        </div><!-- modal-body ended -->
+
     </div>
-</div><!-- modal ended -->
+</div>
+

@@ -4,10 +4,10 @@ var uploader2_done = false;
 var uploader3_done = false;
 
 
-var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
+var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ProjectPopUpController');
 
-
+    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
@@ -203,7 +203,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         // TODO: Need to get these values dynamically
         var postData = {
-            userid: $cookieStore.get('userId'),
+            user_id: $cookieStore.get('userId'),
             name: $scope.params.name,
             organization_id: $cookieStore.get('orgID'),
             //media_logo_name: uploadResult.Name,
@@ -240,11 +240,63 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
         //alert(postData.media_url);
         apiService.post("Project/ProjectAddress", postData).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             console.log("project done");
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'projectGrid');
             called = true;
+
+            var media = [];
+
+            var postData_fb =
+               {
+
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: loginSession.id,
+                   class_type: "Project",
+                   element_type: "project_facebook",
+                   element_info1: $scope.params.facebook,
+               }
+            media.push(postData_fb);
+
+            var postData_twitter =
+                {
+
+                    user_id: $cookieStore.get('userId'),
+                    organization_id: $cookieStore.get('orgID'),
+                    class_id: loginSession.id,
+                    class_type: "Project",
+                    element_type: "project_twitter",
+                    element_info1: $scope.params.twitter,
+                }
+            media.push(postData_twitter);
+
+            var postData_linkedin =
+               {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: loginSession.id,
+                   class_type: "Project",
+                   element_type: "project_linkedin",
+                   element_info1: $scope.params.linkedin,
+               }
+            media.push(postData_linkedin);
+
+            apiService.post("ElementInfo/Create", media).then(function (response) {
+                var loginSession = response.data;
+                called = true;
+
+            },
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+
+           });
+
         },
         function (error) {
             if (error.status === 400)
@@ -313,38 +365,41 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
     };
 
 
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "AddNewProject",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+    //  Audit log start 
+
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "CreateProject",
+           action_id:  "CreateProject View",
+           details: $scope.params.name + "CreateProjectView",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
+
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
-    $scope.params.project_type = "Apartment";
-    $scope.selectedproject = 0;
+  
+
     //end
+
+
+  //  $scope.params.project_type = "Apartment";
+  //  $scope.selectedproject = 0;
+
 
     Url = "GetCSC/state";
     apiService.get(Url).then(function (response) {
@@ -353,8 +408,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, apiService,
 function (error) {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
+    
 });
 
     $scope.selectstate = function () {
@@ -370,8 +424,7 @@ function (error) {
 function (error) {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
+   
 });
 
     $scope.filterExpression = function (city) {
@@ -394,8 +447,7 @@ function (error) {
 function (error) {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
+   
 });
 
     $scope.selectmonth = function () {
@@ -487,7 +539,10 @@ function (error) {
         project_website: $scope.project_website,
         builder_website: $scope.builder_website,
         organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
+        User_ID: $cookieStore.get('userId'),
+        facebook: $scope.facebook,
+        twitter: $scope.twitter,
+        linkedin: $scope.linkedin,
     };
 
 

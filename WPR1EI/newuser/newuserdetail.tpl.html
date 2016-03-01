@@ -32,8 +32,8 @@
 
                     <div class="project-d02" >Phone No: {{account_phone}} </div>
                     <div class="project-d02" >Email: {{account_email}}</div>
-                    <div class="project-d02">Area: {{area}}</div>
-                    <div class="project-d05">{{status}}</div>
+                    <div class="project-d02">Area:{{area}}</div>
+                    <div class="project-d05" ng-class="{'user_status_active': status=='Active', 'user_status_pending': status=='PendingInvitationAcceptance','user_status_inactive': status=='INACTIVE','user_pending_invitation':status=='PendingInvitation' }">{{status}}</div>
                     <!--<!--<div class="project-d03">Company Website:{{builder_website}}</div>-->
 
                 </div>
@@ -59,7 +59,6 @@
                     <!--<li id="newuser_summary"><a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>-->
                     <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
                     <li id="newuser_role"><a aria-controls="summary" role="tab" data-toggle="tab">ROLES</a></li>
-                    <li id="newuser_device"><a aria-controls="summary" role="tab" data-toggle="tab">DEVICES</a></li>             
                     <li id="newuser_project"><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
                     <li id="newuser_team"><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
                     <li id="newuser_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTY LISTINGS</a></li>
@@ -79,7 +78,7 @@
                                 <div class="pull-left profile-row1">First Name:</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="first_name"></h4>
+                                        <p ng-bind="first_name"></p>
                                     </label>
                                 </div>
                             </div>
@@ -89,7 +88,7 @@
                                     <div class="pull-left profile-row1">Phone No {{$index + 1}}:</div>
                                     <div class="pull-right profile-row2">
                                         <label class="label-group">
-                                            <h4>{{choice.account_phone}}</h4> &nbsp;
+                                            <p>{{choice.account_phone}}</p> 
                                         </label>
                                     </div>
                                 </div>
@@ -99,25 +98,25 @@
                                 <div class="pull-left profile-row1">Role</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="role_name"></h4>
+                                        <p ng-bind="role_name"></p>
                                     </label>
                                 </div>
                             </div>
 
                             <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">City</span></div>
+                                <div class="pull-left profile-row1">City</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="city"></h4>
+                                        <p ng-bind="city"></p>
                                     </label>
                                 </div>
                             </div>
 
                             <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Area</span></div>
+                                <div class="pull-left profile-row1">Area</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="area"></h4>
+                                        <p ng-bind="area"></p>
                                     </label>
                                 </div>
                             </div>
@@ -129,27 +128,27 @@
                                 <div class="pull-left profile-row1">Last Name</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="last_name"></h4>
+                                        <p ng-bind="last_name"></p>
                                     </label>
                                 </div>
                             </div>
 
                             <div class="company-profile-row clearfix" ng-repeat="choice1 in choices1">
-                                <div class="pull-left profile-row1">Email Id {{$index + 1}}:</div>
+                                <div class="pull-left profile-row1">Email Id{{$index + 1}}:</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4>{{choice1.account_email}}</h4> &nbsp;
+                                        <p>{{choice1.account_email}}</p>
                                     </label>
                                 </div>
                             </div>
 
 
 
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Address</div>
+                            <div class="company-profile-row clearfix" ng-repeat="choice in choices2">
+                                <div class="pull-left profile-row1">Street{{$index + 1}}:</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="street_1"></h4>
+                                        <p>{{choice.Street_1}}</p>
                                     </label>
                                 </div>
                             </div>
@@ -158,7 +157,7 @@
                                 <div class="pull-left profile-row1">State</div>
                                 <div class="pull-right profile-row2">
                                     <label class="label-group">
-                                        <h4 ng-bind="state"></h4>
+                                        <p ng-bind="state"></p>
                                     </label>
                                 </div>
                             </div>
@@ -173,11 +172,7 @@
                     </div>
                 </div>
 
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="DeviceGrid" selectable="true">
-
-                    </div>
-                </div>
+                
 
                 <div class="leads_group" id="record-content">
                     <div class="tab-content-title">Projects<a id="team_user" class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
@@ -218,10 +213,10 @@
                     </div>
                 </div>
 
-                <!--<div class="leads_group" id="record-content">
+                <div class="leads_group" id="record-content">
                     <div kendo-grid k-options="AuditGrid" selectable="true">
                     </div>
-                </div>-->
+                </div>
 
 
 

@@ -35,7 +35,7 @@
                                             {{'Enter valid No of Wings' | translate }}
                                         </div>
                                     </div>
-                                   
+                                    <div class="field-md2 field-req">*</div>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                     {{ 'Enter valid Tower Name' | translate }}
                                 </div>
                             </div>
-                           
+                            <div class="field-md2 field-req">*</div>
                         </div>
                     </div>
 
@@ -82,7 +82,7 @@
                                                    minlength="1"
                                                    maxlength="10"
                                                    ng-pattern="/^[0-9]+$/"
-                                                   required />
+                                                />
                                             <span class="area-txt">/sq.ft</span>
                                             <div class="text-danger"
                                                  data-ng-if="addNewForm.bprice.$invalid && (!addNewForm.bprice.$pristine || showValid) && !addNewForm.bprice.$focus">
@@ -110,7 +110,7 @@
                                                minlength="1"
                                                maxlength="10"
                                                ng-pattern="/^[0-9]+$/"
-                                               required />
+                                              />
                                         <div class="text-danger"
                                              data-ng-if="addNewForm.carprice.$invalid && (!addNewForm.carprice.$pristine || showValid) && !addNewForm.carprice.$focus">
                                             {{'Enter valid Car Price' | translate }}
@@ -136,7 +136,7 @@
                                                    minlength="1"
                                                    maxlength="10"
                                                    ng-pattern="/^[0-9]+$/"
-                                                   required />
+                                                />
                                             <span class="area-txt">/sq.ft</span>
                                             <div class="text-danger"
                                                  data-ng-if="addNewForm.floorprice.$invalid && (!addNewForm.floorprice.$pristine || showValid) && !addNewForm.floorprice.$focus">
@@ -165,7 +165,7 @@
                                                    minlength="1"
                                                    maxlength="10"
                                                    ng-pattern="/^[0-9]+$/"
-                                                   required />
+                                                   />
                                             <span class="area-txt">Floor</span>
                                             <div class="text-danger"
                                                  data-ng-if="addNewForm.floorstart.$invalid && (!addNewForm.floorstart.$pristine || showValid) && !addNewForm.floorstart.$focus">
@@ -201,10 +201,10 @@
                                 </div>
                             </div>
                         <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                            </div>
+                            
+                        <label class="custom-file-input">
+                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                        </label>
                         </div>
 
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -227,10 +227,10 @@
                                     </div>
                                 </div>
                         <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
-                            <div class="image-upload-link">
-                                <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                            </div>
+                            
+                        <label class="custom-file-input">
+                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                        </label>
                         </div>
 
                     <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
@@ -253,10 +253,10 @@
                                         </div>
                                     </div>
                          <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>   
-                               <div class="image-upload-link">
-                               <div class="browse-title">Browse</div>
-                               <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
-                             </div>
+                               
+                        <label class="custom-file-input">
+                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                        </label>
                         </div>
                     </div>
 
@@ -264,7 +264,7 @@
 
                                 <div class="row" data-ng-repeat="wing in wings ">
 
-                                    <div class="clearfix">
+                                    <div class="clearfix" style="margin-left:2%">
 
                                         <div class="pull-left f-half-3">
                                             <div class="clearfix">

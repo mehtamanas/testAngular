@@ -54,7 +54,7 @@ angular.module('app.guest.login')
                             return;
                         }
                         Idle.watch();
-                        $state.go('app.dashboard');
+                        $state.go('app.my_day');
                     }
 
                 },

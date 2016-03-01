@@ -61,14 +61,14 @@
                                                                        maxlength="10"
                                                                        ng-pattern="/^[0-9]+$/"
                                                                        input-focus
-                                                                       required />
+                                                                        />
                                                                 <div ng-messages="addNewForm.bedrooms.$error" style="color:maroon" role="alert">
                                                                     <div ng-message="required" data-ng-if="addNewForm.bedrooms.$invalid && (!addNewForm.bedrooms.$pristine || showValid) && !addNewForm.bedrooms.$focus">This field should not be empty </div>
                                                                     <div ng-message="pattern">Enter valid value for bedroom</div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="field-md2 field-req">*</div>
+                                                        <div class="field-md2 field-req"></div>
                                                     </div>
 
                                                 </div>
@@ -91,7 +91,7 @@
                                                                        maxlength="10"
                                                                        ng-pattern="/^[0-9]+$/"
                                                                        input-focus
-                                                                       required />
+                                                                   />
                                                                 <div ng-messages="addNewForm.bathrooms.$error" style="color:maroon" role="alert">
                                                                     <div ng-message="required" data-ng-if="addNewForm.bathrooms.$invalid && (!addNewForm.bathrooms.$pristine || showValid) && !addNewForm.bathrooms.$focus">This field should not be empty </div>
                                                                     <div ng-message="pattern">Enter valid value for bathroom</div>
@@ -99,7 +99,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="field-md2 field-req">*</div>
+                                                        <div class="field-md2 field-req"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,13 +196,13 @@
                                                                    ng-pattern="/^[0-9]+$/"
                                                                    data-ng-model="cark_park"
                                                                    input-focus
-                                                                   required />
+                                                                  />
                                                             <div ng-messages="addNewForm.carkpark.$error" style="color:maroon" role="alert">
                                                                 <div ng-message="required" data-ng-if="addNewForm.carkpark.$invalid && (!addNewForm.carkpark.$pristine || showValid) && !addNewForm.carkpark.$focus">This field should not be empty </div>
                                                                 <div ng-message="pattern">Enter valid value for car park</div>
                                                             </div>
                                                         </div>
-                                                        <div class="field-md2 field-req">*</div>
+                                                        <div class="field-md2 field-req"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,10 +235,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                                                <div class="image-upload-link">
-                                                    <div class="browse-title">Browse</div>
+                                             
+                                                <label class="custom-file-input">
                                                     <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                                              </div>
+                                                </label>
                                            </div>
                                             
 
@@ -266,10 +266,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
-                                                <div class="image-upload-link">
-                                                    <div class="browse-title">Browse</div>
+                                              
+                                                <label class="custom-file-input">
                                                     <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                                                </div>
+                                                </label>
                                               </div>
                                         
                                        </div>

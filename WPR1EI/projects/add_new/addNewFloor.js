@@ -22,6 +22,9 @@ var AddNewFloorController = function ($scope, $state, $cookieStore, apiService, 
        
     });
 
+
+
+
     $scope.showProgress = false;
 
     // FILTERS
@@ -358,7 +361,7 @@ function (error) {
         apiService.post("FloorType/FloorCreate", postData).then(function (response) {
             var loginSession = response.data;
             //    alert("Floor Done...");
-
+            AuditCreate();
             $modalInstance.dismiss();
             var unitupdate = [];
 
@@ -435,36 +438,32 @@ function (error) {
 
 
 
+    //  Audit log start 
 
-    //Audit log start
-    // $scope.params = {
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "Floor View",
+           details: $scope.params.unit_name + "AddNewFloor",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-    //     device_os: "windows10",
-    //     device_type: "mobile",
-    //     device_mac_id: "34:#$::43:434:34:45",
-    //     module_id: "Addnew Project",
-    //     action_id: "Addnew Project View",
-    //     details: "Addnew Project detail",
-    //     application: "angular",
-    //     browser: $cookieStore.get('browser'),
-    //     ip_address: $cookieStore.get('IP_Address'),
-    //     location: $cookieStore.get('Location'),
-    //     organization_id: $cookieStore.get('orgID'),
-    //     User_ID: $cookieStore.get('userId')
-    // };
 
-
-    // AuditCreate = function (param) {
-
-    //     apiService.post("AuditLog/Create", param).then(function (response) {
-    //         var loginSession = response.data;
-
-    //     },
-    //function (error) {
-
-    //});
-    // };
-    // AuditCreate($scope.params);
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+   });
+    };
+  
 
     //end
 

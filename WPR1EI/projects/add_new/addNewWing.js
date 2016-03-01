@@ -367,6 +367,7 @@ function (error) {
        
             apiService.post("WingType/CreateNew_WingsType", postData).then(function (response) {
                 var loginSession = response.data;
+                AuditCreate();
                 var towerupdate = [];
                 for (var i in $scope.floors) {
                     var newTower = {};
@@ -457,34 +458,33 @@ function (error) {
 
 
     //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "AddNewWing",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "Wing View",
+           details: $scope.params.wing_code + "AddWing",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
-
    });
     };
-    AuditCreate($scope.params);
+  
 
     //end
-
 
     $scope.params = {
         wing_code: $scope.wing_code,

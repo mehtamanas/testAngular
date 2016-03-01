@@ -39,14 +39,13 @@
 
           uploader.onSuccessItem = function (fileItem, response, status, headers) {
               // post image upload call the below api to update the database
-              var uploadResult = response[0];
+              $scope.params.media_url = response[0].Location;
 
               // TODO: Need to get these values dynamically
               var postData = {
                   userid: $cookieStore.get('userId'),
                   organization_id: window.sessionStorage.selectedCustomerID,
-                  media_name: uploadResult.Name,
-                  media_url: uploadResult.Location,
+                  media_name: $scope.params.media_url,
                   class_type: "channel Partner Form",
                   media_type: "Logo",
                   first_name: $scope.params.first_name,

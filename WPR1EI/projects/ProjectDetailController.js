@@ -8,8 +8,38 @@
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         var orgID = $cookieStore.get('orgID');
 
+      //  Audit log start 
+     
+         AuditCreate = function () {
+             var postdata =
+            {
+                device_os: $cookieStore.get('Device_os'),
+                device_type: $cookieStore.get('Device'),
+                module_id: "ProjectDetail",
+                action_id: "ProjectDetail View",
+                details:  $scope.image.name + "ProjectDetailView",
+                application: "angular",
+                browser: $cookieStore.get('browser'),
+                ip_address: $cookieStore.get('IP_Address'),
+                location: $cookieStore.get('Location'),
+                organization_id: $cookieStore.get('orgID'),
+                User_ID: $cookieStore.get('userId')
+            };
+
+
+             apiService.post("AuditLog/Create", postdata).then(function (response) {
+                 var loginSession = response.data;
+             },
+        function (error) {
+        });
+         };
+        
+         //end
+
+       
         
 
+        $rootScope.title = 'Dwellar./ProjectDetails';
         $('#btnSave').hide();
         $('#iconEdit').hide();
         $('#btnAdd').hide();
@@ -62,39 +92,8 @@
 
         });
       
-        $rootScope.title = 'Dwellar./ProjectDetails';
-        //Audit log start															
-        $scope.params =
-            {
-                device_os: $cookieStore.get('Device_os'),
-                device_type: $cookieStore.get('Device'),
-                device_mac_id: "34:#$::43:434:34:45",
-                module_id: "Contact",
-                action_id: "Contact View",
-                details: "ProjectDetailsView",
-                application: "angular",
-                browser: $cookieStore.get('browser'),
-                ip_address: $cookieStore.get('IP_Address'),
-                location: $cookieStore.get('Location'),
-                organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
-            };
-
-        AuditCreate = function (param) {
-            apiService.post("AuditLog/Create", param).then(function (response) {
-                var loginSession = response.data;
-            },
-       function (error)
-       {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
-       });
-        };
-        AuditCreate($scope.params);
-
-        //end
+          
+       
 
         callApis();//callall the Apis
 
@@ -1098,8 +1097,7 @@
     {
         if (error.status === 400)
             alert(error.data.Message);
-        else
-            alert("Network issue");
+       
     });
 
 
@@ -1268,14 +1266,12 @@
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.main = response.data;
                 $scope.image = $scope.main[0];
+                AuditCreate();
 
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+          
        } );
 
 
@@ -1289,10 +1285,7 @@
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+           
        });
 
 
@@ -1302,10 +1295,7 @@
                 $scope.built = response.data;
             },
        function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+          
        });
 
             //calling brochure  pdf start
@@ -1314,10 +1304,7 @@
                 $scope.Gallery2 = response.data;
             },
        function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+        
        });
             //calling brochure pdf end
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
@@ -1326,22 +1313,16 @@
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+          
        });
             // calling panoramic views api
-            projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/View_Type_Full_2D";
+            projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Panorma_zip_Full_2D";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.view = response.data;
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+          
        });
 
 
@@ -1352,10 +1333,7 @@
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+           
        });
 
             //calling Floors
@@ -1365,10 +1343,7 @@
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+        
        });
 
             $scope.isVisible = [];
@@ -1389,10 +1364,7 @@
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+          
        });
             //calling  unittype
             projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
@@ -1401,10 +1373,7 @@
             },
    function (error)
    {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+      
    });
 
             //calling getImage
@@ -1414,10 +1383,7 @@
             },
        function (error)
        {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+         
        });
             //calling uploadview
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Upload_View";
@@ -1425,13 +1391,41 @@
                 $scope.UploadView = response.data;
             },
        function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+          
        }
             );
+            Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
 
+            apiService.getWithoutCaching(Url).then(function (response) {
+                data = response.data;
+                $scope.facebook = (_.findWhere(data, { element_type: 'project_facebook' })).element_info1;
+                $scope.facebook = 'https://' + $scope.facebook;
+                $scope.twitter = (_.findWhere(data, { element_type: 'project_twitter' })).element_info1;
+                $scope.twitter = 'https://' + $scope.twitter;
+                $scope.linkedin = (_.findWhere(data, { element_type: 'project_linkedin' })).element_info1;
+                $scope.linkedin = 'https://' + $scope.linkedin;
+                //for (i = 0; i < data.length; i++) {
+                //    if (data[i].element_type == "project_facebook") {
+                //        $scope.facebook = data[i].element_info1;
+                //        $scope.class_id = data[i].class_id;
+                //    }
+                //    if (data[i].element_type == "project_twitter") {
+                //        $scope.twitter = data[i].element_info1;
+                //        $scope.class_id = data[i].class_id;
+                //    }
+                //    if (data[i].element_type == "project_linkedin") {
+                //        $scope.linkedin = data[i].element_info1;
+                //        $scope.class_id = data[i].class_id;
+                //    }
+
+                //}
+
+            },
+            function (error) {
+                if (error.status === 400)
+                    alert(error.data.Message);
+
+            });
 
 
             GetUrl = "Tower/GetTowerSummary?id=" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
@@ -1440,10 +1434,6 @@
                      },
                         function (error)
                         {
-                            if (error.status === 400)
-                                alert(error.data.Message);
-                            else
-                                alert("Network issue");
                         });
 
 
@@ -1470,10 +1460,7 @@
                  },
                              function (error)
                              {
-                                 if (error.status === 400)
-                                     alert(error.data.Message);
-                                 else
-                                     alert("Network issue");
+                                
                              });
              }
 
@@ -1544,10 +1531,6 @@
                 },
                     function (error)
                     {
-                        if (error.status === 400)
-                            alert(error.data.Message);
-                        else
-                            alert("Network issue");
                     }
                 );
             }
@@ -1561,10 +1544,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+               
            });
 
             }
@@ -1578,10 +1558,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+               
            });
             }
 
@@ -1594,10 +1571,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+               
            });
             }
 
@@ -1611,10 +1585,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+              
            });
 
             }
@@ -1626,10 +1597,7 @@
                     $scope.UploadView = response.data;
                 },
            function (error) {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+             
            }
                 );
 
@@ -1644,10 +1612,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+              
            });
             }
 
@@ -1660,10 +1625,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+              
            }
                 );
             }
@@ -1677,25 +1639,19 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+               
            });
 
             }
             else if (args == 'panoramic')
             {
-                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/View_Type_Full_2D";
+                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Panorma_zip_Full_2D";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.view = response.data;
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+              
            });
             }
             else if (args == 'brochure')
@@ -1706,10 +1662,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+               
            });
                 //calling brochure pdf end
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
@@ -1718,11 +1671,34 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+              
            });
+            }else if(args == "ElementInfo"){
+
+                  Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
+
+            apiService.getWithoutCaching(Url).then(function (response) {
+                data = response.data;
+                for (i = 0; i < data.length; i++) {
+                    if (data[i].element_type == "project_facebook") {
+                        $scope.facebook = data[i].element_info1;
+                        $scope.class_id = data[i].class_id;
+                    }
+                    if (data[i].element_type == "project_twitter") {
+                        $scope.twitter = data[i].element_info1;
+                        $scope.class_id = data[i].class_id;
+                    }
+                    if (data[i].element_type == "project_linkedin") {
+                        $scope.linkedin = data[i].element_info1;
+                        $scope.class_id = data[i].class_id;
+                    }
+
+                }
+
+            },
+            function (error) {
+
+            });
             }
             else if (args == 'summery') {
                 projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
@@ -1733,10 +1709,7 @@
                 },
            function (error)
            {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
+               
            });
 
             }

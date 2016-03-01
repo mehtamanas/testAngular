@@ -27,17 +27,18 @@
         <form action="">
 
             <div class="clearfix">
-                <div class="pull-left actions-wrap">
+                <div class="pull-left actions-wrap" >
                     
                     <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
                             ng-change="GetValue();addUser()" >
                     <option value="" selected> ACTION </option>
                         <option ng-repeat="fruit in Fruits" value="{{fruit.Id}}"><i class="fa fa-ban fa-fw"></i>{{fruit.Name}}</option>
                     </select>-->
-                    <div class="pull-left actions-wrap" id="dropfresh">
-                        <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
+                    <div class="pull-left actions-wrap"   id="dropfresh">
+
+                        <select ng-model="ddlFruits" class="form-control actions-wrap" style="cursor:pointer" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
                                 ng-change="GetValue();addUser()" id="dfresh">
-                            <option value="" selected> ACTION </option>
+                            <option  value=""  selected style="cursor:pointer"> ACTION </option>
                         </select>
 
                         <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"

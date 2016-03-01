@@ -31,7 +31,8 @@
                                     <div ng-message="pattern">Enter valid value for wing name</div>
                                 </div>
                             </div>
-                          
+                            <div class="field-md2 field-req">*</div>
+
                         </div>
                     </div>
                     <div class="clearfix">
@@ -55,7 +56,7 @@
                                     <div ng-message="pattern">Enter valid value for Number of Floors </div>
                                 </div>
                             </div>
-                           
+                            <div class="field-md2 field-req">*</div>
                         </div>
                     </div>
 
@@ -80,10 +81,10 @@
                                 </div>
                             </div>
                             <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                                <div class="image-upload-link">
-                                    <div class="browse-title">Browse</div>
-                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                                </div>
+                               
+                            <label class="custom-file-input">
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                            </label>
                             </div>
 
                         <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -106,17 +107,17 @@
                                     </div>
                                 </div>
                             <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
-                                <div class="image-upload-link">
-                                    <div class="browse-title">Browse</div>
-                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                                </div>
+                               
+                            <label class="custom-file-input">
+                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                            </label>
                             </div>
                    </div>
 
                             <h4 class="form-title form-title2">Assign Floor Type</h4>
                             <div class="row" data-ng-repeat="floor in floors ">
 
-                                <div class="clearfix">
+                                <div class="clearfix" style="margin-left:2%">
 
                                     <div class="pull-left f-half-3">
                                         <div class="clearfix">

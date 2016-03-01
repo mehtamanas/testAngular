@@ -9,42 +9,37 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
     $scope.reminder_time = "15 min";
     //$scope.due_date = moment().format();
 
+    //Audit log start               
+
     
-    //Audit log start
-    $scope.params = {
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           
+           module_id: "User",
+           action_id: "User Task View",
+           details:$scope.name+ "task created",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
 
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
-
-
-    AuditCreate = function (param) {
-
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
-
         },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+    
    });
     };
-    AuditCreate($scope.params);
+    
 
-    //end
+
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -86,11 +81,13 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
        // $scope.params.remind_me = $scope.remind_me;
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
-    function (error) {
+    function (error)
+    {
         if (error.status === 400)
             alert(error.data.Message);
         else
@@ -104,10 +101,7 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         $scope.priority = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+      
    });
     $scope.priority1 = "be8072b1-6992-466d-a34b-2fc9d31994a6";
     $scope.selectpriority = function () {
@@ -119,10 +113,7 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         $scope.projects = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+      
    });
 
     $scope.selectproject = function () {
@@ -135,10 +126,7 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         $scope.contacts = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+      
    });
 
     $scope.selectcontact = function () {
@@ -152,10 +140,7 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         $scope.users = response.data;
     },
    function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+     
    });
 
     $scope.selectuser = function () {
@@ -167,10 +152,7 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         $scope.events = response.data;
     },
 function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
+   
 });
 
     $scope.selectevent = function () {

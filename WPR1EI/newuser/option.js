@@ -3,36 +3,33 @@
 var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, $rootScope, $modalInstance, $modal) {
     console.log('OptionPopUpController');
 
-    //Audit log start
-            $scope.params = {
-                device_os: "windows10",
-                device_type: "mobile",
-                device_mac_id: "34:#$::43:434:34:45",
-                module_id: "Addnew Project",
-                action_id: "Addnew Project View",
-                details: "Addnew Project detail",
-                application: "angular",
-                browser: $cookieStore.get('browser'),
-                ip_address: $cookieStore.get('IP_Address'),
-                location: $cookieStore.get('Location'),
-                organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
-            };
-            AuditCreate = function (param) {
+    //Audit log start               
 
-                apiService.post("AuditLog/Create", param).then(function (response) {
-                    var loginSession = response.data;
+   
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "User",
+           action_id: "User View",
+           details: $scope.params.city + "role assigned",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-                },
-           function (error) {
-               if (error.status === 400)
-                   alert(error.data.Message);
-               else
-                   alert("Network issue");
-           });
-            };
-            AuditCreate($scope.params);
 
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+     
+   });
+    };
     //end
 
             $scope.params = {
@@ -53,10 +50,7 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
 
             },
                 function (error) {
-                    if (error.status === 400)
-                        alert(error.data.Message);
-                    else
-                        alert("Network issue");
+                   
                 });
 
         projectUrl = "PropertyListing/CreateProperty";
@@ -66,10 +60,7 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
                 $modalInstance.dismiss();
             },
                function (error) {
-                   if (error.status === 400)
-                       alert(error.data.Message);
-                   else
-                       alert("Network issue");
+                
                });
         };
 
@@ -78,10 +69,7 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
             $scope.cities = response.data;
         },
         function (error) {
-            if (error.status === 400)
-                alert(error.data.Message);
-            else
-                alert("Network issue");
+           
         });
 
         if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
@@ -101,10 +89,7 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
         },
         function (error)
         {
-            if (error.status === 400)
-                alert(error.data.Message);
-            else
-                alert("Network issue");
+           
         });
 
         $scope.selectproject = function () {
@@ -165,6 +150,7 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
 
             apiService.post(Url, usersToBeAddedOnServer).then(function (response) {
                 var loginSession = response.data;
+                AuditCreate();
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
                 $rootScope.$broadcast('REFRESH', 'mainGridOptions');

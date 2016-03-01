@@ -70,7 +70,7 @@ angular.module('newuser')
 
               },
                     function (error) {
-                        alert('Hi1');
+                      
                         // deferred.reject(error);
                         return deferred.promise;
                     });
@@ -87,7 +87,7 @@ angular.module('newuser')
 
               },
                function (error) {
-                   alert('Hi5');
+                  
                    // deferred.reject(error);
                    return deferred.promise;
                });
@@ -115,32 +115,36 @@ angular.module('newuser')
           };
 
           //Audit log start															
-          $scope.params =
-              {
-                  device_os: $cookieStore.get('Device_os'),
-                  device_type: $cookieStore.get('Device'),
-                  device_mac_id: "34:#$::43:434:34:45",
-                  module_id: "Contact",
-                  action_id: "Contact View",
-                  details: "UserView",
-                  application: "angular",
-                  browser: $cookieStore.get('browser'),
-                  ip_address: $cookieStore.get('IP_Address'),
-                  location: $cookieStore.get('Location'),
-                  organization_id: $cookieStore.get('orgID'),
-                  User_ID: $cookieStore.get('userId')
-              };
+          
+          //Audit log start               
 
-          AuditCreate = function (param) {
-              apiService.post("AuditLog/Create", param).then(function (response) {
+     
+          AuditCreate = function () {
+              var postdata =
+             {
+                 device_os: $cookieStore.get('Device_os'),
+                 device_type: $cookieStore.get('Device'),
+                 device_mac_id: "34:#$::43:434:34:45",
+                 module_id: "User",
+                 action_id: "User View",
+                 details: "User View",
+                 application: "angular",
+                 browser: $cookieStore.get('browser'),
+                 ip_address: $cookieStore.get('IP_Address'),
+                 location: $cookieStore.get('Location'),
+                 organization_id: $cookieStore.get('orgID'),
+                 User_ID: $cookieStore.get('userId')
+             };
+
+
+              apiService.post("AuditLog/Create", postdata).then(function (response) {
                   var loginSession = response.data;
               },
          function (error) {
-
+            
          });
           };
-          AuditCreate($scope.params);
-
+          AuditCreate();
           //end
 
           $scope.openSucessfullPopup = function () {
@@ -230,16 +234,13 @@ angular.module('newuser')
                   $state.go($scope.optionPopup())
 
               }
-              else if ($cookieStore.get('Selected Text') == "INACTIVE") {
+              else if ($cookieStore.get('Selected Text') == "Inactive") {
                   apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
                       var loginSession = response.data;
                       $state.go($scope.inactive())
                   },
      function (error) {
-         if (error.status === 400)
-             alert(error.data.Message);
-         else
-             alert("Network issue");
+       
      });
 
               }
@@ -287,15 +288,27 @@ angular.module('newuser')
                           "style": "text-align:center"
                       }
               }, {
-                    field: "Name",
-                        title: "Name",
+                    field: "first_name",
+                        title: "First Name",
 
                       width: "100px",
                       attributes: {
                             "class": "UseHand",
                             "style": "text-align:center"
                        }
-              }, 
+              }, {
+                  field: "last_name",
+                  title: "Last Name",
+                  width: "100px",
+
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+
+                  }
+
+              },
+
 
       {
           field: "account_email",
@@ -310,7 +323,8 @@ angular.module('newuser')
 
       }, {
           // template: '<p class="#:Status==\"Active\"? \"user_status_active\" : \"("#:Status==\"INACTIVATE\"? \"user_status_inactive\" : \"user_status_pending\"#")\"#">#= Status #</p>',
-          template: '<p id="#= Status #" class="#:Status==\"Active\"? \"user_status_active\" : (\"user_status_inactive\")#">#= Status #</p>',
+          //template: '<p id="#= Status #" class="#:Status==\"Active\"? \"user_status_active\" : (\"user_status_inactive\")#">#= Status #</p>',
+          template: '<p id="#= Status #">#= Status #</p>',
           width: "100px",
           title: "Status",
           attributes:
@@ -392,8 +406,8 @@ angular.module('newuser')
           };
           $scope.Fruits = [ {
               Id: 2,
-              Name: 'INACTIVE',
-             
+              Name: 'Inactive',
+              "class":'cursorPointer'
           //}, {
           //    Id: 3,
           //    Name: 'ADD TO TEAM'
@@ -404,6 +418,10 @@ angular.module('newuser')
           }, {
               Id: 3,
               Name: 'ASSIGN ROLES',
+              attributes: {
+                  "class": "UseHand",
+                  "style": "cursor:pointer"
+              }
              
           }
           ];
@@ -574,19 +592,6 @@ angular.module('newuser')
 
               });
           };
-
-          //$scope.openInactivePopup = function () {
-          //    var modalInstance = $modal.open({
-          //        animation: true,
-          //        templateUrl: 'newuser/inactive.html',
-          //        backdrop: 'static',
-          //        controller: InactiveController,
-          //        size: 'md',
-
-
-          //    });
-          //};
-
 
           function clearFilters() {
               var gridData = $("#peopleGrid").data("kendoGrid");

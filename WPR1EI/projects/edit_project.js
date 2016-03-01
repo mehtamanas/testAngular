@@ -4,10 +4,10 @@ var uploader2_done = false;
 var uploader3_done = false;
 
 
-var EditProjectController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope) {
+var EditProjectController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $window, FileUploader, $window, uploadService, $modal, $rootScope) {
     console.log('EditProjectController');
 
-   
+    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     var uploader = $scope.uploader = new FileUploader({
        url: apiService.uploadURL
@@ -239,9 +239,59 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
        
         apiService.post("Project/Edit", postData).then(function (response) {
             var loginSession = response.data;
+            AuditCreate();
            // console.log("project Edit done");
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            var media = [];
+
+            var postData_fb =
+               {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: $scope.seletedCustomerId,
+                   class_type: "Project",
+                   element_type: "project_facebook",
+                   element_info1: $scope.facebook,
+               }
+            media.push(postData_fb);
+
+            var postData_twitter =
+                {
+                    user_id: $cookieStore.get('userId'),
+                    organization_id: $cookieStore.get('orgID'),
+                    class_id: $scope.seletedCustomerId,
+                    class_type: "Project",
+                    element_type: "project_twitter",
+                    element_info1: $scope.twitter,
+                }
+            media.push(postData_twitter);
+
+            var postData_linkedin =
+               {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: $scope.seletedCustomerId,
+                   class_type: "Project",
+                   element_type: "project_linkedin",
+                   element_info1: $scope.linkedin,
+               }
+            media.push(postData_linkedin);
+
+            apiService.post("ElementInfo/Create", media).then(function (response) {
+                var loginSession = response.data;
+        
+                called = true;
+
+            },
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+
+           });
+
 
         },
         function (error) {
@@ -264,6 +314,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
 
             });
             $rootScope.$broadcast('REFRESH', 'summery');
+            $rootScope.$broadcast('REFRESH', 'ElementInfo');
          //   $rootScope.$broadcast('REFRESH1', 'projectImage');
         }
       
@@ -317,38 +368,34 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
     };
 
 
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "EditProject" + $scope.seletedCustomerId,
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
+    //  Audit log start 
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "EditProject",
+           action_id: "EditProject View",
+           details: $scope.params.Project_name + "EditProjectView",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
-   function (error)
-   {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
+   function (error) {
    });
     };
-    AuditCreate($scope.params);
+  
 
-    //end
+    //endss
 
     Url = "GetCSC/city";
 
@@ -360,8 +407,7 @@ function (error)
 {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
+  
 });
 
 
@@ -382,8 +428,7 @@ function (error)
 {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
+    
 });
 
 
@@ -408,8 +453,7 @@ function (error)
 {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
+   
 });
 
     $scope.selectmonth = function () {
@@ -469,6 +513,35 @@ function (error)
     }
 
    
+    Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
+
+    apiService.getWithoutCaching(Url).then(function (response) {
+        data = response.data;
+        for (i = 0; i < data.length; i++) {
+            if (data[i].element_type == "project_facebook") {
+                $scope.facebook = data[i].element_info1;
+                $scope.class_id = data[i].class_id;
+            }
+            if (data[i].element_type == "project_twitter") {
+                $scope.twitter = data[i].element_info1;
+                $scope.class_id = data[i].class_id;
+            }
+            if (data[i].element_type == "project_linkedin") {
+                $scope.linkedin = data[i].element_info1;
+                $scope.class_id = data[i].class_id;
+            }
+
+        }
+
+    },
+    function (error) {
+        if (error.status === 400)
+            alert(error.data.Message);
+
+    });
+
+
+
     projectUrl = "Project/GetByProjectIdnew/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
@@ -495,9 +568,10 @@ function (error)
 {
     if (error.status === 400)
         alert(error.data.Message);
-    else
-        alert("Network issue");
 });
+
+
+  
 
     $scope.params = {
 
@@ -523,7 +597,8 @@ function (error)
         long: $scope.long1,
         possasion_month: $scope.possasion_month,
         organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
+        User_ID: $cookieStore.get('userId'),
+
 
     };
     

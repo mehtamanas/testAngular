@@ -2,14 +2,14 @@
     console.log('AddNewUnitController');
 
     $scope.items = items;
-    $scope.unit_id=items.unit_id;
-    $scope.unit_type_desc= items.unit_type_desc;
-    $scope.carpet_area= items.carpet_area;
-    $scope.super_built_up_area= items.super_built_up_area;
-    $scope.cark_park= items.cark_park;
-    $scope.num_bedrooms= items.num_bedrooms;
-    $scope.num_bathrooms= items.num_bathrooms;
-    $scope.organization_id= $cookieStore.get('orgID');
+    $scope.unit_id = items.unit_id;
+    $scope.unit_type_desc = items.unit_type_desc;
+    $scope.carpet_area = items.carpet_area;
+    $scope.super_built_up_area = items.super_built_up_area;
+    $scope.cark_park = items.cark_park;
+    $scope.num_bedrooms = items.num_bedrooms;
+    $scope.num_bathrooms = items.num_bathrooms;
+    $scope.organization_id = $cookieStore.get('orgID');
     $scope.User_ID = $cookieStore.get('userId');
     $rootScope.title = 'Dwellar./projects';
     $scope.media1 = items.Image_Url;
@@ -19,13 +19,13 @@
     else $scope.title = "Edit Unit Type";
 
 
-     uploader = $scope.uploader = new FileUploader({
+    uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
-         
+
     });
-     uploader1 = $scope.uploader1 = new FileUploader({
+    uploader1 = $scope.uploader1 = new FileUploader({
         url: apiService.uploadURL,
-         
+
     });
 
     $scope.showProgress = false;
@@ -45,7 +45,7 @@
 
     });
 
-     //FILTERS
+    //FILTERS
     uploader1.filters.push({
         name: 'imageFilter1',
         fn: function (item /*{File|FileLikeObject}*/, options) {
@@ -75,23 +75,21 @@
 
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-    //var   uploadResult = response[0];
+        //var   uploadResult = response[0];
         // post image upload call the below api to update the database
-    upload1 = 1;
-    $scope.media1 = response[0].Location;
-      if(upload1==1 && upload2==1)
-
-      {
-          $scope.showProgress = false;
-          $scope.finalpost()
-      }
-      else if (upload1 == 1 && uploader1.queue.length == 0) { // For the first uploader not uploading
-          $scope.showProgress = false;
-          $scope.finalpost();
-      }
+        upload1 = 1;
+        $scope.media1 = response[0].Location;
+        if (upload1 == 1 && upload2 == 1) {
+            $scope.showProgress = false;
+            $scope.finalpost()
+        }
+        else if (upload1 == 1 && uploader1.queue.length == 0) { // For the first uploader not uploading
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
-  
-    
+
+
 
 
 
@@ -99,31 +97,29 @@
     // CALLBACKS
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
-    //var  uploadResult1 = response[0];
+        //var  uploadResult1 = response[0];
         $scope.media2 = response[0].Location;
         // TODO: Need to get these values dynamically
-      upload2 = 1;
-      if (upload1 == 1 && upload2 == 1) {
-          $scope.showProgress = false;
-          $scope.finalpost()
-      }
-      else if (upload2 == 1 && uploader.queue.length == 0) { // For the second uploader not uploading
-          $scope.showProgress = false;
-          $scope.finalpost();
-      }
+        upload2 = 1;
+        if (upload1 == 1 && upload2 == 1) {
+            $scope.showProgress = false;
+            $scope.finalpost()
+        }
+        else if (upload2 == 1 && uploader.queue.length == 0) { // For the second uploader not uploading
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
 
-   
 
 
 
-    $scope.finalpost =function()
-    {
+
+    $scope.finalpost = function () {
         upload1 = 0;
         upload2 = 0;
 
-        if (items.unit_id == undefined)
-        {//add
+        if (items.unit_id == undefined) {//add
             var postData = {
                 user_id: $cookieStore.get('userId'),
                 //name: $scope.params.name,
@@ -146,12 +142,12 @@
                 num_bathrooms: $scope.num_bathrooms
 
             };
-            if (parseInt($scope.super_built_up_area) >= parseInt($scope.carpet_area))
-            {
+            if (parseInt($scope.super_built_up_area) > parseInt($scope.carpet_area)) {
 
-                apiService.post("UnitTypes/CreateNewUnitType", postData).then(function (response)
-                {
+                apiService.post("UnitTypes/CreateNewUnitType", postData).then(function (response) {
                     var loginSession = response.data;
+                    AuditCreate();
+                 
                     //   alert("Unit Type Done");
                     $scope.openSucessfullPopup = function () {
                         var modalInstance = $modal.open({
@@ -165,6 +161,7 @@
                         });
                         $rootScope.$broadcast('REFRESH', 'unit');
                     };
+               
                     $modalInstance.dismiss();
                     $scope.openSucessfullPopup();
                 },
@@ -177,21 +174,20 @@
             }
             else { alert("Please enter saleable area greater than carpet area..."); }
 
-           
+
         }
-        else
-        { //edit
-             var postData = {
+        else { //edit
+            var postData = {
                 //userid: $cookieStore.get('userId'),
                 //name: $scope.params.name,
                 //organization_id: $cookieStore.get('orgID'),
-               // media_name: "",
-                 Image_Url: $scope.media1,
+                // media_name: "",
+                Image_Url: $scope.media1,
                 // media_name: uploadResult1.Name,
-                 Image_Url_Unit1: $scope.media2,
+                Image_Url_Unit1: $scope.media2,
                 //class_type: "Project",
                 //street_2: $scope.params.street_2,
-                    id: items.unit_id,
+                id: items.unit_id,
                 //media_type: "image",
                 //project_type: $scope.params.project_type,
                 //id: window.sessionStorage.selectedCustomerID,
@@ -200,40 +196,39 @@
                 super_built_up_area: $scope.super_built_up_area,
                 cark_park: $scope.cark_park,
                 num_bedrooms: $scope.num_bedrooms,
-               num_bathrooms: $scope.num_bathrooms
+                num_bathrooms: $scope.num_bathrooms
 
             };
-             if (parseInt($scope.super_built_up_area) >=parseInt( $scope.carpet_area))
-             {
-                 apiService.post("UnitTypes/EditUnit", postData).then(function (response)
-                 {
-                     var loginSession = response.data;
-                     //   alert("Unit Type Done");
-                     $scope.openSucessfullPopup = function () {
-                         var modalInstance = $modal.open({
-                             animation: true,
-                             templateUrl: 'newuser/Edited.tpl.html',
-                             backdrop: 'static',
-                             controller: EditsucessfullController,
-                             size: 'md',
+            if (parseInt($scope.super_built_up_area) > parseInt($scope.carpet_area)) {
+                apiService.post("UnitTypes/EditUnit", postData).then(function (response) {
+                    var loginSession = response.data;
+                    AuditCreate1();
+                    //   alert("Unit Type Done");
+                    $scope.openEditSucessfullPopup = function () {
+                        var modalInstance = $modal.open({
+                            animation: true,
+                            templateUrl: 'newuser/Edited.tpl.html',
+                            backdrop: 'static',
+                            controller: EditsucessfullController,
+                            size: 'md',
+                            resolve: { items: { title: "Unit" } }
+                        });
+                        $rootScope.$broadcast('REFRESH', 'unit');
+                    };
+                    $modalInstance.dismiss();
+              
+                    $scope.openEditSucessfullPopup();
+                },
+               function (error) {
+                   if (error.status === 400)
+                       alert(error.data.Message);
+                   else
+                       alert("Network issue");
+               });
+            }
 
-                         });
-                         $rootScope.$broadcast('REFRESH', 'unit');
-                     };
-                     $modalInstance.dismiss();
-                     $scope.openSucessfullPopup();
-                 },
-                function (error)
-                {
-                    if (error.status === 400)
-                        alert(error.data.Message);
-                    else
-                        alert("Network issue");
-                });
-             }
-           
-             else { alert("Please enter saleable area greater than carpet area..."); }
-           
+            else { alert("Please enter saleable area greater than carpet area..."); }
+
 
         }
     }
@@ -242,7 +237,7 @@
     $scope.CanceUpload = function () {
         uploader.cancelAll();
         uploader1.cancelAll();
-        
+
         console.log("UploadCancelled");
     }
 
@@ -262,33 +257,64 @@
     uploader1.onCompleteItem = function (fileItem, response, status, headers) {
         $scope.showProgress = false;
     };
-    
-    //Audit log start															
-    $scope.params =
-        {
-            device_os: $cookieStore.get('Device_os'),
-            device_type: $cookieStore.get('Device'),
-            device_mac_id: "34:#$::43:434:34:45",
-            module_id: "Contact",
-            action_id: "Contact View",
-            details: "AddNewUnit",
-            application: "angular",
-            browser: $cookieStore.get('browser'),
-            ip_address: $cookieStore.get('IP_Address'),
-            location: $cookieStore.get('Location'),
-            organization_id: $cookieStore.get('orgID'),
-            User_ID: $cookieStore.get('userId')
-        };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+    //Audit log start															
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "UnitView",
+           details: $scope.unit_type_desc + "Unit View",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
+
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
-
    });
     };
-    AuditCreate($scope.params);
+
+
+    //end
+    //Audit log start															
+    AuditCreate1 = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           module_id: "Project",
+           action_id: "EditUnitView",
+           details: $scope.unit_type_desc + "Unit View",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId'),
+
+       };
+
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
+            var loginSession = response.data;
+        },
+   function (error) {
+   });
+    };
+
+
+    //end
+
 
     //end
 
@@ -320,11 +346,11 @@
 
 
             if (uploader.queue.length != 0)
-            uploader.uploadAll();
+                uploader.uploadAll();
             if (uploader1.queue.length != 0)
-            uploader1.uploadAll();
+                uploader1.uploadAll();
             if (uploader.queue.length == 0 && uploader1.queue.length == 0)
-             $scope.finalpost();
+                $scope.finalpost();
 
             $scope.showValid = false;
 
