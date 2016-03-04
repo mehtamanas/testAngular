@@ -1,0 +1,26 @@
+﻿<div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-body">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Create New Notes</h4>
+            </div>
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+               
+                 <div class="clearfix">
+                    <div class="form-bx form-bx6" ng-repeat="choice in choices2">
+                        <label for="">Add Notes</label>
+                        <textarea cols="100" rows="5" name="description"
+                                  data-ng-model="choice.text"                                  
+                                  minlength="1"
+                                  maxlength="500"
+                                  input-focus
+                                  required />
+                        <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)" ><a href="javascript:" >Remove</a></div>
+                    </div>
+                </div>
+                
+              </form>
+
+        </div>
+ 
+</div>

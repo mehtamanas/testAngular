@@ -1,0 +1,174 @@
+﻿<div id="add_payment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+
+    <div class="modal-header">
+        <button type="button" class="close" id="btn_addnewpayment_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Add New Charges</h4>
+    </div>
+
+    <div class="modal-body">
+
+        <form class="form-content2 edit-organization-setting" name="newForm" novalidate data-ng-submit="addNew(newForm.$valid)" autocomplete="off">
+
+            <div  class="payment-modal-wrap">
+
+                <div class="clearfix form-bx-ht" ng-repeat="choice in choices2">
+
+                    <div class="container">
+                        <div class="col-md-12">
+                           <div class="row">
+                                <div class="col-md-2" >
+                                    <div class="form-group"
+                                                   data-ng-class="{
+                                                         'has-error' : newForm.cname.$invalid && (!newForm.cname.$pristine || showValid) && !newForm.cname.$focus,
+                                                         'has-success': newForm.cname.$valid && !newForm.cname.$pristine && !newForm.cname.$focus
+                                                                    }">
+                                       <div class="charge">
+                                      <label class="charge_label" for=""><b>Charges Name</b></label>
+                                          <input class="form-control"
+                                             placeholder="Charges Name" name="cname" id="addnewpayement_milestone"
+                                              data-ng-model="choice.Charge_name_Type_name"
+                                               minlength="1"
+                                                ng-pattern="/^[\w -]*$/"
+                                                 input-focus
+                                                 required />
+                                              <div class="text-danger"
+                                                         data-ng-if="newForm.cname.$invalid && (!newForm.cname.$pristine || showValid) && !newForm.cname.$focus">
+                                                         {{ 'Enter valid charge name' | translate }}
+                                                </div>
+                                         </div>
+
+                                     </div> 
+                                </div>
+
+                               
+                                <div class="col-md-2" >
+                                    
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm.ctype.$invalid && (!newForm.ctype.$pristine || showValid) && !newForm.ctype.$focus,
+                                                                        'has-success': newForm.ctype.$valid && !newForm.ctype.$pristine && !newForm.ctype.$focus
+                                                                     }">
+                                            <label for="" class="charge_label"><b>Charge Type</b></label>
+                                            <select ng-model="type1" name="ctype" ng-change="selectctype()" id="charge_type"
+                                                    class="dropdown form-control" required>
+                                                <option value="" selected>Select Charge Type</option>
+                                                <option ng-repeat="type in types"
+                                                        value="{{type.id}}">
+                                                    {{type.name}}
+                                                </option>
+
+                                            </select>
+                                            <div class="text-danger"
+                                                 data-ng-if="newForm.ctype.$invalid && (!newForm.ctype.$pristine || showValid) && !newForm.ctype.$focus">
+                                                {{ 'select valid charge type' | translate }}
+                                            </div>
+
+                                        </div>
+                                    
+                                </div>
+                               
+                                <div class="col-md-1" >
+
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                                         'has-error' : newForm.months.$invalid && (!newForm.months.$pristine || showValid) && !newForm.months.$focus,
+                                                         'has-success': newForm.months.$valid && !newForm.months.$pristine && !newForm.months.$focus
+                                                                    }">
+                                        <div class="charge">
+                                            <label class="charge_label"><b>No of Months</b></label>
+                                            <input class="form-control"
+                                                   placeholder="Months" name="months" id="addnewpayement_milestone"
+                                                   data-ng-model="choice.no_of_months"
+                                                   minlength="1"
+                                                   ng-pattern="/^([1-9][0-9]*)$/"
+                                                   input-focus
+                                                   required />
+                                            <div class="text-danger"
+                                                 data-ng-if="newForm.months.$invalid && (!newForm.months.$pristine || showValid) && !newForm.months.$focus">
+                                                {{ 'Enter valid no of months' | translate }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-2" >
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                                         'has-error' : newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus,
+                                                         'has-success': newForm.Percentage.$valid && !newForm.Percentage.$pristine && !newForm.Percentage.$focus
+                                                                    }">
+                                        <div>
+                                            <label class="charge_label"><b>Category</b></label>
+                                            <div class="area-f charge">
+                                                <input class="form-control"
+                                                       placeholder="Percentage" name="Percentage" id="addnewpayement_percentage"
+                                                       data-ng-model="choice.category_type_name"
+                                                       minlength="1"
+                                                       maxlength="3"
+                                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                                       input-focus
+                                                       required />
+                                                
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus">
+                                                    {{ 'Enter valid percentage' | translate }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-2">
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                                         'has-error' : newForm.cvalue.$invalid && (!newForm.cvalue.$pristine || showValid) && !newForm.cvalue.$focus,
+                                                         'has-success': newForm.cvalue.$valid && !newForm.cvalue.$pristine && !newForm.cvalue.$focus
+                                                                    }">
+                                        <div class="charge">
+                                            <label class="charge_label"><b>Value</b></label>
+                                            <input class="form-control"
+                                                   placeholder="Value" name="cvalue" id="addnewpayement_milestone"
+                                                   data-ng-model="choice.Milestone"
+                                                   minlength="1"
+                                                   ng-pattern="/^([1-9][0-9,./]*)$/"
+                                                   input-focus
+                                                   required />
+                                            <div class="text-danger"
+                                                 data-ng-if="newForm.cvalue.$invalid && (!newForm.cvalue.$pristine || showValid) && !newForm.cvalue.$focus">
+                                                {{ 'Enter valid charge value' | translate }}
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                  
+                                </div>
+                               <div class="col-md-1">
+                                   <div id="add-address" ng-class="{'add-input add-input3': $index==0,'remove-field0': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">Remove</a></div>
+                               </div>
+                            </div>
+
+
+                       
+
+                    </div>
+                        </div>
+            </div>
+                </div>
+
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                <div class="btn-f-c"><button class="f-btn" id="addnewpayement_save" type="submit">SAVE</button></div>
+                <div class="btn-f-c">
+                    <button type="button" class="f-btn f-btn2" id="addnewpayement_cancel" ng-click="cancel()" style="width:400px">CANCEL</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div><!-- modal-body ended -->
+
+
+</div>

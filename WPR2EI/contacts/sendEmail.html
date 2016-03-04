@@ -1,0 +1,97 @@
+﻿
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Send Email</h4>
+        </div>
+
+        <form class="form-content form-content2 edit-organization-setting" name="emailForm" style="text-align: left;" novalidate data-ng-submit="sendEmail(emailForm.$valid)" autocomplete="off">
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">From</label>
+                    <tags-input ng-model="params.emailFrom" input-focus name="from" placeholder="From" required>
+                        <auto-complete source="loadTags()"></auto-complete>
+                    </tags-input>
+                </div>
+                <div ng-messages="emailForm.from.$error" data-ng-if="emailForm.from.$invalid && (!emailForm.from.$pristine || showValid) && !emailForm.from.$focus" style="color:maroon" role="alert">
+                    <div ng-message="required">This field is mandatory</div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">To</label>
+                    <tags-input ng-model="params.emailTo" input-focus name="to" placeholder="To" required>
+                        <auto-complete source="loadTags()"></auto-complete>
+                    </tags-input>
+                </div>
+                <div ng-messages="emailForm.to.$error" data-ng-if="emailForm.to.$invalid && (!emailForm.to.$pristine || showValid) && !emailForm.to.$focus" style="color:maroon" role="alert">
+                    <div ng-message="required">This field is mandatory</div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">CC</label>
+                    <tags-input ng-model="params.emailCc" input-focus name="cc" placeholder="CC">
+                        <auto-complete source="loadTags()"></auto-complete>
+                    </tags-input>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">BCC</label>
+                    <tags-input ng-model="params.emailBcc" input-focus name="bcc" placeholder="BCC">
+                        <auto-complete source="loadTags()"></auto-complete>
+                    </tags-input>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">Select Template</label>
+                    <select ng-model="params.template" name="templateSelect" ng-change="selectTemplate()" class="dropdown form-control text-bold">
+                        <option value="" selected>--Select Template--</option>
+                        <option ng-repeat="template in params.templateList"
+                                value="{{template.id}}">
+                            {{template.template_name}}
+                        </option>
+                    </select>
+                    <div ng-messages="emailForm.templateSelect.$error" data-ng-if="emailForm.templateSelect.$invalid && (!emailForm.templateSelect.$pristine || showValid) && !emailForm.templateSelect.$focus" style="color:maroon" role="alert">
+                        <div ng-message="required">This field is mandatory</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">Email Subject</label>
+                    <input type="text" autofocus name="EmailSubject" class="form-control text-bold" id="agrrement_name"
+                           placeholder="Type subject here"
+                           data-ng-model="params.subject"
+                           input-focus />
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-ng-model="params.bodyText" k-tools="params.tools" resizable="true"></textarea>
+                </div>
+            </div>
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                <div class="btn-f-c">
+                    <button type="submit" class="f-btn" style="margin:1px" ng-click="showValid=true"> SEND </button>
+                </div>
+                <div class="btn-f-c">
+                    <button type="button" class="f-btn2" style="margin:1px" ng-click="cancel()"> CANCEL </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

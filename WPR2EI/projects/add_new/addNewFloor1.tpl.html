@@ -1,0 +1,240 @@
+﻿
+<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+<div class="main-content project add-new">
+    <h4>Add New Floor</h4>
+
+
+
+    <form name="addNewForm" novalidate
+          data-ng-submit="addNew(addNewForm.$valid)"
+          autocomplete="off"
+          class="form-horizontal">
+
+         <div class="form-group" 
+           data-ng-class="{
+                    'has-error' : addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid),
+                    'has-success': addNewForm.tname.$valid && !addNewForm.tname.$pristine
+                 }">
+             
+            <div class="col-xs-10">
+                <label class="control-label">Enter Floor Name</label>
+                <label class="label-group">
+                    <input type="text" autofocus name="tname" class="form-control"
+                           placeholder="Enter Floor Name"
+                           data-ng-model="params.unit_name"
+                           minlength="1"
+                           maxlength="40"
+                           ng-pattern="/^[\w -]*$/"
+                           required />
+                </label>
+                <div class="text-danger"
+                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus">
+                    {{ 'Please enter valid floor name' | translate }}
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div class="form-group" 
+             data-ng-class="{
+                    'has-error' : addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid),
+                    'has-success': addNewForm.floors.$valid && !addNewForm.floors.$pristine
+                 }">
+             
+            <div class="col-xs-10">
+                <label class="control-label">How Many Unit Are there in a Floor?</label>
+                <label class="label-group">
+                    <input type="text" name="floors" class="form-control"
+                           placeholder=" How Many Unit Are there in a Floor"
+                           data-ng-model="params.unit_no"
+                           minlength="1"
+                           maxlength="10"
+                           ng-pattern="/^(0|[1-9][0-9]*)$/"
+                           required />
+                </label>
+                <div class="text-danger"
+                     data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">
+                    {{'Enter Valid Number of Floors' | translate }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="modal-body col-lg-4 col-md-4 col-sm-4" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                <label class="control-label">Upload 2 Floor Plan</label>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="btn btn-primary"><input type="file" nv-file-select="" uploader="uploader"></div>
+                        <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                            <div class="panel-body image-upload-panel">
+                                <div class="row" ng-hide="uploader.queue.length">
+                                    <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                        <span class="page-center">Drag And Drop your file here</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                </div>
+                                <div class="row" ng-show="uploader.queue.length">
+                                    <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                        <div ng-show="uploader.isHTML5"
+                                             ng-thumb="{ file: item._file, height: 200 }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-body col-lg-4 col-md-4 col-sm-4" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
+                <label class="control-label">Upload 3D Zip</label>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="btn btn-primary"><input type="file" nv-file-select="" uploader="uploader1"></div>
+                        <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                            <div class="panel-body image-upload-panel">
+                                <div class="row" ng-hide="uploader1.queue.length">
+                                    <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                        <span class="page-center">Drag And Drop your file here</span>
+                                    </div>
+                                    <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                </div>
+                                <div class="row" ng-show="uploader1.queue.length">
+                                    <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
+                                        <div ng-show="uploader1.isHTML5"
+                                             ng-thumb="{ file: item._file, height: 200 }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div>
+
+            <div class="progress" ng-show="showProgress">
+                <div class="progress-bar" role="progressbar"
+                     ng-style="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+        </div>
+
+        <!--<div ng-repeat="item in items">
+            <input ng-model="item.text" type="text" />
+        </div>-->
+
+
+
+        <h4>Assign floor Type</h4>
+        <div class="row" data-ng-repeat="unit in units ">
+
+
+            <div class="col-sm-6">
+                <label class="control-label">Unit Type</label>
+
+                <!--  <h4><span>{{floor.unit_type_desc}}</span></h4>-->
+                <!--<div class="form-group"
+                     data-ng-class="{
+                'has-error' : addNewForm.floortype.$invalid && (!addNewForm.floortype.$pristine || showValid),
+                'has-success': addNewForm.floortype.$valid && !addNewForm.floortype.$pristine
+             }">-->
+                    <div class="col-xs-10">
+
+                        <label class="label-group">
+                            <input type="text" disabled autofocus name="floortype" class="form-control"
+                                   placeholder="Unit Type"
+                                   data-ng-model="unit.unit_type_desc"
+                                   ng-minlength="1"
+                                   ng-maxlength="10"
+                                   ng-pattern="/^[a-zA-Z\s]+$/"
+                                   input-focus
+                                   required />
+                        </label>
+                        <!--<div class="text-danger"
+                             data-ng-if="addNewForm.floortype.$invalid && (!addNewForm.floortype.$pristine || showValid) && !addNewForm.floortype.$focus">
+                            {{'Please enter valid floor type' | translate }}
+                        </div>-->
+                    </div>
+               
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label" >unit No</label>
+                <!--<h4><span>{{floor.no_of_units}}</span></h4>-->
+                <div class="form-group">
+                    <div class="col-xs-10">
+
+                        <label class="label-group">
+                            <input autofocus name="floorno"  class="form-control"
+                                   placeholder="unit No"
+                                   data-ng-model="unit.no_of_units "
+                                   input-focus
+                                   required />
+                        </label>
+                        <!--<div class="text-danger"
+                             data-ng-if="addNewForm.floorno.$invalid && (!addNewForm.floorno.$pristine || showValid) && !addNewForm.floorno.$focus">
+                            {{'Please enter valid floor nunber' | translate }}
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+            <!--<label class="control-label">Unit Id</label>-->
+            <!--<div class="form-group"
+                 data-ng-class="{
+                'has-error' : addNewForm.floortype.$invalid && (!addNewForm.floortype.$pristine || showValid),
+                'has-success': addNewForm.floortype.$valid && !addNewForm.floortype.$pristine
+             }">-->
+                <div class="col-xs-10">
+
+                    <label class="label-group">
+                        <input type="hidden" disabled autofocus name="floortype" class="form-control"
+                               placeholder="Unit Type"
+                               data-ng-model="unit.id"
+                          
+                               ng-pattern="/^[a-zA-Z\s]+$/"
+                               input-focus
+                               required />
+                    </label>
+                    <!--<div class="text-danger"
+                         data-ng-if="addNewForm.floortype.$invalid && (!addNewForm.floortype.$pristine || showValid) && !addNewForm.floortype.$focus">
+                        {{'Please enter valid floor type' | translate }}
+                    </div>-->
+                </div>
+       
+            </div>
+            <div class="col-sm-6">
+                <div class="col-xs-10">
+                    <button class="btn  btn-default" ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add Unit Type</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="submit" class="btn  btn-default" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll()"
+                        ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length">
+                    <!--<span class="glyphicon glyphicon-upload"></span>--> Save
+                </button>
+                <button class="btn  btn-default" ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Floor Details</button>
+                <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+        <!--<div class="col-sm-2"></div>
+        <!--<button class="btn organization-btn" type="submit">Save</button>
+        <button class="btn  btn-default" type="button" ng-click="reset()">Reset</button>
+        <button class="btn  btn-default" type="button" ng-click="cancel()">Cancel</button>-->
+
+
+
+    </form>
+
+</div>
