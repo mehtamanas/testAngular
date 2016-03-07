@@ -1,0 +1,189 @@
+﻿
+<div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Edit Task</h4>
+            </div>
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+                <div class="clearfix">
+                    <div class="form-group form-bx form-bx8">
+                        <label for="">Task Name</label>
+                        <input type="text" class="form-control text-bold" autofocus name="name"
+                               data-ng-model="params.name"
+                               minlength="1"
+                               maxlength="50"
+                               input-focus
+                               required
+                               ng-pattern="/^[a-zA-Z\s]*$/" />
+                    </div>
+                </div>
+
+
+                <div class="clearfix">
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="" class="hidden-xs" id="addnewproject_state">Task  Type</label>
+                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" required>
+                                <option value="" selected>Follow Up</option>
+                                <option ng-repeat="event in events"
+                                        value="{{event.id}}">
+                                    {{event.type}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Project:</label>
+                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                                    class="dropdown form-control" required>
+                                <option value="" selected>Select Project</option>
+                                <option ng-repeat="project in projects"
+                                        value="{{project.id}}">
+                                    {{project.name}}
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Property:</label>
+                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                                    class="dropdown form-control" required>
+                                <option value="" selected>Select Project</option>
+                                <option ng-repeat="project in projects"
+                                        value="{{project.id}}">
+                                    {{project.name}}
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Person:</label>
+                            <select ng-model="contact1" ng-change="selectcontact()"
+                                    class="dropdown form-control" required>
+                                <option value="" selected>Select Contact</option>
+                                <option ng-repeat="contact in contacts"
+                                        value="{{contact.Contact_id}}">
+                                    {{contact.Contact_Name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Assign To:</label>
+                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                                    class="dropdown form-control" required>
+                                <option value="" selected>Select Project</option>
+                                <option ng-repeat="project in projects"
+                                        value="{{project.id}}">
+                                    {{project.name}}
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Date:</label>
+                            <div class="area-f">
+                                <input class="form-control" name="builder_website" id="addnewproject_builder_website"
+                                       placeholder="end date"
+                                       data-ng-model="params.due_date"
+                                       minlength="1"
+                                       maxlength="30"
+                                       input-focus
+                                       required />
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Time:</label>
+                            <div class="area-f">
+                                <input class="form-control" name="builder_website" id="addnewproject_builder_website"
+                                       placeholder="Start time"
+                                       data-ng-model="params.start_date_time"
+                                       minlength="1"
+                                       maxlength="30"
+                                       input-focus
+                                       required />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Select Time</label>
+                            <select ng-model="reminderTime" class="dropdown form-control" required>
+                                <option value="1" selected>15m</option>
+                                <option value="2">30m</option>
+                                <option value="3">45m</option>
+                                <option value="4">60m</option>
+                                <option value="5">no reminder</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Set Priority</label>
+                            <select ng-model="priority1" ng-change="selectpriority()"
+                                    class="dropdown form-control" required>
+                                <option value="" selected>Select Priority</option>
+                                <option ng-repeat="prio in priority"
+                                        value="{{prio.id}}">
+                                    {{prio.type}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group form-bx form-bx5">
+                        <label for="">Add Notes</label>
+                        <textarea cols="100" rows="5" name="description"
+                                  data-ng-model="params.text"
+                                  minlength="1"
+                                  maxlength="500"
+                                  input-focus
+                                  required />
+                    </div>
+                </div>
+
+                <div class="modal-btn-wrap clearfix">
+
+                    <button type="submit" class="f-btn">Save</button>
+
+                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

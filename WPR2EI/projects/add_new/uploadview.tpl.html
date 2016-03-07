@@ -1,0 +1,98 @@
+﻿<div id="add_new_floor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+
+        <div class="close-btn-wrap">
+            <button type="button" class="close" id="btn_gallery_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        </div>
+
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+            <h4 class="form-title">Upload View</h4>
+
+            <div class="clearfix">
+                <div class="image-upload-wrap">
+                    <div class="image-upload-title">Upload Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                                <div class="panel-body image-upload-panel">
+                                    <div class="row" ng-hide="uploader.queue.length">
+                                        <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                        <!--<div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                            <span class="page-center">Drag And Drop</span>
+                                        </div>-->
+                                        <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                    </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                            <div ng-show="uploader.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName">
+                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                    </div>
+
+                        <label class="custom-file-input">
+                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                        </label>
+                            
+                   
+                </div>
+            </div>
+
+            
+
+            <div ng-repeat="choice in choices2">
+                <div class="form-group"
+                     data-ng-class="{
+                                                                'has-error' : addNew.notes.$invalid && (!addNew.notes.$pristine || showValid) && !addNew.notes.$focus,
+                                                                 'has-success': addNew.notes.$valid && !addNew.notes.$pristine && !addNew.notes.$focus
+                                                              }">
+
+                    <div id="phone-wrap" class="clearfix">
+                        <div id="phone-no" class="form-bx form-bx15">
+                            <label for="">Tags</label>
+                            <input type="text" name="notes" class="form-control" id="contact_phoneno"
+                                   placeholder="Tags"
+                                   data-ng-model="choice.text"
+                                   minlength="1"
+                                   maxlength="100"
+                                   input-focus
+                                   required />
+                            <div class="text-danger"
+                                 data-ng-if="addNew.notes.$invalid && (!addNew.notes.$pristine || showValid) && !addNew.notes.$focus">
+                                {{ 'Please enter valid Notes' | translate }}
+                            </div>
+                        </div>
+                        <div id="upload" ng-class="{'add-input add-input6': $index==0,'remove-field6': $index>0}" ng-click="addNewChoice2($event)" ><a id="contact_remove_phone" href="javascript:">Remove</a></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="progress" ng-show="showProgress">
+                <div class="progress-bar" role="progressbar"
+                     ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+            </div>
+
+            <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+
+            <div class="modal-btn-wrap3 clearfix">
+                <button type="submit" id="gallery_save" class="f-btn"
+                        ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                    Save
+                </button>
+            </div>
+
+        </form>
+    </div><!-- modal-body ended -->
+
+
+</div>

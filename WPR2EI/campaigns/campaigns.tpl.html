@@ -1,0 +1,137 @@
+﻿
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-body">
+
+            <div class="close-btn-wrap">
+                <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <form class="form-content form-content2 edit-organization-setting">
+
+                <h4 class="form-title">Select Campaign Type</h4>
+
+                <div class="select-campaign">
+
+                    <div id="campaign-social-media" class="campaign-row">
+                        <div class="title">Social Media</div>
+                        <ul class="list-unstyled">
+                            <li ng-click="EventFunClick(facebookId)">
+                                <div class="campaign-btn campaign-facebook" >
+                                    <span class="setup-b">SETUP</span>
+                                    <span class="selected"></span>
+                                    <span class="campaign-icon"></span> Facebook
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(twitterId)">
+                                <div class="campaign-btn campaign-twitter" >
+                                    <span class="setup-b">SETUP</span>
+                                    <span class="selected"></span>
+                                    <span class="campaign-icon"></span> Twitter
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(linkedInId)">
+                                <div class="campaign-btn campaign-linkedin">
+                                    <span class="setup-b">SETUP</span>
+                                    <span class="selected"></span>
+                                    <span class="campaign-icon"></span> Linkedin
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="campaign-online-ads" class="campaign-row">
+                        <div class="title">Online Ads</div>
+                        <ul class="list-unstyled">
+                            <li ng-click="EventFunClick(googleAdsId)">
+                                <div class="campaign-btn campaign-ad-google">
+                                    <span class="selected"></span>
+                                    Google Adsense
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(facebookAdsId)">
+                                <div class="campaign-btn campaign-ad-facebook">
+                                    <span class="selected"></span>
+                                    Facebook Ads
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(twitterAdsId)">
+                                <div class="campaign-btn campaign-ad-twitter">
+                                    <span class="selected"></span>
+                                    Twitter Ads
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(linkedInAdsId)">
+                                <div class="campaign-btn campaign-ad-linkedin">
+                                    <span class="selected"></span>
+                                    Linkedin Ads
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(utubeAdsId)">
+                                <div class="campaign-btn campaign-ad-youtube">
+                                    <span class="selected"></span>
+                                    Youtube Ads
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="campaign-others" class="campaign-row">
+                        <div class="title">Others</div>
+                        <ul class="list-unstyled">
+                            <li ng-click="EventFunClick(smsId)">
+                                <div class="campaign-btn campaign-sms">
+                                    <span class="campaign-icon2"></span>
+                                    <span class="selected"></span>
+                                    SMS
+                                </div>
+                            </li>
+                            <li ng-click="EmailFunClick(emailId)">
+                                <div class="campaign-btn campaign-email">
+                                    <span class="campaign-icon2"></span>
+                                    <span class="selected"></span>
+                                    Email
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(tvAdsId)">
+                                <div class="campaign-btn campaign-tv-ads">
+                                    <span class="campaign-icon2"></span>
+                                    <span class="selected"></span>
+                                    TV Ads
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(outdoorId)">
+                                <div class="campaign-btn campaign-outdoor">
+                                    <span class="campaign-icon2"></span>
+                                    <span class="selected"></span>
+                                    Outdoor
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(newspaperId)">
+                                <div class="campaign-btn campaign-newspaper">
+                                    <span class="campaign-icon2"></span>
+                                    <span class="selected"></span>
+                                    Newspaper
+                                </div>
+                            </li>
+                            <li ng-click="EventFunClick(eventsId)">
+                                <div class="campaign-btn campaign-events">
+                                    <span class="campaign-icon2"></span>
+                                    <span class="selected"></span>
+
+                                    Events
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div><!-- select-campaign ended -->
+
+            </form>
+
+        </div><!-- modal-body ended -->
+
+    </div>
+</div>

@@ -1,0 +1,175 @@
+﻿
+
+<div class="container-fluid">
+
+    <div id="header" class="navbar-fixed-top clearfix">
+
+        <div class="pull-left logo">
+            <a href="/">
+                <img src="images/logo.png" alt="" />
+            </a>
+        </div><!-- logo ended -->
+
+        <div class="pull-right user-sec">
+            <div class="dropdown">
+                <!--<a id="user-dropdown" data-target="#" href="http://example.com" data-toggle="dropdown" >-->
+                <span class="avatar badge">{{badge}}</span> <span class="welcome">Welcome</span>  {{loggedUser}}
+                <!--<i class="fa fa-angle-down"></i>
+                </a>-->
+                <!--<ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                  <li><a href=""><i class="fa fa-user"></i> My Profile</a></li>
+                  <li><a href=""><i class="fa fa-cog"></i> Account Setting</a></li>
+                  <li><a href=""><i class="fa fa-sign-out"></i> Signout</a></li>
+                </ul>-->
+            </div>
+        </div><!-- user-sec ended -->
+
+    </div><!-- header ended -->
+
+    <div id="content">
+        <div class="row">
+
+            <div id="sidebar" class="col-xs-12">
+
+                <nav class="navbar navbar-default">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-nav2">
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==0}">
+                                <a href="" ng-click="activeBar=0"><span class="nav-icon nav-19"></span> Dashboards <span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
+                                    <li><a ui-sref="app.my_day" href="">My Day</a></li>
+                                    <!--<li><a href="">Insights</a></li>
+                                    <li><a href="">Campaigns</a></li>-->
+                                </ul>
+                            </li><!--Dashboards end-->
+
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==1}">
+                                <a href="" ng-click="activeBar=1"><span class="nav-icon nav-01"></span> Projects <span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
+                                    <li><a ui-sref="app.project" href="">Current Projects</a></li>
+                                    <li><a href="">Archived Projects</a></li>
+                                     <li><a href="" ui-sref="app.property" >Inventory </a></li>
+                                    <li><a href="">Bookings</a></li>
+                                </ul>
+                            </li><!--Projects-->
+
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==2}">
+                                <a href="" ng-click="activeBar=2"><span class="nav-icon nav-23"></span>Organization <span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
+                                    <li><a ui-sref="app.organization" href="">Company Info </a></li>
+                                    <li><a ui-sref="app.newuser" href="">Users </a></li>
+                                    <li><a ui-sref="app.team" href="">Teams  </a></li>
+                                    <li><a ui-sref="app.billing" href="">Billing </a></li>
+                                    <li><a href="">Subscriptions </a></li>
+                                </ul>
+                            </li><!--Organization-->
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==3}">
+                                <a ui-sref="app.template" href="" ng-click="activeBar=3"><span class="nav-icon nav-21"></span>Templates</a>
+                          
+                            </li><!--Templates-->
+
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==4}">
+                                <a href="" ng-click="activeBar=4"><span class="nav-icon nav-15"></span>Campaigns <span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
+                                    <li><a ui-sref="app.campaigns" href="">Events </a></li>
+                                    <li><a ui-sref="app.campaigns" href="">Email </a></li>
+
+                                </ul>
+                            </li><!--Campaigns-->
+
+                        
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==5}">
+                                <a href=" " ng-click="activeBar=5"><span class="nav-icon nav-15"></span>Channel Partners<span class="nav-no">0 </span><span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
+                                    <li><a href="" ui-sref="app.application">Pending Applications </a></li>
+                                    <li><a href="" ui-sref="app.current">Current Partners</a></li>
+
+                                </ul>
+                            </li><!--Channel Partners-->
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==6}">
+                                <a href="" ng-click="activeBar=6"><span class="nav-icon nav-05"></span> People <span class="nav-no">{{total}}</span> <span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx " ng-repeat="tag in tags">
+
+                                    <li><a href="" ui-sref="app.leads"> Leads <span class="nav-no">{{lead}}</span></a></li>
+                                    <li><a href="" ui-sref="app.contacts">Contacts <span class="nav-no">{{contact}}</span></a></li>
+                                    <li><a href="" ui-sref="app.client">Client <span class="nav-no">{{client}}</span> </a></li>
+                                    <li><a href="" ui-sref="app.company">By Company </a></li>
+                                    <li><a href="" ui-sref="app.tags">By Tag </a></li>
+                                </ul>
+                            </li><!--People -->
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==7}">
+                            <a href="" ui-sref="app.tags"><span class="nav-icon nav-22"></span> Tags</a>
+                            <ul class="nav-sub-bx"></ul>
+                            </li><!--Tags -->
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==8}">
+                                <a href="" ng-click="activeBar=8"><span class="nav-icon nav-05"></span> Activities<span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
+                                    <li><a href="" ui-sref="app.tasks">Tasks</a></li>
+                                    <li><a href="" ui-sref="app.calls">Calls</a></li>
+                                    <li><a href="" ui-sref="app.campaigns">Events</a></li>
+                                   
+                                </ul>
+                            </li><!--Activities -->
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==14}"><a href="" ui-sref="app.setting" ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a><ul class="nav-sub-bx"></ul></li><!--Settings -->
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==9}"><a href="" ui-sref="app.report" ng-click="activeBar=9"><span class="nav-icon nav-03"></span> Reports</a><ul class="nav-sub-bx"></ul></li><!--Reports -->
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==10}"><a href="" ng-click="activeBar=10"><span class="nav-icon nav-09"></span>Notification</a><ul class="nav-sub-bx"></ul></li><!--Notification -->
+
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==11}">
+                                <a href="" ng-click="activeBar=11"><span class="nav-icon nav-08"></span> Security<span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx  ">
+                                    <li><a href="" ui-sref="app.audit">Audit Trail</a></li>
+                                </ul>
+                            </li><!--Security -->
+                            
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==12}"><a href="" ng-click="activeBar=12"><span class="nav-icon nav-09"></span> Support</a><ul class="nav-sub-bx"></ul></li><!--Support -->
+
+
+                            <li ng-class="{'active':activeBar==13}"><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li><!--Signout -->
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+
+                </nav>
+
+            </div><!-- sidebar ended -->
+            <div ui-view></div>
+        </div>
+    </div><!-- content ended -->
+
+</div>
+<script>
+    $('#content #sidebar').mCustomScrollbar({
+        theme: "minimal-dark",
+        scrollbarPosition: "outside",
+        scrollInertia: 200,
+        advanced: { autoExpandHorizontalScroll: true }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+

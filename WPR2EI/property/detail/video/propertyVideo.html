@@ -1,0 +1,23 @@
+<div class="properties-list">
+
+    <div class="add-images-title">
+        Videos
+        <a href="#" class="add-images-btn" ng-click="openVideoUploadPopup()"></a>
+    </div>
+
+    <div class="properties-bx-wrap">
+        <div class="properties-bx" ng-repeat="video in videos">
+            <div class="properties-bx-inner">
+                <div class="properties-img">
+                    <video width="234" controls="controls">
+                        <source ng-src="{{video.media_url_formatted}}" type="video/mp4">
+                    </video>
+                </div>
+                <a href="#" class="properties-close"><i class="fa fa-close"></i></a>
+                <a href="#" class="properties-name">{{:: video.media_name}}</a>
+            </div>
+        </div>
+    </div>
+    <!-- properties-bx-wrap ended -->
+</div>
+<!-- Video ended -->

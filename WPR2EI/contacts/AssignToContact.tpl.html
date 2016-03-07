@@ -1,0 +1,40 @@
+﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+
+<div class="main-content project add-new">
+    <form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
+        <div style="font-size:20px;font-weight:900">Assign To</div>
+        <div class="modal-body" style="padding:10%">
+
+            <!--<label>Option</label>-->
+
+            <div class="form-group form-bx ">
+                <div class="form-group form-bx ">
+                    <div class="form-group"
+                        >
+                        <label for="">Assign To</label>
+                        <select ng-model="user1" name="user" ng-change="selectuser()"
+                                class="dropdown form-control" id="editcontact_assignto" required>
+                            <option value="" selected>Select User</option>
+                            <option ng-repeat="User in users"
+                                    value="{{User.id}}">
+                                {{User.name}}
+                            </option>
+                        </select>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="text-align:center">
+                <button class="btn btn-default  login-btn" id="option_sub" type="submit">Submit</button>
+            </div>
+            <!--<button class="btn organization-btn" type="submit">Submit</button>-->
+        </div>
+    </form>
+
+</div>
+
+

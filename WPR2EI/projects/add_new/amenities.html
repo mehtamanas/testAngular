@@ -1,0 +1,44 @@
+﻿<div id="add-remove_amennities" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    
+
+            <div class="modal-body">
+
+                <div class="close-btn-wrap">
+                    <button type="button" class="close" id="btn_aminities_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')">&times;><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <form class="form-content form-content2 edit-organization-setting">
+
+                    <h4 class="form-title">Add/Remove</h4>
+                    <div class="form-title-sub">Click on the amenities icon to add or remove</div>
+
+                    <div class="society-amenities-wrap clearfix"  >
+                        <ul class="list-unstyled society-amenities-list" >
+                            <li ng-repeat="amenity in orgAmenities ">
+                                <div class="amenities-bg clearfix" >
+
+                                    
+                                    <div class="amenities-btn amenities-add" ng-class="{'amenities-selected': isChecked[$index]}" data-id={{amenity.id}} ng-click='onClick($event);toggleClass($index)' >
+                                        <h4 ng-if={{}}></h4>
+                                    </div>
+                                   
+                                    <span class="amenities-ico amenities-ico07"> <img src="{{amenity.media_url}}" alt="icon" width="45" height="45" /> </span> 
+                                    {{amenity.amenity_type_code}}
+                                       
+                                    <!--<input type='checkbox' data-id={{amenity.id}} class='checkbox' ng-click='onClick($event)' />
+                                    <h4 ng-if={{}}></h4>-->
+                                   
+                                 
+                                  
+                                </div>
+                            </li>
+                          
+                        </ul>
+                    </div><!-- society-amenities-wrap ended -->
+                    <button class="f-btn"  type="submit" id="btn_aminities_save" ng-click="addamenity()" btn-default">Save</button>
+                </form>
+
+            </div><!-- modal-body ended -->
+
+   
+</div><!-- modal ended -->
