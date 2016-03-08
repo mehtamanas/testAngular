@@ -8,6 +8,14 @@
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         var orgID = $cookieStore.get('orgID');
 
+        if (!$rootScope.projects.write) {
+            $('#btnSave').hide();
+            $('#iconEdit').hide();
+            $('#btnAdd').hide();
+        }
+
+
+
       //  Audit log start 
      
          AuditCreate = function () {

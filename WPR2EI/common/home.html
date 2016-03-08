@@ -46,7 +46,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-nav2">
                             <li class="nav-sub-dropdown" ng-class="{'active':activeBar==0}">
-                                <a href="#" ng-click="activeBar=0"><span class="nav-icon nav-19"></span> Dashboards <span class="d-arr"></span></a>
+                                <a href="" ng-click="activeBar=0"><span class="nav-icon nav-19"></span> Dashboards <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx ">
                                     <li><a ui-sref="app.my_day" href="">My Day</a></li>
                                     <!--<li><a href="#">Insights</a></li>
@@ -55,8 +55,8 @@
                             </li><!--Dashboards end-->
 
 
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==1}">
-                                <a href="#" ng-click="activeBar=1"><span class="nav-icon nav-01"></span> Projects <span class="d-arr"></span></a>
+                            <li ng-show="projects.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==1}">
+                                <a href="" ng-click="activeBar=1"><span class="nav-icon nav-01"></span> Projects <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx ">
                                     <li><a ui-sref="app.project" href="">Current Projects</a></li>
                                     <li><a href="">Archived Projects</a></li>
@@ -67,27 +67,23 @@
 
 
                             <li class="nav-sub-dropdown" ng-class="{'active':activeBar==2}">
-                                <a href="#" ng-click="activeBar=2"><span class="nav-icon nav-23"></span>Organization <span class="d-arr"></span></a>
+                                <a href="" ng-click="activeBar=2"><span class="nav-icon nav-23"></span>Organization <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx ">
                                     <li><a ui-sref="app.organization" href="">Company Info </a></li>
-                                    <li><a ui-sref="app.newuser" href="#">Users </a></li>
-                                    <li><a ui-sref="app.team" href="">Teams  </a></li>
-                                    <li><a ui-sref="app.billing" href="">Billing </a></li>
+                                    <li ng-show="users.read"><a ui-sref="app.newuser" href="#">Users </a></li>
+                                    <li ng-show="teams.read"><a ui-sref="app.team" href="">Teams  </a></li>
+                                    <li ng-show="billing.read"><a ui-sref="app.billing" href="">Billing </a></li>
                                     <li><a href="">Subscriptions </a></li>
                                 </ul>
                             </li><!--Organization-->
 
                             <li class="nav-sub-dropdown" ng-class="{'active':activeBar==3}">
-                                <a ui-sref="app.template" href="#" ng-click="activeBar=3"><span class="nav-icon nav-21"></span>Templates <span class="d-arr"></span></a>
-                                <ul class="nav-sub-bx ">
-                                    <li><a ui-sref="app.forms" href="">Forms</a></li>
-                                   
-                                </ul>
+                                <a ui-sref="app.template" href="#" ng-click="activeBar=3"><span class="nav-icon nav-21"></span>Templates</a>
                             </li><!--Templates-->
 
 
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==4}">
-                                <a href="#" ng-click="activeBar=4"><span class="nav-icon nav-15"></span>Campaigns <span class="d-arr"></span></a>
+                            <li ng-show="campaigns.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==4}">
+                                <a href="" ng-click="activeBar=4"><span class="nav-icon nav-15"></span>Campaigns <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx ">
                                     <li><a ui-sref="app.campaigns" href="">Events </a></li>
                                     <li><a ui-sref="app.campaigns" href="">Email </a></li>
@@ -96,19 +92,18 @@
                             </li><!--Campaigns-->
 
                         
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==5}">
-                                <a href=" " ng-click="activeBar=5"><span class="nav-icon nav-15"></span>Channel Partners<span class="nav-no">0 </span><span class="d-arr"></span></a>
+                            <li ng-show="channelPartners.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==5}">
+                                <a href="" ng-click="activeBar=5"><span class="nav-icon nav-15"></span>Channel Partners<span class="nav-no">0 </span><span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx ">
-                                    <li><a href="#" ui-sref="app.application">Pending Applications </a></li>
-                                    <li><a href="#" ui-sref="app.current">Current Partners</a></li>
+                                    <li><a href="" ui-sref="app.application">Pending Applications </a></li>
+                                    <li><a href="" ui-sref="app.current">Current Partners</a></li>
 
                                 </ul>
                             </li><!--Channel Partners-->
 
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==6}">
-                                <a href="" ng-click="activeBar=6"><span class="nav-icon nav-05"></span> People <span class="nav-no">{{total}}</span> <span class="d-arr"></span></a>
-                                <ul class="nav-sub-bx " ng-repeat="tag in tags">
-
+                            <li ng-show="contacts.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==6}">
+                                <a href=""  ><span class="nav-icon nav-05"></span> People <span class="nav-no">{{total}}</span> <span class="d-arr"></span></a>
+                                <ul class="nav-sub-bx ">
                                     <li><a href="" ui-sref="app.leads"> Leads <span class="nav-no">{{lead}}</span></a></li>
                                     <li><a href="" ui-sref="app.contacts">Contacts <span class="nav-no">{{contact}}</span></a></li>
                                     <li><a href="" ui-sref="app.client">Client <span class="nav-no">{{client}}</span> </a></li>
@@ -118,32 +113,32 @@
                             </li><!--People -->
 
                             <li class="nav-sub-dropdown" ng-class="{'active':activeBar==7}">
-                            <a href="#" ui-sref="app.tags"><span class="nav-icon nav-22"></span> Tags</a>
+                            <a href="" ui-sref="app.tags" ng-click="activeBar=7"><span class="nav-icon nav-22"></span> Tags</a>
                             <ul class="nav-sub-bx"></ul>
                             </li><!--Tags -->
 
                             <li class="nav-sub-dropdown" ng-class="{'active':activeBar==8}">
                                 <a href="" ng-click="activeBar=8"><span class="nav-icon nav-05"></span> Activities<span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx ">
-                                    <li><a href="" ui-sref="app.tasks">Tasks</a></li>
+                                    <li ng-show="tasks.read"><a href="" ui-sref="app.tasks">Tasks</a></li>
                                     <li><a href="" ui-sref="app.calls">Calls</a></li>
                                     <li><a href="" ui-sref="app.campaigns">Events</a></li>
                                    
                                 </ul>
                             </li><!--Activities -->
 
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==14}"><a href="#" ui-sref="app.setting" ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a><ul class="nav-sub-bx"></ul></li><!--Settings -->
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==9}"><a href="#" ui-sref="app.report" ng-click="activeBar=9"><span class="nav-icon nav-03"></span> Reports</a><ul class="nav-sub-bx"></ul></li><!--Reports -->
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==10}"><a href="#" ng-click="activeBar=10"><span class="nav-icon nav-09"></span>Notification</a><ul class="nav-sub-bx"></ul></li><!--Notification -->
+                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==14}"><a href="" ui-sref="app.setting" ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a><ul class="nav-sub-bx"></ul></li><!--Settings -->
+                            <li ng-show="reports.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==9}"><a href="" ui-sref="app.report" ng-click="activeBar=9"><span class="nav-icon nav-03"></span> Reports</a><ul class="nav-sub-bx"></ul></li><!--Reports -->
+                            <li ng-show="notifications.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==10}"><a href="" ng-click="activeBar=10"><span class="nav-icon nav-09"></span>Notification</a><ul class="nav-sub-bx"></ul></li><!--Notification -->
 
                             <li class="nav-sub-dropdown" ng-class="{'active':activeBar==11}">
                                 <a href="" ng-click="activeBar=11"><span class="nav-icon nav-08"></span> Security<span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx  ">
-                                    <li><a href="" ui-sref="app.audit">Audit Trail</a></li>
+                                    <li ng-show="auditTrail.read"><a href="" ui-sref="app.audit">Audit Trail</a></li>
                                 </ul>
                             </li><!--Security -->
                             
-                            <li class="nav-sub-dropdown" ng-class="{'active':activeBar==12}"><a href="#" ng-click="activeBar=12"><span class="nav-icon nav-09"></span> Support</a><ul class="nav-sub-bx"></ul></li><!--Support -->
+                            <li ng-show="support.read" class="nav-sub-dropdown" ng-class="{'active':activeBar==12}"><a href="" ng-click="activeBar=12"><span class="nav-icon nav-09"></span> Support</a><ul class="nav-sub-bx"></ul></li><!--Support -->
 
 
                             <li ng-class="{'active':activeBar==13}"><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i> Signout</a></li><!--Signout -->

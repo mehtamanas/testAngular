@@ -1,7 +1,15 @@
 
 angular.module('contacts')
 .controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope)
-    {
+{
+
+    if (!$rootScope.contacts.write) {
+        $('#btnSave').hide();
+        $('#iconEdit').hide();
+        $('#btnAdd').hide();
+    }
+
+
         console.log('ContactDetailControllerdm');
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;

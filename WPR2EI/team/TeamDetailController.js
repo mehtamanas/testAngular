@@ -8,33 +8,11 @@
         $rootScope.title = 'Dwellar./TeamDetails';
         var orgID = $cookieStore.get('orgID');
 
-       // //Audit log start
-       // $scope.params = {
-       //     device_os: "windows10",
-       //     device_type: "mobile",
-       //     device_mac_id: "34:#$::43:434:34:45",
-       //     module_id: "TeamDetail",
-       //     action_id: "TeamDetail View",
-       //     details: "TeamDetail",
-       //     application: "angular",
-       //     browser: $cookieStore.get('browser'),
-       //     ip_address: $cookieStore.get('IP_Address'),
-       //     location: $cookieStore.get('Location'),
-       //     organization_id: $cookieStore.get('orgID'),
-       //     User_ID: $cookieStore.get('userId')
-       // };
-       // AuditCreate = function (param) {
-
-       //     apiService.post("AuditLog/Create", param).then(function (response) {
-       //         var loginSession = response.data;
-
-       //     },
-       //function (error) {
-       //});
-       // };
-       // AuditCreate($scope.params);
-
-        //end
+        if (!$rootScope.teams.write) {
+            $('#btnSave').hide();
+            $('#iconEdit').hide();
+            $('#btnAdd').hide();
+        }
 
         TeamUrl = "Team/GetById/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
         apiService.get(TeamUrl).then(function (response) {

@@ -3,8 +3,17 @@ angular.module('contacts')
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window)
     {
 
+        if (!$rootScope.contacts.write) {
+            $('#btnSave').hide();
+            $('#iconEdit').hide();
+            $('#btnAdd').hide();
+        }
+
+
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         console.log('ContactListController');
+
+
 
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
@@ -446,7 +455,7 @@ angular.module('contacts')
             var id = d.Contact_Id;
             window.sessionStorage.selectedCustomerID = id;
             $cookieStore.put('company_name', d.company);
-            $cookieStore.put('lead_name', d.Contact_First_Name);
+            $cookieStore.put('lead_name', d.Name);
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/company/followUp.html',
