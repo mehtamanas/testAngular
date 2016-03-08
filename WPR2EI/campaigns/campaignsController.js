@@ -6,6 +6,13 @@
         var userID = $cookieStore.get('userId');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
+        if (!$rootScope.campaigns.write) {
+            $('#btnSave').hide();
+            $('#iconEdit').hide();
+            $('#btnAdd').hide();
+        }
+
+
         //Audit log start               
         AuditCreate = function () {
             var postdata =

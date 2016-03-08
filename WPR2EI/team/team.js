@@ -7,10 +7,12 @@ angular.module('team')
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
 
-        $('#btnSave').hide();
-        $('#iconEdit').hide();
-        $('#btnAdd').hide();
-
+        if (!$rootScope.teams.write)
+        {
+            $('#btnSave').hide();
+            $('#iconEdit').hide();
+            $('#btnAdd').hide();
+        }
 
 
         security.isAuthorized().then(function (response) {
@@ -156,7 +158,7 @@ angular.module('team')
                 type: "json",
                 transport: {
                     //read: apiService.baseUrl +"Team/GetTeamDetails/" + orgID
-                    read: apiService.baseUrl +"Team/GetTeamDetails/" + userID
+                    read: apiService.baseUrl +"Team/GetTeamDetails?ID=" + userID
                     
                 },
                 pageSize: 20

@@ -19,8 +19,8 @@
                     <div class="content-inner-bx">                        
                         <div class="company-profile-h">
                             
-                            <div id ="btnAdd"class="clearfix">
-                                <a ng-click="openEditOrgPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a>
+                            <div class="clearfix">
+                                <a id="iconEdit" ng-click="openEditOrgPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a>
                                 <div class="pull-left company-profile-photo">
                                     <img src="{{data.media_url}}" alt="" width="218" height="160" class="img-responsive" />
                                    
@@ -219,14 +219,7 @@
                                         </label>
                                     </div>
                                 </div>  
-                                <div class="company-profile-row clearfix">
-                                    <div class="pull-left profile-row1">Year:</div>
-                                    <div class="pull-right profile-row2">
-                                        <label class="label-group" ng-bind="fiscal_year">
-                                            <!--<h5 ng-bind="language"></h5>-->
-                                        </label>
-                                    </div>
-                                </div>                              
+                                                          
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Time Zone:</div> 
                                     <div class="pull-right profile-row2">
