@@ -20,7 +20,7 @@
 
                 <div class="project-detail-photo">
 
-                    <img src={{media_url}} alt="" class="img-responsive" />
+                    <img src={{media_url}} alt="" class="image1" />
                 </div>
 
                 <div class="project-detail-txt">
@@ -33,7 +33,7 @@
                     <div class="project-d02" >Phone No: {{account_phone}} </div>
                     <div class="project-d02" >Email: {{account_email}}</div>
                     <div class="project-d02">Area: {{area}}</div>
-                    <div class="project-d05">{{status}}</div>
+                    <div class="" ng-class="{'user_status_active': status=='Active', 'user_status_pending': status=='PendingInvitationAcceptance','user_status_inactive': status=='Inactive','user_pending_invitation':status=='PendingInvitation' }"></div>
                     <!--<!--<div class="project-d03">Company Website:{{builder_website}}</div>-->
 
                 </div>

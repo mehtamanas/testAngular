@@ -2,6 +2,7 @@
 .controller('templateCtrl', function ($scope, $modal, apiService, $cookieStore) {
     console.log('templateCtrl');
     $scope.title = 'Dwellar Template';
+    $scope.templateAction = 'no_action';
 
     $scope.openCreateTemplate = function (args) {
         
@@ -76,8 +77,80 @@
         dataSource: {
             type: "json",
             transport: {
+                read: apiService.baseUrl + "Template/GetTemplateGrid/" + $cookieStore.get('orgID') + '/6978399d-7ee7-42a6-85dd-6fec5b7312c2'
+            },
+            pageSize: 5,
+            refresh: true,
+            schema: {
+                model: {
+                    fields: {
+                        date: { type: "date" }
+                    }
+                }
+            }        
+        },
+        groupable: true,
+        sortable: true,
+        selectable: "multiple",
+        reorderable: true,
+        resizable: true,
+        filterable: true,
+        columnMenu: {
+            messages: {
+                columns: "Choose columns",
+                filter: "Apply filter",
+                sortAscending: "Sort (asc)",
+                sortDescending: "Sort (desc)"
+            }
+        },
+        pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+        },
+        columns: [{
+                  template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+                  title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                  width: "60px",
+                  attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "template_name",
+                    title: "Name",
+                    width: "120px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "subject",
+                    title: "Subject",
+                    width: "120px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
 
-                read: apiService.baseUrl + "Template/GetTemplateGrid/" + $cookieStore.get('orgID')
+                }, {
+                    field: "description",
+                    title: "Html",
+                    width: "120px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                } ]
+
+            };
+
+    $scope.agreementTemplateGrid = {
+        dataSource: {
+            type: "json",
+            transport: {
+
+                read: apiService.baseUrl + "Template/GetTemplateGrid/" + $cookieStore.get('orgID') + '/fd87a619-6acc-4689-b5ff-e76794d6154a'
 
             },
             pageSize: 5,
@@ -91,7 +164,7 @@
 
                     }
                 }
-            }        
+            }
         },
         groupable: true,
         sortable: true,
@@ -117,7 +190,7 @@
             field: "description",
             title: "Html",
             width: "120px",
-        } ]
+        }]
 
     };
 
@@ -161,7 +234,12 @@
         }
     });
 
-   
+    $scope.$on('REFRESH1', function (event, args) {
+        if (args == 'EmailTemplateGrid') {
+            $('.k-i-refresh').trigger("click");
+        }
+        $scope.templateAction = 'no_action';
+    });
 
     //sheetal's code starts
 
@@ -311,6 +389,75 @@ function (error) {
             size: 'md',
             resolve: { items: { title: "form" } }
         });
+    }
+
+    //delete code start
+
+
+    $scope.openConfirmation = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'contacts/confirmnotes.tpl.html',
+            backdrop: 'static',
+            controller: confirmEmailController,
+            size: 'md',
+            resolve: { items: { title: "Email Template" } }
+
+        });
+
+    }
+
+    $scope.chooseAction = function () {
+        var allGridElements = $(".checkbox").toArray();
+        var allCheckedElement = _.filter(allGridElements, function (o)
+        { return o.checked });
+        allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+        $cookieStore.remove('checkedIds');
+        $cookieStore.put('checkedIds', allCheckedIds);
+
+        if (allCheckedIds.length > 0) {
+
+            if ($scope.templateAction === "no_action") {
+
+            }
+            else if ($scope.templateAction === "add_tag") {
+                $state.go($scope.tagOptionPopup());
+            }
+            else if ($scope.templateAction === "assign_to") {
+                $state.go($scope.assignToUpPopup());
+            }
+            else if ($scope.templateAction === "delete") {
+                var templateDelete = [];
+                for (var i in allCheckedIds) {
+                    var template = {};
+                    template.id = allCheckedIds[i];
+                    template.organization_id = $cookieStore.get('orgID');
+                    templateDelete.push(template);
+                }
+                $cookieStore.put('templateDelete', templateDelete);
+                $scope.openConfirmation();
+            }
+        }
+    }
+
+    $scope.checkALL = function (e) {
+        if ($('.check-box:checked').length > 0)
+            $('.checkbox').prop('checked', true);
+        else
+            $('.checkbox').prop('checked', false);
+    };
+
+
+    $scope.check = function (e, data) {
+        var allListElements = $(".checkbox").toArray();
+        for (var i in allListElements) { // not all checked
+            if (!allListElements[i].checked) {
+                $('#checkAll').prop('checked', false);
+                break;
+            }
+            if (i == allListElements.length - 1) // if all are checked manually
+                $('#checkAll').prop('checked', true);
+        }
     }
 
 });

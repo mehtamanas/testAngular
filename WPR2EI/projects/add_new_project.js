@@ -121,23 +121,9 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // alert("uploader called");
         $scope.media_url1 = response[0].Location;
-       
-        upload = 1;
+        uploader_done = true;
 
-        if (upload == 1 && uploader1.queue.length == 1 && uploader2.queue.length == 1 && uploader3.queue.length == 1) {
-            $scope.showProgress = false;
-            $scope.finalpost();
-        }
-        else if (upload == 1 && upload1 == 1 && uploader2.queue.length == 0 && uploader3.queue.length == 0) {
-            $scope.showProgress = false;
-            $scope.finalpost();
-        }
-        else if (upload == 1 && upload1 == 1 && upload2 == 1 && uploader3.queue.length == 0) {
-            $scope.showProgress = false;
-            $scope.finalpost();
-
-        }
-        else if (upload == 1 && upload1 == 1 && upload2 == 1 && upload3 == 1) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -151,8 +137,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         // post image upload call the below api to update the database
         console.log("uploader1 called");
         $scope.media_url2 = response[0].Location;
-        upload1 = 1;
-      
+        uploader1_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
 
     // CALLBACKS
@@ -160,8 +149,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         // post image upload call the below api to update the database
         console.log("uploader2 called");
         $scope.media_url3 = response[0].Location;
-        upload2 = 1;
-       
+        uploader2_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
 
 
@@ -171,8 +163,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         // post image upload call the below api to update the database
         console.log("uploader3 called");
         $scope.media_url4 = response[0].Location;
-        upload3 = 1;
-      
+        uploader3_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
 
 
@@ -182,12 +177,6 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         if (called == true) {
             return;
         }
-
-        upload = 0;
-        upload1 = 0;
-        upload2 = 0;
-        upload3 = 0;
-     
 
         var address = [];
 
@@ -255,71 +244,70 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'projectGrid');
             called = true;
+            uploader_done = false;
+            uploader1_done = false;
+            uploader2_done = false;
+            uploader3_done = false;
 
             var media = [];
 
-            if ($scope.params.facebook != undefined) {
-                var postData_fb =
-                   {
+            var postData_fb =
+               {
 
-                       user_id: $cookieStore.get('userId'),
-                       organization_id: $cookieStore.get('orgID'),
-                       class_id: loginSession.id,
-                       class_type: "Project",
-                       element_type: "project_facebook",
-                       element_info1: $scope.params.facebook,
-                   }
-                media.push(postData_fb);
-            }
-            if ($scope.params.twitter != undefined) {
-                var postData_twitter =
-                    {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: loginSession.id,
+                   class_type: "Project",
+                   element_type: "project_facebook",
+                   element_info1: $scope.params.facebook,
+               }
+            media.push(postData_fb);
 
-                        user_id: $cookieStore.get('userId'),
-                        organization_id: $cookieStore.get('orgID'),
-                        class_id: loginSession.id,
-                        class_type: "Project",
-                        element_type: "project_twitter",
-                        element_info1: $scope.params.twitter,
-                    }
-                media.push(postData_twitter);
-            }
-            if ($scope.params.twitter != undefined) {
-                var postData_linkedin =
-                   {
-                       user_id: $cookieStore.get('userId'),
-                       organization_id: $cookieStore.get('orgID'),
-                       class_id: loginSession.id,
-                       class_type: "Project",
-                       element_type: "project_linkedin",
-                       element_info1: $scope.params.linkedin,
-                   }
-                media.push(postData_linkedin);
-            }
-            if (media.length>0) {
-                apiService.post("ElementInfo/Create", media).then(function (response) {
-                    var loginSession = response.data;
-                    called = true;
+            var postData_twitter =
+                {
 
-                },
-               function (error) {
-                   if (error.status === 400)
-                       alert(error.data.Message);
-                   else
-                       alert("Network issue");
+                    user_id: $cookieStore.get('userId'),
+                    organization_id: $cookieStore.get('orgID'),
+                    class_id: loginSession.id,
+                    class_type: "Project",
+                    element_type: "project_twitter",
+                    element_info1: $scope.params.twitter,
+                }
+            media.push(postData_twitter);
 
-               });
-            }
+            var postData_linkedin =
+               {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: loginSession.id,
+                   class_type: "Project",
+                   element_type: "project_linkedin",
+                   element_info1: $scope.params.linkedin,
+               }
+            media.push(postData_linkedin);
+
+            apiService.post("ElementInfo/Create", media).then(function (response) {
+                var loginSession = response.data;
+                called = true;
+
             },
-            function (error) {
-                if (error.status === 400)
-                    alert(error.data.Message);
-                else
-                  
-                    alert("Network issue");
-            
-            });
-        
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+
+           });
+
+        },
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
+
+
 
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({

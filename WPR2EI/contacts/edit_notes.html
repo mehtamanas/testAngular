@@ -4,17 +4,22 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Edit Notes</h4>
             </div>
-            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+            <form class="form-content form-content2 edit-organization-setting" style="text-align:left" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
                 <div class="clearfix">
-                    <div class="form-group form-bx form-bx5">
-                        <label for="">Add Notes</label>
-                        <textarea cols="100" rows="5" name="description"
-                                  data-ng-model="params.text"
-                                  minlength="1"
-                                  maxlength="500"
-                                  input-focus
-                                  required />
+
+                    <div class="form-group form-bx form-bx8">
+                        <label for="">From</label>
+                        <tags-input ng-model="params.Name" input-focus name="from" placeholder="Contacts">
+                            <auto-complete source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+
+                    <div class="form-bx form-bx5">
+                        <label for="">Add Note</label>
+
+                        <textarea id="organization_desc" autofocus kendo-editor k-ng-model="params.text"></textarea>
+
                     </div>
                 </div>
 

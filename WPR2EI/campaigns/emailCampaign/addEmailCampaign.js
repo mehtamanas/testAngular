@@ -5,9 +5,9 @@
         //$scope.start_date1 = new Date().toISOString();
         //console.log(new Date().toDateString());
         window.sessionStorage.selectedorgid = $cookieStore.get('orgID'); 
-        $scope.name = $cookieStore.get('Name');
-        $scope.start_date1 = $cookieStore.get('Start_Date');
-        $scope.project1 = $cookieStore.get('project_id');
+        //$scope.name = $cookieStore.get('Name');
+    // $scope.start_date1 = $cookieStore.get('Start_Date');
+      //$scope.project1 = $cookieStore.get('project_id');
 
         //Audit log start               
         AuditCreate = function () {
@@ -58,9 +58,24 @@
         $scope.user = function () {
             $state.go('app.campaigns');
         }
-        $scope.cancel = function () {
+        $scope.cancel = function ()
+        {
+            
+            $cookieStore.remove('Name');
+            $cookieStore.remove('End_Date');
+            $cookieStore.remove('Address');
+            $cookieStore.remove('Start_Date');
+            $cookieStore.remove('Budget');
+            $cookieStore.remove('No_of_leads');
+            $cookieStore.remove('project_id');
+            $cookieStore.remove('Sales');
+            $cookieStore.remove('channel_type_id');
+            $cookieStore.remove('campaign_ID');
             $state.go('app.campaigns');
         }
+
+
+
 
         $scope.params = {
             name: $scope.name,
@@ -76,8 +91,10 @@
             $scope.showValid = true;
             if (isValid) {
                 var date = moment($scope.params.start_date1, 'MMMM DD, YYYY hh:mm A')._d
-                //var date = moment($scope.start_date1, 'DD/MM/YYYY hh:mm A')._d
-                 //date = new Date(date).toISOString();
+
+                var htmldate = $scope.params.start_date1;
+                
+                $cookieStore.put('htmldate1', htmldate);
                 $cookieStore.put('Name', $scope.params.name);
                 $cookieStore.put('End_Date', $scope.params.end_date);
                 $cookieStore.put('Address', $scope.params.Street_1);
@@ -92,4 +109,8 @@
 
         }
 
+        $scope.params.name = $cookieStore.get('Name');
+        $scope.params.start_date1 = $cookieStore.get('Start_Date');
+        $scope.project1 = $cookieStore.get('project_id');
+      
     });

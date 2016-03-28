@@ -5,9 +5,13 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
     console.log('AddNewNotesController');
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
+    $scope.params;
+
     $scope.contact1 = $scope.seletedCustomerId;
+
+    var userID = $cookieStore.get('userId');
     //Audit log start
-  
+
     AuditCreate = function () {
         var postdata =
        {
@@ -16,7 +20,7 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
            //device_mac_id: "34:#$::43:434:34:45",
            module_id: "Contact",
            action_id: "Contact View",
-           details: "AddNewNote",
+           details: "Added new note",
            application: "angular",
            browser: $cookieStore.get('browser'),
            ip_address: $cookieStore.get('IP_Address'),
@@ -36,59 +40,49 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
            alert("Network issue");
    });
     };
-   
+
     //end
+    $scope.contactList = [];
 
-
-    $scope.choices = [{ id: 'choice1' }];
-
-    $scope.addNewChoice = function () {
-        var newItemNo = $scope.choices.length + 1;
-        $scope.choices.push({ 'id': 'choice' + newItemNo });
-    };
-
-
-    $scope.choices2 = [{ id: 'choice1' }];
-    $(document).on("click", ".remove-field", function () {
-        $(this).parent().remove();
-    });
-
-    $scope.choices2 = [{ id: 'choice1' }];
-    $scope.addNewChoice2 = function (e) {
-        var classname = e.currentTarget.className;
-        if (classname == 'remove-field') {
-           
-            $scope.choices2.pop();
+    apiService.get("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+        data = response.data;
+        contactsName = _.pluck(data, 'Name');
+        contactId = _.pluck(data, 'id');
+        for (i = 0; i < contactsName.length; i++) {
+            $scope.contactList.push({'text': contactsName[i].toString(), 'id': contactId[i].toString()});
         }
-        else if ($scope.choices2.length) {
-            var newItemNo2 = $scope.choices2.length + 1;
-            $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
-        }
+    },function (error) {
+            });
 
-    };
+
+    $scope.loadTags = function (query) {
+        return $scope.contactList;
+    }
+
+
+
+
 
     projectUrl = "Notes/CreateMultipleNotes";
     ProjectCreate = function () {
         var schemeupdate = [];
-        for (var i in $scope.choices2) {
-           
-
-           var newscheme = {};
-
+ 
+            var newscheme = {};
+            newscheme.attention = _.pluck($scope.params.Name, 'text').join(','),
             newscheme.user_id = $cookieStore.get('userId');
             newscheme.organization_id = $cookieStore.get('orgID');
-            newscheme.text = $scope.choices2[i].text;
+            newscheme.text = $scope.params.description;
             newscheme.class_id = window.sessionStorage.selectedCustomerID;
             newscheme.class_type = "Person";
             schemeupdate.push(newscheme);
-        }
+        
 
         apiService.post(projectUrl, schemeupdate).then(function (response) {
             var choices2 = response.data;
             AuditCreate();
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
-            
+
             $rootScope.$broadcast('REFRESH', 'NotesGrid');
         },
 function (error) {

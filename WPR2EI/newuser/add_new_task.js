@@ -194,19 +194,16 @@ function (error) {
     }
 
     $scope.addNew = function (isValid) {
+        $scope.isDisabled = true;
         $scope.showValid = true;
         if (isValid) {
-            if ($scope.remind_me === true) {
+            if ($scope.remind_me === true)
                 remind_me = "1";
-                //$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
-                //$scope.params.reminder_datetime = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss').subtract($scope.params.reminder_datetime, 'minutes')._d;
-                //$scope.params.reminder_datetime = moment($scope.params.reminder_datetime, "MM-DD-YYYY HH:");
-                //$scope.due_date = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss')._d;
-                 $scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
-                $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.params.reminder_datetime, 'minutes')._d;
-                var dDate= moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
-            }
-            else remind_me = "0";
+            else
+                remind_me = "0";
+
+            $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.reminder_time, 'minutes')._d;
+            var dDate = moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
 
 
             $scope.params = {
@@ -220,17 +217,16 @@ function (error) {
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
                 assign_user_id: $scope.user1,
-              //end_date_time: $scope.end_date_time,
                 task_type_id: $scope.event1,
                 text: $scope.text,
                 remind_me: remind_me,
                 reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
             };
 
-            $scope.showValid = true;
             new ProjectCreate($scope.params).then(function (response) {
                 console.log(response);
                 $scope.showValid = false;
+                $scope.isDisabled = false;
                 $state.go('guest.signup.thanks');
             }, function (error) {
                 console.log(error);
@@ -239,7 +235,6 @@ function (error) {
             $scope.showValid = false;
 
         }
-
 
     }
 

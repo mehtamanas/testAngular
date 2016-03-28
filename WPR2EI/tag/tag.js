@@ -7,6 +7,10 @@
 
         var orgID = $cookieStore.get('orgID');
 
+        $scope.TagAction = 'no_action';
+
+        $rootScope.title = 'Dwellar-Tag';
+
         $scope.tagGrid = {
             dataSource: {
                 type: "json",
@@ -23,6 +27,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            height: screen.height - 370,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -30,15 +43,28 @@
             },
             columns: [
                  {
-                     field: "name",
-                     title: "Tag Name",
-                     width: "120px",
+                     template: " <input type='checkbox' , class='checkbox', data-id='#= id #', ng-click='check($event,dataItem)'/>",
+                     title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(dataItem)'/>",
+                     width: "10px",
                      attributes:
-                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-                 },]
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+                 },
+              
+                {
+                    template: '<label ng-repeat="tag in tags" style="margin-left:2%;background-color:#=background_color#" class="upper tag-name"><a ui-sref="app.tagpeople({id:dataItem.id})" class="tag_link" href="">#=name#</a></label>',
+                    title: "Tag Name",
+
+                    width: "120px",
+                    attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:left"
+                   }
+                },]
         };
 
         $scope.openTagPopup = function () {
@@ -50,8 +76,6 @@
                 size: 'md'
             });
         };
-
-
 
 
         $scope.filterNow = function () {
@@ -113,11 +137,81 @@
             if (args == 'tagGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.TagAction = 'no_action';
         });
 
+        $scope.chooseAction = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.TagAction === "no_action") {
+
+                }
+                else if ($scope.TagAction === "add_tag") {
+                    $state.go($scope.tagOptionPopup());
+                }
+                else if ($scope.TagAction === "assign_to") {
+                    $state.go($scope.assignToUpPopup());
+                }
+                else if ($scope.TagAction === "delete") {
+                    var tagDelete = [];
+                    for (var i in allCheckedIds) {
+                        var tag = {};
+                        tag.id = allCheckedIds[i];
+                        tag.organization_id = $cookieStore.get('orgID');
+                        tagDelete.push(tag);
+                    }
+                    $cookieStore.put('tagDelete', tagDelete);
+                    $scope.openConfirmation();
+                }
+            }
+        }
+
+        $scope.openConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'tag/confirmremovetag.html',
+                backdrop: 'static',
+                controller: confirmTagController,
+                size: 'md',
+                resolve: { items: { title: "Tag" } }
+
+            });
+
+        }
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
 
 
+        $scope.check = function (e, data) {
+            var allListElements = $(".checkbox").toArray();
+            for (var i in allListElements) { // not all checked
+                if (!allListElements[i].checked) {
+                    $('#checkAll').prop('checked', false);
+                    break;
+                }
+                if (i == allListElements.length - 1) // if all are checked manually
+                    $('#checkAll').prop('checked', true);
+            }
+        }
 
+        $scope.myGridChangetag = function (dataItem) {
+            // dataItem will contain the row that was selected
+            window.sessionStorage.selectedCustomerID = dataItem.id;
+
+            $state.go('app.tagpeople', { id: dataItem.id });
+        };
 
     }
 );

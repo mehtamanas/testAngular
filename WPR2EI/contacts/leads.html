@@ -23,22 +23,24 @@
             <div class="clearfix">
                 <div class="pull-left actions-wrap">
 
-                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                            ng-change="GetValue();addUser();delete();" id="contacaction">
-                        <option value="" selected>ACTIONS</option>
+                    <select ng-model="leadAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
+                        <option value='no_action' selected>ACTIONS</option>
+                        <option value='add_tag'>ADD TAG</option>
+                        <option value='assign_to'>ASSIGN TO</option>
+                        <option value='delete'>DELETE</option>
                     </select>
                 </div>
 
                 <div class="pull-right btn-wrap-right">
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openUploadNotesPopup()" style="cursor:pointer">Upload Notes</a>
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openUploadContactPopup()" style="cursor:pointer">Upload Contact</a>
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openContactPopup()" style="cursor:pointer">+ Add New Contact </a>
+                    <a id="btnAdd2" href="#" class="btn-lk" ng-click="openUploadNotesPopup()" style="cursor:pointer">Upload Notes</a>
+                    <a id="btnAdd1" href="#" class="btn-lk" ng-click="openUploadContactPopup()" style="cursor:pointer">Upload Contact</a>
+                    <a id="btnAdd" href="#" class="btn-lk" ng-click="openContactPopup()" style="cursor:pointer">+ Add New Contact </a>
                 </div>
             </div>
 
             <div id="record-content" class="properties-content">
 
-                <div id="contact_kenomain" kendo-grid k-options="LeadContactGrid" selectable="true" k-on-change="myGridChange(dataItem )">
+                <div id="contact_kenomain" kendo-grid k-options="LeadGrid" selectable="true" k-on-change="myGridChange(dataItem )">
                 </div>
 
             </div><!-- record-content ended -->

@@ -4,6 +4,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     $scope.companyName = $cookieStore.get('company_name');
+
     $scope.leadName = $cookieStore.get('lead_name');
     $scope.Email= $cookieStore.get('email');
     $scope.Phone = $cookieStore.get('phone');

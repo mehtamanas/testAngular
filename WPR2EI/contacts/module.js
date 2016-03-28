@@ -23,29 +23,67 @@ angular.module('contacts', [])
             controller: 'ClientListController',
             title: 'Clients'
         })
-        .state('app.contactdetail', {
-            url: '/contactsdetails',
-            templateUrl: 'contacts/detail/contactDetail.html',
-            controller: 'ContactDetailControllerdm',
-            title: 'Contact Details'
-        })
- 
-   .state('app.company', {
-                url: '/companyList',
-                templateUrl: 'contacts/company/companyList.html',
-                controller: 'CompanyListController',
-                title: 'Company'
-            })
-             .state('app.companyDetail', {
+           .state('app.contactdetail', {
+               url: '/contactsdetails?id',
+               templateUrl: 'contacts/detail/contactDetail.html',
+               controller: 'ContactDetailControllerdm',
+               title: 'Contact Details'
+           })
+
+              .state('app.contactEmail', {
+                  url: '/contactEmail?id',
+                  templateUrl: 'contacts/activityEmail.html',
+                  controller: 'activityEmailCtrl',
+                  title: 'Contact Details'
+              })
+
+
+           .state('app.company', {
+       url: '/companyList',
+       templateUrl: 'contacts/company/companyList.html',
+       controller: 'CompanyListController',
+       title: 'Company'
+   })
+
+         .state('app.companyDetail', {
                  url: '/companyDetail',
                  templateUrl: 'contacts/company/companyDetail.html',
                  controller: 'companyDetailController',
                  title: 'companyDetail'
-             }) 
-		 .state('app.lists', {
-           	  url: '/lists',
-           	  templateUrl: 'contacts/listController.html',
-            	  controller: 'ListController',
-            	  title: 'List'
+             })
+
+		 .state('app.addList', {
+		     url: '/addList',
+		     templateUrl: 'contacts/list/addList.html',
+		     controller: 'addListCtrl',
+		     title: 'Add List'
+		 })
+
+         .state('app.list', {
+             url: '/list',
+             templateUrl: 'contacts/list/list.html',
+             controller: 'listCtrl',
+             data: { pageTitle: 'List' }
          })
-  }]);
+
+         .state('app.listSummary', {
+             url: '/listSummary',
+             templateUrl: 'contacts/list/listSummary.html',
+             controller: 'listSummaryCtrl',
+             data: { pageTitle: 'list Summary' }
+         })
+           .state('app.tagList', {
+               url: '/tagList',
+               templateUrl: 'contacts/list/tagList.html',
+               controller: 'tagListCtrl',
+               data: { pageTitle: 'Tag List' }
+           })
+
+      .state('app.tagpeople', {
+            url: '/tagpeople?id',
+            templateUrl: 'contacts/tag_people.html',
+            controller: 'tagpeopleController',
+            title: 'Tag_People Details'
+        })
+
+    }]);

@@ -48,7 +48,7 @@
                                         <div class="pull-left profile-row1">Campaign ID:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.campaign_ID">{{params.campaign_ID}}</h4>
+                                                <span ng-bind="params.campaign_ID">{{params.campaign_ID}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -57,7 +57,7 @@
                                         <div class="pull-left profile-row1">Campaign Name:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.name">{{params.name}}</h4>
+                                                <span ng-bind="params.name">{{params.name}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                         <div class="pull-left profile-row1">Location:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.Street_1">{{params.Street_1}}</h4>
+                                                <span ng-bind="params.Street_1">{{params.Street_1}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <div class="pull-left profile-row1">Start Date</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.start_date1">{{params.start_date1 | date:'dd/MM/yyyy hh:mm:tt'}}</h4>
+                                                <span ng-bind="params.start_date1">{{params.start_date1 | date:'dd/MM/yyyy hh:mm:tt'}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                         <div class="pull-left profile-row1"> End Date:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.end_date">{{params.end_date | date:'dd/MM/yyyy hh:mm:tt'}}</h4>
+                                                <span ng-bind="params.end_date">{{params.end_date | date:'dd/MM/yyyy hh:mm:tt'}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                         <div class="pull-left profile-row1">Lead:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.no_of_leads">{{params.no_of_leads}}</h4>
+                                                <span ng-bind="params.no_of_leads">{{params.no_of_leads}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                                         <div class="pull-left profile-row1">Sales:</div>
                                         <div class="pull-right profile-row2">
                                             <label class="label-group">
-                                                <h4 ng-bind="params.sales">{{params.sales}}</h4>
+                                                <span ng-bind="params.sales">{{params.sales}}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -123,12 +123,12 @@
 
                             <div class="col-sm-1"></div>
                             &nbsp;
-                            <button class="btn organization-btn" type="submit" id="btn_signup"><b>SAVE</b></button>
+                            <button class="btn organization-btn" style="margin-left: 26%;" type="submit" id="btn_signup"><b>SAVE &gt;</b></button>
                            
-                            <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="back()">
+                            <button class="btn campaign-container-btn-1-1" id="btn_next" type="button" ng-click="back()">
                                 BACK
                             </button>
-                            <button class="campaign-container-btn-cancel" style="margin-left: 19%;" id="campaign_cancel" type="button" ng-click="cancel()">
+                            <button class="campaign-container-btn-cancel" style="margin-left:26%;" id="campaign_cancel" type="button" ng-click="cancel()">
                                 CANCEL
                             </button>
                         </div>

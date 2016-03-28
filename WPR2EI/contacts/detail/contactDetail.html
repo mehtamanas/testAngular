@@ -1,4 +1,5 @@
-﻿<div id="main-content" class="col-xs-12">
+﻿
+<div id="main-content" class="col-xs-12">
     <div class="content-inner">
         <div class="pg-inner-header">
             <div class="row">
@@ -8,198 +9,321 @@
                 </div>
             </div>
         </div>
-   </div>
+    </div>
+    <div class="pg-inner-content">
+
+        <div class="clearfix project-detail-info-1 pg-inner-content_1">
+
+            <div class="row" style="background:#fff;">
+                <div class="col-md-3 col-sm-3" style="width:140px;">
+                    <div class="project-detail-photo_1"><img src={{image.Contact_Image}} alt="" class="image1" /></div>
+                </div>
+                <div class="col-md-3 col-sm-3 contact-detail-txt">
+                    <div class="project-name capt" style="line-height: 20px;">
+                        {{image.Contact_First_Name}} {{image.Contact_Last_Name}}
+                        <span class="type-contact upper" style="margin: 0PX 20px 0px 17px;">{{image.people_type}}</span>
+                        <p style="font-weight: 600;font-size:12px; color:#434343;">Customer ID : {{customerId}}</>
+                    </div>
+                    <div class="project-d02 capt" style="line-height: 18px;color: #333333;font-size: 15px;font-weight: normal;"> {{image.contact_designation}} &nbsp; {{image.company}}<br><small style="color: #9f9f9f;font-size: 13px;font-weight: normal;"> {{Street}}&nbsp; {{area}}&nbsp; {{State}} &nbsp;{{City}}&nbsp; {{zipcode}} </small></div>
+
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="row contact_p">
+                        <div class="col-md-4 contact_count" id="Contact_lead_score_count"><span class="contact_stats">0</span> <p class="contact_p_1" id="Contact_Lead_Score">LEAD SCORE</p></div>
+                        <div class="col-md-4 contact_count" id="Contact_Lead_Marketing_Count"><span class="contact_stats">{{image.marketing_count || 0}}</span> <p class="upper contact_p_1" id="Contact_ Marketing_Count"> Marketing Count</p></div>
+                        <div class="col-md-4 " id="Contact_Lead_Follow_Up_Count"><span class="contact_stats">{{image.follow_up_count|| 0}}</span> <p class="upper contact_p_1" id="Contact_Follow_Up_Count">Follow Up Count</p></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 contact_link_1" style="margin-right: -5%;">
+                    <div classs="row " style="text-align: center;">
+                        <div class="col-md-3 contact_count"><span><a id="followUp" class="contact_links" ng-click="openFollowUp()" data-toggle="modal" style="cursor:pointer">Follow up </a></span></div>
+                        <div class="col-md-3 contact_count"><a id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><span class="contact_links">Edit</span></a></div>
+                        <div class="col-md-3 "><span><a id="followUp" name="addTag" style="cursor:pointer" class="contact_links" ng-click="AddTagPopup()" data-toggle="modal">Add Tag </a></span></div>
+
+                    </div>
+
+                </div>
+                <div class="clearfix" style=" margin-left: 82%; margin-top: 7%;">
+                    <div class="col-md-10 col-sm-5"><span class="span-contact contact_p_1 upper" id="Last_Updated">Last Updated :</span><span style="color:#4b4b4b;font-size: 12px;">{{image.Contact_update_Date | date:'dd/MM/yyyy'}}</span><span class="span-last_date"></span></div>
+                    <div class="col-md-10 col-sm-5"><span class="span-contact contact_p_1 upper" id="Last_Contacted">Last Contacted :</span><span style="color:#4b4b4b;font-size: 12px;"> {{image.last_followup_Date || "Never"}} </span>  <span class="span-last_contacted"></span></div>
+                </div>
+            </div>
 
 
-            <div class="pg-inner-content">
+        </div>
+        <div class="clearfix project-detail-info pg-inner-content_1">
 
-                <div class="project-detail">
+            <div class="row equal" style="background:#fff;">
+                <div class="col-md-2 tags" id="tagLeft" style="width:150px;"><span class="tag_center"> TAGS </span></div>
+                <div class="col-md-10" style="padding: 3px 15px 10px 15px;" id="tagRight">
+                    <span ng-repeat="tag in tags" style="background-color:{{tag.background_color}}; cursor: pointer;" class="upper tag-name" id="posts">
+                        <a style="color:#fff;margin-left: 5px;" ng-click="goToTagDetails(tag.tag_id)">{{tag.tag_name}}</a><span ng-click="removeImage($index)" class="fa fa-close" style="padding-left:5px;"></span>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <!--<script>
+            var tagHeight = document.getElementById('tagRight').offsetHeight;
+
+            document.getElementById('tagLeft').style.height = tagHeight + 'px';
+        </script>-->
 
 
-                    <div class="project-detail-info">
+        <div class="project-detail-tabs pg-tabs" kendo-tab-strip style="background: #efefef;">
+            <ul class="responsive-tagJS" role="tablist">
+                <li class="k-state-active" id="contact_essential"> <a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIALS</a></li>
+                <li id="contact_documents"><a aria-controls="summary" role="tab" data-toggle="tab">DOCUMENTS</a></li>
+                <li id="contact_Quotes"><a aria-controls="summary" role="tab" data-toggle="tab">QUOTES</a></li>
+                <li ng-hide='{{WHO_AM_I === "Service_industry"}}' id="contact_properties"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTIES</a></li>
+                <li id="contact_payment"><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENTS</a></li>
+                <li id="contact_tasks"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
+                <li id="contact_assignedto"><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
+                <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab">EVENTS</a></li>
+                <li id="contact_activity_history"><a aria-controls="summary" role="tab" data-toggle="tab">ACTIVITY HISTORY</a></li>
+            </ul>
 
-                        <div class="project-detail-photo">
+            <div class="content-inner-bx">
 
-                            <img src={{image.Contact_Image}} alt="" class="image1" />
-                          
-                        </div>
+                <div class="row content-inner-bx-1"> 
+                    <div class="col-md-6">
+                        <div class="bx-h1">
+                            <div class="contact-bx-h1-head">
+                                <span class="contact_title_1">Contact Info</span>
 
-                        <div class="project-detail-txt">
-
-
-                            <div class="project-name capt">{{image.Contact_First_Name}} {{image.Contact_Last_Name}} <span class="type-contact upper">{{image.people_type}}</span> <a id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
-                            <div class="project-d02 capt"> <b>{{image.Title}}</b></div>
-                            <!--<div class="project-d02">Type:</div>-->
-                            <div class="project-d02"><b>Phone:</b> <span class="phone-span">{{image.Contact_Phone}}</span> </div>
-                            <div class="project-d02"><b>Email:</b> <span class="url-span"><a href=""  ng-click="sendEmail()">{{image.Contact_Email}}</a></span></div>
-                            <div class="project-d02" ><label ng-repeat="tag in tags"  ng-style="{tag.style}" class="upper tag-name" id="posts">{{tag.tag_name}}</label>
                             </div>
-                        </div> <!-- project-detail-info ended -->
-                        </div>
-
-
-                    <div class="project-detail-tabs pg-tabs" kendo-tab-strip style="background: #efefef;">
-                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
-                            <li class="k-state-active" id="contact_essential"> <a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIAL</a></li>
-                            <li id="contact_documents"><a aria-controls="summary" role="tab" data-toggle="tab">DOCUMENTS</a></li>
-                            <li id="contact_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTY LIST</a></li>
-                            <li id="contact_payment"><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>                         
-                            <li id="contact_tasks"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li> 
-                            <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>                       
-                            <li id="contact_assignedto"><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
-                            <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab">EVENTS</a></li>    
-                            <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab">ACTIVITY HISTORY</a></li>                 
-                        </ul>
-
-                        <div class="content-inner-bx">
-
-                            <div class="row content-inner-bx-1">
-                                <div class="col-md-3">
-                                    <div class="bx-h1">
-                                        <div class="bx-h1-head">
-                                            <div class="title">Contact Info</div>
-
+                            <div class="bx-h1-content clearfix" style="min-height: 516px;">
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Address</div>
+                                        <div ng-repeat="choice in choices2" class="contact_value"  id="address">
+                                            <h7>{{choice.Street_1}} </h7>
+                                            <h7>{{choice.Street_2}} </h7>
                                         </div>
-                                        <div class="bx-h1-content clearfix">
-                                            <div class="cxo-wrap1">
-                                                <div class="cxo-bx1">
-                                                    <div style="border-bottom:1px solid #efefef;font-weight:bold;font-size:18px">Address</div>
-                                                    <div ng-repeat="choice in choices2">
-                                                       <label>Street {{$index + 1}}:</label>  <h7>{{choice.Street_1}} </h7> 
-                                                    </div>
-                                                    <label>Area:</label>  <h7 ng-bind="area"></h7><br />
-                                                    <label>State:</label>  <h7 ng-bind="State"></h7><br />
-                                                    <label>City:</label>  <h7 ng-bind="City"></h7>
-                                                    <label>Pincode:</label>  <h7 ng-bind="zipcode"></h7>
-                                                </div>
-                                            </div>
-                                            <div class="cxo-wrap1">
-                                                <div class="cxo-bx1">
-                                                    <div style="border-bottom:1px solid #efefef;font-weight:bold;font-size:18px">Phone no</div>
-                                                    <div ng-repeat="choice in choices">
-                                                        <label>Phone no {{$index + 1}}:</label>  <h7>{{choice.Contact_Phone}} </h7>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                            <div class="cxo-wrap1">
-                                                <div class="cxo-bx1">
-
-                                                    <div style="border-bottom:1px solid #efefef;font-weight:bold;font-size:18px">Email</div>
-
-                                                    <div ng-repeat="choice1 in choices1">
-                                                        <label>Email {{$index + 1}}:</label>  <h7>{{choice1.Contact_Email}} </h7>
-                                                    </div>
-
-
-                                                </div>
-
-                                            </div>
+                                        <h7 ng-bind="area"></h7><br />
+                                        <h7 ng-bind="State"></h7><br />
+                                        <h7 ng-bind="City"></h7>
+                                        <h7 ng-bind="zipcode"></h7>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Phone No.</div>
+                                        <div ng-repeat="choice in choices" class="contact_value" id="phone_no">
+                                            <label>Phone no {{$index + 1}}:</label>  <h7>{{choice.Contact_Phone}} </h7>
                                         </div>
 
 
                                     </div>
-                                </div><!-- bx-h1 ended -->
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
 
+                                        <div class="contact_title">Email</div>
 
-                                <div class="col-md-7">
-                                    <div class="bx-h1">
-                                        <div class="bx-h1-head">
-                                            <div class="title">About</div>
-
+                                        <div ng-repeat="choice1 in choices1" class="contact_value" id="email">
+                                            <label>Email {{$index + 1}}:</label>  <h7>
+                                                <span class="url-span"><a href="" ng-click="sendEmail()">{{choice1.Contact_Email}}</a></span>
+                                                <!--{{choice1.Contact_Email}}-->
+                                            </h7>
                                         </div>
-                                        <div class="bx-h1-content clearfix">
-                                            <div class="cxo-wrap1">
-                                                <div class="cxo-bx1">
-                                                    <div style="border-bottom:1px solid #efefef;font-weight:bold;font-size:18px">Profession</div>
-                                                    <h7 ng-bind="Title"> </h7>
-                                                </div>
-                                            </div>
+                                    </div>
 
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
 
-
-
+                                        <div class="contact_title">Social Media</div>
+                                        <div class="clearfix " style="margin-top: 4%;">
+                                            <a ng-href="" id="contactFB.png">
+                                                <img src="images/contactFB.png">
+                                            </a>
+                                            <a ng-href="" id="contactTwitter.png">
+                                                <img src="images/contactTwitter.png">
+                                            </a>
+                                            <a ng-href="" id="contactLinkdin.png">
+                                                <img src="images/contactLinkdin.png">
+                                            </a>
                                         </div>
-                                    </div><!-- bx-h1 ended -->
+                                    </div>
                                 </div>
                             </div>
-                        </div> <!--Essential-->
-
-                        <div class="leads_group" id="documentGridDiv">
-                            <div class="tab-content-title">Documents<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" style="cursor:pointer">+</a></div>
-                            <div kendo-grid k-options="DocumentGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Document-->
-
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="PropertyListGrid" selectable="true">
-
-                            </div>
-                        </div> <!--PropertyList-->
-
-                        <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Payments <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()" style="cursor:pointer">+</a></div>
-                            <div kendo-grid k-options="PaymentGrid" selectable="true">
-
-                            </div>
-                        </div>  <!--Payment-->
-
-                        <div class="leads_group" id="record-content">
-                        <div class="pull-left actions-wrap">
-                                <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                                        ng-change="GetValue();addTask()">
-                                    <option value="" selected> ACTION </option>
-                                </select>
-                            </div>
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <div class="tab-content-title">Task <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
-
-                            <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
-
-                            </div>
-                        </div>  <!--Task-->                     
-
-                        <div class="leads_group" id="record-content">
-                            <div class="pull-left actions-wrap">
-                                <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                                        ng-change="GetValue();addUser()">
-                                    <option value="" selected> ACTION </option>
-                                </select>
-                            </div>
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <div class="tab-content-title">Notes <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()">+</a></div>
-                           
-                             <div kendo-grid k-options="NotesGrid" selectable="true" k-on-change="myGridChangeNote(dataItem)">
-
-                            </div>
                         </div>
+                    </div><!-- bx-h1 ended -->
 
-                        <div class="leads_group" id="record-content">
-                            <div kendo-grid k-options="AssignmentToGrid" selectable="true">
+
+                    <div class="col-md-6 custom">
+                        <div class="bx-h1">
+                            <div class="contact-bx-h1-head">
+                                <span class="contact_title_1">About</span>
 
                             </div>
-                        </div>  <!--AssignmentTo-->
+                            <div class="bx-h1-content clearfix">
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Date Of Birth</div>
+                                        <div class="contact_value"><h7 ng-bind="Date_Of_Birth"></h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Age</div>
+                                        <div class="contact_value"><h7 ng-bind="age"></h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Age Group</div>
+                                        <div class="contact_value"><h7 ng-bind="Age_Group"></h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Company</div>
+                                        <div class="contact_value"><h7 ng-bind="company"> </h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Profession</div>
+                                        <div class="contact_value"><h7>{{image.contact_designation}}</h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Annual Income</div>
+                                        <div class="contact_value"><h7 ng-bind="income"></h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title"><span ng-show='{{WHO_AM_I === "Service_industry"}}'>Associated Resellers</span><span ng-hide='{{WHO_AM_I === "Service_industry"}}'>Associated Channel Partners</span></div>
+                                        <div class="contact_value"><h7></h7></div>
+                                        <h7></h7>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Budget</div>
+                                        <div class="contact_value"><h7 ng-bind="budget1"></h7></div>
+                                    </div>
+                                </div>
+                                <div class="cxo-wrap1">
+                                    <div class="cxo-bx1">
+                                        <div class="contact_title">Looking at Purchase In</div>
+                                        <div class="contact_value"><h7 ng-bind="buy1"></h7></div>
+                                    </div>
+                                </div>
 
-                        <div class="leads_group" id="EventGridDiv">
-                            <div class="tab-content-title">Create New Event<a id="contact_openNewEvent" class="add-btn" data-toggle="modal" ng-click="openEventCampaignPopup()">+</a></div>
-                            <div kendo-grid k-options="EventGrid" selectable="true" k-on-change="myGridChangeEvent(dataItem)"></div>
-                        </div>    <!--Event-->
 
-                     <div class="leads_group" id="EventGridDiv">
-                            <div kendo-grid k-options="engagementGrid" selectable="true"></div>
-                        </div>
 
-            
+
+                            </div>
+                        </div><!-- bx-h1 ended -->
+                    </div>
+                </div>
+            </div> <!--Essential-->
+
+            <div class="leads_group" id="documentGridDiv">
+                <div class="tab-content-title">Documents<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" style="cursor:pointer">+</a></div>
+                <div kendo-grid k-options="DocumentGrid" selectable="true">
+
+                </div>
+            </div>  <!--Document-->
+
+            <div class="leads_group" id="quoteGrid">
+                <div class="tab-content-title">Quotation<a id="contact_openNewQuotation" class="add-btn" data-toggle="modal" ng-click="generateNewQuote()" style="cursor:pointer">+</a></div>
+                <div kendo-grid k-options="QuotesGrid" selectable="true"></div>
+            </div> <!--QUOTE-->
+
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="PropertyListGrid" selectable="true" ng-hide="">
+
+                </div>
+            </div> <!--PropertyList-->
+
+            <div class="leads_group" id="record-content">
+                <div class="tab-content-title">Payments <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()" style="cursor:pointer">+</a></div>
+                <div kendo-grid k-options="PaymentGrid" selectable="true">
+
+                </div>
+            </div>  <!--Payment-->
+
+            <div class="leads_group" id="record-content">
+                <div class="tab-content-title">Task <a id="contact_openNewTaskPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
+                <div class="">
+                    <select ng-model="TaskAction" class="form-control actions-wrap" ng-change="taskAction()" id="taskaction">
+                        <option value='no_action' selected>ACTIONS</option>
+                        <option value='delete'>DELETE</option>
+                    </select>
+                </div>
+
+
+                <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
+
+                </div>
+            </div>  <!--Task-->
+
+            <div class="leads_group" id="record-content">
+                <div class="tab-content-title">Notes <a id="contact_openNewNotesPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()">+</a></div>
+
+                <div class="">
+                    <select ng-model="NotesAction" class="form-control actions-wrap" ng-change="chooseAction()" id="notesaction">
+                        <option value='no_action' selected>ACTIONS</option>
+                        <option value='delete'>DELETE</option>
+                    </select>
+                </div>
+
+                <div kendo-grid k-options="NotesGrid" selectable="true" k-on-change="myGridChangeNote(dataItem)">
+
                 </div>
             </div>
-        </div>
 
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="AssignmentToGrid" selectable="true">
+
+                </div>
+            </div>  <!--AssignmentTo-->
+
+            <div class="leads_group" id="EventGridDiv">
+                <div class="tab-content-title">Create New Event<a id="contact_openNewEvent" class="add-btn" data-toggle="modal" ng-click="openEventCampaignPopup()">+</a></div>
+                <div kendo-grid k-options="EventGrid" selectable="true" k-on-change="myGridChangeEvent(dataItem)"></div>
+            </div>    <!--Event-->
+
+            <div class="leads_group" id="EventGridDiv">
+                <!--<div class="content-inner">
+                    <div class="pg-inner-header">
+                        <div class="row">
+                            <div class="pg-inner-hside-1 pg-inner-hside2">
+                                <input type="text" id="select-dates2" placeholder="Start Date" class="form-control cxo-f1">
+                                <input type="text" id="select-dates2" placeholder="End Date" class="form-control cxo-f1">
+
+                                <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.start_date1" k-ng-model="dateObject" placeholder="Start Date" />To
+                                <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.start_date1" k-ng-model="dateObject" placeholder="End Date" />
+
+                                <select ng-model="project1" ng-change="selectproject()" id="contact_project" style="margin-top: 1%;height:32px" class="form-control cxo-f1" required>
+                                    <option value="" selected>--Status--</option>
+                                    <option ng-repeat="project in projects"
+                                            value="{{project.id}}">
+                                        {{project.name}}
+                                    </option>
+                                </select>
+
+                                <button type="submit" class="f-btn  cxo-f3">VIEW</button>
+
+                            </div>
+
+                        </div>
+                    </div><!-- pg-inner-header ended -->
+
+                <div kendo-grid k-options="engagementGrid" selectable="true" k-on-change="myGridChangeactivity(dataItem)"></div>
+            </div>
+
+
+        </div>
     </div>
+</div>
+
+<!-- modal -->

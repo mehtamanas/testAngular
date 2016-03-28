@@ -67,7 +67,12 @@ angular.module('security', [
                 apiService.get('User/Get?id=' + userId).then(function (response) {
                     var currentUser = response.data;
                     if (currentUser) {
-                        //alert('User First Name: ' + currentUser.first_name);
+                     
+                        apiService.get('User/GetWhoAmI?id=' + orgID).then(function (response) {
+                            var currentUser = response.data;
+                            $cookieStore.put('Who_Am_i', currentUser.who_am_i);
+                                                   
+                        });
 
                         $cookieStore.put('currentUser', currentUser);
                         $cookieStore.put('authToken', authToken);
@@ -145,8 +150,6 @@ angular.module('security', [
                 var loginSession = response.data;
                 //alert('Login Session : ' + loginSession.user_id);
                 
-                
-              
                 apiService.get('User/Get?id=' + userId).then(function (response) {
                     var currentUser = response.data;
                     if (currentUser) {

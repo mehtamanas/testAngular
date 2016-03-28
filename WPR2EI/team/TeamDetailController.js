@@ -93,6 +93,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -126,6 +135,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -150,7 +168,7 @@
                 }
             }, {
                 field: "name",
-                title: "First Name",
+                title: "Name",
                 width: "120px",
 
             }, {
@@ -194,6 +212,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -252,6 +279,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -306,6 +342,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,

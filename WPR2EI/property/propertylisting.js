@@ -217,7 +217,8 @@
                 },
             {
                
-                field: "available_status",
+                
+                template: '<span id="#= available_status #">#= available_status #</span>',
                 title: "STATUS",
                 width: "120px",
                 attributes:

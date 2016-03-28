@@ -7,11 +7,11 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
 
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
     $scope.project1 = $scope.seletedCustomerId;
 
 
-    contactUrl = "ToDoItem/EditGet/" + $scope.seletedCustomerId;
+    contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.params = response.data[0];
 
@@ -89,11 +89,12 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
             assigned_to_id: $scope.contact1,
+            assign_user_id: $scope.user1,
             class_type: "Contact",
             reminder_time: $scope.params.reminder_time,
             task_type_id_: $scope.event1,
             time: $scope.params.time,
-            id: $scope.seletedCustomerId,
+            id: $scope.selectedTaskID,
         };
 
 
@@ -101,6 +102,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             apiService.post("ToDoItem/EditTaskWithNotes", postData).then(function (response) {
                 var loginSession = response.data;
                 $modalInstance.dismiss();
+                $scope.isDisabled = false;
                 $scope.openSucessfullPopup();
                 $rootScope.$broadcast('REFRESH', 'TaskGrid');
 
@@ -116,7 +118,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             var postData1 = {
                 user_id: $cookieStore.get('userId'),
                 organization_id: $cookieStore.get('orgID'),            
-                id: $scope.seletedCustomerId,
+                id: $scope.selectedTaskID,
             }
             apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
                 var loginSession = response.data;
@@ -213,6 +215,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
 
 
         $scope.addNew = function (isValid) {
+            $scope.isDisabled = true;
             $scope.showValid = true;
             if (isValid) {
                 if ($scope.remind_me === true) {
@@ -243,7 +246,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                     //reminder_time: $scope.params.reminder_datetime,
  		    due_date: new Date(dDate).toISOString(),
  	            reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
-                    id: $scope.seletedCustomerId,
+ 	            id: $scope.selectedTaskID,
                 };
 
                 $scope.save($scope.params);

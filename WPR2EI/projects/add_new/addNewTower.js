@@ -93,7 +93,8 @@ function (error) {
             resolve: { items: { title: "Tower" } }
         });
 
-        $rootScope.$broadcast('REFRESH','tower');
+        $rootScope.$broadcast('REFRESH', 'tower');
+        $rootScope.$broadcast('REFRESH', 'Inventory');
     };
 
 

@@ -30,7 +30,7 @@
                         <div  class="project-detail-txt">
                            
 
-                            <div class="project-name">Project Name:  {{image.name}} &nbsp; &nbsp; <a ng-click="openEditProjectPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
+                            <div class="project-name">Project Name:  {{image.name}} &nbsp; &nbsp; <a id="iconEdit"  ng-click="openEditProjectPopup()" data-toggle="modal"class="edit-icon" style="cursor:pointer"></a> </div>
                             <div class="project-d02">Street:{{image.Street_1}} {{image.Street_2}}</div>
                             <div class="project-d02">Area: {{image.area}}</div>
                             <div class="project-d01">City: {{image.city}} State: {{image.state}} Pin Code: {{image.ZipCode}}</div>
@@ -41,25 +41,24 @@
                             <div class="project-d03">Company Website:{{image.builder_website}}</div>
 
                         </div>
-                        <div style="float:right; margin-top:210px" >
+                        <div style="float:right;margin-top: 15%; margin-right: 2%;">
                             <a ng-href="{{facebook}}">
-                               
-                                <img src="images/facebook.png" />
+
+                                <img src="images/contactFB.png" />
                             </a>
                             <a ng-href={{twitter}}>
-                                <img src="images/twitter.png" />
-                            </a>   
+                                <img src="images/contactTwitter.png" />
+                            </a>
                             <a ng-href="{{linkedin}}">
-                                <img src="images/linkedin.png" />
-                            </a>                               
+                                <img src="images/contactLinkdin.png" />
+                            </a>
                         </div>
-
                     </div> <!-- project-detail-info ended -->   
 
 
 
                     <div class="project-detail-tabs pg-tabs" kendo-tab-strip >
-                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                        <ul class="responsive-tagJS" role="tablist">
                             <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
                             <li><a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIAL</a></li>
                             <li><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
@@ -80,7 +79,9 @@
                             <li><a aria-controls="summary" role="tab" data-toggle="tab">EVENTS</a></li>
                             <li><a aria-controls="summary" role="tab" data-toggle="tab">ACTIVITY HISTORY</a></li>
                             <li><a aria-controls="summary" role="tab" data-toggle="tab">UPLOAD VIEW</a></li>
-                            <!--<li><a aria-controls="summary" role="tab" data-toggle="tab">CHARGES</a></li>-->
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">SERVICES</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">OFFERS</a></li>
+                            <li><a aria-controls="summary" role="tab" data-toggle="tab">CHARGES</a></li>
                          </ul>
 
 
@@ -123,7 +124,7 @@
                             <div class="tab_style">
                                 <div class="div_pad">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 3%;">
 
                                             <div class="row">
 
@@ -191,7 +192,7 @@
                                                             <img src="{{tower.Image_Url_Tower1}}" alt="" class="img-responsive" style="width:162px;height:150px " />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3 col-sm-3">
+                                                   <div class="col-md-3 col-sm-3">
                                                         <div class="tb-sub">
                                                             <span class="tb-sub-t-1 tb-sub-t07"></span>
                                                             <span class="tb-sub-txt">Base Price</span>
@@ -202,6 +203,11 @@
                                                             <span class="tb-sub-txt">Park Price</span>
                                                             <p class="tower-p">{{tower.cark_park_price}}</p>
                                                         </div>
+
+                                                        <div class="tb-sub">
+                                                            <span class="tb-sub-txt1">Floor Rise Starts From {{tower.floor_rise_starts_from}}</span>
+                                                            
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3">
                                                         <div class="tb-sub">
@@ -209,13 +215,6 @@
                                                             <span class="tb-sub-txt">Floor Rise</span>
                                                             <p class="tower-p">{{tower.floor_rise}}<small style="color: #d5d5d5;"> /sq.ft</small></p>
                                                         </div>
-                                                        <div class="tb-sub">
-                                                            <span class="tb-sub-t-1 tb-sub-t07"></span>
-                                                            <span class="tb-sub-txt">Floor Rise Starts From</span>
-                                                            <p class="tower-p">{{tower.floor_rise_starts_from}}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3 col-sm-3">
                                                         <div class="tb-sub">
                                                             <span class="tb-sub-t-1 tb-sub-t08"></span>
                                                             <span class="tb-sub-txt">No of Wings</span>
@@ -443,7 +442,7 @@
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
                                             
                                         </div>
-                                        <a class="properties-name">{{image.notes}}</a>
+                                       <span style="width:239px;word-wrap:break-word"><a class="properties-name">{{image.notes}}</a></span> 
                                      
                                     </div>
 
@@ -498,8 +497,9 @@
                                             </div>
                                             <a class="properties-close"><i class="fa fa-close"></i></a>
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
-                                            <a class="properties-name">{{image.notes}} Start</a>
+                                            
                                         </div>
+                                        <a class="properties-name">{{image.notes}} Start</a>
                                     </div>
 
                                 </div><!-- properties-bx-wrap ended -->
@@ -512,9 +512,10 @@
                                             </div>
                                             <a class="properties-close"><i class="fa fa-close"></i></a>
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
-                                            <a class="properties-name">{{image.notes}} End</a>
+                                            
 
                                         </div>
+                                       <span style="width:239px;word-wrap:break-word"><a class="properties-name">{{image.notes}} End</a></span> 
                                     </div>
 
                                 </div><!-- properties-bx-wrap ended -->
@@ -539,7 +540,7 @@
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
                                             <!--<a class="properties-name">{{image.notes}}</a>-->
                                         </div>
-                                        <a class="properties-name">{{image.notes}}</a>
+                                       <span style="width:239px;word-wrap:break-word"><a class="properties-name">{{image.notes}}</a></span>
                                     </div>
 
                                 </div><!-- properties-bx-wrap ended -->
@@ -573,7 +574,7 @@
                                             </div>
                                             <a class="properties-close"><i class="fa fa-close"></i></a>
                                         </div>
-                                        <a class="properties-name">{{image.tags}}</a>
+                                       <span style="width:239px;word-wrap:break-word"><a class="properties-name">{{image.tags}}</a></span> 
                                     </div>
 
                                 </div>
@@ -583,17 +584,56 @@
                             </div>
                         </div> <!--Upload View-->
 
-                        <div class="tab-pane fade" id="gallery">
+         
+                        <div class="leads_group" id="record-content">
+
+                          
+                            
+                            <div class="tab-content-title">Service <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddService()" style="cursor:pointer">+</a></div>
+                            <div class="">
+
+                                <select ng-model="serviceAction" class="form-control actions-wrap" ng-change="chooseActionForService()" id="contacaction">
+                                    <option value='no_action' selected>ACTIONS</option>
+                                    <option value='delete'>DELETE</option>
+                                </select>
+                            </div>
+                            <div kendo-grid k-options="serviceGrid" selectable="true" k-on-change="myGridChangeService(dataItem)">
+
+                            </div>
+                        </div> <!--Services-->
+
+
+                        <div class="tab-pane fade" id="offers">
                             <div class="properties-list">
 
-                                <div class="tab-content-title tab-content-title-b"><b>Add Charges</b> <a id="btn_openuplaodviewpopup" data-toggle="modal" class="add-btn" ng-click="openCharges()" style="cursor:pointer">+</a></div>
-   
+                                <div class="tab-content-title tab-content-title-b"><b></b>Offers<a id="btn_openoffers" data-toggle="modal" class="add-btn" ng-click="openOffers()" style="cursor:pointer">+</a></div>
+
                             </div>
-                        </div>
+                            <div kendo-grid k-options="OfferGrid" selectable="true">
+
+                            </div>
+                        </div>  <!--Offers-->
+
+                        <div class="leads_group" id="record-content">
+
+                   
+                            
+                            <div class="tab-content-title tab-content-title-b"><b></b>Add Charges<a id="btn_openoffers" data-toggle="modal" class="add-btn" ng-click="openCharges()" style="cursor:pointer">+</a></div>
+                            <div class="">
+
+                                <select ng-model="chargeAction" class="form-control actions-wrap" ng-change="chooseActionForCharge()" id="contacaction">
+                                    <option value='no_action' selected>ACTIONS</option>
+                                    <option value='delete'>DELETE</option>
+                                </select>
+                            </div>
+                            <div kendo-grid k-options="ChargesGrid" selectable="true" k-on-change="myGridChangeCharges(dataItem)">
+
+                            </div>
+                        </div> <!--Charge-->
+
+                        
 
 
-                         
- </div>
                 </div>
             </div>
         </div>
@@ -602,4 +642,4 @@
     </div>
 
 </div>
-               
+   </div>            

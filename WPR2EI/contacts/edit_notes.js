@@ -3,9 +3,11 @@
  */
 var EditNotesContactController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log('EditNotesContactController');
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.seletedNotesId = window.sessionStorage.selectedNotesID;
+    $scope.selectedCustomerID = window.sessionStorage.selectedCustomerID;
 
-
+    var userID = $cookieStore.get('userId');
+  
     //Audit log start
   
     AuditCreate = function () {
@@ -40,16 +42,43 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
 
     //end
 
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
     //API functionality start
 
-    contactUrl = "Notes/EditGet/" + $scope.seletedCustomerId;
-    apiService.get(contactUrl).then(function (response) {
-        $scope.params = response.data[0];
+    contactUrl = "Notes/EditGet/" + $scope.seletedNotesId;
+    apiService.getWithoutCaching(contactUrl).then(function (response) {
+        data = response.data[0];
+        attentions = (data.attention).split(',');
+        $scope.params.text = data.text;
+        $scope.params.Name = [];
+        for(i=0;i<attentions.length;i++){
+            $scope.params.Name.push({ 'text': attentions[i] })
+        }
     },
     function (error) {
       
     }
    );
+
+    $scope.contactList = [];
+
+    apiService.get("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+        data = response.data;
+        contactsName = _.pluck(data, 'Name');
+        contactId = _.pluck(data, 'id');
+        for (i = 0; i < contactsName.length; i++) {
+            $scope.contactList.push({ 'text': contactsName[i].toString(), 'id': contactId[i].toString() });
+        }
+    }, function (error) {
+    });
+
+
+    $scope.loadTags = function (query) {
+        return $scope.contactList;
+    }
 
     $scope.params = {
         text: $scope.text,
@@ -63,10 +92,13 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
     $scope.save = function () {
         var postData =
                {
-                   id: window.sessionStorage.selectedCustomerID,
+                   id: $scope.seletedNotesId,
+                 
                    text: $scope.params.text,
+                   attention : _.pluck($scope.params.Name, 'text').join(','),
                    organization_id: $cookieStore.get('orgID'),
                    user_id: $cookieStore.get('userId'),
+                   class_id:$scope.selectedCustomerID,
                    class_type: "Person"
                };
 

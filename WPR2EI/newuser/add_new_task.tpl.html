@@ -108,6 +108,20 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Set Priority</label>
+                            <select ng-model="priority1" ng-change="selectpriority()"
+                                    class="dropdown form-control">
+                                <option value="" selected>Select Priority</option>
+                                <option ng-repeat="prio in priority"
+                                        value="{{prio.id}}">
+                                    {{prio.type}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="clearfix">
@@ -126,22 +140,14 @@
                             </div>
                         </div>
 
-
-                        <!--<div class="pull-left f-half-6">
-            <div class="form-group form-bx form-bx3-1">
-                <label for="">Time:</label>
-                <div class="area-f">
-                    <input class="form-control" name="builder_website" id="addnewproject_builder_website"
-                           placeholder="Start time"
-                           data-ng-model="params.end_date_time"
-                           minlength="1"
-                           maxlength="30"
-                           input-focus
-                            />
-
-                </div>
-            </div>
-        </div>-->
+                        <div class="form-group" style="MARGIN-TOP: 4%;">
+                            <div style="float:left;margin-bottom:-13px">
+                                <label>
+                                    <input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true">
+                                    Remind Me
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     </div>
 
@@ -150,28 +156,16 @@
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Select Time</label>
                             <select data-ng-model="reminder_time" class="dropdown form-control">
-                                <option value="" selected>Select Time</option>
-                                <option value="15 min">15 min</option>
-                                <option value="30 min">30 min</option>
-                                <option value="45 min">45 min</option>
-                                <option value="60 min">60 min</option>
-                                <option value="no reminder">no reminder</option>
+                                <option value=0 selected>Select Time</option>
+                                <option value=15>15 min</option>
+                                <option value=30>30 min</option>
+                                <option value=45>45 min</option>
+                                <option value=60>60 min</option>
+                                <option value=0>no reminder</option>
                             </select>
-                        </div>
-                    </div>
 
-                    <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Set Priority</label>
-                            <select ng-model="priority1" ng-change="selectpriority()"
-                                    class="dropdown form-control">
-                                <option value="" selected>Select Priority</option>
-                                <option ng-repeat="prio in priority"
-                                        value="{{prio.id}}">
-                                    {{prio.type}}
-                                </option>
-                            </select>
                         </div>
+
                     </div>
                 </div>
 
@@ -186,14 +180,11 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true"></label>
-                    <label>Remind Me</label>
-                </div>
+                
 
                 <div class="modal-btn-wrap clearfix">
 
-                    <button type="submit" class="f-btn">Save</button>
+                    <button type="submit" class="f-btn" ng-disabled="isDisabled">Save</button>
 
                     <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
                 </div>

@@ -25,7 +25,7 @@
                 var loginSession = response.data;
             },
             function (error) {
-                if (error.status === 400)
+                if (error.status  === 400)
                     alert(error.data.Message);
                 else
                     alert("Network issue");

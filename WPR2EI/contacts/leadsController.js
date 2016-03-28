@@ -1,43 +1,39 @@
 angular.module('contacts')
 .controller('LeadListController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window)
-    {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window) {
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         console.log('ContactListController');
+
+        $scope.leadAction = 'no_action';
 
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
         $cookieStore.put("people_type", "Lead");
 
-        $rootScope.title = 'Dwellar-Leads';
+        $rootScope.title = 'Dwellar - Lead Details';
         var loginSession1;
         var orgID = $cookieStore.get('orgID');
 
-     
+
 
         var j = 0;
-        $scope.editnew = function (id)
-        {
+        $scope.editnew = function (id) {
             $cookieStore.put('contactid', id);
-            apiService.get('PersonContactDevice/GetById?ID=' + orgID).then(function (response)
-            {
+            apiService.get('PersonContactDevice/GetById?ID=' + orgID).then(function (response) {
                 $scope.loginSession2 = response.data;
                 $state.go('loggedIn.modules.people.add_new');
             },
-             function (error)
-             {
-                return deferred.promise;
+             function (error) {
+                 return deferred.promise;
              });
         };
-         
-        $scope.goAddNew = function ()
-        {
+
+        $scope.goAddNew = function () {
             $cookieStore.put('contactid', '');
             $state.go('loggedIn.modules.people.add_new');
         };
-        $scope.goEdit = function ()
-        {
+        $scope.goEdit = function () {
             $state.go('loggedIn.modules.people.update');
         };
 
@@ -70,126 +66,93 @@ angular.module('contacts')
 
         //end
 
-        $scope.GetValue = function (fruit) {
-            var fruitId = $scope.ddlFruits;
-            var fruitName = $.grep($scope.Fruits, function (fruit) {
-                return fruit.Id == fruitId;
-            })[0].Name;
-            $cookieStore.put('Selected Text', fruitName);
 
-
-        }
-
-        $scope.addUser = function () {
-
-            var usersToBeAddedOnServer = [];
+        $scope.chooseAction = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
             $cookieStore.remove('checkedIds');
-            $cookieStore.put('checkedIds', $scope.checkedIds);
-            // Add the new users
-            for (var i in $scope.checkedIds) {
-                var newMember = {};
-                newMember.Name = $scope.checkedIds[i];
-                newMember.status = $cookieStore.get('Selected Text');
-                usersToBeAddedOnServer.push(newMember);
-            }
+            $cookieStore.put('checkedIds', allCheckedIds);
+            
+            if (allCheckedIds.length>0){
 
-            if (usersToBeAddedOnServer.length == 0) {
-                return;
+            if ($scope.leadAction === "no_action") {
+
             }
-            var Text = $cookieStore.get('Selected Text');
-            if ($cookieStore.get('Selected Text') == "ASSIGN TO") {
+            else if ($scope.leadAction === "add_tag") {
+                $state.go($scope.tagOptionPopup());
+            }
+            else if ($scope.leadAction === "assign_to") {
                 $state.go($scope.assignToUpPopup());
             }
-           else if ($cookieStore.get('Selected Text') == "ADD TAG") {
-
-               $state.go($scope.tagOptionPopup());
-           }
-          
-        }
-
-        $scope.delete = function () {
-
-            var contactDelete = [];
-            $cookieStore.remove('checkedIds');
-            $cookieStore.put('checkedIds', $scope.checkedIds);
-            // Add the new users
-            for (var i in $scope.checkedIds) {
-                var contact = {};
-                contact.id = $scope.checkedIds[i];
-                contact.organization_id = $cookieStore.get('orgID');
-
-                contactDelete.push(contact);
+            else if ($scope.leadAction === "delete") {
+                var contactDelete = [];
+                for (var i in allCheckedIds) {
+                    var contact = {};
+                    contact.id = allCheckedIds[i];
+                    contact.organization_id = $cookieStore.get('orgID');
+                    contactDelete.push(contact);
+                }
+                $cookieStore.put('contactDelete', contactDelete);
+                $scope.openConfirmation();
             }
-
-            if (contactDelete.length == 0) {
-                return;
-            }
-
-
-
-            apiService.post("Contact/DeleteMultipleContact", contactDelete).then(function (response) {
-                var loginSession = response.data;
-                $scope.openSucessDeletefullPopup();
-                $rootScope.$broadcast('REFRESH', 'LeadContactGrid');
-            
-
-
-            },
-    function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
-    });
-
-            $scope.openSucessDeletefullPopup = function () {
-                var modalInstance = $modal.open({
-                    animation: true,
-                    templateUrl: 'newuser/delete.html',
-                    backdrop: 'static',
-                    controller: DeleteController,
-                    size: 'md',
-                    resolve: { items: { title: "Lead" } }
-
-                });
-               
             }
         }
 
         // Kendo code
-        $scope.LeadContactGrid = {
-             dataSource: {
-                 type: "json",
-                 transport: {
+        $scope.LeadGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: function (options) {
+                        apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                            data = response.data;
 
-                     read: apiService.baseUrl + "Contact/GetAllContactDetails?Id=" + userID + "&type=Lead",
-		      cache: true
-                 },
-                 pageSize: 20
-             },
-             schema: {
-                 model: {
-                     fields: {
-                         Contact_Created_Date: { type: "date" }
-                     }
-                 }
-             },
+                            for (i = 0; i < data.length; i++) {
+                                var tag = (data[i].Tags);
+                                if (tag !== null) {
+                                    tag = JSON.parse(tag);
+                                    data[i].Tags = [];
+                                    data[i].Tags = tag;
+                                }
+                                else
+                                    data[i].Tags = [];
+                            }
+                            options.success(data);
+                        }, function (error) {
+                            options.error(error);
+                        })
 
-             groupable: true,
-             sortable: true,
-             selectable: "multiple",
-             reorderable: true,
-             resizable: true,
-             filterable: true,
-             pageable: {
-                 refresh: true,
-                 pageSizes: true,
-                 buttonCount: 5
-             },
-             columns: [
+                    },
+
+                },
+                pageSize: 20
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            height: screen.height - 350,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
                   {
-                      template: "<input type='checkbox', class='checkbox', data-id='#= Name #',  ng-click='projectSelected($event,dataItem)' />",
-                  title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='submit(dataItem)' />",
+                      template: "<input type='checkbox', class='checkbox', data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' />",
+                      title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
                       width: "60px",
                       attributes:
                        {
@@ -197,9 +160,9 @@ angular.module('contacts')
                            "style": "text-align:center"
                        }
                   }, {
-                      template: "<img height='40px' width='40px'  class='user-photo' src='#= Contact_Image #'/>" +
-                      "<span style='padding-left:10px' class='customer-name'> </span>",
-                      width: "60px",
+                      template: "<div class='user-photo_1'><img class='image2' src='#= Contact_Image #'/></div>" +
+                                "<span style='padding-left:10px' class='customer-name'> </span>",
+                      width: "120px",
                       title: "Picture",
                       attributes:
                       {
@@ -207,24 +170,24 @@ angular.module('contacts')
                       }
                   }, {
                       field: "Name",
-                      title: "Name",
-                      width: "120px",
+                      template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="">#=Name#</a>',
+                      width: "200px",
                       attributes: {
                           "class": "UseHand",
                           "style": "text-align:center"
                       }
                   }, {
                       field: "Contact_Phone",
-                      title: "Primary Phone",
-                      width: "120px",
+                      title: "Phone",
+
                       attributes: {
                           "class": "UseHand",
                           "style": "text-align:center"
                       }
                   }, {
                       field: "Contact_Email",
-                      title: "Primary Email",
-                      width: "120px",
+                      title: " Email",
+
                       attributes: {
                           "class": "UseHand",
                           "style": "text-align:center"
@@ -232,7 +195,7 @@ angular.module('contacts')
                   }, {
                       field: "City",
                       title: "City",
-                      width: "120px",
+
                       attributes:
                       {
                           "class": "UseHand",
@@ -241,7 +204,7 @@ angular.module('contacts')
                   }, {
                       field: "Assigned_To",
                       title: "Assigned To",
-                      width: "120px",
+
                       attributes: {
                           "class": "UseHand",
                           "style": "text-align:center"
@@ -249,7 +212,7 @@ angular.module('contacts')
                   }, {
                       field: "Type",
                       title: "Type",
-                      width: "120px",
+
                       attributes: {
                           "class": "UseHand",
                           "style": "text-align:center"
@@ -258,7 +221,18 @@ angular.module('contacts')
              {
                  field: "company",
                  title: "Company",
-                 width: "120px",
+
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             },
+             {
+                 field:"Tags",
+                 template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; display:inline-block; margin-bottom: 5px;' class='properties-close upper tag-name'>{{tag.name}}</span>",
+                 title: "TAGS",
+                 width: "220px",
+
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"
@@ -267,18 +241,24 @@ angular.module('contacts')
               {
                   field: "leadsource",
                   title: "Lead Source",
-                  width: "120px",
+
                   attributes: {
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
               },
+                 {
+                     field: "rating",
+                     title: "Last Contacted Date",
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 },
              {
                  field: "Contact_Created_Date",
                  title: "Updated Date",
-                 width: "120px",
-                 format: '{0:dd-MM-yyyy }',
-                 template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #",
+                 //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"
@@ -287,93 +267,34 @@ angular.module('contacts')
              {
                  title: "Action",
                  template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
-                width: "120px",
-                attributes:
-                  {
-                      "class": "UseHand",
-                      "style": "text-align:center"
-                  }
+
+                 attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
              }, ]
-
-         };
-
-
-  
-
-        $scope.Fruits = [{
-           
-            Id: 1,
-            Name: 'ADD TAG'
-        }, {
-            Id: 2,
-            Name: 'ASSIGN TO',
-            attributes: {
-                "class": "UseHand",
-                "style": "cursor:pointer"
-            }
-
-        }, {
-
-            Id: 3,
-            Name: 'DELETE'
-        },
-           
-        ];
-
-
-        $scope.checkedIds = [];
-        $scope.showCheckboxes = function () {
-
-
-            for (var i in $scope.checkedIds) {
-
-                // alert($scope.checkedIds[i]);
-            }
         };
 
-        $scope.submit = function (e) {
 
+        $scope.checkALL = function (e) {
             if ($('.check-box:checked').length > 0)
                 $('.checkbox').prop('checked', true);
             else
                 $('.checkbox').prop('checked', false);
-        }
-        $scope.projectSelected = function (e, data) {
+        };
 
-            console.log(e);
 
+        $scope.check = function (e, data) {
             var allListElements = $(".checkbox").toArray();
-            for (var i in allListElements) {
+            for (var i in allListElements) { // not all checked
                 if (!allListElements[i].checked) {
                     $('#checkAll').prop('checked', false);
                     break;
                 }
-                if (i == allListElements.length - 1)
+                if (i == allListElements.length - 1) // if all are checked manually
                     $('#checkAll').prop('checked', true);
             }
-            var element = $(e.currentTarget);
-            var checked = element.is(':checked')
-            row = element.closest("tr")
-            var id = data.Contact_Id;
-            var fnd = 0;
-            var allListElements = $(".checkbox");
-            for (var i in $scope.checkedIds) {
-                if (id == $scope.checkedIds[i]) {
-                    $scope.checkedIds.splice(i, 1);
-                    fnd = 1;
-                }
-
-            }
-            if (fnd == 0) {
-                $scope.checkedIds.push(id);
-            }
-            if (checked) {
-                row.addClass("k-state-selected");
-            } else {
-                row.removeClass("k-state-selected");
-            }
-
-
         }
 
 
@@ -382,8 +303,7 @@ angular.module('contacts')
             // dataItem will contain the row that was selected
             window.sessionStorage.selectedCustomerID = dataItem.Contact_Id;
 
-            $state.go('app.contactdetail');
-
+            $state.go('app.contactdetail', { id: dataItem.Contact_Id });
         };
 
         $scope.filterNow = function () {
@@ -436,10 +356,16 @@ angular.module('contacts')
             });
 
         }
-        $scope.$on('REFRESH', function (event, args) {
+
+        $scope.$on('REFRESH2', function (event, args) {
             if (args == 'LeadGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.leadAction = 'no_action';
+            $('#checkAll').prop('checked', false);
+
+         
+
         });
 
         $scope.openFollowUp = function (d) {
@@ -529,6 +455,19 @@ angular.module('contacts')
                 size: 'md'
             });
         };
+
+        $scope.openConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/confirm.tpl.html',
+                backdrop: 'static',
+                controller: confirmationController,
+                size: 'md',
+                resolve: { items: { title: "Contact" } }
+
+            });
+
+        }
 
         function clearFilters() {
             var gridData = $("#peopleGrid").data("kendoGrid");

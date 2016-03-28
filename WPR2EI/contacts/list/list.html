@@ -1,0 +1,41 @@
+﻿<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Contact List</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="pg-inner-content">
+
+        <form action="">
+
+            <div class="clearfix">
+
+                <div class="pull-right btn-wrap-right">
+                    <a a href="#" id="btnAdd" class="btn-lk"  ng-click="openListPopup()" style="cursor:pointer">+ Create New List</a>
+                </div>
+            </div>
+
+            <div id="record-content" class="properties-content">
+
+                <div id="contact_kenomain" kendo-grid k-options="ListGrid" selectable="true" k-on-change="myGridChange(dataItem )">
+                </div>
+
+            </div><!-- record-content ended -->
+
+        </form>
+
+    </div><!-- pg-inner-content ended -->
+
+</div>

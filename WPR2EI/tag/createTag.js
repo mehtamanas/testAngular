@@ -11,10 +11,9 @@ var AddTagPopUpController = function ($scope, $state, $cookieStore, apiService, 
 
         device_os: "windows10",
         device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
+        module_id: "Add New Tag",
+        action_id: "Add New Tag View",
+        details:$scope.params.name+" " + "tag aadded",
         application: "angular",
 
         browser: $cookieStore.get('browser'),
@@ -86,6 +85,7 @@ var AddTagPopUpController = function ($scope, $state, $cookieStore, apiService, 
                 name: $scope.params.name,
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
+                background_color: generateColor()
               
             };
 
@@ -103,7 +103,14 @@ var AddTagPopUpController = function ($scope, $state, $cookieStore, apiService, 
 
     }
 
+    //Random Tag color Generator
+    generateColor = function () { //function name
+        var color = '#'; // hexadecimal starting symbol
+        var letters = ['875a53', '69c0d3', 'fdd048', '818dbe', '4999f3', 'ba9fd3', '2aae55', 'bec25f', '777d94', 'ea6d6d', '6c5d5d', '28afdb', '5c71b2', 'fdb453', '71bd8b', 'ff7a4c', '1890ff', '3e582a', '2a5846', '5941a7']; //Set your colors here
 
+        return color += letters[Math.floor(Math.random() * letters.length)];
+
+    }
 
 };
 

@@ -267,6 +267,15 @@ angular.module('newuser')
               reorderable: true,
               resizable: true,
               filterable: true,
+              height: screen.height - 370,
+              columnMenu: {
+                  messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
               pageable: {
                   refresh: true,
                   pageSizes: true,
@@ -312,7 +321,8 @@ angular.module('newuser')
                   }
 
               }, {
-                  template: '<p id="#= status #">#= status #</p>',
+                  field:"status",
+                  template: '<span id="#= status #"></span>',
                   width: "100px",
                   title: "Status",
                   attributes:

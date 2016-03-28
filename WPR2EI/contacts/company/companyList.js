@@ -9,9 +9,10 @@ angular.module('contacts')
         var orgID = $cookieStore.get('orgID');
         var userID = $cookieStore.get('userId');    
       
-        $rootScope.title = 'Dwellar/Contacts';
+        $rootScope.title = 'Dwellar-Company';
      
-    
+        $scope.companyAction = 'no_action';
+
         //Audit log start               
  
         AuditCreate = function () {
@@ -46,133 +47,232 @@ angular.module('contacts')
         AuditCreate();
         //end
 
-        $scope.GetValue = function (fruit) {
-            var fruitId = $scope.ddlFruits;
-            var fruitName = $.grep($scope.Fruits, function (fruit) {
-                return fruit.Id == fruitId;
-            })[0].Name;
-
-            $cookieStore.put('Selected Text', fruitName);
-        }
-
-        $scope.addUser = function () {
-            var usersToBeAddedOnServer = [];
-            $cookieStore.remove('checkedIds');
-            $cookieStore.put('checkedIds', $scope.checkedIds);
-            // Add the new users
-            for (var i in $scope.checkedIds) {
-                var newMember = {};
-                newMember.account_email = $scope.checkedIds[i];
-                newMember.status = $cookieStore.get('Selected Text');
-                usersToBeAddedOnServer.push(newMember);
-            }
-
-            if (usersToBeAddedOnServer.length == 0) {
-                return;
-            }
-            var Text = $cookieStore.get('Selected Text');
-            if ($cookieStore.get('Selected Text') == "ASSIGN TO USER") {
-                $state.go($scope.optionPopup());
-                $state.go($scope.openSucessfullPopup())
-            }
-            else if ($cookieStore.get('Selected Text') == "DELETE") {
-                $state.go($scope.optionPopup())
-
-            }
-            else if ($cookieStore.get('Selected Text') == "ADD TAG") {
-
-                $state.go($scope.openTagPopup())
-
-            }
-            else if ($cookieStore.get('Selected Text') == "ADD TO CAMPAIGN") {
-
-                $state.go($scope.openAddLeadPopup())
-
-            }
-           
-        }
+       
         // Kendo code
+        //$scope.companyGrid =
+        //{
+        //    dataSource: {
+        //        type: "json",
+        //        transport: {
+                   
+        //            read: apiService.baseUrl + "Company/GetCompanyList/" + orgID
+        //            },
+        //        pageSize: 20
+        //    },
+        //    schema: {
+        //        model: {
+        //            fields: {
+        //                date_of_birth: { type: "date" },
+        //                last_contacted: { type: "date" }
+        //            }
+        //        }
+        //    },
+
+        //    groupable: true,
+        //    sortable: true,
+        //    selectable: "multiple",
+        //    reorderable: true,
+        //    resizable: true,
+        //    filterable: true,
+       	//    height: screen.height - 370,
+        //    columnMenu: {
+        //        messages: {
+        //            columns: "Choose columns",
+        //            filter: "Apply filter",
+        //            sortAscending: "Sort (asc)",
+        //            sortDescending: "Sort (desc)"
+        //        }
+        //    },
+        //    pageable: {
+        //        refresh: true,
+        //        pageSizes: true,
+        //        buttonCount: 5
+        //    },
+        //    columns: [
+        //         {
+        //             template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+        //             title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+        //             width: "60px",
+        //             attributes:
+        //              {
+        //                  "class": "UseHand",
+        //                  "style": "text-align:center"
+        //              }
+        //         }, {
+        //             field: "name",
+        //             title: "Name",
+        //             width: "120px",
+        //             attributes: {
+        //                 "class": "UseHand",
+        //                 "style": "text-align:center"
+        //             }
+        //         },
+        //         {
+        //             field: "Tags",
+        //             title: "Tags",
+        //             width: "120px",
+        //             attributes: {
+        //                 "class": "UseHand",
+        //                 "style": "text-align:center"
+        //             }
+        //         },{
+        //             field: "person_count",
+        //            title: "People",
+        //            width: "120px",
+        //            attributes: {
+        //                "class": "UseHand",
+        //                "style": "text-align:center"
+        //            }
+        //        },{
+        //            field: "total_task_count",
+        //            title: "Task",
+        //            width: "120px",
+        //            attributes: {
+        //                "class": "UseHand",
+        //                "style": "text-align:right"
+        //            }
+        //        },{
+        //            field: "total_quote_count",
+        //            title: "Quote",
+        //            width: "120px",
+        //            attributes: {
+        //                "class": "UseHand",
+        //                "style": "text-align:center"
+        //            }
+        //    },{
+        //        field: "last_contacted",
+        //        title: "Last Follow Up",
+        //        format: '{0:dd-MM-yyyy hh:mm:ss tt }',
+        //        type: 'date',
+        //        width: "120px",
+        //        attributes:
+        //        {
+        //            "class": "UseHand",
+        //            "style": "text-align:center"
+        //        }
+        //    },
+        //      {
+        //          field: "rating",
+        //          title: "Rating",
+        //          width: "120px",
+        //          attributes: {
+        //              "class": "UseHand",
+        //              "style": "text-align:center"
+        //          }
+        //      }, ]
+            
+        //};
+
+
+
         $scope.companyGrid =
         {
             dataSource: {
                 type: "json",
                 transport: {
-                   
-                    read: apiService.baseUrl + "Company/GetCompanyList/" + orgID
+                    read: function (options) {
+                        apiService.getWithoutCaching("Company/GetCompanyList/" + orgID).then(function (response) {
+                            data = response.data;
+
+                            for (i = 0; i < data.length; i++) {
+                                var tag = (data[i].Tags);
+                                if (tag !== null) {
+                                    tag = JSON.parse(tag);
+                                    data[i].Tags = [];
+                                    data[i].Tags = tag;
+                                }
+                                else
+                                    data[i].Tags = [];
+                            }
+                            options.success(data);
+                        }, function (error) {
+                            options.error(error);
+                        })
+
                     },
-                pageSize: 5
+                },
+                pageSize: 20
             },
             schema: {
                 model: {
                     fields: {
-                        date_of_birth: { type: "date" }
+                        date_of_birth: { type: "date" },
+                        last_contacted: { type: "date" }
                     }
                 }
             },
-
             groupable: true,
             sortable: true,
             selectable: "multiple",
             reorderable: true,
             resizable: true,
             filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [
+            columns: [{
+                template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+                title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                width: "60px",
+                attributes:
                  {
-                     template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                     title:"<input id='checkAll', type='checkbox', class='check-box' />",
-                     width: "60px",
-                     attributes:
-                      {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                 }, {
-                     field: "name",
-                     title: "Name",
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+            }, {
+                field: "name",
+                title: "Name",
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            }, {
+                     field: "person_count",
+                     title: "People",
                      width: "120px",
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
                      }
-                 },{
-                     field: "person_count",
-                    title: "People",
-                    width: "120px",
-                    attributes: {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-                },{
-                    field: "total_task_count",
-                    title: "Task",
-                    width: "120px",
-                    attributes: {
-                        "class": "UseHand",
-                        "style": "text-align:right"
-                    }
-                },{
-                    field: "total_quote_count",
-                    title: "Quote",
-                    width: "120px",
-                    attributes: {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-            },{
-                field: "last_contacted",
-                title: "Last Follow Up",
-                width: "120px",
-                attributes:
-                {
-                    "class": "UseHand",
-                    "style": "text-align:center"
-                }
-            },
+                 }, {
+                     field: "total_task_count",
+                     title: "Task",
+                     width: "120px",
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:right"
+                     }
+                 }, {
+                     field: "total_quote_count",
+                     title: "Quote",
+                     width: "120px",
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
+                     field: "last_contacted",
+                     title: "Last Follow Up",
+                     format: '{0:dd-MM-yyyy hh:mm:ss tt }',
+                     type: 'date',
+                     width: "120px",
+                     attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 },
               {
                   field: "rating",
                   title: "Rating",
@@ -181,64 +281,42 @@ angular.module('contacts')
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
-              }, ]
-            
-        };
-
-
-
-        $scope.Fruits = [{
-            Id: 1,
-            Name: 'ASSIGN TO USER'
-        }, {
-            Id: 2,
-            Name: 'DELETE'
-        }, {
-            Id: 3,
-            Name: 'ADD TAG'
-        },
-            {
-            Id: 4,
-            Name: 'ADD TO CAMPAIGN'
-        }
-        ];
-        $scope.checkedIds = [];
-        $scope.showCheckboxes = function () {
-            for (var i in $scope.checkedIds) {
-                // alert($scope.checkedIds[i]);
-            }
-        };
-
-        $scope.onClick = function (e) {
-            var element = $(e.currentTarget);
-            var checked = element.is(':checked')
-            row = element.closest("tr")
-            var id = $(e.target).data('id');
-            var fnd = 0;
-            for (var i in $scope.checkedIds) {
-                if (id == $scope.checkedIds[i]) {
-                    $scope.checkedIds.splice(i, 1);
-                    fnd = 1;
+              },
+                 {
+                field: "TAGS",
+                template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; display:inline-block; margin-bottom: 5px;' class='properties-close upper tag-name'>{{tag.name}}</span>",
+                title: "TAGS",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
                 }
+            },
+            ]
 
-            }
-            if (fnd == 0) {
-                $scope.checkedIds.push(id);
-            }
-            if (checked) {
-                row.addClass("k-state-selected");
-            } else {
-                row.removeClass("k-state-selected");
-            }
-        }
+        };
+
+
+    
+
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
             // dataItem will contain the row that was selected
             window.sessionStorage.selectedCustomerID = dataItem.id;
             $scope.companyName = $cookieStore.get('Company_Name');
+            $cookieStore.put('company_name', dataItem.name);
             $state.go('app.companyDetail');
            
 
+        };
+
+        $scope.tagPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/company/addTag.html',
+                backdrop: 'static',
+                controller: AddTagCompanyController,
+                size: 'md'
+            });
         };
 
         $scope.filterNow = function () {
@@ -295,11 +373,64 @@ angular.module('contacts')
             if (args == 'contactGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.companyAction = 'no_action';
         });
 
         function clearFilters() {
             var gridData = $("#peopleGrid").data("kendoGrid");
             gridData.dataSource.filter({});
+        }
+
+        $scope.chooseAction = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.companyAction === "no_action") {
+
+                }
+                else if ($scope.companyAction === "add_tag") {
+                    $state.go($scope.tagPopup());
+                }
+                else if ($scope.companyAction === "assign_to") {
+                    $state.go($scope.assignToUpPopup());
+                }
+                else if ($scope.companyAction === "delete") {
+                    var companyDelete = [];
+                    for (var i in allCheckedIds) {
+                        var company = {};
+                        company.id = allCheckedIds[i];
+                        company.organization_id = $cookieStore.get('orgID');
+                        companyDelete.push(company);
+                    }
+                    $cookieStore.put('contactDelete', companyDelete);
+                    $scope.openConfirmation();
+                }
+            }
+        }
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
+
+        $scope.check = function (e, data) {
+            var allListElements = $(".checkbox").toArray();
+            for (var i in allListElements) { // not all checked
+                if (!allListElements[i].checked) {
+                    $('#checkAll').prop('checked', false);
+                    break;
+                }
+                if (i == allListElements.length - 1) // if all are checked manually
+                    $('#checkAll').prop('checked', true);
+            }
         }
     }
 );

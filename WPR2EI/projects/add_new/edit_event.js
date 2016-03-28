@@ -4,7 +4,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
     console.log('EditEventproject');
 
 
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.selectedEventID = window.sessionStorage.selectedEventID;
     var orgID = $cookieStore.get('orgID');
     $scope.project1 = window.sessionStorage.selectedCustomerID;
  
@@ -36,7 +36,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
 
     //end
 
-    contactUrl = "Event/EditGet/" + $scope.seletedCustomerId;
+    contactUrl = "Event/EditGet/" + $scope.selectedEventID;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.params = response.data[0];
 
@@ -96,7 +96,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
 
 
     $scope.params = {
-        id: window.sessionStorage.selectedCustomerID,
+        id: window.sessionStorage.selectedEventID,
         name: $scope.name,
         start_date: $scope.start_date,
         end_date: $scope.end_date,
@@ -105,7 +105,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
         user_id: $cookieStore.get('userId'),
         location: $scope.location,
         reminder_time: $scope.reminder_time,
-        text: $scop.text,
+        text: $scope.text,
         project_id: $scope.project1,
         contact_id: $scope.contact1,
       
@@ -116,7 +116,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
     $scope.save = function () {
         var postData =
                {
-                   id: window.sessionStorage.selectedCustomerID,
+                   id: window.sessionStorage.selectedEventID,
                    name: $scope.params.name,
                    start_date: $scope.params.start_date,
                    end_date: $scope.params.end_date,
@@ -183,7 +183,7 @@ var EditEventproject = function ($scope, $state, $cookieStore, apiService, $moda
                 text: $scope.params.text,
                 remind_me: remind_me,
                 reminder_time: $scope.params.reminder_datetime,
-                id: $scope.seletedCustomerId,
+                id: $scope.selectedEventID,
             };
 
             $scope.save($scope.params);

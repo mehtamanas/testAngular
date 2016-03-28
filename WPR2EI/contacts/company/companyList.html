@@ -21,10 +21,11 @@
     <div class="pg-inner-content">
         <div class="clearfix">
             <div class="pull-left actions-wrap">
-                <select id="actions-option" class="form-control actions-option">
-                    <option>ACTIONS</option>
-                    <option>EDIT</option>
-                    <option>DELETE</option>
+
+                <select ng-model="companyAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
+                    <option value='no_action' selected>ACTIONS</option>
+                    <option value='add_tag'>ADD TAG</option>
+
                 </select>
             </div>
         </div>

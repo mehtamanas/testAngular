@@ -5,6 +5,8 @@
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     var userId = $cookieStore.get('userId');
+    $scope.chargetype = [];
+    $scope.caltype = [];
 
     //Audit log start
     $scope.params = {
@@ -37,6 +39,23 @@
 
     //end
 
+    $(document).on("click", "remove-field0", function () {
+        var removed1 = $(this).parent().find('#Charge_name_Type_name').val();
+        var removed2 = $(this).parent().find('#charge_type').val();
+        var removed3 = $(this).parent().find('#no_of_months').val();
+        var removed4 = $(this).parent().find('#category_type_name').val();
+        var removed5 = $(this).parent().find('#charge_value').val();
+        var fnd = 0;
+        for (var i in $scope.choices2) {
+            if (removed1 == $scope.choices2[i].Charge_name_Type_name && removed2 == $scope.choices2[i].charge_type && removed3 == $scope.choices2[i].no_of_months && removed4 == $scope.choices2[i].category_type_name && removed5 == $scope.choices2[i].charge_value) {
+                $scope.choices2.splice(i, 1);
+                fnd = 1;
+            }
+
+        }
+        $(this).parent().remove();
+    });
+
 
 
     $scope.choices = [{ id: 'choice1' }];
@@ -48,9 +67,8 @@
 
 
     $scope.choices2 = [{ id: 'choice1' }];
-    $(document).on("click", ".remove-field0", function () {
 
-    });
+   
 
     $scope.choices2 = [{ id: 'choice1' }];
     $scope.addNewChoice2 = function (e) {
@@ -66,69 +84,47 @@
 
     };
 
-    paymentCreate = function (param) {
+    $scope.paymentCreate = function () {
+
 
         var schemeupdate = [];
-        var tot = 0;
-        for (var i in $scope.choices2) {
-
-            tot = tot + parseInt($scope.choices2[i].percentage);
-
+        for (var i in $scope.choices2)
+        {
+            var newscheme = {};
+            
+            newscheme.user_id = $cookieStore.get('userId');
+            newscheme.organization_id = $cookieStore.get('orgID');
+            newscheme.category_type_name = $scope.choices2[i].category_type_name;
+            newscheme.Charge_name_Type_name = $scope.choices2[i].Charge_name_Type_name;
+            newscheme.no_of_months = $scope.choices2[i].no_of_months;
+            if (newscheme.no_of_months == undefined)
+            {
+                newscheme.no_of_months = "0";
+            }
+          
+            newscheme.project_id = window.sessionStorage.selectedCustomerID;
+            newscheme.Charge_Type_id = $scope.chargetype[i].id;
+            newscheme.calculation_type = $scope.caltype[i].id;
+            newscheme.charge_value = $scope.choices2[i].charge_value;
+            schemeupdate.push(newscheme);
         }
 
-        if (tot != 100) {
-            //alert("cannot proceed...");
-            $scope.openUnsucessPopup();
-            return;
-        }
-        else {
+        apiService.post("Charges/CreateChargeProjectMapping", schemeupdate).then(function (response) {
+            var loginSession = response.data;
+            $modalInstance.dismiss();
+            $scope.openSucessfullPopup();
+            $rootScope.$broadcast('REFRESH', 'ChargesGrid');
+        },
+     function (error) {
+         if (error.status === 400)
+             alert(error.data.Message);
+         else
+             alert("Network issue");
 
-            apiService.post("Payment/Add_new_Payment_scheme", param).then(function (response) {
-                var loginSession = response.data;
-                var schemeupdate = [];
-                for (var i in $scope.choices2) {
-                    var newscheme = {};
-
-                    newscheme.user_id = $cookieStore.get('userId');
-                    newscheme.organization_id = $cookieStore.get('orgID');
-                    newscheme.Milestone = $scope.choices2[i].Milestone;
-                    newscheme.percentage = $scope.choices2[i].percentage;
-                    newscheme.project_id = window.sessionStorage.selectedCustomerID;
-                    newscheme.payment_schedule_id = loginSession.id;
-                    schemeupdate.push(newscheme);
-                }
-
-                apiService.post("Payment/new_Paymnt_scheme_Milestn", schemeupdate).then(function (response) {
-                    $scope.choices2 = response.data;
-                    $modalInstance.dismiss();
-                    $scope.openSucessfullPopup();
-                },
-             function (error) {
-                 if (error.status === 400)
-                     alert(error.data.Message);
-                 else
-                     alert("Network issue");
-
-             });
-                $scope.total = tot;
-                $modalInstance.dismiss();
-
-            },
-function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
-
-});
-
-
-        }
-
-
-
-    }
-
+     });
+ 
+ 
+}
 
     Url = "Charges/GetCharge_Type"
     apiService.get(Url).then(function (response) {
@@ -138,11 +134,32 @@ function (error) {
        alert("Error " + error.state);
    });
 
-    $scope.selectctype = function () {
-        $scope.params.Charge_Type_id = $scope.type1;
+    $scope.selectctype = function (id,$index)
+    {
+        
+        if (id == 'EE3B05C9-D14A-4179-9D48-166D503F8E11')
+        {
+            $scope.chargetype[$index].enable = true;
+            
+        }
+        else
+        {
+            $scope.chargetype[$index].enable = false;
+            $scope.chargetype[$index].value = null;
+        }
+        
+        $scope.chargetype.id = $scope.chargetype[$index].id;
     };
 
-  
+    $scope.caltypes = [];
+   
+    $scope.caltypes.push('Previous Total');
+    $scope.caltypes.push('Basic');
+    
+    $scope.selectyear = function ($index) {
+        $scope.caltype.id = $scope.caltype[$index].id;
+        //alert($scope.params.month);
+    };
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
@@ -151,30 +168,21 @@ function (error) {
             backdrop: 'static',
             controller: sucessfullController,
             size: 'md',
-            resolve: { items: { title: "Payment" } }
+            resolve: { items: { title: "Charges" } }
 
         });
-        $rootScope.$broadcast('REFRESH', 'payment');
+        
     };
 
-    $scope.openUnsucessPopup = function () {
-        var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'newuser/unsuccess.tpl.html',
-            backdrop: 'static',
-            controller: UnsucessController,
-            size: 'md'
 
-        });
-
-        $rootScope.$broadcast('REFRESH', 'payment');
-    };
 
     $scope.params = {
         Charge_Type_id: $scope.Charge_Type_id,
         Charge_name_Type_name: $scope.Charge_name_Type_name,
         category_type_name: $scope.category_type_name,
-        no_of_months:$scope.no_of_months,
+        no_of_months: $scope.no_of_months,
+        charge_value: $scope.charge_value,
+        calculation_type: $scope.calculation_type,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId')
     };
@@ -185,11 +193,12 @@ function (error) {
         Charge_name_Type_name: $scope.Charge_name_Type_name,
         category_type_name: $scope.category_type_name,
         no_of_months: $scope.no_of_months,
+        charge_value: $scope.charge_value,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId')
     };
 
-
+  
 
 
 
@@ -210,13 +219,7 @@ function (error) {
         if (isValid) {
 
 
-            new paymentCreate($scope.params).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
+            $scope.paymentCreate();
 
             $scope.showValid = false;
 

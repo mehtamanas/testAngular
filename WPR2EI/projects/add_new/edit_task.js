@@ -7,17 +7,17 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
 
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
     $scope.project1 = $scope.seletedCustomerId;
 
 
-    contactUrl = "ToDoItem/EditGet/" + $scope.seletedCustomerId;
+    contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.params = response.data[0];
 
         var remindTime = moment.duration(moment.utc(moment(response.data[0].due_date).diff(moment(response.data[0].reminder_time))).format("HH:mm:ss")).asMinutes();
         $scope.reminder_time = remindTime.toString();
-        $scope.due_date = moment(moment.utc(response.data[0].due_date).toDate()).format("DD/MM/YYYY HH:mm A");
+        $scope.due_date = moment(moment.utc(response.data[0].due_date).toDate()).format("DD/MM/YYYY hh:mm A");
       //  $scope.params.end_date = moment(moment.utc(response.data[0].end_date).toDate()).format("DD/MM/YYYY HH:mm A");
         if (response.data[0].remind_me === "1")
             $scope.remind_me = true;
@@ -88,7 +88,7 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
         reminder_time: $scope.reminder_time,
         task_type_id_: $scope.event1,
         time: $scope.time,
-        id: $scope.seletedCustomerId,
+        id: $scope.selectedTaskID,
 
     };
 
@@ -146,7 +146,7 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
         var postData1 = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
-            id: $scope.seletedCustomerId,
+            id: $scope.selectedTaskID,
         }
         apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
             var loginSession = response.data;
@@ -285,7 +285,7 @@ function (error) {
                 //reminder_time: $scope.params.reminder_datetime,
   		due_date: new Date(dDate).toISOString(),
  	        reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
-                id: $scope.seletedCustomerId,
+ 	        id: $scope.selectedTaskID,
             };
 
             $scope.save($scope.params);

@@ -8,9 +8,9 @@
         $scope.YTD = moment(moment().startOf('year').calendar()).format("MMM D YYYY");
       
         
-        $(document).ready(function () {
-            $('#select-dates2').searchableOptionList();
-        });
+        //$(document).ready(function () {
+        //    $('#select-dates2').searchableOptionList();
+        //});
 
        
         var callApi = function () {

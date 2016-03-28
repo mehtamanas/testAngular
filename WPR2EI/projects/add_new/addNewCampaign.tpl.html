@@ -46,7 +46,7 @@
                                 <option value="" selected>Select Project</option>
                                 <option ng-repeat="project in projects"
                                         value="{{project.id}}"
-                                      >
+                                        ng-disabled="project.id !== project1">
                                     {{project.name}}
                                 </option>
 

@@ -1,0 +1,134 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Contact List</h2>
+                </div>
+            </div>
+            <div class="pg-inner-content">
+
+                <div class="project-detail">
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+
+                        <div class="col-lg-3 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;">
+                                <h2 cass="pg-inner-title">Add Members</h2>
+                                <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+                                    <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab" ng-click="showTags()">Add By Tag</a></li>
+                                    <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab" ng-click="showList()">Add By Name</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row left-inner-addon">
+                            <div class="col-lg-3 pull-right">
+                                <div class="right-inner-addon" style="padding-top: 15%;">
+                                    <i class="fa fa-search"></i>
+                                    <input type="text" ng-model="tagFilter.Name" class="form-control" id="add_users_to_team" placeholder="Search Tags" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="tagSelected">
+                        <!--tags Start-->
+                        <div class="user_details1">
+
+                            <div class="user_details">
+                                <div class="row row_content" ng-repeat="user in orgUsers | filter: tagFilter:strict">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <p class="user_name">
+                                            {{user.Name }}
+                                        </p>
+                                        <!--<p class="user_mail">
+                                        </p>-->
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 col-sm-3">
+                                        <span class="pull-right" ng-click="addUser(user)">
+                                            <img ng-src="assets/images/{{user.isTeamMember ? 'ok': 'plus'}}_icon.png" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                            <div class="user_list_content">
+
+                                <div class="user_list_item">
+                                    <span class="user_items" ng-repeat="user in orgUsers">
+                                        <span class="btn btn-info1 btn_pad" ng-if="user.isTeamMember" style="margin-top: 5px;">
+                                            {{user.Name}}
+                                            <span class="icon_space glyphicon glyphicon-remove" ng-click="removeUser(user)"></span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="user_list_text">
+                                    <div class="row left-inner-addon">
+                                        <div class="col-lg-2 col-md-2 col-sm-1"></div>
+                                        <div class="col-lg-2 col-md-2 col-sm-1"></div>
+
+
+                                    </div>
+                                    <button type="submit" class="btn campaign-container-btn-1-1" id="campaign_cancel" ng-click="cancel()">BACK</button>
+                                    <button type="button" class="btn organization-btn-1-2" ng-click="contactsummary()"> Next &gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--tags End-->
+
+                    <div ng-show="listSelected"><!--list Start-->
+                        <div class="user_details1">
+
+                            <div class="user_details">
+                                <div class="row row_content" ng-repeat="list in orgList | filter: tagFilter:strict">
+
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <p class="user_name">
+                                            {{list.Name}}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 col-sm-3">
+                                        <span class="pull-right" ng-click="addList(list)">
+                                            <img ng-src="assets/images/{{list.isSelected ? 'ok': 'plus'}}_icon.png" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                            <div class="user_list_content">
+
+                                <div class="user_list_item">
+                                    <span class="user_items" ng-repeat="list in orgList">
+                                        <span class="btn btn-info1 btn_pad" ng-if="list.isSelected" style="margin-top: 5px;">
+                                            {{list.Name}}
+                                            <span class="icon_space glyphicon glyphicon-remove" ng-click="removeList(list)"></span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="user_list_text">
+                                    <div class="row left-inner-addon">
+                                        <div class="col-lg-2 col-md-2 col-sm-1"></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-1"></div>
+
+
+                                </div>
+                                <button type="submit" class="btn campaign-container-btn-1-1" id="campaign_cancel" ng-click="cancel()">BACK</button>
+                                <!--<button type="submit" class="campaign-container-btn-cancel" id="campaign_cancel" style="margin-left: 30%;" ng-click="cancel()">CANCEL</button>-->
+                                <button type="button" class="btn organization-btn-1-2" ng-click="saveList()"> Next &gt;</button>
+                            </div>
+                        </div>
+                    </div><!--list End-->
+
+                    <div kendo-grid k-options="tagGrid" selectable="true"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

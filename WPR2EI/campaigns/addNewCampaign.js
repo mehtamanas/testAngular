@@ -60,7 +60,7 @@
         }
 
         $scope.cancel = function () {
-            $state.go('app.campaigns');
+            $state.go('app.campaignsEvent');
         }
  
         $scope.params = {

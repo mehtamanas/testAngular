@@ -245,68 +245,61 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             $scope.openSucessfullPopup();
             var media = [];
 
-            if ($scope.params.facebook != undefined) {
-                var postData_fb =
-                   {
+            var postData_fb =
+               {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: $scope.seletedCustomerId,
+                   class_type: "Project",
+                   element_type: "project_facebook",
+                   element_info1: $scope.facebook,
+               }
+            media.push(postData_fb);
 
-                       user_id: $cookieStore.get('userId'),
-                       organization_id: $cookieStore.get('orgID'),
-                       class_id: loginSession.id,
-                       class_type: "Project",
-                       element_type: "project_facebook",
-                       element_info1: $scope.params.facebook,
-                   }
-                media.push(postData_fb);
-            }
-            if ($scope.params.twitter != undefined) {
-                var postData_twitter =
-                    {
+            var postData_twitter =
+                {
+                    user_id: $cookieStore.get('userId'),
+                    organization_id: $cookieStore.get('orgID'),
+                    class_id: $scope.seletedCustomerId,
+                    class_type: "Project",
+                    element_type: "project_twitter",
+                    element_info1: $scope.twitter,
+                }
+            media.push(postData_twitter);
 
-                        user_id: $cookieStore.get('userId'),
-                        organization_id: $cookieStore.get('orgID'),
-                        class_id: loginSession.id,
-                        class_type: "Project",
-                        element_type: "project_twitter",
-                        element_info1: $scope.params.twitter,
-                    }
-                media.push(postData_twitter);
-            }
-            if ($scope.params.twitter != undefined) {
-                var postData_linkedin =
-                   {
-                       user_id: $cookieStore.get('userId'),
-                       organization_id: $cookieStore.get('orgID'),
-                       class_id: loginSession.id,
-                       class_type: "Project",
-                       element_type: "project_linkedin",
-                       element_info1: $scope.params.linkedin,
-                   }
-                media.push(postData_linkedin);
-            }
-            if (media.length > 0) {
-                apiService.post("ElementInfo/Create", media).then(function (response) {
-                    var loginSession = response.data;
-                    called = true;
+            var postData_linkedin =
+               {
+                   user_id: $cookieStore.get('userId'),
+                   organization_id: $cookieStore.get('orgID'),
+                   class_id: $scope.seletedCustomerId,
+                   class_type: "Project",
+                   element_type: "project_linkedin",
+                   element_info1: $scope.linkedin,
+               }
+            media.push(postData_linkedin);
 
-                },
-               function (error) {
-                   if (error.status === 400)
-                       alert(error.data.Message);
-                   else
-                       alert("Network issue");
+            apiService.post("ElementInfo/Create", media).then(function (response) {
+                var loginSession = response.data;
+        
+                called = true;
 
-               });
-            }
+            },
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+
+           });
+
+
         },
-            function (error) {
-                if (error.status === 400)
-                    alert(error.data.Message);
-                else
-
-                    alert("Network issue");
-
-            });
-
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
 
             
         $scope.openSucessfullPopup = function () {

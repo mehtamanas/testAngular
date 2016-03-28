@@ -10,119 +10,52 @@
         <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
             <h4 class="form-title">Edit Project</h4>
+            <h4 class="form-sub-title">Select Project Type</h4>
 
-            <h4 class="form-sub-title">Images</h4>
+            <div class="project-type-list clearfix">
 
-            <div class="clearfix image-upload-container">
-                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-                    <div class="image-upload-title">Upload Project Logo</div>
-                    <div class="dropzone dropzone-bx image-upload-bx">
-                        <div class="fallback">
-                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                <div class="image-upload-panel">
-                                    <div class="row" ng-hide="uploader.queue.length">
-                                        <img ng-src={{params.media_url1}} class="upload-image" />
-                                    </div>
-                                    <div class="row" ng-show="uploader.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                            <div ng-show="uploader.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="pull-left project-type-bx project-type01 " ng-click="selectapartment()" ng-class="{'project-selected': selectedproject==4}">
+                    <div class="select-tick"></div>
+                    <div class="project-type-inner">
+                        <div class="project-type-img">
+                            <!--<img src="images/apartment.png" style="width:110px;height:100px;" ng-click="selectapartment()" />-->
                         </div>
+                        <div class="project-type-title">Apartment</div>
                     </div>
-                    <div class="uploadFileName">
-                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                    </div>
-
-                    <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                    </label>
                 </div>
 
-                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
-                    <div class="image-upload-title">Upload Home Page Image</div>
-                    <div class="dropzone dropzone-bx image-upload-bx">
-                        <div class="fallback">
-                            <div class="panel panel-success" uploader="uploader1" nv-file-over="">
-                                <div class="image-upload-panel">
-                                    <div class="row" ng-hide="uploader1.queue.length">
-                                        <img ng-src={{params.media_url2}} class="upload-image" />
-                                    </div>
-                                    <div class="row" ng-show="uploader1.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
-                                            <div ng-show="uploader1.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="pull-left project-type-bx project-type02" ng-click="selecthome()" ng-class="{'project-selected': selectedproject==5}">
+                    <div class="select-tick"></div>
+                    <div class="project-type-inner">
+                        <div class="project-type-img">
+                            <!--<img src="images/family.png" style="width:110px;height:100px;" ng-click="selecthome()" />-->
                         </div>
+                        <div class="project-type-title">Single Family Home</div>
                     </div>
-                    <div class="uploadFileName">
-                        <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
-                    </div>
-
-                    <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
-                    </label>
-
                 </div>
 
-                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
-                    <div class="image-upload-title">Upload Project Thumbnail</div>
-                    <div class="dropzone dropzone-bx image-upload-bx">
-                        <div class="fallback">
-                            <div class="panel panel-success" uploader="uploader2" nv-file-over="">
-                                <div class=" image-upload-panel">
-                                    <div class="row" ng-hide="uploader2.queue.length">
-                                        <img ng-src={{params.media_url3}} class="upload-image" />
-                                    </div>
-                                    <div class="row" ng-show="uploader2.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
-                                            <div ng-show="uploader2.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="pull-left project-type-bx project-type03" ng-click="selectvilla()" ng-class="{'project-selected': selectedproject==6}">
+                    <div class="select-tick"></div>
+                    <div class="project-type-inner">
+                        <div class="project-type-img">
+                            <!--<img src="images/plot.png" style="width:110px;height:100px;" ng-click="selectvilla()" />-->
                         </div>
+                        <div class="project-type-title">Villas</div>
                     </div>
-                    <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>
-
-                    <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
-                    </label>
-
                 </div>
 
-                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader3" filters="queueLimit, customFilter">
-                    <div class="image-upload-title">Upload Podium Image</div>
-                    <div class="dropzone dropzone-bx image-upload-bx">
-                        <div class="fallback">
-                            <div class="panel panel-success" uploader="uploader3" nv-file-over="">
-                                <div class="panel-body image-upload-panel">
-                                    <div class="row" ng-hide="uploader3.queue.length">
-                                        <img ng-src={{params.media_url4}} class="img-responsive" />
-                                    </div>
-                                    <div class="row" ng-show="uploader3.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader3.queue">
-                                            <div ng-show="uploader3.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="pull-left project-type-bx project-type04" ng-click="selectplot()" ng-class="{'project-selected': selectedproject==7}">
+                    <div class="select-tick"></div>
+                    <div class="project-type-inner">
+                        <div class="project-type-img">
+                            <!--<img src="images/villas.png" style="width:110px;height:100px;" ng-click="selectplot()" />-->
                         </div>
+                        <div class="project-type-title">Plot</div>
                     </div>
-                    <div class="uploadFileName"><p ng-show="uploader3.queue.length"> {{uploader3.queue[0]._file.name}}</p></div>
-                    <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader3" />
-                    </label>
                 </div>
-            </div>
+
+            </div><!-- select-project-type ended -->
+         
 
             <h4 class="form-sub-title">Project Details</h4>
             <div class="form-group"
@@ -146,7 +79,7 @@
                             <div ng-message="pattern">Enter valid project name</div>
                         </div>
                     </div>
-                    <div class="field-mdl field-req" style="margin-top: 25px; margin-left:10px">*</div>
+                    <div class="field-mdl field-req">*</div>
                 </div>
 
             </div>
@@ -282,6 +215,118 @@
                     </div>
                 </div>
             </div>
+            <h4 class="form-sub-title">Images</h4>
+
+            <div class="clearfix image-upload-container">
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Project Logo</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                                <div class="image-upload-panel">
+                                    <div class="row" ng-hide="uploader.queue.length">
+                                        <img ng-src={{params.media_url1}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                            <div ng-show="uploader.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName">
+                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                    </div>
+
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                    </label>
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Home Page Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                                <div class="image-upload-panel">
+                                    <div class="row" ng-hide="uploader1.queue.length">
+                                        <img ng-src={{params.media_url2}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader1.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
+                                            <div ng-show="uploader1.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName">
+                        <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
+                    </div>
+
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+                    </label>
+
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Project Thumbnail</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader2" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader2.queue.length">
+                                        <img ng-src={{params.media_url3}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader2.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
+                                            <div ng-show="uploader2.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>
+
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                    </label>
+
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader3" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Podium Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader3" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader3.queue.length">
+                                        <img ng-src={{params.media_url4}} class="img-responsive" />
+                                    </div>
+                                    <div class="row" ng-show="uploader3.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader3.queue">
+                                            <div ng-show="uploader3.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader3.queue.length"> {{uploader3.queue[0]._file.name}}</p></div>
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader3" />
+                    </label>
+                </div>
+            </div><!--images end-->
 
             <div ng-repeat="choice in choices2">
                 <div class="form-group"
@@ -501,7 +546,7 @@
 
                         <div id="email-wrap">
                             <div id="facebook" class="form-bx form-bx2">
-                                <p>Add Social Media Profile</p>
+                                <p>Add social Media Profile</p>
                                 <input autofocus name="fb" class="form-control" id="newcontact_social" type="text"
                                        data-ng-model="facebook"
                                        />
@@ -569,51 +614,7 @@
 
                 </div>
 
-                <h4 class="form-sub-title">Select Project Type</h4>
-
-                <div class="project-type-list clearfix">
-
-                    <div class="pull-left project-type-bx project-type01 " ng-click="selectapartment()" ng-class="{'project-selected': selectedproject==4}">
-                        <div class="select-tick"></div>
-                        <div class="project-type-inner">
-                            <div class="project-type-img">
-                                <!--<img src="images/apartment.png" style="width:110px;height:100px;" ng-click="selectapartment()" />-->
-                            </div>
-                            <div class="project-type-title">Apartment</div>
-                        </div>
-                    </div>
-
-                    <div class="pull-left project-type-bx project-type02" ng-click="selecthome()"ng-class="{'project-selected': selectedproject==5}">
-                        <div class="select-tick"></div>
-                        <div class="project-type-inner">
-                            <div class="project-type-img" >
-                                <!--<img src="images/family.png" style="width:110px;height:100px;" ng-click="selecthome()" />-->
-                            </div>
-                            <div class="project-type-title">Single Family Home</div>
-                        </div>
-                    </div>
-
-                    <div class="pull-left project-type-bx project-type03" ng-click="selectvilla()" ng-class="{'project-selected': selectedproject==6}">
-                        <div class="select-tick"></div>
-                        <div class="project-type-inner">
-                            <div class="project-type-img" >
-                                <!--<img src="images/plot.png" style="width:110px;height:100px;" ng-click="selectvilla()" />-->
-                            </div>
-                            <div class="project-type-title">Villas</div>
-                        </div>
-                    </div>
-
-                    <div class="pull-left project-type-bx project-type04" ng-click="selectplot()" ng-class="{'project-selected': selectedproject==7}">
-                        <div class="select-tick"></div>
-                        <div class="project-type-inner">
-                            <div class="project-type-img" >
-                                <!--<img src="images/villas.png" style="width:110px;height:100px;" ng-click="selectplot()" />-->
-                            </div>
-                            <div class="project-type-title">Plot</div>
-                        </div>
-                    </div>
-
-                </div><!-- select-project-type ended -->
+              
 
                 <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0">
                     <div class="progress-bar" role="progressbar"

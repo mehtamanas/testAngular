@@ -39,7 +39,7 @@
                                  data-ng-class="{ 'has-error' : addNewForm.paymenttype.$invalid && (!addNewForm.paymenttype.$pristine || showValid) && !addNewForm.paymenttype.$focus,
                                                   'has-success': addNewForm.paymenttype.$valid && !addNewForm.paymenttype.$pristine && !addNewForm.paymenttype.$focus
                                                  }">
-                                <div class="form-group form-bx form-bx11 form-bx11-1 ">
+                                <div class="form-group form-bx11-2 ">
                                     <label for="">Payment Type</label>
                                     <select ng-model="pay1" ng-change="selectpay()" name="paymenttype"
                                             class="dropdown form-control" id="contactpayment_amount" required>
@@ -58,33 +58,16 @@
                               
                                 </div>
 
-                            <div class="form-group"
-                                 data-ng-class="{ 'has-error' : addNewForm.paymentdate.$invalid && (!addNewForm.paymentdate.$pristine || showValid) && !addNewForm.paymentdate.$focus,
-                                                  'has-success': addNewForm.paymentdate.$valid && !addNewForm.paymentdate.$pristine && !addNewForm.paymentdate.$focus
-                                                 }">
-
-                                <div class="form-group form-bx form-bx11 form-bx11-1">
-
-                                    <label for="">Due Required</label>
-                                    <input class="form-control" name="paymentdate" id="contactpayment_amount"
-                                           placeholder="DD/MM/YYYY"
-                                           data-ng-model="params.duedate"
-                                           minlength="1"
-                                           maxlength="10"
-                                           ng-pattern='/^[0,1]?\d{1}\/(([0-2]?\d{1})|([3][0,1]{1}))\/(([1]{1}[9]{1}[9]{1}\d{1})|([2-9]{1}\d{3}))$/'
-                                           input-focus
-                                           required />
-                                    <div ng-messages="addNewForm.paymentdate.$error" style="color:maroon" role="alert">
-                                        <div ng-message="required" data-ng-if="addNewForm.paymentdate.$invalid && (!addNewForm.paymentdate.$pristine || showValid) && !addNewForm.paymentdate.$focus">This field should not be empty </div>
-                                        <div ng-message="pattern">Enter valid due date</div>
+                            <div class="clearfix">
+                                <div class="pull-left f-half-6">
+                                    <div class="form-group form-bx form-bx3-1">
+                                        <label for="">Due Required</label>
+                                        <input kendo-date-picker class="form-control "
+                                               ng-model="params.duedate"
+                                               k-ng-model="k_due_date"
+                                               k-format="'dd/MM/yyyy'" />
                                     </div>
-                                    
                                 </div>
-
-                                </div>
-
-
-
                             </div>
                     </div>
                     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">

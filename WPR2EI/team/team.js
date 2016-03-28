@@ -171,6 +171,15 @@ angular.module('team')
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
