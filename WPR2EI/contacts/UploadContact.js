@@ -9,17 +9,7 @@
     });
 
     $scope.showProgress = false;
-   
-    // FILTERS
-    //uploader.filters.push({
-    //    name: 'imageFilter',
-    //    fn: function (item /*{File|FileLikeObject}*/, options) {
-    //        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-    //        return '||csv|'.indexOf(type) !== -1;
-    //    }
-    //});
-
-
+ 
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         if (uploader.queue.length > 1) {
             uploader.removeFromQueue(0);
@@ -28,7 +18,7 @@
 
 
     uploader.onSuccessItem = function (files, response, status, headers) {
-        // post image upload call the below api to update the database
+        
         var uploadResult = response[0];
 
 
@@ -59,11 +49,11 @@
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'contacts/uploadSuccess.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: uploadSuccessController,
             size: 'md',
-            resolve: { items: { title: "Contact Upload" } }
+            resolve: { items: { title: "Contact Uploaded" } }
         });
        
     };

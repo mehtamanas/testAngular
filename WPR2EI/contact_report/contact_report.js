@@ -158,19 +158,7 @@
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
-              },
-             {
-                 field: "Contact_Created_Date",
-                 title: "Updated Date",
-                 width: "120px",
-                 format: '{0:dd-MM-yyyy }',
-                 template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:center"
-                 }
-             },
-             {
+              },{
                  title: "Action",
                  template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
                  width: "120px",
