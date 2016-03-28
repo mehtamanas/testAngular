@@ -5,13 +5,11 @@
 angular.module('common')
     .controller('HomeController', ['$scope', '$cookieStore', '$location', 'security', '$rootScope', '$cookies', 'apiService', function ($scope, $cookieStore, $location, security, $rootScope, $cookies, apiService) {
 
-
+      
         $scope.loggedUser = $cookieStore.get('loggedUser');
         if ($scope.loggedUser !== null)
             $scope.badge = (($scope.loggedUser).charAt(0)).toUpperCase();
         var userID = $cookieStore.get('userId');
-
-
 
 
         $('.nav-sub-dropdown > a').on('click', function () {
@@ -26,6 +24,9 @@ angular.module('common')
                 $(this).removeClass('nav-sub-active');
             }
         });
+
+        $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
+
         $scope.activeBar = 0;
         $rootScope.projects = { 'read': true, 'write': true, 'delete': true };
         $rootScope.users = { 'read': true, 'write': true, 'delete': true };
@@ -43,7 +44,20 @@ angular.module('common')
         $rootScope.billing = { 'read': true, 'write': true, 'delete': true };
         $rootScope.contacts = { 'read': true, 'write': true, 'delete': true };
         $rootScope.property = { 'read': true, 'write': true, 'delete': true };
-         $rootScope.customTags = { 'read': true, 'write': true, 'delete': true };
+        $rootScope.customTags = { 'read': true, 'write': true, 'delete': true };
+
+        if ($scope.WHO_AM_I == "Broker") {
+
+            $rootScope.Properties = { 'read': true, 'write': true, 'delete': true };
+            $rootScope.projects = { 'read': false, 'write': false, 'delete': false };
+            
+        }
+        else {
+          
+            $rootScope.projects = { 'read': true, 'write': true, 'delete': true };
+            $rootScope.Properties = { 'read': false, 'write': false, 'delete': false };
+          
+        }
 
         security.isAuthorized().then(function (response) {
             nav = response;
