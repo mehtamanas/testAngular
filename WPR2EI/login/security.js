@@ -64,16 +64,18 @@ angular.module('security', [
                 var userId = loginSession.user_id;
                 var authToken = loginSession.login_token;
                 var orgID = loginSession.organization_id;
+
+                apiService.get('User/GetWhoAmI?id=' + orgID).then(function (response) {
+                    var currentUser = response.data;
+                    $cookieStore.put('Who_Am_i', currentUser.who_am_i);
+
+                });
+
                 apiService.get('User/Get?id=' + userId).then(function (response) {
                     var currentUser = response.data;
                     if (currentUser) {
                      
-                        apiService.get('User/GetWhoAmI?id=' + orgID).then(function (response) {
-                            var currentUser = response.data;
-                            $cookieStore.put('Who_Am_i', currentUser.who_am_i);
-                                                   
-                        });
-
+                      
                         $cookieStore.put('currentUser', currentUser);
                         $cookieStore.put('authToken', authToken);
                         apiService.setAuthTokenHeader(authToken);
