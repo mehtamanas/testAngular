@@ -6,8 +6,8 @@
         $rootScope.title = 'Dwellar - Blog';
      
         var userID = $cookieStore.get('userId');
-        loggedUserRole = $cookieStore.get('loggedUserRole');
-        loggedUserFlag = $cookieStore.get('loggedUserFlag');
+      $scope.loggedUserRole = $cookieStore.get('loggedUserRole');
+        //loggedUserFlag = $cookieStore.get('loggedUserFlag');
        
         //Audit log start															
         $scope.params =
