@@ -13,8 +13,9 @@
             $('#iconEdit').hide();
             $('#btnAdd').hide();
         }
-
-
+        
+        $scope.chargeAction = 'no_action';
+        $scope.serviceAction = 'no_action';
 
       //  Audit log start 
      
@@ -1978,21 +1979,7 @@
                 $scope.twitter = 'https://' + $scope.twitter;
                 $scope.linkedin = (_.findWhere(data, { element_type: 'project_linkedin' })).element_info1;
                 $scope.linkedin = 'https://' + $scope.linkedin;
-                //for (i = 0; i < data.length; i++) {
-                //    if (data[i].element_type == "project_facebook") {
-                //        $scope.facebook = data[i].element_info1;
-                //        $scope.class_id = data[i].class_id;
-                //    }
-                //    if (data[i].element_type == "project_twitter") {
-                //        $scope.twitter = data[i].element_info1;
-                //        $scope.class_id = data[i].class_id;
-                //    }
-                //    if (data[i].element_type == "project_linkedin") {
-                //        $scope.linkedin = data[i].element_info1;
-                //        $scope.class_id = data[i].class_id;
-                //    }
-
-                //}
+             
 
             },
             function (error) {
@@ -2252,8 +2239,12 @@
             if (args == 'serviceGrid') {
                 $('.k-i-refresh').trigger("click");
             }
-            $scope.ddlFruits = "ACTION";
+            $scope.serviceAction = 'no_action';
+            $('#checkAll').prop('checked', false);
+           
         });
+
+       
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'TaskGrid') {
@@ -2271,6 +2262,8 @@
             if (args == 'ChargesGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.chargeAction = 'no_action';
+            $('#checkAll').prop('checked', false);
         });
 
     });

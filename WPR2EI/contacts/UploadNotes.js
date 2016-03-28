@@ -59,11 +59,11 @@
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'contacts/uploadSuccess.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: uploadSuccessController,
             size: 'md',
-            resolve: { items: { title: "Contact Notes Upload" } }
+            resolve: { items: { title: "Notes Uploaded" } }
         });
 
     };
