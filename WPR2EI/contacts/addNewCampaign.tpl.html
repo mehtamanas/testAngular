@@ -7,15 +7,15 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
             </div>
 
-            <form class="form-content form-content2 edit-organization-setting" name="addNewForm"  style="text-align:left" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" style="text-align:left" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
                 <h4 class="form-title">Create New Events</h4>
-                       
-                       
+
+
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx8">
                         <label for="">Event Title</label>
-                        <input type="text" class="form-control text-bold" autofocus name="project_name"
+                        <input type="text" class="form-control text-bold" autofocus name="project_name" id="addNewCampaign_eventTitle"
                                placeholder="Event Name"
                                data-ng-model="name"
                                minlength="1"
@@ -28,12 +28,12 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx8">
                         <label for="">Location</label>
-                        <input type="text" class="form-control text-bold" autofocus name="project_name"
+                        <input type="text" class="form-control text-bold" autofocus name="project_name" id="addNewCampaign_Location"
                                placeholder="Address"
                                data-ng-model="location"
                                minlength="1"
-                               maxlength="100"                   
-                               input-focus/>
+                               maxlength="100"
+                               input-focus />
                     </div>
                 </div>
 
@@ -41,8 +41,8 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx4 form-bx3-1" style="width:390px">
                             <label for="">Project</label>
-                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
-                                    class="dropdown form-control" >
+                            <select ng-model="project1" ng-change="selectproject()" id="contact_addNewCampaign_Location"
+                                    class="dropdown form-control">
                                 <option value="" selected>Select Project</option>
                                 <option ng-repeat="project in projects"
                                         value="{{project.id}}">
@@ -57,11 +57,11 @@
                         <div class="form-group form-bx4 form-bx3-1" style="width:390px">
                             <label for="">Contact</label>
                             <select ng-model="contact1" ng-change="selectcontact()"
-                                    class="dropdown form-control">
+                                    class="dropdown form-control" id="contact_addNewCampaign_Contact">
                                 <option value="" selected>Select Contact</option>
                                 <option ng-repeat="contact in contacts"
                                         value="{{contact.Contact_id}}"
-                                         ng-disabled="contact.Contact_id !== contact1">
+                                        ng-disabled="contact.Contact_id !== contact1">
                                     {{contact.Contact_Name}}
                                 </option>
                             </select>
@@ -69,25 +69,25 @@
                     </div>
                 </div>
 
-    <strong class="duration_time form-content form-bx8"> Duration</strong>
+                <strong class="duration_time form-content form-bx8"> Duration</strong>
 
                 <div class="clearfix">
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx4 form-bx3-1" style="width:390px">
                             <label for="">Start Date </label>
-                            <input kendo-date-time-picker class="form-control" 
+                            <input kendo-date-time-picker class="form-control" id="contact_addNewCampaign_startDate "
                                    ng-model="start_date"
                                    k-ng-model="k_start_date"
-                                    k-format="'dd/MM/yyyy hh:mm tt'" />
+                                   k-format="'dd/MM/yyyy hh:mm tt'" />
                         </div>
                     </div>
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx4 form-bx3-1" style="width:390px">
-                            <label for="">End Date</label>                          
-                                <input kendo-date-time-picker class="form-control" 
-                                       ng-model="end_date"
-                                       k-ng-model="k_end_date"
-                                        k-format="'dd/MM/yyyy hh:mm tt'" />                                                   
+                            <label for="">End Date</label>
+                            <input kendo-date-time-picker class="form-control" id="contact_addNewCampaign_endDate "
+                                   ng-model="end_date"
+                                   k-ng-model="k_end_date"
+                                   k-format="'dd/MM/yyyy hh:mm tt'" />
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Select Time</label>
-                            <select data-ng-model="reminder_time" class="dropdown form-control" >
+                            <select data-ng-model="reminder_time" class="dropdown form-control" id="contact_addNewCampaign_selectTime">
                                 <option value="" selected>Select Time</option>
                                 <option value="15 min">15 min</option>
                                 <option value="30 min">30 min</option>
@@ -107,13 +107,13 @@
                                 <option value="no reminder">no reminder</option>
                             </select>
                         </div>
-                    </div>     
+                    </div>
                 </div>
-               
+
                 <strong class="duration_time form-content form-bx8"> Add Notes</strong>
                 <div class="clearfix">
-                    <div class="form-group form-bx form-bx5">                      
-                        <textarea cols="100" rows="5" name="description"
+                    <div class="form-group form-bx form-bx5">
+                        <textarea cols="100" rows="5" name="description" id="contact_addNewCampaign_description"
                                   data-ng-model="text"
                                   minlength="1"
                                   maxlength="500"
@@ -122,20 +122,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true"></label>
-                    <label>Remind Me</label> 
+                    <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true" id="chk_remindMe"></label>
+                    <label>Remind Me</label>
                 </div>
 
-                    <!-- select-project-type ended -->
-                    <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
-                        <div class="btn-f-c">
-                            <button class="f-btn" id="campaign_save" ng-click="eventCreate()" type="submit">
-                                SAVE 
-                            </button>
-                        </div>
-                        <div class="btn-f-c"><button class="f-btn f-btn2" type="submit" id="gallery_cancel" ng-click="$dismiss('cancel')">CANCEL</button></div>
+                <!-- select-project-type ended -->
+                <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                    <div class="btn-f-c">
+                        <button class="f-btn" id="contact_addNewCampaign_save" ng-click="eventCreate()" type="submit">
+                            SAVE
+                        </button>
                     </div>
-</form>
+                    <div class="btn-f-c"><button class="f-btn f-btn2" type="submit" id="contact_addNewCampaign_cancel" ng-click="$dismiss('cancel')">CANCEL</button></div>
+                </div>
+            </form>
         </div><!-- modal-body ended -->
 
     </div>

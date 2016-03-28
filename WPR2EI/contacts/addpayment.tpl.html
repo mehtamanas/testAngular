@@ -42,7 +42,7 @@
                                 <div class="form-group form-bx11-2 ">
                                     <label for="">Payment Type</label>
                                     <select ng-model="pay1" ng-change="selectpay()" name="paymenttype"
-                                            class="dropdown form-control" id="contactpayment_amount" required>
+                                            class="dropdown form-control" id="contactpayment_paymentType" required>
                                         <option value="" selected>Select Payment</option>
                                         <option ng-repeat="pay in payment"
                                                 value="{{pay.id}}">
@@ -62,7 +62,7 @@
                                 <div class="pull-left f-half-6">
                                     <div class="form-group form-bx form-bx3-1">
                                         <label for="">Due Required</label>
-                                        <input kendo-date-picker class="form-control "
+                                        <input kendo-date-picker class="form-control " id="contactpayment_dueRequired"
                                                ng-model="params.duedate"
                                                k-ng-model="k_due_date"
                                                k-format="'dd/MM/yyyy'" />

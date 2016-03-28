@@ -26,16 +26,16 @@
                 <div class="pull-left actions-wrap">
 
                     <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                            ng-change="GetValue();addUser()" id="contacaction">
+                            ng-change="GetValue();addUser()" id="listControlleraction">
                         <option value="" selected>ACTIONS</option>
                     </select>
                 </div>
 
 
                 <div class="pull-right btn-wrap-right">
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openUploadNotesPopup()" style="cursor:pointer">Upload Notes</a>
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openUploadContactPopup()" style="cursor:pointer">Upload Person</a>
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openContactPopup()" style="cursor:pointer">+ Add New Person</a>
+                    <a id="listController_openUploadNotesPopup" href="#" class="btn-lk" ng-click="openUploadNotesPopup()" style="cursor:pointer">Upload Notes</a>
+                    <a id="listController_openUploadContactPopup" href="#" class="btn-lk" ng-click="openUploadContactPopup()" style="cursor:pointer">Upload Person</a>
+                    <a id="listController_openContactPopup" href="#" class="btn-lk" ng-click="openContactPopup()" style="cursor:pointer">+ Add New Person</a>
                 </div>
             </div>
 

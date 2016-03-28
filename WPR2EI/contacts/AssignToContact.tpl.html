@@ -14,7 +14,7 @@
                         >
                         <label for="">Assign To</label>
                         <select ng-model="user1" name="user" ng-change="selectuser()"
-                                class="dropdown form-control" id="editcontact_assignto" required>
+                                class="dropdown form-control" id="AssignToContact_assignto" required>
                             <option value="" selected>Select User</option>
                             <option ng-repeat="User in users"
                                     value="{{User.id}}">
@@ -29,7 +29,7 @@
 
 
             <div style="text-align:center">
-                <button class="btn btn-default  login-btn" id="option_sub" type="submit">Submit</button>
+                <button class="btn btn-default  login-btn" id="btn_AssignToContact_sub" type="submit">Submit</button>
             </div>
             <!--<button class="btn organization-btn" type="submit">Submit</button>-->
         </div>

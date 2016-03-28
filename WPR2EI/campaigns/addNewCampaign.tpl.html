@@ -41,7 +41,7 @@
                             <div class="clearfix">
                                 <div class="form-group form-bx form-bx5">
                                     <label for="">Event Name</label>
-                                    <input type="text" class="form-control text-bold" autofocus name="project_name"
+                                    <input type="text" class="form-control text-bold" autofocus name="project_name" id="addnewCampaign_eventName"
                                            placeholder="Event Name"
                                            data-ng-model="params.name"
                                            minlength="1"
@@ -55,7 +55,7 @@
                             <div class="clearfix">
                                 <div class="form-group form-bx form-bx5">
                                     <label for="">Location</label>
-                                    <input type="text" class="form-control text-bold" autofocus name="project_name"
+                                    <input type="text" class="form-control text-bold" autofocus name="project_name" id="addnewCampaign_Location"
                                            placeholder="Address"
                                            data-ng-model="params.Street_1"
                                            minlength="1"
@@ -69,7 +69,7 @@
                             <div class="clearfix">
                                 <div class="form-group form-bx form-bx5">
                                     <label for="">Project</label>
-                                    <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                                    <select ng-model="project1" ng-change="selectproject()"  id="addnewCampaign_project"
                                             class="dropdown form-control" >
                                         <option value="" selected>Select Project</option>
                                         <option ng-repeat="project in projects"
@@ -85,7 +85,7 @@
                                 <div class="pull-left f-half-6">
                                     <div class="form-group form-bx4 form-bx3-1" style="width:390px">
                                         <label for="">Start Date </label>
-                                        <input kendo-date-time-picker class="form-control"
+                                        <input kendo-date-time-picker class="form-control" id="addnewCampaign_startDate" 
                                                data-ng-model="params.start_date1"
                                                k-ng-model="dateObject"
                                                k-format="'MMMM d, yyyy h:mm tt'" />                                   
@@ -95,7 +95,7 @@
                                 <div class="pull-left f-half-6">
                                     <div class="form-group form-bx4 form-bx3-1" style="width:390px">
                                         <label for="">End Date</label>
-                                        <input kendo-date-time-picker class="form-control"
+                                        <input kendo-date-time-picker class="form-control"  id="addnewCampaign_endDate"  
                                                data-ng-model="params.end_date"
                                                k-ng-model="dateObject1"
                                                k-format="'MMMM d, yyyy h:mm tt'" />
@@ -105,10 +105,10 @@
                             </div>
 
                             <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;">
-                                <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
+                                <button class="btn campaign-container-btn" id="addnewcampaign_cancel" type="button" ng-click="cancel()">
                                     CANCEL
                                 </button>
-                                <button class="btn organization-btn" id="campaign_save" type="submit" >NEXT</button>                             
+                                <button class="btn organization-btn" id="addnewcampaign_save" type="submit" >NEXT</button>                             
                             </div>
                         </div>
                    </form>

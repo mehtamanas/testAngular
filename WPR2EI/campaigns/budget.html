@@ -47,7 +47,7 @@
                                              }">
                             <label for="">Budget</label>
                             <input type="text" format 
-                                   class="form-control text-bold rupee" autofocus name="Budget"
+                                   class="form-control text-bold rupee" autofocus name="Budget" id="budget"
                                    placeholder="Budget"
                                    data-ng-model="params.budget"
                                    ng-pattern="/^([1-9][0-9,./]*)$/" 
@@ -55,7 +55,7 @@
                                    required />
                             <div ng-messages="addNewForm.Budget.$error" style="color:maroon" role="alert">
                                 <div ng-message="required" data-ng-if="addNewForm.Budget.$invalid && (!addNewForm.Budget.$pristine || showValid) && !addNewForm.Budget.$focus">This field should not be empty </div>
-                                <div ng-message="pattern">Enter valid value for Budget</div>
+                                <div ng-message="pattern" id="err_budget">Enter valid value for Budget</div>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                                               }">                    
                             <label for="">Leads</label>
                             <input type="text" format
-                                   class="form-control" name="Leads"
+                                   class="form-control" name="Leads" id="budget_leads"
                                    placeholder="Leads"
                                    data-ng-model="params.no_of_leads"
                                    ng-pattern="/^([1-9][0-9,./]*)$/"  
@@ -79,7 +79,7 @@
                                    required />
                             <div ng-messages="addNewForm.Leads.$error" style="color:maroon" role="alert">
                                 <div ng-message="required" data-ng-if="addNewForm.Leads.$invalid && (!addNewForm.Leads.$pristine || showValid) && !addNewForm.Leads.$focus">This field should not be empty </div>
-                                <div ng-message="pattern">Enter valid value for Lead</div>
+                                <div ng-message="pattern" id="err_leads">Enter valid value for Lead</div>
                             </div>
                             
                         </div>
@@ -95,25 +95,25 @@
 
                             <label for="">Sales</label>
                             <input type="text" format 
-                                   class="form-control rupee" name="sales"
+                                   class="form-control rupee" name="sales" id="budget_sales"
                                    placeholder="sales"
                                    data-ng-model="params.sales"
                                    input-focus
                                    required />
                             <div ng-messages="addNewForm.sales.$error" style="color:maroon" role="alert">
                                 <div ng-message="required" data-ng-if="addNewForm.sales.$invalid && (!addNewForm.sales.$pristine || showValid) && !addNewForm.sales.$focus">This field should not be empty </div>
-                                <div ng-message="pattern">Enter valid value for Sales</div>
+                                <div ng-message="pattern" id="err_sales">Enter valid value for Sales</div>
                             </div>
                         </div>
                     </div>
 
                     
                     <div class="modal-btn-wrap5 modal-btn-wrap6" style="text-align:right;" >
-                        <button type="submit" class="btn organization-btn" id="btn_next" style="margin-right: 1%;" ><b> Next ></b></button>
-                        <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="back()">
+                        <button type="submit" class="btn organization-btn" id="btn_budgetNext" style="margin-right: 1%;" ><b> Next ></b></button>
+                        <button class="btn campaign-container-btn" id="btn_budgetback" type="button" ng-click="back()">
                             BACK
                         </button>
-                        <button class="campaign-container-btn-cancel" style="margin-left: 24%;" id="campaign_cancel" type="button" ng-click="cancel()">
+                        <button class="campaign-container-btn-cancel" style="margin-left: 24%;" id="btn_budgetcancel" type="button" ng-click="cancel()">
                             CANCEL
                         </button>
                    </div>

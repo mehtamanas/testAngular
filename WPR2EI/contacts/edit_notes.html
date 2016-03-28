@@ -10,7 +10,7 @@
 
                     <div class="form-group form-bx form-bx8">
                         <label for="">From</label>
-                        <tags-input ng-model="params.Name" input-focus name="from" placeholder="Contacts">
+                        <tags-input ng-model="params.Name" input-focus name="from" placeholder="Contacts" id="contact_editNotes_From">
                             <auto-complete source="loadTags($query)"></auto-complete>
                         </tags-input>
                     </div>
@@ -18,15 +18,15 @@
                     <div class="form-bx form-bx5">
                         <label for="">Add Note</label>
 
-                        <textarea id="organization_desc" autofocus kendo-editor k-ng-model="params.text"></textarea>
+                        <textarea id="contact_editNotes_addNotes" autofocus kendo-editor k-ng-model="params.text"></textarea>
 
                     </div>
                 </div>
 
                 <div class="modal-btn-wrap clearfix">
-                    <button type="submit" class="f-btn">Save</button>
+                    <button type="submit" class="f-btn" id="btn_contact_editNotes_save">SAVE</button>
 
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    <button type="button" class="f-btn f-btn2" id="contact_editNotes_cancel" ng-click="cancel()">CANCEL</button>
                 </div>
             </form>
 

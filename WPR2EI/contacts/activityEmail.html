@@ -3,14 +3,14 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="exampleModalLabel">Send Email</h4>
+            <h4 class="modal-title" id="activityEmail_sendEmail">Send Email</h4>
         </div>
 
         <form class="form-content form-content2 edit-organization-setting" name="emailForm" style="text-align: left;" novalidate data-ng-submit="sendEmail(emailForm.$valid)" autocomplete="off">
             <div class="clearfix">
                 <div class="form-group form-bx form-bx8">
                     <label for="">From</label>
-                    <input type="text" ng-model="params.fromemailid" input-focus name="from" placeholder="From" ng-disabled="true" required>
+                    <input type="text" ng-model="params.fromemailid" id="activityEmail_From" input-focus name="from" placeholder="From" ng-disabled="true" required>
                         <!--<auto-complete source="loadTags()"></auto-complete>-->
                     
                 </div>
@@ -19,7 +19,7 @@
             <div class="clearfix">
                 <div class="form-group form-bx form-bx8">
                     <label for="">To</label>
-                    <input type="text" ng-model="params.toemailid" input-focus name="to" placeholder="To" ng-disabled="true" required>
+                    <input type="text" ng-model="params.toemailid" id="activityEmail_To" input-focus name="to" placeholder="To" ng-disabled="true" required>
                         <!--<auto-complete source="loadTags()"></auto-complete>-->
                     
                 </div>
@@ -28,7 +28,7 @@
             <div class="clearfix">
                 <div class="form-group form-bx form-bx8">
                     <label for="">CC</label>
-                    <input type="text" ng-model="params.cc" input-focus name="cc" ng-disabled="true" placeholder="CC">
+                    <input type="text" ng-model="params.cc" id="activityEmail_Cc" input-focus name="cc" ng-disabled="true" placeholder="CC">
                       
                     
                 </div>
@@ -37,7 +37,7 @@
             <div class="clearfix">
                 <div class="form-group form-bx form-bx8">
                     <label for="">BCC</label>
-                    <input type="text" ng-model="params.bcc" input-focus name="bcc" ng-disabled="true" placeholder="BCC">
+                    <input type="text" ng-model="params.bcc" id="activityEmail_Bcc" input-focus name="bcc" ng-disabled="true" placeholder="BCC">
                         
                    
                 </div>
@@ -62,7 +62,7 @@
             <div class="clearfix">
                 <div class="form-group form-bx form-bx8">
                     <label for="">Email Subject</label>
-                    <input type="text" autofocus name="EmailSubject" id="agrrement_name"
+                    <input type="text" autofocus name="EmailSubject" id="activityEmail_emailSubject"
                            placeholder="Type subject here"
                            data-ng-model="params.subject"
                            ng-disabled="true"
