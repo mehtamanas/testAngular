@@ -1,7 +1,7 @@
 ﻿
 
             <div class="modal-header">
-                <button type="button" id="btn_agreement_close" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                <button type="button" id="btn_agreementTemplate_close" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
                 <h4 class="form-title">Create New Agreement Template</h4>
             </div>
 
@@ -10,14 +10,14 @@
                     <div class="form-group form-bx form-bx14">
                         <label for="">Template Name</label>
                         <div>
-                            <input type="text" autofocus name="TemplateName" class="form-control" id="agrrement_name"
+                            <input type="text" autofocus name="TemplateName" class="form-control" id="AgreementTemplateName"
                                    placeholder="Template Name"
                                    data-ng-model="params.templateName"
                                    input-focus
                                    required />
                         </div>
                         <div ng-messages="agrrementForm.TemplateName.$error" data-ng-if="agrrementForm.TemplateName.$invalid && (!agrrementForm.TemplateName.$pristine || showValid) && !agrrementForm.TemplateName.$focus" style="color:maroon" role="alert">
-                            <div ng-message="required">You did not enter a field</div>
+                            <div ng-message="required" id="err_TemplateName">You did not enter a field</div>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx14">
                         <label for="">Link To Project</label>
-                        <select ng-model="params.projectSelected" name="linkProject" ng-change="selectevent()" class="dropdown form-control text-bold" required>
+                        <select ng-model="params.projectSelected" name="linkProject" id="agreeTempLink" ng-change="selectevent()" class="dropdown form-control text-bold" required>
                             <option value="" selected>--Choose Project--</option>
                             <option ng-repeat="project in projectList"
                                     value="{{project.id}}">
@@ -33,7 +33,7 @@
                         </select>
                     </div>
                     <div ng-messages="agrrementForm.linkProject.$error" data-ng-if="agrrementForm.linkProject.$invalid && (!agrrementForm.linkProject.$pristine || showValid) && !agrrementForm.linkProject.$focus" style="color:maroon" role="alert">
-                        <div ng-message="required">You did not choose a field</div>
+                        <div ng-message="required" id="err_agreeTempLin">You did not choose a field</div>
                     </div>
                 </div>
 
@@ -45,14 +45,14 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx14">
                         <label for="">Description</label>
-                        <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.htmlcontent"  resizable="true"></textarea>
+                        <textarea id="agreeTempDescription" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.htmlcontent"  resizable="true"></textarea>
                     </div>
                 </div>
                 <input ng-show="false" id="imageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                 <div class="modal-btn-wrap-1 clearfix">
-                    <button type="button" class=" f-btn f-btn-20" style="margin:1px" ng-click="preview()"> PREVIEW </button>
-                    <button type="submit" class=" f-btn " style="margin:1px" ng-click="showValid=true"> SAVE </button>
-                    <button type="button" class=" f-btn f-btn-19" style="margin:1px" ng-click="cancel()"> CANCEL </button>
+                    <button type="button" id="btn_agreePreview" class=" f-btn f-btn-20" style="margin:1px" ng-click="preview()"> PREVIEW </button>
+                    <button type="submit" id="btn_agreeSave" class=" f-btn " style="margin:1px" ng-click="showValid=true"> SAVE </button>
+                    <button type="button" id="btn_agreeCancel" class=" f-btn f-btn-19" style="margin:1px" ng-click="cancel()"> CANCEL </button>
                 </div>
             </form>
 

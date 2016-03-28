@@ -44,7 +44,7 @@
                         <div class="clearfix">
                             <div class="form-group form-bx form-bx5">
                                 <label for="">Campaign Name</label>
-                                <input type="text" class="form-control text-bold" autofocus name="Campaign_name"
+                                <input type="text" class="form-control text-bold" autofocus name="Campaign_name" id="addEmailCampaign_Campaign_name"
                                        placeholder="Campaign Name"
                                        data-ng-model="params.name"
                                        minlength="1"
@@ -58,7 +58,7 @@
                         <div class="clearfix">
                             <div class="form-group form-bx form-bx5">
                                 <label for="">Project</label>
-                                <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                                <select ng-model="project1" ng-change="selectproject()" id="addEmailCampaign_project"
                                         class="dropdown form-control">
                                     <option value="" selected>Select Project</option>
                                     <option ng-repeat="project in projects"
@@ -75,7 +75,7 @@
 
 
                                 <label for="">Start Date </label>
-                                <input kendo-date-time-picker class="form-control"
+                                <input kendo-date-time-picker class="form-control" id="addEmailCampaign_startDate" 
                                        data-ng-model="params.start_date1"
                                        k-ng-model="dateObject"
                                        k-format="'MMMM d, yyyy h:mm tt'"
@@ -99,11 +99,11 @@
                     </div>
 
                     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;margin-left: 16%;">
-                        <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
+                        <button class="btn campaign-container-btn" id="addEmailCampaign_cancel" type="button" ng-click="cancel()">
                             CANCEL
                         </button>
 
-                        <button class="btn organization-btn" id="campaign_save" type="submit">
+                        <button class="btn organization-btn" id="addEmailCampaign_save" type="submit">
                             NEXT
                         </button>
 

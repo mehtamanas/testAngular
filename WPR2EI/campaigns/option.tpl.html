@@ -14,7 +14,7 @@
                         <div class="amenities-bg clearfix">
 
 
-                            <div class="amenities-btn amenities-add" ng-class="{'amenities-selected': isChecked[$index]}" data-id={{tag.id}} ng-click='onClick($event);toggleClass($index)' k-on-change="myGridChange(dataItem)">
+                            <div class="amenities-btn amenities-add" id="option_amenities" ng-class="{'amenities-selected': isChecked[$index]}" data-id={{tag.id}} ng-click='onClick($event);toggleClass($index)' k-on-change="myGridChange(dataItem)">
                                 <h4 ng-if={{}}></h4>
                             </div>
 
@@ -28,8 +28,8 @@
 
 
 
-            <button type="submit" class="f-btn f-btn cxo-f3" ng-click="addTag()">Ok</button>
-            <button type="submit" class="f-btn f-btn2 cxo-f3" ng-click="cancel()">CANCEL</button>
+            <button type="submit" class="f-btn f-btn cxo-f3" ng-click="addTag()" id="option_ok">Ok</button>
+            <button type="submit" class="f-btn f-btn2 cxo-f3" ng-click="cancel()" id="option_cancel">CANCEL</button>
 
 
 

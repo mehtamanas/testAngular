@@ -46,7 +46,7 @@
                                 <div class="pull-left company-profile-half">
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Campaign ID:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_Campaign ID">
                                             <label class="label-group">
                                                 <span ng-bind="params.campaign_ID">{{params.campaign_ID}}</span>
                                             </label>
@@ -55,7 +55,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Campaign Name:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_CampaignName">
                                             <label class="label-group">
                                                 <span ng-bind="params.name">{{params.name}}</span>
                                             </label>
@@ -64,7 +64,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Location:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_location">
                                             <label class="label-group">
                                                 <span ng-bind="params.Street_1">{{params.Street_1}}</span>
                                             </label>
@@ -73,7 +73,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Start Date</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_startDate">
                                             <label class="label-group">
                                                 <span ng-bind="params.start_date1">{{params.start_date1 | date:'dd/MM/yyyy hh:mm:tt'}}</span>
                                             </label>
@@ -85,7 +85,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1"> End Date:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_endDate">
                                             <label class="label-group">
                                                 <span ng-bind="params.end_date">{{params.end_date | date:'dd/MM/yyyy hh:mm:tt'}}</span>
                                             </label>
@@ -94,7 +94,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Budget:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_budget">
                                             <label class="label-group">
                                                 <h4 ng-bind="params.budget">{{params.budget}}</h4>
                                             </label>
@@ -103,7 +103,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Lead:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_lead">
                                             <label class="label-group">
                                                 <span ng-bind="params.no_of_leads">{{params.no_of_leads}}</span>
                                             </label>
@@ -112,7 +112,7 @@
 
                                     <div class="company-profile-row clearfix">
                                         <div class="pull-left profile-row1">Sales:</div>
-                                        <div class="pull-right profile-row2">
+                                        <div class="pull-right profile-row2" id="summaryEvent_sales">
                                             <label class="label-group">
                                                 <span ng-bind="params.sales">{{params.sales}}</span>
                                             </label>
@@ -123,12 +123,12 @@
 
                             <div class="col-sm-1"></div>
                             &nbsp;
-                            <button class="btn organization-btn" style="margin-left: 26%;" type="submit" id="btn_signup"><b>SAVE &gt;</b></button>
+                            <button class="btn organization-btn" style="margin-left: 26%;" type="submit" id="btn_summaryEvent_save"><b>SAVE &gt;</b></button>
                            
-                            <button class="btn campaign-container-btn-1-1" id="btn_next" type="button" ng-click="back()">
+                            <button class="btn campaign-container-btn-1-1" id="btn_summaryEvent_next" type="button" ng-click="back()" >
                                 BACK
                             </button>
-                            <button class="campaign-container-btn-cancel" style="margin-left:26%;" id="campaign_cancel" type="button" ng-click="cancel()">
+                            <button class="campaign-container-btn-cancel" style="margin-left:26%;" id="btn_summaryEvent_cancel" type="button" ng-click="cancel()">
                                 CANCEL
                             </button>
                         </div>
