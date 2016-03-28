@@ -15,8 +15,8 @@
                             <div class="right-inner-addon" style="padding-top: 12px;">
                                 <h2 cass="pg-inner-title">Add Members</h2>
                                 <ul class="nav nav-tabs responsive-tagJS" role="tablist">
-                                    <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab" ng-click="showTags()">Add By Tag</a></li>
-                                    <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab" ng-click="showList()">Add By Name</a></li>
+                                    <li id="btn_AddByTag"><a aria-controls="summary" style="cursor:pointer" role="tab" data-toggle="tab" ng-click="showTags()">Add By Tag</a></li>
+                                    <li id="btn_AddByName"><a aria-controls="summary" style="cursor:pointer" role="tab" data-toggle="tab" ng-click="showList()">Add By Name</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                             <div class="col-lg-3 pull-right">
                                 <div class="right-inner-addon" style="padding-top: 15%;">
                                     <i class="fa fa-search"></i>
-                                    <input type="text" ng-model="tagFilter.Name" class="form-control" id="add_users_to_team" placeholder="Search Tags" />
+                                    <input type="text"  ng-model="tagFilter.Name" class="form-control" id="tagList" placeholder="Search Tags" />
                                 </div>
                             </div>
                         </div>
@@ -71,8 +71,8 @@
 
 
                                     </div>
-                                    <button type="submit" class="btn campaign-container-btn-1-1" id="campaign_cancel" ng-click="cancel()">BACK</button>
-                                    <button type="button" class="btn organization-btn-1-2" ng-click="contactsummary()"> Next &gt;</button>
+                                    <button type="submit" class="btn campaign-container-btn-1-1" id="btn_TagListBack" ng-click="cancel()">BACK</button>
+                                    <button type="button" class="btn organization-btn-1-2" id="btn_TagListNext" ng-click="contactsummary()"> Next &gt;</button>
                                 </div>
                             </div>
                         </div>
@@ -116,9 +116,9 @@
 
 
                                 </div>
-                                <button type="submit" class="btn campaign-container-btn-1-1" id="campaign_cancel" ng-click="cancel()">BACK</button>
+                                <button type="submit" class="btn campaign-container-btn-1-1" id="btn_NameListBack" ng-click="cancel()">BACK</button>
                                 <!--<button type="submit" class="campaign-container-btn-cancel" id="campaign_cancel" style="margin-left: 30%;" ng-click="cancel()">CANCEL</button>-->
-                                <button type="button" class="btn organization-btn-1-2" ng-click="saveList()"> Next &gt;</button>
+                                <button type="button" class="btn organization-btn-1-2" id="btn_NameListNext" ng-click="saveList()"> Next &gt;</button>
                             </div>
                         </div>
                     </div><!--list End-->

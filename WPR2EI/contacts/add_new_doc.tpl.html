@@ -4,7 +4,7 @@
 
 
     <div class="modal-header">
-        <button id="btn_contactdoc_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <button id="addNewDocClose" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">Add New Document</h4>
     </div><!-- modal-header ended -->
 
@@ -22,7 +22,7 @@
                 <div id="phone-wrap" class="clearfix">
                     <div id="phone-no" class="form-bx form-bx2">
                         <label for="">Document Name</label>
-                        <input type="text" autofocus name="Add_Document_Name" class="form-control" id="contactdoc_name"
+                        <input type="text" autofocus name="Add_Document_Name" class="form-control" id="contactAddNewDoc"
                                placeholder="Document Name"
                                data-ng-model="params.Document_Name"
                                minlength="1"
@@ -32,7 +32,7 @@
                                required />
                         <div ng-messages="newForm.Add_Document_Name.$error" style="color:maroon" role="alert">
                             <div ng-message="required" data-ng-if="newForm.Add_Document_Name.$invalid && (!newForm.Add_Document_Name.$pristine || showValid) && !newForm.Add_Document_Name.$focus">This field should not be empty </div>
-                            <div ng-message="pattern">Enter valid document name</div>
+                            <div ng-message="pattern" id="err_doc">Enter valid document name</div>
                         </div>
 
                     </div>
@@ -48,7 +48,7 @@
                 <div id="phone-wrap" class="clearfix">
                     <div id="phone-no" class="form-bx form-bx2">
                         <label for="">Category</label>
-                        <select name="Cat" ng-model="category1" ng-change="selectCategory()" id="contactdoc_category"
+                        <select name="Cat" ng-model="category1" ng-change="selectCategory()" id="opt_addNewDoc"
                                 class="dropdown form-control" required>
                             <option value="" selected>Select Category</option>
                             <option ng-repeat="category in categories"
@@ -58,7 +58,7 @@
                         </select>
                         <div ng-messages="newForm.Cat.$error" style="color:maroon" role="alert">
                             <div ng-message="required" data-ng-if="newForm.Cat.$invalid && (!newForm.Cat.$pristine || showValid) && !newForm.Cat.$focus">This field should not be empty </div>
-                            <div ng-message="pattern">Enter valid category for document</div>
+                            <div ng-message="pattern" id="err_AddNew">Enter valid category for document</div>
                         </div>
                     </div>
 
@@ -79,10 +79,9 @@
                                         </div>-->
                                         <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                     </div>
-                                    <div class="row" ng-show="uploader.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                            <div ng-show="uploader.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                    <div class="" ng-show="uploader.queue.length">
+                                        <div class="user-photo_2" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1" alt="your image" />
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +92,7 @@
                         <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
                     </div>
                     <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="*" nv-file-select="" uploader="uploader" />
+                        <input type="file" class="image-upload-f" id="addNewDocImage" value="Browse" accept="*" nv-file-select="" uploader="uploader" />
                     </label>
 
                 </div>
@@ -108,11 +107,8 @@
 
 
             <div class="modal-btn-wrap clearfix">
-                <button id="btn_contactdoc_save" type="submit" class="f-btn">SAVE</button>
-
-
-
-                <button id="btn_contactdoc_cancelme" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                <button id="btn_addNewDocSave" type="submit" class="f-btn">SAVE</button>
+                <button id="btn_addNewDocCancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
             </div>
 
 
@@ -122,3 +118,17 @@
 
 
 </div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#addNewDocImage").change(function () {
+        readURL(this);
+    });
+</script>

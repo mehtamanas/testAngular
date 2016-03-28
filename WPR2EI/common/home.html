@@ -45,114 +45,119 @@
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-nav2 " id="menu-wplook-main-menu">
-                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==0}" id="menu-item1">
+                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==0}" id="menu-item1" name="Dashboards">
                                 <a href="" ng-click="activeBar=0"><span class="nav-icon nav-19"></span> Dashboards <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu1">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item1"><a ui-sref="app.my_day" href="">My Day</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item1" name="my_day"><a ui-sref="app.my_day" href="">My Day</a></li>
                                     <!--<li><a href="#">Insights</a></li>
                                     <li><a href="">Campaigns</a></li>-->
                                 </ul>
                             </li><!--Dashboards end-->
 
 
-                            <li ng-show="projects.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==1}">
+                            <li ng-show="projects.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==1}" name="Projects">
                                 <a href="" ng-click="activeBar=1"><span class="nav-icon nav-01"></span> Projects <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu2">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item2"><a ui-sref="app.project" href="">Current Projects</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item3"><a href="">Archived Projects</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item4"><a href="" ui-sref="app.property">Inventory </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item5"><a href="">Bookings</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item2" name="current_projects"><a ui-sref="app.project" href="">Current Projects</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item3" name="Archived_Projects"><a href="" >Archived Projects</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item4" name="Inventory"><a href="" ui-sref="app.property">Inventory </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item5" name="Bookings" ><a href="">Bookings</a></li>
                                 </ul>
                             </li><!--Projects-->
 
 
-                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==2}">
+                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==2}" name="Organization ">
                                 <a href="" ng-click="activeBar=2"><span class="nav-icon nav-23"></span>Organization <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu3">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item6"><a ui-sref="app.organization" href="">Company Info </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="users.read" id="sub-menu-item7"><a ui-sref="app.newuser" href="#">Users </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="teams.read" id="sub-menu-item8"><a ui-sref="app.team" href="">Teams  </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="billing.read" id="sub-menu-item9"><a ui-sref="app.billing" href="">Billing </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item6" name="Company Info"><a ui-sref="app.organization" href="">Company Info </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="users.read" id="sub-menu-item7" name="Users"><a ui-sref="app.newuser" href="#">Users </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="teams.read" id="sub-menu-item8" name="Teams"><a ui-sref="app.team" href="">Teams  </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="billing.read" id="sub-menu-item9" name="Billing"><a ui-sref="app.billing" href="">Billing </a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item10"><a href="">Subscriptions </a></li>
                                 </ul>
                             </li><!--Organization-->
 
-                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==3}">
+                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==3}" name="Templates">
                                 <a ui-sref="app.template" href="#" ng-click="activeBar=3"><span class="nav-icon nav-21"></span>Templates</a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu4">
                                     <!--<li data-toggle="collapse" data-target=".navbar-collapse.in"><a ui-sref="app.forms" href="">Forms</a></li>--> 
                                 </ul>
                             </li><!--Templates-->
-                            <li ng-show="campaigns.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==4}">
+                            <li ng-show="campaigns.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==4}" name="Campaigns">
                                 <a href="" ng-click="activeBar=4"><span class="nav-icon nav-15"></span>Campaigns <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu5">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in"><a ui-sref="app.campaignsEvent" href="">Events </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in"><a ui-sref="app.campaigns" href="">Email </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" name="Events"><a ui-sref="app.campaignsEvent" href="">Events </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" name="Email"><a ui-sref="app.campaigns" href="">Email </a></li>
                                 </ul>
                             </li><!--Campaigns-->
 
 
-                            <li ng-show="channelPartners.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==5}">
+                            <li ng-show="channelPartners.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==5}" name="Channel_Partners">
                                 <a href="" ng-click="activeBar=5"><span class="nav-icon nav-25"></span>Channel Partners<span class="nav-no">0 </span><span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu6">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item13"><a href="" ui-sref="app.application">Pending Applications </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item14"><a href="" ui-sref="app.current">Current Partners</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item13" name="Pending_Applications"><a href="" ui-sref="app.application">Pending Applications </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item14" name="Current_Partners"><a href="" ui-sref="app.current">Current Partners</a></li>
                                 </ul>
                             </li><!--Channel Partners-->
 
-                            <li ng-show="contacts.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==6}">
+                            <li ng-show="contacts.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==6}" name="People">
                                 <a href="" ng-click="activeBar=6"><span class="nav-icon nav-05"></span> People <span class="nav-no">{{total}}</span> <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu7">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item15"><a href="" ui-sref="app.leads"> Leads <span class="nav-no">{{lead}}</span></a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item16"><a href="" ui-sref="app.contacts">Contacts <span class="nav-no">{{contact}}</span></a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item17"><a href="" ui-sref="app.client">Clients <span class="nav-no">{{client}}</span> </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item18"><a href="" ui-sref="app.company">By Company </a></li>
-                                    <li  data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item19"><a href="" ui-sref="app.tags">By Tag </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="" ui-sref="app.list">List</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item15" name="Leads"><a href="" ui-sref="app.leads"> Leads <span class="nav-no">{{lead}}</span></a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item16" name="Contacts"><a href="" ui-sref="app.contacts">Contacts <span class="nav-no">{{contact}}</span></a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item17" name="Clients"><a href="" ui-sref="app.client">Clients <span class="nav-no">{{client}}</span> </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item18" name="By_Company"><a href="" ui-sref="app.company">By Company </a></li>
+                                    <li  data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item19" name="By_Tag"><a href="" ui-sref="app.tags">By Tag </a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" name="List"><a href="" ui-sref="app.list">List</a></li>
                                 </ul>
                             </li><!--People -->
 
-                            <li ng-show="customTags.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==7}">
+                            <li ng-show="customTags.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==7}" name="Tags">
                                 <a href="" ui-sref="app.tags" ng-click="activeBar=7"><span class="nav-icon nav-22"></span> Tags</a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu8"></ul>
                             </li><!--Tags -->
 
-                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==8}">
+                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==8}" name="Activities">
                                 <a href="" ng-click="activeBar=8"><span class="nav-icon nav-26"></span> Activities<span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu9">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="tasks.read" id="sub-menu-item20"><a href="" ui-sref="app.tasks">Tasks</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item21"><a href="" ui-sref="app.calls">Calls</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item22"><a href="" ui-sref="app.campaigns">Events</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="tasks.read" id="sub-menu-item20" name="Tasks"><a href="" ui-sref="app.tasks">Tasks</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item21" name="Calls"><a href="" ui-sref="app.calls">Calls</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item22" name="Events"><a href="" ui-sref="app.campaigns">Events</a></li>
 
                                 </ul>
                             </li><!--Activities -->
 
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==14}"><a href="" ui-sref="app.setting" ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a><ul class="nav-sub-bx sub-menu" id="sub-menu10"></ul></li><!--Settings -->
+                            <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==14}">
+                                <a href="" ui-sref="app.setting" ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a>
+                                <ul class="nav-sub-bx sub-menu" id="sub-menu10">
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown" ui-sref="app.integration"><a href="">Integration</a></li>
+                                </ul>
+                            </li><!--Settings -->
 
-                            <li class="nav-sub-dropdown menu-item"  ng-class="{'active':activeBar==9}" >
+                            <li class="nav-sub-dropdown menu-item"  ng-class="{'active':activeBar==9}" name="Reports" >
                                 <a href="" ui-sref="app.report" ng-click="activeBar=9"><span class="nav-icon nav-03"></span> Reports<span class="d-arr"></span></a>
 
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu11">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown" ui-sref="app.contact_report" ><a href="" >Lead Reports</a></li><!--Contact Report -->
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown" ui-sref="app.contact_report"name="Lead_Reports" ><a href="" >Lead Reports</a></li><!--Contact Report -->
                                 </ul>
                             </li><!--Reports -->
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="notifications.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==10}"><a href="" ng-click="activeBar=10"><span class="nav-icon nav-27"></span>Notifications</a><ul class="nav-sub-bx sub-menu" id="sub-menu12"></ul></li><!--Notification -->
+                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="notifications.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==10}" name="Notifications"><a href="" ng-click="activeBar=10"><span class="nav-icon nav-27"></span>Notifications</a><ul class="nav-sub-bx sub-menu" id="sub-menu12"></ul></li><!--Notification -->
 
-                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==11}">
+                            <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==11}" name="Security">
                                 <a href="" ng-click="activeBar=11"><span class="nav-icon nav-08"></span> Security<span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu13">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item23" ng-show="auditTrail.read"><a href="" ui-sref="app.audit">Audit Trail</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item23" ng-show="auditTrail.read"><a href="" ui-sref="app.audit" name="Audit_Trail">Audit Trail</a></li>
                                 </ul>
                             </li><!--Security -->
 
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="support.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==12}"><a href="" ng-click="activeBar=12"><span class="nav-icon nav-09"></span> Support</a><ul class="nav-sub-bx sub-menu" id="sub-menu14"></ul></li><!--Support -->
+                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="support.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==12}"><a href="" ng-click="activeBar=12" name="Support"><span class="nav-icon nav-09"></span> Support</a><ul class="nav-sub-bx sub-menu" id="sub-menu14"></ul></li><!--Support -->
 
-<li  class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==13}">
+<li  class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==13}" name="Contact_Update">
                                 <a href="" ui-sref="app.contact_update" ng-click="activeBar=13"><span class="nav-icon nav-09"></span> Contact Update</a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu15"></ul>
                             </li><!--Contact Update -->
 
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'active':activeBar==14}"><a href="#" ng-click="logout()"><span class="nav-icon nav-10"></span> Signout</a></li><!--Signout -->
+                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'active':activeBar==14}"><a href="#" ng-click="logout()" name="Signout"><span class="nav-icon nav-10"></span> Signout</a></li><!--Signout -->
                         </ul>
                     </div><!-- /.navbar-collapse -->
 

@@ -3,7 +3,7 @@
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
         <div class="close-btn-wrap">
-            <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+            <button id="btn_EditCompanyClose" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
         <form class="form-content" name="newForm" novalidate data-ng-submit="addNewContact(newForm.$valid)" autocomplete="off">
 
@@ -25,9 +25,8 @@
                                         <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                     </div>
                                     <div class="row" ng-show="uploader.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                            <div ng-show="uploader.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        <div class="user-photo_3" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1" alt="your image" />
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +37,7 @@
                         <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                     </div>
                     <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                        <input type="file" class="image-upload-f" id="uploadImageEditCompany" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                     </label>
 
 
@@ -51,8 +50,8 @@
 
                     <div class="form-group form-bx form-bx8">
                         <label for="">Company Name</label>
-                        <input type="text" autofocus name="company" class="form-control" id="gallery_notes"
-                               placeholder="Company "
+                        <input type="text" autofocus name="company" class="form-control" id="companyNotes"
+                              
                                data-ng-model="params.company_name"
                                minlength="1"
                                required />
@@ -65,7 +64,7 @@
                 <div class="form-group form-bx form-bx5">
                     <div class="form-group">
                         <label for="">Description</label>
-                        <textarea id="organization_desc" autofocus kendo-editor k-ng-model="description"></textarea>
+                        <textarea id="txt_CompanyDescription" autofocus kendo-editor k-ng-model="description"></textarea>
                     </div>
                 </div>
             </div>
@@ -80,18 +79,18 @@
                     <div id="address-wrap" class="clearfix">
                         <div id="address-no" class="form-bx form-bx2">
                             <label>Street{{$index + 1}}</label>
-                            <input type="text" name="Address" class="form-control" id="contact_address"
+                            <input type="text" name="Address" class="form-control" id="editStreetCompany"
                                    placeholder="Street{{$index + 1}}"
                                    data-ng-model="choice.Street_1"
-                                 
+                                    
                                    input-focus />
-                            <div class="text-danger"
+                            <div class="text-danger" id="err_Sreet"
                                  data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
                                 {{ 'Enter valid Address' | translate }}
                             </div>
 
                         </div>
-                        <div id="contact_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
+                        <div id="contact_removeaddress" name="remove_editCompany" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
                     </div>
                 </div>
             </div>
@@ -105,13 +104,13 @@
 
                     <div class="form-group form-bx form-bx8">
                         <label for="">Area</label>
-                        <input type="text" class="form-control text-bold" id="addnewproject_name" autofocus name="Area"
-                               placeholder="Area"
+                        <input type="text" class="form-control text-bold" id="editCompanyArea" autofocus name="Area"
+                               
                                data-ng-model="params.area"
                                minlength="1"
                                maxlength="30"
                                input-focus />
-                        <div class="text-danger"
+                        <div class="text-danger" id="err_Area"
                              data-ng-if="addNewForm.Area.$invalid && (!addNewForm.Area.$pristine || showValid) && !addNewForm.Area.$focus">
                             {{ 'Enter valid Area' | translate }}
                         </div>
@@ -124,7 +123,7 @@
 
             <div class="clearfix">
                 <div class="form-bx form-bx3">
-                    <select ng-model="state1" ng-change="selectstate(state)" class="dropdown form-control" id="contact_details_state">
+                    <select ng-model="state1" ng-change="selectstate(state)" class="dropdown form-control" id="opt_editCompanyState">
                         <option value="" selected>State</option>
                         <option ng-repeat="state in states"
                                 value="{{state.state_id}}">
@@ -137,7 +136,7 @@
                 <div class="field-mdl field-mdl2 field-req"></div>
 
                 <div class="form-bx form-bx3">
-                    <select ng-change="selectcity(city)" ng-model="city1" class="dropdown form-control" id="contact_details_city">
+                    <select ng-change="selectcity(city)" ng-model="city1" class="dropdown form-control" id="opt_editCompanyCity">
                         <option value="" selected>City</option>
                         <option ng-repeat="city in cities  | filter:filterExpression"
                                 value="{{city.city_id}}">
@@ -153,14 +152,14 @@
                                           'has-error' : newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus,
                                           'has-success': newForm.Pin.$valid && !newForm.Pin.$pristine && !newForm.Pin.$focus
                                                                          }">
-                        <input type="text" name="Pin" class="form-control" id="contact_pin"
-                               placeholder="Pin"
+                        <input type="text" name="Pin" class="form-control" id="editCompanyPin"
+                               
                                data-ng-model="params.zip_code"
                                minlength="1"
                                maxlength="6"
                                input-focus
                                ng-pattern="/^[0-9]{1,7}$/" />
-                        <div class="text-danger"
+                        <div class="text-danger" id="err_pinCode"
                              data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
                             {{ 'Please enter valid pin' | translate }}
                         </div>
@@ -178,17 +177,16 @@
 
                     <div id="phone-wrap" class="clearfix">
                         <div id="phone-no" class="form-bx form-bx2">
-                            <input type="text" name="website" class="form-control" id="Website"
-                                   placeholder="Website"
+                            <input type="text" name="website" class="form-control" id="editCompanyWebsite"
                                    data-ng-model="choice.contact_element_website"                                 
                                    input-focus
                                   />
                             <div class="text-danger"
                                  data-ng-if="newForm.website.$invalid && (!newForm.website.$pristine || showValid) && !newForm.website.$focus">
-                                {{ 'Enter valid phone number' | translate }}
+                                {{ 'Enter valid website URL' | translate }}
                             </div>
                         </div>
-                        <div id="contact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="contact_remove_phone" href="javascript:">Remove</a></div>
+                        <div id="contact_removephone" name="editRemoveCompany" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="contact_remove_phone" href="javascript:">Remove</a></div>
                     </div>
                 </div>
 
@@ -205,10 +203,10 @@
                     <div id="email-wrap">
                         <div id="facebook" class="form-bx form-bx2">
                             <p>Add social Media Profile</p>
-                            <input autofocus name="fb" class="form-control" id="newcontact_social" type="text"
+                            <input autofocus name="fb" class="form-control" id="editAddCompanySocialFb" type="text"
                                    data-ng-model="facebook" />
 
-                            <div class="text-danger"
+                            <div class="text-danger" id="err_socialMediaFb"
                                  data-ng-if="newForm.fb.$invalid && (!newForm.fb.$pristine || showValid) && !newForm.fb.$focus">
                                 {{ 'Please enter alphabets only' | translate }}
                             </div>
@@ -229,10 +227,10 @@
                     <div id="email-wrap">
                         <div id="twitter" class="form-bx form-bx2">
 
-                            <input autofocus name="twitter" class="form-control" id="newcontact_twitter" type="text"
+                            <input autofocus name="twitter" class="form-control" id="editAddCompanySocialTwitter" type="text"
                                    data-ng-model="twitter" />
 
-                            <div class="text-danger"
+                            <div class="text-danger" id="err_socialMediaTr"
                                  data-ng-if="newForm.twitter.$invalid && (!newForm.twitter.$pristine || showValid) && !newForm.twitter.$focus">
                                 {{ 'Please enter alphabets only' | translate }}
                             </div>
@@ -253,10 +251,10 @@
                     <div id="email-wrap">
                         <div id="linkedin" class="form-bx form-bx2">
 
-                            <input autofocus name="linked" class="form-control" id="newcontact_linked" type="text"
+                            <input autofocus name="linked" class="form-control" id="editAddCompanySocialLink" type="text"
                                    data-ng-model="linkedin" />
 
-                            <div class="text-danger"
+                            <div class="text-danger" id="err_socialMediaLk"
                                  data-ng-if="newForm.linked.$invalid && (!newForm.linked.$pristine || showValid) && !newForm.linked.$focus">
                                 {{ 'Please enter alphabets only' | translate }}
                             </div>
@@ -274,13 +272,13 @@
 
 
             <div class="modal-btn-wrap clearfix">
-                <button id="btn_contact_save" type="submit" class="f-btn">SAVE</button>
+                <button id="btn_editCompanySave" type="submit" class="f-btn">SAVE</button>
                 <!--<button type="submit" id="gallery_save" class="f-btn"
                         ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
                     Save
                 </button>-->
 
-                <button id="btn_contact_cancelme" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                <button id="btn_editCompanyCancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
             </div>
         </form>
 
@@ -288,3 +286,17 @@
     </div><!-- modal-body ended -->
 
 </div><!-- modal ended -->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#uploadImageEditCompany").change(function () {
+        readURL(this);
+    });
+</script>

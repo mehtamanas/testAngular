@@ -3,13 +3,15 @@
         cursor: pointer !important;
     }
 </style>
+
 <div id="main-content" class="col-xs-12">
     <div class="content-inner">
+
         <div class="pg-inner-header">
             <div class="row">
 
                 <div class="col-md-12">
-                    <h2 class="pg-inner-title">Contact List</h2>
+                    <h2 class="pg-inner-title">Blogs</h2>
                 </div>
 
             </div>
@@ -20,16 +22,15 @@
 
         <form action="">
 
-            <div class="clearfix">
-
-                <div class="pull-right btn-wrap-right" style="margin-bottom: 1%;">
-                    <a href="#" id="createNewListContact" class="btn-lk"  ng-click="openListPopup()" style="cursor:pointer">+ Create New List</a>
+            <div class="clearfix">           
+                <div class="pull-right btn-wrap-right">                   
+                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openAddBlogPopup()" style="cursor:pointer">+ Add New Blog Post</a>
                 </div>
             </div>
 
             <div id="record-content" class="properties-content">
 
-                <div id="contact_kenomain" kendo-grid k-options="ListGrid" selectable="true" k-on-change="myGridChange(dataItem )">
+                <div id="contact_kenomain" kendo-grid k-options="BlogsPostGrid" selectable="true" k-on-change="myBlogGridChange(dataItem )">
                 </div>
 
             </div><!-- record-content ended -->

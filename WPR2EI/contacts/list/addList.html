@@ -2,7 +2,7 @@
 
 
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" id="btn_CloseList" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">Create New Contact List</h4>
     </div>
     <form class="form-content form-content2 edit-organization-setting" name="addNewForm" style="text-align:left" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
@@ -11,8 +11,7 @@
 
             <div class="form-group" style="width: 727px !important;">
                 <label for="">List Name</label>
-                <input type="text" class="form-control text-bold" autofocus name="name" id="addnewteam_name"
-                       placeholder="List Name"
+                <input type="text" class="form-control text-bold" autofocus name="name" id="addNewListName"
                        data-ng-model="params.name"
                        minlength="1"
                        maxlength="50"
@@ -25,8 +24,7 @@
         <div class="clearfix">
             <div class="form-group form-bx form-bx13">
                 <label for="">Description</label>
-                <textarea cols="100" rows="10" name="description" id="addnewteam_description"
-                          placeholder="Description"
+                <textarea cols="100" rows="10" name="description" id="txt_AddNewListDescription"
                           data-ng-model="params.description"
                           minlength="1"
                           maxlength="500"
@@ -35,10 +33,10 @@
         </div>
 
         <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;">
-            <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
+            <button class="btn campaign-container-btn" id="btn_AddListCancel" type="button" ng-click="cancel()">
                 CANCEL
             </button>
-            <button class="btn organization-btn" id="campaign_save" type="submit">NEXT</button>
+            <button class="btn organization-btn" id="btn_AddListNext" type="submit">NEXT</button>
         </div>
 
        
