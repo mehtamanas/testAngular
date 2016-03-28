@@ -1796,7 +1796,7 @@ html .km-pane-wrapper .km-widget, .k-ie .km-pane-wrapper .k-widget, .k-ie .km-pa
 }
 
 .k-picker-wrap.k-state-hover .k-input, .k-picker-wrap.k-state-focused .k-input {
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 
 .k-textbox:hover, .k-overflow-anchor:hover, .k-autocomplete.k-state-hover, .k-picker-wrap.k-state-hover, .k-numeric-wrap.k-state-hover, .k-dropdown-wrap.k-state-hover {
@@ -1929,6 +1929,7 @@ td.k-state-focused.k-state-selected {
     border-radius: 0;
     background:#696969;
     border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
 }
 
 .k-tabstrip-items .k-state-active {

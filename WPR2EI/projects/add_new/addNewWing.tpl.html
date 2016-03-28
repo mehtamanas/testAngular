@@ -65,7 +65,7 @@
                                                 <div class="dropzone dropzone-bx image-upload-bx">
                                                     <div class="fallback">
                                                         <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                                            <div class="panel-body image-upload-panel">
+                                                            <div class="image-upload-panel">
                                                                 <div class="row" ng-hide="uploader.queue.length">
                                                                     <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
@@ -83,11 +83,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                                                    <div class="image-upload-link">
-                                                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                                <div class="uploadFileName">
+                                                 <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
+                                                    <label class="custom-file-input">
+                                                        
+                                                         <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                                                        
-                                                    </div>
+                                                    </label>
                                             </div>
 
                                             <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
@@ -95,7 +97,7 @@
                                                     <div class="dropzone dropzone-bx image-upload-bx">
                                                         <div class="fallback">
                                                             <div class="panel panel-success" uploader="uploader1" nv-file-over="">
-                                                                <div class="panel-body image-upload-panel">
+                                                                <div class="image-upload-panel">
                                                                     <div class="row" ng-hide="uploader1.queue.length">
                                                                         <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                                                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
@@ -114,10 +116,10 @@
                                                         </div>
                                                     </div>
                                                 <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
-                                                    <div class="image-upload-link">
-                                                        <div class="browse-title">Browse</div>
+                                                    <label class="custom-file-input">
+                                                       
                                                         <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                                                    </div>
+                                                    </label>
                                                 </div>
                                             </div>
 

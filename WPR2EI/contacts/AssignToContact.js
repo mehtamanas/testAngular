@@ -3,17 +3,33 @@
 var ActionUpController = function ($scope, $state, $cookieStore, apiService, $rootScope, $modalInstance, $modal) {
     console.log('ActionUpController');
 
-    //Audit log start               
+    //Audit log start  
+    var people_type = $cookieStore.get('people_type');
 
+    if (people_type == "Contact") {
+        $scope.title = 'contact';
+
+    }
+    else if (people_type == "Client") {
+        $scope.title = 'client';
+
+    }
+    else if (people_type == "Lead") {
+        $scope.title = 'lead';
+
+    }
+    else {
+        $rootScope.title = '';
+    }
 
     AuditCreate = function () {
         var postdata =
        {
            device_os: $cookieStore.get('Device_os'),
            device_type: $cookieStore.get('Device'),
-           module_id: "User",
-           action_id: "User View",
-           details: $scope.params.city + "role assigned",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: "Assigned the "+$scope.title+" to: "+$scope.params.city  ,
            application: "angular",
            browser: $cookieStore.get('browser'),
            ip_address: $cookieStore.get('IP_Address'),
@@ -32,7 +48,7 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
     };
     //end
 
-    
+
 
     Url = "user/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
@@ -52,9 +68,9 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
         mappinguser_id: $scope.mappinguser_id,
     };
 
-  
+
     //calling Api
-   
+
 
 
     $scope.addNew = function () {
@@ -63,7 +79,7 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
         var usersToBeAddedOnServer = [];
 
         var Url;
-        if ($cookieStore.get('Selected Text') == "ASSIGN TO") {
+
             for (var i in $scope.checkedIds) {
                 var newMember = {};
                 newMember.contact_id = $scope.checkedIds[i];
@@ -74,16 +90,17 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
             }
 
             Url = "Mapping/ContactToUser";
-        }
-       
+
 
         apiService.post(Url, usersToBeAddedOnServer).then(function (response) {
             var loginSession = response.data;
             AuditCreate();
             $modalInstance.dismiss();
-            $rootScope.$broadcast('REFRESH', 'LeadContactGrid');
+            $rootScope.$broadcast('REFRESH1', 'contactGrid');
+            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
+            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
             $scope.openSucessfullPopup();
-           
+
         },
        function (error) {
            if (error.status === 400)
@@ -93,9 +110,9 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
        });
     }
 
-   
 
-   
+
+
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -111,9 +128,9 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
             backdrop: 'static',
             controller: assigntopopup,
             size: 'md',
-           
+
 
         });
-     
+
     }
 };

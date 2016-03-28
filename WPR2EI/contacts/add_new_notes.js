@@ -5,26 +5,32 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
     console.log('AddNewNotesController');
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
+    $scope.params;
+
     $scope.contact1 = $scope.seletedCustomerId;
+
+    var userID = $cookieStore.get('userId');
     //Audit log start
-    $scope.params = {
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+           //device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: "Added new note",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
@@ -34,78 +40,49 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
 
     //end
+    $scope.contactList = [];
 
-
-    $scope.choices = [{ id: 'choice1' }];
-
-    $scope.addNewChoice = function () {
-        var newItemNo = $scope.choices.length + 1;
-        $scope.choices.push({ 'id': 'choice' + newItemNo });
-    };
-
-
-    $scope.choices2 = [{ id: 'choice1' }];
-    $(document).on("click", ".remove-field", function () {
-        $(this).parent().remove();
-    });
-
-    $scope.choices2 = [{ id: 'choice1' }];
-    $scope.addNewChoice2 = function (e) {
-        var classname = e.currentTarget.className;
-        if (classname == 'remove-field') {
-            // $scope.choices2.pop();
+    apiService.get("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+        data = response.data;
+        contactsName = _.pluck(data, 'Name');
+        contactId = _.pluck(data, 'id');
+        for (i = 0; i < contactsName.length; i++) {
+            $scope.contactList.push({'text': contactsName[i].toString(), 'id': contactId[i].toString()});
         }
-        else if ($scope.choices2.length) {
-            var newItemNo2 = $scope.choices2.length + 1;
-            $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
-        }
-
-    };
-
-    //API functionality start
-    //$scope.params = {
-    //    project_id: $scope.project1,
-    //    text: $scope.text,
-    //    class_id:$scope.contact1,
-    //    organization_id: $cookieStore.get('orgID'),
-    //    user_id: $cookieStore.get('userId'),
-    //    class_type: "Person",
-        
-    //};
+    },function (error) {
+            });
 
 
-   
+    $scope.loadTags = function (query) {
+        return $scope.contactList;
+    }
+
+
 
 
 
     projectUrl = "Notes/CreateMultipleNotes";
     ProjectCreate = function () {
         var schemeupdate = [];
-
-        for (var i in $scope.choices2)
-        {
-         
-
+ 
             var newscheme = {};
-
+            newscheme.attention = _.pluck($scope.params.Name, 'text').join(','),
             newscheme.user_id = $cookieStore.get('userId');
             newscheme.organization_id = $cookieStore.get('orgID');
-            newscheme.text = $scope.choices2[i].text;
+            newscheme.text = $scope.params.description;
             newscheme.class_id = window.sessionStorage.selectedCustomerID;
             newscheme.class_type = "Person";
             schemeupdate.push(newscheme);
+        
 
-       
-        }
         apiService.post(projectUrl, schemeupdate).then(function (response) {
             var choices2 = response.data;
-
-
+            AuditCreate();
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
+
             $rootScope.$broadcast('REFRESH', 'NotesGrid');
         },
 function (error) {
@@ -113,29 +90,8 @@ function (error) {
         alert(error.data.Message);
     else
         alert("Network issue");
-});
-        }
-       
-
-
-    //projectUrl = "/Notes/Create";
-    //ProjectCreate = function (param) {
-
-    //    apiService.post(projectUrl, param).then(function (response) {
-    //        var loginSession = response.data;
-    //        $scope.openSucessfullPopup();
-    //        $modalInstance.dismiss();
-    //        $rootScope.$broadcast('REFRESH', 'NotesGrid');
-    //    },
-    //function (error) {
-    //    if (error.status === 400)
-    //        alert(error.data.Message);
-    //    else
-    //        alert("Network issue");
-    //})
-    //};
-
-
+})
+    };
 
     //end
     //popup functionality start

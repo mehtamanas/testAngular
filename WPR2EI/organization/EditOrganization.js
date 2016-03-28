@@ -168,6 +168,8 @@ function (error)
                 state: $scope.state1,
                 zip_code: $scope.zip_code,
                 country: $scope.country1,
+                first_month_of_financial_year: $scope.month1,
+                timezone:$scope.timezone1
 
 
 

@@ -3,10 +3,11 @@
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope,$q, emailService) {
 
         var userId = $cookieStore.get('userId');
-        var emailTemplate = $cookieStore.get('emailAddTemplate');
+        var emailTemplate = JSON.parse(window.localStorage.getItem("emailAddTemplate"));
+        window.localStorage.removeItem('emailAddTemplate');
         var tagToBeAdded = $cookieStore.get('usersToBeAddedOnServer1');
         var tagToBeRemove= $cookieStore.get('usersToBeRemovedOnServer1');
-
+        $scope.start_date = $cookieStore.get('htmldate1');
         $scope.params = {};
      
 
@@ -150,25 +151,39 @@
 
         }
       
-        $cookieStore.remove('Name');
-        $cookieStore.remove('End_Date');
-        $cookieStore.remove('Address');
-        $cookieStore.remove('Start_Date');
-        $cookieStore.remove('Budget');
-        $cookieStore.remove('No_of_leads');
-        $cookieStore.remove('Sales');
-        $cookieStore.remove('channel_type_id');
-        $cookieStore.remove('campaign_ID');
-
+        
+        $scope.RemoveCookies=function()
+        {
+            $cookieStore.remove('Name');
+            $cookieStore.remove('End_Date');
+            $cookieStore.remove('Address');
+            $cookieStore.remove('Start_Date');
+            $cookieStore.remove('Budget');
+            $cookieStore.remove('No_of_leads');
+            $cookieStore.remove('project_id');
+            $cookieStore.remove('Sales');
+            $cookieStore.remove('channel_type_id');
+            $cookieStore.remove('campaign_ID');
+            $cookieStore.remove('usersToBeAddedOnServer1');
+            $state.go('app.campaigns');            
+        }
 
         $scope.cancel = function () {
+            $cookieStore.remove('Name');
+            $cookieStore.remove('End_Date');
+            $cookieStore.remove('Address');
+            $cookieStore.remove('Start_Date');
+            $cookieStore.remove('Budget');
+            $cookieStore.remove('No_of_leads');
+            $cookieStore.remove('project_id');
+            $cookieStore.remove('Sales');
+            $cookieStore.remove('channel_type_id');
+            $cookieStore.remove('campaign_ID');
             $state.go('app.campaigns');
         };
 
         $scope.back = function () {
-            $state.go('app.addTemplate');
-            
-
+            $state.go('app.addTemplate');            
         }
 
     });

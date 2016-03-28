@@ -1,11 +1,18 @@
 ﻿angular.module('my_day')
 .controller('my_dayController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $anchorScroll) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $anchorScroll, $window, $stateParams) {
         //var userID = $cookieStore.get('user_id');
+        $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
+        $scope.selectedTaskID = $stateParams.id;
+
+
+        $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+        $scope.seletedCustomerId = $stateParams.id;
         $scope.showEventTodayGrid = true;
         $scope.showContactTodayGrid = true;
         $scope.showTaskTodayGrid = true;
         var userID = $cookieStore.get('userId');
+       
         console.log('my_dayController');
 
         var contactGrid = function () {
@@ -13,184 +20,282 @@
                 dataSource: {
                     type: "json",
                     transport: {
-                        read: apiService.baseUrl + "Notes/GetNotesByUserId/" + userID + "/today"
-
+                        read: apiService.baseUrl + "Contact/GetPeopleGrid/" + userID + "/today"
                     },
                     pageSize: 5,
+                    schema: {
+                        model: {
+                            fields: {
+                                due_date: { type: "date" },
+                                
+                            }
+                        }
+                    }
                 },
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                height:500,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
                     buttonCount: 5
                 },
                 columns: [{
-                    template: "<img height='40px' width='40px' src='#= Contact_image #'/>" +
+                    template: "<img height='40px' width='40px' src='#= media_url #'/>" +
                     "<span style='padding-left:10px' class='property-photo'> </span>",
                     title: "Picture",
-                    width: "120px",
+                   
                     attributes:
                       {
                           "class": "UseHand",
+                          "style": "text-align:center"
                       }
                 }, {
                     field: "Contact_name",
+                    template: '<a ui-sref="app.contactdetail({id:dataItem.id})" href="">#=Contact_name#</a>',
                     title: "Contact",
-                    width: "85px"
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                },{
+                    field: "task_type",
+                    title: "Task Type",
+                
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                },{
                     field: "text",
                     title: "Notes",
-                    width: "85px"
+                    width: "250px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 },
                 {
-                    template: " <span class='pull-right contact-ico'> <a href='javascript:' class='ico-msg'></a></span>",
-                    width: "40px",
+                    field: "due_date",
+                    title: "Due Date",
+                 
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                     attributes:
-                      {
-                          "class": "UseHand",
-                      }
-                },
-                 {
-                     template: "<span class='pull-right contact-ico'> <a href='javascript:' class='ico-send'></a></span>",
-                     width: "40px",
-                     attributes:
-                       {
-                           "class": "UseHand",
-                       }
-                 },
                   {
-                      template: "<span class='pull-right contact-ico'> <a href='javascript:' class='ico-call'></a></span>",
-                      width: "40px",
-                      attributes:
-                        {
-                            "class": "UseHand",
-                        }
-                  }]
+                      "style": "text-align:center"
+                  }
+
+                },
+               ]
             }
 
             $scope.contactTomorrowGrid = {
                 dataSource: {
                     type: "json",
                     transport: {
-
-                        read: apiService.baseUrl + "Notes/GetNotesByUserId/" + userID + "/tomorrow"
-
+                        read: apiService.baseUrl + "Contact/GetPeopleGrid/" + userID + "/tomorrow"
                     },
                     pageSize: 5,
+                    schema: {
+                        model: {
+                            fields: {
+                                due_date: { type: "date" },
+                               
+                            }
+                        }
+                    }
                 },
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                height: 500,
+                filterable: true,
+
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
                     buttonCount: 5
                 },
                 columns: [{
-                    template: "<img height='40px' width='40px' src='#= Contact_image #'/>" +
+                    template: "<img height='40px' width='40px' src='#= media_url #'/>" +
                     "<span style='padding-left:10px' class='property-photo'> </span>",
                     title: "Picture",
-                    width: "120px",
+                 
                     attributes:
                       {
                           "class": "UseHand",
+                          "style": "text-align:center"
                       }
                 }, {
                     field: "Contact_name",
+                    template: '<a ui-sref="app.contactdetail({id:dataItem.id})" href="">#=Contact_name#</a>',
                     title: "Contact",
-                    width: "85px"
+                    width: "200px",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "task_type",
+                    title: "Task Type",
+                  
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                },{
                     field: "text",
                     title: "Notes",
-                    width: "85px"
+                    width: "250px",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 },
                 {
-                    template: " <span class='pull-right contact-ico'> <a href='javascript:' class='ico-msg'></a></span>",
-                    width: "40px",
+                    field: "due_date",
+                    title: "Due Date",
+                  
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                     attributes:
                       {
-                          "class": "UseHand",
+                          "style": "text-align:center"
                       }
-                },
-                 {
-                     template: "<span class='pull-right contact-ico'> <a href='javascript:' class='ico-send'></a></span>",
-                     width: "40px",
-                     attributes:
-                       {
-                           "class": "UseHand",
-                       }
-                 },
-                  {
-                      template: "<span class='pull-right contact-ico'> <a href='javascript:' class='ico-call'></a></span>",
-                      width: "40px",
-                      attributes:
-                        {
-                            "class": "UseHand",
-                        }
-                  }]
+
+                },]
             }
 
             $scope.contactNext7DayGrid = {
                 dataSource: {
                     type: "json",
                     transport: {
-
-                        read: apiService.baseUrl + "Notes/GetNotesByUserId/" + userID + "/7days"
-
+                        read: apiService.baseUrl + "Contact/GetPeopleGrid/" + userID + "/7days"
                     },
                     pageSize: 5,
+                    schema: {
+                        model: {
+                            fields: {
+                                due_date: { type: "date" },
+                               
+                            }
+                        }
+                    }
                 },
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
                     buttonCount: 5
                 },
                 columns: [{
-                    template: "<img height='40px' width='40px' src='#= Contact_image #'/>" +
+                    template: "<img height='40px' width='40px' src='#= media_url #'/>" +
                     "<span style='padding-left:10px' class='property-photo'> </span>",
                     title: "Picture",
-                    width: "120px",
+                  
                     attributes:
                       {
                           "class": "UseHand",
+                          "style": "text-align:center"
                       }
                 }, {
                     field: "Contact_name",
+                    template: '<a ui-sref="app.contactdetail({id:dataItem.id})" href="">#=Contact_name#</a>',
                     title: "Contact",
-                    width: "85px"
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "task_type",
+                    title: "Task Type",
+                 
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
                     field: "text",
                     title: "Notes",
-                    width: "85px"
-                },
-                {
-                    template: " <span class='pull-right contact-ico'> <a href='javascript:' class='ico-msg'></a></span>",
-                    width: "40px",
+                    width: "250px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "due_date",
+                    title: "Due Date",
+                
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                     attributes:
                       {
-                          "class": "UseHand",
+                          "style": "text-align:center"
                       }
-                },
-                 {
-                     template: "<span class='pull-right contact-ico'> <a href='javascript:' class='ico-send'></a></span>",
-                     width: "40px",
-                     attributes:
-                       {
-                           "class": "UseHand",
-                       }
-                 },
-                  {
-                      template: "<span class='pull-right contact-ico'> <a href='javascript:' class='ico-call'></a></span>",
-                      width: "40px",
-                      attributes:
-                        {
-                            "class": "UseHand",
-                        }
-                  }]
+
+                },]
             }
         }
+
         var eventGrid = function () {
             $scope.eventTodayGrid = {
                 dataSource: {
@@ -211,9 +316,20 @@
                         }
                     }
                 },
-                pageSize: 5,
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
@@ -223,18 +339,18 @@
                 columns: [{
                     field: "name",
                     title: "Name",
-                    width: 176
+                  
                 }, {
                     field: "event_date1",
                     title: "Start",
-                    width: "85px",
-                    format: '{0:dd/MM/yyyy}'
+                   
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
 
                 }, {
                     field: "end_date",
                     title: "End",
-                    width: "85px",
-                    format: '{0:dd/MM/yyyy}'
+                   
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
 
                 }, {
                     field: "project_name",
@@ -243,7 +359,7 @@
                 }, {
                     field: "contact_name",
                     title: "Contact",
-                    width: "85px",
+                    width: "200px",
                 }]
             }
             $scope.eventTomorrowGrid = {
@@ -265,9 +381,20 @@
                         }
                     }
                 },
-                pageSize: 5,
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
@@ -277,18 +404,18 @@
                 columns: [{
                     field: "name",
                     title: "Name",
-                    width: 176
+                  
                 }, {
                     field: "event_date1",
                     title: "Start",
-                    width: "85px",
-                    format: '{0:dd/MM/yyyy}'
+                  
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
 
                 }, {
                     field: "end_date",
                     title: "End",
-                    width: "85px",
-                    format: '{0:dd/MM/yyyy}'
+                   
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
 
                 }, {
                     field: "project_name",
@@ -297,7 +424,7 @@
                 }, {
                     field: "contact_name",
                     title: "Contact",
-                    width: "85px",
+                    width: "200px",
                 }]
             }
             $scope.eventNext7Grid = {
@@ -319,9 +446,20 @@
                         }
                     }
                 },
-                pageSize: 5,
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
@@ -331,31 +469,30 @@
                 columns: [{
                     field: "name",
                     title: "Name",
-                    width: 176
+                 
                 }, {
                     field: "event_date1",
-                    title: "Start",
-                    width: 85,
-                    format: '{0:dd/MM/yyyy}'
+                    title: "Start",                  
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
 
                 }, {
                     field: "end_date",
-                    title: "End",
-                    width: 85,
-                    format: '{0:dd/MM/yyyy}'
+                    title: "End",                 
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
 
                 }, {
                     field: "project_name",
                     title: "Project",
-                    width: 85
+                   
                 }, {
                     field: "contact_name",
                     title: "Contact",
-                    width: 85
+                    width: 200,
                 }]
             }
 
         }
+
         var taskGrid = function () {
             $scope.taskTodayGrid = {
                 dataSource: {
@@ -375,9 +512,20 @@
                         }
                     }
                 },
-                pageSize: 5,
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
@@ -385,31 +533,67 @@
                 },
                 columns: [{
                     field: "name",
-                    title: "Task Name",
-                    width: "85px",
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="">#=name#</a>',
+                    title: "Task Name",                   
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
-                    field: "project_name",
-                    title: "Project",
-                    width: "85px",
+                    field: "Project_Name",
+                    title: "Project",                   
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
                     field: "user_name",
-                    title: "Assigned To",
-                    width: "85px",
+                    title: "Assigned To",                  
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
-                    field: "Contact_name",
+                    field: "Contact_Name",
                     title: "Contact",
-                    width: "85px",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
-                    field: "status",
-                    title: "Status",
-                    width: "85px",
+                    field: "company",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "remind_me",
+                    title: "Remind Me",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                     field:"status",
+                    template: '<span id="#= status #"></span>',
+                    title: "Status",                
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
                     field: "due_date",
-                    title: "Due Date",
-                    width: "85px",
-                    format: '{0:dd/MM/yyyy}'
-                }, ]
-
+                    title: "Due Date",                
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                },]
 
             }
             $scope.taskTomorrowGrid = {
@@ -430,9 +614,20 @@
                         }
                     }
                 },
-                pageSize: 5,
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
@@ -440,29 +635,69 @@
                 },
                 columns: [{
                     field: "name",
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="">#=name#</a>',
                     title: "Task Name",
-                    width: 176
+                  
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "project_name",
                     title: "Project",
-                    width: 85
+                   
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "user_name",
                     title: "Assigned To",
-                    width: 85
+                  
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "Contact_name",
                     title: "Contact",
-                    width: 85
+                    width: 200,
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
-                    field: "status",
-                    title: "Status",
-                    width: 85
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                },{
+                     field: "remind_me",
+                     title: "Remind Me",
+                     width: "200px",
+                     attributes:
+                      {
+                          "style": "text-align:center"
+                      }
+                 }, {
+field:"status",
+                    template: '<span id="#= status #"></span>',
+                    title: "Status",                  
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "due_date",
-                    title: "Due Date",
-                    width: 85,
-                    format: '{0:dd/MM/yyyy}'
+                    title: "Due Date",                 
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, ]
 
 
@@ -485,9 +720,20 @@
                         }
                     }
                 },
-                pageSize: 5,
-                groupable: false,
+                groupable: true,
                 sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
                 pageable: {
                     refresh: true,
                     pageSizes: true,
@@ -495,29 +741,66 @@
                 },
                 columns: [{
                     field: "name",
-                    title: "Task Name",
-                    width: 176
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="">#=name#</a>',
+                    title: "Task Name",                 
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "project_name",
-                    title: "Project",
-                    width: 85
+                    title: "Project",                  
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "user_name",
-                    title: "Assigned To",
-                    width: 85
+                    title: "Assigned To",                   
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "Contact_name",
                     title: "Contact",
-                    width: 85
+                    width: 200,
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
-                    field: "status",
-                    title: "Status",
-                    width: 85
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "remind_me",
+                    title: "Remind Me",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field:"status",
+                    template: '<span id="#= status #"></span>',
+                    title: "Status",                  
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, {
                     field: "due_date",
-                    title: "Due Date",
-                    width: 85,
-                    format: '{0:dd/MM/yyyy}'
+                    title: "Due Date",                 
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
                 }, ]
 
 
@@ -718,4 +1001,44 @@
             }
 
         }
+
+
+        // Kendo Grid on change
+        $scope.myTodayGridChange = function (dataItem) {        
+            window.sessionStorage.selectedCustomerID = dataItem.id;
+            $state.go('app.contactdetail', { id: dataItem.id });
+        };
+        // Kendo Grid on change
+        $scope.myTomorrowGridChange = function (dataItem) {           
+            window.sessionStorage.selectedCustomerID = dataItem.id;
+            $state.go('app.contactdetail', { id: dataItem.id });
+        };
+
+        // Kendo Grid on change
+        $scope.myNext7GridChange = function (dataItem) {          
+            window.sessionStorage.selectedCustomerID = dataItem.id;
+            $state.go('app.contactdetail', { id: dataItem.id });
+        };
+
+
+        // Kendo Grid on change
+        $scope.myGridChange = function (dataItem) {
+            window.sessionStorage.selectedTaskID = dataItem.task_id;
+            $state.go('app.edit_task_myday', { id: dataItem.task_id });
+        };
+        // Kendo Grid on change
+        $scope.myGridChange = function (dataItem) {
+            window.sessionStorage.selectedTaskID = dataItem.task_id;
+            $state.go('app.edit_task_myday', { id: dataItem.task_id });
+        };
+
+        // Kendo Grid on change
+        $scope.myGridChange = function (dataItem) {
+            window.sessionStorage.selectedTaskID = dataItem.task_id;
+            $state.go('app.edit_task_myday', { id: dataItem.task_id });
+        };
+
+
+       
+
     });

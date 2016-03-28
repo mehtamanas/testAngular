@@ -35,7 +35,7 @@
                                             {{'Enter valid No of Wings' | translate }}
                                         </div>
                                     </div>
-                                    <div class="field-md2 field-req">*</div>
+                                    <div class="field-md3 field-req">*</div>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                      'has-error' : addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid),
                                      'has-success': addNewForm.tname.$valid && !addNewForm.tname.$pristine
                                                 }">
-                            <div class="form-group form-bx form-bx2">
+                            <div class="form-group form-bx form-bx3-2 ">
                                 <label for="">Enter Tower Name:</label>
                                 <input type="text" class="form-control" name="tname" placeholder="Tower A" id="editnewtower_tower_name"
                                        data-ng-model="params.tower_name"
@@ -186,7 +186,7 @@
                             <div class="dropzone dropzone-bx image-upload-bx">
                                 <div class="fallback">
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                        <div class="panel-body image-upload-panel">
+                                        <div class="image-upload-panel">
                                             <div class="row" ng-hide="uploader.queue.length">
                                                 <img ng-src={{params.Image_Url_Tower1}} class="upload-image" />
                                             </div>
@@ -212,7 +212,7 @@
                                 <div class="dropzone dropzone-bx image-upload-bx">
                                     <div class="fallback">
                                         <div class="panel panel-success" uploader="uploader1" nv-file-over="">
-                                            <div class="panel-body image-upload-panel">
+                                            <div class=" image-upload-panel">
                                                 <div class="row" ng-hide="uploader1.queue.length">
                                                     <img ng-src={{params.Image_Url_Tower3Dzip}} class="upload-image" />
                                                 </div>
@@ -238,7 +238,7 @@
                                     <div class="dropzone dropzone-bx image-upload-bx">
                                         <div class="fallback">
                                             <div class="panel panel-success" uploader="uploader2" nv-file-over="">
-                                                <div class="panel-body image-upload-panel">
+                                                <div class=" image-upload-panel">
                                                     <div class="row" ng-hide="uploader2.queue.length">
                                                         <img ng-src={{params.Image_Url_Minimap}}  class="upload-image" />
                                                     </div>

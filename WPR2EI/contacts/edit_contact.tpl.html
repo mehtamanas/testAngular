@@ -19,37 +19,38 @@
                         <div class="fallback">
                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                 <div class="image-upload-panel">
-                                    <div class="row" ng-hide="uploader.queue.length">
-                                        <img ng-src={{params.Contact_Image}}  class="upload-image"/>
+                                    <div class="user-photo_2" ng-hide="uploader.queue.length">
+                                        <img ng-src={{params.Contact_Image}} class="image3" />
                                     </div>
                                     <div class="row" ng-show="uploader.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                            <div ng-show="uploader.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        <div class="user-photo_4" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1" alt="your image" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                    <div class="image-upload-link">
-                        <div class="browse-title">Add Photo</div>
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                        </div>
+                    <div class="uploadFileName">
+                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                    </div>
+                    <label class="custom-file-input">
+
+                        <input type="file" class="image-upload-f" id="contactedit_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                    </label>
                 </div>
 
             </div>
 
             <div class="clearfix">
 
-                <div class="form-bx form-bx14">
+                <div class="form-bx">
                     <div class="form-group"
                          data-ng-class="{
                                            'has-error' : newForm.salutation.$invalid && (!newForm.salutation.$pristine || showValid) && !newForm.salutation.$focus,
                                             'has-success': newForm.salutation.$valid && !newForm.salutation.$pristine && !newForm.salutation.$focus
                                      }">
-                        <select id="salutation_select" name="salutation" ng-change="selectsalutation()" ng-model="salutation1" class="dropdown form-control">
+                        <select id="contactedit_salutation" name="salutation" ng-change="selectsalutation()" ng-model="salutation1" class="dropdown form-control">
                             <option value="" selected>Select Salutation</option>
                             <option value="Mr.">Mr.</option>
                             <option value="Ms.">Ms.</option>
@@ -72,8 +73,8 @@
                                            'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
                                            'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
                                                                     }">
-                        <input type="text" autofocus name="firstName" class="form-control" id="editcontact_fname"
-                               placeholder="First Name"
+                        <label>First Name</label>
+                        <input type="text" autofocus name="firstName" class="form-control" id="contactedit_fname"
                                data-ng-model="params.Contact_First_Name"
                                minlength="1"
                                maxlength="40"
@@ -96,8 +97,8 @@
                                                'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
                                                 'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
                                               }">
+                        <label>Last Name</label>
                         <input type="text" name="lastName" class="form-control" id="editcontact_lname"
-                               placeholder="Last Name"
                                data-ng-model="params.Contact_Last_Name"
                                minlength="1"
                                maxlength="30"
@@ -120,15 +121,15 @@
 
                 <div class="form-bx" style="padding:5px">
                     <label for="">Title</label>
-                    <input kendo-auto-complete ng-model="params.designation" k-data-source="titleList" class="form-control" />
+                    <input kendo-auto-complete ng-model="params.designation" k-data-source="titleList" class="form-control"  id="editcontact_title" />
                 </div>
-             
 
-                <div class="form-bx"  style="padding:5px;margin-left:3%">
+
+                <div class="form-bx" style="padding:5px;margin-left:3%">
                     <label for="">Company</label>
-                    <input kendo-auto-complete ng-model="params.company" k-data-source="companyList" class="form-control" />
+                    <input kendo-auto-complete ng-model="params.company" k-data-source="companyList" class="form-control" id="editcontact_Company" />
                 </div>
-              </div>
+            </div>
 
             <div class="clearfix">
 
@@ -138,7 +139,7 @@
                                            'has-error' : newForm.budget.$invalid && (!newForm.budget.$pristine || showValid) && !newForm.budget.$focus,
                                             'has-success': newForm.budget.$valid && !newForm.budget.$pristine && !newForm.budget.$focus
                                      }">
-                        <select id="type_select" name="budget" ng-change="selectbudget()" ng-model="budget1" class="dropdown form-control">
+                        <select id="editcontact_Budget" name="budget" ng-change="selectbudget()" ng-model="budget1" class="dropdown form-control">
                             <option value="" selected>Select Budget</option>
                             <option value="Less than 1Cr.">Less than 1Cr.</option>
                             <option value="1Cr. to 5Cr.">1Cr. to 5Cr.</option>
@@ -159,7 +160,7 @@
                                            'has-error' : newForm.duration.$invalid && (!newForm.duration.$pristine || showValid) && !newForm.duration.$focus,
                                             'has-success': newForm.duration.$valid && !newForm.duration.$pristine && !newForm.duration.$focus
                                      }">
-                        <select id="type_select" name="duration" ng-change="selectbuy()" ng-model="buy1" class="dropdown form-control">
+                        <select id="editcontact_duration" name="duration" ng-change="selectbuy()" ng-model="buy1" class="dropdown form-control">
                             <option value="" selected>Looking At Purchase In</option>
                             <option value="0-3 months">0-3 months</option>
                             <option value="3-6 months">3-6 months</option>
@@ -172,7 +173,7 @@
                             {{ 'Enter valid Purchase Duration' | translate }}
                         </div>
                     </div>
-                    </div>
+                </div>
 
 
                 <div class="clearfix">
@@ -184,28 +185,26 @@
                                          'has-success': newForm.income.$valid && !newForm.income.$pristine && !newForm.income.$focus
                                                                      }">
                             <label for="">Income</label>
-                            <input type="text" class="form-control text-bold" autofocus name="income"
-                                   placeholder="Income"
+                            <input type="text" id="editcontact_Income" class="form-control text-bold" autofocus name="income"
                                    data-ng-model="params.income"
                                    minlength="1"
                                    maxlength="50"
                                    ng-pattern="/^([1-9][0-9,./]*)$/"
-                                   input-focus
-                                    />
+                                   input-focus />
                             <div class="text-danger"
                                  data-ng-if="newForm.income.$invalid && (!newForm.income.$pristine || showValid) && !newForm.income.$focus">
                                 {{ 'Enter valid income' | translate }}
                             </div>
                         </div>
-                 </div>
-            </div>
+                    </div>
+                </div>
 
                 <div class="clearfix">
 
 
                     <div class="form-bx form-bx2" style="border: 1px solid #e7e7e7;border-radius: 2px;">
 
-                        <select kendo-multi-select k-options="selectOptions" name="project" id="edituser_role" k-ng-model="project_name" k-on-change="selectProject()" class="dropdown form-control" ></select>
+                        <select kendo-multi-select k-options="selectOptions" name="project" id="editcontact_project" k-ng-model="project_name" k-on-change="selectProject()" class="dropdown form-control"></select>
                     </div>
 
                     <div class="text-danger"
@@ -223,7 +222,8 @@
                                            'has-error' : newForm.gender.$invalid && (!newForm.gender.$pristine || showValid) && !newForm.gender.$focus,
                                             'has-success': newForm.gender.$valid && !newForm.gender.$pristine && !newForm.gender.$focus
                                      }">
-                        <select id="gender_select" name="gender" ng-change="selectgender()" ng-model="gender" class="dropdown form-control">
+                        <label>Gender</label>
+                        <select id="editcontact_gender" name="gender" ng-change="selectgender()" ng-model="gender" class="dropdown form-control">
                             <option value="" selected>Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -239,26 +239,15 @@
 
 
                 <div class="form-bx" style="padding:5px;margin-left:3%">
-                    <div class="form-group"
-                         data-ng-class="{
-                                           'has-error' : newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus,
-                                            'has-success': newForm.Age.$valid && !newForm.Age.$pristine && !newForm.Age.$focus
-                                          }">
-                        <input type="text" name="Age" class="form-control" id="contact_age"
-                               placeholder="Age"
-                               data-ng-model="params.age"
-                               minlength="1"
-                               maxlength="2"
-                               input-focus
-                               ng-pattern="/^(0|[1-9][0-9]*)$/" />
-                        <div class="text-danger"
-                             data-ng-if="newForm.Age.$invalid && (!newForm.Age.$pristine || showValid) && !newForm.Age.$focus">
-                            {{ 'Enter valid age' | translate }}
-                        </div>
-                    </div>
+                    <label for="">Date Of Birth</label>
+                    <input kendo-date-picker k-options="myOptions" id="editcontact_Date_Of_Birth"
+                           class="form-control "
+                           ng-model="params.Date_Of_Birth"
+                           k-ng-model="k_due_date"
+                           k-format="'dd/MM/yyyy'" />
                 </div>
             </div>
-          
+
 
             <div ng-repeat="choice in choices">
                 <div class="form-group"
@@ -269,20 +258,17 @@
 
                     <div id="phone-wrap" class="clearfix">
                         <div id="phone-no" class="form-bx form-bx2">
+                            <label>Phone Number</label>
                             <input type="text" name="phone_no" class="form-control" id="editcontact_phone"
-                                   placeholder="Phone Number"
                                    data-ng-model="choice.Contact_Phone"
-                                   minlength="10"
-                                   maxlength="10"
                                    input-focus
-                                   ng-pattern="/^[1-9]{1}[0-9]{9}$/"
-                                    />
+                                   ng-pattern="/^[0-9]{1,11}$/" />
                             <div class="text-danger"
                                  data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
                                 {{ 'Enter valid phone number' | translate }}
                             </div>
                         </div>
-                        <div id="editcontact_removephone" ng-class="{'add-input add-input2': $index==0,'remove-field2': $index>0}" ng-click="addNewChoice($event)"><a id="editcontact_remove_phone" href="javascript:">Remove</a></div>
+                        <div id="editcontact_removephone" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="editcontact_remove_phone" href="javascript:">Remove</a></div>
                     </div>
                 </div>
             </div>
@@ -296,21 +282,18 @@
                                                            }">
                     <div id="email-wrap" class="clearfix">
                         <div id="email-no" class="form-bx form-bx2">
+                            <label>Email Address</label>
                             <input type="email" name="email" class="form-control" id="editcontact_email"
                                    placeholder="Email Address"
                                    data-ng-model="choice1.Contact_Email"
-                                   minlength="1"
-                                   maxlength="30"
-                                 
                                    input-focus
-                                   ng-pattern="/^[a-zA-Z\s]+[a-zA-Z\s0-9._-]+@[a-zA-Z\sa-z]+\.[a-zA-Z\s.]{2,5}$/"
-                                   />
+                                   ng-pattern="/^[a-zA-Z\s]+[a-zA-Z\s0-9._-]+@[a-zA-Z\sa-z]+\.[a-zA-Z\s.]{2,5}$/" />
                             <div class="text-danger"
                                  data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
                                 {{ 'Enter valid email address' | translate }}
                             </div>
                         </div>
-                        <div id="editcontact_removeemail" ng-class="{'add-input add-input2': $index==0,'remove-field2': $index>0}" ng-click="addNewChoice1($event)"><a id="editcontact_remove_email" href="javascript:">Remove</a></div>
+                        <div id="editcontact_removeemail" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="editcontact_remove_email" href="javascript:">Remove</a></div>
                     </div>
                 </div>
             </div>
@@ -319,14 +302,14 @@
             <div class="clearfix">
 
                 <div class="form-bx form-bx14">
-                        <select id="type_select" name="type" ng-change="selecttype()" ng-model="people_type" class="dropdown form-control">
-                            <option value="" selected>Select Type</option>
-                            <option value="Client">Client</option>
-                            <option value="Lead">Lead</option>
-                            <option value="Contact">Contact</option>
-                        </select>  
-                     </div>
-             
+                    <select id="editcontact_Type" name="type" ng-change="selecttype()" ng-model="people_type" class="dropdown form-control">
+                        <option value="" selected>Select Type</option>
+                        <option value="Client">Client</option>
+                        <option value="Lead">Lead</option>
+                        <option value="Contact">Contact</option>
+                    </select>
+                </div>
+
             </div>
 
             <div class="clearfix">
@@ -337,8 +320,8 @@
                                            'has-success': newForm.user.$valid && !newForm.user.$pristine && !newForm.user.$focus
                                             }">
                         <label for="">Assign To</label>
-                        <select ng-model="user1" name="user" ng-change="selectuser()"
-                                class="dropdown form-control" id="editcontact_assignto" required>
+                        <select ng-model="user1" name="user" ng-change="selectuser()" 
+                                class="dropdown form-control" id="editcontact_assignto" required >
                             <option value="" selected>Select User</option>
                             <option ng-repeat="User in users"
                                     value="{{User.id}}">
@@ -349,12 +332,12 @@
                             <div ng-message="required" data-ng-if="newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus">This field should not be empty </div>
                             <div ng-message="pattern">Enter valid user to be assigned</div>
                         </div>
-                      
-                        </div>
+
                     </div>
+                </div>
                 <div class="field-md2 field-req">*</div>
 
-               
+
 
                 <div class="form-group form-bx ">
                     <div class="form-group"
@@ -370,14 +353,14 @@
                                     value="{{project.id}}">
                                 {{project.name}}
                             </option>
-                         </select>
+                        </select>
                         <div ng-messages="newForm.project.$error" style="color:maroon" role="alert">
                             <div ng-message="required" data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">This field should not be empty </div>
                             <div ng-message="pattern">Enter valid project to be assigned</div>
                         </div>
-                        </div>
-
                     </div>
+
+                </div>
 
                 <div class="field-md2 field-req">*</div>
             </div>
@@ -391,21 +374,19 @@
                                        }">
                     <div id="address-wrap" class="clearfix">
                         <div id="address-no" class="form-bx form-bx2">
-                             <label>Street{{$index + 1}}</label>
+                            <label>Street{{$index + 1}}</label>
                             <input type="text" name="Address" class="form-control" id="editcontact_address"
-                                   placeholder="Street{{$index + 1}}"
                                    data-ng-model="choice.Street_1"
                                    minlength="5"
                                    maxlength="50"
-                                   input-focus
-                                   />
+                                   input-focus />
                             <div class="text-danger"
                                  data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
                                 {{ 'Enter valid Address' | translate }}
                             </div>
 
                         </div>
-                        <div id="editcontact_removeaddress" ng-class="{'add-input add-input2': $index==0,'remove-field2': $index>0}" ng-click="addNewChoice2($event)"><a id="editcontact_remove_address" href="javascript:">Remove</a></div>
+                        <div id="editcontact_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="editcontact_remove_address" href="javascript:">Remove</a></div>
                     </div>
                 </div>
             </div>
@@ -420,8 +401,7 @@
 
                     <div class="form-group form-bx form-bx8">
                         <label for="">Area</label>
-                        <input type="text" class="form-control text-bold" id="addnewproject_name" autofocus name="Area"
-                               placeholder="Area"
+                        <input type="text" class="form-control text-bold" id="editcontact_Area" autofocus name="Area"
                                data-ng-model="params.area"
                                minlength="1"
                                maxlength="30"
@@ -439,6 +419,7 @@
 
             <div class="clearfix">
                 <div class="form-bx form-bx3">
+                    <label>State</label>
                     <select ng-model="state1" ng-change="selectstate(state)" class="dropdown form-control" id="editcontact_state">
                         <option value="" selected>State</option>
                         <option ng-repeat="state in states"
@@ -449,10 +430,11 @@
                 </div>
 
 
-              
+
 
                 <div class="field-mdl field-mdl2 field-req"></div>
                 <div class="form-bx form-bx3">
+                    <label>City</label>
                     <select ng-change="selectcity(city)" ng-model="city1" class="dropdown form-control" id="editcontact_city">
                         <option value="" selected>City</option>
                         <option ng-repeat="city in cities  | filter: filterExpression"
@@ -469,14 +451,13 @@
                                                'has-error' : newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus,
                                                'has-success': newForm.Pin.$valid && !newForm.Pin.$pristine && !newForm.Pin.$focus
                                                                          }">
+                        <label>Pin</label>
                         <input type="text" name="Pin" class="form-control" id="editcontact_pin"
-                               placeholder="Pin"
-                               data-ng-model="params.zipcode"
+                               data-ng-model="params.zip_code"
                                minlength="1"
                                maxlength="7"
                                input-focus
-                               ng-pattern="/^[0-9]{1,7}$/"
-                             />
+                               ng-pattern="/^[0-9]{1,7}$/" />
                         <div class="text-danger"
                              data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
                             {{ 'Please enter valid pin' | translate }}
@@ -501,3 +482,17 @@
     </div><!-- modal-body ended -->
 
 </div><!-- modal ended -->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#editproject_uploader1").change(function () {
+        readURL(this);
+    });
+</script>

@@ -3,7 +3,7 @@
 
 .controller('ProjectDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, projectService) {
-        console.log('ProjectDetailController');
+        //console.log('ProjectDetailController');
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         var orgID = $cookieStore.get('orgID');
@@ -43,7 +43,7 @@
          };
         
          //end
-
+         $scope.serviceAction = 'no_action';
        
         
 
@@ -96,17 +96,8 @@
                 $('#btnAdd').show();
             }
 
-
-
         });
       
-          
-       
-
-        callApis();//callall the Apis
-
-     
-
 
         $scope.openNewPaymentSchemePopup = function () {
             var modalInstance = $modal.open({
@@ -220,6 +211,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+      	    height: screen.height - 370,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -228,7 +228,7 @@
             columns: [{
                 field: "first_name",
                 title: "First Name",
-                width: "120px",
+               
                 attributes:
                     {
                         "class": "UseHand",
@@ -238,7 +238,7 @@
             }, {
                 field: "last_name",
                 title: "Last Name",
-                width: "120px",
+               
                 attributes:
                    {
                        "class": "UseHand",
@@ -249,7 +249,7 @@
             }, {
                 field: "account_email",
                 title: "Email",
-                width: "120px",
+              
                 attributes:
                    {
                        "class": "UseHand",
@@ -258,7 +258,7 @@
             }, {
                 field: "account_phone",
                 title: "Phone",
-                width: "120px",
+                
                 attributes:
                    {
                        "class": "UseHand",
@@ -268,7 +268,7 @@
             {
                 field: "account_country",
                 title: "Country",
-                width: "120px",
+               
                 attributes:
                    {
                        "class": "UseHand",
@@ -296,6 +296,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            height: screen.height - 370,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -304,7 +313,7 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px",
+               
                 attributes:
                    {
                        "class": "UseHand",
@@ -314,7 +323,7 @@
             {
                 field: "description",
                 title: "Description",
-                width: "120px",
+               
                 attributes:
                    {
                        "class": "UseHand",
@@ -342,6 +351,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            height: screen.height - 370,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -350,7 +368,7 @@
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px",
+              
                 attributes:
                    {
                        "class": "UseHand",
@@ -359,7 +377,7 @@
             }, {
                 field: "built_up_area",
                 title: "Area",
-                width: "120px",
+               
                 attributes:
                   {
                       "class": "UseHand",
@@ -369,7 +387,7 @@
             }, {
                 field: "flat_number",
                 title: "Flat No",
-                width: "120px",
+              
                 attributes:
                   {
                       "class": "UseHand",
@@ -378,7 +396,7 @@
             }, {
                 field: "floor_number",
                 title: "Floor No",
-                width: "120px",
+              
                 attributes:
                   {
                       "class": "UseHand",
@@ -388,7 +406,7 @@
                 {
                     field: "total_cost",
                     title: "Total Cost",
-                    width: "120px",
+                 
                     attributes:
                   {
                       "class": "UseHand",
@@ -416,16 +434,25 @@
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height: screen.height - 370,
             filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
                 buttonCount: 5
             },
             columns: [{
-                field: "first_name",
+                field: "Contact_First_Name",
                 title: "First Name",
-                width: "50px",
+              
                 attributes:
                  {
                      "class": "UseHand",
@@ -435,32 +462,41 @@
             }, {
                 field: "people_type",
                 title: "people Type",
-                width: "50px",
+             
                 attributes:
                  {
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
             }, {
-                field: "phone",
+                field: "Contact_Phone",
                 title: "Contact Phone",
-                width: "50px",
+              
                 attributes:
                  {
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
             }, {
-                field: "email",
+                field: "Contact_Email",
                 title: "Contact Email",
-                width: "50px",
+              
                 attributes:
                  {
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
 
-            }]
+            }, {
+                title: "Action",
+                template: "<a id='followUp' class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
+                width: "120px",
+                attributes:
+                {
+                  "class": "UseHand",
+                  "style": "text-align:center"
+                }
+            },]
         };
 
         $scope.TaskGrid = {
@@ -489,6 +525,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            height: screen.height - 370,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
 
             pageable: {
                 refresh: true,
@@ -498,7 +543,7 @@
             columns: [{
                 field: "name",
                 title: "Task Name",
-                width: "120px",
+              
                 attributes:
              {
                  "style": "text-align:center"
@@ -507,7 +552,7 @@
             }, {
                 field: "project_name",
                 title: "Project",
-                width: "120px",
+              
                 attributes:
              {
                  "style": "text-align:center"
@@ -516,16 +561,24 @@
             }, {
                 field: "user_name",
                 title: "Assign To",
-                width: "120px",
+             
                 attributes:
              {
                  "style": "text-align:center"
              }
 
+            },{
+                field: "company_name",
+                title: "Company",
+                attributes:
+                 {
+                     "style": "text-align:center"
+                 }
+
             }, {
                 field: "priority",
                 title: "Priority",
-                width: "120px",
+              
                 attributes:
              {
                  "style": "text-align:center"
@@ -534,7 +587,7 @@
             }, {
                 field: "start_date_time",
                 title: "Start Date",
-                width: "120px",
+             
                 format: '{0:dd/MM/yyyy hh:mm:ss}',
                 attributes:
              {
@@ -544,7 +597,7 @@
             }, {
                 field: "due_date",
                 title: "Due Date",
-                width: "120px",
+               
                 format: '{0:dd/MM/yyyy hh:mm:ss}',
                 attributes:
              {
@@ -555,7 +608,7 @@
              {
                  field: "reminder_time",
                  title: "Reminder Date",
-                 width: "120px",
+               
                  format: '{0:dd/MM/yyyy hh:mm:ss}',
                  attributes:
                {
@@ -566,15 +619,16 @@
             {
                 field: "text",
                 title: "Notes",
-                width: "120px",
+               
                 attributes:
              {
                  "style": "text-align:center"
              }
             }, {
-                field: "status",
+                field:"status",
+                template: '<span id="#= status #"></span>',
                 title: "Status",
-                width: "120px",
+               
                 attributes:
              {
                  "style": "text-align:center"
@@ -608,6 +662,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -616,7 +679,7 @@
             columns: [{
                 field: "name",
                 title: "Event Name",
-                width: "120px",
+              
                 attributes:
                {
                    "style": "text-align:center"
@@ -625,7 +688,7 @@
             {
                 field: "project_name",
                 title: "Project Name",
-                width: "120px",
+               
                 attributes:
                {
                    "style": "text-align:center"
@@ -634,7 +697,7 @@
             {
                 field: "location",
                 title: "Location",
-                width: "120px",
+              
                 attributes:
                {
                    "style": "text-align:center"
@@ -643,7 +706,7 @@
              {
                  field: "userevent_date",
                  title: "Start Date",
-                 width: "120px",
+                
                  format: '{0:dd/MM/yyyy hh:mm:ss}',
                  attributes:
                {
@@ -653,7 +716,7 @@
              {
                  field: "end_date",
                  title: "End Date",
-                 width: "120px",
+              
                  format: '{0:dd/MM/yyyy hh:mm:ss}',
                  attributes:
                {
@@ -673,12 +736,134 @@
              {
                  field: " text",
                  title: "Note",
-                 width: "120px",
+               
                  attributes:
                {
                    "style": "text-align:center"
                }
              }]
+        };
+
+
+        $scope.serviceGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: apiService.baseUrl + "Services/GetServicesGrid/" + $scope.seletedCustomerId
+
+                },
+                pageSize: 20,
+                refresh: true,
+                schema: {
+                    model: {
+                        fields: {
+
+                            userevent_date: { type: "date" },
+                            end_date: { type: "date" },
+
+                        }
+                    }
+                }
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                {
+                    template: "<input type='checkbox', class='checkbox', data-id='#= project_service_id #',  ng-click='check($event,dataItem)' />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                    width: "50px",
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                }, {
+
+                    field: "name",
+                    title: " Service Name",
+                
+                    attributes:
+                   {
+                       "style": "text-align:center"
+                   }
+                },
+            {
+                field: "description",
+                title: "Description",
+              
+                encoded: false,
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            },
+            {
+                field: "price",
+                title: "Unit Price",
+               
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            },
+            {
+                field: "tax_value",
+                title: "Taxes",
+             
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            },
+            {
+                field: "final_amount",
+                title: "Total",
+              
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            }, {
+                field: "status",
+                title: "Status",
+
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            },
+
+            {
+                title: "Action",
+
+                template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Create Quote </a> </div>",
+               
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+            },
+
+            ]
         };
 
         $scope.filterNow = function () {
@@ -717,7 +902,7 @@
 
         };
        
-       $scope.towerGrid = function () {
+        $scope.towerGrid = function () {
             Url = "Floors/GenerateTowerGrid"
 
             var postData = {
@@ -736,8 +921,6 @@
 
 
         }
-
-
 
         $scope.TowerListGrid = {
 
@@ -760,6 +943,14 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -783,7 +974,7 @@
                 template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
                 "<span style='padding-left:10px' class='property-photo'> </span>",
                 title: "Photo",
-                width: "120px",
+               
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
@@ -792,7 +983,7 @@
             }, {
                   field: "tower_name",
                   title: "Name",
-                  width: "120px",
+              
                   attributes:
                   {
                       "class": "UseHand",
@@ -802,7 +993,7 @@
               {
                   field: "num_bedrooms",
                   title: "Bedrooms",
-                  width: "120px",
+               
                   attributes:
                 {
                     "class": "UseHand",
@@ -812,7 +1003,7 @@
             {
                 field: "num_bathrooms",
                 title: "Bathrooms",
-                width: "120px",
+              
                 attributes:
                 {
                     "class": "UseHand",
@@ -822,7 +1013,7 @@
             {
                 field: "super_built_up_area",
                 title: "Slb. Area",
-                width: "120px",
+             
                 attributes:
                 {
                     "class": "UseHand",
@@ -832,7 +1023,7 @@
               {
                   field: "carpet_area",
                   title: "Crp Area",
-                  width: "120px",
+             
                   attributes:
                 {
                     "class": "UseHand",
@@ -842,7 +1033,7 @@
                {
                      field: "total_consideration",
                      title: "Price",
-                     width: "120px",
+               
                      attributes:
                   {
                       "class": "UseHand",
@@ -852,7 +1043,6 @@
             {
                       field: "available_status",
                       title: "Status",
-                      width: "120px",
                       attributes:
                       {
                           "class": "UseHand",
@@ -862,7 +1052,7 @@
               {
                   field: "floorno",
                   title: "Floor No",
-                  width: "120px",
+                
                   attributes:
                 {
                     "class": "UseHand",
@@ -872,7 +1062,7 @@
                 {
                     field: "unitno",
                     title: "Unit No",
-                    width: "120px",
+                  
                     attributes:
                 {
                     "class": "UseHand",
@@ -882,7 +1072,7 @@
                   {
                       field: "carpark",
                       title: "Car Park",
-                      width: "120px",
+                 
                       attributes:
                 {
                     "class": "UseHand",
@@ -891,9 +1081,306 @@
                   }]
 
         };
-       
-        
+              
+        $scope.OfferGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+
+                    read: apiService.baseUrl + "Offers/GetOfferProject?orgID=" + orgID
+                },
+                pageSize: 20
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [{
+                field: "offer_name",
+                title: "Offer Name",
+              
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+
+            }, {
+                field: "description",
+                title: "Description",
+                width: "200px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+            }, {
+                field: "offer_type_name",
+                title: "Offer Type",
+               
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+            }, {
+                field: "offer_value",
+                title: "Offer Value",
+               
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+
+            }, {
+                field: "project_name",
+                title: "Project Name",
+              
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+
+            }, {
+                field: "SKUoffer",
+                title: "SKU",
+             
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+
+            }, {
+                field:"status",
+                template: '<span id="#= status #"></span>',
+                title: "Status",
+              
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+
+            }, ]
+        };
+
+        $scope.ChargesGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: apiService.baseUrl + "Services/GetCharges?id=" + $scope.seletedCustomerId  //eea9b986-8561-4970-851b-7cfb38bb2b87"
+
+                },
+                pageSize: 20,
+                refresh: true,
+                schema: {
+                    model: {
+                        fields: {
+
+                            userevent_date: { type: "date" },
+                            end_date: { type: "date" },
+
+                        }
+                    }
+                }
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                {
+                    template: "<input type='checkbox', class='checkbox', data-id='#= charge_name_type_id #',  ng-click='check($event,dataItem)' />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                    width: "50px",
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                },
+
+                {
+                field: "charge_type",
+                title: "Charge Name",
+             
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            },
+            {
+                field: "category_type_name",
+                title: "Category Type Name",
+            
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            }, {
+                field: "charge",
+                title: "Charge Type Name",
+             
+                attributes:
+              {
+                  "style": "text-align:center"
+              }
+            }, {
+                field: "no_of_months",
+                title: "No of Months",
+             
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
+            },
+             {
+                 field: "charge_percentage",
+                 title: "Charge Percentage",
+              
+                 attributes:
+               {
+                   "style": "text-align:center"
+               }
+             }]
+        };
+
+
+        $scope.chooseActionForCharge = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.chargeAction === "no_action") {
+
+                }
+                else if ($scope.chargeAction === "delete") {
+                    var chargeDelete = [];
+                    for (var i in allCheckedIds) {
+                        var charge = {};
+                        charge.charge_name_type_id = allCheckedIds[i];
+                        charge.organization_id = $cookieStore.get('orgID');
+                        chargeDelete.push(charge);
+                    }
+                    $cookieStore.put('chargeDelete', chargeDelete);
+                    $scope.openConfirmationCharge();
+                }
+            }
+        }
+
+        $scope.chooseActionForService = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.serviceAction === "no_action") {
+
+                }
+                else if ($scope.serviceAction === "delete") {
+                    var serviceDelete = [];
+                    for (var i in allCheckedIds) {
+                        var service = {};
+                        service.project_service_id = allCheckedIds[i];
+                        service.organization_id = $cookieStore.get('orgID');
+                        serviceDelete.push(service);
+                    }
+                    $cookieStore.put('serviceDelete', serviceDelete);
+                    $scope.openConfirmation();
+                }
+            }
+        }
       
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
+
+
+        $scope.check = function (e, data) {
+            var allListElements = $(".checkbox").toArray();
+            for (var i in allListElements) { // not all checked
+                if (!allListElements[i].checked) {
+                    $('#checkAll').prop('checked', false);
+                    break;
+                }
+                if (i == allListElements.length - 1) // if all are checked manually
+                    $('#checkAll').prop('checked', true);
+            }
+        }
+
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'projectGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+            $scope.serviceAction = 'no_action';
+
+
+
+        });
+
+        $scope.openOffers = function () {
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/offers.tpl.html',
+                backdrop: 'static',
+                controller: OfferController,
+                size: 'md'
+
+            });
+
+        };
 
         $scope.openAddPopup = function () {
             //   alert("abc");
@@ -930,6 +1417,7 @@
                 }
             });
         };
+
         $scope.openNewFloorPopup = function () {
            
                 var modalInstance = $modal.open({
@@ -952,7 +1440,6 @@
 
         };
 
-
         $scope.openNewPanoramicPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -962,7 +1449,6 @@
                 size: 'md'
             });
         };
-
 
         $scope.openEditFloorPopup = function (id) {
             
@@ -1057,7 +1543,6 @@
 
         };
 
-
         $scope.openEditProjectPopup = function () {
 
             var modalInstance = $modal.open({
@@ -1070,9 +1555,6 @@
             });
 
         };
-
-        
-
 
         $scope.openNewGalleryPopup = function () {
             var modalInstance = $modal.open({
@@ -1094,27 +1576,31 @@
             });
         };
 
-        //for tower drop town
-        Url = "Tower/GetByProjectID/" + $scope.seletedCustomerId;
-
-        apiService.getWithoutCaching(Url).then(function (response) {
-            $scope.towers = response.data;
-
-        },
-    function (error)
-    {
-        if (error.status === 400)
-            alert(error.data.Message);
+        $scope.openAddService = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/addNewService.tpl.html',
+                backdrop: 'static',
+                controller: addNewServiceController,
+                size: 'md'
+            });
+        };
        
-    });
+        $scope.openFollowUp = function (d) {
+            var id = d.id;
+            window.sessionStorage.selectedCustomerID = id;
+            $cookieStore.put('company_name', d.company);
+            $cookieStore.put('lead_name', d.Name);
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/company/followUp.html',
+                backdrop: 'static',
+                controller: FollowUpController,
+                size: 'md'
 
+            });
 
-
-
-    
-
-
-
+        };
 
         $scope.openNewAmenityPopup = function () {
             var modalInstance = $modal.open({
@@ -1135,7 +1621,6 @@
                 size: 'md'
             });
         };
-
 
         $scope.openNewPanoramicViewPopup = function () {
             var modalInstance = $modal.open({
@@ -1191,7 +1676,6 @@
             }
 
         }
-
 
         $scope.openEventCampaignPopup = function () {
             var modalInstance = $modal.open({
@@ -1260,27 +1744,85 @@
             });
 
         };
+
+        $scope.openConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/confirmService.tpl.html',
+                backdrop: 'static',
+                controller: ServiceconfirmationController,
+                size: 'md',
+                resolve: { items: { title: "Project" } }
+
+            });
+
+        }
+
+
+        $scope.openConfirmationCharge = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/confirmCharges.tpl.html',
+                backdrop: 'static',
+                controller: ChargeconfirmationController,
+                size: 'md',
+                resolve: { items: { title: "Project" } }
+
+            });
+
+        }
+
+        $scope.editCharges = function () {
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/editcharges.tpl.html',
+                backdrop: 'static',
+                controller: EditChargesController,
+                size: 'md'
+
+            });
+
+        };
+
+        $scope.editService = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/editService.tpl.html',
+                backdrop: 'static',
+                controller: editServiceController,
+                size: 'md'
+            });
+        };
+
             // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
             // dataItem will contain the row that was selected
-            window.sessionStorage.selectedCustomerID = dataItem.task_id;
+            window.sessionStorage.selectedTaskID = dataItem.task_id;
             //  alert(window.sessionStorage.selectedCustomerID);
             $scope.openEditTask();
         };
 
         $scope.myGridChangeEvent = function (dataItem) {
             // dataItem will contain the row that was selected
-            window.sessionStorage.selectedCustomerID = dataItem.id;
+            window.sessionStorage.selectedEventID = dataItem.id;
             //  alert(window.sessionStorage.selectedCustomerID);
             $scope.openEditEventPopup();
         };
-      
+
+        $scope.myGridChangeService = function (dataItem) {
+            // dataItem will contain the row that was selected
+            window.sessionStorage.selectedServiceID = dataItem.project_service_id;
+            //  alert(window.sessionStorage.selectedCustomerID);
+            $scope.editService();
+        };
        
-
-
-        function callApis() {
-
-
+        $scope.myGridChangeCharges = function (dataItem) {
+            // dataItem will contain the row that was selected
+            window.sessionStorage.chargeId = dataItem.charge_name_type_id;
+            //  alert(window.sessionStorage.selectedCustomerID);
+            $scope.editCharges();
+        };
 
             //calling Project Main api
             projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
@@ -1294,9 +1836,6 @@
        {
           
        } );
-
-
-
 
             //callingWingApi
             projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
@@ -1318,6 +1857,19 @@
        function (error) {
           
        });
+            //for tower drop town
+            Url = "Tower/GetByProjectID/" + $scope.seletedCustomerId;
+
+            apiService.getWithoutCaching(Url).then(function (response) {
+                $scope.towers = response.data;
+
+            },
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+
+        });
+
 
             //calling brochure  pdf start
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
@@ -1415,6 +1967,7 @@
           
        }
             );
+
             Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
 
             apiService.getWithoutCaching(Url).then(function (response) {
@@ -1457,7 +2010,6 @@
                         {
                         });
 
-
             //calling essential
              if ($scope.seletedCustomerId !== '') {
                  //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
@@ -1486,49 +2038,7 @@
              }
 
         }
-
-        };
-
-        //$scope.$on('REFRESH1', function (event, args) {
-
-        //    setTimeout(function () {
-        //        if (args == 'projectImage') {
-                   
-                  
-        //                //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
-        //                GetUrl = "Project/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
-
-        //                apiService.getWithoutCaching(GetUrl).then(function (response) {
-
-        //                    $scope.data = response.data;
-        //                    $scope.media_url = $scope.data[0].media_url;
-        //                    $scope.media_name = $scope.data[0].media_name;
-        //                    $scope.media_url1 = $scope.data[0].media_url1;
-        //                    $scope.media_url2 = $scope.data[0].media_url2;
-        //                    $scope.media_url3 = $scope.data[0].media_url3;
-        //                    $scope.media_url4 = $scope.data[0].media_url4;
-        //                    if ($scope.data[0].contact_mobile !== '') {
-        //                        $scope.mobile = $scope.data[0].contact_mobile;
-        //                    }
-        //                    if ($scope.data[0].contact_email !== '') {
-        //                        $scope.email = $scope.data[0].contact_Email;
-        //                    }
-        //                },
-        //                            function (error) {
-        //                                if (error.status === 400)
-        //                                    alert(error.data.Message);
-        //                                else
-        //                                    alert("Network issue");
-        //                            });
-        //            }
-
-    
-        //    }, 1500);
-
-        //});
       
-
-
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'UserGrid') {
                 $('.k-i-refresh').trigger("click");
@@ -1582,31 +2092,42 @@
                
            });
             }
+            else if (args == 'Inventory') {
 
-            else if (args == 'amenity')
-            {
+                Url = "Tower/GetByProjectID/" + $scope.seletedCustomerId;
+
+                apiService.get(Url).then(function (response) {
+                    $scope.towers = response.data;
+
+                },
+            function (error) {
+                if (error.status === 400)
+                    alert(error.data.Message);
+                else
+                    alert("Network issue");
+            });
+
+            }
+            else if (args == 'amenity') {
                 projectUrl = "Amenities/GetAmenities?id=" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.orgAmenities = response.data;
 
                 },
-           function (error)
-           {
-               
+           function (error) {
+
            });
             }
 
-            else if (args == 'images')
-            {
+            else if (args == 'images') {
 
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Gallery_Type_Full_2D";//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery = response.data;
 
                 },
-           function (error)
-           {
-              
+           function (error) {
+
            });
 
             }
@@ -1618,108 +2139,97 @@
                     $scope.UploadView = response.data;
                 },
            function (error) {
-             
+
            }
                 );
 
             }
 
-            else if (args == 'floor')
-            {
+            else if (args == 'floor') {
 
                 projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.builddetail = response.data;
                 },
-           function (error)
-           {
-              
+           function (error) {
+
            });
             }
 
-            else if (args == 'payment')
-            {
+            else if (args == 'payment') {
                 projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;//d028defd-319f-4b89-a51b-55ed9b327200 ";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.orgpayment = response.data;
 
                 },
-           function (error)
-           {
-              
+           function (error) {
+
            }
                 );
             }
-            else if (args == 'videos')
-            {
+            else if (args == 'videos') {
 
                 projectUrl = "Project/GetVideoByProjectID/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Videos = response.data;
 
                 },
-           function (error)
-           {
-               
+           function (error) {
+
            });
 
             }
-            else if (args == 'panoramic')
-            {
+            else if (args == 'panoramic') {
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Panorma_zip_Full_2D";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.view = response.data;
                 },
-           function (error)
-           {
-              
+           function (error) {
+
            });
             }
-            else if (args == 'brochure')
-            {
+            else if (args == 'brochure') {
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery2 = response.data;
                 },
-           function (error)
-           {
-               
+           function (error) {
+
            });
                 //calling brochure pdf end
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery1 = response.data;
                 },
-           function (error)
-           {
-              
+           function (error) {
+
            });
-            }else if(args == "ElementInfo"){
+            } else if (args == "ElementInfo") {
 
-                  Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
+                Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
 
-            apiService.getWithoutCaching(Url).then(function (response) {
-                data = response.data;
-                for (i = 0; i < data.length; i++) {
-                    if (data[i].element_type == "project_facebook") {
-                        $scope.facebook = data[i].element_info1;
-                        $scope.class_id = data[i].class_id;
+                apiService.getWithoutCaching(Url).then(function (response) {
+                    data = response.data;
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].element_type == "project_facebook") {
+                            $scope.facebook = data[i].element_info1;
+                            $scope.class_id = data[i].class_id;
+                        }
+                        if (data[i].element_type == "project_twitter") {
+                            $scope.twitter = data[i].element_info1;
+                            $scope.class_id = data[i].class_id;
+                        }
+                        if (data[i].element_type == "project_linkedin") {
+                            $scope.linkedin = data[i].element_info1;
+                            $scope.class_id = data[i].class_id;
+                        }
+
                     }
-                    if (data[i].element_type == "project_twitter") {
-                        $scope.twitter = data[i].element_info1;
-                        $scope.class_id = data[i].class_id;
-                    }
-                    if (data[i].element_type == "project_linkedin") {
-                        $scope.linkedin = data[i].element_info1;
-                        $scope.class_id = data[i].class_id;
-                    }
 
-                }
+                },
+                function (error) {
 
-            },
-            function (error) {
-
-            });
+                });
             }
             else if (args == 'summery') {
                 projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
@@ -1728,15 +2238,21 @@
                     $scope.image = $scope.main[0];
 
                 },
-           function (error)
-           {
-               
+           function (error) {
+
            });
 
             }
             $state.go('app.projectdetail', {}, { reload: false });
             $scope.$apply();
 
+        });
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'serviceGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+            $scope.ddlFruits = "ACTION";
         });
 
         $scope.$on('REFRESH', function (event, args) {
@@ -1751,5 +2267,10 @@
             }
         });
 
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'ChargesGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
 
     });

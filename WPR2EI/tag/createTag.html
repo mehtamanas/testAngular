@@ -13,7 +13,7 @@
                     
                         <div class="form-group form-bx form-bx14">
                             <label for="">Tag Name</label>
-                            <input type="text" class="form-control text-bold" autofocus name="TagName"
+                            <input type="text" class="form-control text-bold" autofocus name="TagName" id="tagname"
                                    data-ng-model="params.name"
                                    minlength="1"
                                    maxlength="50"
@@ -25,9 +25,9 @@
             
                 <div class="modal-btn-wrap clearfix">
 
-                    <button type="submit" class="f-btn">Save</button>
+                    <button type="submit" class="f-btn" id="btn_createtagsave">Save</button>
 
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    <button type="button" class="f-btn f-btn2" ng-click="cancel()" id="btn_createtagcancel">CANCEL</button>
                 </div>
             </form>
 

@@ -6,13 +6,6 @@
         var userID = $cookieStore.get('userId');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
-        if (!$rootScope.campaigns.write) {
-            $('#btnSave').hide();
-            $('#iconEdit').hide();
-            $('#btnAdd').hide();
-        }
-
-
         //Audit log start               
         AuditCreate = function () {
             var postdata =
@@ -58,16 +51,16 @@
                 pageSize: 20,
                 schema:
                      {
-                 model: {
-                    fields: {
+                         model: {
+                             fields: {
 
-                        start_date1: { type: "date" },
-                        created_date: { type: "date" }
+                                 start_date1: { type: "date" },
+                                 created_date: { type: "date" }
 
 
-                    }
-            }
-        }
+                             }
+                         }
+                     }
 
             },
             groupable: true,
@@ -76,6 +69,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+              height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -85,93 +87,105 @@
                {
                    field: "name",
                    title: "NAME",
-                   width: "120px",
+                   width: "180px",
                    attributes:
                     {
                         "class": "UseHand",
                         "style": "text-align:center"
                     }
-               }, {
-                   field: "channel_type_name",
-                   title: "CHANNEL",
-                   width: "120px",
-                   attributes:
-                     {
-                         "class": "UseHand",
-                         "style": "text-align:center"
-                     }
-               }, {
-                   field: "budget",
-                   title: "Budget",
-                   width: "120px",
-                   attributes:
-                     {
-                         "class": "UseHand",
-                         "style": "text-align:center"
-                     }
-               }, {
-                    field: "spent",
-                    title: "SPENT",
-                    width: "120px",
-                    attributes:
-                     {
-                         "class": "UseHand",
-                         "style": "text-align:center"
-                     }
-                }, {
-                    field: "clicks",
-                    title: "CLICKS",
-                    width: "120px",
-                    attributes:
-                      {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                }, {
-                    field: "conversion_rate",
-                    title: "CON.RATE",
-                    width: "120px",
-                    attributes:
-                      {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                },{
-                   field: "no_of_leads",
-                   title: "LEAD",
-                   width: "120px",
-                   attributes: {
-                       "class": "UseHand",
-                       "style": "text-align:center"
-                   }
-                },{
-                    field: "created_date",
-                    title: "Created Date",
-                    width: "120px",
-                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-                   attributes: {
-                       "class": "UseHand",
-                       "style": "text-align:center"
-                   }
-                }, {
-                    field: "start_date1",
-                    title: "Start Date",
-                    width: "120px",
-                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-                    attributes: {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-                }, {
-                   template: '<span id="#= status #">#= status #</span>',
-                   title: "STATUS",
-                   width: "120px",
-                   attributes: {
-                       "class": "UseHand",
-                       "style": "text-align:center"
-                   },
+               },
+               //}, {
+               //    field: "channel_type_name",
+               //    title: "CHANNEL",
+               //    width: "120px",
+               //    attributes:
+               //      {
+               //          "class": "UseHand",
+               //          "style": "text-align:center"
+               //      }
+                   //}, 
+                   {
+                       field: "budget",
+                       title: "Budget",
 
-               }]
+                       attributes:
+                         {
+                             "class": "UseHand",
+                             "style": "text-align:center"
+                         }
+                   }, {
+                       field: "spent",
+                       title: "SPENT",
+
+                       attributes:
+                        {
+                            "class": "UseHand",
+                            "style": "text-align:center"
+                        }
+                   }, {
+                       field: "clicks",
+                       title: "CLICKS",
+
+                       attributes:
+                         {
+                             "class": "UseHand",
+                             "style": "text-align:center"
+                         }
+                   }, {
+                       field: "conversion_rate",
+                       title: "CON.RATE",
+
+                       attributes:
+                         {
+                             "class": "UseHand",
+                             "style": "text-align:center"
+                         }
+                   }, {
+                       field: "no_of_leads",
+                       title: "LEAD",
+
+                       attributes: {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+                   }, {
+                       field: "created_date",
+                       title: "Created Date",
+
+                       format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                       attributes: {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+                   }, {
+                       field: "start_date1",
+                       title: "Start Date",
+
+                       format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                       attributes: {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+                   }, {
+                       field:"status",
+                       template: '<span id="#= status #"></span>',
+                       title: "STATUS",
+                       attributes: {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+                   }, {
+                       template: "<a id='RunNow' class='btn btn-primary' data-toggle='modal'>Run Now</a> </div>",
+                       title: "ACTION",
+                       width: "120px",
+                       attributes: {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       },
+
+                   }
+
+            ]
         };
 
 
@@ -253,6 +267,6 @@
                 size: 'md'
             });
         };
-    
+
     });
 

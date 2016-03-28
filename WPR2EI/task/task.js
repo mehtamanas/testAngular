@@ -1,22 +1,21 @@
 ﻿angular.module('task')
 
-
-
 .controller('TaskGridController',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window) {
 
         var orgID = $cookieStore.get('orgID');
 
-        $rootScope.title = 'Dwellar./Properties';
+        $rootScope.title = 'Dwellar./Task';
 
         var userId = $cookieStore.get('userId');
 
+        $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
 
         $scope.TaskGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetTaskByRole/" + userId
+                    read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
                 },
                 pageSize: 20,
 
@@ -35,6 +34,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            height: screen.height - 370,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -42,6 +50,7 @@
             },
             columns: [{
                 field: "name",
+                template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="">#=name#</a>',
                 title: "Task Name",
                 width: "120px",
                 attributes:
@@ -50,7 +59,7 @@
              }
 
             }, {
-                field: "project_name",
+                field: "Project_Name",
                 title: "Project",
                 width: "120px",
                 attributes:
@@ -59,7 +68,7 @@
              }
 
             }, {
-                field: "Contact_name",
+                field: "Contact_Name",
                 title: "Contact",
                 width: "120px",
                 attributes:
@@ -76,8 +85,16 @@
                  "style": "text-align:center"
              }
 
-            },
-           {
+            }, {
+                field: "company",
+                title: "Company",
+                width: "120px",
+                attributes:
+             {
+                 "style": "text-align:center"
+             }
+
+            }, {
                field: "priority",
                title: "Priority",
                width: "120px",
@@ -90,7 +107,7 @@
                field: "start_date_time",
                title: "Start Date",
                width: "120px",
-               format: '{0:dd/MM/yyyy hh:mm:ss}',
+               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes:
              {
                  "style": "text-align:center"
@@ -100,7 +117,7 @@
                field: "due_date",
                title: "Due Date",
                width: "120px",
-               format: '{0:dd/MM/yyyy hh:mm:ss}',
+               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes:
              {
                  "style": "text-align:center"
@@ -118,7 +135,8 @@
 
 
            }, {
-               field: "status",
+               field:"status",
+               template: '<span id="#= status #"></span>',
                title: "Status",
                width: "120px",
                attributes:
@@ -164,138 +182,26 @@
 
 
         // Kendo Grid on change
+
         $scope.myGridChange = function (dataItem) {
-            // dataItem will contain the row that was selected
+            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
+            apiService.getWithoutCaching(contactUrl).then(function (response) {
+                $scope.params = response.data[0];
 
-
-            window.sessionStorage.selectedCustomerID = dataItem.id;
-            //$state.go('app.propertydetail');
-
-
-        };
-
-
-
-        $scope.submit = function (e) {
-
-            if ($('.check-box:checked').length > 0)
-                $('.checkbox').prop('checked', true);
-            else
-                $('.checkbox').prop('checked', false);
-        }
-
-        $scope.propertySelected = function (e, data) {
-            console.log(e);
-            var element = $(e.currentTarget);
-            var checked = element.is(':checked')
-            row = element.closest("tr")
-            var id = data.tower_id;
-            var fnd = 0;
-            for (var i in $scope.checkedIds) {
-                if (id == $scope.checkedIds[i]) {
-                    $scope.checkedIds.splice(i, 1);
-                    fnd = 1;
+                var stat = $scope.params.status;
+                if (stat == "Completed") {
+                    alert(" Completed task can not be edited...");
                 }
-
-            }
-            if (fnd == 0) {
-                $scope.checkedIds.push(id);
-            }
-            if (checked) {
-                row.addClass("k-state-selected");
-            } else {
-                row.removeClass("k-state-selected");
-            }
-
-        }
-
-        $scope.GetValue = function (fruit) {
-
-            var fruitId = $scope.ddlFruits;
-            var fruitName = $.grep($scope.Fruits, function (fruit) {
-                return fruit.Id == fruitId;
-            })[0].Name;
-
-            $cookieStore.put('Selected Text', fruitName);
-            // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
-            //    alert("hiii");
-
-
-
-        }
-
-        $scope.soldProperty = function () {
-
-            var usersToBeAddedOnServer = [];
-            $cookieStore.remove('checkedIds');
-            $cookieStore.put('checkedIds', $scope.checkedIds);
-            // Add the new users
-            for (var i in $scope.checkedIds) {
-                var newMember = {};
-                newMember.id = $scope.checkedIds[i];
-                newMember.organization_id = $cookieStore.get('orgID');
-                newMember.available_status = 1;
-
-                usersToBeAddedOnServer.push(newMember);
-            }
-
-            if (usersToBeAddedOnServer.length == 0) {
-                return;
-            }
-
-
-
-            apiService.post("Floors/StatusChange", usersToBeAddedOnServer).then(function (response) {
-                var loginSession = response.data;
-
-                $scope.openSucessfullPopup();
-                //    $modalInstance.dismiss();
-                $rootScope.$broadcast('REFRESH', 'TowerListGrid');
-
-
+                else {
+                    window.sessionStorage.selectedTaskID = dataItem.task_id;
+                    $state.go('app.edit_task', { id: dataItem.task_id });
+                    //$scope.openEditTask();
+                };
             },
-    function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
-    });
+             function (error) {
 
-            $scope.openSucessfullPopup = function () {
-                var modalInstance = $modal.open({
-                    animation: true,
-                    templateUrl: 'property/sold.html',
-                    backdrop: 'static',
-                    controller: SoldController,
-                    size: 'md',
-                    resolve: { items: { title: "Property " } }
-
-                });
-                $rootScope.$broadcast('REFRESH', 'TowerListGrid');
-            }
-        }
-
-        $scope.Fruits = [{
-            Id: 1,
-            Name: 'SOLD'
-
-        }];
-        $scope.checkedIds = [];
-        $scope.showCheckboxes = function () {
-
-
-            for (var i in $scope.checkedIds) {
-
-                alert($scope.checkedIds[i]);
-            }
+             });
         };
-
-        $scope.$on('REFRESH', function (event, args) {
-            if (args == 'TowerListGrid') {
-                $('.k-i-refresh').trigger("click");
-            }
-            $scope.ddlFruits = "ACTION";
-        });
 
 
         $scope.filterNow = function () {
@@ -349,11 +255,29 @@
 
         }
 
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'TaskGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
 
         function clearFilters() {
             var gridData = $("#peopleGrid").data("kendoGrid");
             gridData.dataSource.filter({});
         }
+
+
+        $scope.openEditTask = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'task/edit_task.html',
+                backdrop: 'static',
+                controller: EditTaskGridController,
+                size: 'md'
+
+            });
+            $rootScope.$broadcast('REFRESH', 'TaskGrid');
+        };
 
         $scope.openPropertyPopup = function () {
             // alert("hi");

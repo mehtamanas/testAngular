@@ -7,11 +7,11 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
 
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
     $scope.project1 = $scope.seletedCustomerId;
 
 
-    contactUrl = "ToDoItem/EditGet/" + $scope.seletedCustomerId;
+    contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.params = response.data[0];
 
@@ -91,11 +91,12 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         assigned_to_id: $scope.contact1,
+        assign_user_id: $scope.user1,
         class_type: "User",
         reminder_time: $scope.params.reminder_time,
         task_type_id_: $scope.event1,
         time: $scope.params.time,
-        id: $scope.seletedCustomerId,
+        id: $scope.selectedTaskID,
        
     };
 
@@ -110,12 +111,13 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
                    due_date: $scope.params.due_date,
                    organization_id: $cookieStore.get('orgID'),
                    user_id: $cookieStore.get('userId'),
-                   assigned_to_id: $scope.contact1,
+                   assigned_to_id: $scope.params.assigned_to_id,
+                   assign_user_id: $scope.params.assign_user_id,
                    class_type: "User",
                    reminder_time: $scope.params.reminder_time,
                    task_type_id_: $scope.event1,
                    time: $scope.params.time,
-                   id: $scope.seletedCustomerId,
+                   id: $scope.selectedTaskID,
                   
                };
 
@@ -139,7 +141,7 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
         var postData1 = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
-            id: $scope.seletedCustomerId,
+            id: $scope.selectedTaskID,
         }
         apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
             var loginSession = response.data;
@@ -274,10 +276,10 @@ function (error) {
 		due_date: new Date(dDate).toISOString(),
  	        reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
                 //reminder_time: $scope.params.reminder_datetime,
-                id: $scope.seletedCustomerId,
+ 	        id: $scope.selectedTaskID,
             };
 
-            $scope.save($scope.params);
+            $scope.save();
 
         }
 

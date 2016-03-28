@@ -7,12 +7,10 @@ angular.module('team')
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
 
-        if (!$rootScope.teams.write)
-        {
-            $('#btnSave').hide();
-            $('#iconEdit').hide();
-            $('#btnAdd').hide();
-        }
+        $('#btnSave').hide();
+        $('#iconEdit').hide();
+        $('#btnAdd').hide();
+
 
 
         security.isAuthorized().then(function (response) {
@@ -173,6 +171,15 @@ angular.module('team')
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,

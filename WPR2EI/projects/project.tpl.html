@@ -24,13 +24,11 @@
 
             <div class="clearfix">
                 <div class="pull-left actions-wrap">
-                    <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                            ng-change="GetValue();addUser()">
-                        <option value="" selected> ACTION </option>
+
+                    <select ng-model="projectAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
+                        <option value='no_action' selected>ACTIONS</option>                        
+                        <option value='delete'>DELETE</option>
                     </select>
-                    
-                    <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                            ng-change="GetValue()"></select>-->
                 </div>
 
                 <div class="pull-right btn-wrap-right">

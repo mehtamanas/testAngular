@@ -267,6 +267,15 @@ angular.module('newuser')
               reorderable: true,
               resizable: true,
               filterable: true,
+              height: screen.height - 370,
+              columnMenu: {
+                  messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
               pageable: {
                   refresh: true,
                   pageSizes: true,
@@ -312,7 +321,8 @@ angular.module('newuser')
                   }
 
               }, {
-                  template: '<p id="#= status #">#= status #</p>',
+                  field:"status",
+                  template: '<span id="#= status #"></span>',
                   width: "100px",
                   title: "Status",
                   attributes:
@@ -320,17 +330,6 @@ angular.module('newuser')
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
-              }, {
-                  field: "status",
-                  title: "Status",
-                  width: "80px",
-
-                  attributes: {
-                      "class": "UseHand",
-                      "style": "text-align:center"
-
-                  }
-
               }, {
                   field: "rolename",
                   title: "Role",
@@ -469,7 +468,7 @@ angular.module('newuser')
           // Kendo Grid on change
           $scope.myGridChange = function (dataItem) {
               // dataItem will contain the row that was selected
-              window.sessionStorage.selectedCustomerID = dataItem.Id;
+              window.sessionStorage.selectedCustomerID = dataItem.id;
               $state.go('app.newuserdetail');
 
           };

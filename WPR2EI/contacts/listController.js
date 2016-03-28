@@ -110,6 +110,36 @@
 
 
         }
+
+        $scope.delete = function () {
+
+            var contactDelete = [];
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', $scope.checkedIds);
+            // Add the new users
+            for (var i in $scope.checkedIds) {
+                var contact = {};
+                contact.id = $scope.checkedIds[i];
+                contact.organization_id = $cookieStore.get('orgID');
+
+                contactDelete.push(contact);
+            }
+
+            if (contactDelete.length == 0) {
+                return;
+            }
+            resetCheckedIds();
+            $cookieStore.put('contactDelete', contactDelete);
+            $scope.openConfirmation();
+        }
+
+        var resetCheckedIds = function () {
+            $scope.checkedIds = []; // for reseting the checked list
+            $('.checkbox').prop('checked', false);// for reseting the checked list
+            $('#checkAll').prop('checked', false)// for reseting the checked list
+            $scope.ddlFruits = '';
+        }
+
         // Kendo code
         $scope.contactGrid = {
             dataSource: {
@@ -135,6 +165,14 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -151,9 +189,9 @@
                           "style": "text-align:center"
                       }
                  }, {
-                     template: "<img height='40px' width='40px'  class='user-photo' src='#= Contact_Image #'/>" +
-                     "<span style='padding-left:10px' class='customer-name'> </span>",
-                     width: "60px",
+                    template: "<div class='user-photo_1'><img class='image2' src='#= Contact_Image #'/></div>" +
+               "<span style='padding-left:10px' class='customer-name'> </span>",
+                   
                      title: "Picture",
                      attributes:
                      {
@@ -162,7 +200,7 @@
                  }, {
                      field: "Name",
                      title: "Name",
-                     width: "120px",
+                  
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -170,7 +208,7 @@
                  }, {
                      field: "Contact_Phone",
                      title: "Phone",
-                     width: "120px",
+                     width: "200px",
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -178,7 +216,7 @@
                  }, {
                      field: "Contact_Email",
                      title: "Email",
-                     width: "120px",
+                   
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -186,7 +224,7 @@
                  }, {
                      field: "City",
                      title: "City",
-                     width: "120px",
+                    
                      attributes:
                      {
                          "class": "UseHand",
@@ -195,7 +233,7 @@
                  }, {
                      field: "Assigned_To",
                      title: "Assigned To",
-                     width: "120px",
+                   
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -203,7 +241,7 @@
                  }, {
                      field: "Type",
                      title: "Type",
-                     width: "120px",
+                   
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -212,7 +250,7 @@
             {
                 field: "company",
                 title: "Company",
-                width: "120px",
+              
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
@@ -221,7 +259,7 @@
             {
                 title: "Action",
                 template: "<a id='followUp' class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
-                 width: "120px",
+               
                  attributes:
                    {
                        "class": "UseHand",
@@ -412,6 +450,18 @@
             });
         };
 
+        $scope.openConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/confirm.tpl.html',
+                backdrop: 'static',
+                controller: confirmationController,
+                size: 'md',
+                resolve: { items: { title: "Contact" } }
+
+            });
+
+        }
 
         function clearFilters() {
             var gridData = $("#peopleGrid").data("kendoGrid");

@@ -53,14 +53,14 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
         if (called == true) {
             return;
         }
+
+        var dDate = moment($scope.params.duedate, "DD/MM/YYYY hh:mm A")._d;
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
-          //  payment_schedule_id: $scope.payment_type1,
-            // media_name: uploadResult1.Name,
             payment_schedule_id: $scope.params.payment_type1,
             Amount: $scope.params.Amount,
-            duedate: $scope.params.duedate,
+            duedate: new Date(dDate).toISOString(),
             contact_id: window.sessionStorage.selectedCustomerID,
             ////user_id: $cookieStore.get('userId'),
         };

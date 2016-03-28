@@ -3,28 +3,32 @@
  */
 var EditNotesContactController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log('EditNotesContactController');
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.seletedNotesId = window.sessionStorage.selectedNotesID;
+    $scope.selectedCustomerID = window.sessionStorage.selectedCustomerID;
 
-
+    var userID = $cookieStore.get('userId');
+  
     //Audit log start
-    $scope.params = {
+  
+    AuditCreate = function () {
+        var postdata =
+       {
+           device_os: $cookieStore.get('Device_os'),
+           device_type: $cookieStore.get('Device'),
+          // device_mac_id: "34:#$::43:434:34:45",
+           module_id: "Contact",
+           action_id: "Contact View",
+           details: "EditNote",
+           application: "angular",
+           browser: $cookieStore.get('browser'),
+           ip_address: $cookieStore.get('IP_Address'),
+           location: $cookieStore.get('Location'),
+           organization_id: $cookieStore.get('orgID'),
+           User_ID: $cookieStore.get('userId')
+       };
 
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
-        application: "angular",
-        browser: $cookieStore.get('browser'),
-        ip_address: $cookieStore.get('IP_Address'),
-        location: $cookieStore.get('Location'),
-        organization_id: $cookieStore.get('orgID'),
-        User_ID: $cookieStore.get('userId')
-    };
 
-    AuditCreate = function (param) {
-        apiService.post("AuditLog/Create", param).then(function (response) {
+        apiService.post("AuditLog/Create", postdata).then(function (response) {
             var loginSession = response.data;
         },
    function (error) {
@@ -34,26 +38,50 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
            alert("Network issue");
    });
     };
-    AuditCreate($scope.params);
+    AuditCreate();
 
     //end
 
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
     //API functionality start
 
-    contactUrl = "Notes/EditGet/" + $scope.seletedCustomerId;
-    apiService.get(contactUrl).then(function (response) {
-        $scope.params = response.data[0];
+    contactUrl = "Notes/EditGet/" + $scope.seletedNotesId;
+    apiService.getWithoutCaching(contactUrl).then(function (response) {
+        data = response.data[0];
+        attentions = (data.attention).split(',');
+        $scope.params.text = data.text;
+        $scope.params.Name = [];
+        for(i=0;i<attentions.length;i++){
+            $scope.params.Name.push({ 'text': attentions[i] })
+        }
     },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
+      
     }
    );
 
+    $scope.contactList = [];
+
+    apiService.get("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+        data = response.data;
+        contactsName = _.pluck(data, 'Name');
+        contactId = _.pluck(data, 'id');
+        for (i = 0; i < contactsName.length; i++) {
+            $scope.contactList.push({ 'text': contactsName[i].toString(), 'id': contactId[i].toString() });
+        }
+    }, function (error) {
+    });
+
+
+    $scope.loadTags = function (query) {
+        return $scope.contactList;
+    }
+
     $scope.params = {
-        text: $scope.params.text,
+        text: $scope.text,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         class_type: "Person",
@@ -64,10 +92,13 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
     $scope.save = function () {
         var postData =
                {
-                   id: window.sessionStorage.selectedCustomerID,
+                   id: $scope.seletedNotesId,
+                 
                    text: $scope.params.text,
+                   attention : _.pluck($scope.params.Name, 'text').join(','),
                    organization_id: $cookieStore.get('orgID'),
                    user_id: $cookieStore.get('userId'),
+                   class_id:$scope.selectedCustomerID,
                    class_type: "Person"
                };
 
@@ -92,15 +123,13 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
             size: 'md',
-            resolve: { items: { title: "Edit" } }
+            resolve: { items: { title: "Notes" } }
         });
     }
-
-    //end
 
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
@@ -111,10 +140,7 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
             $scope.showValid = false;
 
         }
-
     }
-
-
 };
 
 

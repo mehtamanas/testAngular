@@ -9,18 +9,22 @@
             </div>
         </div>
     </div>
-
-   
-
     <div class="pg-inner-content">
 
         <form action="">
-
             <div class="clearfix">
-            
+                <div class="pull-left actions-wrap">
+
+                    <select ng-model="TagAction" class="form-control actions-wrap" ng-change="chooseAction()" id="tagaction">
+                        <option value='no_action' selected>ACTIONS</option>
+                        <option value='delete'>DELETE</option>
+                    </select>
+                </div>
+
+
                 <div class="pull-right btn-wrap-right">
                     
-                    <a id="contact_opencontactpopup" href="#" class="btn-lk" ng-click="openTagPopup()" style="cursor:pointer">+ Add New Tag</a>
+                    <a id="contact_openaddnewTagpopup" href="#" class="btn-lk" ng-click="openTagPopup()" style="cursor:pointer">+ Add New Tag</a>
                 </div>
             </div>
 

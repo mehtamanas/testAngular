@@ -6,12 +6,43 @@ angular.module('organization')
           var orgID = $cookieStore.get('orgID');
           $rootScope.title = 'Dwellar./Organization';
 
-          if (!$rootScope.organization.write) {
-              $('#btnSave').hide();
-              $('#iconEdit').hide();
-              $('#btnAdd').hide();
-          }
-       
+          $('#btnSave').hide();
+          $('#iconEdit').hide();
+          $('#btnAdd').hide();
+
+          security.isAuthorized().then(function (response) {
+              nav = response;
+              console.log(nav);
+              if (nav.length > 0) {
+
+                  for (i = 0; i < nav.length; i++) {
+                      if (nav[i].resource === "Projects") $rootScope.projects = nav[i];
+      
+                      if (nav[i].resource === "Users") $rootScope.users = nav[i];
+                      if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
+                      if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
+                      if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
+                      if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
+                      if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
+                      if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
+                      if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
+                      if (nav[i].resource === "Builders") $rootScope.support = nav[i];
+                      if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
+                      if (nav[i].resource === "Support") $rootScope.support = nav[i];
+                      if (nav[i].resource === "Property") $rootScope.property = nav[i];
+                      if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
+                      if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
+                      if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
+                  }
+              }
+
+              if ($rootScope.organization.write) {
+                  $('#btnSave').show();
+                  $('#iconEdit').show();
+                  $('#btnAdd').show();
+              }
+          });
+
 
 
 

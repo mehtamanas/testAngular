@@ -7,8 +7,15 @@ angular.module('campaigns', [])
         $stateProvider
             .state('app.campaigns', {
                 url: '/campaigns',
-                templateUrl: 'campaigns/campaignsdetail.html',
+                templateUrl: 'campaigns/emailCampaign/campaignsdetail.html',
                 controller: 'campaignsDetailController',
+                title: 'campaigns'
+            })
+
+            .state('app.campaignsEvent', {
+                url: '/campaigns',
+                templateUrl: 'campaigns/campaignsEventDetail.html',
+                controller: 'campaignsEventController',
                 title: 'campaigns'
             })
             .state('app.addNewCampaign', {

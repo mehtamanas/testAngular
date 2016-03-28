@@ -4,10 +4,10 @@
 .controller('budgetEmailController',
     function ($scope, $state, $cookieStore, apiService, $modal, $rootScope, emailService) {
 
+
+
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-        $scope.budget = $cookieStore.get('Budget');
-        $scope.no_of_leads = $cookieStore.get('No_of_leads');
-        $scope.sales = $cookieStore.get('Sales');
+        
         //Audit log start               
         AuditCreate = function () {
             var postdata =
@@ -39,7 +39,7 @@
      
         //end
 
-
+        if (!$cookieStore.get('Budget')) {
         projectUrl = "CampaignEvent/GenerateCampaignId";
         apiService.get(projectUrl).then(function (response) {
             $scope.params = response.data;
@@ -49,6 +49,7 @@
         
     }
         );
+    }
 
         $scope.params = {
             budget: $scope.budget,
@@ -58,6 +59,11 @@
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
         };
+
+
+        $scope.params.budget = $cookieStore.get('Budget');
+        $scope.params.no_of_leads = $cookieStore.get('No_of_leads');
+        $scope.params.sales = $cookieStore.get('Sales');
       
         $scope.addNew = function (isValid) {
             $scope.showValid = true;
@@ -74,16 +80,27 @@
         }
 
 
-        
-       
-    
-         $scope.cancel = function () {
+        $scope.cancel = function () {
+            $cookieStore.remove('Name');
+            $cookieStore.remove('End_Date');
+            $cookieStore.remove('Address');
+            $cookieStore.remove('Start_Date');
+            $cookieStore.remove('project_id');
+            $cookieStore.remove('Budget');
+            $cookieStore.remove('No_of_leads');
+            $cookieStore.remove('Sales');
+            $cookieStore.remove('channel_type_id');
+            $cookieStore.remove('campaign_ID');
              $state.go('app.campaigns');
          };
          
-         $scope.back = function () {
+        $scope.back = function ()
+        {
              $state.go('app.addEmailCampaign');
            
          }
+
+        
+       
     });
 

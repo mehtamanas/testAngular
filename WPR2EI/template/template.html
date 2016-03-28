@@ -31,7 +31,7 @@
                         <div class="tab-pane fade in active" id="summary">
                             <div class="tab-content-title">Agreement <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('agreement')" style="cursor:pointer">+</a></div>
                         </div>
-
+                        <div kendo-grid k-options="agreementTemplateGrid" selectable="true" k-on-change="agreementEdit( dataItem )"></div>
                     </div>  <!--agreement-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
@@ -62,7 +62,13 @@
                         <div class="tab-pane fade in active">
                             <div class="tab-content-title">Emails <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('email')" style="cursor:pointer">+</a></div>
                         </div>
-                        <div kendo-grid k-options="EmailTemplateGrid" selectable="true" k-on-change="EditTemplate( dataItem )"></div>
+                        <div class="">
+                            <select ng-model="templateAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
+                                <option value='no_action' selected>ACTIONS</option>
+                                <option value='delete'>DELETE</option>
+                            </select>
+                        </div>
+                        <div kendo-grid k-options="EmailTemplateGrid" selectable="true" k-on-change="emailEdit( dataItem )"></div>
                     </div>  <!--email template-->
 
                     <div class="tab-content">

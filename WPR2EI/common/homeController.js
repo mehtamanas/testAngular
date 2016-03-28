@@ -7,7 +7,8 @@ angular.module('common')
 
 
         $scope.loggedUser = $cookieStore.get('loggedUser');
-        $scope.badge = (($scope.loggedUser).charAt(0)).toUpperCase();
+        if ($scope.loggedUser !== null)
+            $scope.badge = (($scope.loggedUser).charAt(0)).toUpperCase();
         var userID = $cookieStore.get('userId');
 
 
@@ -42,27 +43,29 @@ angular.module('common')
         $rootScope.billing = { 'read': true, 'write': true, 'delete': true };
         $rootScope.contacts = { 'read': true, 'write': true, 'delete': true };
         $rootScope.property = { 'read': true, 'write': true, 'delete': true };
+         $rootScope.customTags = { 'read': true, 'write': true, 'delete': true };
 
         security.isAuthorized().then(function (response) {
             nav = response;
-        if (nav.length > 0) {
-            $rootScope.projects = _.findWhere(nav, { resource: 'Projects' });
-            $rootScope.users = _.findWhere(nav, { resource: 'Users' });
-            $rootScope.teams = _.findWhere(nav, { resource: 'Teams' });
-            $rootScope.billing = _.findWhere(nav, { resource: 'Billing' });
-            $rootScope.contacts = _.findWhere(nav, { resource: 'Contacts' });
-            $rootScope.organization = _.findWhere(nav, { resource: 'Organization' });
-            $rootScope.channelPartners = _.findWhere(nav, { resource: 'Channel Partners' });
-            $rootScope.auditTrail = _.findWhere(nav, { resource: 'Audit Trail' });
-            $rootScope.reports =_.findWhere(nav, { resource: 'Reports' });
-            $rootScope.builders = _.findWhere(nav, { resource: 'Builders' });
-            $rootScope.notifications = _.findWhere(nav, { resource: 'Notifications' });
-            $rootScope.support = _.findWhere(nav, { resource: 'Support' });
-            $rootScope.property = _.findWhere(nav, { resource: 'Property' });
-            $rootScope.sharedListings = _.findWhere(nav, { resource: 'Shared Listings' });
-            $rootScope.campaigns = _.findWhere(nav, { resource: 'Campaigns' });
-            $rootScope.tasks = _.findWhere(nav, { resource: 'Tasks' });
-        }
+            if (nav.length > 0) {
+                $rootScope.projects = _.findWhere(nav, { resource: 'Projects' });
+                $rootScope.users = _.findWhere(nav, { resource: 'Users' });
+                $rootScope.teams = _.findWhere(nav, { resource: 'Teams' });
+                $rootScope.billing = _.findWhere(nav, { resource: 'Billing' });
+                $rootScope.contacts = _.findWhere(nav, { resource: 'Contacts' });
+                $rootScope.organization = _.findWhere(nav, { resource: 'Organization' });
+                $rootScope.channelPartners = _.findWhere(nav, { resource: 'Channel Partners' });
+                $rootScope.auditTrail = _.findWhere(nav, { resource: 'Audit Trail' });
+                $rootScope.reports = _.findWhere(nav, { resource: 'Reports' });
+                $rootScope.builders = _.findWhere(nav, { resource: 'Builders' });
+                $rootScope.notifications = _.findWhere(nav, { resource: 'Notifications' });
+                $rootScope.support = _.findWhere(nav, { resource: 'Support' });
+                $rootScope.property = _.findWhere(nav, { resource: 'Property' });
+                $rootScope.sharedListings = _.findWhere(nav, { resource: 'Shared Listings' });
+                $rootScope.campaigns = _.findWhere(nav, { resource: 'Campaigns' });
+                $rootScope.tasks = _.findWhere(nav, { resource: 'Tasks' });
+                $rootScope.customTags = _.findWhere(nav, { resource: 'Tags' });
+            }
         });
 
         $scope.logout = function () {
@@ -155,5 +158,43 @@ angular.module('common')
        console.log("Error " + error.state);
    }
         );
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'contactcount') {
+                contactUrl = "Contact/GetAllContactCount?Id=" + userID;
+                apiService.getWithoutCaching(contactUrl).then(function (response) {
+                    $scope.tags = response.data;
+                    var leadcount = 0;
+                    if ($scope.tags[0].leadsCount != null) {
+                        leadcount = parseInt($scope.tags[0].leadsCount);
+                    }
+                    $scope.lead = leadcount;
+
+                    var contactcount = 0;
+                    if ($scope.tags[0].contactsCount != null) {
+                        contactcount = parseInt($scope.tags[0].contactsCount);
+                    }
+                    $scope.contact = contactcount;
+
+                    var clientcount = 0;
+                    if ($scope.tags[0].clientsCount != null) {
+                        clientcount = parseInt($scope.tags[0].clientsCount);
+                    }
+                    $scope.client = clientcount;
+
+
+
+
+                    $scope.total = $scope.lead + $scope.contact + $scope.client;
+
+                },
+           function (error) {
+               console.log("Error " + error.state);
+           }
+                );
+            }
+
+
+        });
 
     }]);

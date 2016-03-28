@@ -7,7 +7,7 @@ angular.module('contacts')
   
     var userID = $cookieStore.get('userId');
     $rootScope.title = 'Dwellar./companyDetail';
-    $scope.rate = 2;
+    //$scope.rate = 2;
     $scope.max = 5;
     $scope.isReadonly = false;
 
@@ -15,6 +15,17 @@ angular.module('contacts')
         $scope.overStar = value;
         $scope.percent = 100 * (value / $scope.max);
     }
+
+    contactUrl = "Tags/GetTagsByCompanyId/" + $scope.seletedCustomerId;
+    apiService.getWithoutCaching(contactUrl).then(function (response) {
+        $scope.tags = response.data;
+
+
+    },
+function (error) {
+    console.log("Error " + error.state);
+}
+    );
 
     //Audit log start               
  
@@ -50,10 +61,10 @@ angular.module('contacts')
 
     //end
     contactUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId; 
-    apiService.get(contactUrl).then(function (response) {
+    apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.main = response.data;
         $scope.company = $scope.main[0];
-
+        $scope.rate = $scope.main[0].rating;
     },
 function (error) {
    
@@ -84,22 +95,30 @@ function (error) {
     };
 
 
+
+
     if ($scope.seletedCustomerId != "undefined") {
 
-        GetUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
-        apiService.get(GetUrl).then(function (response) {
+        GetUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+
+        apiService.getWithoutCaching(GetUrl).then(function (response) {
 
             $scope.data = response.data;
 
-            $scope.Contact_First_Name = $scope.data[0].Contact_First_Name;
-            $scope.Contact_Last_Name = $scope.data[0].Contact_Last_Name;
-            $scope.Contact_Email = $scope.data[0].Contact_Email;
-            $scope.Contact_Phone = $scope.data[0].Contact_Phone;
-            $scope.street1 = $scope.data[0].street1;
-            $scope.Role = $scope.data[0].Role;
-            $scope.zipcode = $scope.data[0].zipcode;
-            $scope.State = $scope.data[0].State;
-            $scope.City = $scope.data[0].City;
+            $scope.company_name = $scope.data[0].company_name;
+            $scope.area = $scope.data[0].area;
+            $scope.description = $scope.data[0].description;          
+            $scope.zipcode = $scope.data[0].zipcode;          
+            //$scope.choices1[0].Contact_Email = response.data[0].Contact_Email;
+            //$scope.choices[0].Contact_Phone = response.data[0].Contact_Phone;
+            $scope.choices2[0].Street_1 = response.data[0].street1;
+            if (response.data[0].street2 != undefined)
+            { $scope.choices2.push({ 'Street_1': response.data[0].street2 }); }
+            
+            $scope.zip_code = $scope.data[0].zip_code;
+            $scope.state = $scope.data[0].state;
+            $scope.city = $scope.data[0].city;
+            $scope.Title = $scope.data[0].Title;
 
             if ($scope.data.contact_mobile !== '') {
                 $scope.mobile = $scope.data.contact_mobile;
@@ -109,9 +128,11 @@ function (error) {
             }
         },
                     function (error) {
-                      
+                        deferred.reject(error);
+                        //alert("not working");
                     });
     }
+
 
     $scope.companyGrid = {
          dataSource: {
@@ -136,6 +157,15 @@ function (error) {
          reorderable: true,
          resizable: true,
          filterable: true,
+         height: screen.height - 370,
+         columnMenu: {
+             messages: {
+                 columns: "Choose columns",
+                 filter: "Apply filter",
+                 sortAscending: "Sort (asc)",
+                 sortDescending: "Sort (desc)"
+             }
+         },
          pageable: {
              refresh: true,
              pageSizes: true,
@@ -154,6 +184,7 @@ function (error) {
                   }
               }, {
                   field: "Contact_First_Name",
+                  template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="">#=Contact_First_Name#</a>',
                   title: "Name",
                   width: "120px",
                   attributes: {
@@ -204,7 +235,7 @@ function (error) {
               },
               {
                   title: "Action",
-                  template: "<a id='followUp' class='btn btn-primary'  ng-click='openFollowUp(dataItem)' data-toggle='modal'  style='cursor:pointer'>Follow up </a> </div>",
+                  template: "<a id='followUp' class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
                   width: "120px",
                   attributes:
                     {
@@ -217,11 +248,27 @@ function (error) {
 
     //popup functionality start
 
+    //$scope.openFollowUp = function (d) {
+    //    var id = d.Contact_Id;
+    //    window.sessionStorage.selectedCustomerID = id;
+    //    var modalInstance = $modal.open({
+
+    //        animation: true,
+    //        templateUrl: 'contacts/company/followUp.html',
+    //        backdrop: 'static',
+    //        controller: FollowUpController,
+    //        size: 'md'
+
+    //    });
+
+    //};
+
     $scope.openFollowUp = function (d) {
         var id = d.Contact_Id;
         window.sessionStorage.selectedCustomerID = id;
+       // $cookieStore.put('company_name', d.company);
+        $cookieStore.put('lead_name', d.Contact_First_Name);
         var modalInstance = $modal.open({
-
             animation: true,
             templateUrl: 'contacts/company/followUp.html',
             backdrop: 'static',
@@ -232,13 +279,22 @@ function (error) {
 
     };
 
-
     $scope.openEditCompanyPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'contacts/company/editCompany.html',
             backdrop: 'static',
             controller: EditCompanyController,
+            size: 'md'
+        });
+    };
+
+    $scope.openCompanyTagConfirmation = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'contacts/company/companytagremove.tpl.html',
+            backdrop: 'static',
+            controller: confirmationComapnyTagController,
             size: 'md'
         });
     };
@@ -272,7 +328,22 @@ function (error) {
         $cookieStore.put('email', dataItem.Contact_Email);
         $cookieStore.put('phone', dataItem.Contact_Phone);
         $cookieStore.put('name', dataItem.Name);
+        $state.go('app.contactdetail');
      
     };
+
+    $scope.removeImage = function (index) {
+        var id = $scope.tags[index].tag_id;
+
+        var postdata =
+            {
+                id: id,
+                company_id: window.sessionStorage.selectedCustomerID
+            }
+
+        $cookieStore.put('postdata', postdata);
+        $scope.openCompanyTagConfirmation();
+
+    }
 
 });

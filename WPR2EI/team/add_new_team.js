@@ -3,6 +3,8 @@
  */
 var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope) {
     console.log('TeamPopUpController');
+
+
     //Audit log start															
     $scope.params =
         {
@@ -107,12 +109,13 @@ var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $m
 
             $scope.addNew = function (isValid) {
                 $scope.showValid = true;
-                if (isValid) {
-                 
-
+                $scope.isDisabled = true;
+                if (isValid)
+                {
                         new ProjectCreate($scope.params).then(function (response) {
                             console.log(response);
                             $scope.showValid = false;
+                            $scope.isDisabled = false;
                             $state.go('guest.signup.thanks');
                         }, function (error) {
                             console.log(error);

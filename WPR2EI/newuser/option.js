@@ -90,7 +90,7 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
         
         }
         else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
-            Url = "Role/Get/442aa5f4-4298-4740-9e43-36ee021df1e7";
+            Url = "Role/Get/1";
 
         }
         else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {

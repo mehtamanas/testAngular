@@ -4,13 +4,14 @@ angular.module('campaigns')
 .controller ('EmailTagController', 
 function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, emailService) {
     console.log('EmailTagController');
-
+    $scope.contactListFilter = '';
     
     emailData= {
             teamId: window.sessionStorage.selectedCustomerID,
             orgId:$cookieStore.get('orgID')
     }
       
+    
     $scope.usersInTeam = undefined;
     $scope.orgUsers = undefined;
 
@@ -28,7 +29,13 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
 
         $q.all(promises).then(function (values) {
             $scope.usersInTeam = values[0].data;
-            $scope.orgUsers = _.filter(values[1].data );
+            $scope.orgUsers = _.filter(values[1].data);
+
+            if ($cookieStore.get('usersToBeAddedOnServer1')) { //if user has clicked baqck from next page
+                var a = ($cookieStore.get('usersToBeAddedOnServer1'))[0].people_list_id;
+                var userObject = (_.findWhere($scope.orgUsers, { id: a }))
+                $scope.addUser(userObject);
+            }
 
             // Now, find out the users already in the team and mark them
             angular.forEach($scope.usersInTeam, function (existingUser) {
@@ -39,10 +46,22 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
     };
 
     loadUsers();
-
+    if ($cookieStore.get('usersToBeAddedOnServer1')) {
+        var a = ($cookieStore.get('usersToBeAddedOnServer1')).people_list_id;
+        $scope.orgUsers
+    }
      usersToBeRemoved = [];
      usersToBeAdded = [];
 
+     $scope.addRemoveUser = function (user) {
+         //alert("hi");
+         if (usersToBeAdded.length < 1 && !user.isTeamMember) {
+             $scope.addUser(user);
+         }
+         else if (user.isTeamMember) {
+             $scope.removeUser(user);
+         }
+     };
     // Get the collection of users to be removed
     $scope.removeUser = function (user) {
         if (user.isTeamMember) {
@@ -63,23 +82,25 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
 
     // Get the collection of users to be added
     $scope.addUser = function (user) {
-        if (!user.isTeamMember) {
+        if (usersToBeAdded.length < 1 && !user.isTeamMember)
+        {
             user.isTeamMember = true;
-
             var existingUsers = _.pluck($scope.usersInTeam, 'id');
-
+            
             // User should not be already existing and do not add duplicate entry
-            if (existingUsers.indexOf(user.id) == -1 && usersToBeAdded.indexOf(user.id) == -1) {
-                {
-                    usersToBeAdded.push(user.id);
-                }
+            
+            if (existingUsers.indexOf(user.id) == -1 && usersToBeAdded.indexOf(user.id) == -1)
+            {
+                        usersToBeAdded.push(user.id);
             }
+           
 
             // Remove the user if just added
             usersToBeRemoved = _.remove(usersToBeRemoved, function (removeMe) {
                 return removeMe.id == user.id;
             });
         }
+        
     };
 
     // Final update to the server
@@ -102,7 +123,7 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
         var updatePromisses = [];
         angular.forEach(usersToAdd, function (userId) {
             var newMember = {};
-            newMember.tag_id = userId;
+            newMember.people_list_id = userId;
             newMember.user_id = currentlyLoggedInUserId;
             newMember.campaign_id = "";
             newMember.organization_id = emailData.orgId;
@@ -116,7 +137,7 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
         var removePromisses = [];
         angular.forEach(usersToRemove, function (userId) {
             var existingMember = {};
-            existingMember.tag_id = userId;
+            existingMember.people_list_id = userId;
             existingMember.user_id = currentlyLoggedInUserId;
             existingMember.campaign_id ="";
             existingMember.organization_id = emailData.orgId;
@@ -125,37 +146,30 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
           
         });
 
-        //if (usersToBeAddedOnServer.length > 0)
-        //    updatePromisses.push(emailService.addUsersToTeam(usersToBeAddedOnServer));
-        //if (usersToBeRemovedOnServer.length > 0)
-        //    updatePromisses.push(emailService.removeUsersFromTeam(usersToBeRemovedOnServer));
-
-        //$q.all(updatePromisses).then(function (results) {
-        //    if (results.length > 0) {
-        //        loadUsers();
-        //        alert('Team members updated successfully.')
-        //        $modalInstance.dismiss();
-        //    }
-        //}, function (errors) {
-        //    if (error.status === 400)
-        //        alert(error.data.Message);
-        //    else
-        //        alert("Network issue");
-        //});
+      
     };
 
     $scope.next = function () {
+        if (usersToBeAdded.length < 1) {
+            alert("Please select a contact list");
+            return;
+        }
         $scope.updateTeamUsers();
         $cookieStore.put('usersToBeAddedOnServer1', usersToBeAddedOnServer);
         $cookieStore.put('usersToBeRemovedOnServer1', usersToBeRemovedOnServer);
         $state.go('app.addTemplate');
     }
+    
 
     $scope.cancel = function () {
+
+        $cookieStore.remove('usersToBeAddedOnServer1');
         $state.go('app.campaigns');
     };
 
-    $scope.back = function () {
+    $scope.back = function ()
+    {      
+          
         $state.go('app.budgetEmail');
     }
 });

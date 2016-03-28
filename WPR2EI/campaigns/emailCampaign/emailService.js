@@ -13,12 +13,12 @@ angular.module('campaigns')
 
             this.getUsersInTeam = function (orgId) {
            
-                return $http.get(apiService.baseUrl + 'Tags/GetAllTagsWithId?id=' + orgId1)
+                return $http.get(apiService.baseUrl + 'PeopleList/GetPeopleList/' + orgId1)
             };
 
             this.getOrgUsers = function (orgId) {
             
-                return $http.get(apiService.baseUrl + 'CampaignTag/GetCampaignTag/' + seletedCustomerId + '/' + orgId1)
+                return $http.get(apiService.baseUrl + 'PeopleList/GetPeopleListById/' + seletedCustomerId + '/' + orgId1)
             };
 
             this.getEngagements = function(){
@@ -26,13 +26,13 @@ angular.module('campaigns')
             };
             // Add users
             this.addUsersToTeam = function (usersTobeAdded) {
-                return $http.post(apiService.baseUrl + 'CampaignTag/CreateCampaignTag', usersTobeAdded);
+                return $http.post(apiService.baseUrl + 'PeopleList/CampaignToPeopleList', usersTobeAdded);
             };
 
             // Remove users
             this.removeUsersFromTeam = function (usersTobeRemoved) {
                 return $http({
-                    method: 'DELETE', url: apiService.baseUrl + 'Mapping/DeleteMultipleCampaignTag',
+                    method: 'DELETE', url: apiService.baseUrl + 'PeopleList/DeleteMultiplePeopleCampaignMapping',
                     data: usersTobeRemoved, headers: { 'Content-Type': 'application/json' }
                 });
             };

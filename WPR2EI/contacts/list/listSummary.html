@@ -1,0 +1,78 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Contact List</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content" style="">
+       
+        <div class="project-detail">
+            <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                <div class="col-lg-12 pull-left">
+                    <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                        <h2 class="pg-inner-title"> Summary</h2>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                    <div class="project-detail">
+                        <div class="content-inner-bx">
+                            <div class="clearfix tab-inner" style="margin-left: 5%;">
+
+                                <div class="pull-left company-profile-half">
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">List Name:</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <span ng-bind="params.name">{{params.name}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1">Description:</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <span ng-bind="params.description">{{params.description}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1"></div>
+
+                        </div>
+                    </div>
+
+                    <button class="btn organization-btn" style="margin-left: 26%;" type="submit" id="btn_ListSummerySave"><b>SAVE &gt;</b></button>
+                    <button class="btn campaign-container-btn-1-1" id="btn_ListSummaryBack" type="button" ng-click="back()">
+                        BACK
+                    </button>
+                   
+                    <a href="" class=""></a>
+
+
+
+                </form>
+            </div>
+            <!--</div>--><!-- project-detail ended -->
+
+        </div><!-- pg-inner-content ended -->
+
+    </div><!-- main-content ended -->
+
+
+</div>

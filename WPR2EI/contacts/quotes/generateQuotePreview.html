@@ -1,0 +1,165 @@
+﻿<div id="quotePreview">
+    <div class="modal-header">
+        <button type="button" id="btn_generateQuotePre" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        <h4 class="form-title" style="text-align:left"><b>Quote #1</b></h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="quote-container">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="capt quote-title">{{contactData.Contact_First_Name}}{{contactData.Contact_Last_Name}}</h5>
+                        <span class="capt quote-value">{{contactData.street1}}</span><br />
+                        <span class="capt quote-value">{{contactData.street2}}</span>
+                        <span class="capt quote-value">{{contactData.City}}</span><br />
+                        <span class="capt quote-value">{{contactData.State}} - {{contactData.zipcode}}</span><br /><br />
+                        <span class="quote-value">Phone: {{contactData.Contact_Phone}}</span><br />
+                        <span class="quote-value">Email: {{contactData.Contact_Email}}</span>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="images/logo.png" alt="Dwellar." style="float: right;margin-right: 7%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix " style="margin-left: 3%;">
+            <div class="col-md-12  quote-bold">
+                <div class="row" style="margin-top: 1%;">
+                    <div class="col-md-4">
+                        <span class="capt">ST No. : </span><span class="upper"> AAECD6943NSD001</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="capt">PAN No. : </span><span class="upper"> AAF86786GGV4</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="capt">PAYMENT TERMS : </span><span class="capt">100% Advance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="margin-top: 4%;">
+        <h3 style="color: #d5d5d5;margin-left: 1%;">Estimate</h3>
+        <div class="clearfix " style="margin-left: 3%;">
+            <div class="col-md-12 ">
+                <div class="row" style="margin-top: 1%;">
+                    <div class="col-md-6"ng-repeat="companey in companyEstimate" >
+                        <span class="capt  quote-bold">{{companey.company_name}}</span><br>
+                        <span class="capt">{{companey.area}}</span>
+                        <span class="capt">{{companey.street1}} {{companey.street2}}
+                        {{companey.city}}{{companey.state}}{{companey.zipcode}}</span>
+                    </div>
+                    <div class="col-md-6  ">
+                        <span class="capt quote-bold">Estimate No. :</span><span class="upper"> {{params.random_id}}</span><br>
+                        <span class="capt quote-bold">Date :</span><span class="upper"></span><br>
+                        <span class="capt quote-bold">Expiration date :</span><span class="upper"> {{params.expiry_datetime}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="clearfix ">
+            <table class="table table-responsive" style="margin-top: 8%;">
+                <thead class="quote-tbl-head-1">
+                    <tr>
+                        <th>No.</th>
+                        <th>PRODUCTS</th>
+                        <th>QTY</th>
+                        <th>RATE</th>
+                        <th>AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="sub in subscription">
+                        <td style="width: 1px;">{{$index+1}}.</td>
+                        <td style="width: 45%;">
+                            <span class="quote-bold">{{sub.name}}</span><br>
+                            <span class="capt">{{sub.desc}}</span><br><br>
+                        </td>
+                        <td>
+                            <span class="quote-bold">{{sub.quantity}}</span>
+                        </td>
+                        <td>
+                            <span class="quote-bold"> {{sub.price | currency:"&#8377;"}}</span>
+                        </td>
+                        <td>
+                            <span class="quote-bold"> {{sub.total | currency:"&#8377;"}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr style="margin-top: 4%;">
+        <div class="clearfix " style="margin-left: 3%;">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-7 quote_total">
+                        <table class="table table-responsive">
+                            <tbody>
+                                <tr>
+                                    <td class="quote_table">
+                                        <span class="capt">service tax @ 14%</span>
+                                    </td>
+                                    <td class="quote-bold quote_table">
+                                        <span><i class="fa fa-inr"> </i> {{sub.tax}} </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <h4 class="quote-bold">Sub Total</h4>
+                                    </td>
+                                    <td class="quote-bold "><span>{{params.subTotal | currency:"&#8377;"}} </span></td>
+                                </tr>
+                                <tr>
+                                    <td class=" quote_table">
+                                        <span class="capt">offer #15% OFF</span>
+                                    </td>
+                                    <td class="quote-bold quote_table">  {{params.offerDiscount | currency:"&#8377;"}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="quote_table">
+                                        <span class="capt">additional discount</span>
+                                    </td>
+                                    <td class="quote-bold quote_table"> {{params.additionalDiscount | currency:"&#8377;"}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="quote-bold">
+                                        <span>TOTAL</span>
+                                    </td>
+                                    <td class="quote-bold"> {{params.grandTotal | currency:"&#8377;"}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix " style="margin-left: 3%;">
+            <div class="col-md-12 ">
+                <div class="row" style="margin-top: 1%;">
+                    <div class="col-md-3">
+                        <label>Accepeted By</label><br>
+                        <p class="quote_sign">------------------------</p>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Accepeted Date</label><br>
+                        <p class="quote_sign">-----------------------</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="modal-btn-wrap-1 clearfix" style="text-align:left">
+            <button type="button" id="generatePreview" class="btn btn-primary quote_btn" style="margin:1px" ng-click="preview()"> PREVIEW </button>
+        </div>
+    </div>
+
+    <!-- modal ended -->
+
+</div>

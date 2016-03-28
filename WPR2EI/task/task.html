@@ -22,7 +22,7 @@
 
             <div id="record-content" class="properties-content">
 
-                <div id="project-record-list" kendo-grid="peopleGrid" k-options="TaskGrid" selectable="true">
+                <div id="project-record-list" kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
                 </div>
 
             </div><!-- record-content ended -->

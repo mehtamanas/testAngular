@@ -302,7 +302,7 @@
                                            placeholder="Email"
                                            data-ng-model="choice1.email"
                                            minlength="1"
-                                           maxlength="30"
+                                           maxlength="50"
                                           
                                            input-focus
                                            ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" />
@@ -328,11 +328,8 @@
                                     <input type="text" name="Phone" class="form-control"
                                            placeholder="Phone"
                                            data-ng-model="choice.phone_no"
-                                           minlength="10"
-                                           maxlength="10"
-                                           
                                            input-focus
-                                           ng-pattern="/^([1-9][0-9]*)$/" />
+                                           ng-pattern="/^[0-9]{1,11}$/" />
                                     <div class="text-danger"
                                          data-ng-if="newForm.Phone.$invalid && (!newForm.Phone.$pristine || showValid) && !newForm.Phone.$focus">
                                         {{ 'Please Enter Valid Phone Number' | translate }}
@@ -358,7 +355,7 @@
                     <div class="pull-left f-half-5">
                         <div class="form-bx form-bx6">
                             <label for="">List In Builder Directory</label>
-                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control" required>
+                            <select id="year_select" ng-change="selectbuilder()" ng-model="directory1" class="dropdown form-control">
                                 <option value="" selected>--Select Yes or No--</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -517,7 +514,7 @@
                     <div class="clearfix" style="margin-top: 10px;">
                         <div class="form-bx form-bx6">
                             <label for="">Time Zone</label>
-                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" required>
+                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" >
                                 <option value="" selected>--Select Timezone--</option>
                                 <option ng-repeat="Time in timezone | orderBy:'timezone'"
                                         value="{{Time.id}}">

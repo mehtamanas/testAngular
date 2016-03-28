@@ -1,6 +1,4 @@
-/**
- * Created by dwellarkaruna on 20/10/15.
- */
+
 angular.module('my_day', [])
 
     .config(['$stateProvider', function ($stateProvider) {
@@ -11,6 +9,13 @@ angular.module('my_day', [])
                 controller: 'my_dayController',
                 title: 'my_day'
             })
+         .state('app.edit_task_myday', {
+             url: '/edit_task_myday?id',
+             templateUrl: 'my_day/edit/edit_task_myday.html',
+             controller: 'MyDayEditTask',
+             title: 'Edit Task'
+         })
+
         
              
     }]);

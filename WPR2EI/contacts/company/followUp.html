@@ -34,8 +34,8 @@
 
             <div class="pull-left" style="margin-bottom: 1%;">
             
-           <input type="button" ng-class="{'div_email_selected' : emailChecked,'div_email':!emailChecked}" ng-click="emailSelected()" value="EMAIL"/>
-            <input type="button" ng-class="{'div_call_selected' : callChecked,'div_call':!callChecked}" ng-click="callSelected()" value="CALL" style="margin-left: 40px;" />
+           <input type="button" ng-class="{'div_email_selected' : emailChecked,'div_email':!emailChecked}" ng-click="emailSelected()" value="EMAIL" id="btn_FollowUpCompanyEmail"/>
+            <input type="button" ng-class="{'div_call_selected' : callChecked,'div_call':!callChecked}" ng-click="callSelected()" value="CALL" style="margin-left: 40px;" id="btn_FollowUpCompanyCall" />
         </div>
 
         </div>
@@ -77,6 +77,7 @@
                                         <label for="">Choose Date</label>
                                         <input kendo-date-time-picker class=""
                                                ng-model="due_date"
+                                               id="companyDatetime"
                                                k-ng-model="k_start_date"
                                                k-format="'MMMM d, yyyy h:mm tt'" />
                                     </div>
@@ -85,7 +86,7 @@
 
                                         <div class="form-group form-bx form-bx3-1">
                                             <label for="">Select Time</label>
-                                            <select data-ng-model="reminder_time" class="dropdown form-control" style="height: 49px;width: 82%;">
+                                            <select data-ng-model="reminder_time" class="dropdown form-control" style="height: 49px;width: 82%;" id="Opt_companySelectTime">
                                                 <option value="" selected>Select Time</option>
                                                 <option value="15 min">15 min</option>
                                                 <option value="30 min">30 min</option>
@@ -102,13 +103,15 @@
                         <textarea class="form-control" rows="5" name="description"
                                   data-ng-model="text"
                                   minlength="1"
+                                  id="txt_CompaanyAddNotes"
                                   maxlength="500"
+
                                   input-focus 
                                   style="height: 60%;"></textarea>
                     </div>
       
                         <div class="form-group form-bx13 ">
-                            <label><input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true">Remind Me</label>
+                            <label><input type="checkbox" name="test3" value="1" id="Chk_ContactRemind" ng-model="remind_me" ng-init="remind_me=true">Remind Me</label>
                         </div>
                     </div>
             </div>
@@ -116,8 +119,8 @@
      </div>
         
         <div class="modal-btn-wrap clearfix">
-            <button type="submit" class="f-btn" style="width: 438px">SAVE</button>
-            <button type="button" class="f-btn f-btn2" ng-click="cancel()" style="width: 438px">CANCEL</button>
+            <button type="submit" class="f-btn" id="btn_companyFollowUpSave" style="width: 438px">SAVE</button>
+            <button type="button" class="f-btn f-btn2" id="btn_companyFollowUpCancel" ng-click="cancel()" style="width: 438px">CANCEL</button>
         </div>
     </form>
 </div>

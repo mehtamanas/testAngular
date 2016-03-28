@@ -6,20 +6,58 @@
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
 
-        if (!$rootScope.users.write) {
-            $('#btnSave').hide();
-            $('#iconEdit').hide();
-            $('#btnAdd').hide();
-        }
+        $('#btnSave').hide();
+        $('#iconEdit').hide();
+        $('#btnAdd').hide();
+
+
+
+        security.isAuthorized().then(function (response) {
+            nav = response;
+            console.log(nav);
+            if (nav.length > 0) {
+
+                for (i = 0; i < nav.length; i++) {
+                    if (nav[i].resource === "Projects") {
+                        $rootScope.projects = nav[i];
+
+                    }
+                    if (nav[i].resource === "Users") $rootScope.users = nav[i];
+                    if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
+
+                    if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
+                    if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
+                    if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
+                    if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
+                    if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
+                    if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
+                    if (nav[i].resource === "Builders") $rootScope.support = nav[i];
+                    if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
+                    if (nav[i].resource === "Support") $rootScope.support = nav[i];
+                    if (nav[i].resource === "Property") $rootScope.property = nav[i];
+                    if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
+                    if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
+                    if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
 
 
 
 
-       
+                }
+            }
 
 
 
-       
+            if ($rootScope.users.write) {
+                event.preventDefault();
+                $('#btnSave').show();
+                $('#iconEdit').hide();
+                $('#btnAdd').hide();
+            }
+
+
+
+        });
+        //   $rootScope.title = 'Dwellar./UserDetails';
         $rootScope.title = 'Dwellar./users/details';
         //Audit log start															
         $scope.params =
@@ -295,6 +333,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -376,6 +423,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -458,6 +514,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -466,7 +531,7 @@
             columns: [
 
                  {
-                     template: "<img height='40px' width='40px' src='#= media_url #'/>" +
+		    template: "<img height='40px' width='40px' src='#= media_url #'/>" +
                      "<span style='padding-left:10px' class='property-photo'> </span>",
                      title: "PROJECT LOGO",
                      width: "120px",
@@ -586,6 +651,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -665,12 +739,26 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
                 buttonCount: 5
             },
             columns: [{
+                template: " <input type='checkbox' , class='checkbox', data-id='#= name #', ng-click='taskSelected($event,dataItem)'  />",
+                title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='submit(dataItem)'  />",
+                width: "60px",
+
+            },{
                 field: "name",
                 title: "Task Name",
                 width: "120px",
@@ -705,6 +793,14 @@
              {
                  "style": "text-align:center"
              }
+
+            },{
+                field: "company_name",
+                title: "Company",
+                attributes:
+                 {
+                     "style": "text-align:center"
+                 }
 
             },
              {
@@ -760,7 +856,8 @@
 
 
              }, {
-                 field: "status",
+                 field:"status",
+                 template: '<span id="#= status #"></span>',
                  title: "Status",
                  width: "120px",
                  attributes:
@@ -804,6 +901,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -895,6 +1001,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -914,7 +1029,7 @@
                 },
 
                 {
-                    template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
+		    template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
                     "<span style='padding-left:10px' class='property-photo'> </span>",
                     title: "Photo",
                     width: "120px",
@@ -1028,6 +1143,7 @@
                 },
             {
                 field: "available_status",
+                template: '<span id="#= available_status#"></span>',
                 title: "Status",
                 width: "120px",
                 attributes:
@@ -1069,6 +1185,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -1130,6 +1255,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -1254,6 +1388,15 @@
             reorderable: true,
             resizable: true,
             filterable: true,
+  height: screen.height - 370,
+columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -1358,7 +1501,7 @@
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
             // dataItem will contain the row that was selected
-            window.sessionStorage.selectedCustomerID = dataItem.task_id;
+            window.sessionStorage.selectedTaskID = dataItem.task_id;
             //  alert(window.sessionStorage.selectedCustomerID);
             $scope.openEditTask();
         };

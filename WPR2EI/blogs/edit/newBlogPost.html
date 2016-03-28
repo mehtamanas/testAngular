@@ -1,0 +1,109 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="exampleModalLabel">Create New Blog Post</h4>
+</div>
+
+<form class="form-content form-content2 edit-organization-setting" name="emailForm" style="text-align:left;" novalidate data-ng-submit="addNewContact(emailForm.$valid)" autocomplete="off">
+    <div class="clearfix image-upload-container">
+    <div class="modal-body image-upload-wrap">
+        <div class="image-upload-title">Upload Contact Image</div>
+        <div class="dropzone dropzone-bx image-upload-bx">
+            <div class="fallback">
+                <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                    <div class="image-upload-panel">
+                        <div class="user-photo_2" ng-hide="uploader1.queue.length">
+                            <img ng-src={{params.media_url}} class="image3" ng-disabled="{{media_url}}"/>
+                        </div>
+                        <div class="row" ng-show="uploader1.queue.length">
+                            <div class="user-photo_4" ng-repeat="item in uploader1.queue">
+                                <img id="fetch" src="#" class="image1" alt="your image" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uploadFileName">
+            <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
+        </div>
+        <label class="custom-file-input">
+
+            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+        </label>
+    </div>
+
+</div>
+    <div class="clearfix">
+        <div class="form-group form-bx form-bx8">
+            <label for="">Blog Name</label>
+            <input type="text" class="form-control text-bold" id="edit_blog_name" autofocus name="Blog_name"
+                   placeholder="Blog Name"
+                   data-ng-model="params.name"
+                   input-focus
+                   ng-disabled="params.name"
+                   required />
+            <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
+                <div ng-message="required">You did not enter a field</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">     
+        <div class="form-group">      
+            <div class="form-group form-bx form-bx8">
+                <label> Tag</label>
+                <div class="form-bx13" style="padding-bottom: 29px;">
+
+                    <input kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" id="edit_blog_tag" ng-disabled="params.tag_name"/>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="clearfix">
+        <div class="form-group form-bx form-bx14">
+            <label for="">Description</label>
+            <textarea id="edit_blog_editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.htmlcontent" resizable="true" ></textarea>
+        </div>
+    </div>
+
+    <div class="clearfix">     
+        <div class="form-group form-bx form-bx5">
+            <label for="">Comment</label>
+            <textarea cols="110" rows="05" name="description"
+                      data-ng-model="params.comment"                   
+                      input-focus 
+                      id="edit_blog_textarea"/>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="pull-left f-half-6" ng-show='flag === "Approved"'>
+            <div class="form-group form-bx form-bx3-1">
+                <label for="">Date:</label>
+                <input kendo-date-time-picker class="form-control "
+                       ng-model="due_date"
+                       k-ng-model="k_due_date"
+                       k-format="'dd/MM/yyyy hh:mm tt'" />
+            </div>
+        </div>
+    </div>
+
+        <input ng-show="false" id="imageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+        <div class="progress" ng-show="((uploader.progress)/1)>0">
+            <div class="progress-bar" role="progressbar"
+                 ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+        </div>
+
+        <div class="modal-btn-wrap-1 clearfix">
+            <button type="button" class=" f-btn " ng-click="approval()" ng-hide='flag === "Approved"'> APPROVE </button>
+            <button type="button" class=" f-btn f-btn-19 " ng-click="decline()"> DECLINE </button>
+            <button type="button" class=" f-btn " ng-click="publish()" ng-hide='flag === "Sent For Approval"'> PUBLISH </button>
+            <button type="submit" id="gallery_save" class="f-btn" ng-hide='flag === "Sent For Approval"'> SAVE DRAFT </button>
+            <!--<button type="button" class=" f-btn f-btn-20 " ng-click="preview()"> PREVIEW </button>-->
+
+
+
+
+        </div>
+</form>

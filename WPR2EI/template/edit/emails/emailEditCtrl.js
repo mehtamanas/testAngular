@@ -1,4 +1,4 @@
-﻿emailEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, emailData) {
+﻿emailEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, emailData, FileUploader) {
     $scope.showTemplate = true;
     $scope.showPreview = false;
     $scope.params = {}
@@ -10,7 +10,24 @@
     $scope.params.projectSelected;
     //$scope.params.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
     $scope.params.htmlcontent = emailData.description;
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiService.uploadURL,
+    });
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        img = response[0].Location;
+        var edit = $('#editor').data("kendoEditor");
+        edit.exec('inserthtml', { value: "<img alt=''  src='" + img + "' />" });
+
+    };
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        uploader.uploadAll();
+    }
+
     $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
         tools: ["bold",
                 "italic",
                 "underline",
@@ -23,12 +40,22 @@
                 "insertOrderedList",
                 "indent",
                 "outdent",
+                "createLink",
+                'pdf',
+                "unlink",
                 "fontName",
                 "fontSize",
                 "foreColor",
                 "backColor",
                 "print",
                 'createTable',
+                {
+                    name: "myTool",
+                    tooltip: "Insert Image",
+                    exec: function (e) {
+                        $('#imageBrowser').trigger("click");
+                    }
+                },
                   {
                       name: "insertHtml",
                       items: [
@@ -37,36 +64,35 @@
                           { text: "My First Name", value: "{{my_first_name}}" },
                           { text: "My Last Name", value: "{{my_last_name}}" },
                           { text: "Salutation", value: "{{salutation}}" },
-                           { text: "Brochure Url", value: "{{brochure_url}}" },
+                           { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
 
                       ]
                   },
-                  "insertImage",
                   "insertFile",
-
-
-
-
+                  "viewHtml",
         ],
-        imageBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Read",
-                destroy: {
-                    url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Destroy",
-                    type: "POST"
-                },
-                create: {
-                    url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Create",
-                    type: "POST"
-                },
-                thumbnailUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Thumbnail",
-                uploadUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Upload",
-                imageUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Image?path={0}"
-            }
-        },
+        //imageBrowser: {
+        //    messages: {
+        //        dropFilesHere: "Drop files here"
+        //    },
+        //    transport: {
+        //        read: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Read",
+        //        destroy: {
+        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Destroy",
+        //            type: "POST"
+        //        },
+        //        create: {
+        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Create",
+        //            type: "POST"
+        //        },
+        //        thumbnailUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Thumbnail",
+        //        uploadUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Upload",
+        //        imageUrl: function (name) {
+        //            var pictureUrl = decodeURIComponent(name);
+        //            return pictureUrl;
+        //        },
+        //    }
+        //},
         fileBrowser: {
             messages: {
                 dropFilesHere: "Drop files here"

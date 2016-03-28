@@ -2,27 +2,43 @@
 var ContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ContactPopUpController');
 
+    $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     var orgID = $cookieStore.get('orgID');
 
-  var people_type = $cookieStore.get('people_type');
-   
-    if (people_type=="Contact")
-    {
-        $scope.directory1 = "Contact";
-    }
-    else if (people_type == "Client")
-    {
-        $scope.directory1 = "Client";
-    }
-    else if (people_type == "Lead")
-    {
-        $scope.directory1 = "Lead";
-    }
-    else
-    {
-        $scope.directory1 = "";
+    $scope.date = new Date();
+    $scope.myOptions = {
+        max: $scope.date
     }
 
+    var people_type = $cookieStore.get('people_type');
+
+    if (people_type == "Contact") {
+        $scope.directory1 = "Contact";
+    }
+    else if (people_type == "Client") {
+        $scope.directory1 = "Client";
+    }
+    else if (people_type == "Lead") {
+        $scope.directory1 = "Lead";
+    }
+    else {
+        $scope.directory1 = "";
+    }
+    if (people_type == "Contact") {
+      $scope.title = 'contact';
+      
+    }
+    else if (people_type == "Client") {
+        $scope.title = 'client';
+       
+    }
+    else if (people_type == "Lead") {
+        $scope.title = 'lead';
+     
+    }
+    else {
+        $rootScope.title = '';
+    }
 
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
@@ -51,17 +67,16 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
     }
 
     //Audit log start															
-  
+
     AuditCreate = function () {
         var postdata =
        {
            device_os: $cookieStore.get('Device_os'),
-           device_type: $cookieStore.get('Device'),
-           //device_mac_id: "34:#$::43:434:34:45",
+           device_type: $cookieStore.get('Device'), 
            module_id: "Contact",
            action_id: "Contact View",
-           details: $scope.params.first_name + "AddNewContact",
-           application: "angular",
+           details: "Added new " + $scope.title + ": "+$scope.params.first_name,
+           application: "Angular",
            browser: $cookieStore.get('browser'),
            ip_address: $cookieStore.get('IP_Address'),
            location: $cookieStore.get('Location'),
@@ -81,7 +96,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
    });
     };
 
-  
+
     //end
 
 
@@ -124,7 +139,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         }
 
-
+        var dDate = moment($scope.params.Date_Of_Birth, "DD/MM/YYYY hh:mm A")._d;
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
@@ -132,8 +147,8 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             media_url: $scope.media_url,
             first_name: $scope.params.first_name,
             income: $scope.params.income,
-           
-            age: $scope.params.age,
+
+            Date_Of_Birth: new Date(dDate).toISOString(),
             gender: $scope.directory2,
             salutation: $scope.params.salutation,
             last_name: $scope.params.last_name,
@@ -146,22 +161,25 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             city: $scope.params.city,
             zip_code: $scope.params.zip_code,
             class_type: "Contact",
-            area:$scope.params.area,
+            area: $scope.params.area,
             Street_1: newadd.Street_1,
             Street_2: newadd.Street_2,
             mappinguser_id: $scope.params.mappinguser_id,
             company: $scope.params.company,
             designation: $scope.params.designation,
-            
+            no_of_project: $scope.params.no_of_project,
 
         };
 
         apiService.post("Contact/CreateNew", postData).then(function (response) {
             var loginSession = response.data;
-            $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            $modalInstance.dismiss();
+
             AuditCreate();
-            $rootScope.$broadcast('REFRESH', 'contactGrid');
+            $rootScope.$broadcast('REFRESH1', 'contactGrid');
+            $rootScope.$broadcast('REFRESH2', 'projectGrid');
+            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
 
 
             var media = [];
@@ -191,13 +209,23 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
             var postData_budget =
             {
-               // id: $scope.choices[i].class_id,
+                // id: $scope.choices[i].class_id,
                 class_id: loginSession.id,
                 class_type: "Contact",
                 element_type: "Budget",
                 element_info1: $scope.budget,
             }
             media.push(postData_budget);
+
+            var postData_service =
+          {
+              // id: $scope.choices[i].class_id,
+              class_id: loginSession.id,
+              class_type: "Contact",
+              element_type: "service",
+              element_info1: $scope.service,
+          }
+            media.push(postData_service);
 
             var postData_duration =
            {
@@ -220,11 +248,14 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                     }
                 media.push(postData_project);
             }
-           
+
 
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
                 called = true;
+                $rootScope.$broadcast('REFRESH1', 'elemeninfo');
+                $rootScope.$broadcast('REFRESH', 'contactcount');
+
             },
            function (error) {
                if (error.status === 400)
@@ -281,7 +312,10 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             size: 'md',
             resolve: { items: { title: "Contact" } }
         });
-        $rootScope.$broadcast('REFRESH', 'contactGrid');
+        $rootScope.$broadcast('REFRESH1', 'contactGrid');
+        $rootScope.$broadcast('REFRESH2', 'LeadGrid');
+        $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+
     }
 
     var address = [];
@@ -303,7 +337,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         state: $scope.state,
         project_id: $scope.project_id,
         city: $scope.city,
-        age: $scope.age,
+        Date_Of_Birth: $scope.Date_Of_Birth,
         gender: $scope.gender,
         zip_code: $scope.zip_code,
         people_type: $scope.people_type,
@@ -382,6 +416,18 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
     };
 
+    Url = "Services/GetServices/" + $cookieStore.get('orgID');
+    apiService.get(Url).then(function (response) {
+        $scope.services = response.data;
+    },
+   function (error) {
+       alert("Error " + error.state);
+   });
+
+    $scope.selectservices = function () {
+        $scope.service = $scope.service1;
+    };
+
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
@@ -434,7 +480,7 @@ function (error) {
     };
 
     $scope.selectcity = function () {
-        $scope.params.city = $scope.city1;  
+        $scope.params.city = $scope.city1;
     };
 
     Url = "Company/GetAllCompanies/" + orgID;
@@ -476,7 +522,7 @@ function (error) {
     };
     //console.log($scope.project_name + 'after load');
 
-    $scope.selectProject= function () {
+    $scope.selectProject = function () {
         $scope.project_name = $scope.project_name;
     };
 
@@ -490,13 +536,13 @@ function (error) {
 
     $scope.addNewContact = function (isValid) {
         $scope.showValid = true;
-
+       
         if (isValid) {
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
             if (uploader.queue.length == 0)
                 $scope.finalpost();
-
+          
             $scope.showValid = false;
         }
     }

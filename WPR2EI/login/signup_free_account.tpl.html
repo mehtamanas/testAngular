@@ -90,7 +90,7 @@
                                                      data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">
                                                     {{ ' Enter Valid First Name' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                       
                                     </div>
@@ -120,7 +120,7 @@
                                                      data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">
                                                     {{ 'Enter Valid Last Name ' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                     </div>
 
@@ -154,7 +154,7 @@
                                                      data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
                                                     {{ ' Enter Valid Email Address' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                     </div>
                                     
@@ -168,7 +168,7 @@
                                             <div class="col-xs-10">
                                                 <select ng-model="country1"  name = country ng-change="selectcountry()" id="signup_country" class="dropdown form-control" required>
 
-                                                    <option value="" selected>--Choose Country--</option>
+                                                    <option value="">Select Country</option>
                                                     <option ng-repeat="country in countries  "
                                                             value="{{country.id}}">
                                                         {{country.country_name}}
@@ -178,7 +178,7 @@
                                                      data-ng-if="newForm.country.$invalid && (!newForm.country.$pristine || showValid) && !newForm.country.$focus">
                                                     {{ ' Enter Valid Country' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                     </div>
                                     
@@ -211,7 +211,7 @@
                                                      data-ng-if="newForm.password.$invalid && (!newForm.password.$pristine || showValid) && !newForm.password.$focus">
                                                     {{ 'Enter valid password'| translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                     </div>
                                     <div class="col-sm-5">
@@ -235,7 +235,7 @@
                                                     <div ng-message="compareto" data-ng-if="newForm.confirmPassword.$invalid && (!newForm.confirmPassword.$pristine || showValid) && !newForm.confirmPassword.$focus">These passwords don't match. Try again?</div>
                                                 </div>
                                                 
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                     </div>
                                 </div>
@@ -267,7 +267,7 @@
                                                      data-ng-if="newForm.phone.$invalid && (!newForm.phone.$pristine || showValid) && !newForm.phone.$focus">
                                                     {{ 'Enter 10 Digit Phone Number' | translate }}
                                                 </div>
-                                            </div><div class="field-mdl field-req">*</div>
+                                            </div><div class="field-md0 field-req">*</div>
                                         </div>
                                     </div>
                                 </div>
@@ -339,12 +339,9 @@
                                 <div class="form-group">
                                     <div>
                                         <label><b>Landline: </b></label>
-                                        <span>0120-4960600</span>
+                                        <span>+91 22 39653051</span>
                                     </div>
-                                    <div>
-                                        <label><b>India Toll Free: </b></label>
-                                        <span>0120-4960600</span>
-                                    </div>
+                                   
                                     <div>
                                         <label><b>Email: </b></label>
                                         <a href="mailto:support@dwellar.com">support@dwellar.com</a>
@@ -363,13 +360,10 @@
                                         FROM INDIA:
                                     </div>
                                     <div>
+                                        
                                         <div>
-                                            <label><b>India Toll Free: </b></label>
-                                            <span>1800-102-2558</span>
-                                        </div>
-                                        <div>
-                                            <label><b>Mobile: </b></label>
-                                            <span>+91-9898989831</span>
+                                            <label><b>Landline: </b></label>
+                                            <span>+91 22 39653050</span>
                                         </div>
                                     </div>
                                     <div>

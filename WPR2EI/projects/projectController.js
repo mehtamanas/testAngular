@@ -11,6 +11,7 @@ angular.module('project')
           var organization_id = $cookieStore.get('orgID');
           //alert($cookieStore.get('userId'));
 
+          $scope.projectAction = 'no_action';
 
         //code for login permissions
           if (!$rootScope.projects.write) {
@@ -56,7 +57,68 @@ angular.module('project')
                    });
                   };
                   AuditCreate();
-            //end
+        //end
+
+
+
+        $scope.chooseAction = function () {
+                      var allGridElements = $(".checkbox").toArray();
+                      var allCheckedElement = _.filter(allGridElements, function (o)
+                      { return o.checked });
+                      allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+                      $cookieStore.remove('checkedIds');
+                      $cookieStore.put('checkedIds', allCheckedIds);
+
+                      if (allCheckedIds.length > 0) {
+
+                          if ($scope.projectAction === "no_action") {
+
+                          }                         
+                          else if ($scope.projectAction === "delete") {
+                              var projectDelete = [];
+                              for (var i in allCheckedIds) {
+                                  var project = {};
+                                  project.project_id = allCheckedIds[i];
+                                  project.organization_id = $cookieStore.get('orgID');
+                                  projectDelete.push(project);
+                              }
+                              $cookieStore.put('projectDelete', projectDelete);
+                              $scope.openConfirmation();
+                          }
+                      }
+                  }
+
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
+
+
+        $scope.check = function (e, data) {
+            var allListElements = $(".checkbox").toArray();
+            for (var i in allListElements) { // not all checked
+                if (!allListElements[i].checked) {
+                    $('#checkAll').prop('checked', false);
+                    break;
+                }
+                if (i == allListElements.length - 1) // if all are checked manually
+                    $('#checkAll').prop('checked', true);
+            }
+        }
+
+
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'projectGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+            $scope.projectAction = 'no_action';
+
+
+
+        });
 
        //grid fuctionality start
         $scope.projectGrid = {
@@ -73,7 +135,16 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height:screen.height - 370,
             filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -81,8 +152,8 @@ angular.module('project')
             },
             columns: [
                 {
-                    template: " <input type='checkbox' , class='checkbox', data-id='#= name #', ng-click='projectSelected($event,dataItem)'  />",
-                    title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='submit(dataItem)'  />",
+                    template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
                     width: "60px",
                     attributes:
                       {
@@ -94,8 +165,8 @@ angular.module('project')
                  {
                      template: "<img height='40px' width='40px' src='#= project_image #'/>" +
                      "<span style='padding-left:10px' class='property-photo'> </span>",
-                     title: "Logo",
-                     width: "120px",
+                  
+                  
                      attributes:
                        {
                            "class": "UseHand",
@@ -105,7 +176,7 @@ angular.module('project')
                {
                    field: "name",
                    title: "NAME",
-                   width: "120px",
+                 
                    attributes:
                     {
                         "class": "UseHand",
@@ -114,7 +185,7 @@ angular.module('project')
                }, {
                    field: "address",
                    title: "LOCATION",
-                   width: "120px",
+               
                    attributes:
                      {
                          "class": "UseHand",
@@ -123,7 +194,7 @@ angular.module('project')
                },{
                    field: "unitTypes",
                    title: "UNIT TYPES",
-                   width: "120px",
+                
                    attributes:
                      {
                          "class": "UseHand",
@@ -133,7 +204,7 @@ angular.module('project')
                 {
                     field: "unitCount",
                    title: "TOTAL UNITS",
-                   width: "120px",
+               
                    attributes:
                     {
                         "class": "UseHand",
@@ -142,7 +213,7 @@ angular.module('project')
                }, {
                    field: "available",
                    title: "AVAILABLE UNITS",
-                   width: "120px",
+                
                    attributes:
                      {
                          "class": "UseHand",
@@ -151,7 +222,7 @@ angular.module('project')
                }, {
                    field: "area",
                    title: "AREA",
-                   width: "120px",
+                
                    attributes:
                      {
                          "class": "UseHand",
@@ -162,7 +233,7 @@ angular.module('project')
                {
                    field: "possession_date",
                    title: "POSSESSION DATE",
-                   width: "120px",
+                 
                    attributes: {
                        "class": "UseHand",
                        "style": "text-align:center"
@@ -172,7 +243,7 @@ angular.module('project')
                {
                    field: "price",
                    title: "PRICE",
-                   width: "120px",
+                
                    attributes: {
                        "class": "UseHand",
                        "style": "text-align:center"
@@ -207,138 +278,6 @@ angular.module('project')
         };
 
 
-        
-          $scope.submit = function (e) {
-
-              if ($('.check-box:checked').length > 0)
-                  $('.checkbox').prop('checked', true);
-              else
-                  $('.checkbox').prop('checked', false);
-          }
-
-        //for delete project And multiple select checkbox
-
-          $scope.projectSelected = function (e, data) {
-
-              console.log(e);
-
-              var allListElements = $(".checkbox").toArray();
-              for (var i in allListElements) {
-                  if (!allListElements[i].checked) {
-                      $('#checkAll').prop('checked', false);
-                      break;
-                  }
-                  if (i == allListElements.length - 1)
-                      $('#checkAll').prop('checked', true);
-              }
-              var element = $(e.currentTarget);
-              var checked = element.is(':checked')
-              row = element.closest("tr")
-              var id = data.id;
-              var fnd = 0;
-              var allListElements = $(".checkbox");
-              for (var i in $scope.checkedIds) {
-                  if (id == $scope.checkedIds[i]) {
-                      $scope.checkedIds.splice(i, 1);
-                      fnd = 1;
-                  }
-
-              }
-              if (fnd == 0) {
-                  $scope.checkedIds.push(id);
-              }
-              if (checked) {
-                  row.addClass("k-state-selected");
-              } else {
-                  row.removeClass("k-state-selected");
-              }
-
-           
-          }
-
-
-          $scope.GetValue = function (fruit) {
-
-              var fruitId = $scope.ddlFruits;
-              var fruitName = $.grep($scope.Fruits, function (fruit) {
-                  return fruit.Id == fruitId;
-              })[0].Name;
-
-              $cookieStore.put('Selected Text', fruitName);
-              // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
-
-
-
-
-          }
-        
-
-          $scope.addUser = function () {
-
-              var usersToBeAddedOnServer = [];
-              $cookieStore.remove('checkedIds');
-              $cookieStore.put('checkedIds', $scope.checkedIds);
-              // Add the new users
-              for (var i in $scope.checkedIds) {
-                  var newMember = {};
-                  newMember.project_id = $scope.checkedIds[i];
-                  newMember.organization_id = $cookieStore.get('orgID');
-
-                  usersToBeAddedOnServer.push(newMember);
-              }
-
-              if (usersToBeAddedOnServer.length == 0) {
-                  return;
-              }
-
-
-
-              apiService.post("Project/DeleteMultipleProject", usersToBeAddedOnServer).then(function (response) {
-                  var loginSession = response.data;
-                  $scope.openSucessfullPopup();
-                  $rootScope.$broadcast('REFRESH', 'projectGrid');
-            
-
-              },
-      function (error) {
-          if (error.status === 400)
-              alert(error.data.Message);
-          else
-              alert("Network issue");
-      });
-
-              $scope.openSucessfullPopup = function ()
-              {
-                  var modalInstance = $modal.open({
-                      animation: true,
-                      templateUrl: 'newuser/delete.html',
-                      backdrop: 'static',
-                      controller: DeleteController,
-                      size: 'md',
-                      resolve: { items: { title: "Project " } }
-
-                  });
-                  $rootScope.$broadcast('REFRESH', 'projectGrid');
-              }
-          }
-
-          $scope.Fruits = [{
-              Id: 1,
-              Name: 'DELETE'
-          
-          }];
-          $scope.checkedIds = [];
-          $scope.showCheckboxes = function () {
-
-
-              for (var i in $scope.checkedIds) {
-
-                  // alert($scope.checkedIds[i]);
-              }
-          };
-
-
-
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
@@ -355,6 +294,7 @@ angular.module('project')
             $scope.ddlFruits = "ACTION";
         });
 
+
         $scope.openProjectPopup = function () {
            // alert("hi");
             var modalInstance = $modal.open({
@@ -366,6 +306,19 @@ angular.module('project')
             });
         };
        
+
+        $scope.openConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/confirmproject.tpl.html',
+                backdrop: 'static',
+                controller: ProjectconfirmationController,
+                size: 'md',
+                resolve: { items: { title: "Project" } }
+
+            });
+
+        }
     }
 );
 

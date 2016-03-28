@@ -5,7 +5,10 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     var orgID = $cookieStore.get('orgID');
-
+    $scope.date = new Date();
+    $scope.myOptions = {
+        max: $scope.date
+    }
     var uploader = $scope.uploader = new FileUploader(
     {
         url: apiService.uploadURL,
@@ -14,6 +17,24 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     $scope.showProgress = false;
 
     //Audit log start               
+   
+    var people_type = $cookieStore.get('people_type');
+
+    if (people_type == "Contact") {
+        $scope.title = 'contact';
+
+    }
+    else if (people_type == "Client") {
+        $scope.title = 'client';
+
+    }
+    else if (people_type == "Lead") {
+        $scope.title = 'lead';
+
+    }
+    else {
+        $rootScope.title = '';
+    }
 
    
     AuditCreate = function () {
@@ -24,7 +45,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
           // device_mac_id: "34:#$::43:434:34:45",
            module_id: "Contact",
            action_id: "Contact View",
-           details: $scope.params.Contact_First_Name +  "EditContact",
+           details: "Edited" + $scope.title +"- "+ $scope.params.Contact_First_Name,
            application: "angular",
            browser: $cookieStore.get('browser'),
            ip_address: $cookieStore.get('IP_Address'),
@@ -72,31 +93,32 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         }
     }
 
-    contactUrl = "Contact/GetContactSummary/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+    contactUrl = "Contact/GetContactSummary/?Id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(contactUrl).then(function (response) {
-        $scope.params = response.data[0];
+        $scope.params = response.data;
 
-        $scope.choices1[0].Contact_Email = response.data[0].Contact_Email;
-        $scope.choices[0].Contact_Phone = response.data[0].Contact_Phone;
+        $scope.choices1[0].Contact_Email = response.data.Contact_Email;
+        $scope.choices[0].Contact_Phone = response.data.Contact_Phone;
 
-        $scope.choices2[0].Street_1 = response.data[0].street1;
+        $scope.choices2[0].Street_1 = response.data.street1;
 
-        if (response.data[0].street2 != undefined)
-        { $scope.choices2.push({ 'Street_1': response.data[0].street2 }); }
-        $scope.params.State = response.data[0].Stateid;
-        $scope.state1 = response.data[0].Stateid;
-        $scope.city1 = response.data[0].cityid;
-        $scope.params.City = response.data[0].cityid;
+        if (response.data.street2 != undefined)
+        { $scope.choices2.push({ 'Street_1': response.data.street2 }); }
+        $scope.params.State = response.data.Stateid;
+        $scope.state1 = response.data.Stateid;
+        $scope.city1 = response.data.cityid;
+        $scope.params.City = response.data.cityid;
        
-        $scope.user1 = response.data[0].Assigned_To;
-        $scope.params.mappinguser_id = response.data[0].Assigned_To;
-        $scope.project1 = response.data[0].projectid;
-        $scope.params.project_id = response.data[0].projectid;
-        $scope.people_type = response.data[0].people_type;
-        $scope.gender = response.data[0].gender;
-        $scope.salutation1 = response.data[0].salutation;
-        $scope.params.lead_source = response.data[0].lead_source;
-        $scope.params.income = response.data[0].income;
+        $scope.user1 = response.data.assignto;
+        $scope.params.mappinguser_id = response.data.assignto;
+        $scope.project1 = response.data.project_id;
+        $scope.params.project_id = response.data.project_id;
+        $scope.people_type = response.data.people_type;
+        $scope.gender = response.data.gender;
+        $scope.salutation1 = response.data.salutation;
+        $scope.params.lead_source = response.data.lead_source;
+        $scope.params.income = response.data.income;
+        $scope.params.Date_Of_Birth = moment(response.data.Date_Of_Birth).format('DD/MM/YYYY');
 
     },
     function (error) {
@@ -183,8 +205,8 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                     newadd.Street_2 = $scope.choices2[1].Street_1;
             }
         }
-
       
+        var dDate = moment($scope.params.Date_Of_Birth, "DD/MM/YYYY hh:mm A")._d;
         var postData =
        {
            contact_id: $scope.seletedCustomerId,
@@ -192,20 +214,19 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            organization_id: $cookieStore.get('orgID'),
            class_type: "Contact",
            media_url: $scope.params.Contact_Image,
-           age: $scope.params.age,
+           Date_Of_Birth: new Date(dDate).toISOString(),
            gender: $scope.gender,
            people_type: $scope.people_type,
            first_name: $scope.params.Contact_First_Name,
            last_name: $scope.params.Contact_Last_Name,
            income: $scope.params.income,
-          
            designation: $scope.params.designation,
            contact_element_info_email: $scope.choices1[0].Contact_Email,
            contact_element_info_phone: $scope.choices[0].Contact_Phone,
            state: $scope.params.State,
            project_id: $scope.params.project_id,
            city: $scope.params.City,
-           zip_code: $scope.params.zipcode,
+           zip_code: $scope.params.zip_code,
            Street_1: newadd.Street_1,
            Street_2: newadd.Street_2,
            area: $scope.params.area,
@@ -221,7 +242,12 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             AuditCreate();
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
-            $rootScope.$broadcast('REFRESH', 'contactGrid');
+            $rootScope.$broadcast('REFRESH', 'Summary');
+            $rootScope.$broadcast('REFRESH1', 'contactGrid');
+            $rootScope.$broadcast('REFRESH2', 'projectGrid');
+            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
+            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+           
 
             var media = [];
             for (var i in $scope.choices1) {
@@ -283,7 +309,10 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
                 called = true;
-
+                
+                $rootScope.$broadcast('REFRESH1', 'elemeninfo');
+                $rootScope.$broadcast('REFRESH', 'contactcount');
+               
             },
            function (error)
            {
@@ -333,7 +362,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
         contact_element_info_phone: $scope.Contact_Phone,
         state: $scope.State,
         city: $scope.City,
-        age: $scope.age,
+        Date_Of_Birth: $scope.Date_Of_Birth,
         gender: $scope.gender,
         zip_code: $scope.zip_code,
         people_type: $scope.people_type,
