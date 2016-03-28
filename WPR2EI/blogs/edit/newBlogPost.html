@@ -13,7 +13,7 @@
                 <div class="panel panel-success" uploader="uploader1" nv-file-over="">
                     <div class="image-upload-panel">
                         <div class="user-photo_2" ng-hide="uploader1.queue.length">
-                            <img ng-src={{params.media_url}} class="image3" ng-disabled="{{media_url}}"/>
+                            <img ng-src={{params.media_url}} class="image3" />
                         </div>
                         <div class="row" ng-show="uploader1.queue.length">
                             <div class="user-photo_4" ng-repeat="item in uploader1.queue">
@@ -41,7 +41,6 @@
                    placeholder="Blog Name"
                    data-ng-model="params.name"
                    input-focus
-                   ng-disabled="params.name"
                    required />
             <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
                 <div ng-message="required">You did not enter a field</div>
@@ -55,7 +54,7 @@
                 <label> Tag</label>
                 <div class="form-bx13" style="padding-bottom: 29px;">
 
-                    <input kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" id="edit_blog_tag" ng-disabled="params.tag_name"/>
+                    <input kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" id="edit_blog_tag" />
                 </div>
             </div>
         </div>
@@ -69,7 +68,7 @@
     </div>
 
     <div class="clearfix">     
-        <div class="form-group form-bx form-bx5">
+        <div class="form-group form-bx form-bx5" ng-hide='flag === "Draft"'>
             <label for="">Comment</label>
             <textarea cols="110" rows="05" name="description"
                       data-ng-model="params.comment"                   
@@ -81,10 +80,10 @@
         <div class="pull-left f-half-6" ng-show='flag === "Approved"'>
             <div class="form-group form-bx form-bx3-1">
                 <label for="">Date:</label>
-                <input kendo-date-time-picker class="form-control "
-                       ng-model="due_date"
+                <input kendo-date-picker class="form-control "
+                       ng-model="params.duedate"
                        k-ng-model="k_due_date"
-                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                       k-format="'dd/MM/yyyy'" />
             </div>
         </div>
     </div>
@@ -96,10 +95,11 @@
         </div>
 
         <div class="modal-btn-wrap-1 clearfix">
-            <button type="button" class=" f-btn " ng-click="approval()" ng-hide='flag === "Approved"'> APPROVE </button>
-            <button type="button" class=" f-btn f-btn-19 " ng-click="decline()"> DECLINE </button>
-            <button type="button" class=" f-btn " ng-click="publish()" ng-hide='flag === "Sent For Approval"'> PUBLISH </button>
-            <button type="submit" id="gallery_save" class="f-btn" ng-hide='flag === "Sent For Approval"'> SAVE DRAFT </button>
+            <button type="button" class=" f-btn " ng-click="approval()" ng-hide='flag === "Approved"||flag === "Draft"'> APPROVE </button>
+            <button type="button" class=" f-btn " ng-click="sendForApproval()" ng-hide='flag === "Sent For Approval" ||flag === "Approved"'>SEND FOR APPROVE </button>
+            <button type="button" class=" f-btn f-btn-19 " ng-click="decline()" ng-hide='flag === "Draft"'> DECLINE </button>
+            <button type="button" class=" f-btn " ng-click="publish()" ng-hide='flag === "Sent For Approval"||flag === "Draft"'> PUBLISH </button>
+            <button type="submit" id="gallery_save" class="f-btn" ng-hide='flag === "Approved"'> SAVE DRAFT </button>
             <!--<button type="button" class=" f-btn f-btn-20 " ng-click="preview()"> PREVIEW </button>-->
 
 

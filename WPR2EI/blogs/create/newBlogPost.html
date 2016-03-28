@@ -33,7 +33,7 @@
                 <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
             </div>
             <label class="custom-file-input">
-                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+                <input type="file" class="image-upload-f" id="blog_Create_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
             </label>
 
 
@@ -42,7 +42,7 @@
     </div>
     <div class="form-group form-bx form-bx8">
         <label for="">Blog Name</label>
-        <input type="text" class="form-control text-bold" id="addnewproject_name" autofocus name="Blog_name"
+        <input type="text" class="form-control text-bold" id="addnewBlog_name" autofocus name="Blog_name"
                placeholder="Blog Name"
                data-ng-model="params.name"
                input-focus
@@ -53,13 +53,14 @@
     </div>
 
     <div class="clearfix">
-        <label> Tag</label>
+
         <div class="form-group">
             <div class="col-xs-12">
+                <label> Tag</label>
 
                 <div class="form-bx13" style="padding-bottom: 29px;">
 
-                    <input kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" />
+                    <input id="Blog_tag" kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" />
                 </div>
             </div>
         </div>
@@ -68,11 +69,11 @@
     <div class="clearfix">
         <div class="form-group form-bx form-bx14">
             <label for="">Description</label>
-            <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.htmlcontent" resizable="true"></textarea>
+            <textarea id="Blog_editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.htmlcontent" resizable="true"></textarea>
         </div>
     </div>
 
-    <input ng-show="false" id="imageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+    <input ng-show="false" id="BlogimageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
     <div class="progress" ng-show="((uploader.progress)/1)>0">
         <div class="progress-bar" role="progressbar"
              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
@@ -80,8 +81,8 @@
 
     <div class="modal-btn-wrap-1 clearfix">
         <button type="button" class=" f-btn f-btn-20" style="margin:1px" ng-click="preview()"> PREVIEW </button>
-        <button type="submit" id="gallery_save" class="f-btn" > Save Draft</button>
-        <button type="button" class=" f-btn f-btn-19" style="margin:1px">Send For Approval </button>
-        <button type="button" class=" f-btn f-btn-19" style="margin:1px"> Publish </button>
+        <button type="submit"  class="f-btn" > Save Draft</button>
+        <button type="button" class=" f-btn" style="margin:1px" ng-click="sendForApproval()">Send For Approval </button>
+        <button type="button" class=" f-btn" style="margin:1px"> Publish </button>
     </div>
 </form>

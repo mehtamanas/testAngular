@@ -141,13 +141,14 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             }          
                 $scope.params.htmlcontent = $sanitize($scope.params.htmlcontent);
                 var postdata = {
-                    name:$scope.params.name,
+                    name: $scope.params.name,
                     media_type:"image",                
-                    media_url: $scope.media_url,
+                    media_url: $scope.params.media_url,
                     description: $scope.params.htmlcontent,
                     organization_id: $cookieStore.get('orgID'),
                     user_id: $cookieStore.get('userId'),
                     tag_name: $scope.params.tag_name,
+                    blog_id: window.sessionStorage.selectedBlogID,
                
                 };
 
@@ -155,7 +156,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                 apiService.post("Blogs/Edit", postdata).then(function (response)
                 {
                     data = response.data[0];
-                    $scope.openSucessfullPopup();
+                    //$scope.openSucessfullPopup();
+                    $scope.openConfirmationBlog();
                     $scope.cancel();
                     $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
                 },
@@ -221,6 +223,24 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         name: $scope.name,
 
     };
+    $scope.sendForApproval = function () {
+        var postdataSendForApproval = {
+            organization_id: $cookieStore.get('orgID'),
+            user_id: $cookieStore.get('userId'),
+            // comment: $scope.params.comment,
+            blog_id: window.sessionStorage.selectedBlogID,
+            status: "Sent For Approval",
+
+        };
+        apiService.post("Blogs/BlogCommentCreate", postdataSendForApproval).then(function (response) {
+            data = response.data[0];
+            $modalInstance.dismiss();
+        },
+              function (error) {
+                  if (error.status === 400)
+                      alert(error.data.Message);
+              });
+    }
 
     $scope.approval = function () {
         var postdataApproval = {                  
@@ -232,7 +252,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
 
         };
         apiService.post("Blogs/BlogCommentCreate", postdataApproval).then(function (response) {
-            data = response.data[0];       
+            data = response.data[0];
+            $modalInstance.dismiss();
         },
               function (error) {
                   if (error.status === 400)
@@ -251,24 +272,27 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         };
         apiService.post("Blogs/BlogCommentCreate", postdataDecline).then(function (response) {
             data = response.data[0];
+            $modalInstance.dismiss();
         },
               function (error) {
                   if (error.status === 400)
                       alert(error.data.Message);
               });
     }
-
+   
     $scope.publish = function () {
+        var date = moment($scope.params.duedate, "DD/MM/YYYY hh:mm A")._d;
         var postdataPublished = {
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
-           // comment: $scope.params.comment,
+            publication_date: new Date(date).toISOString(),
             blog_id: window.sessionStorage.selectedBlogID,
             status: "Published",
 
         };
         apiService.post("Blogs/BlogCommentCreate", postdataPublished).then(function (response) {
             data = response.data[0];
+            $modalInstance.dismiss();
         },
               function (error) {
                   if (error.status === 400)
@@ -277,7 +301,18 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     }
 
 
+    $scope.openConfirmationBlog = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'blogs/confirmation/confirmBlog.html',
+            backdrop: 'static',
+            controller: confirmBlogController,
+            size: 'md',
+            resolve: { items: { title: "Blog" } }
 
+        });
+        $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+    }
     $scope.addNewContact = function (isValid) {
         $scope.showValid = true;
 

@@ -148,7 +148,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                 {
                     data = response.data[0];
                     $scope.openSucessfullPopup();
-                    $scope.cancel();
+                    $modalInstance.dismiss();
                     $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
                 },
                 function (error)
@@ -159,7 +159,24 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
             }
        
          
+        $scope.sendForApproval = function () {
+            var postdataSendForApproval = {
+                organization_id: $cookieStore.get('orgID'),
+                user_id: $cookieStore.get('userId'),
+                // comment: $scope.params.comment,
+                blog_id: window.sessionStorage.selectedBlogID,
+                status: "Sent For Approval",
 
+            };
+            apiService.post("Blogs/BlogCommentCreate", postdataSendForApproval).then(function (response) {
+                data = response.data[0];
+                $modalInstance.dismiss();
+            },
+                  function (error) {
+                      if (error.status === 400)
+                          alert(error.data.Message);
+                  });
+        }
  
     //end
 
