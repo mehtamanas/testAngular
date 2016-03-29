@@ -34,7 +34,7 @@
     $scope.gotoDelete = function () {
 
 
-        apiService.post("Tags/Delete", postdata).then(function (response) {
+        apiService.post("Company/Delete", postdata).then(function (response) {
             var loginSession = response.data;
             AuditCreate();
             $modalInstance.dismiss();
@@ -61,7 +61,7 @@
 
 
             });
-            $rootScope.$broadcast('REFRESH', 'Tag');
+            $rootScope.$broadcast('REFRESHTag', 'Tag');
         }
 
     }

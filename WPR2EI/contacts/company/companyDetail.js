@@ -315,6 +315,24 @@ function (error) {
         }
 
     });
+
+    $scope.$on('REFRESHTag', function (event, args) {
+        if (args == 'Tag')
+        {
+            contactUrl = "Tags/GetTagsByCompanyId/" + $scope.seletedCustomerId;
+            apiService.getWithoutCaching(contactUrl).then(function (response) {
+                $scope.tags = response.data;
+
+
+            },
+        function (error) {
+            console.log("Error " + error.state);
+        }
+            );
+        }
+
+    });
+
     function RefreshGrid() {
         setInterval(function () {
             $('peopleGrid').data("kendoGrid").dataSource.transport.read();
