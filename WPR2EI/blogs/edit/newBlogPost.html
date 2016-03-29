@@ -68,7 +68,7 @@
     </div>
 
     <div class="clearfix">     
-        <div class="form-group form-bx form-bx5" ng-hide='flag === "Draft"'>
+        <div class="form-group form-bx form-bx5" ng-hide='flag === "Draft" ||flag === "Not Approved"'>
             <label for="">Comment</label>
             <textarea cols="110" rows="05" name="description"
                       data-ng-model="params.comment"                   
@@ -95,11 +95,11 @@
         </div>
 
         <div class="modal-btn-wrap-1 clearfix">
-            <button type="button" class=" f-btn " ng-click="approval()" ng-hide='flag === "Approved"||flag === "Draft"'> APPROVE </button>
-            <button type="button" class=" f-btn " ng-click="sendForApproval()" ng-hide='flag === "Sent For Approval" ||flag === "Approved"'>SEND FOR APPROVE </button>
-            <button type="button" class=" f-btn f-btn-19 " ng-click="decline()" ng-hide='flag === "Draft"'> DECLINE </button>
-            <button type="button" class=" f-btn " ng-click="publish()" ng-hide='flag === "Sent For Approval"||flag === "Draft"'> PUBLISH </button>
-            <button type="submit" id="gallery_save" class="f-btn" ng-hide='flag === "Approved"'> SAVE DRAFT </button>
+            <button type="button" class=" f-btn" id="editBlog_btn_approve" ng-click="approval()" ng-hide='flag === "Approved"||flag === "Draft"||flag === "Not Approved"'> APPROVE </button>
+            <button type="button" class=" f-btn" id="editBlog_btn_sendforapproval" ng-click="sendForApproval()" ng-hide='flag === "Sent For Approval"||flag === "Approved"||flag === "Not Approved"'>SEND FOR APPROVE </button>
+            <button type="button" class=" f-btn f-btn-19" id="editBlog_btn_decline"  ng-click="decline()" ng-hide='flag === "Draft"||flag === "Not Approved"'> DECLINE </button>
+            <button type="button" class=" f-btn" id="editBlog_btn_publish" ng-click="publish()" ng-hide='flag === "Sent For Approval"||flag === "Draft"||flag === "Not Approved"'> PUBLISH </button>
+            <button type="submit" id="editBlog_btn_save" class="f-btn" ng-hide='flag === "Approved"'> SAVE DRAFT </button>
             <!--<button type="button" class=" f-btn f-btn-20 " ng-click="preview()"> PREVIEW </button>-->
 
 
