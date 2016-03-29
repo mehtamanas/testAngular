@@ -10,49 +10,49 @@
             <div class="pg-inner-content">
                 <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
                     <ul class="nav nav-tabs responsive-tagJS" role="tablist">
-                        <li class="k-state-active"> <a aria-controls="quotes" role="tab" data-toggle="tab">QUOTES</a></li>
-                        <li><a aria-controls="agreement" role="tab" data-toggle="tab">AGREEMENTS</a></li>
-                        <li><a aria-controls="invoices" role="tab" data-toggle="tab">INVOICES</a></li>
-                        <li><a aria-controls="channel_partner" role="tab" data-toggle="tab">CHANNEL PARTNER</a></li>
-                        <li><a aria-controls="people" role="tab" data-toggle="tab">PEOPLE</a></li>
-                        <li><a aria-controls="quote" role="tab" data-toggle="tab">QUOTE</a></li>
-                        <li><a aria-controls="email_template" role="tab" data-toggle="tab">EMAIL TEMPLATE</a></li>
-                        <li><a aria-controls="form" role="tab" data-toggle="tab">FORM</a></li>
+                        <li id="TemplateQuotes" class="k-state-active"> <a aria-controls="quotes" role="tab" data-toggle="tab">QUOTES</a></li>
+                        <li id="TemplateAgreements"><a aria-controls="agreement" role="tab" data-toggle="tab">AGREEMENTS</a></li>
+                        <li id="TemplateInvoices"><a aria-controls="invoices" role="tab" data-toggle="tab">INVOICES</a></li>
+                        <li id="TemplateChannelPartner"><a aria-controls="channel_partner" role="tab" data-toggle="tab">CHANNEL PARTNER</a></li>
+                        <li id="TemplatePeople"><a aria-controls="people" role="tab" data-toggle="tab">PEOPLE</a></li>
+                        <li id="TemplateQuote"><a aria-controls="quote" role="tab" data-toggle="tab">QUOTE</a></li>
+                        <li id="TemplateEmail"><a aria-controls="email_template" role="tab" data-toggle="tab">EMAIL TEMPLATE</a></li>
+                        <li id="TemplateForm"><a aria-controls="form" role="tab" data-toggle="tab">FORM</a></li>
                     </ul>
 
 
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
-                            <div class="tab-content-title">Quotes <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('quotes')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Quotes <a id="AddQuotes" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('quotes')" style="cursor:pointer">+</a></div>
                         </div>
 
                     </div>  <!--quotes-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
-                            <div class="tab-content-title">Agreement <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('agreement')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Agreement <a id="AddAgreement" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('agreement')" style="cursor:pointer">+</a></div>
                         </div>
                         <div kendo-grid k-options="agreementTemplateGrid" selectable="true" k-on-change="agreementEdit( dataItem )"></div>
                     </div>  <!--agreement-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
-                            <div class="tab-content-title">Invoice <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('invoice')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Invoice <a id="AddInvoice" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('invoice')" style="cursor:pointer">+</a></div>
                         </div>
                     </div>  <!--invoice-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
-                            <div class="tab-content-title">Channel <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('channel')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Channel <a id="AddChannel" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('channel')" style="cursor:pointer">+</a></div>
                         </div>
 
                     </div>  <!--channel partner-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
-                            <div class="tab-content-title">People <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('people')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">People <a id="AddPeople" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('people')" style="cursor:pointer">+</a></div>
                         </div>
 
                     </div>  <!--people-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="summary">
-                            <div class="tab-content-title">Quote <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('quote')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Quote <a id="AddQuote" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('quote')" style="cursor:pointer">+</a></div>
 
 
                         </div>
@@ -60,10 +60,10 @@
                     </div>  <!--quote-->
                     <div class="tab-content">
                         <div class="tab-pane fade in active">
-                            <div class="tab-content-title">Emails <a id="btn_opentowerpopup" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('email')" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Emails <a id="AddEmail" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('email')" style="cursor:pointer">+</a></div>
                         </div>
                         <div class="">
-                            <select ng-model="templateAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
+                            <select ng-model="templateAction" class="form-control actions-wrap" ng-change="chooseAction()" id="TemplateAction">
                                 <option value='no_action' selected>ACTIONS</option>
                                 <option value='delete'>DELETE</option>
                             </select>
@@ -86,6 +86,7 @@
                                             <input type="text" class="form-control text-bold" autofocus name="project_name"
                                                    placeholder="Form ID"
                                                    data-ng-model="params.random_id"
+                                                   id="EmailTemplate"
                                                    input-focus
                                                    required />
                                         </div>
@@ -96,7 +97,7 @@
                                     <div class="clearfix">
                                         <div class="form-group form-bx form-bx5">
                                             <label for="">Project</label>
-                                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                                            <select ng-model="project1" ng-change="selectproject()" id="TemplateProject"
                                                     class="dropdown form-control" required>
                                                 <option value="" selected>Select Project</option>
                                                 <option ng-repeat="project in projects"
@@ -111,7 +112,7 @@
                                     <div class="clearfix">
                                         <div class="form-group form-bx form-bx5">
                                             <label for="">Select Team</label>
-                                            <select ng-model="team1" ng-change="selectteam()" id="contact_project"
+                                            <select ng-model="team1" ng-change="selectteam()" id="TemplateTeam"
                                                     class="dropdown form-control" required>
                                                 <option value="" selected>Select Team</option>
                                                 <option ng-repeat="team in teams"
@@ -127,7 +128,7 @@
 
                                     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;">
 
-                                        <button class="btn organization-btn" id="form_save" type="submit">
+                                        <button class="btn organization-btn" id="btn_TemplateSave" type="submit">
                                             SAVE
                                         </button>
 
