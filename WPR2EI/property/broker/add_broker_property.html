@@ -161,6 +161,14 @@
                         </div>
 
                         <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 1%;">
+                                <div class="col-md-3" ng-repeat="offer in offers"><input type="checkbox" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click='check($event,dataItem)'"/> &nbsp;{{offer.type_name}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="row">
                             <div class="pull-left f-half-6">
                                 <div class="form-group form-bx form-bx3-1">
                                     <label for="" class="hidden-xs" id="addnewproject_state">Availabilty</label>
@@ -298,11 +306,11 @@
                             <div class="pull-left f-half-6">
                                 <div class="form-group form-bx form-bx3-1">
                                     <label for="" class="hidden-xs" id="addnewproject_state">State</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
+                                    <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold">
+                                        <option value="" selected>State</option>
+                                        <option ng-repeat="state in states"
+                                                value="{{state.state_id}}">
+                                            {{state.state_name}}
                                     </select>
                                 </div>
                             </div>
@@ -310,11 +318,11 @@
                             <div class="pull-left f-half-6">
                                 <div class="form-group form-bx form-bx3-1">
                                     <label for="" class="hidden-xs" id="addnewproject_state">City</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
+                                    <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold">
+                                        <option value="" selected>City</option>
+                                        <option ng-repeat="city in cities"
+                                                value="{{city.city_id}}">
+                                            {{city.city_name}}
                                     </select>
                                 </div>
                             </div>
