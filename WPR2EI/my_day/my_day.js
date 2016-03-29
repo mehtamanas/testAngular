@@ -683,7 +683,7 @@
                           "style": "text-align:center"
                       }
                  }, {
-field:"status",
+                    field:"status",
                     template: '<span id="#= status #"></span>',
                     title: "Status",                  
                     attributes:
