@@ -108,7 +108,8 @@ angular.module('contacts')
                 $scope.Contact_Last_Name = $scope.data.Contact_Last_Name;
                 $scope.zipcode = $scope.data.zipcode;
 		        $scope.customerId = $scope.data.customer_id;
-                $scope.Street = $scope.data.street1;
+		        $scope.Street = $scope.data.street1;
+		        $scope.Street2 = $scope.data.street2;
                 $scope.area = $scope.data.area;
                 $scope.age = $scope.calage;
                 $scope.choices1[0].Contact_Email = response.data.Contact_Email;
@@ -1555,6 +1556,7 @@ angular.module('contacts')
                         $scope.zipcode = $scope.data.zipcode;
                         $scope.customerId = $scope.data.customer_id;
                         $scope.Street = $scope.data.street1;
+                        $scope.Street2 = $scope.data.street2;
                         $scope.area = $scope.data.area;
                         $scope.age = $scope.calage;
                         $scope.choices1[0].Contact_Email = response.data.Contact_Email;
@@ -1715,10 +1717,24 @@ angular.module('contacts')
 
     // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedTaskID = dataItem.task_id;
-            //  alert(window.sessionStorage.selectedCustomerID);
-            $scope.openEditTask();
+
+            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
+            apiService.getWithoutCaching(contactUrl).then(function (response) {
+                $scope.params = response.data[0];
+
+                var stat = $scope.params.status;
+                if (stat == "Completed") {
+                    alert(" Completed task can not be edited...");
+                }
+                else {
+                    window.sessionStorage.selectedTaskID = dataItem.task_id;
+                    $scope.openEditTask();
+
+                };
+            },
+             function (error) {
+
+             });
         };
 
 

@@ -1,4 +1,4 @@
-﻿var confirmationComapnyTagController = function ($scope, items, $state, $rootScope, $modal, apiService, $cookieStore, $modalInstance) {
+﻿var confirmationComapnyTagController = function ($scope, $state, $rootScope, $modal, apiService, $cookieStore, $modalInstance) {
     console.log('confirmationComapnyTagController');
     $scope.tagname = $cookieStore.get('tag_name');
 
@@ -28,7 +28,7 @@
     };
     //end
 
-    $scope.title = items.title;
+   
     var postdata = $cookieStore.get('postdata');
     $scope.length = parseInt(postdata.length);
     $scope.gotoDelete = function () {
