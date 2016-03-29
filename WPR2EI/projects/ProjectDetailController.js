@@ -789,7 +789,7 @@
             columns: [
                 {
                     template: "<input type='checkbox', class='checkbox', data-id='#= project_service_id #',  ng-click='check($event,dataItem)' />",
-                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(serviceGrid)' />",
                     width: "50px",
                     attributes:
                      {
@@ -1229,7 +1229,7 @@
             columns: [
                 {
                     template: "<input type='checkbox', class='checkbox', data-id='#= charge_name_type_id #',  ng-click='check($event,dataItem)' />",
-                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(ChargesGrid)' />",
                     width: "50px",
                     attributes:
                      {
@@ -1285,7 +1285,7 @@
 
 
         $scope.chooseActionForCharge = function () {
-            var allGridElements = $(".checkbox").toArray();
+            var allGridElements = $("#selectCharges .checkbox").toArray();
             var allCheckedElement = _.filter(allGridElements, function (o)
             { return o.checked });
             allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
@@ -1312,7 +1312,7 @@
         }
 
         $scope.chooseActionForService = function () {
-            var allGridElements = $(".checkbox").toArray();
+            var allGridElements = $("#selectServices .checkbox").toArray();
             var allCheckedElement = _.filter(allGridElements, function (o)
             { return o.checked });
             allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
@@ -1339,11 +1339,22 @@
         }
       
 
-        $scope.checkALL = function (e) {
-            if ($('.check-box:checked').length > 0)
-                $('.checkbox').prop('checked', true);
-            else
-                $('.checkbox').prop('checked', false);
+        $scope.checkALL = function (t) {
+
+            if (t == $scope.serviceGrid) {
+                if ($('.check-box:checked').length > 0)
+                    $('#selectServices .checkbox').prop('checked', true);
+                else
+                    $('#selectServices .checkbox').prop('checked', false);
+            }
+            else if (t == $scope.ChargesGrid) {
+                if ($('.check-box:checked').length > 0)
+                    $('#selectCharges .checkbox').prop('checked', true);
+                else
+                    $('#selectCharges .checkbox').prop('checked', false);
+            }
+
+
         };
 
 
@@ -2263,7 +2274,7 @@
                 $('.k-i-refresh').trigger("click");
             }
             $scope.chargeAction = 'no_action';
-            $('#checkAll').prop('checked', false);
+            
         });
 
     });

@@ -60,7 +60,8 @@
 
     $scope.choices = [{ id: 'choice1' }];
 
-    $scope.addNewChoice = function () {
+    $scope.addNewChoice = function ()
+    {
         var newItemNo = $scope.choices.length + 1;
         $scope.choices.push({ 'id': 'choice' + newItemNo });
     };
@@ -68,16 +69,22 @@
 
     $scope.choices2 = [{ id: 'choice1' }];
 
-   
 
-    $scope.choices2 = [{ id: 'choice1' }];
-    $scope.addNewChoice2 = function (e) {
-        var classname = e.currentTarget.className;
-        if (classname == 'remove-field0') {
+    
+    $scope.RemoveCharge = function (a)
+    {
+        var classname1 = a.currentTarget.className;
+        if (classname1 == 'remove-field0' && $scope.choices2.length>1) {
 
             $scope.choices2.pop();
-        }
-        else if ($scope.choices2.length) {
+        }        
+    }
+    
+
+    $scope.choices2 = [{ id: 'choice1' }];
+    $scope.addNewCharge = function (e) {
+        var classname = e.currentTarget.className;       
+         if ($scope.choices2.length) {
             var newItemNo2 = $scope.choices2.length + 1;
             $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
         }
