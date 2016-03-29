@@ -323,7 +323,7 @@
                             <input type="text" name="phone_no" class="form-control" id="contactadd_phoneno"
                                    data-ng-model="choice.contact_element_info_phone"
                                    input-focus
-                                   ng-pattern="/^[0-9]{1,11}$/" />
+                                   ng-pattern="/^[0-9\-]{1,12}$/" />
                             <div class="text-danger"
                                  data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
                                 {{ 'Enter valid phone number' | translate }}

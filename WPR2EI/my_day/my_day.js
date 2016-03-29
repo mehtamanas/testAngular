@@ -1028,14 +1028,49 @@ field:"status",
         };
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
-            window.sessionStorage.selectedTaskID = dataItem.task_id;
-            $state.go('app.edit_task_myday', { id: dataItem.task_id });
+
+
+            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
+            apiService.getWithoutCaching(contactUrl).then(function (response) {
+                $scope.params = response.data[0];
+
+                var stat = $scope.params.status;
+                if (stat == "Completed") {
+                    alert(" Completed task can not be edited...");
+                }
+                else {
+                    window.sessionStorage.selectedTaskID = dataItem.task_id;
+                    $state.go('app.edit_task_myday', { id: dataItem.task_id });
+
+                };
+            },
+             function (error) {
+
+             });
+
         };
 
         // Kendo Grid on change
         $scope.myGridChange = function (dataItem) {
-            window.sessionStorage.selectedTaskID = dataItem.task_id;
-            $state.go('app.edit_task_myday', { id: dataItem.task_id });
+
+
+            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
+            apiService.getWithoutCaching(contactUrl).then(function (response) {
+                $scope.params = response.data[0];
+
+                var stat = $scope.params.status;
+                if (stat == "Completed") {
+                    alert(" Completed task can not be edited...");
+                }
+                else {
+                    window.sessionStorage.selectedTaskID = dataItem.task_id;
+                    $state.go('app.edit_task_myday', { id: dataItem.task_id });
+
+                };
+            },
+             function (error) {
+
+             });
         };
 
 
