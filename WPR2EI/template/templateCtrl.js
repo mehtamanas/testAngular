@@ -4,6 +4,8 @@
     $scope.title = 'Dwellar Template';
     $scope.templateAction = 'no_action';
 
+    var orgID = $cookieStore.get('orgID');
+
     $scope.openCreateTemplate = function (args) {
         
         if (args === 'quotes') {
@@ -150,7 +152,7 @@
             type: "json",
             transport: {
 
-                read: apiService.baseUrl + "Template/GetTemplateGrid/" + $cookieStore.get('orgID') + '/fd87a619-6acc-4689-b5ff-e76794d6154a'
+                read: apiService.baseUrl + "Template/GetTemplateGrid/" + orgID + '/fd87a619-6acc-4689-b5ff-e76794d6154a'
 
             },
             pageSize: 5,
@@ -180,19 +182,39 @@
         columns: [{
             field: "template_name",
             title: "Name",
-            width: "120px"
+            width: "120px",
+            attributes: {
+                "style": "text-align:center"
+            }
         }, {
             field: "subject",
             title: "Subject",
             width: "120px",
+            attributes: {
+                "style": "text-align:center"
+            }
 
-        }, {
-            field: "description",
-            title: "Html",
+        },{
+            template: "<a id='Agreement_description' href='' ng-click='openAgreementPreview(dataItem)' data-toggle='modal'>View More</a></div>",
+            title: "Preview",
             width: "120px",
+            attributes: {
+                "style": "text-align:center"
+            }
         }]
-
     };
+
+    $scope.openAgreementPreview = function (d) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'template/preview.html',
+            backdrop: 'static',
+            controller: previewCtrl,
+            size: 'md',
+            resolve: { agreementData: d }
+        });
+    };
+
 
     $scope.emailEdit = function (dataItem) {
         var modalInstance = $modal.open({
@@ -460,4 +482,5 @@ function (error) {
         }
     }
 
+  
 });
