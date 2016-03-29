@@ -4,7 +4,7 @@
             <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
 
                 <div class="close-btn-wrap">
-                    <button type="button" class="close" id="btn_gallery_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" id="btn_brochureClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
                 </div>
 
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
@@ -21,7 +21,7 @@
 
                             <div class="form-group form-bx form-bx8">
                                 <label for="">Notes</label>
-                                <input type="text" autofocus name="notes" class="form-control" id="gallery_notes"
+                                <input type="text" autofocus name="notes" class="form-control" id="brochureNotes"
                                        placeholder="Add Notes "
                                        data-ng-model="params.notes"
                                        minlength="1"
@@ -29,7 +29,7 @@
                                        alphabets-only
                                        required />
                                 <div class="text-danger"
-                                     data-ng-if="addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus">
+                                     data-ng-if="addNewForm.notes.$invalid && (!addNewForm.notes.$pristine || showValid) && !addNewForm.notes.$focus" id="err_brochureNotes">
                                     {{ 'Enter a proper note' | translate }}
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                 <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
 
                                 <label class="custom-file-input">
-                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/pdf" nv-file-select="" uploader="uploader" />
+                                    <input type="file" class="image-upload-f" id="brochureNotesUpload1" value="Browse" accept="application/pdf" nv-file-select="" uploader="uploader" />
                                 </label>
                            
                             </div>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
                             <label class="custom-file-input">
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/pdf" nv-file-select="" uploader="uploader1" />
+                                <input type="file" class="image-upload-f" id="brochureNotesUpload2" value="Browse" accept="application/pdf" nv-file-select="" uploader="uploader1" />
                             </label>
 
                             </div>
@@ -111,7 +111,7 @@
                              ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                     </div>
                     <div class="modal-btn-wrap3 clearfix">
-                        <button type="submit" id="gallery_save" class="f-btn"
+                        <button type="submit" id="btn_brochureNotesSave" class="f-btn"
                                 ng-click="showProgress=true; uploader.uploadAll();uploader1.uploadAll()" >
                             Save
                         </button>

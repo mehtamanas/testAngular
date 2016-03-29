@@ -4,7 +4,7 @@
         <div class="modal-content">
 
             <div class="close-btn-wrap">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btn_budgetClose" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
             </div>
 
             <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
@@ -15,6 +15,7 @@
                         <label for="">Budget</label>
                         <input type="text" class="form-control text-bold" autofocus name="project_name"
                                placeholder="Budget"
+                               id="budget"
                                data-ng-model="params.name"
                                minlength="1"
                                maxlength="30"
@@ -28,7 +29,7 @@
              <div class="clearfix">             
                     <div class="form-group form-bx form-bx8">
                             <label for="">Leads</label>
-                            <input class="form-control" name="project_website" id="addnewproject_project_website"
+                            <input class="form-control" name="project_website" id="budgetLeads"
                                    placeholder="Leads"
                                    data-ng-model="params.event_date"
                                    minlength="1"
@@ -41,7 +42,7 @@
              <div class="clearfix">
                     <div class="form-group form-bx form-bx8">
                         <label for="">Sales</label>
-                        <input class="form-control" name="project_website" id="addnewproject_project_website"
+                        <input class="form-control" name="project_website" id="budgetSales"
                                placeholder="Leads"
                                data-ng-model="params.event_date"
                                minlength="1"
@@ -53,14 +54,14 @@
 
              <div class="col-sm-1"></div>
                 &nbsp;
-                <button class="btn organization-btn" id="btn_signup" type="submit" ng-click="signup()"><b>< Back</b></button>
+                <button class="btn organization-btn" id="btn_budgetBack" type="submit" ng-click="signup()"><b>< Back</b></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-               <button class="btn organization-btn" id="btn_next" type="submit"><b>  Save & Next ></b></button>              
+               <button class="btn organization-btn" id="btn_budgetSaveNext" type="submit"><b>  Save & Next ></b></button>              
            </form>
         </div><!-- modal-body ended -->
 

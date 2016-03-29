@@ -21,7 +21,7 @@
                     <div class="dropzone dropzone-bx image-upload-bx">
                         <div class="fallback">
                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                <div class="panel-body image-upload-panel">
+                                <div class="image-upload-panel">
                                     <div class="row" ng-hide="uploader.queue.length">
                                         <img ng-src={{data.media_url}} alt="Drag and Drop" class="img-responsive" />
                                     </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="image-upload-link">
                         <div class="browse-title">Browse</div>
-                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                        <input type="file" class="image-upload-f" id="editorganization_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                         <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                                         'has-success': newForm.Organization.$valid && !newForm.Organization.$pristine && !newForm.Organization.$focus
                                     }">
                         <label for="">Organization Name</label>
-                        <input type="text" disabled name="Organization" class="form-control"
+                        <input type="text" disabled name="Organization" class="form-control" id="editOrganization_orgName"
                                placeholder="DB Realty"
                                data-ng-model="name"
                                minlength="1"
@@ -254,7 +254,7 @@
                         <div class="form-bx form-bx6">
                             <label for="">Organization ID</label>
                             <span></span>
-                            <input type="text" disabled name="orgid" class="form-control"
+                            <input type="text" disabled name="orgid" class="form-control" id="editOrganization_orgId"
                                    placeholder="Organization ID"
                                    data-ng-model="params.organization_id"
                                   input-focus
@@ -271,7 +271,7 @@
                                     }">
                                 <label for="">Divisions: </label>
                                <span></span>
-                                <input type="text" name="Divisions" class="form-control"
+                                <input type="text" name="Divisions" class="form-control"id="editOrganization_orgDivisions"
                                        placeholder="Divisions"
                                        data-ng-model="divisions"
                                        minlength="1"
@@ -298,7 +298,7 @@
                                                          'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
                                                      }">
                                     <label for="" class="clearfix">Email <span class="pull-right">Primary</span></label>
-                                    <input type="text" name="email" class="form-control"
+                                    <input type="text" name="email" class="form-control" id="editOrganization_orgEmail"
                                            placeholder="Email"
                                            data-ng-model="choice1.email"
                                            minlength="1"
@@ -325,7 +325,7 @@
                                                         'has-success': newForm.Phone.$valid && !newForm.Phone.$pristine && !newForm.Phone.$focus
                                                      }">
                                     <label for="" class="clearfix">Phone <span class="pull-right">Primary</span></label>
-                                    <input type="text" name="Phone" class="form-control"
+                                    <input type="text" name="Phone" class="form-control" id="editOrganization_orgPhone"
                                            placeholder="Phone"
                                            data-ng-model="choice.phone_no"
                                            input-focus
@@ -371,7 +371,7 @@
                                                             'has-success': newForm.Language.$valid && !newForm.Language.$pristine && !newForm.Language.$focus
                                                      }">
                                 <label for="">Language	</label>
-                                <input type="text" name="Language" class="form-control"
+                                <input type="text" name="Language" class="form-control" id="editOrganization_orgLanguage"
                                        placeholder="Language"
                                        data-ng-model="language"
                                        minlength="1"
@@ -400,12 +400,11 @@
                                                             'has-success': newForm.pan_no.$valid && !newForm.pan_no.$pristine && !newForm.pan_no.$focus
                                                          }">
                               
-                                <input type="text" name="pan_no" class="form-control"
+                                <input type="text" name="pan_no" class="form-control" id="editOrganization_orgPanNo"
                                        placeholder="PAN No"
                                        data-ng-model="pan_no"
                                        minlength="10"
                                        maxlength="10"
-                                     
                                        input-focus
                                        ng-pattern="/^[A-Z0-9\.]*$/" />
                                 <div class="text-danger"
@@ -426,12 +425,11 @@
                                                             'has-success': newForm.Tan_No.$valid && !newForm.Tan_No.$pristine && !newForm.Tan_No.$focus
                                                         }">
                                
-                                <input type="text" name="Tan_No" class="form-control"
+                                <input type="text" name="Tan_No" class="form-control"  id="editOrganization_orgTanNo"
                                        placeholder="TAN No"
                                        data-ng-model="tan_no"
                                        minlength="10"
                                        maxlength="10"
-                                       
                                        input-focus
                                        ng-pattern="/^[A-Z0-9\.]*$/" />
                                 <div class="text-danger"
@@ -452,7 +450,7 @@
                                                            'has-success': newForm.service_tax_no.$valid && !newForm.service_tax_no.$pristine && !newForm.service_tax_no.$focus
                                                          }">
                               
-                                <input type="text" name="service_tax_no" class="form-control"
+                                <input type="text" name="service_tax_no" class="form-control" id="editOrganization_orgservice_tax_no"
                                        placeholder="Service Tax No"
                                        data-ng-model="service_tax_no"
                                        minlength="15"
@@ -479,7 +477,7 @@
                                                              'has-success': newForm.cin_no.$valid && !newForm.cin_no.$pristine && !newForm.cin_no.$focus
                                                           }">
                                
-                                <input type="text" name="cin_no" class="form-control"
+                                <input type="text" name="cin_no" class="form-control" id="editOrganization_orgcin_no" 
                                        placeholder="CIN No"
                                        data-ng-model="cin_no"
                                        minlength="21"
@@ -501,7 +499,7 @@
                     <div class="clearfix">
                         <div class="form-bx form-bx6">
                             <label for="">First month of financial year</label>
-                            <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control">
+                            <select ng-change="selectmonth()" ng-model="month1" class="dropdown form-control" id="editOrganization_selectMonth" >
                                 <option value="" selected>--Select Month--</option>
                                 <option ng-repeat="month in month"
                                         value="{{month.id}}">
@@ -514,7 +512,7 @@
                     <div class="clearfix" style="margin-top: 10px;">
                         <div class="form-bx form-bx6">
                             <label for="">Time Zone</label>
-                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" >
+                            <select ng-change="SelectTimezone()" ng-model="timezone1" class="dropdown form-control" id="editOrganization_orgTimeZon" >
                                 <option value="" selected>--Select Timezone--</option>
                                 <option ng-repeat="Time in timezone | orderBy:'timezone'"
                                         value="{{Time.id}}">
@@ -539,9 +537,9 @@
             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
             <div class="modal-btn-wrap clearfix">
-                <button type="submit" class="f-btn" style="width:390px">SAVE</button>
+                <button type="submit" class="f-btn" style="width:390px" id="btn_editOrganization_save">SAVE</button>
 
-                <button type="button" class="f-btn f-btn2"  style="width:390px" ng-click="$dismiss('cancel')">CANCEL</button>
+                <button type="button" class="f-btn f-btn2"  style="width:390px" ng-click="$dismiss('cancel')" id="btn_editOrganization_cancel">CANCEL</button>
             </div>
 
         </form>

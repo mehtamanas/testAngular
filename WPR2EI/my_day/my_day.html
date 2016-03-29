@@ -26,9 +26,9 @@
                         <div class="bx-h1-head clearfix">
                             <div class="pull-left title">Today + Overdue Tasks</div>
                             <div class="pull-right bx-h1-link">
-                                <a ng-click="taskShowHideGrid('today')" href="javascript:" id="contact-today" ng-class="{active:showTaskTodayGrid}">Overdue</a>
-                                <a ng-click="taskShowHideGrid('tomorrow')" href="javascript:" id="contact-tomorrow" ng-class="{active:showTaskTomorrowGrid}">Today</a>
-                                <a ng-click="taskShowHideGrid('next7Days')" href="javascript:" id="contact-week" ng-class="{active:showTaskNext7Grid}">Next 7 Days</a>
+                                <a ng-click="taskShowHideGrid('today')" href="javascript:" id="taskContactToday" ng-class="{active:showTaskTodayGrid}">Overdue</a>
+                                <a ng-click="taskShowHideGrid('tomorrow')" href="javascript:" id="taskContactTomorrow" ng-class="{active:showTaskTomorrowGrid}">Today</a>
+                                <a ng-click="taskShowHideGrid('next7Days')" href="javascript:" id="taskContactWeek" ng-class="{active:showTaskNext7Grid}">Next 7 Days</a>
                             </div>
                         </div>
                         <div class="bx-h1-content overdue-tasks-tb clearfix">
@@ -54,9 +54,9 @@
                         <div class="bx-h1-head clearfix">
                             <div class="pull-left title">People</div>
                             <div class="pull-right bx-h1-link">
-                                <a href="javascript:" id="contact-today" ng-click="contactShowHideGrid('today')" ng-class="{active:showContactTodayGrid}">Today</a>
-                                <a href="javascript:" id="contact-tomorrow" ng-click="contactShowHideGrid('tomorrow')" ng-class="{active:showContactTomorrowGrid}">Tomorrow</a>
-                                <a href="javascript:" id="contact-week" ng-click="contactShowHideGrid('next7Days')" ng-class="{active:showContactNext7Grid}">Next 7 Days</a>
+                                <a href="javascript:" id="peopleContactToday" ng-click="contactShowHideGrid('today')" ng-class="{active:showContactTodayGrid}">Today</a>
+                                <a href="javascript:" id="peopleContactTomorrow" ng-click="contactShowHideGrid('tomorrow')" ng-class="{active:showContactTomorrowGrid}">Tomorrow</a>
+                                <a href="javascript:" id="peopleContactWeek" ng-click="contactShowHideGrid('next7Days')" ng-class="{active:showContactNext7Grid}">Next 7 Days</a>
                             </div>
                         </div>
                         <div class="bx-h1-content clearfix">
@@ -96,7 +96,7 @@
                 <div class="modal-body">
 
                     <div class="close-btn-wrap">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" id="btn_myDayClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
 
                     <form class="form-content">
@@ -127,12 +127,12 @@
                                         <p>Thanks,</p>
                                     </div>
                                     <div class="msg-area">
-                                        <textarea class="form-control"></textarea>
+                                        <textarea class="form-control" id="txt_myDayMsg"></textarea>
                                     </div>
                                     <div class="clearfix">
                                         <div class="pull-right replay-btn">
-                                            <button type="submit" class="f-btn">REPLY</button>
-                                            <button type="submit" class="f-btn f-btn2">CANCEL</button>
+                                            <button type="submit" id="myDayReply" class="f-btn">REPLY</button>
+                                            <button type="submit" id="myDayCancel" class="f-btn f-btn2">CANCEL</button>
                                         </div>
                                     </div>
                                 </div>

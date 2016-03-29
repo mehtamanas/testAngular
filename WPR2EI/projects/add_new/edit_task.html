@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btn_editTaskClose" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Edit Task</h4>
             </div>
             <form class="form-content form-content2 edit-organization-setting" name="addNewForm" style="text-align:left; autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)" >
@@ -21,11 +21,12 @@
                             <input type="text" class="form-control text-bold" autofocus name="TaskName"
                                    data-ng-model="params.name"
                                    minlength="1"
+                                   id="editTaskName"
                                    maxlength="50"
                                    input-focus
                                    required />
                             <div class="text-danger"
-                                 data-ng-if="addNewForm.TaskName.$invalid && (!addNewForm.TaskName.$pristine || showValid) && !addNewForm.TaskName.$focus">
+                                 data-ng-if="addNewForm.TaskName.$invalid && (!addNewForm.TaskName.$pristine || showValid) && !addNewForm.TaskName.$focus" id="err_editTaskName">
                                 {{ 'Please enter Task Name' | translate }}
                             </div>
                         </div>
@@ -37,7 +38,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="" class="hidden-xs" id="addnewproject_state">Task  Type</label>
-                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" id="editTaskType">
                                 <option value="" selected>Choose Task Type</option>
                                 <option ng-repeat="event in events"
                                         value="{{event.id}}">
@@ -51,7 +52,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Project:</label>
-                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                            <select ng-model="project1" ng-change="selectproject()" id="editTaskProject"
                                     class="dropdown form-control" >
                                 <option value="" selected>Select Project</option>
                                 <option ng-repeat="project in projects"
@@ -69,7 +70,7 @@
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Person:</label>
                             <select ng-model="contact1" ng-change="selectcontact()"
-                                    class="dropdown form-control" >
+                                    class="dropdown form-control" id="editTaskPerson">
                                 <option value="" selected>Select Contact</option>
                                 <option ng-repeat="contact in contacts"
                                         value="{{contact.Contact_id}}">
@@ -85,7 +86,7 @@
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Assign To:</label>
                             <select ng-model="user1" ng-change="selectuser()"
-                                    class="dropdown form-control" >
+                                    class="dropdown form-control" id="editTaskAssignTo">
                                 <option value="" selected>Select User</option>
                                 <option ng-repeat="user in users"
                                         value="{{user.assign_user_id}}">
@@ -100,7 +101,7 @@
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Set Priority</label>
                             <select ng-model="priority1" ng-change="selectpriority()"
-                                    class="dropdown form-control">
+                                    class="dropdown form-control" id="editTaskSetPriority">
                                 <option value="" selected>Select Priority</option>
                                 <option ng-repeat="prio in priority"
                                         value="{{prio.id}}">
@@ -118,6 +119,7 @@
 
                             <input kendo-date-time-picker class="form-control"
                                    ng-model="due_date"
+                                   id="editTaskDueDateAndTime"
                                    k-ng-model="k_due_date"
                                    k-format="'dd/MM/yyyy hh:mm tt'" />
                         </div>
@@ -125,7 +127,7 @@
                     <div class="form-group" style="MARGIN-TOP: 2%;">
                         <div style="float:left;margin-bottom:-13px">
                             <label>
-                                <input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true">
+                                <input type="checkbox" name="test3" value="1" id="editTaskRemindMe" ng-model="remind_me" ng-init="remind_me=true">
                                 Remind Me
                             </label>
                         </div>
@@ -136,7 +138,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Select Time</label>
-                            <select data-ng-model="reminder_time" class="dropdown form-control" >
+                            <select data-ng-model="reminder_time" class="dropdown form-control" id="editTaskSelectTime">
                                 <option value="" selected>Select Time</option>
                                 <option value="15">15 min</option>
                                 <option value="30">30 min</option>
@@ -157,6 +159,7 @@
                         <textarea cols="110" rows="5" name="description"
                                   data-ng-model="params.text"
                                   minlength="1"
+                                  id="txt_editTaskAddNotes"
                                   maxlength="500"
                                   input-focus
                                    />
@@ -167,9 +170,9 @@
 
                
                 <div class="modal-btn-wrap-1 clearfix">
-                    <button type="submit" class="f-btn"> SAVE</button>
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
-                    <button type="button" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
+                    <button type="submit" id="btn_editTaskSave" class="f-btn"> SAVE</button>
+                    <button type="button" id="btn_editTaskCancel" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    <button type="button" id="btn_editTaskComplete" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
                 </div>
                     
             </form>

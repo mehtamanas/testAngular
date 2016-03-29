@@ -17,7 +17,7 @@
                                                      }">
                         <div class="form-group form-bx form-bx8">
                             <label for="">Task Name</label>
-                            <input type="text" class="form-control text-bold" autofocus name="TaskName"
+                            <input type="text" class="form-control text-bold" autofocus name="TaskName" id="UsereditTask_taskName"
                                    data-ng-model="params.name"
                                    minlength="1"
                                    maxlength="50"
@@ -36,7 +36,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="" class="hidden-xs" id="addnewproject_state">Task  Type</label>
-                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" >
+                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" id="UsereditTask_taskType" >
                                 <option value="" selected>Choose Task Type</option>
                                 <option ng-repeat="event in events"
                                         value="{{event.id}}">
@@ -50,7 +50,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Project:</label>
-                            <select ng-model="project1" ng-change="selectproject()" id="contact_project"
+                            <select ng-model="project1" ng-change="selectproject()" id="UsereditTask_project"
                                     class="dropdown form-control" >
                                 <option value="" selected>Select Project</option>
                                 <option ng-repeat="project in projects"
@@ -68,7 +68,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Person:</label>
-                            <select ng-model="contact1" ng-change="selectcontact()"
+                            <select ng-model="contact1" ng-change="selectcontact()" id="UsereditTask_person"
                                     class="dropdown form-control" >
                                 <option value="" selected>Select Contact</option>
                                 <option ng-repeat="contact in contacts"
@@ -84,7 +84,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Assign To:</label>
-                            <select ng-model="user1" ng-change="selectuser()"
+                            <select ng-model="user1" ng-change="selectuser()" id="UsereditTask_assignTo"
                                     class="dropdown form-control" >
                                 <option value="" selected>Select User</option>
                                 <option ng-repeat="user in users"
@@ -99,7 +99,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Set Priority</label>
-                            <select ng-model="priority1" ng-change="selectpriority()"
+                            <select ng-model="priority1" ng-change="selectpriority()" id="UsereditTask_setPriority"
                                     class="dropdown form-control">
                                 <option value="" selected>Select Priority</option>
                                 <option ng-repeat="prio in priority"
@@ -126,7 +126,7 @@
                     <div class="form-group" style="MARGIN-TOP: 2%;">
                         <div style="float:left;margin-bottom:-13px">
                             <label>
-                                <input type="checkbox" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true">
+                                <input type="checkbox" name="test3" value="1" ng-model="remind_me" id="chk_UsereditTask_remindMe" ng-init="remind_me=true">
                                 Remind Me
                             </label>
                         </div>
@@ -137,7 +137,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Select Time</label>
-                            <select data-ng-model="reminder_time" class="dropdown form-control" >
+                            <select data-ng-model="reminder_time" class="dropdown form-control" id="UsereditTask_selectTime" >
                                 <option value="" selected>Select Time</option>
                                 <option value="15">15 min</option>
                                 <option value="30">30 min</option>
@@ -154,7 +154,7 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx5">
                        
-                        <textarea cols="100" rows="5" name="description"
+                        <textarea cols="100" rows="5" name="description" id="UsereditTask_description"
                                   data-ng-model="params.text"
                                   minlength="1"
                                   maxlength="500"
@@ -163,9 +163,9 @@
                     </div>
                 </div>
                 <div class="modal-btn-wrap-1 clearfix">
-                    <button type="submit" class="f-btn"> SAVE</button>
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
-                    <button type="button" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
+                    <button type="submit" class="f-btn" id="btn_UsereditTask_save"> SAVE</button>
+                    <button type="button" class="f-btn f-btn2" ng-click="cancel()" id="btn_UsereditTask_cancel">CANCEL</button>
+                    <button type="button" class="f-btn f-btn2" ng-click="completeFun()" id="btn_UsereditTask_complete">COMPLETE  </button>
                 </div>
 
 

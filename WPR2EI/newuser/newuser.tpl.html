@@ -36,7 +36,7 @@
                     </select>-->
                     <div class="pull-left actions-wrap" id="dropfresh">
                         <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                                ng-change="GetValue();addUser()" id="dfresh">
+                                ng-change="GetValue();addUser()" id="newUserAction">
                             <option value="" selected> ACTION </option>
                         </select>
 
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="pull-right btn-wrap-right">
-                    <a href="#"  class="btn-lk" ng-click="openUserPopup()">+ ADD NEW USER </a>
+                    <a href="#"  class="btn-lk" ng-click="openUserPopup()" id="addNewUser">+ ADD NEW USER </a>
                     <!--<a href="#" class="btn-lk" ng-click="openImportUserPopup()">+ Import Users</a>-->
                    
                 </div>

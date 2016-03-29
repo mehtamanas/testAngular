@@ -1,7 +1,7 @@
 ﻿
 <div id="add_new_unit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-header">
-        <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        <button id="btn_offersClose" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         <h4 class="form-title modal-top">Add New Offer</h4>
     </div> 
     <div class="modal-body">
@@ -19,7 +19,7 @@
                             <div class="form-group form-bx">
                                 <label for="">Offer Name</label>
                                 <div class="area-f" style="margin-top: 2%;">
-                                    <input type="text" autofocus name="offername" class="form-control" id="addnewunit_no_bedrooms"
+                                    <input type="text" autofocus name="offername" class="form-control" id="offerName"
                                            
                                            data-ng-model="params.offer_name"
                                            minlength="1"
@@ -28,7 +28,7 @@
                                            input-focus />
                                     <div ng-messages="addNewForm.offername.$error" style="color:maroon" role="alert">
                                         <div ng-message="required" data-ng-if="addNewForm.offername.$invalid && (!addNewForm.offername.$pristine || showValid) && !addNewForm.offername.$focus">This field should not be empty </div>
-                                        <div ng-message="pattern">Enter valid offer name</div>
+                                        <div ng-message="pattern" id="err_offerName">Enter valid offer name</div>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                                                         'has-success': addNewForm.project.$valid && !addNewForm.project.$pristine && !addNewForm.project.$focus
                                                                      }">
                                 <label for="" >Select Project</label>
-                                <select ng-model="project1" style="margin-top: 2%;" name="project" ng-change="selectproject()" id="contact_project"
+                                <select ng-model="project1" style="margin-top: 2%;" name="project" ng-change="selectproject()" id="offerSelectProject"
                                         class="dropdown form-control" required>
                                     <option value="" selected>Select Project</option>
                                     <option ng-repeat="project in projects"
@@ -61,7 +61,7 @@
                                 </select>
                                 <div ng-messages="newForm.project.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.project.$invalid && (!addNewForm.project.$pristine || showValid) && !addNewForm.project.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern">Enter valid project to be assigned</div>
+                                    <div ng-message="pattern" id="err_offerSelectProject">Enter valid project to be assigned</div>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
             <div class="clearfix" style="margin-left: 2%;">
             <div class="col-md-12">
                 <div class="row" style="margin-bottom: 1%;" >
-                    <div class="col-md-3" ng-repeat="offer in offers" ><input type="radio" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click="selectoffers(offer.id,$index)" /> &nbsp;{{offer.type_name}}  </div>
+                    <div class="col-md-3" ng-repeat="offer in offers" ><input type="radio" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click="selectoffers(offer.id,$index)" id="offerTypeName" /> &nbsp;{{offer.type_name}}  </div>
                   
                 </div>
                 </div>
@@ -91,13 +91,13 @@
                                                                         }">
                                 <div class="form-group form-bx unit-type">
                                     <label for=""></label>
-                                    <input type="text" class="form-control" autofocus name="dperecent" id="addnewunit_unittypedesc"
+                                    <input type="text" class="form-control" autofocus name="dperecent" id="offerDiscPercent"
                                           
                                            data-ng-model="dicountType[$index].value"
                                            input-focus 
                                            ng-disabled="!dicountType[$index].enable"/>
                                     <div class="text-danger"
-                                         data-ng-if="addNewForm.dperecent.$invalid && (!addNewForm.dperecent.$pristine || showValid) && !addNewForm.dperecent.$focus">
+                                         data-ng-if="addNewForm.dperecent.$invalid && (!addNewForm.dperecent.$pristine || showValid) && !addNewForm.dperecent.$focus" id="err_offerDiscPercent">
                                         {{ 'Enter valid discount percentage' | translate }}
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                             
                             <div class="col-md-7" style="margin-top: 2%;">
                            <div style="margin-bottom: 2%;"> <label for="">Description</label></div>
-                            <textarea id="organization_desc" autofocus kendo-editor k-ng-model="params.description"></textarea>
+                            <textarea id="txt_offerDesc" autofocus kendo-editor k-ng-model="params.description"></textarea>
                                 </div>
                             <div class="text-danger"
                                  data-ng-if="addNewForm.Description.$invalid && (!addNewForm.Description.$pristine || showValid) && !addNewForm.Description.$focus">
@@ -151,12 +151,12 @@
 
             <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="margin-top: 4%;">
                 <div class="btn-f-c">
-                    <button type="submit" class="f-btn " id="btn_addnewproject_save">
+                    <button type="submit" class="f-btn " id="btn_offerSave">
                         SAVE
                     </button>
                 </div>
                 <div class="btn-f-c">
-                    <button type="button" class="f-btn2" id="btn_edituser_cancle" ng-click="$dismiss('cancel')">CANCEL</button>
+                    <button type="button" class="f-btn2" id="btn_offerCancel" ng-click="$dismiss('cancel')">CANCEL</button>
                 </div>
             </div>
 

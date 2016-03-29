@@ -4,7 +4,7 @@
     <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
 
         <div class="close-btn-wrap">
-            <button type="button" class="close" id="btn_gallery_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" id="btn_uploadViewClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
 
         <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
@@ -40,7 +40,7 @@
                     </div>
 
                         <label class="custom-file-input">
-                            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                            <input type="file" class="image-upload-f" id="btn_uploadViewUpload1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                         </label>
                             
                    
@@ -59,7 +59,7 @@
                     <div id="phone-wrap" class="clearfix">
                         <div id="phone-no" class="form-bx form-bx15">
                             <label for="">Tags</label>
-                            <input type="text" name="notes" class="form-control" id="contact_phoneno"
+                            <input type="text" name="notes" class="form-control" id="uploadViewTags"
                                    placeholder="Tags"
                                    data-ng-model="choice.text"
                                    minlength="1"
@@ -67,7 +67,7 @@
                                    input-focus
                                    required />
                             <div class="text-danger"
-                                 data-ng-if="addNew.notes.$invalid && (!addNew.notes.$pristine || showValid) && !addNew.notes.$focus">
+                                 data-ng-if="addNew.notes.$invalid && (!addNew.notes.$pristine || showValid) && !addNew.notes.$focus" id="err_uploadViewTags">
                                 {{ 'Please enter valid Notes' | translate }}
                             </div>
                         </div>
@@ -85,7 +85,7 @@
             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
             <div class="modal-btn-wrap3 clearfix">
-                <button type="submit" id="gallery_save" class="f-btn"
+                <button type="submit" id="btn_uploadViewSave" class="f-btn"
                         ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
                     Save
                 </button>

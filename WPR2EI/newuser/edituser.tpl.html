@@ -20,7 +20,7 @@
                             <div class="dropzone dropzone-bx image-upload-bx">
                                 <div class="fallback">
                                     <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                        <div class="panel-body image-upload-panel">
+                                        <div class="image-upload-panel">
                                             <div class="row" ng-hide="uploader.queue.length">
                                                 <img ng-src={{params.media_url}} alt="Drag and Drop" class="img-responsive" />
                                             </div>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="image-upload-link">
                                 <div class="browse-title">Browse</div>
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                <input type="file" class="image-upload-f" id="editUser_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                                 
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                 </div>-->
                                 <div ng-messages="newForm.first_name.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="newForm.first_name.$invalid && (!newForm.first_name.$pristine || showValid) && !newForm.first_name.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern">Enter valid first name</div>
+                                    <div ng-message="pattern" id="err_edituser_fname">Enter valid first name</div>
                                 </div>
                                 </div>
                         </div>
@@ -97,7 +97,7 @@
                                 </div>-->
                                 <div ng-messages="newForm.lastName.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern">Enter valid last name</div>
+                                    <div ng-message="pattern"id="err_edituser_lname">Enter valid last name</div>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                             <div id="address-wrap" class="clearfix">
                                 <div id="address-no" class="form-bx form-bx2">
                                     <!--<label ng-show="$index==0" for="" style="padding-top:5px;"><b>Address</b></label>-->
-                                    <input type="text" name="Address" class="form-control" id="edituser_add"
+                                    <input type="text" name="Address" class="form-control" id="edituser_address"
                                            placeholder="Address Line"
                                            data-ng-model="choice.Street_1"
                                            minlength="1"
@@ -220,7 +220,7 @@
 
                             <div class="form-group form-bx form-bx8">
                                 <label for="">Area</label>
-                                <input type="text" class="form-control text-bold" id="addnewproject_name" autofocus name="Area"
+                                <input type="text" class="form-control text-bold" id="edituser_Area" autofocus name="Area"
                                        placeholder="Area"
                                        data-ng-model="params.area"
                                        minlength="1"

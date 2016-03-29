@@ -1,4 +1,4 @@
-﻿<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+﻿<button type="button" id="btn_confirmChargeClose" class="close" ng-click="$dismiss('cancel')">&times;</button>
 <div class="main-content add-new project sucessful-popup" style="padding: 2%;">
      <h3 style="text-align:center" ng-hide="length">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Charge</h3>
     <h3 style="text-align:center" ng-show="length<=1">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Charge</h3>
@@ -6,8 +6,8 @@
 
     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
         <div style="padding: 2% 0% 3% 19%;">
-            <button type="submit" class="btn btn-primary " id="btn_addnewproject_save" ng-click="gotoDelete()">YES</button>
-            <button type="button" class="f-btnTag" id="btn_edituser_cancle" ng-click="$dismiss('cancel')">NO</button>
+            <button type="submit" class="btn btn-primary " id="btn_confirmChargeYes" ng-click="gotoDelete()">YES</button>
+            <button type="button" class="f-btnTag" id="btn_confirmChargeNo" ng-click="$dismiss('cancel')">NO</button>
         </div>
     </div>
     <!--<button type="button" id="btn_success_cancel" class="f-btn f-btn-sucessfull-ok" ng-click="$dismiss('cancel')">NO</button>
