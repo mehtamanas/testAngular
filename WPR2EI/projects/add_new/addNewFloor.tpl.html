@@ -4,7 +4,7 @@
     
         <div class="modal-body">
                 <div class="close-btn-wrap">
-                    <button type="button" class="close" id="btn_addnewfloor_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" id="btn_AddNewFloorClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
                 </div>
     <!--test surekha-->
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" novalidate autocomplete="off">
@@ -20,7 +20,7 @@
 
                             <div class="form-group form-bx f-unit">
                                 <label for="">How many units are there on this floor?</label>
-                                <input type="text" autofocus name="floors" class="form-control" id="addnewfloor_no_of_units"
+                                <input type="text" autofocus name="floors" class="form-control" id="addNewFloorNoOfUnits"
                                        placeholder="Units "
                                        data-ng-model="params.no_of_units"
                                        minlength="1"
@@ -29,7 +29,7 @@
                                        required />
                                 <div ng-messages="addNewForm.floors.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern">Enter valid value for floor number</div>
+                                    <div ng-message="pattern" id="err_addNewFloorNoOfUnits">Enter valid value for floor number</div>
                                 </div>
                             </div>
                            <div class="field-md6 field-req">*</div>
@@ -45,7 +45,7 @@
 
                             <div class="form-group form-bx form-bx3-2 ">
                                 <label for="">Enter floor type name:</label>
-                                <input type="text" autofocus name="tname" class="form-control" id="addnewfloor_floor_name"
+                                <input type="text" autofocus name="tname" class="form-control" id="addNewFloorName"
                                        placeholder="Floor Name"
                                        data-ng-model="params.unit_name"
                                        minlength="1"
@@ -54,7 +54,7 @@
                                        required />
                                 <div ng-messages="addNewForm.tname.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.tname.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern">Enter valid value for floor name</div>
+                                    <div ng-message="pattern" id="err_addNewFloorName">Enter valid value for floor name</div>
                                 </div>
                             </div>
                        <span class="field-md2 field-req">*</span>
@@ -88,7 +88,7 @@
                             <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
                    
                             <label class="custom-file-input">
-                                <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                <input type="file" class="image-upload-f" id="addNewFloorNameUpload1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                             </label>
                             </div>
 
@@ -118,7 +118,7 @@
                                 <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
                             
                                 <label class="custom-file-input">
-                                    <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                                    <input type="file" class="image-upload-f" id="addNewFloorNameUpload2" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
                                 </label>
                                 </div>
                            
@@ -134,7 +134,7 @@
                                     <div class="clearfix">
                                         <div class="form-group form-bx">
                                             <label for="">Unit Type</label>
-                                            <input type="text" disabled autofocus class="form-control" id="addnewfloor_unit_type_desc"
+                                            <input type="text" disabled autofocus class="form-control" id="addNewFloorUnitTypeDesc"
                                                    placeholder="Unit Type"
                                                    data-ng-model="unit.unit_type_desc"
                                                    input-focus />
@@ -147,7 +147,7 @@
                                     <div class="clearfix">
                                         <div class="form-group form-bx">
                                             <label for="">Unit No.</label>
-                                            <input type="text" autofocus class="form-control" id="addnewfloor_no_of_unit"
+                                            <input type="text" autofocus class="form-control" id="addNewFloorNoOfUnit"
                                                    placeholder="Unit No"
                                                    data-ng-model="unit.no_of_units "
                                                    input-focus />
@@ -157,7 +157,7 @@
                                         <div class="form-group"
                                              >
                                             <div class="form-group form-bx">
-                                                <input type="hidden" disabled autofocus name="floortype" id="addnewfloor_unit_id" class="form-control"
+                                                <input type="hidden" disabled autofocus name="floortype" id="addNewFloorUnit" class="form-control"
                                                        placeholder="Unit Type"
                                                        data-ng-model="unit.id"
                                                       
@@ -179,7 +179,7 @@
                      <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
                             <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" id="btn_addnewfloor_save" class="f-btn" >
+                                <button type="submit" id="btn_addeNewFloorSave" class="f-btn" >
                                     Save
                                 </button>
                             </div>

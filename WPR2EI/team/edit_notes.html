@@ -10,7 +10,7 @@
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx5">
                         <label for="">Add Notes</label>
-                        <textarea cols="100" rows="5" name="description"
+                        <textarea cols="100" rows="5" name="description" id="team_editNotes_description"
                                   data-ng-model="params.text"
                                   minlength="1"
                                   maxlength="500"
@@ -24,9 +24,9 @@
                             ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length && !uploader3.getNotUploadedItems().length">
                         Save
                     </button>-->
-                    <button type="submit" class="f-btn"  ng-click="save()">Save</button>
+                    <button type="submit" class="f-btn"  ng-click="save()" id="team_editNotes_save">SAVE</button>
 
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    <button type="button" class="f-btn f-btn2" ng-click="cancel()" id="team_editNotes_cancel">CANCEL</button>
                 </div>
             </form>
 

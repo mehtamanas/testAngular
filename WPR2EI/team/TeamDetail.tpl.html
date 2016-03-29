@@ -46,10 +46,10 @@
 
 
                     <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
-                        <ul class="nav nav-tabs responsive-tagJS" role="tablist">
-                            <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
-                            <li id="tab_user"><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
-                            <li id="tab_project"><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
+                        <ul class=" responsive-tagJS" role="tablist">
+                            <li id="teamDetail_summary" class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
+                            <li id="teamDetail_user"><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
+                            <li id="teamDetail_project"><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
   
                         </ul>
 
@@ -59,18 +59,18 @@
 
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Team Name:</div>
-                                    <div class="pull-right profile-row2">
+                                    <div class="pull-right profile-row2" id="teamDetail_teamName">
                                         <label class="label-group">
-                                            <h4 ng-bind="name"></h4>
+                                            <span ng-bind="name"></span>
                                         </label>
                                     </div>
                                 </div>
 
                                 <div class="company-profile-row clearfix">
                                     <div class="pull-left profile-row1">Description:</div>
-                                    <div class="pull-right profile-row2">
+                                    <div class="pull-right profile-row2" id="teamDetail_description">
                                         <label class="label-group">
-                                            <h4 ng-bind="description"></h4>
+                                            <span ng-bind="description"></span>
                                         </label>
                                     </div>
                                 </div>
@@ -85,21 +85,21 @@
                         </div> <!--Summary-->
 
                         <div class="leads_group" id="documentGridDiv">
-                            <div class="tab-content-title">Users<a id="team_user" class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Users<a id="teamDetail_openNewUserPopup"class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
                             <div kendo-grid k-options="UserGrid" selectable="true">
 
                             </div>
                         </div>  <!--UserGrid-->
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Projects<a id="team_user" class="add-btn" data-toggle="modal" ng-click="openProjectPopup()" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title">Projects<a id="teamDetail_openNewProjectPopup" class="add-btn" data-toggle="modal" ng-click="openProjectPopup()" style="cursor:pointer">+</a></div>
                                 <div kendo-grid k-options="ProjectGrid" selectable="true">
 
                                 </div>
                             </div> <!--ProjectGrid--> 
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Task <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>                  
+                            <div class="tab-content-title">Task <a id="teamDetail_openNewTaskPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>                  
                                 <div kendo-grid k-options="TaskGrid" selectable="true"></div>
                         </div>  <!--Task-->
 
