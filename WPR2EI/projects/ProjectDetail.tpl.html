@@ -585,7 +585,7 @@
                         </div> <!--Upload View-->
 
          
-                        <div class="leads_group" id="record-content">
+                        <div class="leads_group" id="project_ServiceGrid">
 
                           
                             
@@ -597,7 +597,7 @@
                                     <option value='delete'>DELETE</option>
                                 </select>
                             </div>
-                            <div kendo-grid k-options="serviceGrid" selectable="true" k-on-change="myGridChangeService(dataItem)">
+                            <div id="selectServices" kendo-grid k-options="serviceGrid" selectable="true" k-on-change="myGridChangeService(dataItem)">
 
                             </div>
                         </div> <!--Services-->
@@ -614,7 +614,7 @@
                             </div>
                         </div>  <!--Offers-->
 
-                        <div class="leads_group" id="record-content">
+                        <div class="leads_group" id="project_ChargeGrid">
 
                    
                             
@@ -626,7 +626,7 @@
                                     <option value='delete'>DELETE</option>
                                 </select>
                             </div>
-                            <div kendo-grid k-options="ChargesGrid" selectable="true" k-on-change="myGridChangeCharges(dataItem)">
+                            <div id="selectCharges" kendo-grid k-options="ChargesGrid" selectable="true" k-on-change="myGridChangeCharges(dataItem)">
 
                             </div>
                         </div> <!--Charge-->
