@@ -36,7 +36,7 @@
                     <div class="uploadFileName">
                         <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
                     </div>
-                    <label class="custom-file-input">
+                    <label class="custom-file-input" id="addNewImage">
 
                         <input type="file" class="image-upload-f" id="contactadd_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                     </label>
@@ -302,7 +302,7 @@
 
                 <div class="form-bx" style="padding:5px;margin-left:3%">
                     <label for="">Date Of Birth</label>
-                    <input kendo-date-picker k-options="myOptions" class="form-control "
+                    <input id="contactadd_datepicker" kendo-date-picker k-options="myOptions" class="form-control "
                            ng-model="params.Date_Of_Birth"
                            k-ng-model="k_due_date"
                            k-format="'dd/MM/yyyy'" />
