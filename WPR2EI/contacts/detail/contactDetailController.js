@@ -595,8 +595,8 @@ angular.module('contacts')
             },
             columns: [
                     {
-                        template: " <input type='checkbox' , class='checkbox', data-id='#= task_id #', ng-click='check($event,dataItem)'/>",
-                        title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(dataItem)'/>",
+                        template: " <input type='checkbox' , class='checkbox', data-id='#= task_id #', ng-click='check()'/>",
+                        title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(TaskGrid)'/>",
                         width: "50px",
 
                     }, {
@@ -791,8 +791,8 @@ angular.module('contacts')
             },
             columns: [
                  {
-                     template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
-                     title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                     template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check()' />",
+                     title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(NotesGrid)' />",
                      width: "60px",
                      attributes:
                 {
@@ -1474,6 +1474,7 @@ angular.module('contacts')
             if (args == 'NotesGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.NotesAction = 'no_action';
         });
 
         $scope.$on('REFRESH1', function (event, args) {
@@ -1755,7 +1756,7 @@ angular.module('contacts')
         };
      
         $scope.chooseAction = function () {
-            var allGridElements = $(".checkbox").toArray();
+            var allGridElements = $("#selectNotesGrid .checkbox").toArray();
             var allCheckedElement = _.filter(allGridElements, function (o)
             { return o.checked });
             allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
@@ -1788,7 +1789,7 @@ angular.module('contacts')
         }
 
         $scope.taskAction = function () {
-            var allGridElements = $(".checkbox").toArray();
+            var allGridElements = $("#selectTasksGrid .checkbox").toArray();
             var allCheckedElement = _.filter(allGridElements, function (o)
             { return o.checked });
             allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
@@ -1820,15 +1821,26 @@ angular.module('contacts')
             }
         }
 
-        $scope.checkALL = function (e) {
-            if ($('.check-box:checked').length > 0)
-                $('.checkbox').prop('checked', true);
-            else
-                $('.checkbox').prop('checked', false);
+        $scope.checkALL = function (t) {
+
+            if (t == $scope.TaskGrid) {
+                if ($('.check-box:checked').length > 0)
+                    $('#selectTasksGrid .checkbox').prop('checked', true);
+                else
+                    $('#selectTasksGrid .checkbox').prop('checked', false);
+            }
+            else if (t == $scope.NotesGrid) {
+                if ($('.check-box:checked').length > 0)
+                    $('#selectNotesGrid .checkbox').prop('checked', true);
+                else
+                    $('#selectNotesGrid .checkbox').prop('checked', false);
+            }
+
+
         };
 
 
-        $scope.check = function (e, data) {
+        $scope.check = function () {
             var allListElements = $(".checkbox").toArray();
             for (var i in allListElements) { // not all checked
                 if (!allListElements[i].checked) {

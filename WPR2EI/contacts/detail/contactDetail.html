@@ -251,7 +251,7 @@
                 </div>
             </div>  <!--Payment-->
 
-            <div class="leads_group" id="record-content">
+            <div class="leads_group" id="contactTaskGrid">
                 <div class="tab-content-title">Task <a id="contact_openNewTaskPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
                 <div class="">
                     <select ng-model="TaskAction" class="form-control actions-wrap" ng-change="taskAction()" id="taskaction">
@@ -261,12 +261,12 @@
                 </div>
 
 
-                <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
+                <div id="selectTasksGrid" kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
 
                 </div>
             </div>  <!--Task-->
 
-            <div class="leads_group" id="record-content">
+            <div class="leads_group" id="contactNotesGrid">
                 <div class="tab-content-title">Notes <a id="contact_openNewNotesPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()">+</a></div>
 
                 <div class="">
@@ -276,7 +276,7 @@
                     </select>
                 </div>
 
-                <div kendo-grid k-options="NotesGrid" selectable="true" k-on-change="myGridChangeNote(dataItem)">
+                <div id="selectNotesGrid" kendo-grid k-options="NotesGrid" selectable="true" k-on-change="myGridChangeNote(dataItem)">
 
                 </div>
             </div>
