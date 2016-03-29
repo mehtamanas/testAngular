@@ -117,7 +117,7 @@
         return { text: emailData.Contact_Email }, { text: loggedUser.account_email }
     }
 
-    apiService.get('Template/GetAllTemplates?orgId=' + $cookieStore.get('orgID')).then(function (response) {
+    apiService.getWithoutCaching('Template/GetAllTemplates?orgId=' + $cookieStore.get('orgID')).then(function (response) {
         $scope.params.templateList = response.data;
     });
 
