@@ -1639,28 +1639,28 @@ angular.module('contacts')
                                 b++;
                             }
 
+
+                            if (data[i].element_type == "Budget") {
+
+                                $scope.budget1 = data[i].element_info1;
+                                $scope.class_id = data[i].class_id;
+
+                            }
+
+                            if (data[i].element_type == "PurchaseDuration") {
+
+                                $scope.buy1 = data[i].element_info1;
+                                $scope.class_id = data[i].class_id;
+
+                            }
+
+                            if (data[i].element_type == "InterestedProjects") {
+
+                                ($scope.project_name).push(data[i].element_info1);
+                                $scope.class_id = data[i].class_id;
+
+                            }
                         }
-                        if (data[i].element_type == "Budget") {
-
-                            $scope.budget1 = data[i].element_info1;
-                            $scope.class_id = data[i].class_id;
-
-                        }
-
-                        if (data[i].element_type == "PurchaseDuration") {
-
-                            $scope.buy1 = data[i].element_info1;
-                            $scope.class_id = data[i].class_id;
-
-                        }
-
-                        if (data[i].element_type == "InterestedProjects") {
-
-                            ($scope.project_name).push(data[i].element_info1);
-                            $scope.class_id = data[i].class_id;
-
-                        }
-
                     },
                     function (error) {
 

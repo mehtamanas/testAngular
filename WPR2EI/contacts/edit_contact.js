@@ -131,7 +131,8 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     apiService.getWithoutCaching(Url).then(function (response) {
         data = response.data;
         a = 0, b = 0, c = 0,d = 0;
-        for (i = 0; i < data.length; i++) {
+        for (i = 0; i < data.length; i++)
+        {
             if (data[i].element_type == "email_contact") {
                 if (a > 0) { $scope.choices1.push({ 'id': 'choice' + (a + 1) }); }
                 $scope.choices1[a].Contact_Email = data[i].element_info1;
@@ -151,19 +152,21 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                
             }
 
-            if (data[i].element_type == "PurchaseDuration") {
+            if (data[i].element_type == "PurchaseDuration")
+            {
 
                 $scope.buy1 = data[i].element_info1;
                 $scope.params.class_id = data[i].class_id;
 
             }
          
-            if (data[i].element_type == "InterestedProjects") {
+            if (data[i].element_type == "InterestedProjects")
+            {
                    
                ($scope.project_name).push(data[i].element_info1);
                $scope.params.class_id = data[i].class_id;
                    
-                }
+            }
             
         }
 
@@ -386,7 +389,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.choices = [{ id: 'choice1' }];
 
-    $(document).on("click", ".remove-field2", function () {
+    $(document).on("click", ".remove-field", function () {
         var removedElement = $(this).parent().find('#editcontact_email').val();
         var removedElement1 = $(this).parent().find('#editcontact_phone').val();
         var fnd = 0;
