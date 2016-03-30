@@ -221,8 +221,17 @@ function (error) {
 
     var calculateTotal = function () {
 
-        $scope.params.grandTotal = parseFloat($scope.params.subTotal) - parseFloat($scope.params.offerDiscount) - parseFloat($scope.params.additionalDiscount);
+        if ($scope.radiovalue == 'Flat Charge')
+        {
+            $scope.params.grandTotal = parseFloat($scope.params.subTotal) - parseFloat($scope.params.offerDiscount) - parseFloat($scope.params.additionalDiscount);
+        }
+        else if ($scope.radiovalue == 'Percent')
+        {
+            $scope.params.grandTotal = parseFloat($scope.params.subTotal) -(parseFloat($scope.params.subTotal) * (parseFloat($scope.params.offerDiscount)/100) )- parseFloat($scope.params.additionalDiscount);
+        }
 
+
+      
     }
 
 

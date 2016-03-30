@@ -163,8 +163,8 @@
                 <button type="submit" id="generateAdd" class="btn btn-primary quote_add_btn" value="ADD NEW" ng-click="addNewquote2($event)">ADD NEW</button>
                 <button type="button" id="generateClear" class="btn btn-primary quote_clear_btn" value="CLEAR" ng-click="quotes2.pop()">CLEAR</button>
                 <div style="margin: 22% 0% 0% 63%;">
-                    <label class="radio-inline"><input type="radio" name="optradio">Flat Charge</label>
-                    <label class="radio-inline"><input type="radio" name="optradio">Percent</label>
+                    <label class="radio-inline"><input type="radio" ng-model="radiovalue" value="Flat Charge" name="optradio">Flat Charge</label>
+                    <label class="radio-inline"><input type="radio" ng-model="radiovalue" value="Percent" name="optradio">Percent</label>
                 </div>
             </div>
             <div class="col-md-4 quote_total">
@@ -172,7 +172,7 @@
                     <tbody style="text-align: right;">
                         <tr><td class="quote_table"><label class="form-inline quote-subtotal">Sub total</label> </td><td class="quote_table" style="width: 49%;padding-right: 18px;"><input type="text" format disabled class="form-control" data-ng-model="params.subTotal" id="generateSubTotal" placeholder="Sub Total"/></td></tr>
                         <tr><td class="quote_table"><label class="form-inline quote-subtotal">Offer Discount</label> </td><td class="quote_table" style="padding-right: 18px;"> <input type="text" disabled class="form-control" ng-change="finalTotal($index)" id="generateOfferDiscount" data-ng-model="params.offerDiscount" placeholder="Offer Discount" /></td></tr>
-                        <tr><td class="quote_table"><label class="form-inline quote-subtotal">Additional Discount</label></td><td class="quote_table" style="padding-right: 18px;"> <input type="text" format class="form-control"  ng-change="discountTotal()" id="generateAdditionalDisc" data-ng-model="params.additionalDiscount" placeholder="Additional Discount" /></td></tr>
+                        <tr><td class="quote_table"><label class="form-inline quote-subtotal">Additional Discount</label></td><td class="quote_table" style="padding-right: 18px;"> <input type="text" format class="form-control" ng-blur="discountTotal()" id="generateAdditionalDisc" data-ng-model="params.additionalDiscount" placeholder="Additional Discount" /></td></tr>
                     </tbody>
                 </table>
             </div>
