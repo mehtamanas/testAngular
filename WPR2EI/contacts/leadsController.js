@@ -4,7 +4,7 @@ angular.module('contacts')
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         console.log('ContactListController');
-
+        $scope.gridView = 'default';
         $scope.leadAction = 'no_action';
 
         var userID = $cookieStore.get('userId');
@@ -65,6 +65,50 @@ angular.module('contacts')
         AuditCreate($scope.params);
 
         //end
+
+        $scope.changeView = function () {
+            //filter by grid name
+            filterObj = _.filter($scope.views, function (o)
+            { return o.view_name === $scope.gridView });
+
+            //get the grid datasource
+            var grid = $('#contact_kenomain').getKendoGrid();
+            var sortObj = [];
+            sortObj.push({ field: filterObj[0].sort_by, dir: filterObj[0].sort_order });
+            var col = (filterObj[0].column_names).split(',');
+            for (i = 0; i < col.length; i++) {
+                for (j = 0; j < $('#contact_kenomain').getKendoGrid().columns.length; j++) {
+                    if ($('#contact_kenomain').getKendoGrid().columns[j].title === col[i]) {
+                        $('#contact_kenomain').getKendoGrid().columns[j]
+                        break;
+                    }
+                }
+
+            }
+
+            $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
+
+
+        }
+
+        $scope.saveView = function () {
+            var grid = $('#contact_kenomain').getKendoGrid();
+            var sortObject = grid.dataSource._sort[0];
+            var colObject = _.filter(grid.columns, function (o)
+            { return !o.hidden });
+            colObject = (_.pluck(colObject, 'title')).join(',');
+
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/Views/createView.html',
+                backdrop: 'static',
+                controller: createViewCtrl,
+                size: 'md',
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead' } }
+            });
+        }
+
 
 
         $scope.chooseAction = function () {
