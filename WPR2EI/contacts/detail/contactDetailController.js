@@ -1288,17 +1288,21 @@ angular.module('contacts')
         };
 
         $scope.openNewDocument = function () {
+            $state.go('app.documentAgreement');
+        }
 
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/add_new_doc.tpl.html',
-                backdrop: 'static',
-                controller: AddNewDocumentController,
-                size: 'md'
+        //$scope.openNewDocument = function () {
 
-            });
+        //    var modalInstance = $modal.open({
+        //        animation: true,
+        //        templateUrl: 'contacts/add_new_doc.tpl.html',
+        //        backdrop: 'static',
+        //        controller: AddNewDocumentController,
+        //        size: 'md'
 
-        };
+        //    });
+
+        //};
 
         $scope.openAddNewTask = function () {
 

@@ -1,0 +1,106 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-5">
+                    <h2 class="pg-inner-title">Create New Agreement</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pg-inner-content" style="">
+
+        <div class="project-detail">
+
+            
+
+            <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                <form class="form-content " name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+                 
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="broker_carpet">Select Document Type</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+                      
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Select Project</label>
+                                <select ng-model="event1" ng-change="selectproject()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="project in projects"
+                                            value="{{project.id}}">
+                                        {{project.name}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Select Template</label>
+                                <select ng-model="event1" ng-change="selecttemplate()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="template in templates"
+                                            value="{{template.id}}">
+                                        {{template.type}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Template Name</label>
+                                <input type="text" class="form-control text-bold" id="broker_serialno"
+                                       data-ng-model="params.name"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus />
+                            </div>
+                        </div>
+                    </div>                    
+
+                    <div class="clearfix">
+                        <p>Type or Paste your text into the text editor below.You can also insert images.Use the drop list to add placeholders for customer's data.</p>
+
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx14">
+                            <label for="">Description</label>
+                            <textarea id="agreeTempDescription" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.htmlcontent" resizable="true"></textarea>
+                        </div>
+                    </div>
+
+                   
+                    <div class="modal-btn-wrap-1 clearfix">
+                        <button type="button" id="btn_agreePreview" class=" f-btn f-btn-20" style="margin:1px" ng-click="preview()"> PREVIEW </button>
+                        <button type="submit" id="btn_agreeSave" class=" f-btn " style="margin:1px" ng-click="showValid=true"> SAVE </button>
+                        <button type="button" id="btn_agreeCancel" class=" f-btn f-btn-19" style="margin:1px" ng-click="cancel()"> CANCEL </button>
+                    </div>
+
+                </form>
+            </div>
+            <!--</div>--><!-- project-detail ended -->
+
+        </div><!-- pg-inner-content ended -->
+
+    </div>
+</div><!-- main-content ended -->

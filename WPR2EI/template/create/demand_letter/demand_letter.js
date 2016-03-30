@@ -1,4 +1,4 @@
-﻿agreementCreateCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, FileUploader) {
+﻿demandLetterController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, FileUploader) {
 
     $scope.showTemplate = true;
     $scope.showPreview = false;
@@ -20,7 +20,7 @@
     };
 
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
-            uploader.uploadAll();
+        uploader.uploadAll();
     }
 
     $scope.editorOption = {
@@ -70,28 +70,7 @@
                   "insertFile",
                   "viewHtml",
         ],
-        //imageBrowser: {
-        //    messages: {
-        //        dropFilesHere: "Drop files here"
-        //    },
-        //    transport: {
-        //        read: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Read",
-        //        destroy: {
-        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Destroy",
-        //            type: "POST"
-        //        },
-        //        create: {
-        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Create",
-        //            type: "POST"
-        //        },
-        //        thumbnailUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Thumbnail",
-        //        uploadUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Upload",
-        //        imageUrl: function (name) {
-        //            var pictureUrl = decodeURIComponent(name);
-        //            return pictureUrl;
-        //        },
-        //    }
-        //},
+       
         fileBrowser: {
             messages: {
                 dropFilesHere: "Drop files here"
@@ -113,10 +92,10 @@
     }
 
     var callApi = function () {
-        apiService.get("Project/Get/"+ $cookieStore.get('orgID')).then(function (response) {
+        apiService.get("Project/Get/" + $cookieStore.get('orgID')).then(function (response) {
             $scope.projectList = response.data;
-        })
-        }
+        })        
+    }
 
     callApi();
 
@@ -129,7 +108,7 @@
                 description: $scope.params.htmlcontent,
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
-                document_type_id: "fd87a619-6acc-4689-b5ff-e76794d6154a"
+                document_type_id: "d9b1c8d6-4201-4077-abd0-c6654a6fa7d0"
             };
 
             console.log($scope.params.htmlcontent);
@@ -146,15 +125,7 @@
         }
     }
 
-    $scope.preview = function () {
-        var modalInstance = $modal.open({
-            animation: true,
-            template: $scope.params.htmlcontent,
-            backdrop: 'static',
-            size: 'md'
-        });
-
-    }
+   
 
     $scope.cancel = function () {
         $modalInstance.dismiss();
@@ -171,11 +142,6 @@
         });
     }
 
-    $scope.preview = function () {
-        demoFromHTML();
-        //$scope.showTemplate = false;
-        //$scope.showPreview = true;
-    }
 
     $scope.goTOTemplate = function () {
         $scope.showTemplate = true;
@@ -222,7 +188,7 @@
                 //          this allow the insertion of new lines after html
                 //pdf.save('Test.pdf');
                 var string = pdf.output('datauristring');
-              //  pdf.save('Test.pdf');
+                //  pdf.save('Test.pdf');
                 window.open(string);
                 //pdf.output('datauri');
             },
