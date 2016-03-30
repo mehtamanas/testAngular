@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="pg-inner-content" style="">
-        
+
         <div class="project-detail">
 
             <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
@@ -26,257 +26,256 @@
                 <form class="form-content " name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
 
                     <div class="clearfix">
-                        
-                            <div style="margin-bottom:2px">
-                                <label><input type="radio" id="broker_sales" name="test" ng-model="radioValue" value="1" ng-checked="true" />Sales</label>
-                               <label><input type="radio" id="broker_Rent" name="test" ng-model="radioValue" value="2" /> &nbsp; Rent</label><br />
-                               <label><input type="radio" id="broker_Residential" name="test" ng-model="radioValue" value="3" /> &nbsp; Residential</label>
-                              <label><input type="radio" id="broker_Commercial" name="test" ng-model="radioValue" value="4" /> &nbsp; Commercial</label>
-                            </div>
+
+                        <div style="margin-bottom:2px">
+                            <label><input type="radio" id="broker_sales" name="broker_optn" ng-model="radioValue" value="sale"  />Sales</label>
+                            <label><input type="radio" id="broker_Rent" name="broker_optn" ng-model="radioValue" value="rent" /> &nbsp; Rent</label><br />
+                            <label><input type="radio" id="broker_Residential" name="test" ng-model="radioValue" value="3" /> &nbsp; Residential</label>
+                            <label><input type="radio" id="broker_Commercial" name="test" ng-model="radioValue" value="4" /> &nbsp; Commercial</label>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Serial No.</label>
-                                    <input type="text" class="form-control text-bold" id="broker_serialno"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           input-focus
-                                            />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-1">
-                                <div class="form-group">
-                                    <label for="">Bedroom</label>
-                                    <input type="text" class="form-control text-bold" id="broker_bedroom"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                                </div>
-                                <div class="col-md-1" style="margin-left:1%">
-                                    <div class="form-group">
-                                        <label for="">Bathroom</label>
-                                        <input type="text" class="form-control text-bold" id="broker_bathroom"
-                                               data-ng-model="params.name"
-                                               minlength="1"
-                                               maxlength="60"
-                                               ng-pattern="/^[a-z 0-9\s]+$/i"
-                                               input-focus
-                                               required />
-                                    </div>
-                                </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Agreement Area</label>
-                                    <input type="text" class="form-control text-bold" id="broker_agreement_area"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Build-up Area</label>
-                                    <input type="text" class="form-control text-bold" 
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                    <div class="form-group form-bx form-bx3-1">
-                                        <label for="" class="hidden-xs" id="broker_carpet">Carpark/Garage</label>
-                                        <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                            <option value="" selected></option>
-                                            <option ng-repeat="event in events"
-                                                    value="{{event.id}}">
-                                                    {{event.type}}
-                                        </select>
-                                    </div>
-                                </div>
-                       
-                            <div class="pull-left f-half-6">
-                                    <div class="form-group form-bx form-bx3-1">
-                                        <label for="" class="hidden-xs" id="addnewproject_state">Furnishing</label>
-                                        <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                            <option value="" selected></option>
-                                            <option ng-repeat="event in events"
-                                                    value="{{event.id}}">
-                                                    {{event.type}}
-                                        </select>
-                                    </div>
-                                </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Floor</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">View</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-md-12">
-                            <div class="row" style="margin-bottom: 1%;">
-                                <div class="col-md-3" ng-repeat="offer in offers"><input type="checkbox" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click='check($event,dataItem)'"/> &nbsp;{{offer.type_name}}</div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Serial No.</label>
+                                <input type="text" class="form-control text-bold" id="broker_serialno"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus />
                             </div>
                         </div>
                     </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Availabilty</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="">Bedroom</label>
+                                <input type="text" class="form-control text-bold" id="broker_bedroom"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
                             </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Lease Period</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="">Date:</label>
-                                    <input kendo-date-picker class="form-control "
-                                           ng-model="due_date"
-                                           k-ng-model="k_due_date"
-                                           k-format="'dd/MM/yyyy hh:mm tt'" />
-                                </div>
+                        </div>
+                        <div class="col-md-1" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Bathroom</label>
+                                <input type="text" class="form-control text-bold" id="broker_bathroom"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="">Possession Date:</label>
-                                    <input kendo-date-picker class="form-control "
-                                           ng-model="due_date"
-                                           k-ng-model="k_due_date"
-                                           k-format="'dd/MM/yyyy hh:mm tt'" />
-                                </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Agreement Area</label>
+                                <input type="text" class="form-control text-bold" id="broker_agreement_area"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Property Condition</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Build-up Area</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
                             </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Listing Source</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            
-
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Type Of Agreement</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="broker_carpet">Carpark/Garage</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
                             </div>
-
-
-
                         </div>
 
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Location / Address Details</h2>
-                                </div>
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Furnishing</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
                             </div>
-
                         </div>
 
-                        <div class="row">
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Floor</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">View</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 1%;">
+                                <div class="col-md-3" ng-repeat="offer in offers"><input type="checkbox" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click='check($event,dataItem)' " /> &nbsp;{{offer.type_name}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row for_rent" style="display: none">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Availabilty</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Lease Period</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Date:</label>
+                                <input kendo-date-picker class="form-control "
+                                       ng-model="due_date"
+                                       k-ng-model="k_due_date"
+                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Possession Date:</label>
+                                <input kendo-date-picker class="form-control "
+                                       ng-model="due_date"
+                                       k-ng-model="k_due_date"
+                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Property Condition</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Listing Source</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Type Of Agreement</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Location / Address Details</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Building Name</label>
                                 <input type="text" class="form-control text-bold"
-                                       data-ng-model="params.name"
+                                       data-ng-model=""
                                        minlength="1"
                                        maxlength="60"
                                        ng-pattern="/^[a-z 0-9\s]+$/i"
@@ -285,479 +284,488 @@
                             </div>
                         </div>
                     </div>
+
                     <div ng-repeat="choice in choices1">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Address Line{{$index + 1}}</label>
                                     <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"                                      
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-                          <div id="contact_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
-                        </div>
-                      </div>
-
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">State</label>
-                                    <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold">
-                                        <option value="" selected>State</option>
-                                        <option ng-repeat="state in states"
-                                                value="{{state.state_id}}">
-                                            {{state.state_name}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">City</label>
-                                    <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold">
-                                        <option value="" selected>City</option>
-                                        <option ng-repeat="city in cities"
-                                                value="{{city.city_id}}">
-                                            {{city.city_name}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Pin</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
+                                           data-ng-model=""
                                            minlength="1"
                                            maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
                                            input-focus
                                            required />
                                 </div>
                             </div>
-
+                            <div id="contact_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Locality</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Payment</h2>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Base Rent</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Advanced Rent</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Monthly Rent</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">State</label>
+                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold">
+                                    <option value="" selected>State</option>
+                                    <option ng-repeat="state in states"
+                                            value="{{state.state_id}}">
+                                        {{state.state_name}}
+                                </select>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Deposit Required</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Deposit Type</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Deposit Ammount</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Mode Of Payment</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">City</label>
+                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold">
+                                    <option value="" selected>City</option>
+                                    <option ng-repeat="city in cities"
+                                            value="{{city.city_id}}">
+                                        {{city.city_name}}
+                                </select>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Sale Price per sqft</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Pin</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Car Park Rate</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
+                    </div>
 
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Sale price for Carpark</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Locality</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Payment</h2>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Liscensee Brokerage Type</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
+                    </div>
 
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Liscensee Brokerage </label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                    <div  class="row for_rent" style="display: none">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Base Rent</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.base_rent"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus
+                                        />
                             </div>
                         </div>
 
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Rent Escalation</h2>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Period</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Type</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Amount</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Taxes and Charges</h2>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Liscensee Brokerage Type</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2" style="margin-left:1%">
-                                <div class="form-group">
-                                    <label for="">Liscensee Brokerage </label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Advanced Rent</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.advanced_rent"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus
+                                        />
                             </div>
                         </div>
 
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Agent Details</h2>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Agent Name</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Monthly Rent</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.monthly_rent"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus
+                                        />
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Phone</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Deposit Required</label>
+                                <select ng-model="deposit1" ng-change="selectdeposit()" class="dropdown form-control text-bold">
+                                    <option value="" selected>Select Deposit</option>
+                                    <option value=Yes>Yes</option>
+                                    <option value=No>No</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Contacts For Premises</h2>
-                                </div>
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Deposit Type</label>
+                                <select ng-model="depositType1" ng-change="selectdepodit_type()" class="dropdown form-control text-bold">
+                                    <option value="" selected>Select Type</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Rent Multiple">Rent Multiple</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Name</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Deposit Ammount</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.deposit_amount"
+                                       minlength="1"
+                                       maxlength="60"
+                                        />
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="" class="hidden-xs" id="addnewproject_state">Contact Type</label>
-                                    <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
-                                        <option value="" selected></option>
-                                        <option ng-repeat="event in events"
-                                                value="{{event.id}}">
-                                            {{event.type}}
-                                    </select>
-                                </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Mode Of Payment</label>
+                                <select ng-model="payment1" ng-change="selectModePayment()" class="dropdown form-control text-bold">
+                                    <option value="" selected>Select Payment Mode</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Cheque">Cheque</option>  
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-6 for_sale" style="display:none">
+                            <div class="form-group">
+                                <label for="">Sale Price per sqft</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.sale_price_per_sqft"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus
+                                        />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Car Park Rate</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.car_park_rate"
+                                       minlength="1"
+                                       maxlength="60"
+                                        />
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Phone</label>
-                                    <input type="text" class="form-control text-bold"
-                                           data-ng-model="params.name"
-                                           minlength="1"
-                                           maxlength="60"
-                                           ng-pattern="/^[a-z 0-9\s]+$/i"
-                                           input-focus
-                                           required />
-                                </div>
+                        <div class="col-md-2 for_sale"  style="display:none;margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Sale price for Carpark</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.sale_price_for_car_park"
+                                       minlength="1"
+                                       maxlength="60"
+                                        />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Liscensee Brokerage Type</label>
+                                <select ng-model="brokerage1" ng-change="selectBrokerage()" class="dropdown form-control text-bold">
+                                    <option value="" selected>select Brokerage Type</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Percent">Percent</option>
+                                    <option value="Rent Multiple">Rent Multiple</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="pull-left f-half-6">
-                                <div class="form-group form-bx form-bx3-1">
-                                    <label for="">Selet Date/Time</label>
-                                    <input kendo-date-time-picker class="form-control "
-                                           ng-model="due_date"
-                                           k-ng-model="k_due_date"
-                                           k-format="'dd/MM/yyyy hh:mm tt'" />
-                                </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Liscensee Brokerage </label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.licensee_brokerage"
+                                       minlength="1"
+                                       maxlength="60"
+                                       />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row for_rent" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;display:none">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Rent Escalation</h2>
                             </div>
                         </div>
 
-                        <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                            <div class="col-lg-12 pull-left">
-                                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                                    <h2 class="pg-inner-title">Comments</h2>
-                                </div>
+                    </div>
+
+                    <div class="row for_rent" style="display:none">
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Period</label>
+                                <select ng-model="period1" ng-change="selectPeriod()" class="dropdown form-control text-bold">
+                                    <option value="" selected>Select Period</option>
+                                    <option value="12 Months">12 Months</option>
+                                    <option value="24 Months">24 Months</option>
+                                    <option value="36 Months">36 Months</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="top-row" style="width:100%; background:#fff; padding:60px"></div>
-
-                        <strong class="duration_time form-content form-bx8">Candid Comments</strong>
-                        <div class="clearfix">
-                            <div class="form-group form-bx form-bx5">
-                                <textarea cols="110" rows="05" name="description"
-                                          data-ng-model="text"
-                                          minlength="1"
-                                          maxlength="500"
-                                          input-focus
-                                          style="float:left" />
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Type</label>
+                                <select ng-model="rentEscType1" ng-change="selectRentEscType()" class="dropdown form-control text-bold">
+                                    <option value="" selected>Select Type</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Percent">Percent</option>
+                                </select>
                             </div>
                         </div>
 
-                        <strong class="duration_time form-content form-bx8">Client Comments</strong>
-                        <div class="clearfix">
-                            <div class="form-group form-bx form-bx5">
-                                <textarea cols="110" rows="05" name="description"
-                                          data-ng-model="text"
-                                          minlength="1"
-                                          maxlength="500"
-                                          input-focus
-                                          style="float:left" />
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Amount</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model="params.rent_escalation_amount"
+                                       minlength="1"
+                                       maxlength="60"
+                                        />
                             </div>
                         </div>
 
+                    </div>
 
-</form>
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Taxes and Charges</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Liscensee Brokerage Type</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Liscensee Brokerage </label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Agent Details</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Agent Name</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Contacts For Premises</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Contact Type</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Selet Date/Time</label>
+                                <input kendo-date-time-picker class="form-control "
+                                       ng-model="due_date"
+                                       k-ng-model="k_due_date"
+                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Comments</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding:60px"></div>
+
+                    <strong class="duration_time form-content form-bx8">Candid Comments</strong>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+                            <textarea cols="110" rows="05" name="description"
+                                      data-ng-model=""
+                                      minlength="1"
+                                      maxlength="500"
+                                      input-focus
+                                      style="float:left" />
+                        </div>
+                    </div>
+
+                    <strong class="duration_time form-content form-bx8">Client Comments</strong>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+                            <textarea cols="110" rows="05" name="description"
+                                      data-ng-model=""
+                                      minlength="1"
+                                      maxlength="500"
+                                      input-focus
+                                      style="float:left" />
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <button type="submit" class="f-btn f-btn2" id="btn_addNewTaskSave" ng-click="save()">Save</button>
+
+                        <button type="button" class="f-btn f-btn2" id="btn_addNewTaskCancel" ng-click="cancel()">CANCEL</button>
+
+
+                    </div>
+
+                </form>
             </div>
             <!--</div>--><!-- project-detail ended -->
 
         </div><!-- pg-inner-content ended -->
 
     </div>
-</div><!-- main-content ended -->
+</div>
+<script>
+    $(function () {
+        $("input[name='broker_optn']").click(function () {
+            if ($("#broker_Rent").is(":checked")) {
+                $(".for_rent").show();
+            } else {
+                $(".for_rent").hide();
+            }
+            if ($("#broker_sales").is(":checked")) {
+                $(".for_sale").show();
+            } else {
+                $(".for_sale").hide();
+            }
+        });
+    });
+ </script>
+<!-- main-content ended -->
