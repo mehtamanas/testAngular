@@ -17,12 +17,12 @@ angular.module('contacts', [])
                 controller: 'LeadListController',
                 title: 'Leads'
             })
-        .state('app.client', {
-            url: '/client',
-            templateUrl: 'contacts/client.html',
-            controller: 'ClientListController',
-            title: 'Clients'
-        })
+            .state('app.client', {
+                url: '/client',
+                templateUrl: 'contacts/client.html',
+                controller: 'ClientListController',
+                title: 'Clients'
+            })
            .state('app.contactdetail', {
                url: '/contactsdetails?id',
                templateUrl: 'contacts/detail/contactDetail.html',
@@ -39,11 +39,11 @@ angular.module('contacts', [])
 
 
            .state('app.company', {
-       url: '/companyList',
-       templateUrl: 'contacts/company/companyList.html',
-       controller: 'CompanyListController',
-       title: 'Company'
-   })
+                   url: '/companyList',
+                   templateUrl: 'contacts/company/companyList.html',
+                   controller: 'CompanyListController',
+                   title: 'Company'
+               })
 
          .state('app.companyDetail', {
                  url: '/companyDetail',
@@ -79,11 +79,18 @@ angular.module('contacts', [])
                data: { pageTitle: 'Tag List' }
            })
 
-      .state('app.tagpeople', {
-            url: '/tagpeople?id',
-            templateUrl: 'contacts/tag_people.html',
-            controller: 'tagpeopleController',
-            title: 'Tag_People Details'
+          .state('app.tagpeople', {
+                url: '/tagpeople?id',
+                templateUrl: 'contacts/tag_people.html',
+                controller: 'tagpeopleController',
+                title: 'Tag_People Details'
+          })
+
+        .state('app.documentAgreement', {
+            url: '/documentAgreement',
+            templateUrl: 'contacts/documentAgreement.html',
+            controller: 'documentAgreementCtrl',
+            title: 'Document Agreement Details'
         })
 
     }]);

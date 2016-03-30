@@ -145,7 +145,79 @@
                      }
                 } ]
 
-            };
+    };
+
+    $scope.DemandLetterGrid = {
+        dataSource: {
+            type: "json",
+            transport: {
+                read: apiService.baseUrl + "Template/GetTemplateGrid/" + $cookieStore.get('orgID') + '/d9b1c8d6-4201-4077-abd0-c6654a6fa7d0'
+            },
+            pageSize: 5,
+            refresh: true,
+            schema: {
+                model: {
+                    fields: {
+                        date: { type: "date" }
+                    }
+                }
+            }
+        },
+        groupable: true,
+        sortable: true,
+        selectable: "multiple",
+        reorderable: true,
+        resizable: true,
+        filterable: true,
+        columnMenu: {
+            messages: {
+                columns: "Choose columns",
+                filter: "Apply filter",
+                sortAscending: "Sort (asc)",
+                sortDescending: "Sort (desc)"
+            }
+        },
+        pageable: {
+            refresh: true,
+            pageSizes: true,
+            buttonCount: 5
+        },
+        columns: [{
+            template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+            title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+            width: "60px",
+            attributes:
+               {
+                   "style": "text-align:center"
+               }
+        }, {
+            field: "template_name",
+            title: "Name",
+            width: "120px",
+            attributes:
+             {
+                 "style": "text-align:center"
+             }
+        }, {
+            field: "subject",
+            title: "Subject",
+            width: "120px",
+            attributes:
+             {
+                 "style": "text-align:center"
+             }
+
+        }, {
+            field: "description",
+            title: "Html",
+            width: "120px",
+            attributes:
+             {
+                 "style": "text-align:center"
+             }
+        }]
+
+    };
 
     $scope.agreementTemplateGrid = {
         dataSource: {
@@ -228,6 +300,17 @@
         }
         });
 
+    }
+
+    $scope.openDemandLetterPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'template/create/demand_letter/demand_letter.html',
+            backdrop: 'static',
+            controller: demandLetterController,
+            size: 'md',
+           
+        });
     }
 
     $scope.agreementEdit = function (dataItem) {
