@@ -87,12 +87,14 @@
                 buttonCount: 5
             },
             columns: [{
-                template: "<div class='user-photo_1'><img class='image2' src='#= media_url #'/></div>" +
+                template: "<div class='user-photo_1'style='margin-left:44%'><img class='image2' src='#= media_url #'/></div>" +
                     "<span style='padding-left:10px' class='customer-name'> </span>",            
                 title: "Picture",
+                width: "120px",
                 attributes:
                 {
                     "class": "UseHand",
+                    "style":"text-align:center",
                 }
              }, {
                 field: "name",

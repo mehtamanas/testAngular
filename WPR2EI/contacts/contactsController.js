@@ -166,7 +166,7 @@ angular.module('contacts')
                     "style": "text-align:center"
                 }
            }, {
-             template: "<div class='user-photo_1'><img class='image2' src='#= Contact_Image #'/></div>" +
+               template: "<div class='user-photo_1' style='margin-left: 33%;'><img class='image2' src='#= Contact_Image #'/></div>" +
                "<span style='padding-left:10px' class='customer-name'> </span>",
               
                title: "Picture",
