@@ -1,6 +1,4 @@
-/**
- * Created by dwellarkaruna on 20/10/15.
- */
+
 angular.module('project', [])
 
     .config(['$stateProvider', function ($stateProvider) {
@@ -17,5 +15,26 @@ angular.module('project', [])
             controller: 'ProjectDetailController',
             title: 'Projects Details'
         })
+         .state('app.contactDemandList', {
+             url: '/project/contactDemandList',
+             templateUrl: 'projects/demand_letter/contactList.html',
+             controller: 'contactListCtrl',
+             title: 'Contact List'
+         })
+        .state('app.demandLetterTemplate', {
+            url: '/project/demandLetterTemplate',
+            templateUrl: 'projects/demand_letter/demandLetterTemplate.html',
+            controller: 'demandLetterTemplateCtrl',
+            title: 'Demand Letter Template'
+        })
+         .state('app.demandLetterSend', {
+             url: '/project/demandLetterSend',
+             templateUrl: 'projects/demand_letter/sendDemandLetter.html',
+             controller: 'sendDemandLetterCtrl',
+             title: 'Demand Letter Send'
+         })
+
+
+
              
     }]);

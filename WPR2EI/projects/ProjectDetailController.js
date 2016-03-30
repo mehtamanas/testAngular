@@ -1,9 +1,8 @@
 ﻿angular.module('project')
 
-
 .controller('ProjectDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, projectService) {
-        //console.log('ProjectDetailController');
+       console.log('ProjectDetailController');
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         var orgID = $cookieStore.get('orgID');
@@ -17,8 +16,7 @@
         $scope.chargeAction = 'no_action';
         $scope.serviceAction = 'no_action';
 
-      //  Audit log start 
-     
+      //  Audit log start     
          AuditCreate = function () {
              var postdata =
             {
@@ -35,7 +33,6 @@
                 User_ID: $cookieStore.get('userId')
             };
 
-
              apiService.post("AuditLog/Create", postdata).then(function (response) {
                  var loginSession = response.data;
              },
@@ -46,14 +43,10 @@
          //end
          $scope.serviceAction = 'no_action';
        
-        
-
         $rootScope.title = 'Dwellar-ProjectDetails';
         $('#btnSave').hide();
         $('#iconEdit').hide();
         $('#btnAdd').hide();
-
-
 
         security.isAuthorized().then(function (response) {
             nav = response;
@@ -82,13 +75,8 @@
                     if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
                     if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
 
-
-
-
                 }
             }
-
-
 
             if ($rootScope.projects.write) {
                 event.preventDefault();
@@ -99,7 +87,6 @@
 
         });
       
-
         $scope.openNewPaymentSchemePopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -285,11 +272,7 @@
                     read: apiService.baseUrl + "Project/GetProjectTeamList/" + $scope.seletedCustomerId
 
                 },
-                pageSize: 20
-
-                //group: {
-                //    field: 'sport'
-                //}
+                pageSize: 20              
             },
             groupable: true,
             sortable: true,
@@ -342,9 +325,6 @@
                 },
                 pageSize: 20
 
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -426,9 +406,6 @@
                 },
                 pageSize: 20
 
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -745,7 +722,6 @@
              }]
         };
 
-
         $scope.serviceGrid = {
             dataSource: {
                 type: "json",
@@ -890,42 +866,30 @@
         });
         
         $scope.selectTower = function () {
-
             $scope.params.project_id = $scope.tower1;
-
-            //alert($scope.params.project_id);
             $cookieStore.put('tower_id', $scope.params.project_id);
             //var grid = document.getElementById('gridInventory');
             //grid.data('kendoGrid').refresh();
             $('.k-i-refresh').trigger("click");
-  
-           
-
+            
         };
        
         $scope.towerGrid = function () {
             Url = "Floors/GenerateTowerGrid"
-
             var postData = {
                 tower_id: $scope.tower1
             }
             apiService.post(Url, postData).then(function (response) {
 
                 $('.k-i-refresh').trigger("click");
-                //$state.go('towerGrid');  
-
+               
             },
         function (error) {
             alert("Error " + error.tower);
         });
-
-
-
         }
 
         $scope.TowerListGrid = {
-
-
             dataSource: {
                 type: "json",
                 transport: {
@@ -934,9 +898,6 @@
                 },
                 pageSize: 20
 
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -1092,9 +1053,6 @@
                 },
                 pageSize: 20
 
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -1191,7 +1149,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Services/GetCharges?id=" + $scope.seletedCustomerId  //eea9b986-8561-4970-851b-7cfb38bb2b87"
+                    read: apiService.baseUrl + "Services/GetCharges?id=" + $scope.seletedCustomerId  
 
                 },
                 pageSize: 20,
@@ -1376,26 +1334,19 @@
                 $('.k-i-refresh').trigger("click");
             }
             $scope.serviceAction = 'no_action';
-
-
-
         });
 
         $scope.openOffers = function () {
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/offers.tpl.html',
                 backdrop: 'static',
                 controller: OfferController,
                 size: 'md'
-
             });
-
         };
 
         $scope.openAddPopup = function () {
-            //   alert("abc");
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/addProject.tpl.html',
@@ -1412,8 +1363,7 @@
             });
         };
 
-        $scope.openTeamPopup = function () {
-            //   alert("abc");
+        $scope.openTeamPopup = function () {          
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/addTeam.html',
@@ -1430,8 +1380,7 @@
             });
         };
 
-        $scope.openNewFloorPopup = function () {
-           
+        $scope.openNewFloorPopup = function () {          
                 var modalInstance = $modal.open({
                     animation: true,
                     templateUrl: 'projects/add_new/addNewFloor.tpl.html',
@@ -1439,17 +1388,13 @@
                     controller: AddNewFloorController,
                     size: 'md'
                     
-                });
-           
+                });          
         };
 
             // Kendo Grid on change
-        $scope.myGridChangePanam = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedCustomerID = dataItem.tower_id;
-            //  alert(window.sessionStorage.selectedCustomerID);
+        $scope.myGridChangePanam = function (dataItem) {          
+            window.sessionStorage.selectedCustomerID = dataItem.tower_id;        
             $scope.openNewPanoramicPopup();
-
         };
 
         $scope.openNewPanoramicPopup = function () {
@@ -1462,8 +1407,7 @@
             });
         };
 
-        $scope.openEditFloorPopup = function (id) {
-            
+        $scope.openEditFloorPopup = function (id) {           
             $cookieStore.put('FloorId', id);
             var modalInstance = $modal.open({
                 animation: true,
@@ -1471,36 +1415,27 @@
                 backdrop: 'static',
                 controller: AddNewEditFloorController,
                 size: 'md',
-
             });
         };
 
-        $scope.openNewTowerPopup = function () {
-            
+        $scope.openNewTowerPopup = function () {          
                 var modalInstance = $modal.open({
                     animation: true,
                     templateUrl: 'projects/add_new/addNewTower.tpl.html',
                     backdrop: 'static',
                     controller: AddNewTowerController,
-                    size: 'md'
-                    
-                });
-            
-            
-           
+                    size: 'md'                   
+                });         
         };
 
         $scope.openEditTowerPopup = function (id) {
-
-            $cookieStore.put('tower_id', id);
-           
+            $cookieStore.put('tower_id', id);          
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/edit_tower.tpl.html',
                 backdrop: 'static',
                 controller: AddEditTowerController,
                 size: 'md',
-
             });
         };
 
@@ -1527,45 +1462,35 @@
             }
         };
 
-        $scope.openNewWingPopup = function () {
-            
+        $scope.openNewWingPopup = function () {         
                 var modalInstance = $modal.open({
                     animation: true,
                     templateUrl: 'projects/add_new/addNewWing.tpl.html',
                     backdrop: 'static',
                     controller: AddNewWingController,
-                    size: 'md'
-                  
-                });
-        
+                    size: 'md'               
+                });     
         };
 
-        $scope.openEditWingPopup = function (id) {
-           
+        $scope.openEditWingPopup = function (id) {        
             $cookieStore.put('wing_id',id);
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/editWing.tpl.html',
                 backdrop: 'static',
                 controller: EditNewWingController,
-                size: 'md'
-             
-                
-            });
-
+                size: 'md'                  
+           });
         };
 
         $scope.openEditProjectPopup = function () {
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/edit_project.tpl.html',
                 backdrop: 'static',
                 controller: EditProjectController,
                 size: 'md'
-
             });
-
         };
 
         $scope.openNewGalleryPopup = function () {
@@ -1609,9 +1534,7 @@
                 backdrop: 'static',
                 controller: FollowUpController,
                 size: 'md'
-
             });
-
         };
 
         $scope.openNewAmenityPopup = function () {
@@ -1680,9 +1603,7 @@
                     backdrop: 'static',
                     controller: DeleteController,
                     size: 'md',
-                    resolve: { items: { title: "Image" } }
-                   
-                    
+                    resolve: { items: { title: "Image" } }                                      
                 });
                 $rootScope.$broadcast('REFRESH', 'images');
             }
@@ -1732,29 +1653,23 @@
         };
 
         $scope.openEditTask = function () {
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/edit_task.html',
                 backdrop: 'static',
                 controller: EditTaskProject,
                 size: 'md'
-
             });
-
         };
 
         $scope.openCharges = function () {
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/addcharges.tpl.html',
                 backdrop: 'static',
                 controller: ChargesController,
                 size: 'md'
-
             });
-
         };
 
         $scope.openConfirmation = function () {
@@ -1765,11 +1680,8 @@
                 controller: ServiceconfirmationController,
                 size: 'md',
                 resolve: { items: { title: "Project" } }
-
             });
-
         }
-
 
         $scope.openConfirmationCharge = function () {
             var modalInstance = $modal.open({
@@ -1779,22 +1691,17 @@
                 controller: ChargeconfirmationController,
                 size: 'md',
                 resolve: { items: { title: "Project" } }
-
             });
-
         }
 
         $scope.editCharges = function () {
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/editcharges.tpl.html',
                 backdrop: 'static',
                 controller: EditChargesController,
                 size: 'md'
-
             });
-
         };
 
         $scope.editService = function () {
@@ -1808,36 +1715,28 @@
         };
 
             // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedTaskID = dataItem.task_id;
-            //  alert(window.sessionStorage.selectedCustomerID);
+        $scope.myGridChange = function (dataItem) {        
+            window.sessionStorage.selectedTaskID = dataItem.task_id;           
             $scope.openEditTask();
         };
 
-        $scope.myGridChangeEvent = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedEventID = dataItem.id;
-            //  alert(window.sessionStorage.selectedCustomerID);
+        $scope.myGridChangeEvent = function (dataItem) {            
+            window.sessionStorage.selectedEventID = dataItem.id;          
             $scope.openEditEventPopup();
         };
 
-        $scope.myGridChangeService = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedServiceID = dataItem.project_service_id;
-            //  alert(window.sessionStorage.selectedCustomerID);
+        $scope.myGridChangeService = function (dataItem) {           
+            window.sessionStorage.selectedServiceID = dataItem.project_service_id;           
             $scope.editService();
         };
        
-        $scope.myGridChangeCharges = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.chargeId = dataItem.charge_name_type_id;
-            //  alert(window.sessionStorage.selectedCustomerID);
+        $scope.myGridChangeCharges = function (dataItem) {          
+            window.sessionStorage.chargeId = dataItem.charge_name_type_id;         
             $scope.editCharges();
         };
 
             //calling Project Main api
-            projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            projectUrl = "Project/GetProjectSummary?id=" + $scope.seletedCustomerId;
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.main = response.data;
                 $scope.image = $scope.main[0];
@@ -1850,86 +1749,79 @@
        } );
 
             //callingWingApi
-            projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.builder = response.data;
-
             },
-       function (error)
-       {
-           
-       });
-
+           function (error)
+           {           
+           });
 
             //calling Tower
-            projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+            projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.built = response.data;
             },
-       function (error) {
+           function (error) {
           
-       });
+           });
+
             //for tower drop town
             Url = "Tower/GetByProjectID/" + $scope.seletedCustomerId;
-
             apiService.getWithoutCaching(Url).then(function (response) {
                 $scope.towers = response.data;
-
             },
-        function (error) {
-            if (error.status === 400)
-                alert(error.data.Message);
-
-        });
-
+            function (error) {            
+            });
 
             //calling brochure  pdf start
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.Gallery2 = response.data;
             },
-       function (error) {
+           function (error) {
         
-       });
+           });
+
             //calling brochure pdf end
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.Gallery1 = response.data;
             },
-       function (error)
-       {
+           function (error)
+           {
           
-       });
+           });
+
             // calling panoramic views api
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Panorma_zip_Full_2D";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.view = response.data;
             },
-       function (error)
-       {
+           function (error)
+           {
           
-       });
-
+           });
 
             //calling Amenities
             projectUrl = "Amenities/GetAmenities?id=" + $scope.seletedCustomerId;
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgAmenities = response.data;
             },
-       function (error)
-       {
+           function (error)
+           {
            
-       });
+           });
 
             //calling Floors
             projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.builddetail = response.data;
             },
-       function (error)
-       {
+           function (error)
+           {
         
-       });
+           });
 
             $scope.isVisible = [];
             $scope.isVisible[0] = true;
@@ -1947,41 +1839,40 @@
                 $scope.orgpayment = response.data;
 
             },
-       function (error)
-       {
+           function (error)
+           {
           
-       });
+           });
+
             //calling  unittype
             projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgUsers = response.data;
             },
-   function (error)
-   {
+               function (error)
+               {
       
-   });
+               });
 
             //calling getImage
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId +"/Gallery_Type_Full_2D";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.Gallery = response.data;
             },
-       function (error)
-       {
+           function (error)
+           {
          
-       });
+           });
             //calling uploadview
             projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Upload_View";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.UploadView = response.data;
             },
-       function (error) {
+           function (error) {
           
-       }
-            );
+           });
 
             Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
-
             apiService.getWithoutCaching(Url).then(function (response) {
                 data = response.data;
                 $scope.facebook = (_.findWhere(data, { element_type: 'project_facebook' })).element_info1;
@@ -1989,16 +1880,11 @@
                 $scope.twitter = (_.findWhere(data, { element_type: 'project_twitter' })).element_info1;
                 $scope.twitter = 'https://' + $scope.twitter;
                 $scope.linkedin = (_.findWhere(data, { element_type: 'project_linkedin' })).element_info1;
-                $scope.linkedin = 'https://' + $scope.linkedin;
-             
-
+                $scope.linkedin = 'https://' + $scope.linkedin;            
             },
-            function (error) {
-                if (error.status === 400)
-                    alert(error.data.Message);
+            function (error) {             
 
             });
-
 
             GetUrl = "Tower/GetTowerSummary?id=" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
             apiService.getWithoutCaching(GetUrl).then(function (response) {
@@ -2008,11 +1894,10 @@
                         {
                         });
 
-            //calling essential
-             if ($scope.seletedCustomerId !== '') {
-                 //GetUrl = apiService.baseUrl +"Project/GetById/0e31ff89-3236-4626-a3d9-4360ae084e33"
-                 GetUrl = "Project/GetById/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f Project/GetById/" ;
 
+            //calling essential
+             if ($scope.seletedCustomerId !== '') {               
+                 GetUrl = "Project/GetById/" + $scope.seletedCustomerId;
                  apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                      $scope.data = response.data;
@@ -2036,6 +1921,9 @@
              }
 
         }
+        $scope.DemandletterFun = function () {
+            $state.go('app.contactDemandList');
+        }
       
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'UserGrid') {
@@ -2054,7 +1942,7 @@
 
           if (args == 'unit')
             {
-                projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                projectUrl = "UnitTypes/GetUnitTypeDetails/" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.orgUsers = response.data;
                 },
@@ -2066,22 +1954,19 @@
 
             else if (args == 'wing')
             {
-                projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+                projectUrl = "WingType/GetWingFloorList/" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.builder = response.data;
 
                 },
            function (error)
-           {
-               
+           {              
            });
 
             }
-
             else if (args == 'tower')
             {
-
-                projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
+                projectUrl = "Tower/GetTowerWingList/" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.built = response.data;
                 },
@@ -2118,11 +2003,9 @@
             }
 
             else if (args == 'images') {
-
-                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Gallery_Type_Full_2D";//8c4128e2-785b-4ad6-85af-58344dd79517";
+                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Gallery_Type_Full_2D";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery = response.data;
-
                 },
            function (error) {
 
@@ -2131,7 +2014,6 @@
             }
 
             else if (args == 'uploadview') {
-
                 projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Upload_View";
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.UploadView = response.data;
@@ -2145,7 +2027,7 @@
 
             else if (args == 'floor') {
 
-                projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                projectUrl = "FloorType/GetFloorUnitList/" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.builddetail = response.data;
                 },
@@ -2155,7 +2037,7 @@
             }
 
             else if (args == 'payment') {
-                projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;//d028defd-319f-4b89-a51b-55ed9b327200 ";
+                projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.orgpayment = response.data;
 
@@ -2166,14 +2048,11 @@
                 );
             }
             else if (args == 'videos') {
-
-                projectUrl = "Project/GetVideoByProjectID/" + $scope.seletedCustomerId;//8c4128e2-785b-4ad6-85af-58344dd79517";
+                projectUrl = "Project/GetVideoByProjectID/" + $scope.seletedCustomerId;
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Videos = response.data;
-
                 },
            function (error) {
-
            });
 
             }
@@ -2187,7 +2066,7 @@
            });
             }
             else if (args == 'brochure') {
-                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"//8c4128e2-785b-4ad6-85af-58344dd79517";
+                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_start"
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery2 = response.data;
                 },
@@ -2195,7 +2074,7 @@
 
            });
                 //calling brochure pdf end
-                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"//8c4128e2-785b-4ad6-85af-58344dd79517";
+                projectUrl = "Project/GetImageByProjectID/" + $scope.seletedCustomerId + "/Pdf_End"
                 apiService.getWithoutCaching(projectUrl).then(function (response) {
                     $scope.Gallery1 = response.data;
                 },
@@ -2221,9 +2100,7 @@
                             $scope.linkedin = data[i].element_info1;
                             $scope.class_id = data[i].class_id;
                         }
-
                     }
-
                 },
                 function (error) {
 
@@ -2253,9 +2130,7 @@
             $scope.serviceAction = 'no_action';
             $('#checkAll').prop('checked', false);
            
-        });
-
-       
+        });     
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'TaskGrid') {
