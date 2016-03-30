@@ -407,6 +407,7 @@
                                     <div class="pull-left payment-list-title">
                                         {{user.type_of_payment}}<a data-toggle="modal"></a>
                                         <a ng-click="openEditPaymentSchemePopup(user.PaymentScheduleDetailsList[0].payment_schedule_id)" style="cursor:pointer" data-toggle="modal"><span class="edit-icon"></span></a>
+                                        <a ng-click="DemandletterFun()">Send Demand Letter</a>
                                     </div>
                                     <div class="pull-right">
                                         <label ng-click="toggleClass($index)">{{isVisible[$index] ? '-' : '+'}}</label>
@@ -416,6 +417,7 @@
                                 <div ng-show="isVisible[$index]" class="payment-list-content">
                                     <div class="payment-list-row clearfix" ng-repeat="sum in user.PaymentScheduleDetailsList">
                                         <span class="payment-c01">{{sum.description}}</span>
+                                 
                                         <span class="payment-c02">{{sum.percentage}}</span>
                                         
                                     </div>
