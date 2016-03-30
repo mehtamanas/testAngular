@@ -2,7 +2,7 @@
 angular.module('contacts')
 .controller('companyDetailController', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope) {
     console.log('companyDetailController');
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.seletedCompanyId = window.sessionStorage.selectedCustomerID;
 
   
     var userID = $cookieStore.get('userId');
@@ -16,7 +16,7 @@ angular.module('contacts')
         $scope.percent = 100 * (value / $scope.max);
     }
 
-    contactUrl = "Tags/GetTagsByCompanyId/" + $scope.seletedCustomerId;
+    contactUrl = "Tags/GetTagsByCompanyId/" + $scope.seletedCompanyId;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.tags = response.data;
 
@@ -60,7 +60,7 @@ function (error) {
   
 
     //end
-    contactUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId; 
+    contactUrl = "Company/GetCompanySummary/" + $scope.seletedCompanyId;
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.main = response.data;
         $scope.company = $scope.main[0];
@@ -76,7 +76,7 @@ function (error) {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             rating: $scope.rate,
-            id: $scope.seletedCustomerId,
+            id: $scope.seletedCompanyId,
         }
         apiService.post("Company/UpdateRating", postData).then(function (response) {
             var loginSession = response.data;
@@ -97,9 +97,9 @@ function (error) {
 
 
 
-    if ($scope.seletedCustomerId != "undefined") {
+    if ($scope.seletedCompanyId != "undefined") {
 
-        GetUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
+        GetUrl = "Company/GetCompanySummary/" + $scope.seletedCompanyId;//0bcdb6a7-af0a-4ed0-b428-8faa23b7689f" ;
 
         apiService.getWithoutCaching(GetUrl).then(function (response) {
 
@@ -139,7 +139,7 @@ function (error) {
              type: "json",
              transport: {
 
-                 read: apiService.baseUrl + "Company/GetAllContactDetailsbycompany/" + userID + "/" + $scope.seletedCustomerId
+                 read: apiService.baseUrl + "Company/GetAllContactDetailsbycompany/" + userID + "/" + $scope.seletedCompanyId
              },
              pageSize: 5
          },
@@ -303,7 +303,7 @@ function (error) {
     $scope.$on('REFRESH', function (event, args) {
         if (args == 'company_summary') {
 
-            contactUrl = "Company/GetCompanySummary/" + $scope.seletedCustomerId; //f2294ca0-0fee-4c16-86af-0483a5718991";
+            contactUrl = "Company/GetCompanySummary/" + $scope.seletedCompanyId; //f2294ca0-0fee-4c16-86af-0483a5718991";
             apiService.getWithoutCaching(contactUrl).then(function (response) {
                 $scope.main = response.data;
                 $scope.company = $scope.main[0];
@@ -316,14 +316,12 @@ function (error) {
 
     });
 
-    $scope.$on('REFRESHTag', function (event, args) {
+    $scope.$on('REFRESHTAG', function (event, args) {
         if (args == 'Tag')
         {
-            contactUrl = "Tags/GetTagsByCompanyId/" + $scope.seletedCustomerId;
+            contactUrl = "Tags/GetTagsByCompanyId/" + $scope.seletedCompanyId;
             apiService.getWithoutCaching(contactUrl).then(function (response) {
                 $scope.tags = response.data;
-
-
             },
         function (error) {
             console.log("Error " + error.state);
@@ -332,6 +330,7 @@ function (error) {
         }
 
     });
+
 
     function RefreshGrid() {
         setInterval(function () {
@@ -356,7 +355,7 @@ function (error) {
         var postdata =
             {
                 id: id,
-                company_id: window.sessionStorage.selectedCustomerID
+                company_id: $scope.seletedCompanyId
             }
 
         $cookieStore.put('postdata', postdata);

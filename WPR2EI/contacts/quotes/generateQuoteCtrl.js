@@ -112,7 +112,7 @@ function (error) {
 
 
     $scope.selectoffer = function () {
-        offerType = JSON.parse($scope.offer1);
+      offerType = JSON.parse($scope.offer1);
         if (isNaN(offerType.offer_value) == true) {
             $scope.offersvalue = offerType.offer_value
             $scope.params.offerDiscount = null;
@@ -221,7 +221,7 @@ function (error) {
 
     var calculateTotal = function () {
 
-        $scope.params.grandTotal = parseFloat($scope.params.subTotal) - parseFloat($scope.params.subTotal * ($scope.params.offerDiscount / 100)) - parseFloat($scope.params.additionalDiscount);
+        $scope.params.grandTotal = parseFloat($scope.params.subTotal) - parseFloat($scope.params.offerDiscount) - parseFloat($scope.params.additionalDiscount);
 
     }
 
@@ -254,7 +254,11 @@ function (error) {
     }
     var calculateGrandTotal = function () {//for grand total calculation
         $scope.params.subTotal = 0;
-        $scope.params.grandTotal= 0;
+        $scope.params.grandTotal = 0;
+        
+        $scope.offerType = JSON.parse($scope.offer1);
+        $scope.offer_type_name = offerType.offer_type_name;
+
         for (i = 0; i < $scope.subscription.length; i++) {
             $scope.params.subTotal = parseFloat($scope.params.subTotal) + parseFloat($scope.subscription[i].total);
         }
@@ -268,8 +272,15 @@ function (error) {
             $scope.params.additionalDiscount = '0';
             params.offerDiscount = '0';
         }
-     
-         $scope.params.grandTotal = parseFloat($scope.params.subTotal) - parseFloat($scope.params.subTotal * ($scope.params.offerDiscount / 100)) - parseFloat($scope.params.additionalDiscount);
+         if ($scope.offer_type_name == 'Percent')
+         {
+             $scope.params.grandTotal = (parseFloat($scope.params.subTotal) - parseFloat(($scope.params.subTotal) * ($scope.params.offerDiscount / 100))) - parseFloat($scope.params.additionalDiscount);
+         }
+         else if ($scope.offer_type_name == 'Flat Discount')
+         {
+             $scope.params.grandTotal = (parseFloat($scope.params.subTotal) - parseFloat($scope.params.offerDiscount)) - parseFloat($scope.params.additionalDiscount);
+         }
+         
 
          finalPrice();
     }
@@ -285,7 +296,7 @@ function (error) {
             project_id: $scope.project1,
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
-            discount: params.offerDiscount,
+            discount:$scope.params.offerDiscount,
             additional_discount: $scope.params.additionalDiscount,
             gross_amount: $scope.params.subTotal,
             final_amount: $scope.params.grandTotal,
