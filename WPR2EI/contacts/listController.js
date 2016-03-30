@@ -34,7 +34,7 @@
                  return deferred.promise;
              });
         };
-        
+
 
         $scope.goAddNew = function () {
             $cookieStore.put('contactid', '');
@@ -189,9 +189,9 @@
                           "style": "text-align:center"
                       }
                  }, {
-                    template: "<div class='user-photo_1'><img class='image2' src='#= Contact_Image #'/></div>" +
+                     template: "<div class='user-photo_1' style='margin-left:33%;'><img class='image2' src='#= Contact_Image #'/></div>" +
                "<span style='padding-left:10px' class='customer-name'> </span>",
-                   
+
                      title: "Picture",
                      attributes:
                      {
@@ -200,7 +200,7 @@
                  }, {
                      field: "Name",
                      title: "Name",
-                  
+
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -216,7 +216,7 @@
                  }, {
                      field: "Contact_Email",
                      title: "Email",
-                   
+
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -224,7 +224,7 @@
                  }, {
                      field: "City",
                      title: "City",
-                    
+
                      attributes:
                      {
                          "class": "UseHand",
@@ -233,7 +233,7 @@
                  }, {
                      field: "Assigned_To",
                      title: "Assigned To",
-                   
+
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -241,7 +241,7 @@
                  }, {
                      field: "Type",
                      title: "Type",
-                   
+
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -250,7 +250,7 @@
             {
                 field: "company",
                 title: "Company",
-              
+
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
@@ -259,12 +259,12 @@
             {
                 title: "Action",
                 template: "<a id='followUp' class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
-               
-                 attributes:
-                   {
-                       "class": "UseHand",
-                       "style": "text-align:center;"
-                   }
+
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center;"
+                  }
             }, ]
 
         };
