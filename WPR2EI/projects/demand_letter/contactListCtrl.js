@@ -1,14 +1,14 @@
 ﻿angular.module('project')
 
 .controller('contactListCtrl',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $modalInstance) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window) {
 
         var orgID = $cookieStore.get('orgID');
 
         $rootScope.title = 'Dwellar./SelectClient';
 
         var userID = $cookieStore.get('userId');
-
+        var payment_schedule_id = $cookieStore.get('Payment_Schedule_Id');
        
 
             $scope.SelectClientGrid = {
@@ -16,7 +16,7 @@
                     type: "json",
                     transport: {
                         read: function (options) {
-                            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Contact").then(function (response) {
+                            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Client").then(function (response) {
                                 data = response.data;
 
                                 
@@ -299,9 +299,9 @@
        
         
 
-        $scope.cancel = function () {
-            $modalInstance.dismiss();
-        }
+        //$scope.cancel = function () {
+        //    $modalInstance.dismiss();
+        //}
 
         $scope.SelectDemandTemplate = function () {
             $state.go('app.demandLetterTemplate');

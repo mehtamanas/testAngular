@@ -6,6 +6,7 @@
     //$scope.title = items.title;
     var templateDelete = $cookieStore.get('templateDelete');
     var totalContact = $cookieStore.get('checkedIds');
+   var PaymentId= $cookieStore.get('payment_schedule_id');
    // $scope.length = parseInt(templateDelete.length);
     $scope.gotoDelete = function () {
         apiService.post("Template/DeleteMultipleTemplates", templateDelete).then(function (response) {
