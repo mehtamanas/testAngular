@@ -75,32 +75,52 @@ angular.module('contacts')
         AuditCreate($scope.params);
 
         //end
-        $scope.changeView = function () {
-            //filter by grid name
-            filterObj = _.filter($scope.views, function (o)
-            { return o.view_name === $scope.gridView });
+        var callViewApi = function () {
 
-            //get the grid datasource
-            var grid = $('#contact_kenomain').getKendoGrid();
-            var sortObj = [];
-            sortObj.push({ field: filterObj[0].sort_by, dir: filterObj[0].sort_order });
-            var col = (filterObj[0].column_names).split(',');
-            for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
-                var colFlag = false;
-                for (j = 0; j < col.length; j++) {
-                    if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].title) {
-                        $('#contact_kenomain').getKendoGrid().showColumn(i);
-                        colFlag = true;
-                        break;
-                    }
-                    if (j === $('#contact_kenomain').getKendoGrid().columns.length - 1 && colFlag == false) {
-                        $('#contact_kenomain').getKendoGrid().hideColumn(i);
+            apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
+                $scope.views = res.data;
+            }, function (err) {
+
+            });
+        }
+
+
+        callViewApi();
+
+        $scope.changeView = function () {
+            if ($scope.gridView !== 'default') {
+                //filter by grid name
+                filterObj = _.filter($scope.views, function (o)
+                { return o.view_name === $scope.gridView });
+
+                //get the grid datasource
+                var grid = $('#contact_kenomain').getKendoGrid();
+                var sortObj = [];
+                sortObj.push({ field: filterObj[0].sort_by, dir: filterObj[0].sort_order });
+                var col = (filterObj[0].column_names).split(',');
+                for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+                    var colFlag = false;
+                    for (j = 0; j < col.length; j++) {
+                        if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].title) {
+                            $('#contact_kenomain').getKendoGrid().showColumn(i);
+                            colFlag = true;
+                            break;
+                        }
+                        if (j === col.length - 1 && colFlag == false) {
+                            $('#contact_kenomain').getKendoGrid().hideColumn(i);
+                        }
                     }
                 }
+
+                $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
             }
+            else {
+                $('#contact_kenomain').getKendoGrid().dataSource.sort({});
+                for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+                    $('#contact_kenomain').getKendoGrid().showColumn(i);
+                }
 
-            $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
-
+            }
 
         }
 
@@ -120,7 +140,7 @@ angular.module('contacts')
                 backdrop: 'static',
                 controller: createViewCtrl,
                 size: 'md',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead' } }
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'client' } }
             });
         }
 
@@ -467,6 +487,7 @@ angular.module('contacts')
             }
             $scope.clientAction = 'no_action';
             $('#checkAll').prop('checked', false);
+            callViewApi();
         });
 
         $scope.openFollowUp = function (d) {

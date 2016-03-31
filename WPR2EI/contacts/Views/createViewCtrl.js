@@ -1,4 +1,4 @@
-﻿createViewCtrl = function ($scope, $state, apiService, $cookieStore, $modalInstance, $modal,viewData) {
+﻿createViewCtrl = function ($scope, $state, apiService, $rootScope,$cookieStore, $modalInstance, $modal, viewData) {
     $scope.params = {};
 
     $scope.createView = function (isValid) {
@@ -15,6 +15,9 @@
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
                 $scope.cancel();
+                if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', 'LeadGrid');
+                if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', 'contactGrid');
+                if (viewData.grid == 'client')  $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
             }, function (error) {
 
             })
