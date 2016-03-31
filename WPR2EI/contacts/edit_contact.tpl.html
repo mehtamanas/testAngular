@@ -121,7 +121,7 @@
 
                 <div class="form-bx" style="padding:5px">
                     <label for="">Title</label>
-                    <input kendo-auto-complete ng-model="params.designation" k-data-source="titleList" class="form-control"  id="editcontact_title" />
+                    <input kendo-auto-complete ng-model="params.designation" k-data-source="titleList" class="form-control" id="editcontact_title" />
                 </div>
 
 
@@ -240,7 +240,7 @@
 
                 <div class="form-bx" style="padding:5px;margin-left:3%">
                     <label for="">Date Of Birth</label>
-                    <input id="editadd_datepicker" kendo-date-picker k-options="myOptions" 
+                    <input id="editadd_datepicker" kendo-date-picker k-options="myOptions"
                            class="form-control "
                            ng-model="params.Date_Of_Birth"
                            k-ng-model="k_due_date"
@@ -262,7 +262,7 @@
                             <input type="text" name="phone_no" class="form-control" id="editcontact_phone"
                                    data-ng-model="choice.Contact_Phone"
                                    input-focus
-                                   ng-pattern="/^[0-9\-]{8,12}$/"/>
+                                   ng-pattern="/^[0-9\-]{8,12}$/" />
                             <div class="text-danger"
                                  data-ng-if="newForm.phone_no.$invalid && (!newForm.phone_no.$pristine || showValid) && !newForm.phone_no.$focus">
                                 {{ 'Enter valid phone number' | translate }}
@@ -320,8 +320,8 @@
                                            'has-success': newForm.user.$valid && !newForm.user.$pristine && !newForm.user.$focus
                                             }">
                         <label for="">Assign To</label>
-                        <select ng-model="user1" name="user" ng-change="selectuser()" 
-                                class="dropdown form-control" id="editcontact_assignto" required >
+                        <select ng-model="user1" name="user" ng-change="selectuser()"
+                                class="dropdown form-control" id="editcontact_assignto" required>
                             <option value="" selected>Select User</option>
                             <option ng-repeat="User in users"
                                     value="{{User.id}}">
@@ -492,7 +492,7 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-    $("#editproject_uploader1").change(function () {
+    $("#contactedit_uploader1").change(function () {
         readURL(this);
     });
 </script>
