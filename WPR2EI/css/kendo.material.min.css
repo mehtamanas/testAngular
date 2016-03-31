@@ -614,8 +614,8 @@
 }
 
 .k-widget.k-tooltip {
-    border-color: rgba(100,100,100,0.9);
-    background-color: rgba(100,100,100,0.9);
+    border-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,0.9);
     color: #fff;
 }
 
@@ -632,19 +632,19 @@
 }
 
 .k-callout-n {
-    border-bottom-color: rgba(100,100,100,0.9);
+    border-bottom-color: rgba(255,255,255,0.9);
 }
 
 .k-callout-w {
-    border-right-color: rgba(100,100,100,0.9);
+    border-right-color: rgba(255,255,255,0.9);
 }
 
 .k-callout-s {
-    border-top-color: rgba(100,100,100,0.9);
+    border-top-color: rgba(255,255,255,0.9);
 }
 
 .k-callout-e {
-    border-left-color: rgba(100,100,100,0.9);
+    border-left-color: rgba(255,255,255,0.9);
 }
 
 .k-tooltip-validation .k-callout-n {
