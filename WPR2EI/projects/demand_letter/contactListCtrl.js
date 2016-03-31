@@ -1,7 +1,7 @@
 ﻿angular.module('project')
 
 .controller('contactListCtrl',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $modalInstance) {
 
         var orgID = $cookieStore.get('orgID');
 
@@ -297,8 +297,11 @@
 
 
        
+        
 
-     
+        $scope.cancel = function () {
+            $modalInstance.dismiss();
+        }
 
         $scope.SelectDemandTemplate = function () {
             $state.go('app.demandLetterTemplate');

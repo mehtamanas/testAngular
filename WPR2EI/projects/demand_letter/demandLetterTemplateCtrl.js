@@ -182,6 +182,9 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
         }
    
 }
+    $scope.back = function () {
+        $state.go('app.contactDemandList');
+    }
 
   
     $scope.sendEmail = function (isValid) {
