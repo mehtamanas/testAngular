@@ -44,8 +44,8 @@
 
                 </div>
                 <div class="clearfix" style=" margin-left: 82%; margin-top: 7%;">
-                    <div class="col-md-10 col-sm-5"><span class="span-contact contact_p_1 upper" id="Last_Updated">Last Updated :</span><span style="color:#4b4b4b;font-size: 12px;">{{image.Contact_update_Date | date:'dd/MM/yyyy'}}</span><span class="span-last_date"></span></div>
-                    <div class="col-md-10 col-sm-5"><span class="span-contact contact_p_1 upper" id="Last_Contacted">Last Contacted :</span><span style="color:#4b4b4b;font-size: 12px;"> {{image.last_followup_Date || "Never"}} </span>  <span class="span-last_contacted"></span></div>
+                    <div class="col-md-10 col-sm-5"><span class="span-contact contact_p_1 upper" id="Last_Updated">Last Updated :</span><span style="color:#4b4b4b;font-size: 12px;" id="Last_Updated" >{{image.Contact_update_Date | date:'dd/MM/yyyy'}}</span><span class="span-last_date"></span></div>
+                    <div class="col-md-10 col-sm-5"><span class="span-contact contact_p_1 upper" id="Last_Contacted">Last Contacted :</span><span style="color:#4b4b4b;font-size: 12px;" id="Last_Contacted"> {{image.last_followup_Date || "Never"}} </span>  <span class="span-last_contacted"></span></div>
                 </div>
             </div>
 
@@ -161,42 +161,42 @@
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Date Of Birth</div>
-                                        <div class="contact_value"><h7 ng-bind="Date_Of_Birth"></h7></div>
+                                        <div class="contact_value"><h7 ng-bind="Date_Of_Birth" id="contact_Date_Of_Birth"></h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Age</div>
-                                        <div class="contact_value"><h7 ng-bind="age"></h7></div>
+                                        <div class="contact_value"><h7 ng-bind="age" id="contact_age"></h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Age Group</div>
-                                        <div class="contact_value"><h7 ng-bind="Age_Group"></h7></div>
+                                        <div class="contact_value"><h7 ng-bind="Age_Group" id="contact_ageGroup"></h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Company</div>
-                                        <div class="contact_value"><h7 ng-bind="company"> </h7></div>
+                                        <div class="contact_value"><h7 ng-bind="company" id="contact_company"> </h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Profession</div>
-                                        <div class="contact_value"><h7>{{image.contact_designation}}</h7></div>
+                                        <div class="contact_value"><h7 id="contact_profession">{{image.contact_designation}} </h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Annual Income</div>
-                                        <div class="contact_value"><h7 ng-bind="income"></h7></div>
+                                        <div class="contact_value"><h7 ng-bind="income" id="contact_annualIncome"></h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
-                                        <div class="contact_title"><span ng-show='{{WHO_AM_I === "Service_industry"}}'>Associated Resellers</span><span ng-hide='{{WHO_AM_I === "Service_industry"}}'>Associated Channel Partners</span></div>
+                                        <div class="contact_title"><span ng-show='{{WHO_AM_I === "Service_industry"}}' id="contact_associatedResellers">Associated Resellers</span><span ng-hide='{{WHO_AM_I === "Service_industry"}}' id="contact_associatedChannelPartners">Associated Channel Partners</span></div>
                                         <div class="contact_value"><h7></h7></div>
                                         <h7></h7>
                                     </div>
@@ -204,13 +204,13 @@
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Budget</div>
-                                        <div class="contact_value"><h7 ng-bind="budget1"></h7></div>
+                                        <div class="contact_value"><h7 ng-bind="budget1" id="contact_budget"></h7></div>
                                     </div>
                                 </div>
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
                                         <div class="contact_title">Looking at Purchase In</div>
-                                        <div class="contact_value"><h7 ng-bind="buy1"></h7></div>
+                                        <div class="contact_value"><h7 ng-bind="buy1" id="contact_buy1"></h7></div>
                                     </div>
                                 </div>
 
