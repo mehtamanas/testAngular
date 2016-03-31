@@ -76,14 +76,16 @@ angular.module('contacts')
             var sortObj = [];
             sortObj.push({ field: filterObj[0].sort_by, dir: filterObj[0].sort_order });
             var col = (filterObj[0].column_names).split(',');
-            for (i = 0; i < col.length; i++) {
-                for (j = 0; j < $('#contact_kenomain').getKendoGrid().columns.length; j++) {
-                    if ($('#contact_kenomain').getKendoGrid().columns[j].title === col[i]) {
-                        $('#contact_kenomain').getKendoGrid().columns[j]
+            for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+                for (j = 0; j < col.length; j++) {
+                    if (col[j]===$('#contact_kenomain').getKendoGrid().columns[i].title) {
+                        $('#contact_kenomain').getKendoGrid().showColumn(i);
                         break;
                     }
-                }
+                    if (j === $('#contact_kenomain').getKendoGrid().columns.length - 1) {
 
+                    }
+                }
             }
 
             $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
