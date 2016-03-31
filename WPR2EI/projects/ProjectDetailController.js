@@ -1837,6 +1837,16 @@
             projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;//d028defd-319f-4b89-a51b-55ed9b327200 ";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgpayment = response.data;
+                //$scope.PaymentScheduleDetailsList = [];
+                var paymentArr = [];
+                for (i = 0; i < $scope.orgpayment.length; i++) {
+                    if (i == 0) paymentArr.push(_.pluck(($scope.orgpayment)[i].PaymentScheduleDetailsList, 'payment_schedule_id'));
+                    else _.merge(paymentArr[0], (_.pluck(($scope.orgpayment)[i].PaymentScheduleDetailsList, 'payment_schedule_id')));
+                }
+
+                var uniqPayment = _.uniq(paymentArr[0]);
+                $cookieStore.put('payment_schedule_id', uniqPayment);
+
 
             },
            function (error)
