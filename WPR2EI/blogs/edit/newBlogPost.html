@@ -29,7 +29,7 @@
         </div>
         <label class="custom-file-input">
 
-            <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+            <input type="file" class="image-upload-f" id="blog_Create_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
         </label>
     </div>
 
@@ -43,7 +43,7 @@
                    input-focus
                    required />
             <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
-                <div ng-message="required">You did not enter a field</div>
+                <div ng-message="required">Enter your name</div>
             </div>
         </div>
     </div>
@@ -107,3 +107,19 @@
 
         </div>
 </form>
+<!-- for image fetch -->
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#blog_Create_uploader1").change(function () {
+        readURL(this);
+    });
+</script>
