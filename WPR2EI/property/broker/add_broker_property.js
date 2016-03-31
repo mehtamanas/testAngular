@@ -18,7 +18,6 @@
             }
         };
 
-    
         Url = "GetCSC/state";
         apiService.get(Url).then(function (response) {
             $scope.states = response.data;
@@ -29,22 +28,46 @@
 
         $scope.selectstate = function () {
             $scope.params.state = $scope.state1;
-            //alert($scope.params.state);
         };
 
         Url = "GetCSC/city";
         apiService.get(Url).then(function (response) {
             $scope.cities = response.data;
         },
-    function (error) {
+        function (error) {
         alert("Error " + error.cities);
-
-    });
+        });
 
         $scope.filterExpression = function (city) {
             return (city.stateid === $scope.params.state);
         };
 
+
+        Url = "Broker/GetPC";
+        apiService.get(Url).then(function (response) {
+            $scope.properties = response.data;
+         },
+         function (error) {
+         alert("Error " + error.state);
+         });
+
+        Url = "Broker/GetPV";
+        apiService.get(Url).then(function (response) {
+            $scope.views = response.data;
+        },
+         function (error) {
+             alert("Error " + error.state);
+         });
+
+        Url = "Broker/GetLS";
+        apiService.get(Url).then(function (response) {
+            $scope.sources = response.data;
+        },
+         function (error) {
+             alert("Error " + error.state);
+         });
+
+     
 
         //function call
         $scope.selectdeposit = function () {
@@ -101,13 +124,11 @@
                     alert("Network issue");
 
             });
-
         }
 
-        Url = "Amenities/GetAmenitiesByOrg?id=" + orgID;
+        Url = "Amenities/GetAmenities?id=" + orgID;
         apiService.get(Url).then(function (response) {
             $scope.orgAmenities = response.data;
-
         },
        function (error) {
 
