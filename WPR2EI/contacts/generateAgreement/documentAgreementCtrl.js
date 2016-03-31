@@ -1,13 +1,8 @@
 ﻿angular.module('contacts')
 .controller('documentAgreementCtrl',
     function ($scope, $state, $cookieStore, apiService, $rootScope, $sanitize, $modal, FileUploader) {
-
-
-
-        $scope.showTemplate = true;
-        $scope.showPreview = false;
         $scope.params = {}
-
+        $scope.params.documentType = 'agreement';
         $scope.params.orgId = $cookieStore.get('orgID');
         $scope.params.userid = $cookieStore.get('userId')
         $scope.params.templateName;
@@ -59,18 +54,6 @@
                             $('#imageBrowser').trigger("click");
                         }
                     },
-                      {
-                          name: "insertHtml",
-                          items: [
-                              { text: "Last Name", value: "{{last_name}}" },
-                              { text: "First Name", value: "{{first_name}}" },
-                              { text: "My First Name", value: "{{my_first_name}}" },
-                              { text: "My Last Name", value: "{{my_last_name}}" },
-                              { text: "Salutation", value: "{{salutation}}" },
-                               { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
-
-                          ]
-                      },
                       "insertFile",
                       "viewHtml",
             ],
@@ -117,9 +100,22 @@
         }
 
         var callApi = function () {
-            apiService.get("Project/Get/" + $cookieStore.get('orgID')).then(function (response) {
-                $scope.projectList = response.data;
-            })
+            Url = "project/Get/" + $cookieStore.get('orgID');//project
+            apiService.get(Url).then(function (response) {
+                $scope.projects = response.data;
+            },
+           function (error) {
+               alert("Error " + error.state);
+           });
+
+            Url = "Template/GetAllTemplatesByDoc?orgId=" + $cookieStore.get('orgID') + "&docId=d9b1c8d6-4201-4077-abd0-c6654a6fa7d0";//templates
+            apiService.get(Url).then(function (response) {
+                $scope.params.templateList = response.data;
+            },
+           function (error) {
+               alert("Error " + error.state);
+           });
+
         }
 
         callApi();
@@ -150,47 +146,23 @@
             }
         }
 
-        $scope.preview = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                template: $scope.params.htmlcontent,
-                backdrop: 'static',
-                size: 'md'
-            });
-
-        }
-
-
-        Url = "project/Get/" + $cookieStore.get('orgID');
-        apiService.get(Url).then(function (response) {
-            $scope.projects = response.data;
-        },
-       function (error) {
-           alert("Error " + error.state);
-       });
-
         $scope.selectproject = function () {
-            $scope.params.project_id = $scope.project1;
+            
         };
 
-
-
-        Url = "Template/GetAllTemplatesByDoc?orgId=" + $cookieStore.get('orgID') + "&docId=" + "d9b1c8d6-4201-4077-abd0-c6654a6fa7d0";
-        apiService.get(Url).then(function (response) {
-            $scope.templates = response.data;
-        },
-       function (error) {
-           alert("Error " + error.state);
-       });
-
-        $scope.selecttemplate = function () {
-            $scope.params.docId = $scope.template1;
+        $scope.selectTemplate = function () {
+            if ($scope.params.templateSelected !== "") {
+                $scope.params.bodyText = $sanitize((_.findWhere($scope.params.templateList, { id: $scope.params.templateSelected })).description);
+                //for (var k in custom_fields) {
+                //    while (($scope.params.bodyText).search(k) > -1) {
+                //        $scope.params.bodyText = ($scope.params.bodyText).replace(k, custom_fields[k]);
+                //    }
+                //}
+            }
+            else{
+                $scope.params.bodyText = "";
+        }
         };
-
-
-        //$scope.cancel = function () {
-        //    $modalInstance.dismiss();
-        //}
 
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
@@ -199,14 +171,13 @@
                 backdrop: 'static',
                 controller: sucessfullController,
                 size: 'md',
-                resolve: { items: { title: "Agreement" } }
+                resolve: { items: { title: "Demand Letter" } }
             });
         }
 
         $scope.preview = function () {
             demoFromHTML();
-            //$scope.showTemplate = false;
-            //$scope.showPreview = true;
+
         }
 
         $scope.goTOTemplate = function () {
