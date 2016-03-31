@@ -238,7 +238,7 @@
 }
 
 .k-loading-image {
-    background-image: url('Material/loading-image.gif');
+    background-image: url('../images/default.svg'); 
 }
 
 .k-loading-color {
