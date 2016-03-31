@@ -207,6 +207,7 @@ angular.module('contacts')
             reorderable: true,
             resizable: true,
             filterable: true,
+            height:screen.height -370,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -232,7 +233,7 @@ angular.module('contacts')
             }, {
                 field: "name",
                 title: "Name",
-                width: "120px",
+               
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
@@ -240,7 +241,7 @@ angular.module('contacts')
             }, {
                      field: "person_count",
                      title: "People",
-                     width: "120px",
+                  
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -248,7 +249,7 @@ angular.module('contacts')
                  }, {
                      field: "total_task_count",
                      title: "Task",
-                     width: "120px",
+                  
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:right"
@@ -256,7 +257,7 @@ angular.module('contacts')
                  }, {
                      field: "total_quote_count",
                      title: "Quote",
-                     width: "120px",
+                    
                      attributes: {
                          "class": "UseHand",
                          "style": "text-align:center"
@@ -266,7 +267,7 @@ angular.module('contacts')
                      title: "Last Follow Up",
                      format: '{0:dd-MM-yyyy hh:mm:ss tt }',
                      type: 'date',
-                     width: "120px",
+                  
                      attributes:
                      {
                          "class": "UseHand",
@@ -276,7 +277,7 @@ angular.module('contacts')
               {
                   field: "rating",
                   title: "Rating",
-                  width: "120px",
+                
                   attributes: {
                       "class": "UseHand",
                       "style": "text-align:center"
