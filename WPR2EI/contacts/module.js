@@ -88,7 +88,7 @@ angular.module('contacts', [])
 
         .state('app.documentAgreement', {
             url: '/documentAgreement',
-            templateUrl: 'contacts/documentAgreement.html',
+            templateUrl: 'contacts/generateAgreement/documentAgreement.html',
             controller: 'documentAgreementCtrl',
             title: 'Document Agreement Details'
         })
