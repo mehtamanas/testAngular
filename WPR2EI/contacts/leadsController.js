@@ -77,13 +77,15 @@ angular.module('contacts')
             sortObj.push({ field: filterObj[0].sort_by, dir: filterObj[0].sort_order });
             var col = (filterObj[0].column_names).split(',');
             for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+                var colFlag = false;
                 for (j = 0; j < col.length; j++) {
                     if (col[j]===$('#contact_kenomain').getKendoGrid().columns[i].title) {
                         $('#contact_kenomain').getKendoGrid().showColumn(i);
+                        colFlag = true;
                         break;
                     }
-                    if (j === $('#contact_kenomain').getKendoGrid().columns.length - 1) {
-
+                    if (j === $('#contact_kenomain').getKendoGrid().columns.length - 1 && colFlag==false) {
+                        $('#contact_kenomain').getKendoGrid().hideColumn(i);
                     }
                 }
             }
@@ -95,7 +97,9 @@ angular.module('contacts')
 
         $scope.saveView = function () {
             var grid = $('#contact_kenomain').getKendoGrid();
-            var sortObject = grid.dataSource._sort[0];
+            if (grid.dataSource._sort) {
+                var sortObject = grid.dataSource._sort[0];
+            }
             var colObject = _.filter(grid.columns, function (o)
             { return !o.hidden });
             colObject = (_.pluck(colObject, 'title')).join(',');
