@@ -287,7 +287,7 @@
                                    placeholder="Email Address"
                                    data-ng-model="choice1.Contact_Email"
                                    input-focus
-                                   ng-pattern="/^[a-zA-Z\s]+[a-zA-Z\s0-9._-]+@[a-zA-Z\sa-z]+\.[a-zA-Z\s.]{2,5}$/" />
+                                   ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
                             <div class="text-danger"
                                  data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
                                 {{ 'Enter valid email address' | translate }}
@@ -378,7 +378,7 @@
                             <input type="text" name="Address" class="form-control" id="editcontact_address"
                                    data-ng-model="choice.Street_1"
                                    minlength="5"
-                                   maxlength="50"
+                                   maxlength="255"
                                    input-focus />
                             <div class="text-danger"
                                  data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
@@ -404,7 +404,7 @@
                         <input type="text" class="form-control text-bold" id="editcontact_Area" autofocus name="Area"
                                data-ng-model="params.area"
                                minlength="1"
-                               maxlength="30"
+                               maxlength="255"
                                input-focus />
                         <div class="text-danger"
                              data-ng-if="addNewForm.Area.$invalid && (!addNewForm.Area.$pristine || showValid) && !addNewForm.Area.$focus">
