@@ -4,6 +4,7 @@ angular.module('contacts')
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         console.log('ContactListController');
+        $scope.gridView = 'default';
         $scope.contactAction = 'no_action';
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
@@ -74,6 +75,54 @@ angular.module('contacts')
         AuditCreate($scope.params);
 
         //end
+        $scope.changeView = function () {
+            //filter by grid name
+            filterObj = _.filter($scope.views, function (o)
+            { return o.view_name === $scope.gridView });
+
+            //get the grid datasource
+            var grid = $('#contact_kenomain').getKendoGrid();
+            var sortObj = [];
+            sortObj.push({ field: filterObj[0].sort_by, dir: filterObj[0].sort_order });
+            var col = (filterObj[0].column_names).split(',');
+            for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+                var colFlag = false;
+                for (j = 0; j < col.length; j++) {
+                    if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].title) {
+                        $('#contact_kenomain').getKendoGrid().showColumn(i);
+                        colFlag = true;
+                        break;
+                    }
+                    if (j === $('#contact_kenomain').getKendoGrid().columns.length - 1 && colFlag == false) {
+                        $('#contact_kenomain').getKendoGrid().hideColumn(i);
+                    }
+                }
+            }
+
+            $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
+
+
+        }
+
+        $scope.saveView = function () {
+            var grid = $('#contact_kenomain').getKendoGrid();
+            if (grid.dataSource._sort) {
+                var sortObject = grid.dataSource._sort[0];
+            }
+            var colObject = _.filter(grid.columns, function (o)
+            { return !o.hidden });
+            colObject = (_.pluck(colObject, 'title')).join(',');
+
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/Views/createView.html',
+                backdrop: 'static',
+                controller: createViewCtrl,
+                size: 'md',
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead' } }
+            });
+        }
 
         $scope.chooseAction = function () {
             var allGridElements = $(".checkbox").toArray();
@@ -251,7 +300,7 @@ angular.module('contacts')
       },
       {
           field: "TAGS",
-          template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; display:inline-block; margin-bottom: 5px;' class='properties-close upper tag-name'>{{tag.name}}</span>",
+          template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
           title: "TAGS",
           width: "120px",
           attributes: {
@@ -309,6 +358,66 @@ angular.module('contacts')
                 clearFilters();
 
         };
+        //for tags tooltip
+        $(document).ready(function () {
+            kendo.ui.Tooltip.fn._show = function (show) {
+                return function (target) {
+                    var e = {
+                        sender: this,
+                        target: target,
+                        preventDefault: function () {
+                            this.isDefaultPrevented = true;
+                        }
+                    };
+
+                    if (typeof this.options.beforeShow === "function") {
+                        this.options.beforeShow.call(this, e);
+                    }
+                    if (!e.isDefaultPrevented) {
+                        // only show the tooltip if preventDefault() wasn't called..
+                        show.call(this, target);
+                    }
+                };
+            }(kendo.ui.Tooltip.fn._show);
+            $("#contact_kenomain").kendoTooltip({
+                animation: {
+                    close: {
+                        effects: "fadeOut zoom:out",
+                        duration: 600
+                    },
+                    open: {
+                        effects: "fadeIn zoom:in",
+                        duration: 100
+                    }
+                },
+                filter: "td:nth-child(12)", //this filter selects the  column cells
+                position: "top",
+                beforeShow: function (e) {
+                    console.log(e);
+                    if ($(e.target).data("tagName") === null) {
+
+                        // don't show the tooltip if the name attribute contains null
+                        e.preventDefault();
+                    }
+                },
+                content: function (e) {
+
+                    var dataItem = $("#contact_kenomain").data("kendoGrid").dataItem(e.target.closest("tr"));
+                    var data = dataItem.Tags;
+                    var content = '';
+                    for (i = 0; i < data.length; i++) {
+                        content = content + "<span style='background-color:" + data[i].background_color + ";display:block; margin-bottom: 5px;' class='properties-close upper tag-name'>" + data[i].name + "</span>"
+                    }
+
+                    return content;
+
+
+                }
+
+            }).data("kendoTooltip");
+
+        });
+        //end tooltip
 
         function applyFilter(filterField, filterValue) {
 

@@ -31,6 +31,13 @@
                         <option value='delete'>DELETE</option>
                     </select>
                 </div>
+                <div class="pull-left actions-wrap">
+                    <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeView()" id="contacaction">
+                        <option value='default' selected>Default View</option>
+                        <option ng-repeat="view in views" value={{view.view_name}}>{{view.view_name}}</option>
+                    </select>
+                </div>
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveView()"><u>SAVE VIEW</u></a>
 
 
                 <div class="pull-right btn-wrap-right">
