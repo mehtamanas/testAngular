@@ -2,37 +2,37 @@
 
 
 .controller('TeamDetailController',
-    function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope, $modal,teamService) {
+    function ($scope, $state, security, $cookieStore, apiService, $window, $rootScope, $modal, teamService) {
         console.log('TeamDetailController');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         $rootScope.title = 'Dwellar./TeamDetails';
         var orgID = $cookieStore.get('orgID');
 
-       // //Audit log start
-       // $scope.params = {
-       //     device_os: "windows10",
-       //     device_type: "mobile",
-       //     device_mac_id: "34:#$::43:434:34:45",
-       //     module_id: "TeamDetail",
-       //     action_id: "TeamDetail View",
-       //     details: "TeamDetail",
-       //     application: "angular",
-       //     browser: $cookieStore.get('browser'),
-       //     ip_address: $cookieStore.get('IP_Address'),
-       //     location: $cookieStore.get('Location'),
-       //     organization_id: $cookieStore.get('orgID'),
-       //     User_ID: $cookieStore.get('userId')
-       // };
-       // AuditCreate = function (param) {
+        // //Audit log start
+        // $scope.params = {
+        //     device_os: "windows10",
+        //     device_type: "mobile",
+        //     device_mac_id: "34:#$::43:434:34:45",
+        //     module_id: "TeamDetail",
+        //     action_id: "TeamDetail View",
+        //     details: "TeamDetail",
+        //     application: "angular",
+        //     browser: $cookieStore.get('browser'),
+        //     ip_address: $cookieStore.get('IP_Address'),
+        //     location: $cookieStore.get('Location'),
+        //     organization_id: $cookieStore.get('orgID'),
+        //     User_ID: $cookieStore.get('userId')
+        // };
+        // AuditCreate = function (param) {
 
-       //     apiService.post("AuditLog/Create", param).then(function (response) {
-       //         var loginSession = response.data;
+        //     apiService.post("AuditLog/Create", param).then(function (response) {
+        //         var loginSession = response.data;
 
-       //     },
-       //function (error) {
-       //});
-       // };
-       // AuditCreate($scope.params);
+        //     },
+        //function (error) {
+        //});
+        // };
+        // AuditCreate($scope.params);
 
         //end
 
@@ -62,7 +62,7 @@
 
                 $scope.name = $scope.data[0].name;
                 $scope.description = $scope.data[0].description;
-             
+
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
                 }
@@ -93,8 +93,8 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-  height: screen.height - 370,
-columnMenu: {
+            height: screen.height - 370,
+            columnMenu: {
                 messages: {
                     columns: "Choose columns",
                     filter: "Apply filter",
@@ -111,13 +111,23 @@ columnMenu: {
             columns: [{
                 field: "name",
                 title: "Name",
-                width: "120px"
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
             }, {
 
                 field: "description",
                 title: "Description",
                 width: "120px",
-               
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
+
             }]
         };
 
@@ -125,7 +135,7 @@ columnMenu: {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl +"Team/GetUsersByTeam/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Team/GetUsersByTeam/" + $scope.seletedCustomerId
                 },
                 pageSize: 20
             },
@@ -135,8 +145,8 @@ columnMenu: {
             reorderable: true,
             resizable: true,
             filterable: true,
-  height: screen.height - 370,
-columnMenu: {
+            height: screen.height - 370,
+            columnMenu: {
                 messages: {
                     columns: "Choose columns",
                     filter: "Apply filter",
@@ -151,41 +161,62 @@ columnMenu: {
             }, schema: {
                 model: {
                     fields: {
-                       
+
                         date: { type: "date" },
-                       
+
                     }
                 }
             },
             columns: [{
-                template: "<img height='40px' width='40px' src='#= media_url #'/>" +
+                template: "<img height='40px' style='margin-left:11%' width='40px' src='#= media_url #'/>" +
                 "<span style='padding-left:10px' class='property-photo'> </span>",
                 title: "Picture",
                 width: "120px",
                 attributes: {
                     "class": "UseHand",
+                    "style": "text-align:center",
 
                 }
             }, {
                 field: "name",
                 title: "Name",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "account_email",
                 title: "Email",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "account_phone",
                 title: "Phone",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
 
-            },{
+                }
+
+            }, {
                 field: "date",
                 title: "Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
             }]
         };
 
@@ -193,7 +224,7 @@ columnMenu: {
             dataSource: {
                 type: "json",
                 transport: {
-                    read:apiService.baseUrl + "Team/GetTeamPropertyList/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Team/GetTeamPropertyList/" + $scope.seletedCustomerId
                 },
                 pageSize: 20,
                 schema: {
@@ -212,8 +243,8 @@ columnMenu: {
             reorderable: true,
             resizable: true,
             filterable: true,
-  height: screen.height - 370,
-columnMenu: {
+            height: screen.height - 370,
+            columnMenu: {
                 messages: {
                     columns: "Choose columns",
                     filter: "Apply filter",
@@ -249,12 +280,12 @@ columnMenu: {
                 title: "Built Up",
                 width: "120px",
 
-            },{
+            }, {
                 field: "super_built_up_area",
                 title: "Super Built Up ",
                 width: "120px",
 
-              }]
+            }]
         };
 
         $scope.PeopleGrid = {
@@ -279,8 +310,8 @@ columnMenu: {
             reorderable: true,
             resizable: true,
             filterable: true,
-  height: screen.height - 370,
-columnMenu: {
+            height: screen.height - 370,
+            columnMenu: {
                 messages: {
                     columns: "Choose columns",
                     filter: "Apply filter",
@@ -342,8 +373,8 @@ columnMenu: {
             reorderable: true,
             resizable: true,
             filterable: true,
-  height: screen.height - 370,
-columnMenu: {
+            height: screen.height - 370,
+            columnMenu: {
                 messages: {
                     columns: "Choose columns",
                     filter: "Apply filter",
@@ -399,7 +430,7 @@ columnMenu: {
         };
 
         //end
-       
+
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);

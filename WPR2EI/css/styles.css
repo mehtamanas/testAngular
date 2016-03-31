@@ -1300,7 +1300,7 @@ div.k-grid-footer {
     border-radius: 0;
     margin: auto;
     text-align: center;
-    /*width: 960px;*/
+    width: 960px;
 }
 
 .modal-header {
