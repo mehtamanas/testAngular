@@ -4,7 +4,7 @@
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">Edit Organization</h4>
+        <h4 class="modal-title" id="exampleModalLabel" style="text-align: left;">Edit Organization</h4>
     </div><!-- modal-header ended -->
 
     <div class="modal-body">
@@ -21,14 +21,13 @@
                     <div class="dropzone dropzone-bx image-upload-bx">
                         <div class="fallback">
                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                <div class="image-upload-panel">
-                                    <div class="row" ng-hide="uploader.queue.length">
-                                        <img ng-src={{data.media_url}} alt="Drag and Drop" class="img-responsive" />
+                                <div class="image-upload-panel project-detail-photo_2">
+                                    <div class="" ng-hide="uploader.queue.length">
+                                        <img ng-src={{data.media_url}}  class="image1" />
                                     </div>
                                     <div class="row" ng-show="uploader.queue.length">
-                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                            <div ng-show="uploader.isHTML5"
-                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        <div class="user-photo_3" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1" alt="your image" />
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +35,13 @@
                         </div>
                     </div>
                     <div class="image-upload-link">
-                        <div class="browse-title">Browse</div>
-                        <input type="file" class="image-upload-f" id="editorganization_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
-                    </div>
+                        <div class="uploadFileName">
+                            <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
+                        </div>
+                        <label class="custom-file-input" id="addNewImage">
+                            <input type="file" class="image-upload-f" id="editorganization_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                         </label>
+</div>
                 </div>
 
             </div>
@@ -546,3 +548,18 @@
     </div><!-- modal-body ended -->
 
 </div><!-- modal ended -->
+<!-- for image fetch -->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#editorganization_uploader1").change(function () {
+        readURL(this);
+    });
+</script>
