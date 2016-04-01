@@ -10930,3 +10930,10 @@ input[type=text].rupee_1 {
     vertical-align: middle;
     position: relative;
 }
+.user-photo_3 {
+    background: #e9e9e9;
+    text-align: center;
+    width:204px;
+    height: 110px;
+    position: relative;
+}
