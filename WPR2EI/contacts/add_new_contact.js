@@ -160,7 +160,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             project_id: $scope.params.project_id,
             city: $scope.params.city,
             zip_code: $scope.params.zip_code,
-            class_type: "Contact",
+            class_type: "Person",
             area: $scope.params.area,
             Street_1: newadd.Street_1,
             Street_2: newadd.Street_2,
@@ -188,7 +188,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                     {
                         id: $scope.choices1[i].class_id,
                         class_id: loginSession.id,
-                        class_type: "Contact",
+                        class_type: "Person",
                         element_type: "email_contact",
                         element_info1: $scope.choices1[i].contact_element_info_email,
                     }
@@ -200,7 +200,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                     {
                         id: $scope.choices[i].class_id,
                         class_id: loginSession.id,
-                        class_type: "Contact",
+                        class_type: "Person",
                         element_type: "phone_contact",
                         element_info1: $scope.choices[i].contact_element_info_phone,
                     }
@@ -211,7 +211,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             {
                 // id: $scope.choices[i].class_id,
                 class_id: loginSession.id,
-                class_type: "Contact",
+                class_type: "Person",
                 element_type: "Budget",
                 element_info1: $scope.budget,
             }
@@ -221,7 +221,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
           {
               // id: $scope.choices[i].class_id,
               class_id: loginSession.id,
-              class_type: "Contact",
+              class_type: "Person",
               element_type: "service",
               element_info1: $scope.service,
           }
@@ -231,7 +231,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
            {
                //id: $scope.choices[i].class_id,
                class_id: loginSession.id,
-               class_type: "Contact",
+               class_type: "Person",
                element_type: "PurchaseDuration",
                element_info1: $scope.buy,
            }
@@ -242,7 +242,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                     {
                         //id: $scope.choices[i].class_id,
                         class_id: loginSession.id,
-                        class_type: "Contact",
+                        class_type: "Person",
                         element_type: "InterestedProjects",
                         element_info1: $scope.project_name[i],
                     }
