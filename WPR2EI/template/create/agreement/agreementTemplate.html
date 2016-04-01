@@ -31,10 +31,11 @@
                                     value="{{project.id}}">
                                 {{project.name}}
                         </select>
+                        <div ng-messages="agrrementForm.linkProject.$error" data-ng-if="agrrementForm.linkProject.$invalid && (!agrrementForm.linkProject.$pristine || showValid) && !agrrementForm.linkProject.$focus" style="color:maroon" role="alert">
+                            <div ng-message="required" id="err_agreeTempLin">You did not choose a field</div>
+                        </div>
                     </div>
-                    <div ng-messages="agrrementForm.linkProject.$error" data-ng-if="agrrementForm.linkProject.$invalid && (!agrrementForm.linkProject.$pristine || showValid) && !agrrementForm.linkProject.$focus" style="color:maroon" role="alert">
-                        <div ng-message="required" id="err_agreeTempLin">You did not choose a field</div>
-                    </div>
+                  
                 </div>
 
                 <div class="clearfix">
