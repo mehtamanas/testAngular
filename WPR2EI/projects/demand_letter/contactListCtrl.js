@@ -193,6 +193,7 @@
                     }
                     if (i == allListElements.length - 1) // if all are checked manually
                         $('#checkAll').prop('checked', true);
+                    
                 }
             }
 
@@ -304,6 +305,7 @@
         //}
 
         $scope.SelectDemandTemplate = function () {
+            $scope.chooseAction();
             $state.go('app.demandLetterTemplate');
         }
     }

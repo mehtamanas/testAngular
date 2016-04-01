@@ -31,8 +31,9 @@ angular.module('project', [])
              url: '/project/demandLetterSend',
              templateUrl: 'projects/demand_letter/sendDemandLetter.html',
              controller: 'sendDemandLetterCtrl',
-             title: 'Demand Letter Send'
-         })
+             title: 'Demand Letter Send',
+            
+             })
 
 
 
