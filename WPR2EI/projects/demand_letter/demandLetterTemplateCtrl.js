@@ -124,13 +124,16 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
     }
 
     apiService.get('Template/GetAllTemplates?orgId=' + orgID).then(function (response) {
-        $scope.params.templateList = response.data;
+        $scope.params.templateList = response.data;        
     });
 
     $scope.selectTemplate = function () {
+
         if ($scope.params.template !== "") {
+            $scope.params.template_name = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).template_name;
             $scope.params.subject = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).subject;
             $scope.params.bodyText = $sanitize((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description);
+            $cookieStore.put('TemplateName', $scope.params.template_name)
         }
         else
             $scope.params.bodyText = "";

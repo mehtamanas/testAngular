@@ -1,26 +1,53 @@
 ﻿angular.module('project')
 
-.controller ('sendDemandLetterCtrl', function ($scope, $state, $rootScope, $modal, apiService, $cookieStore) {
+.controller ('sendDemandLetterCtrl', function ($scope, $state, $rootScope, $modal, apiService, $cookieStore) 
+{
     console.log('sendDemandLetterCtrl');
 
     //$scope.title = items.title;
-    var templateDelete = $cookieStore.get('templateDelete');
-    var totalContact = $cookieStore.get('checkedIds');
-   var PaymentId= $cookieStore.get('payment_schedule_id');
-   // $scope.length = parseInt(templateDelete.length);
-    $scope.gotoDelete = function () {
-        apiService.post("Template/DeleteMultipleTemplates", templateDelete).then(function (response) {
-            var loginSession = response.data;
-            $scope.openSucessfullPopup();
-        
+ 
+    $scope.totalContact = $cookieStore.get('checkedIds');
+    $scope.length = parseInt($scope.totalContact.length);
+    $scope.PaymentId= $cookieStore.get('payment_schedule_id');
+   var demandLetterTemplate = JSON.parse(window.localStorage.getItem("emailAddTemplate"));
+   window.localStorage.removeItem('emailAddTemplate');
+   $scope.template_name = $cookieStore.get('TemplateName');
+   $scope.project_id = $cookieStore.get('projectId');
+  
 
+
+   $scope.sendDemandLetter = function ()
+   {
+        var postData = {
+            client_id: $scope.totalContact,
+            template_id: demandLetterTemplate.template,
+            template: demandLetterTemplate.bodyText,
+            payment_detail_scheme_id: $scope.PaymentId,
+            subject: demandLetterTemplate.subject,
+            project_id: $scope.project_ids,
+            user_id: $cookieStore.get('userId'),
+            organization_id: $cookieStore.get('orgID')
+        }
+        apiService.post('Template/ClientDemandLetterMapping', postData).then(function (response) {
+            var SessionData = response.data;
+
+            
         },
-    function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
-        else
-            alert("Network issue");
-    });
+       function (error) {
+
+       });
+
+    }
+
+   $scope.addNew = function (isValid) {
+       $scope.showValid = true;
+       if (isValid) {
+           $scope.sendDemandLetter();
+           $scope.showValid = false;
+
+       }
+
+   }
 
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
@@ -35,6 +62,6 @@
             $rootScope.$broadcast('REFRESH1', 'EmailTemplateGrid');
         }
 
-    }
+    
 
 });
