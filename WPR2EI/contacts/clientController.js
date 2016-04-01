@@ -247,7 +247,7 @@ angular.module('contacts')
                       }
                   }, {
                       field: "Name",
-                      template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="">#=Name#</a>',
+                      template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" class="contact_name" href="">#=Name#</a>',
                      
                       attributes: {
                           "class": "UseHand",

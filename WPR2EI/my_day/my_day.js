@@ -64,7 +64,7 @@
                       }
                 }, {
                     field: "Contact_name",
-                    template: '<a ui-sref="app.contactdetail({id:dataItem.id})" href="">#=Contact_name#</a>',
+                    template: '<a ui-sref="app.contactdetail({id:dataItem.id})" href="" class="contact_name">#=Contact_name#</a>',
                     title: "Contact",
                     width: "200px",
                     attributes:
@@ -533,7 +533,7 @@
                 },
                 columns: [{
                     field: "name",
-                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="">#=name#</a>',
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
                     title: "Task Name",                   
                     attributes:
                      {
