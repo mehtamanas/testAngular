@@ -10918,4 +10918,7 @@ input[type=text].rupee_1 {
  .equal {
     display: flex;
 }
-/**/
+
+.contact_name:hover{
+    text-decoration:underline !important;
+}

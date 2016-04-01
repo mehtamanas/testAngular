@@ -50,7 +50,7 @@
             },
             columns: [{
                 field: "name",
-                template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="">#=name#</a>',
+                template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
                 title: "Task Name",
                 width: "120px",
                 attributes:
