@@ -1,7 +1,7 @@
 ﻿var sendEmailCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize, emailData) {
     console.log('sendEmailController');
     $scope.params = {};
-      var nullCheck = function () {
+    var nullCheck = function () {
         if (emailData.Contact_First_Name === null)
             emailData.Contact_First_Name = '';
         if (emailData.Contact_Last_Name === null)
@@ -13,7 +13,7 @@
         if (emailData.salutation === null)
             emailData.salutation = '';
     }
- nullCheck();
+    nullCheck();
     var loggedUser = $cookieStore.get('loggedUserInfo');
     var custom_fields = { "{{first_name}}": emailData.Contact_First_Name, '{{last_name}}': emailData.Contact_Last_Name, "{{my_first_name}}": loggedUser.first_name, "{{my_last_name}}": loggedUser.last_name, "{{salutation}}": emailData.salutation, "{{brochure_url}}": 'http://www.dwellar.com' }
     $scope.params.emailFrom = [{ text: loggedUser.account_email }];
@@ -67,7 +67,7 @@
                         $('#imageBrowser').trigger("click");
                     }
                 },
-                 
+
                   "insertFile",
                   "viewHtml",
         ],
@@ -135,28 +135,31 @@
             $scope.params.bodyText = "";
     }
 
-    $scope.sendEmail = function () {
-        var postData = {
-            fromemailid: _.pluck($scope.params.emailFrom, 'text').join(','),
-            toemailid: _.pluck($scope.params.emailTo, 'text').join(','),
-            cc: _.pluck($scope.params.emailCc, 'text').join(','),
-            bcc: _.pluck($scope.params.emailBcc, 'text').join(','),
-            template: $scope.params.bodyText,
-            template_id: $scope.params.template,
-            subject: $scope.params.subject,
-            document_type_id: "6978399d-7ee7-42a6-85dd-6fec5b7312c2",
-            user_id: $cookieStore.get('userId'),
-            organization_id: $cookieStore.get('orgID')
+    $scope.sendEmail = function (isValid) {
+        if (isValid) {
+            $scope.disabled = true;
+            var postData = {
+                fromemailid: _.pluck($scope.params.emailFrom, 'text').join(','),
+                toemailid: _.pluck($scope.params.emailTo, 'text').join(','),
+                cc: _.pluck($scope.params.emailCc, 'text').join(','),
+                bcc: _.pluck($scope.params.emailBcc, 'text').join(','),
+                template: $scope.params.bodyText,
+                template_id: $scope.params.template,
+                subject: $scope.params.subject,
+                document_type_id: "6978399d-7ee7-42a6-85dd-6fec5b7312c2",
+                user_id: $cookieStore.get('userId'),
+                organization_id: $cookieStore.get('orgID')
 
+            }
+            apiService.post('SendEmail/SaveEmail', postData).then(function (response) {
+                data = response.data;
+                $scope.openSucessfullPopup();
+                $scope.cancel();
+            },
+           function (error) {
+
+           });
         }
-        apiService.post('SendEmail/SaveEmail', postData).then(function (response) {
-            data = response.data;
-            $scope.openSucessfullPopup();
-            $scope.cancel();
-        },
-       function (error) {
-
-       });
     }
 
     $scope.cancel = function () {
