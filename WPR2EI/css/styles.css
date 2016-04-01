@@ -10922,3 +10922,11 @@ input[type=text].rupee_1 {
 .contact_name:hover{
     text-decoration:underline !important;
 }
+.project-detail-photo_2 {
+    background: #efefef;
+    text-align: center;
+    width: 204px;
+    height: 110px;
+    vertical-align: middle;
+    position: relative;
+}
