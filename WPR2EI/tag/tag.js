@@ -55,7 +55,7 @@
                  },
               
                 {
-                    template: '<label ng-repeat="tag in tags" style="margin-left:2%;background-color:#=background_color#;" class="upper tag-name"><span style="cursor:pointer"><a ui-sref="app.tagpeople({id:dataItem.id})" class="tag_link" href=""></a>#=name#</span</label>',
+                    template: '<label ng-repeat="tag in tags" style="margin-left:2%;background-color:#=background_color#;" class="upper tag-name"><a ui-sref="app.tagpeople({id:dataItem.id})" class="tag_link" href=""></a>#=name#</label>',
                     title: "Tag Name",
 
                     width: "120px",

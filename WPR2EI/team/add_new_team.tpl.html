@@ -1,77 +1,80 @@
 
 
 <div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    
-     
-            <div class="modal-body">
-                <div class="close-btn-wrap">
-                    <button type="button" class="close" id="btn_addnewteam_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <div class="modal-header" style="text-align:left">
+        <h4 class="form-title">Create New Team</h4>
+        <div class="close-btn-wrap" style="height:0px">
+            <button type="button" style="margin-top:-38px;" class="close" id="btn_addnewteam_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+            <!--<div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">Team Name</label>
+                     <input type="text" class="form-control text-bold" autofocus name="name" id="addnewteam_name"
+                           placeholder="Team Name"
+                           data-ng-model="params.name"
+                           minlength="1"
+                           maxlength="50"
+                           input-focus
+                           required
+                            />
                 </div>
-                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
-                    <h4 class="form-title" style="text-align:center">Create New Team</h4>
-                    <!--<div class="clearfix">
-                        <div class="form-group form-bx form-bx8">
+            </div>-->
+            <div class="clearfix">
+                <div class="clearfix">
+                    <div class="form-group form-bx form-bx13"
+                         data-ng-class="{
+                                                                        'has-error' : addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus,
+                                                                        'has-success': addNewForm.name.$valid && !addNewForm.name.$pristine && !addNewForm.name.$focus
+
+                                                                    }">
+                        <div class="form-group" style="width: 727px !important;">
                             <label for="">Team Name</label>
-                             <input type="text" class="form-control text-bold" autofocus name="name" id="addnewteam_name"
+                            <input type="text" class="form-control text-bold" autofocus name="name" id="addnewteam_name"
                                    placeholder="Team Name"
                                    data-ng-model="params.name"
                                    minlength="1"
                                    maxlength="50"
                                    input-focus
                                    required
-                                    />
+                                   ng-pattern="/^[\w -]*$/" />
                         </div>
-                    </div>-->
-                    <div class="clearfix" style="margin-left: 8%;">
-                    <div class="clearfix">
-                        <div class="form-group form-bx form-bx13"
-                             data-ng-class="{
-                                                                        'has-error' : addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus,
-                                                                        'has-success': addNewForm.name.$valid && !addNewForm.name.$pristine && !addNewForm.name.$focus
-                             
-                                                                    }">
-                            <div class="form-group" style="width: 727px !important;">
-                                <label for="">Team Name</label>
-                                <input type="text" class="form-control text-bold" autofocus name="name" id="addnewteam_name"
-                                       placeholder="Team Name"
-                                       data-ng-model="params.name"
-                                       minlength="1"
-                                       maxlength="50"
-                                       input-focus
-                                       required
-                                       ng-pattern="/^[\w -]*$/" />
-                                </div>
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus">
-                                    {{ 'This field should not be empty' | translate }}
-                                </div>
-                            </div>
-                        <div class="field-mdl field-req" style="margin-top:24px;margin-left: 20px;">*</div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="form-group form-bx form-bx13">
-                            <label for="">Team Description</label>
-                            <textarea cols="100" rows="10" name="description" id="addnewteam_description"
-                                   placeholder="Team Description"
-                                   data-ng-model="params.description"
-                                   ng-pattern="/^[a-zA-Z 0-9 ',_#/:.&-()\s]*$/"
-                                   minlength="1"
-                                   maxlength="500"
-                                   input-focus />
+                        <div class="text-danger"
+                             data-ng-if="addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus">
+                            {{ 'This field should not be empty' | translate }}
                         </div>
                     </div>
-                    <div class="modal-btn-wrap clearfix">
-                        <!--<button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()"
-                                ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length && !uploader3.getNotUploadedItems().length">
-                            Save
-                        </button>-->
-                        <button type="submit" class="f-btn11" ng-disabled="isDisabled" id="btn_addNewTeam_save">SAVE</button>
-                        
-                        <button type="button" class="f-btn2" id="btn_addNewTeam_cancel" style="width: 354px;" ng-click="cancel()" >CANCEL</button>
+                    <div class="field-mdl field-req" style="margin-left: 19px;margin-top: 7px;">*</div>
+                </div>
+                <div class="clearfix">
+                    <div class="form-group form-bx form-bx13">
+                        <label for="">Team Description</label>
+                        <textarea cols="100" rows="10" name="description" id="addnewteam_description"
+                                  placeholder="Team Description"
+                                  data-ng-model="params.description"
+                                  ng-pattern="/^[a-zA-Z 0-9 ',_#/:.&-()\s]*$/"
+                                  minlength="1"
+                                  maxlength="500"
+                                  input-focus />
                     </div>
-                        </div>
-                </form>
+                </div>
+                <div class="modal-btn-wrap clearfix">
+                    <!--<button type="submit" class="f-btn" ng-click="showProgress=true;uploader.uploadAll();uploader1.uploadAll();uploader2.uploadAll();uploader3.uploadAll()"
+                            ng-disabled="!uploader.getNotUploadedItems().length && !uploader1.getNotUploadedItems().length && !uploader2.getNotUploadedItems().length && !uploader3.getNotUploadedItems().length">
+                        Save
+                    </button>-->
+                    <button type="submit" class="f-btn11" ng-disabled="isDisabled" id="btn_addNewTeam_save">SAVE</button>
 
+                    <button type="button" class="f-btn2" id="btn_addNewTeam_cancel" style="width: 354px;" ng-click="cancel()">CANCEL</button>
+                </div>
             </div>
-       
+        </form>
+
     </div>
+
+</div>
