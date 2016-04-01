@@ -126,7 +126,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     }
   );
 
-    Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Contact";
+    Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Person";
 
     apiService.getWithoutCaching(Url).then(function (response) {
         data = response.data;
@@ -215,7 +215,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            contact_id: $scope.seletedCustomerId,
            user_id: $cookieStore.get('userId'),
            organization_id: $cookieStore.get('orgID'),
-           class_type: "Contact",
+           class_type: "Person",
            media_url: $scope.params.Contact_Image,
            Date_Of_Birth: new Date(dDate).toISOString(),
            gender: $scope.gender,
@@ -258,7 +258,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                     {
                         id: $scope.choices1[i].class_id,
                         class_id: window.sessionStorage.selectedCustomerID,
-                        class_type: "Contact",
+                        class_type: "Person",
                         element_type: "email_contact",
                         element_info1: $scope.choices1[i].Contact_Email,
                     }
@@ -270,7 +270,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                     {
                         id: $scope.choices[i].class_id,
                         class_id: window.sessionStorage.selectedCustomerID,
-                        class_type: "Contact",
+                        class_type: "Person",
                         element_type: "phone_contact",
                         element_info1: $scope.choices[i].Contact_Phone,
                     }
@@ -281,7 +281,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             {
                 // id: $scope.choices[i].class_id,
                 class_id: window.sessionStorage.selectedCustomerID,
-                class_type: "Contact",
+                class_type: "Person",
                 element_type: "Budget",
                 element_info1: $scope.budget,
             }
@@ -291,7 +291,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
            {
                //id: $scope.choices[i].class_id,
                class_id: window.sessionStorage.selectedCustomerID,
-               class_type: "Contact",
+               class_type: "Person",
                element_type: "PurchaseDuration",
                element_info1: $scope.buy,
            }
@@ -302,7 +302,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                     {
                         //id: $scope.choices[i].class_id,
                         class_id: window.sessionStorage.selectedCustomerID,
-                        class_type: "Contact",
+                        class_type: "Person",
                         element_type: "InterestedProjects",
                         element_info1: $scope.project_name[i],
                     }
