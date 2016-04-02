@@ -14,6 +14,7 @@ angular.module('app.guest.login')
 
         $scope.rememberMe = function () {
             if ($scope.params.remember) {
+                $rootScope.rememberMeOn = true;
                 $cookieStore.put($scope.params.email, JSON.stringify(data = { 'email': $scope.params.email, 'password': $scope.params.password }));
             }
         }
@@ -141,6 +142,9 @@ angular.module('app.guest.login')
         $rootScope.$on('IdleStart', function () {
             // the user appears to have gone idle
             console.log("IdleStart");
+            if ($rootScope.rememberMeOn){
+                $rootScope.$broadCast('Keepalive');
+            }
         });
 
         $rootScope.$on('IdleWarn', function (e, countdown) {
