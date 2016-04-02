@@ -247,9 +247,9 @@
             if (args == 'projectGrid') {
                 $('.k-i-refresh').trigger("click");
             }
-            else {
+            else if (args.name == 'ViewCreated') {
                 callViewApi();
-                $scope.gridView = args;
+                $scope.gridView = args.data;
             }
         });
 

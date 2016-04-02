@@ -51,7 +51,8 @@ angular.module('MainApp', [
    'setting',
   'tag',
   'contact_report',
-  'ngTagsInput'
+  'ngTagsInput',
+    'ngStorage',
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/login');

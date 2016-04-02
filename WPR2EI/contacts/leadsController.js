@@ -1,6 +1,6 @@
 angular.module('contacts')
 .controller('LeadListController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window, $localStorage,$sessionStorage, $interval) {
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         console.log('ContactListController');
@@ -171,34 +171,63 @@ angular.module('contacts')
             }
         }
 
+        //Sync
+        $scope.refreshData = function () {
+            $('#contact_kenomain').getKendoGrid().dataSource.data($localStorage.leadDataSource);
+        }
+
+
+        var syncLeadDataSource = function () {
+            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                data = response.data;
+                for (i = 0; i < data.length; i++) {
+                    var tag = (data[i].Tags);
+                    if (tag !== null) {
+                        tag = JSON.parse(tag);
+                        data[i].Tags = [];
+                        data[i].Tags = tag;
+                    }
+                    else { data[i].Tags = []; }
+                }
+                $localStorage.leadDataSource = data;
+            })
+        };
+        //Sync Ends
+
         // Kendo code
         $scope.LeadGrid = {
             dataSource: {
                 type: "json",
                 transport: {
                     read: function (options) {
-                        apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
-                            data = response.data;
-
-                            for (i = 0; i < data.length; i++) {
-                                var tag = (data[i].Tags);
-                                if (tag !== null) {
-                                    tag = JSON.parse(tag);
-                                    data[i].Tags = [];
-                                    data[i].Tags = tag;
+                        if ($localStorage.leadDataSource)
+                        { options.success($localStorage.leadDataSource); }
+                        else {
+                            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                                data = response.data;
+                                for (i = 0; i < data.length; i++) {
+                                    var tag = (data[i].Tags);
+                                    if (tag !== null) {
+                                        tag = JSON.parse(tag);
+                                        data[i].Tags = [];
+                                        data[i].Tags = tag;
+                                    }
+                                    else
+                                        data[i].Tags = [];
                                 }
-                                else
-                                    data[i].Tags = [];
-                            }
-                            options.success(data);
-                        }, function (error) {
-                            options.error(error);
-                        })
-
+                                $localStorage.leadDataSource = data;
+                                options.success(data);
+                            }, function (error) {
+                                options.error(error);
+                            })
+                        }
                     },
 
                 },
                 pageSize: 20
+            },
+            dataBound: function () {
+                syncData = $interval(syncLeadDataSource, 5000);
             },
             groupable: true,
             sortable: true,
@@ -490,8 +519,12 @@ angular.module('contacts')
         }
 
         $scope.$on('REFRESH2', function (event, args) {
-            if (args == 'LeadGrid') {
-                $('.k-i-refresh').trigger("click");
+            if (args.name == 'LeadGrid') {
+                // $('.k-i-refresh').trigger("click");
+                $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+            } else if(args.name == 'LeadGrid') {
+                callViewApi();
+                $scope.gridView = args;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
