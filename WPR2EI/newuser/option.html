@@ -1,13 +1,16 @@
 ﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
-<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+<div class="modal-header">
+    <h4 class="modal-title">Options</h4>
+    <div class="close-btn-wrap" style="height:0px">
+        <button type="button" class="close" id="btn_option_close" style="margin-top:-6%;" ng-click="$dismiss('cancel')" data-toggle="tooltip" title="Close Tab">&times;</button>
+    </div>
+</div>
 <form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
-    <div class="main-content project add-new">
-        <h3>Options</h3>
-
-        <div class="col-sm-8">
+    <div class="main-content project add-new" style="padding:2%">
+        <div class="col-sm-9">
             <!--<label>Option</label>-->
             <div class="form-group">
-                <div class="col-xs-12">
+                <div class="">
                     <input type="hidden" name="Select Project" data-ng-model="params.country">
 
                     <select ng-change="selectcity()" ng-model="city1"  id="useroption_project" class="dropdown form-control" required>

@@ -1,17 +1,12 @@
-﻿
+﻿<button type="button" class="close" id="btn_invite_close" ng-click="$dismiss('cancel')" data-toggle="tooltip" title="Close Tab">&times;</button>
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-  
-
-    <div class="modal-body">
-
-        <div class="close-btn-wrap">
-            <button type="button" class="close" id="btn_newuser_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+   <div class="main-content add-new project sucessful-popup" style="padding: 2%">
+    <h4 style="text-align:center">Invitation Sent Successfully</h4>
+    <div class="modal-btn-wrap5  clearfix">
+        <div style="padding: 2% 0% 3% 0%;">
+            <button type="button" id="btn_invite_cancel" class="btn btn-primary" ng-click="$dismiss('cancel')">OK</button>
         </div>
-       
-        <p align="center" style="font-size:20px"><strong>Invitation Sent Successfully</strong></p>
-
-        <br/>
-        <button type="button" id="btn_invite_cancel" class="f-btn f-btn-sucessfull-ok" ng-click="$dismiss('cancel')">OK</button>
-    </div><!-- modal-body ended -->
+    </div>
+</div><!-- modal-body ended -->
 </div>

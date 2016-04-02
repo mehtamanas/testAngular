@@ -324,7 +324,7 @@ function (error)
                 templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
                 controller: EditsucessfullController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Organization" } }
             });
 
