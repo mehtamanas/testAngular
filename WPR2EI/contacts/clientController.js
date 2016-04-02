@@ -78,7 +78,8 @@ angular.module('contacts')
         var callViewApi = function () {
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
-                $scope.views = res.data;
+                $scope.views= _.filter(res.data, function (o)
+                { return o.grid_name === 'client'});
             }, function (err) {
 
             });
@@ -101,7 +102,7 @@ angular.module('contacts')
                 for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
                     var colFlag = false;
                     for (j = 0; j < col.length; j++) {
-                        if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].title) {
+                        if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].field) {
                             $('#contact_kenomain').getKendoGrid().showColumn(i);
                             colFlag = true;
                             break;
@@ -131,7 +132,7 @@ angular.module('contacts')
             }
             var colObject = _.filter(grid.columns, function (o)
             { return !o.hidden });
-            colObject = (_.pluck(colObject, 'title')).join(',');
+            colObject = (_.pluck(colObject, 'field')).join(',');
 
 
             var modalInstance = $modal.open({
@@ -227,116 +228,132 @@ angular.module('contacts')
                  buttonCount: 5
              },
              columns: [
-                  {
-                      template: "<input type='checkbox', class='checkbox', data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' />",
-                      title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
-                      width: "60px",
-                      attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
-                  }, {
-                      template: "<div class='user-photo_1' style='margin-left: 33%;'><img class='image2' src='#= Contact_Image #'/></div>" +
-                                "<span style='padding-left:10px' class='customer-name'> </span>",
-                     
-                      title: "Picture",
-                      attributes:
-                      {
-                          "class": "UseHand",
-                      }
-                  }, {
-                      field: "Name",
-                      template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" class="contact_name" href="">#=Name#</a>',
-                     
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "Contact_Phone",
-                      title: "Phone",
-                      width: "200px",
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "Contact_Email",
-                      title: "Email",
-                     
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "City",
-                      title: "City",
-                     
-                      attributes:
+                 {
+                     template: "<input type='checkbox', class='checkbox', data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' />",
+                     title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                     width: "60px",
+                     field: 'Contact_Id',
+                     attributes:
                       {
                           "class": "UseHand",
                           "style": "text-align:center"
                       }
-                  }, {
-                      field: "Assigned_To",
-                      title: "Assigned To",
-                    
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "Type",
-                      title: "Type",
-              
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "rating",
-                      title: "Last Contacted Date",
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  },
-                  {
-                      field: "Contact_Created_Date",
-                      title: "Updated Date",
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  },
+                 }, {
+                     template: "<div class='user-photo_1' style='margin-left:35%'><img class='image2' src='#= Contact_Image #'/></div>" +
+                               "<span style='padding-left:10px' class='customer-name'> </span>",
+                     width: "120px",
+                     title: "Picture",
+                     field: 'Contact_Image',
+                     attributes:
+                     {
+                         "class": "UseHand",
+                     }
+                 }, {
+                     field: "Name",
+                     template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="" class="contact_name">#=Name#</a>',
+                     width: "200px",
+                     title: 'Name',
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
+                     field: "Contact_Phone",
+                     title: "Phone",
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
+                     field: "Contact_Email",
+                     title: " Email",
+
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
+                     field: "City",
+                     title: "City",
+
+                     attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
+                     field: "Assigned_To",
+                     title: "Assigned To",
+
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
+                     field: "Type",
+                     title: "Type",
+
+                     attributes: {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 },
+            {
+                field: "company",
+                title: "Company",
+
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            },
+            {
+                field: "Tags",
+                template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
+                title: "TAGS",
+                width: "220px",
+
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            },
              {
-                 field: "company",
-                 title: "Company",
-             
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:center"
-                 }
-             }, {
-                 field: "TAGS",
-                 template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
-                 title: "TAGS",
+                 field: "leadsource",
+                 title: "Lead Source",
+
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
              },
-             {
-                 title: "Action",
-                 template: "<a id='followUp' class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
-             
-                 attributes:
-                   {
-                       "class": "UseHand",
-                       "style": "text-align:center;"
-                   }
-             }, ]
+                {
+                    field: "rating",
+                    title: "Last Contacted Date",
+                    attributes: {
+                        "class": "UseHand",
+                        "style": "text-align:center"
+                    }
+                },
+            {
+                field: "Contact_Created_Date",
+                title: "Updated Date",
+                //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            },
+            {
+                title: "Action",
+                template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
+                field: 'Action',
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+            }, ]
 
          };
 
