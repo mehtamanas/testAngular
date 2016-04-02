@@ -246,8 +246,6 @@ angular.module('contacts')
             },
             pageable: {
                 refresh: true,
-                pageSizes: true,
-                buttonCount: 5
             },
             columns: [
                   {
