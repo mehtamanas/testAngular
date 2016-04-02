@@ -17,7 +17,7 @@
     });
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         img = response[0].Location;
-        var edit = $('#editor').data("kendoEditor");
+        var edit = $('#emailTemplateDescription').data("kendoEditor");
         edit.exec('inserthtml', { value: "<img alt=''  src='" + img + "' />" });
 
     };

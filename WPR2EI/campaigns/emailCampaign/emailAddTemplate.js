@@ -47,7 +47,24 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
     $scope.params.templateList;
     $scope.params.subject;
     $scope.params.bodyText;
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiService.uploadURL,
+    });
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        img = response[0].Location;
+        var edit = $('#agreeTempDescription').data("kendoEditor");
+        edit.exec('inserthtml', { value: "<img alt=''  src='" + img + "' />" });
+
+    };
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        uploader.uploadAll();
+    }
+
     $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
         tools: ["bold",
                 "italic",
                 "underline",
@@ -61,6 +78,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
                 "indent",
                 "outdent",
                 "createLink",
+                'pdf',
                 "unlink",
                 "fontName",
                 "fontSize",
@@ -68,6 +86,13 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
                 "backColor",
                 "print",
                 'createTable',
+                {
+                    name: "myTool",
+                    tooltip: "Insert Image",
+                    exec: function (e) {
+                        $('#imageBrowser').trigger("click");
+                    }
+                },
                   {
                       name: "insertHtml",
                       items: [
@@ -80,29 +105,31 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
 
                       ]
                   },
-                  "insertImage",
                   "insertFile",
                   "viewHtml",
         ],
-        imageBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Read",
-                destroy: {
-                    url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Destroy",
-                    type: "POST"
-                },
-                create: {
-                    url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Create",
-                    type: "POST"
-                },
-                thumbnailUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Thumbnail",
-                uploadUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Upload",
-                imageUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Image?path={0}"
-            }
-        },
+        //imageBrowser: {
+        //    messages: {
+        //        dropFilesHere: "Drop files here"
+        //    },
+        //    transport: {
+        //        read: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Read",
+        //        destroy: {
+        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Destroy",
+        //            type: "POST"
+        //        },
+        //        create: {
+        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Create",
+        //            type: "POST"
+        //        },
+        //        thumbnailUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Thumbnail",
+        //        uploadUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Upload",
+        //        imageUrl: function (name) {
+        //            var pictureUrl = decodeURIComponent(name);
+        //            return pictureUrl;
+        //        },
+        //    }
+        //},
         fileBrowser: {
             messages: {
                 dropFilesHere: "Drop files here"
