@@ -1,14 +1,18 @@
 ﻿
 
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-        <div class="close-btn-wrap">
-            <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <!-- modal header-->
+    <div class="modal-header">
+        <h4 class="form-title modal-header-top" >Add New Contact</h4>
+        <div class="close-btn-wrap" style="height:0px!important">
+            <button id="btn_contact_cancel" type="button" class="close" style="margin-top: -4%;" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
+    </div>
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+      
         <form class="form-content" name="newForm" novalidate data-ng-submit="addNewContact(newForm.$valid)" autocomplete="off">
 
-
-            <h4 class="form-title">Add New Contact</h4>
+         
 
             <div class="clearfix image-upload-container">
                 <div class="modal-body image-upload-wrap">
@@ -24,11 +28,11 @@
                                         </div>-->
                                         <div class="col-lg-2 col-md-8 col-sm-12"></div>
                                     </div>
-                                     <div class="row" ng-show="uploader.queue.length">
-                                            <div class="user-photo_3" ng-repeat="item in uploader.queue">
-                                                <img id="fetch" src="#" class="image1" alt="your image" />
-                                            </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="user-photo_3" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1" alt="your image" />
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -40,12 +44,12 @@
 
                         <input type="file" class="image-upload-f" id="contactadd_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                     </label>
-                   
 
-               
-            </div>
+
 
                 </div>
+
+            </div>
 
             <div class="clearfix">
 
@@ -55,7 +59,7 @@
                                            'has-error' : newForm.salutation.$invalid && (!newForm.salutation.$pristine || showValid) && !newForm.salutation.$focus,
                                             'has-success': newForm.salutation.$valid && !newForm.salutation.$pristine && !newForm.salutation.$focus
                                      }">
-                        
+
                         <select id="contactadd_salutation" name="salutation" ng-change="selectsalutation()" ng-model="salutation1" class="dropdown form-control">
                             <option value="" selected>Select Salutation</option>
                             <option value="Mr.">Mr.</option>
@@ -81,7 +85,6 @@
                                             }">
                         <label>First Name</label>
                         <input type="text" autofocus name="firstName" class="form-control" id="contactadd_firstname"
-                              
                                data-ng-model="params.first_name"
                                minlength="1"
                                maxlength="40"
@@ -126,7 +129,7 @@
 
                 <div class="form-bx" style="padding:5px">
                     <label for="">Title</label>
-                    <input kendo-auto-complete ng-model="params.designation" id="contactadd_title"  k-data-source="titleList" class="form-control" />
+                    <input kendo-auto-complete ng-model="params.designation" id="contactadd_title" k-data-source="titleList" class="form-control" />
                 </div>
 
 
@@ -180,7 +183,7 @@
                     </div>
                 </div>
 
-               <div class="form-bx" style="padding:5px;margin-left:3%">               
+                <div class="form-bx" style="padding:5px;margin-left:3%">
                     <div class="form-group"
                          data-ng-class="{
                                            'has-error' : newForm.duration.$invalid && (!newForm.duration.$pristine || showValid) && !newForm.duration.$focus,
@@ -209,7 +212,7 @@
                                          'has-success': newForm.income.$valid && !newForm.income.$pristine && !newForm.income.$focus
                                                                      }">
                             <label for="">Income</label>
-                            <input type="text"   class="form-control text-bold" autofocus name="income" id="contactadd_income"
+                            <input type="text" class="form-control text-bold" autofocus name="income" id="contactadd_income"
                                    data-ng-model="params.income"
                                    minlength="1"
                                    maxlength="50"
@@ -226,7 +229,7 @@
                 <div class="clearfix">
                     <div class="form-bx form-bx2" style="border: 1px solid #e7e7e7;border-radius: 2px;" ng-hide='{{WHO_AM_I === "Service_industry"}}'>
 
-                        <select kendo-multi-select k-options="selectOptions" name="project"  id="contactadd_project" k-ng-model="project_name" k-on-change="selectProject()" class="dropdown form-control"></select>
+                        <select kendo-multi-select k-options="selectOptions" name="project" id="contactadd_project" k-ng-model="project_name" k-on-change="selectProject()" class="dropdown form-control"></select>
                     </div>
 
                     <div class="text-danger"
@@ -242,7 +245,7 @@
                                         'has-success': newForm.service.$valid && !newForm.service.$pristine && !newForm.service.$focus
                                              }">
                         <label for="">Select Services</label>
-                        <select ng-model="service1" name="service" ng-change="selectservices()" id="contactadd_service" 
+                        <select ng-model="service1" name="service" ng-change="selectservices()" id="contactadd_service"
                                 class="dropdown form-control">
                             <option value="" selected>Select Services</option>
                             <option ng-repeat="service in services"
@@ -263,7 +266,7 @@
                                           'has-success': newForm.ProjectNo.$valid && !newForm.ProjectNo.$pristine && !newForm.ProjectNo.$focus
                                            }">
                         <label>No. of Projects</label>
-                        <input type="text" autofocus name="ProjectNo" class="form-control" id="contactadd_projectno" 
+                        <input type="text" autofocus name="ProjectNo" class="form-control" id="contactadd_projectno"
                                data-ng-model="params.no_of_project"
                                minlength="1"
                                maxlength="50"
@@ -276,7 +279,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
 
             <div class="clearfix">
@@ -347,7 +350,6 @@
                             <input type="email" name="email" class="form-control" id="contactadd_email"
                                    data-ng-model="choice1.contact_element_info_email"
                                    input-focus
-
                                    ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
                             <div class="text-danger"
                                  data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">

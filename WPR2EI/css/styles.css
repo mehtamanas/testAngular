@@ -10937,3 +10937,7 @@ input[type=text].rupee_1 {
     height: 110px;
     position: relative;
 }
+/*for modal header*/
+.modal-header-top{
+    text-align:left;
+}
