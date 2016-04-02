@@ -181,7 +181,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
             templateUrl: 'campaigns/emailCampaign/emailAddPreview.html',
             backdrop: 'static',
             controller: emailAddPreviewCtrl,
-            size: 'md',
+            size: 'lg',
             resolve: {
                 items: function () {
                     return $scope.params.bodyText;
