@@ -153,7 +153,7 @@ angular.module('app.guest.login')
                 templateUrl: 'login/signup_free_account.tpl.html',
 
                 controller: SignupFreeAccountController,
-                size: 'md'
+                size: 'lg'
             });
         };
 

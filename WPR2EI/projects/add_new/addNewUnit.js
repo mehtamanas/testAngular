@@ -155,7 +155,7 @@
                             templateUrl: 'newuser/sucessfull.tpl.html',
                             backdrop: 'static',
                             controller: sucessfullController,
-                            size: 'md',
+                            size: 'lg',
                             resolve: { items: { title: "Unit" } }
 
                         });
@@ -210,7 +210,7 @@
                             templateUrl: 'newuser/Edited.tpl.html',
                             backdrop: 'static',
                             controller: EditsucessfullController,
-                            size: 'md',
+                            size: 'lg',
                             resolve: { items: { title: "Unit" } }
                         });
                         $rootScope.$broadcast('REFRESH', 'unit');

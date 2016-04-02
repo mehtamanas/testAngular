@@ -315,7 +315,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Project" } }
             });
         }

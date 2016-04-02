@@ -175,7 +175,7 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Payment" } }
 
         });
@@ -188,7 +188,7 @@ function (error) {
             templateUrl: 'newuser/unsuccess.tpl.html',
             backdrop: 'static',
             controller: UnsucessController,
-            size: 'md'
+            size: 'lg'
 
         });
 

@@ -1446,7 +1446,7 @@ columnMenu: {
                 templateUrl: 'newuser/Projects/addProject.tpl.html',
                 backdrop: 'static',
                 controller: AddProjectController,
-                size: 'md',
+                size: 'lg',
                 resolve: {
                     newuserService: newuserService,
                     newuserData: {
@@ -1470,7 +1470,7 @@ columnMenu: {
                 templateUrl: 'newuser/edituser.tpl.html',
                 backdrop: 'static',
                 controller: EditUserPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1481,7 +1481,7 @@ columnMenu: {
                 templateUrl: 'newuser/add_new_task.tpl.html',
                 backdrop: 'static',
                 controller: AddNewTaskUserController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -1493,7 +1493,7 @@ columnMenu: {
                 templateUrl: 'newuser/edit_task.html',
                 backdrop: 'static',
                 controller: EditTaskUser,
-                size: 'md'
+                size: 'lg'
 
             });
 

@@ -83,7 +83,7 @@ var AddBudgetproject = function ($scope, $state, $cookieStore, apiService, $moda
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Event" } }
 
         });

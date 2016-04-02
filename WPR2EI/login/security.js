@@ -106,7 +106,7 @@ angular.module('security', [
                         templateUrl: 'login/error.tpl.html',
                         backdrop: 'static',
                         controller: ErrorsucessfullController,
-                        size: 'md',
+                        size: 'lg',
                         resolve: { items: { title: error.data.Message } }
                     });
 

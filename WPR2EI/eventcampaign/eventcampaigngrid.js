@@ -157,7 +157,7 @@
                 templateUrl: 'eventcampaign/eventcampaign.tpl.html',
                 backdrop: 'static',
                 controller: EventCampaignController,
-                size: 'md'
+                size: 'lg'
             });
         };
 

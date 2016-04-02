@@ -161,7 +161,7 @@
             templateUrl: 'projects/UpdateSuccessful.tpl.html',
             backdrop: 'static',
             controller: UpdateController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Amenities" } }
         });
 
