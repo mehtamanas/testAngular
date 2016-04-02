@@ -93,7 +93,7 @@
                 templateUrl: 'projects/add_new/addNewPaymentScheme.tpl.html',
                 backdrop: 'static',
                 controller: AddNewPaymentSchemeController,
-                size: 'md'
+                size: 'lg'
             });
         };
         $scope.openEditPaymentSchemePopup = function (id) {
@@ -104,7 +104,7 @@
                 templateUrl: 'projects/add_new/editPaymentScheme.tpl.html',
                 backdrop: 'static',
                 controller: EditPaymentSchemeController,
-                size: 'md'
+                size: 'lg'
             });
 
         };
@@ -1342,7 +1342,7 @@
                 templateUrl: 'projects/add_new/offers.tpl.html',
                 backdrop: 'static',
                 controller: OfferController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1352,7 +1352,7 @@
                 templateUrl: 'projects/addProject.tpl.html',
                 backdrop: 'static',
                 controller: AddUserProjectController,
-                size: 'md',
+                size: 'lg',
                 resolve: {
                     projectService: projectService,
                     projectData: {
@@ -1369,7 +1369,7 @@
                 templateUrl: 'projects/addTeam.html',
                 backdrop: 'static',
                 controller: AddTeamController,
-                size: 'md',
+                size: 'lg',
                 resolve: {
                     projectService: projectService,
                     projectData: {
@@ -1386,7 +1386,7 @@
                     templateUrl: 'projects/add_new/addNewFloor.tpl.html',
                     backdrop: 'static',
                     controller: AddNewFloorController,
-                    size: 'md'
+                    size: 'lg'
                     
                 });          
         };
@@ -1403,7 +1403,7 @@
                 templateUrl: 'projects/panoramic.tpl.html',
                 backdrop: 'static',
                 controller: AddNewPanoramicController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1414,7 +1414,7 @@
                 templateUrl: 'projects/add_new/edit_floor.tpl.html',
                 backdrop: 'static',
                 controller: AddNewEditFloorController,
-                size: 'md',
+                size: 'lg',
             });
         };
 
@@ -1424,7 +1424,7 @@
                     templateUrl: 'projects/add_new/addNewTower.tpl.html',
                     backdrop: 'static',
                     controller: AddNewTowerController,
-                    size: 'md'                   
+                    size: 'lg'                   
                 });         
         };
 
@@ -1435,7 +1435,7 @@
                 templateUrl: 'projects/add_new/edit_tower.tpl.html',
                 backdrop: 'static',
                 controller: AddEditTowerController,
-                size: 'md',
+                size: 'lg',
             });
         };
 
@@ -1446,7 +1446,7 @@
                     templateUrl: 'projects/add_new/addNewUnit.tpl.html',
                     backdrop: 'static',
                     controller: AddNewUnitController,
-                    size: 'md',
+                    size: 'lg',
                     resolve: { items: { title: "Add New Unit Type" } }
                 });
             }
@@ -1456,7 +1456,7 @@
                     templateUrl: 'projects/add_new/addNewUnit.tpl.html',
                     backdrop: 'static',
                     controller: AddNewUnitController,
-                    size: 'md',
+                    size: 'lg',
                     resolve: { items: unit }
                 });
             }
@@ -1468,7 +1468,7 @@
                     templateUrl: 'projects/add_new/addNewWing.tpl.html',
                     backdrop: 'static',
                     controller: AddNewWingController,
-                    size: 'md'               
+                    size: 'lg'               
                 });     
         };
 
@@ -1479,7 +1479,7 @@
                 templateUrl: 'projects/add_new/editWing.tpl.html',
                 backdrop: 'static',
                 controller: EditNewWingController,
-                size: 'md'                  
+                size: 'lg'                  
            });
         };
 
@@ -1489,7 +1489,7 @@
                 templateUrl: 'projects/edit_project.tpl.html',
                 backdrop: 'static',
                 controller: EditProjectController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1499,7 +1499,7 @@
                 templateUrl: 'projects/add_new/gallery.html',
                 backdrop: 'static',
                 controller: AddNewGalleryController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1509,7 +1509,7 @@
                 templateUrl: 'projects/add_new/uploadview.tpl.html',
                 backdrop: 'static',
                 controller: UploadViewController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1519,7 +1519,7 @@
                 templateUrl: 'projects/addNewService.tpl.html',
                 backdrop: 'static',
                 controller: addNewServiceController,
-                size: 'md'
+                size: 'lg'
             });
         };
        
@@ -1533,7 +1533,7 @@
                 templateUrl: 'contacts/company/followUp.html',
                 backdrop: 'static',
                 controller: FollowUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1543,7 +1543,7 @@
                 templateUrl: 'projects/add_new/amenities.html',
                 backdrop: 'static',
                 controller: AddNewAmenityController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1553,7 +1553,7 @@
                 templateUrl: 'projects/add_new/brochure.html',
                 backdrop: 'static',
                 controller: AddNewBrochureController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1563,7 +1563,7 @@
                 templateUrl: 'projects/add_new/panoramicView.tpl.html',
                 backdrop: 'static',
                 controller: AddNewPanoramicViewController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1573,7 +1573,7 @@
                 templateUrl: 'projects/add_new/videos.tpl.html',
                 backdrop: 'static',
                 controller: AddNewVideosController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1602,7 +1602,7 @@
                     templateUrl: 'newuser/delete.html',
                     backdrop: 'static',
                     controller: DeleteController,
-                    size: 'md',
+                    size: 'lg',
                     resolve: { items: { title: "Image" } }                                      
                 });
                 $rootScope.$broadcast('REFRESH', 'images');
@@ -1616,7 +1616,7 @@
                 templateUrl: 'projects/add_new/addNewCampaign.tpl.html',
                 backdrop: 'static',
                 controller: AddNewEventproject,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1626,7 +1626,7 @@
                 templateUrl: 'projects/add_new/edit_event.html',
                 backdrop: 'static',
                 controller: EditEventproject,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1636,7 +1636,7 @@
                 templateUrl: 'projects/add_new/budget.html',
                 backdrop: 'static',
                 controller: AddBudgetproject,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1646,7 +1646,7 @@
                 templateUrl: 'projects/add_new/add_new_task.html',
                 backdrop: 'static',
                 controller: AddNewTaskProject,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -1658,7 +1658,7 @@
                 templateUrl: 'projects/add_new/edit_task.html',
                 backdrop: 'static',
                 controller: EditTaskProject,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1668,7 +1668,7 @@
                 templateUrl: 'projects/add_new/addcharges.tpl.html',
                 backdrop: 'static',
                 controller: ChargesController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1678,7 +1678,7 @@
                 templateUrl: 'projects/confirmService.tpl.html',
                 backdrop: 'static',
                 controller: ServiceconfirmationController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Project" } }
             });
         }
@@ -1689,7 +1689,7 @@
                 templateUrl: 'projects/add_new/confirmCharges.tpl.html',
                 backdrop: 'static',
                 controller: ChargeconfirmationController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Project" } }
             });
         }
@@ -1700,7 +1700,7 @@
                 templateUrl: 'projects/add_new/editcharges.tpl.html',
                 backdrop: 'static',
                 controller: EditChargesController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1710,7 +1710,7 @@
                 templateUrl: 'projects/editService.tpl.html',
                 backdrop: 'static',
                 controller: editServiceController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
