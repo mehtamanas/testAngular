@@ -6,18 +6,20 @@
                     <h2 class="pg-inner-title">Call Record</h2>
                 </div>
             </div>
-            <div class="pull-left actions-wrap">
-                <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeView()" id="contacaction">
-                    <option value='default' selected>Default View</option>
-                    <option ng-repeat="view in views" value={{view.view_name}}>{{view.view_name}}</option>
-                </select>
-            </div>
-            <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveView()"><u>SAVE VIEW</u></a>
         </div>
     </div>
 
     <div class="pg-inner-content">
         <form action="">
+            <div class="clearfix">
+                <div class="pull-left actions-wrap">
+                    <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeView()" id="contacaction">
+                        <option value='default' selected>Default View</option>
+                        <option ng-repeat="view in views" value={{view.view_name}}>{{view.view_name}}</option>
+                    </select>
+                </div>
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveView()"><u>SAVE VIEW</u></a>
+            </div>
             <div id="record-content" class="properties-content">
                 <div id="project-record-list" kendo-grid k-options="callrecordGrid" selectable="true">
                 </div>
