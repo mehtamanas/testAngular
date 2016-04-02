@@ -149,7 +149,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/sucessfull.tpl.html',
                   backdrop: 'static',
                   controller: sucessfullController,
-                  size: 'lg',
+                  size: 'sm',
                   resolve: { items: { title: "User" } }
               });
 
@@ -161,7 +161,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/inactive.html',
                   backdrop: 'static',
                   controller: InactiveController,
-                  size: 'lg',
+                  size: 'sm',
                  resolve: { items: { title: "User" } }
               });
 
@@ -174,7 +174,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/option.html',
                   backdrop: 'static',
                   controller: OptionPopUpController,
-                  size: 'lg'
+                  size: 'sm'
               });
           };
 
