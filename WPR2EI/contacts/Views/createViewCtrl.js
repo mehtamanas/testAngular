@@ -3,6 +3,7 @@
 
     $scope.createView = function (isValid) {
         if (isValid) {
+            $scope.disabled = true;
             var postData = {
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
@@ -15,9 +16,10 @@
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
                 $scope.cancel();
-                if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-                if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', 'contactGrid');
-                if (viewData.grid == 'client')  $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+                if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', $scope.params.viewName);
+                if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', $scope.params.viewName);
+                if (viewData.grid == 'client') $rootScope.$broadcast('REFRESH3', $scope.params.viewName);
+                if (viewData.grid == 'call') $rootScope.$broadcast('REFRESH', $scope.params.viewName);
             }, function (error) {
 
             })

@@ -97,8 +97,8 @@ angular.module('contacts')
 
                 //get the grid datasource
                 var grid = $('#contact_kenomain').getKendoGrid();
-                var sortObj = [];
-                sortObj.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
+                var sort = [];
+                sort.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
                 var col = (sortObj[0].column_names).split(',');
                 for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
                     var colFlag = false;
@@ -114,7 +114,7 @@ angular.module('contacts')
                     }
                 }
 
-                $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
+                $('#contact_kenomain').getKendoGrid().dataSource.sort(sort);
             }
             else {
                 $('#contact_kenomain').getKendoGrid().dataSource.sort({});
@@ -500,10 +500,12 @@ angular.module('contacts')
             if (args == 'contactGrid') {
                 $('.k-i-refresh').trigger("click");
             }
-
+            else {
+                callViewApi();
+                $scope.gridView = args;
+            }
             $scope.contactAction = 'no_action';
             $('#checkAll').prop('checked', false);
-            callViewApi();
         });
 
         $scope.openFollowUp = function (d) {

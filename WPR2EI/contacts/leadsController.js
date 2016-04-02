@@ -82,13 +82,13 @@ angular.module('contacts')
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {
                 //filter by grid name
-                filterObj = _.filter($scope.views, function (o)
+                sortObj = _.filter($scope.views, function (o)
                 { return o.view_name === $scope.gridView });
 
                 //get the grid datasource
                 var grid = $('#contact_kenomain').getKendoGrid();
-                var sortObj = [];
-                sortObj.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
+                var sort = [];
+                sort.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
                 var col = (sortObj[0].column_names).split(',');
                 for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
                     var colFlag = false;
@@ -104,7 +104,7 @@ angular.module('contacts')
                     }
                 }
 
-                $('#contact_kenomain').getKendoGrid().dataSource.sort(sortObj);
+                $('#contact_kenomain').getKendoGrid().dataSource.sort(sort);
             }
             else {
                 $('#contact_kenomain').getKendoGrid().dataSource.sort({});
