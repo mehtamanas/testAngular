@@ -3,7 +3,7 @@
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
         console.log('CallController');
         $rootScope.title = 'Dwellar-Call Records';
-
+        $scope.gridView = 'default';
         var userID = $cookieStore.get('userId');
 
         var orgID = $cookieStore.get('orgID');
@@ -92,6 +92,7 @@
                 {
                     template: "<audio controls><source type='audio/mpeg' src='#= recordingurl #'></audio>",
                     title: "Recording",
+                    field: 'recordingurl',
                     width:'314px',
                     attributes:
                       {
@@ -119,18 +120,81 @@
                 },]
         };
 
-
-
-
-
-
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
                 applyFilter('first_name', $scope.lastNameFilter);
             else
                 clearFilters();
-
         };
+
+        var callViewApi = function () {
+
+            apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
+                $scope.views = _.filter(res.data, function (o)
+                { return o.grid_name === 'call' });
+            }, function (err) {
+
+            });
+        }
+
+        callViewApi();
+
+        $scope.changeView = function () {
+            if ($scope.gridView !== 'default') {
+                //filter by grid name
+                sortObj = _.filter($scope.views, function (o)
+                { return o.view_name === $scope.gridView });
+
+                //get the grid datasource
+                var grid = $('#project-record-list').getKendoGrid();
+                var sort = [];
+                sort.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
+                var col = (sortObj[0].column_names).split(',');
+                for (i = 0; i < $('#project-record-list').getKendoGrid().columns.length; i++) {
+                    var colFlag = false;
+                    for (j = 0; j < col.length; j++) {
+                        if (col[j] === $('#project-record-list').getKendoGrid().columns[i].field) {
+                            $('#project-record-list').getKendoGrid().showColumn(i);
+                            colFlag = true;
+                            break;
+                        }
+                        if (j === col.length - 1 && colFlag == false) {
+                            $('#project-record-list').getKendoGrid().hideColumn(i);
+                        }
+                    }
+                }
+
+                $('#project-record-list').getKendoGrid().dataSource.sort(sort);
+            }
+            else {
+                $('#project-record-list').getKendoGrid().dataSource.sort({});
+                for (i = 0; i < $('#project-record-list').getKendoGrid().columns.length; i++) {
+                    $('#project-record-list').getKendoGrid().showColumn(i);
+                }
+
+            }
+
+        }
+
+        $scope.saveView = function () {
+            var grid = $('#project-record-list').getKendoGrid();
+            if (grid.dataSource._sort) {
+                var sortObject = grid.dataSource._sort[0];
+            }
+            var colObject = _.filter(grid.columns, function (o)
+            { return !o.hidden });
+            colObject = (_.pluck(colObject, 'field')).join(',');
+
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/Views/createView.html',
+                backdrop: 'static',
+                controller: createViewCtrl,
+                size: 'lg',
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'call' } }
+            });
+        }
 
         function applyFilter(filterField, filterValue) {
 
@@ -182,6 +246,10 @@
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'projectGrid') {
                 $('.k-i-refresh').trigger("click");
+            }
+            else {
+                callViewApi();
+                $scope.gridView = args;
             }
         });
 
