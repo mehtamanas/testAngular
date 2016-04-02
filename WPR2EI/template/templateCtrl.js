@@ -14,7 +14,7 @@
                 templateUrl: 'template/create/quoteCreate.html',
                 backdrop: 'static',
                 controller: quotesCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
         else if (args === 'agreement') {
@@ -23,7 +23,7 @@
                 templateUrl: 'template/create/agreement/agreementCreate.html',
                 backdrop: 'static',
                 controller: agreementCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
         else if (args === 'invoice') {
@@ -32,7 +32,7 @@
                 templateUrl: 'template/create/invoiceCreate.html',
                 backdrop: 'static',
                 controller: invoiceCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
 
@@ -42,7 +42,7 @@
                 templateUrl: 'template/create/channelCreate.html',
                 backdrop: 'static',
                 controller: channelCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
         else if (args === 'people') {
@@ -51,7 +51,7 @@
                 templateUrl: 'template/create/peopleCreate.html',
                 backdrop: 'static',
                 controller: peopleCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
         else if (args === 'quote') {
@@ -60,7 +60,7 @@
                 templateUrl: 'template/create/quoteCreate.html',
                 backdrop: 'static',
                 controller: quoteCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
         else if (args === 'email') {
@@ -69,7 +69,7 @@
                 templateUrl: 'template/create/emails/emailCreate.html',
                 backdrop: 'static',
                 controller: emailCreateCtrl,
-                size: 'md'
+                size: 'lg'
             });
         }
 
@@ -282,7 +282,7 @@
             templateUrl: 'template/preview.html',
             backdrop: 'static',
             controller: previewCtrl,
-            size: 'md',
+            size: 'lg',
             resolve: { agreementData: d }
         });
     };
@@ -294,7 +294,7 @@
             templateUrl: 'template/edit/emails/emailEdit.html',
             backdrop: 'static',
             controller: emailEditCtrl,
-            size: 'md',
+            size: 'lg',
             resolve:{
                 emailData: dataItem
         }
@@ -308,7 +308,7 @@
             templateUrl: 'template/create/demand_letter/demand_letter.html',
             backdrop: 'static',
             controller: demandLetterController,
-            size: 'md',
+            size: 'lg',
            
         });
     }
@@ -319,7 +319,7 @@
             templateUrl: 'template/edit/agreement/agreementEdit.html',
             backdrop: 'static',
             controller: agreementEditCtrl,
-            size: 'md',
+            size: 'lg',
             resolve: {
                 agreementData: dataItem
             }
@@ -491,7 +491,7 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "form" } }
         });
     }
@@ -505,7 +505,7 @@ function (error) {
             templateUrl: 'contacts/confirmnotes.tpl.html',
             backdrop: 'static',
             controller: confirmEmailController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Email Template" } }
 
         });
