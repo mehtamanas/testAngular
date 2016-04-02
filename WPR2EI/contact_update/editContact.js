@@ -101,7 +101,7 @@ var updateContactController = function ($scope, $state, $modalInstance, COUNTRIE
                 templateUrl: 'newuser/invite.tpl.html',
                 backdrop: 'static',
                 controller: InviteController,
-                size: 'md',
+                size: 'lg',
 
 
             });

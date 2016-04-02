@@ -316,7 +316,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/company/addTag.html',
                 backdrop: 'static',
                 controller: AddTagCompanyController,
-                size: 'md'
+                size: 'lg'
             });
         };
 

@@ -95,7 +95,7 @@ var EditNoteTeamController = function ($scope, $state, $cookieStore, apiService,
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Edit" } }
         });
     }

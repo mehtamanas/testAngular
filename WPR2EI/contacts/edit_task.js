@@ -261,7 +261,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                 templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
                 controller: EditsucessfullController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Task" } }
             });
         }

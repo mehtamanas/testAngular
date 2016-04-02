@@ -126,7 +126,7 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
             templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Notes" } }
         });
     }

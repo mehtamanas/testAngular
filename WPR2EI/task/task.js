@@ -273,7 +273,7 @@
                 templateUrl: 'task/edit_task.html',
                 backdrop: 'static',
                 controller: EditTaskGridController,
-                size: 'md'
+                size: 'lg'
 
             });
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
@@ -286,7 +286,7 @@
                 templateUrl: 'property/add_new_property.tpl.html',
                 backdrop: 'static',
                 controller: PropertyPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
     }

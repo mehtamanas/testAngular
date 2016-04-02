@@ -414,7 +414,7 @@
                 templateUrl: 'contacts/company/followUp.html',
                 backdrop: 'static',
                 controller: FollowUpController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -438,7 +438,7 @@
                 templateUrl: 'contact_update/editContact.html',
                 backdrop: 'static',
                 controller: updateContactController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -448,7 +448,7 @@
                 templateUrl: 'contacts/confirm.tpl.html',
                 backdrop: 'static',
                 controller: confirmationController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Contact" } }
 
             });

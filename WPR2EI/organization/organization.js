@@ -282,7 +282,7 @@ angular.module('organization')
                       backdrop: 'static',
 
                       controller: EditOrgPopUpController,
-                      size: 'md'
+                      size: 'lg'
                   });
               };
          

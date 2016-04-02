@@ -127,7 +127,7 @@ var OptionPopController = function ($scope, $state, $cookieStore, apiService, $r
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Tags" } }
         });
 

@@ -1300,7 +1300,7 @@ div.k-grid-footer {
     border-radius: 0;
     margin: auto;
     text-align: center;
-    width: 960px;
+    /*width: 960px;*/
 }
 
 .modal-header {
@@ -10829,7 +10829,7 @@ input[type=text].rupee_1 {
 }
 
 .k-myTool {
-    background-position: -288px -96px;
+    background-position:-288px -215px;
 }
 
 .quote-subtotal {
@@ -10930,7 +10930,7 @@ input[type=text].rupee_1 {
     vertical-align: middle;
     position: relative;
 }
-.user-photo_3 {
+.user-photo_3-1 {
     background: #e9e9e9;
     text-align: center;
     width:204px;

@@ -130,7 +130,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/Views/createView.html',
                 backdrop: 'static',
                 controller: createViewCtrl,
-                size: 'md',
+                size: 'lg',
                 resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead' } }
             });
         }
@@ -507,7 +507,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/company/followUp.html',
                 backdrop: 'static',
                 controller: FollowUpController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -521,7 +521,7 @@ angular.module('contacts')
                 backdrop: 'static',
 
                 controller: ContactPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -532,7 +532,7 @@ angular.module('contacts')
                 backdrop: 'static',
 
                 controller: ContactUploadPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -543,7 +543,7 @@ angular.module('contacts')
                 backdrop: 'static',
 
                 controller: ContactNotesUploadPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -571,7 +571,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/option.html',
                 backdrop: 'static',
                 controller: TagPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -581,7 +581,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/AssignToContact.tpl.html',
                 backdrop: 'static',
                 controller: ActionUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -591,7 +591,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirm.tpl.html',
                 backdrop: 'static',
                 controller: confirmationController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Contact" } }
 
             });

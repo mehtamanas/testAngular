@@ -57,7 +57,7 @@
                 templateUrl: 'newuser/delete.html',
                 backdrop: 'static',
                 controller: DeleteController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Notes" } }
 
             });

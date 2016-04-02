@@ -72,7 +72,7 @@
                 templateUrl: 'tag/createTag.html',
                 backdrop: 'static',
                 controller: AddTagPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -178,7 +178,7 @@
                 templateUrl: 'tag/confirmremovetag.html',
                 backdrop: 'static',
                 controller: confirmTagController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Tag" } }
 
             });

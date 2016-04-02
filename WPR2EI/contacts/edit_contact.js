@@ -350,7 +350,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
             controller: EditsucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Contact" } }
         });
         $rootScope.$broadcast('REFRESH', 'contactGrid');

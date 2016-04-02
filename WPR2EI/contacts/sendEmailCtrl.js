@@ -28,9 +28,13 @@
         url: apiService.uploadURL,
     });
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-        img = response[0].Location;
-        var edit = $('#editor').data("kendoEditor");
-        edit.exec('inserthtml', { value: "<img alt=''  src='" + img + "' />" });
+        loc = response[0].Location;
+        var edit = $('#sendEmailEditor').data("kendoEditor");
+        var fileType = fileItem.file.type.slice(fileItem.file.type.lastIndexOf('/') + 1);
+        if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
+            edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
+        else
+            edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
 
     };
 
@@ -68,49 +72,8 @@
                     }
                 },
 
-                  "insertFile",
                   "viewHtml",
         ],
-        //imageBrowser: {
-        //    messages: {
-        //        dropFilesHere: "Drop files here"
-        //    },
-        //    transport: {
-        //        read: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Read",
-        //        destroy: {
-        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Destroy",
-        //            type: "POST"
-        //        },
-        //        create: {
-        //            url: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Create",
-        //            type: "POST"
-        //        },
-        //        thumbnailUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Thumbnail",
-        //        uploadUrl: "http://demos.telerik.com/kendo-ui/service/ImageBrowser/Upload",
-        //        imageUrl: function (name) {
-        //            var pictureUrl = decodeURIComponent(name);
-        //            return pictureUrl;
-        //        },
-        //    }
-        //},
-        fileBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Read",
-                destroy: {
-                    url: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Destroy",
-                    type: "POST"
-                },
-                create: {
-                    url: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Create",
-                    type: "POST"
-                },
-                uploadUrl: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Upload",
-                fileUrl: "http://demos.telerik.com/kendo-ui/service/FileBrowser/File?fileName={0}"
-            }
-        }
     }
 
     $scope.loadTags = function () {
@@ -172,7 +135,7 @@
             templateUrl: 'contacts/sucessfullEmail.tpl.html',
             backdrop: 'static',
             controller: sucessfullEmailController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Email" } }
         });
     }

@@ -535,7 +535,7 @@
                 templateUrl: 'team/addProject.tpl.html',
                 backdrop: 'static',
                 controller: AddProjectTeamController,
-                size: 'md',
+                size: 'lg',
                 resolve: {
                     newuserService: teamService,
                     newuserData: {
@@ -553,7 +553,7 @@
                 templateUrl: 'team/add_new_task.tpl.html',
                 backdrop: 'static',
                 controller: AddNewTaskTeam,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -566,7 +566,7 @@
                 templateUrl: 'team/edit_task.html',
                 backdrop: 'static',
                 controller: EditTaskTeam,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -583,7 +583,7 @@
                 templateUrl: 'team/edit_team.html',
                 backdrop: 'static',
                 controller: EditTeamPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 

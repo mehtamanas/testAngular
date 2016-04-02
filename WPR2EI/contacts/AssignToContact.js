@@ -127,7 +127,7 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
             templateUrl: 'contacts/assignpopup.tpl.html',
             backdrop: 'static',
             controller: assigntopopup,
-            size: 'md',
+            size: 'lg',
 
 
         });
