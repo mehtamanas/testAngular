@@ -145,7 +145,7 @@ var AddProjectController = function ($scope, $q, $cookieStore, newuserService, n
             templateUrl: 'projects/UpdateSuccessful.tpl.html',
             backdrop: 'static',
             controller: UpdateController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Project" } }
 
         });

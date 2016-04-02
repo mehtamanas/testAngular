@@ -82,7 +82,7 @@
                   templateUrl: 'application/accept.tpl.html',
                   backdrop: 'static',
                   controller: acceptController,
-                  size: 'md'
+                  size: 'lg'
               });
           };
 
@@ -92,7 +92,7 @@
                   templateUrl: 'application/decline.tpl.html',
                   backdrop: 'static',
                   controller: declineController,
-                  size: 'md'
+                  size: 'lg'
               });
           };
 

@@ -149,7 +149,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/sucessfull.tpl.html',
                   backdrop: 'static',
                   controller: sucessfullController,
-                  size: 'md',
+                  size: 'lg',
                   resolve: { items: { title: "User" } }
               });
 
@@ -161,7 +161,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/inactive.html',
                   backdrop: 'static',
                   controller: InactiveController,
-                  size: 'md',
+                  size: 'lg',
                  resolve: { items: { title: "User" } }
               });
 
@@ -174,7 +174,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/option.html',
                   backdrop: 'static',
                   controller: OptionPopUpController,
-                  size: 'md'
+                  size: 'lg'
               });
           };
 
@@ -529,7 +529,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/add_new_user.tpl.html',
                   backdrop: 'static',
                   controller: UserPopUpController,
-                  size: 'md'
+                  size: 'lg'
               });
           };
 
@@ -542,7 +542,7 @@ angular.module('newuser')
                   //controller: import_usersController,
                   controller: uploadController,
 
-                  size: 'md'
+                  size: 'lg'
                   //resolve: {
                   //    uploadService: uploadService
                   //}
@@ -555,7 +555,7 @@ angular.module('newuser')
                   templateUrl: 'newuser/block.tpl.html',
                   backdrop: 'static',
                   controller: BlockController,
-                  size: 'md',
+                  size: 'lg',
 
 
               });

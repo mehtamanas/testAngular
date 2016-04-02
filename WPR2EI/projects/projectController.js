@@ -302,7 +302,7 @@ angular.module('project')
                 templateUrl: 'projects/add_new_project.tpl.html',
                 backdrop: 'static',
                 controller: ProjectPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
        
@@ -313,7 +313,7 @@ angular.module('project')
                 templateUrl: 'projects/confirmproject.tpl.html',
                 backdrop: 'static',
                 controller: ProjectconfirmationController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Project" } }
 
             });

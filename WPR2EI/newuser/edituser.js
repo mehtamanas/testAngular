@@ -433,7 +433,7 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
             controller: EditsucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "User" } }
         });
         $rootScope.$broadcast('REFRESH', 'newuser');

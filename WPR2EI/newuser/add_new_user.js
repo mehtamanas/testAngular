@@ -111,7 +111,7 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
             templateUrl: 'newuser/invite.tpl.html',
             backdrop: 'static',
             controller: InviteController,
-            size: 'md',
+            size: 'lg',
 
 
         });
