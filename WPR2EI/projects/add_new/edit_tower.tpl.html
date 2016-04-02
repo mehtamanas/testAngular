@@ -1,348 +1,337 @@
 ﻿
 
 <div id="add_new_tower" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-   
-
-            <div class="modal-body">
-
-                <div class="close-btn-wrap">
-                    <button type="button"  id="btn_editTowerClose" class="close" ng-click="$dismiss('cancel')">&times;</button>
-                </div>
-
-                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate
-                      data-ng-submit="addNew(addNewForm.$valid)"
-                      autocomplete="off">
-
-                    <h4 class="form-title">Edit Tower Type</h4>
-                    <div class="clearfix">
-                        <div class="pull-left f-half-3">
-                            <div class="clearfix">
-                                <div class="form-group"
-                                     data-ng-class="{
-                                                      'has-error' : addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid),
-                                                      'has-success': addNewForm.floors.$valid && !addNewForm.floors.$pristine
-                                                       }">
-                                    <div class="form-group form-bx f-unit">
-                                        <label for="">How Many Wings Are There in This Tower?</label>
-                                        <input type="text" class="form-control" autofocus name="floors" placeholder="Wing No"  id="editTowerNo"
-                                               data-ng-model="params.no_of_wings"
-                                               minlength="1"
-                                               maxlength="10"
-                                               ng-pattern="/^(0|[1-9][0-9]*)$/"
-                                               required />
-                                        <div class="text-danger"
-                                             data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus" id="err_editTowerNo">
-                                            {{'Enter valid No of Wings' | translate }}
-                                        </div>
-                                    </div>
-                                    <div class="field-md3 field-req">*</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+    <div class="modal-header">
+        <h4 class="form-title" style="text-align:left">Edit Tower Type</h4>
+        <div class="close-btn-wrap" style="height:0px!important">
+            <button type="button" id="btn_editTowerClose" style="margin-top:-4%" class="close"  data-toggle="tooltip" title="Close Tab" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate
+              data-ng-submit="addNew(addNewForm.$valid)"
+              autocomplete="off">
+            <div class="clearfix">
+                <div class="pull-left f-half-3">
                     <div class="clearfix">
                         <div class="form-group"
                              data-ng-class="{
+                                                      'has-error' : addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid),
+                                                      'has-success': addNewForm.floors.$valid && !addNewForm.floors.$pristine
+                                                       }">
+                            <div class="form-group form-bx f-unit">
+                                <label for="">How Many Wings Are There in This Tower?</label>
+                                <input type="text" class="form-control" autofocus name="floors" placeholder="Wing No" id="editTowerNo"
+                                       data-ng-model="params.no_of_wings"
+                                       minlength="1"
+                                       maxlength="10"
+                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                       required />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus" id="err_editTowerNo">
+                                    {{'Enter valid No of Wings' | translate }}
+                                </div>
+                            </div>
+                            <div class="field-md3 field-req">*</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group"
+                     data-ng-class="{
                                      'has-error' : addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid),
                                      'has-success': addNewForm.tname.$valid && !addNewForm.tname.$pristine
                                                 }">
-                            <div class="form-group form-bx form-bx3-2 ">
-                                <label for="">Enter Tower Name:</label>
-                                <input type="text" class="form-control" name="tname" placeholder="Tower A" id="editTowerName"
-                                       data-ng-model="params.tower_name"
-                                       minlength="1"
-                                       maxlength="30"
-                                       ng-pattern="/^[\w -]*$/"
-                                       required />
-                                <div class="text-danger"
-                                     data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus" id="err_editTowerName">
-                                    {{ 'Enter valid Tower Name' | translate }}
-                                </div>
-                            </div>
-                            <div class="field-md2 field-req">*</div>
+                    <div class="form-group form-bx form-bx3-2 ">
+                        <label for="">Enter Tower Name:</label>
+                        <input type="text" class="form-control" name="tname" placeholder="Tower A" id="editTowerName"
+                               data-ng-model="params.tower_name"
+                               minlength="1"
+                               maxlength="30"
+                               ng-pattern="/^[\w -]*$/"
+                               required />
+                        <div class="text-danger"
+                             data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.street.$focus" id="err_editTowerName">
+                            {{ 'Enter valid Tower Name' | translate }}
                         </div>
                     </div>
+                    <div class="field-md2 field-req">*</div>
+                </div>
+            </div>
 
 
+            <div class="clearfix">
+
+                <div class="pull-left f-half-3">
                     <div class="clearfix">
-
-                        <div class="pull-left f-half-3">
-                            <div class="clearfix">
-                                <div class="form-group"
-                                     data-ng-class="{
+                        <div class="form-group"
+                             data-ng-class="{
                                                      'has-error' : addNewForm.bprice.$invalid && (!addNewForm.bprice.$pristine || showValid),
                                                      'has-success': addNewForm.bprice.$valid && !addNewForm.bprice.$pristine
                                                         }">
-                                    <div class="form-group form-bx">
-                                        <label for="">Base Price</label>
-                                        <div class="area-f">
-                                            <input type="text" class="form-control" name="bprice" placeholder="Base Price" id="editTowerBaserate"
-                                                   data-ng-model="params.base_price"
-                                                   minlength="1"
-                                                   maxlength="10"
-                                                   ng-pattern="/^[0-9]+$/"
-                                                />
-                                            <span class="area-txt">/sq.ft</span>
-                                            <div class="text-danger"
-                                                 data-ng-if="addNewForm.bprice.$invalid && (!addNewForm.bprice.$pristine || showValid) && !addNewForm.bprice.$focus" id="err_editTowerBaserate">
-                                                {{'Enter valid Base Price' | translate }}
-                                            </div>
-                                        </div>
+                            <div class="form-group form-bx">
+                                <label for="">Base Price</label>
+                                <div class="area-f">
+                                    <input type="text" class="form-control" name="bprice" placeholder="Base Price" id="editTowerBaserate"
+                                           data-ng-model="params.base_price"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^[0-9]+$/" />
+                                    <span class="area-txt">/sq.ft</span>
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.bprice.$invalid && (!addNewForm.bprice.$pristine || showValid) && !addNewForm.bprice.$focus" id="err_editTowerBaserate">
+                                        {{'Enter valid Base Price' | translate }}
                                     </div>
-                                 
                                 </div>
-
                             </div>
+
                         </div>
 
-                        <div class="pull-left f-half-3">
-                            <div class="clearfix">
-                                <div class="form-group"
-                                     data-ng-class="{
+                    </div>
+                </div>
+
+                <div class="pull-left f-half-3">
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
                                                              'has-error' : addNewForm.carprice.$invalid && (!addNewForm.carprice.$pristine || showValid),
                                                              'has-success': addNewForm.carprice.$valid && !addNewForm.carprice.$pristine
                                                              }">
-                                    <div class="form-group form-bx">
-                                        <label for="">Car Park Price</label>
-                                        <input type="text" class="form-control" name="carprice" placeholder="Car Park Price" id="editTowerCarParkPrice"
-                                               data-ng-model="params.cark_park_price"
-                                               minlength="1"
-                                               maxlength="10"
-                                               ng-pattern="/^[0-9]+$/"
-                                              />
-                                        <div class="text-danger"
-                                             data-ng-if="addNewForm.carprice.$invalid && (!addNewForm.carprice.$pristine || showValid) && !addNewForm.carprice.$focus" id="err_editTowerCarParkPrice">
-                                            {{'Enter valid Car Price' | translate }}
-                                        </div>
-                                    </div>
-                                 
+                            <div class="form-group form-bx">
+                                <label for="">Car Park Price</label>
+                                <input type="text" class="form-control" name="carprice" placeholder="Car Park Price" id="editTowerCarParkPrice"
+                                       data-ng-model="params.cark_park_price"
+                                       minlength="1"
+                                       maxlength="10"
+                                       ng-pattern="/^[0-9]+$/" />
+                                <div class="text-danger"
+                                     data-ng-if="addNewForm.carprice.$invalid && (!addNewForm.carprice.$pristine || showValid) && !addNewForm.carprice.$focus" id="err_editTowerCarParkPrice">
+                                    {{'Enter valid Car Price' | translate }}
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="pull-left f-half-3">
-                            <div class="clearfix">
-                                <div class="form-group"
-                                     data-ng-class="{
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pull-left f-half-3">
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
                                                               'has-error' : addNewForm.floorprice.$invalid && (!addNewForm.floorprice.$pristine || showValid),
                                                               'has-success': addNewForm.floorprice.$valid && !addNewForm.floorprice.$pristine
                                                                 }">
-                                    <div class="form-group form-bx">
-                                        <label for="">Floor Rise</label>
-                                        <div class="area-f">
-                                            <input type="text" class="form-control" name="floorprice" placeholder="Floor Rise" id="editTowerFloorRise"
-                                                   data-ng-model="params.floor_rise"
-                                                   minlength="1"
-                                                   maxlength="10"
-                                                   ng-pattern="/^[0-9]+$/"
-                                                />
-                                            <span class="area-txt">/sq.ft</span>
-                                            <div class="text-danger"
-                                                 data-ng-if="addNewForm.floorprice.$invalid && (!addNewForm.floorprice.$pristine || showValid) && !addNewForm.floorprice.$focus" id="err_editTowerFloorRise">
-                                                {{'Enter valid Floor Price' | translate }}
-                                            </div>
-                                        </div>
-                                   
+                            <div class="form-group form-bx">
+                                <label for="">Floor Rise</label>
+                                <div class="area-f">
+                                    <input type="text" class="form-control" name="floorprice" placeholder="Floor Rise" id="editTowerFloorRise"
+                                           data-ng-model="params.floor_rise"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^[0-9]+$/" />
+                                    <span class="area-txt">/sq.ft</span>
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.floorprice.$invalid && (!addNewForm.floorprice.$pristine || showValid) && !addNewForm.floorprice.$focus" id="err_editTowerFloorRise">
+                                        {{'Enter valid Floor Price' | translate }}
                                     </div>
                                 </div>
 
                             </div>
                         </div>
 
-                        <div class="pull-left f-half-3">
-                            <div class="clearfix">
-                                <div class="form-group"
-                                     data-ng-class="{
+                    </div>
+                </div>
+
+                <div class="pull-left f-half-3">
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
                                                              'has-error' : addNewForm.floorstart.$invalid && (!addNewForm.floorstart.$pristine || showValid),
                                                              'has-success': addNewForm.floorstart.$valid && !addNewForm.floorstart.$pristine
                                                             }">
-                                    <div class="form-group form-bx">
-                                        <label for="">Floor Rise Starts From</label>
-                                        <div class="area-f">
-                                            <input type="text" class="form-control" name="floorstart" placeholder="Floor Rise Starts From" id="editTowerFloorRiseStarts"
-                                                   data-ng-model="params.floor_rise_starts_from"
-                                                   minlength="1"
-                                                   maxlength="10"
-                                                   ng-pattern="/^[0-9]+$/"
-                                                   />
-                                            <span class="area-txt">Floor</span>
-                                            <div class="text-danger"
-                                                 data-ng-if="addNewForm.floorstart.$invalid && (!addNewForm.floorstart.$pristine || showValid) && !addNewForm.floorstart.$focus" id="err_editTowerFloorRiseStarts">
-                                                {{'Enter valid Floor Start' | translate }}
-                                            </div>
+                            <div class="form-group form-bx">
+                                <label for="">Floor Rise Starts From</label>
+                                <div class="area-f">
+                                    <input type="text" class="form-control" name="floorstart" placeholder="Floor Rise Starts From" id="editTowerFloorRiseStarts"
+                                           data-ng-model="params.floor_rise_starts_from"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^[0-9]+$/" />
+                                    <span class="area-txt">Floor</span>
+                                    <div class="text-danger"
+                                         data-ng-if="addNewForm.floorstart.$invalid && (!addNewForm.floorstart.$pristine || showValid) && !addNewForm.floorstart.$focus" id="err_editTowerFloorRiseStarts">
+                                        {{'Enter valid Floor Start' | translate }}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="clearfix image-upload-container">
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Tower Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                                <div class="image-upload-panel">
+                                    <div class="row" ng-hide="uploader.queue.length">
+                                        <img ng-src={{params.Image_Url_Tower1}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                            <div ng-show="uploader.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
                                         </div>
-                                      
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                    <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
 
-                    <div class="clearfix image-upload-container">
-                    <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-                            <div class="image-upload-title">Upload Tower Image</div>
-                            <div class="dropzone dropzone-bx image-upload-bx">
-                                <div class="fallback">
-                                    <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                        <div class="image-upload-panel">
-                                            <div class="row" ng-hide="uploader.queue.length">
-                                                <img ng-src={{params.Image_Url_Tower1}} class="upload-image" />
-                                            </div>
-                                            <div class="row" ng-show="uploader.queue.length">
-                                                <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                                    <div ng-show="uploader.isHTML5"
-                                                         ng-thumb="{ file: item._file, height: 200 }"></div>
-                                                </div>
-                                            </div>
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editTowerUpload1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                    </label>
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload 3D Zip</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader1.queue.length">
+                                        <img ng-src={{params.Image_Url_Tower3Dzip}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader1.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
+                                            <div ng-show="uploader1.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                            
-                        <label class="custom-file-input">
-                            <input type="file" class="image-upload-f" id="editTowerUpload1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                        </label>
                         </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
 
-                    <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
-                                <div class="image-upload-title">Upload 3D Zip</div>
-                                <div class="dropzone dropzone-bx image-upload-bx">
-                                    <div class="fallback">
-                                        <div class="panel panel-success" uploader="uploader1" nv-file-over="">
-                                            <div class=" image-upload-panel">
-                                                <div class="row" ng-hide="uploader1.queue.length">
-                                                    <img ng-src={{params.Image_Url_Tower3Dzip}} class="upload-image" />
-                                                </div>
-                                                <div class="row" ng-show="uploader1.queue.length">
-                                                    <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
-                                                        <div ng-show="uploader1.isHTML5"
-                                                             ng-thumb="{ file: item._file, height: 200 }"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editTowerUpload2" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                    </label>
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Minimap Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader2" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader2.queue.length">
+                                        <img ng-src={{params.Image_Url_Minimap}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader2.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
+                                            <div ng-show="uploader2.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
                                         </div>
                                     </div>
                                 </div>
-                        <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
-                            
-                        <label class="custom-file-input">
-                            <input type="file" class="image-upload-f" id="editTowerUpload2" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                        </label>
-                        </div>
-
-                    <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
-                                    <div class="image-upload-title">Upload Minimap Image</div>
-                                    <div class="dropzone dropzone-bx image-upload-bx">
-                                        <div class="fallback">
-                                            <div class="panel panel-success" uploader="uploader2" nv-file-over="">
-                                                <div class=" image-upload-panel">
-                                                    <div class="row" ng-hide="uploader2.queue.length">
-                                                        <img ng-src={{params.Image_Url_Minimap}}  class="upload-image" />
-                                                    </div>
-                                                    <div class="row" ng-show="uploader2.queue.length">
-                                                        <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
-                                                            <div ng-show="uploader2.isHTML5"
-                                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                         <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>   
-                               
-                        <label class="custom-file-input">
-                            <input type="file" class="image-upload-f" id="editTowerUpload3" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
-                        </label>
+                            </div>
                         </div>
                     </div>
+                    <div class="uploadFileName"> <p ng-show="uploader2.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>
 
-                                <h4 class="form-title form-title2">Assign Wing Type</h4>
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editTowerUpload3" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                    </label>
+                </div>
+            </div>
 
-                                <div class="row" data-ng-repeat="wing in wings ">
+            <h4 class="form-title form-title2">Assign Wing Type</h4>
 
-                                    <div class="clearfix" style="margin-left:2%">
+            <div class="row" data-ng-repeat="wing in wings ">
 
-                                        <div class="pull-left f-half-3">
-                                            <div class="clearfix">
-                                                <div class="form-group form-bx">
-                                                    <label for="">Wing Name:</label>
-                                                    <input type="text" disabled class="form-control" name="wingname" placeholder="A-1" id="editTowerWingName"
-                                                           data-ng-model="wing.wing_name"
-                                                         
-                                                           input-focus
-                                                            />
-                                                </div>
-                                            </div>
-                                            <!--<div class="clearfix">
-                        <div class="form-group form-bx">
-                            <label for="">Wing Name:</label>
-                            <input type="text" class="form-control" placeholder="A-2"
+                <div class="clearfix" style="margin-left:2%">
 
-                                   />
+                    <div class="pull-left f-half-3">
+                        <div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Wing Name:</label>
+                                <input type="text" disabled class="form-control" name="wingname" placeholder="A-1" id="editTowerWingName"
+                                       data-ng-model="wing.wing_name"
+                                       input-focus />
+                            </div>
                         </div>
-                    </div>-->
-                                        </div>
+                        <!--<div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Wing Name:</label>
+                                <input type="text" class="form-control" placeholder="A-2"
 
-                                        <div class="pull-left f-half-4">
-                                            <div class="clearfix">
-                                                <div class="form-group form-bx">
-                                                    <label for="">Wing No.</label>
-                                                    <input type="text" class="form-control" name="totalfloors" placeholder="1" id="editTowerWingNo"
-                                                           data-ng-model="wing.wing_no"  
-                                                           input-focus
-                                                            />
-                                                </div>
-                                            </div>
-                                            <!--<div class="clearfix">
-                        <div class="form-group form-bx">
-                            <label for="">Wing No.</label>
-                            <input type="text" class="form-control" placeholder="2" />
-                        </div>
-                    </div>-->
-                                        </div>
-
-                                        <div class="pull-left f-half-3">
-                                            <div class="clearfix">
-                                                <div class="form-group form-bx">
-
-                                                    <input type="hidden" class="form-control" disabled name="floorno" id="editTowerFloorNo"
-                                                           placeholder="Floor Number"
-                                                           data-ng-model="wing.wing_id"
-                                                           input-focus
-                                                            />
-                                                </div>
-                                            </div>
-                                            <!--<div class="clearfix">
-                        <div class="form-group form-bx">
-                            <label for="">Wing Name:</label>
-                            <input type="text" class="form-control" placeholder="A-2"
-
-                                   />
-                        </div>
-                    </div>-->
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                    <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress)/3)>0">
-                        <div class="progress-bar" role="progressbar"
-                             ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress)/3 + '%' }"></div>
+                                       />
+                            </div>
+                        </div>-->
                     </div>
-                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
-                               
-                     <div class="modal-btn-wrap3 clearfix">
-                        <button type="submit" id="btn_editTowerSave" class="f-btn">
-                                        SAVE
-                       </button>
-                   </div>
 
-</form>
-            </div><!-- modal-body ended -->
+                    <div class="pull-left f-half-4">
+                        <div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Wing No.</label>
+                                <input type="text" class="form-control" name="totalfloors" placeholder="1" id="editTowerWingNo"
+                                       data-ng-model="wing.wing_no"
+                                       input-focus />
+                            </div>
+                        </div>
+                        <!--<div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Wing No.</label>
+                                <input type="text" class="form-control" placeholder="2" />
+                            </div>
+                        </div>-->
+                    </div>
+
+                    <div class="pull-left f-half-3">
+                        <div class="clearfix">
+                            <div class="form-group form-bx">
+
+                                <input type="hidden" class="form-control" disabled name="floorno" id="editTowerFloorNo"
+                                       placeholder="Floor Number"
+                                       data-ng-model="wing.wing_id"
+                                       input-focus />
+                            </div>
+                        </div>
+                        <!--<div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Wing Name:</label>
+                                <input type="text" class="form-control" placeholder="A-2"
+
+                                       />
+                            </div>
+                        </div>-->
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress)/3)>0">
+                <div class="progress-bar" role="progressbar"
+                     ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress)/3 + '%' }"></div>
+            </div>
+            <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+
+            <div class="modal-btn-wrap3 clearfix">
+                <button type="submit" id="btn_editTowerSave" class="f-btn">
+                    SAVE
+                </button>
+            </div>
+
+        </form>
+    </div><!-- modal-body ended -->
 
 </div><!-- modal ended -->

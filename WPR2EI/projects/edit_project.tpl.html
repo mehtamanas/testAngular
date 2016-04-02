@@ -1,15 +1,13 @@
 ﻿
 <div id="add_new_project" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel">
-
-    <div class="modal-body">
-
-        <div class="close-btn-wrap">
-            <button type="button" class="close" id="btn_editProjectClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <div class="modal-header">
+        <h4 class="form-title" style="text-align:left">Edit Project</h4>
+        <div class="close-btn-wrap" style="height:0px!important">
+            <button type="button" id="btn_editProjectClose"  style="margin-top:-4%" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
-
+    </div>
+    <div class="modal-body">
         <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
-
-            <h4 class="form-title">Edit Project</h4>
             <h4 class="form-sub-title">Select Project Type</h4>
 
             <div class="project-type-list clearfix">

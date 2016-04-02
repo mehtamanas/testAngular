@@ -1,16 +1,13 @@
 ﻿<div id="add_new_floor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 
-
-    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-
-        <div class="close-btn-wrap">
-            <button type="button" class="close" id="btn_galleryClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <div class="modal-header">
+        <h4 class="form-title" style="text-align:left">Add New Images</h4>
+        <div class="close-btn-wrap" style="height:0px!important">
+            <button type="button"id="btn_galleryClose"  data-toggle="tooltip" title="Close Tab" style="margin-top:-4%" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
-
+    </div>
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
         <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
-
-            <h4 class="form-title">Add New Images</h4>
-
             <div class="clearfix">
                 <div class="form-group"
                      data-ng-class="{
