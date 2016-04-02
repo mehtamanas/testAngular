@@ -6592,13 +6592,13 @@ button.close {
     }
 
     .modal-sm {
-        width: 300px;
+           width: 550px;
     }
 }
 
 @media (min-width:992px) {
     .modal-lg {
-    
+        width: 900px;
     }
 }
 
