@@ -177,9 +177,9 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             $modalInstance.dismiss();
 
             AuditCreate();
-            $rootScope.$broadcast('REFRESH1', 'contactGrid');
-            $rootScope.$broadcast('REFRESH2', 'projectGrid');
-            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
 
 
             var media = [];
@@ -312,10 +312,6 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             size: 'md',
             resolve: { items: { title: "Contact" } }
         });
-        $rootScope.$broadcast('REFRESH1', 'contactGrid');
-        $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-        $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
-
     }
 
     var address = [];

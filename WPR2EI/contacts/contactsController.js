@@ -497,12 +497,13 @@ angular.module('contacts')
 
         }
         $scope.$on('REFRESH1', function (event, args) {
-            if (args == 'contactGrid') {
+            if (args.name == 'contactGrid') {
+                //$('.k-i-refresh').trigger("click");
                 $('.k-i-refresh').trigger("click");
             }
-            else {
+        else if (args.name == 'ViewCreated') {
                 callViewApi();
-                $scope.gridView = args;
+                $scope.gridView = args.data;
             }
             $scope.contactAction = 'no_action';
             $('#checkAll').prop('checked', false);

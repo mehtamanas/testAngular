@@ -1,7 +1,7 @@
 angular.module('app.guest.login')
 
 .controller('LoginController',
-    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, Idle, $filter, apiService, usSpinnerService) {
+    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, Idle, $filter, apiService, usSpinnerService, $interval) {
         // Init model
         $scope.params = {
             email: '',
@@ -124,29 +124,6 @@ angular.module('app.guest.login')
         };
 
 
-        // edited by surekha on 30-1-2016
-        $scope.params =
-                  {
-                      operating_system: $cookieStore.get('Device_os'),
-                      device_name: $cookieStore.get('Device'),
-                      mac_id: "34:#$::43:434:34:45",
-                      organization_id: $cookieStore.get('orgID'),
-                      User_ID: $cookieStore.get('userId')
-                  };
-
-        DeviceCreate = function (param) {
-            apiService.post("User/DeviceCreate", param).then(function (response) {
-                var loginSession = response.data;
-            },
-           function (error) {
-
-           });
-        };
-        DeviceCreate($scope.params);
-
-        //end
-
-
         $scope.openSignupPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
@@ -258,6 +235,7 @@ angular.module('app.guest.login')
             $cookieStore.remove('tower_id');
             $cookieStore.remove('teamid');
             localStorage.clear();
+            $interval.cancel(syncData);
             console.log("loggedout");
             $state.go('login');
         });

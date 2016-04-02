@@ -3,7 +3,7 @@
  */
 
 angular.module('common')
-    .controller('HomeController', ['$scope', '$cookieStore', '$location', 'security', '$rootScope', '$cookies', 'apiService', function ($scope, $cookieStore, $location, security, $rootScope, $cookies, apiService) {
+    .controller('HomeController', ['$scope', '$cookieStore', '$location', 'security', '$rootScope', '$cookies', 'apiService', '$interval', function ($scope, $cookieStore, $location, security, $rootScope, $cookies, apiService, $interval) {
 
       
         $scope.loggedUser = $cookieStore.get('loggedUser');
@@ -137,6 +137,7 @@ angular.module('common')
             $cookieStore.remove('teamid');
             localStorage.clear();
             console.log("loggedout");
+            $interval.cancel(syncData);
             $location.url('/app/index.html#/login');
         };
 
