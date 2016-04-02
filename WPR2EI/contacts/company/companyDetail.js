@@ -273,7 +273,7 @@ function (error) {
             templateUrl: 'contacts/company/followUp.html',
             backdrop: 'static',
             controller: FollowUpController,
-            size: 'md'
+            size: 'lg'
 
         });
 
@@ -285,7 +285,7 @@ function (error) {
             templateUrl: 'contacts/company/editCompany.html',
             backdrop: 'static',
             controller: EditCompanyController,
-            size: 'md'
+            size: 'lg'
         });
     };
 
@@ -295,7 +295,7 @@ function (error) {
             templateUrl: 'contacts/company/companytagremove.tpl.html',
             backdrop: 'static',
             controller: confirmationComapnyTagController,
-            size: 'md'
+            size: 'lg'
         });
     };
 

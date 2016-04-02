@@ -53,7 +53,7 @@ var TeamPopUpController = function ($scope, $state, $cookieStore, apiService, $m
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Team" } }
         });
 

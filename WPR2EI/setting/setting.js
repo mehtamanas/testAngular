@@ -105,7 +105,7 @@
                 templateUrl: 'setting/save.html',
                 backdrop: 'static',
                 controller: SaveController,
-                size: 'md',
+                size: 'lg',
 
             });
 

@@ -96,11 +96,11 @@ angular.module('team')
             //alert('Login Session : ' + loginSession.user_id);
         },
 
-    
+
 
 
     function (error) {
-       // alert('Hi3');
+        // alert('Hi3');
         // deferred.reject(error);
         return deferred.promise;
     });
@@ -156,8 +156,8 @@ angular.module('team')
                 type: "json",
                 transport: {
                     //read: apiService.baseUrl +"Team/GetTeamDetails/" + orgID
-                    read: apiService.baseUrl +"Team/GetTeamDetails?ID=" + userID
-                    
+                    read: apiService.baseUrl + "Team/GetTeamDetails?ID=" + userID
+
                 },
                 pageSize: 20
 
@@ -171,8 +171,8 @@ angular.module('team')
             reorderable: true,
             resizable: true,
             filterable: true,
-  height: screen.height - 370,
-columnMenu: {
+            height: screen.height - 370,
+            columnMenu: {
                 messages: {
                     columns: "Choose columns",
                     filter: "Apply filter",
@@ -309,7 +309,7 @@ columnMenu: {
                 templateUrl: 'team/add_new_team.tpl.html',
                 backdrop: 'static',
                 controller: TeamPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 

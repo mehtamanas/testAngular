@@ -98,7 +98,7 @@
             templateUrl: 'contacts/list/addList.html',
             backdrop: 'static',
             controller: addListCtrl,
-            size: 'md'
+            size: 'lg'
         });
     };
 

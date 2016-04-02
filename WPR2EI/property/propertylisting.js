@@ -464,7 +464,7 @@
                 templateUrl: 'property/add_new_property.tpl.html',
                 backdrop: 'static',
                 controller: PropertyPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
     }

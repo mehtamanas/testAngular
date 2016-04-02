@@ -382,7 +382,7 @@
                 templateUrl: 'contacts/company/followUp.html',
                 backdrop: 'static',
                 controller: FollowUpController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -396,7 +396,7 @@
                 backdrop: 'static',
 
                 controller: ContactPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -407,7 +407,7 @@
                 backdrop: 'static',
 
                 controller: ContactUploadPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -418,7 +418,7 @@
                 backdrop: 'static',
 
                 controller: ContactNotesUploadPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -446,7 +446,7 @@
                 templateUrl: 'contacts/option.html',
                 backdrop: 'static',
                 controller: TagPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -456,7 +456,7 @@
                 templateUrl: 'contacts/confirm.tpl.html',
                 backdrop: 'static',
                 controller: confirmationController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Contact" } }
 
             });

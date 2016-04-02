@@ -135,7 +135,7 @@
                 templateUrl: 'campaigns/emailCampaign/sucessfullCampaign.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullCampaginController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Email campaign" } }
             });
         }

@@ -228,7 +228,7 @@
                 templateUrl: 'blogs/create/blogCrate.html',
                 backdrop: 'static',
                 controller: BlogPostPopUpCtrl,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -238,7 +238,7 @@
                 templateUrl: 'blogs/edit/blogEdit.html',
                 backdrop: 'static',
                 controller: BlogPostEditCtrl,
-                size: 'md'
+                size: 'lg'
             });
         };
     }

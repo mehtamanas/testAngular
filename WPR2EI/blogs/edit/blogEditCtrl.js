@@ -227,7 +227,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Blog" } }
         });
         $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
@@ -331,7 +331,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             templateUrl: 'blogs/confirmation/confirmBlog.html',
             backdrop: 'static',
             controller: confirmBlogController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Blog" } }
 
         });
@@ -344,7 +344,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             templateUrl: 'blogs/confirmation/confirmApproval.html',
             backdrop: 'static',
             controller: confirmApprovalController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Blog" } }
 
         });

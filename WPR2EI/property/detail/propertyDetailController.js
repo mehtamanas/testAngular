@@ -197,7 +197,7 @@ angular.module('property')
                     animation: true,
                     templateUrl: 'property/detail/upload/videoUpload/videoUpload.tpl.html',
                     controller: VideoUploadController,
-                    size: 'md'
+                    size: 'lg'
                 });
             };
 

@@ -62,7 +62,7 @@
             templateUrl: 'contacts/uploadSuccess.html',
             backdrop: 'static',
             controller: uploadSuccessController,
-            size: 'md',
+            size: 'lg',
             resolve: { items: { title: "Notes Uploaded" } }
         });
 

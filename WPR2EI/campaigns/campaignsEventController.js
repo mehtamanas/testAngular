@@ -260,7 +260,7 @@
                 templateUrl: 'campaigns/campaigns.tpl.html',
                 backdrop: 'static',
                 controller: campaignsController,
-                size: 'md'
+                size: 'lg'
             });
         };
 

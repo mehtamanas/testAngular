@@ -249,7 +249,7 @@
                 templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
                 controller: EditsucessfullController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Task" } }
             });
 

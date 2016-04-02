@@ -1270,7 +1270,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/edit_contact.tpl.html',
                 backdrop: 'static',
                 controller: EditContactPopUpController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1281,7 +1281,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/addpayment.tpl.html',
                 backdrop: 'static',
                 controller: PaymentUpController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -1311,7 +1311,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/add_new_task.tpl.html',
                 backdrop: 'static',
                 controller: AddNewTaskController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -1324,7 +1324,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/add_new_notes.html',
                 backdrop: 'static',
                 controller: AddNewNotesController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1335,7 +1335,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/edit_notes.html',
                 backdrop: 'static',
                 controller: EditNotesContactController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1345,7 +1345,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/addNewCampaign.tpl.html',
                 backdrop: 'static',
                 controller: AddNewEventContact,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1355,7 +1355,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/edit_event.html',
                 backdrop: 'static',
                 controller: EditEventContact,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1365,7 +1365,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/edit_task.html',
                 backdrop: 'static',
                 controller: EditTaskController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -1377,7 +1377,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/sendEmail.html',
                 backdrop: 'static',
                 controller: sendEmailCtrl,
-                size: 'md',
+                size: 'lg',
                 resolve: {
                     emailData: $scope.image
                 }
@@ -1402,7 +1402,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/quotes/generateQuote.html',
                 backdrop: 'static',
                 controller: generateQuoteCtrl,
-                size: 'md',
+                size: 'lg',
                 resolve: {
                     contactData: $scope.image
                 }
@@ -1416,7 +1416,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/company/followUp.html',
                 backdrop: 'static',
                 controller: FollowUpController,
-                size: 'md'
+                size: 'lg'
 
             });
 
@@ -1430,7 +1430,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/add_new_tag.html',
                 backdrop: 'static',
                 controller: AddTagController,
-                size: 'md'
+                size: 'lg'
             });
         };
 
@@ -1440,7 +1440,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirmnotes.tpl.html',
                 backdrop: 'static',
                 controller: confirmNotesController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Notes" } }
 
             });
@@ -1453,7 +1453,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirmtask.html',
                 backdrop: 'static',
                 controller: confirmTaskController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Task" } }
 
             });
@@ -1466,7 +1466,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirmremoverag.tpl.html',
                 backdrop: 'static',
                 controller: confirmationTagController,
-                size: 'md',
+                size: 'lg',
                 resolve: { items: { title: "Tag" } }
 
             });
