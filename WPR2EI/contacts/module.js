@@ -23,6 +23,14 @@ angular.module('contacts', [])
                 controller: 'ClientListController',
                 title: 'Clients'
             })
+
+           .state('app.addNewContact', {
+                        url: '/addNewContact',
+                        templateUrl: 'contacts/add_new_contact.tpl.html',
+                        controller: 'ContactPopUpController',
+             })
+          
+
            .state('app.contactdetail', {
                url: '/contactsdetails?id',
                templateUrl: 'contacts/detail/contactDetail.html',
@@ -92,5 +100,7 @@ angular.module('contacts', [])
             controller: 'documentAgreementCtrl',
             title: 'Document Agreement Details'
         })
+
+
 
     }]);

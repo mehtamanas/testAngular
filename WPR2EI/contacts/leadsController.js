@@ -549,14 +549,7 @@ angular.module('contacts')
 
 
         $scope.openContactPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/add_new_contact.tpl.html',
-                backdrop: 'static',
-
-                controller: ContactPopUpController,
-                size: 'lg'
-            });
+            $state.go('app.addNewContact');
         };
 
         $scope.openUploadContactPopup = function () {
