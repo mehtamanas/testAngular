@@ -80,14 +80,16 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Person:</label>
-                            <select ng-model="contact1" ng-change="selectcontact()" id="UseraddNewTask_person"
-                                    class="dropdown form-control" >
-                                <option value="" selected>Select Contact</option>
-                                <option ng-repeat="contact in contacts"
-                                        value="{{contact.Contact_id}}">
-                                    {{contact.Contact_Name}}
-                                </option>
-                            </select>
+                            <select kendo-combo-box class="dropdown form-control"
+                                    id="UseraddNewTask_person"
+                                    k-placeholder="'Select Contact'"
+                                    k-data-text-field="'Contact_Name'"
+                                    k-data-value-field="'Contact_id'"
+                                    k-filter="'contains'"
+                                    ng-model="contact1"
+                                    k-auto-bind="false"
+                                    k-min-length="3"
+                                    k-data-source="contacts"></select>
                         </div>
                     </div>
                 </div>
