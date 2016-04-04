@@ -4,9 +4,10 @@
 var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope,$window) {
     console.log('AddNewTaskController');
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-   // $scope.due_date = moment().format();
+    //var day = moment().format();
     var userId = $cookieStore.get('userId');
-    $scope.reminder_time = 15;    
+    $scope.reminder_time = "15";
+    $scope.due_date = moment().add(1, 'days').format('DD/MM/YYYY hh:mm A');
     //Audit log start
     $scope.params = {
 
@@ -109,7 +110,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
         $scope.params.priority = $scope.priority1;
       
     };
- 
+
 
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
