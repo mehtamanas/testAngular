@@ -135,7 +135,7 @@
             templateUrl: 'contacts/sucessfullEmail.tpl.html',
             backdrop: 'static',
             controller: sucessfullEmailController,
-            size: 'lg',
+            size: 'sm',
             resolve: { items: { title: "Email" } }
         });
     }

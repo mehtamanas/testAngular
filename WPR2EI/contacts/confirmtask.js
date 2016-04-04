@@ -24,7 +24,7 @@
                 templateUrl: 'newuser/delete.html',
                 backdrop: 'static',
                 controller: DeleteController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Task" } }
 
             });

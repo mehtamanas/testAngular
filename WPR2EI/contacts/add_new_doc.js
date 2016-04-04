@@ -131,7 +131,7 @@ var AddNewDocumentController = function ($scope, $state, $cookieStore, apiServic
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'sm',
             resolve: { items: { title: "Document" } }
         });
     }

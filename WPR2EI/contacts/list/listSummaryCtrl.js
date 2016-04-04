@@ -113,7 +113,7 @@
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "List" } }
             });
             $rootScope.$broadcast('REFRESH', 'ListGrid');

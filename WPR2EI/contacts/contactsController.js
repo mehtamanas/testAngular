@@ -604,7 +604,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirm.tpl.html',
                 backdrop: 'static',
                 controller: confirmationController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Contact" } }
 
             });
