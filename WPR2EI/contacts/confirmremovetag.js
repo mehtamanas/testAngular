@@ -39,7 +39,7 @@
             AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-
+            $rootScope.$broadcast('REFRESHTAG', 'Tag');
         },
 
 
@@ -61,7 +61,7 @@
 
 
             });
-            $rootScope.$broadcast('REFRESH', 'Tag');
+           
         }
 
     }

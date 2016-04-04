@@ -51,17 +51,18 @@
             description: $scope.description,
             price: $scope.params.price,
             tax_value: $scope.final_tax,
+            
             final_amount: $scope.final_Total,
 
         };
-
-
+        $cookieStore.put('totalTax', $scope.final_tax);
+      
 
         apiService.post("Services/Create", post).then(function (response) {
             var loginSession = response.data;
             AuditCreate();
             var service = [];
-
+            
 
             for (var i in $scope.quotes2) {
                 var newService = {};
@@ -69,7 +70,7 @@
                 newService.project_service_id = loginSession.id;
                 newService.charges_amt = $scope.serviceType[i].amount;
                 newService.charges_id = $scope.serviceType[i].id;
-                newService.user_id = $cookieStore.get('userId'),
+                newService.user_id = $cookieStore.get('userId'),              
                 newService.organization_id = $cookieStore.get('orgID'),
                 service.push(newService);
             }
@@ -112,12 +113,24 @@ function (error) {
 
 });
 
-
-
+    //var chargeName=[];
+    //var chargePercentage = [];
     $scope.selectService = function (index) {
         var j = _.findIndex($scope.taxes, function (o) { return o.id == $scope.serviceType[index].id; });
         $scope.serviceType[index].charge = (_.findWhere($scope.taxes, { id: $scope.serviceType[index].id })).charge_percentage;
         var calcType = (_.findWhere($scope.taxes, { id: $scope.serviceType[index].id })).calculation_type;
+
+        
+
+        //var charge = (_.findWhere($scope.taxes, { id: $scope.serviceType[index].id })).charge_type;
+        //chargeName.push({ name: charge});
+        //var percent=(_.findWhere($scope.taxes, { id: $scope.serviceType[index].id })).charge_percentage;
+        //chargePercentage.push(percent);
+
+        //$cookieStore.put('chargeName',chargeName);
+        //$cookieStore.put('chargePercentage', chargePercentage);
+
+
         if (calcType === 'Basic')
             basicTotal(j, index);
         else
@@ -242,7 +255,7 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'lg',
+            size: 'md',
             resolve: { items: { title: "Payment" } }
 
         });
@@ -263,7 +276,7 @@ function (error) {
     };
 
 
-
+    
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');

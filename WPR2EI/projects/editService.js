@@ -105,7 +105,7 @@ function (error) {
             var loginSession = response.data;
             AuditCreate();
             var service = [];
-
+           
 
             for (var i in $scope.quotes2) {
                 var newService = {};

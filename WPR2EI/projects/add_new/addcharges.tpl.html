@@ -1,7 +1,7 @@
 ﻿<div id="add_payment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-header">
         <button type="button" class="close" id="btn_addChargesClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
-        <h4 class="form-title modal-top" style="text-align:left">Add New Charges</h4>
+        <h4 class="modal-title modal-top">Add New Charges</h4>
     </div>
     <div class="modal-body">
         <form class="form-content2 edit-organization-setting" name="newForm" novalidate data-ng-submit="addNew(newForm.$valid)" autocomplete="off" >
@@ -156,7 +156,7 @@
                                                    name="cvalue" id="addNewChargeValue"
                                                    data-ng-model="choice.charge_value"
                                                    minlength="1"
-                                                   ng-pattern="/^([1-9][0-9,./]*)$/"
+                                                   ng-pattern="/^([0-9][0-9,./]*)$/"
                                                    input-focus
                                                    required />
                                             <div ng-messages="repeatform.cvalue.$error" style="color:maroon" role="alert">
