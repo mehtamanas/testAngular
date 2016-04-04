@@ -121,6 +121,7 @@
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'ChargesGrid');
+            
         },
      function (error) {
          if (error.status === 400)
@@ -174,7 +175,7 @@
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'lg',
+            size: 'md',
             resolve: { items: { title: "Charges" } }
 
         });

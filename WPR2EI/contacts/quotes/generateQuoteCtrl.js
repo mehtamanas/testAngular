@@ -12,7 +12,7 @@
             animation: true,
             template: $scope.params.htmlcontent,
             backdrop: 'static',
-            size: 'lg'
+            size: 'md'
         });
 
     }
@@ -27,7 +27,7 @@
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'sm',
+            size: 'md',
             resolve: { items: { title: "Quote" } }
         });
     }
@@ -241,20 +241,23 @@ function (error) {
 
     $scope.addNewquote2 = function (e) {
         var classname = e.currentTarget.className;
-        if (classname == 'remove-field') {
+        if (classname == 'btn btn-primary quote_add_btn') {
 
-            $scope.quotes2.pop();
-        }
-        else if ($scope.quotes2.length) {
             var newItemNo2 = $scope.quotes2.length + 1;
             $scope.quotes2.push({ 'id': 'choice' + newItemNo2 });
         }
-
     };
+
+    $scope.removeQuotes = function (e) {
+        if ($scope.quotes2.length > 1) {
+            $scope.quotes2.pop();
+        }
+
+    }
 
     var calculateQuote = function (index) { //for total calculation
         if ($scope.subscription[index].taxDisabled == true) {
-            $scope.subscription[index].total = parseFloat($scope.subscription[index].price) * parseFloat($scope.subscription[index].quantity) + parseFloat($scope.subscription[index].tax);
+            $scope.subscription[index].total = parseFloat($scope.subscription[index].price) * parseFloat($scope.subscription[index].quantity) + parseFloat($scope.subscription[index].tax) * parseFloat($scope.subscription[index].quantity);
             calculateGrandTotal(index);
         }
         else
@@ -265,8 +268,7 @@ function (error) {
         $scope.params.subTotal = 0;
         $scope.params.grandTotal = 0;
         
-        $scope.offerType = JSON.parse($scope.offer1);
-        $scope.offer_type_name = offerType.offer_type_name;
+       
 
         for (i = 0; i < $scope.subscription.length; i++) {
             $scope.params.subTotal = parseFloat($scope.params.subTotal) + parseFloat($scope.subscription[i].total);
@@ -280,16 +282,23 @@ function (error) {
          else if ($scope.params.offerDiscount == undefined && $scope.params.additionalDiscount == undefined) {
             $scope.params.additionalDiscount = '0';
             params.offerDiscount = '0';
-        }
+         }
+
+         $scope.offerType = JSON.parse($scope.offer1);
+         $scope.offer_type_name = offerType.offer_type_name;
+
          if ($scope.offer_type_name == 'Percent')
          {
              $scope.params.grandTotal = (parseFloat($scope.params.subTotal) - parseFloat(($scope.params.subTotal) * ($scope.params.offerDiscount / 100))) - parseFloat($scope.params.additionalDiscount);
          }
-         else if ($scope.offer_type_name == 'Flat Discount')
-         {
+         else if ($scope.offer_type_name == 'Flat Discount') {
              $scope.params.grandTotal = (parseFloat($scope.params.subTotal) - parseFloat($scope.params.offerDiscount)) - parseFloat($scope.params.additionalDiscount);
          }
-         
+         else
+         {
+
+             $scope.params.grandTotal= $scope.params.subTotal;
+         }
 
          finalPrice();
     }
@@ -371,7 +380,7 @@ function (error) {
             templateUrl: 'contacts/quotes/generateQuotePreview.html',
             backdrop: 'static',
             controller: quotePreviewCltr,
-            size: 'lg',
+            size: 'md',
             resolve: {
                 previewData :{
                 subscriptionData: $scope.subscription,

@@ -2,6 +2,17 @@
     
     var orgID = $cookieStore.get('orgID');
     var userId = $cookieStore.get('userId');
+
+    $scope.perviewchargeName = [];
+    perviewchargeName = $cookieStore.get('chargeName');
+    $scope.perviewchargePercent = [];
+    perviewchargePercent = $cookieStore.get('chargePercentage');
+    $scope.previewtotalTax = [];
+    previewtotalTax = $cookieStore.get('totalTax');
+
+    var previewService = []
+    
+
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     $scope.subscription = previewData.subscriptionData;
     $scope.params = previewData.otherFields;

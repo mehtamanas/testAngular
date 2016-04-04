@@ -193,7 +193,7 @@
             templateUrl: 'newuser/Edited.tpl.html',
             backdrop: 'static',
             controller: EditsucessfullController,
-            size: 'lg',
+            size: 'md',
             resolve: { items: { title: "Charges" } }
         });
 
