@@ -91,8 +91,10 @@
                                     k-filter="'contains'"
                                     ng-model="contact1"
                                     k-auto-bind="false"
+                                    ng-change="selectcontact()"
                                     k-min-length="3"
-                                    k-data-source="contacts"></select>
+                                    k-data-source="contacts">
+                            </select>
                         </div>
                     </div>
                 </div>
