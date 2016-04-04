@@ -114,6 +114,7 @@ angular.module('contacts')
                 }
 
                 $('#contact_kenomain').getKendoGrid().dataSource.sort(sort);
+                $('#contact_kenomain').getKendoGrid().showColumn(0);
             }
             else {
                 $('#contact_kenomain').getKendoGrid().dataSource.sort({});
@@ -232,7 +233,6 @@ angular.module('contacts')
                      template: "<input type='checkbox', class='checkbox', data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' />",
                      title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
                      width: "60px",
-                     field: 'Contact_Id',
                      attributes:
                       {
                           "class": "UseHand",
