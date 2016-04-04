@@ -178,7 +178,7 @@
                 templateUrl: 'tag/confirmremovetag.html',
                 backdrop: 'static',
                 controller: confirmTagController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Tag" } }
 
             });
