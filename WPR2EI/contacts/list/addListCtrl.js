@@ -14,14 +14,19 @@
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         description: $scope.description,
-       
+        
     };
+
+    var putValue = function () {
+        $cookieStore.put('Name', $scope.params.name);
+        $cookieStore.put('Description', $scope.params.description);
+    }
+   
 
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-            $cookieStore.put('Name', $scope.params.name);
-            $cookieStore.put('Description', $scope.params.description);
+            putValue();
             $modalInstance.dismiss();
             $state.go('app.tagList');
             $scope.showValid = false;
@@ -35,6 +40,7 @@
         $modalInstance.dismiss('cancel');
     };
 
+ 
 };
 
 

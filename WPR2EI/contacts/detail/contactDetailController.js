@@ -138,7 +138,7 @@ angular.module('contacts')
                             //alert("not working");
                         });
         }
-        Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Contact";
+        Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Person";
 
         apiService.getWithoutCaching(Url).then(function (response) {
             data = response.data;
@@ -1617,7 +1617,7 @@ angular.module('contacts')
                 {
 
                    
-                    Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Contact";
+                Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Person";
 
                     apiService.getWithoutCaching(Url).then(function (response) {
                         data = response.data;

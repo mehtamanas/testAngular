@@ -9,7 +9,11 @@
 
         <div class="clearfix">
 
-            <div class="form-group" style="width: 727px !important;">
+            <div class="form-group" style="width: 727px !important;"
+                  data-ng-class="{
+                                  'has-error' : addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus,
+                                  'has-success': addNewForm.name.$valid && !addNewForm.name.$pristine && !addNewForm.name.$focus
+                                                     }">
                 <label for="">List Name</label>
                 <input type="text" class="form-control text-bold" autofocus name="name" id="addNewListName"
                        data-ng-model="params.name"
@@ -17,18 +21,30 @@
                        maxlength="50"
                        input-focus
                        required />
-            </div>
+                <div class="text-danger" id="err_taskNew"
+                     data-ng-if="addNewForm.name.$invalid && (!addNewForm.name.$pristine || showValid) && !addNewForm.name.$focus">
+                    {{ 'Please enter List Name' | translate }}
+                </div>
 
         </div>
-
+</div>
         <div class="clearfix">
-            <div class="form-group form-bx form-bx13">
+            <div class="form-group form-bx form-bx13"
+                 data-ng-class="{
+                                  'has-error' : addNewForm.description.$invalid && (!addNewForm.description.$pristine || showValid) && !addNewForm.description.$focus,
+                                  'has-success': addNewForm.description.$valid && !addNewForm.description.$pristine && !addNewForm.description.$focus
+                                                     }">
                 <label for="">Description</label>
                 <textarea cols="100" rows="10" name="description" id="txt_AddNewListDescription"
                           data-ng-model="params.description"
                           minlength="1"
                           maxlength="500"
-                          input-focus />
+                          input-focus
+                          required />
+                <div class="text-danger" id="err_taskNew"
+                     data-ng-if="addNewForm.description.$invalid && (!addNewForm.description.$pristine || showValid) && !addNewForm.description.$focus">
+                    {{ 'Please enter Description' | translate }}
+                </div>
             </div>
         </div>
 
