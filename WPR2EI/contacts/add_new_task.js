@@ -6,9 +6,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
    // $scope.due_date = moment().format();
     var userId = $cookieStore.get('userId');
-    $scope.reminder_time = "15 min";
-
-    $scope.contact1 = $scope.seletedCustomerId;
+    $scope.reminder_time = "15 min";    
     //Audit log start
     $scope.params = {
 
@@ -132,6 +130,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
     Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.contacts = response.data;
+        $scope.contact1 = $scope.seletedCustomerId;
     },
    function (error) {
        if (error.status === 400)
