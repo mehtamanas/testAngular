@@ -66,15 +66,18 @@
                    
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
-                            <label for="">Person:</label>
-                            <select ng-model="contact1" ng-change="selectcontact()" id="contact_editTask_Person"
-                                    class="dropdown form-control" >
-                                <option value="" selected>Select Contact</option>
-                                <option ng-repeat="contact in contacts"
-                                        value="{{contact.Contact_id}}">
-                                    {{contact.Contact_Name}}
-                                </option>
-                            </select>
+                            <label for="">Person:</label>                           
+                            <select kendo-combo-box class="dropdown form-control"
+                                    id="contact_editTask_Person"
+                                    k-placeholder="'Select Contact'"
+                                    k-data-text-field="'Contact_Name'"
+                                    k-data-value-field="'Contact_id'"
+                                    k-filter="'contains'"
+                                    ng-model="contact1"
+                                    ng-change="selectcontact()"
+                                    k-auto-bind="false"
+                                    k-min-length="3"
+                                    k-data-source="contacts"></select>
                         </div>
                     </div>
                 </div>
@@ -115,8 +118,7 @@
                     <div class="clearfix">
 
                         <div class="pull-left f-half-6">
-                            <div class="form-group form-bx form-bx3-1">
-                                _
+                            <div class="form-group form-bx form-bx3-1">                              
                                 <input kendo-date-time-picker class="form-control" id="contact_editTask_DueDateAndTime"
                                        ng-model="due_date"
                                        k-ng-model="k_due_date"

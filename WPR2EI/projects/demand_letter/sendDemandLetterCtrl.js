@@ -20,11 +20,11 @@
    {
         var postData = {
             client_id: $scope.totalContact,
-            template_id: demandLetterTemplate.template,
-            template: demandLetterTemplate.bodyText,
+            template_id: demandLetterTemplate.template_id,
+            template: demandLetterTemplate.template,
             payment_detail_scheme_id: $scope.PaymentId,
             subject: demandLetterTemplate.subject,
-            project_id: $scope.project_ids,
+            project_id: $scope.project_id,
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID')
         }
