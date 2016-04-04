@@ -52,7 +52,7 @@
             templateUrl: 'contacts/uploadSuccess.html',
             backdrop: 'static',
             controller: uploadSuccessController,
-            size: 'lg',
+            size: 'sm',
             resolve: { items: { title: "Contact Uploaded" } }
         });
        

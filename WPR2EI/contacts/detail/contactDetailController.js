@@ -1440,7 +1440,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirmnotes.tpl.html',
                 backdrop: 'static',
                 controller: confirmNotesController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Notes" } }
 
             });
@@ -1453,7 +1453,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirmtask.html',
                 backdrop: 'static',
                 controller: confirmTaskController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Task" } }
 
             });

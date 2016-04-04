@@ -224,14 +224,14 @@
             </div> <!--Essential-->
 
             <div class="leads_group" id="documentGridDiv">
-                <div class="tab-content-title">Documents<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" style="cursor:pointer">+</a></div>
+                <div class="tab-content-title">Documents<a id="contact_openNewDocument"  class="add-btn" data-toggle="modal" ng-click="openNewDocument()" href="" style="cursor:pointer">+</a></div>
                 <div kendo-grid k-options="DocumentGrid" selectable="true">
 
                 </div>
             </div>  <!--Document-->
 
             <div class="leads_group" id="quoteGrid">
-                <div class="tab-content-title">Quotation<a id="contact_openNewQuotation" class="add-btn" data-toggle="modal" ng-click="generateNewQuote()" style="cursor:pointer">+</a></div>
+                <div class="tab-content-title">Quotation<a id="contact_openNewQuotation" class="add-btn" data-toggle="modal" ng-click="generateNewQuote()"  href="" style="cursor:pointer">+</a></div>
                 <div kendo-grid k-options="QuotesGrid" selectable="true"></div>
             </div> <!--QUOTE-->
 
@@ -242,14 +242,14 @@
             </div> <!--PropertyList-->
 
             <div class="leads_group" id="record-content">
-                <div class="tab-content-title">Payments <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()" style="cursor:pointer">+</a></div>
+                <div class="tab-content-title">Payments <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()"  href="" style="cursor:pointer">+</a></div>
                 <div kendo-grid k-options="PaymentGrid" selectable="true">
 
                 </div>
             </div>  <!--Payment-->
 
             <div class="leads_group" id="contactTaskGrid">
-                <div class="tab-content-title">Task <a id="contact_openNewTaskPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
+                <div class="tab-content-title">Task <a id="contact_openNewTaskPopup" class="add-btn" data-toggle="modal"  href="" style="cursor:pointer" ng-click="openAddNewTask()">+</a></div>
                 <div class="">
                     <select ng-model="TaskAction" class="form-control actions-wrap" ng-change="taskAction()" id="taskaction">
                         <option value='no_action' selected>ACTIONS</option>
@@ -264,7 +264,7 @@
             </div>  <!--Task-->
 
             <div class="leads_group" id="contactNotesGrid">
-                <div class="tab-content-title">Notes <a id="contact_openNewNotesPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewNotes()">+</a></div>
+                <div class="tab-content-title">Notes <a id="contact_openNewNotesPopup" class="add-btn" data-toggle="modal"  href="" ng-click="openAddNewNotes()">+</a></div>
 
                 <div class="">
                     <select ng-model="NotesAction" class="form-control actions-wrap" ng-change="chooseAction()" id="notesaction">
@@ -285,7 +285,7 @@
             </div>  <!--AssignmentTo-->
 
             <div class="leads_group" id="EventGridDiv">
-                <div class="tab-content-title">Create New Event<a id="contact_openNewEvent" class="add-btn" data-toggle="modal" ng-click="openEventCampaignPopup()">+</a></div>
+                <div class="tab-content-title">Create New Event<a id="contact_openNewEvent" class="add-btn" data-toggle="modal"  href="" ng-click="openEventCampaignPopup()">+</a></div>
                 <div kendo-grid k-options="EventGrid" selectable="true" k-on-change="myGridChangeEvent(dataItem)"></div>
             </div>    <!--Event-->
 

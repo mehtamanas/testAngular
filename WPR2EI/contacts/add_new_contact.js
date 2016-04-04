@@ -309,7 +309,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'sm',
             resolve: { items: { title: "Contact" } }
         });
     }

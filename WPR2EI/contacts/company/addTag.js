@@ -99,7 +99,7 @@ var AddTagCompanyController= function ($scope, $state, $cookieStore, apiService,
                     templateUrl: 'newuser/sucessfull.tpl.html',
                     backdrop: 'static',
                     controller: sucessfullController,
-                    size: 'lg',
+                    size: 'sm',
                     resolve: { items: { title: "Tag" } }
                 });
             }
