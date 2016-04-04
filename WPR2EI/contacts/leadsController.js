@@ -513,11 +513,11 @@ angular.module('contacts')
 
         $scope.$on('REFRESH2', function (event, args) {
             if (args.name == 'LeadGrid') {
-                // $('.k-i-refresh').trigger("click");
-                $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
-            } else if(args.name == 'LeadGrid') {
+                $('.k-i-refresh').trigger("click");
+                //$('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+            } else if (args.name == 'ViewCreated') {
                 callViewApi();
-                $scope.gridView = args;
+                $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);

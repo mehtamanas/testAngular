@@ -239,7 +239,7 @@ angular.module('app.guest.login')
             $cookieStore.remove('tower_id');
             $cookieStore.remove('teamid');
             localStorage.clear();
-            $interval.cancel(syncData);
+            if (window.syncData !== undefined) { $interval.cancel(syncData); }
             console.log("loggedout");
             $state.go('login');
         });
