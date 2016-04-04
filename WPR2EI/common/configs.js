@@ -7,10 +7,10 @@ angular.module('configs', [])
 
 .constant('CONFIGS', {
     baseURL: function () {
-        return 'http://dwellar-dev1.azurewebsites.net//';
+        return 'http://dw-webservices-dev1.azurewebsites.net/';
     },
     uploadURL: function () {
-        return 'http://dwellar-dev1.azurewebsites.net/MediaElement/upload';
+        return 'http://dw-webservices-dev1.azurewebsites.net/MediaElement/upload';
     },
     ipTraceUrl: function () {
         return 'http://ipinfo.io/json';
