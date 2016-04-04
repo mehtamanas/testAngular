@@ -64,7 +64,7 @@ angular.module('MainApp', [
         IdleProvider.idle(1200); // in seconds
         IdleProvider.timeout(5); // in seconds
         cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
-        cfpLoadingBarProvider.includeBar = false;
+        //cfpLoadingBarProvider.includeBar = false;
     }])
 .run(function ($rootScope, $location, $cookieStore, Idle,$window) {
     $rootScope.$on("$stateChangeStart", function (event, next, current) {
