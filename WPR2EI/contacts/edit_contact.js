@@ -246,10 +246,9 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
             $rootScope.$broadcast('REFRESH', 'Summary');
-            $rootScope.$broadcast('REFRESH1', 'contactGrid');
-            $rootScope.$broadcast('REFRESH2', 'projectGrid');
-            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
            
 
             var media = [];
