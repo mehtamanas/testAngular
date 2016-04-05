@@ -19,7 +19,6 @@
                         <h2 class="pg-inner-title"> Add Property Detail</h2>
                     </div>
                 </div>
-
             </div>
 
             <div class="top-row" style="width:100%; background:#fff; padding:60px">
@@ -30,8 +29,8 @@
                         <div style="margin-bottom:2px">
                             <label><input type="radio" id="broker_sales" name="broker_optn" ng-model="radioValue" value="sale"/>Sales</label>
                             <label><input type="radio" id="broker_Rent" name="broker_optn" ng-model="radioValue" value="rent" ng-checked="true" /> &nbsp; Rent</label><br />
-                            <label><input type="radio" id="broker_Residential" name="test" ng-model="radioValue" value="3" /> &nbsp; Residential</label>
-                            <label><input type="radio" id="broker_Commercial" name="test" ng-model="radioValue" value="4" /> &nbsp; Commercial</label>
+                            <label><input type="radio" id="broker_Residential" name="test" ng-model="radio1" value="3" /> &nbsp; Residential</label>
+                            <label><input type="radio" id="broker_Commercial" name="test" ng-model="radio1" value="4" /> &nbsp; Commercial</label>
                         </div>
                     </div>
                    
@@ -56,9 +55,9 @@
                                        data-ng-model=""
                                        minlength="1"
                                        maxlength="60"
-                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       ng-pattern="/^[0-9]+$/"
                                        input-focus
-                                       required />
+                                        />
                             </div>
                         </div>
                         <div class="col-md-1" style="margin-left:1%">
@@ -68,9 +67,9 @@
                                        data-ng-model=""
                                        minlength="1"
                                        maxlength="60"
-                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       ng-pattern="/^[0-9]+$/"
                                        input-focus
-                                       required />
+                                       />
                             </div>
                         </div>
 
@@ -80,55 +79,59 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="">Agreement Area</label>
-                                <input type="text" class="form-control text-bold" id="broker_agreement_area"
-                                       data-ng-model=""
-                                       minlength="1"
-                                       maxlength="60"
-                                       ng-pattern="/^[a-z 0-9\s]+$/i"
-                                       input-focus
-                                       required />
-                            </div>
+                                <div class="area-f">
+                                    <input type="text" class="form-control text-bold" id="broker_agreement_area"
+                                           data-ng-model=""
+                                           minlength="1"
+                                           maxlength="60"
+                                           ng-pattern="/^[0-9]+$/"
+                                           input-focus
+                                           />
+                                    <span class="area-txt">sq.ft</span>
+                                </div>
+                           </div>
                         </div>
-
                         <div class="col-md-2" style="margin-left:1%">
                             <div class="form-group">
                                 <label for="">Build-up Area</label>
-                                <input type="text" class="form-control text-bold" id="broker_BuildUp_area"
-                                       data-ng-model=""
-                                       minlength="1"
-                                       maxlength="60"
-                                       ng-pattern="/^[a-z 0-9\s]+$/i"
-                                       input-focus
-                                       required />
-                            </div>
+                                <div class="area-f">
+                                    <input type="text" class="form-control text-bold" id="broker_BuildUp_area"
+                                           data-ng-model=""
+                                           minlength="1"
+                                           maxlength="60"
+                                           ng-pattern="/^[0-9]+$/"
+                                           input-focus
+                                            />
+                                    <span class="area-txt">sq.ft</span>
+                                </div>
                         </div>
-
+                      </div>
                     </div>
 
                     <div class="row">
-                        <div class="pull-left f-half-6">
-                            <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_Carpark">Carpark/Garage</label>
-                                <select ng-model="carpark1" ng-change="selectcarpark()" class="dropdown form-control text-bold">
-                                    <option value="" selected>Select Carpark</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Carpark/Garage</label>
+                                <div class="area-f">
+                                    <input type="text" class="form-control text-bold" id="broker_carpark"
+                                           data-ng-model=""
+                                           minlength="1"
+                                           maxlength="60"
+                                           ng-pattern="/^[0-9]+$/"
+                                            />
+                                </div>
                             </div>
                         </div>
 
-                        <div class="pull-left f-half-6">
+                        <div class="pull-left f-half-6" style="margin-left:1%">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_Furnish">Furnishing</label>
-                                <select ng-model="furnish1" ng-change="selectfurnish()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Furnishing</label>
+                                <select ng-model="furnish1" ng-change="selectfurnish()" class="dropdown form-control text-bold"  id="broker_Furnish">
                                     <option value="" selected>Select Furnishing</option>
-                                    <option value="Partly Furnished">Partly Furnished</option>
-                                    <option value="Fully Furnished">Fully Furnished</option>
-                                    <option value="Unfurnished">Unfurnished</option>
-                                </select>
+                                    <option ng-repeat="fur in furnish"
+                                            value="{{fur.id}}">
+                                        {{fur.type}}
+                                    </select>
                             </div>
                         </div>
 
@@ -139,7 +142,7 @@
                                        data-ng-model=""
                                        minlength="1"
                                        maxlength="60"
-                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       ng-pattern="/^[0-9]+$/"
                                        input-focus
                                        required />
                             </div>
@@ -150,8 +153,8 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_View">View</label>
-                                <select ng-model="view1" ng-change="selectView()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">View</label>
+                                <select ng-model="view1" ng-change="selectView()" class="dropdown form-control text-bold"  id="broker_View">
                                     <option value="" selected>Select View</option>
                                     <option ng-repeat="view in views"
                                             value="{{view.id}}">
@@ -164,7 +167,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row" style="margin-bottom: 1%;">
-                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click='check($event,dataItem)'/> &nbsp;{{Amenity.amenity_type_code}}</div>
+                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-value="{{Amenity.id}}" name="test" ng-click='onClick($index)'/> &nbsp;{{Amenity.amenity_type_code}}
+                                    <h4 ng-if={{}}></h4>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -172,21 +177,20 @@
                     <div class="row for_rent" style="display: none">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_Availabilty">Availabilty</label>
-                                <select ng-model="available1" ng-change="selectAvailabilty()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Availabilty</label>
+                                <select ng-model="available1" ng-change="selectAvailabilty()" class="dropdown form-control text-bold" id="broker_Availabilty">
                                     <option value="" selected>Select Availabilty</option>
-                                    <option value="">Leased</option>
-                                    <option value="">Not Available</option>
-                                    <option value="">Available</option>
-                                    <option value="">Available From:Date</option>
-                                </select>
+                                    <option ng-repeat="available in availability"
+                                            value="{{available.id}}">
+                                        {{available.type}}
+                                 </select>
                             </div>
                         </div>
 
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_lease_period">Lease Period</label>
-                                <select ng-model="leasePeriod1" ng-change="selectLeasePeriod()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Lease Period</label>
+                                <select ng-model="leasePeriod1" ng-change="selectLeasePeriod()" class="dropdown form-control text-bold" id="broker_lease_period">
                                     <option value="" selected>Select Lease Period</option>
                                     <option value="" selected>12 Months</option>
                                 </select>
@@ -219,8 +223,8 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_property_condition">Property Condition</label>
-                                <select ng-model="properyCondition1" ng-change="selectPropertyCondition()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Property Condition</label>
+                                <select ng-model="properyCondition1" ng-change="selectPropertyCondition()" class="dropdown form-control text-bold" id="broker_property_condition">
                                     <option value="" selected>Select Property Condition</option>
                                     <option ng-repeat="property in properties"
                                             value="{{property.id}}">
@@ -231,8 +235,8 @@
 
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_listing_source">Listing Source</label>
-                                <select ng-model="listSource1" ng-change="selectListSource()" class="dropdown form-control text-bold" >
+                                <label for="" class="hidden-xs">Listing Source</label>
+                                <select ng-model="listSource1" ng-change="selectListSource()" class="dropdown form-control text-bold"  id="broker_listing_source">
                                     <option value="" selected>Select Listing Source</option>
                                     <option ng-repeat="source in sources"
                                             value="{{source.id}}">
@@ -245,8 +249,8 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_agreement">Type Of Agreement</label>
-                                <select ng-model="agreement1" ng-change="selectAgreement()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Type Of Agreement</label>
+                                <select ng-model="agreement1" ng-change="selectAgreement()" class="dropdown form-control text-bold"  id="broker_agreement">
                                     <option value="" selected>Select Agreement</option>
                                     <option value="">Leave & Licence</option>
                                 </select>
@@ -287,15 +291,15 @@
                                             />
                                 </div>
                             </div>
-                            <div id="contact_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
+                            <div id="broker_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_city">City</label>
-                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">City</label>
+                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold"  id="broker_city">
                                     <option value="" selected>City</option>
                                     <option ng-repeat="city in cities"
                                             value="{{city.city_id}}">
@@ -306,8 +310,8 @@
 
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_state">State</label>
-                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">State</label>
+                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold"  id="broker_state">
                                     <option value="" selected>State</option>
                                     <option ng-repeat="state in states"
                                             value="{{state.state_id}}">
@@ -391,8 +395,8 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_deposit">Deposit Required</label>
-                                <select ng-model="deposit1" ng-change="selectdeposit()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Deposit Required</label>
+                                <select ng-model="deposit1" ng-change="selectdeposit()" class="dropdown form-control text-bold"  id="broker_deposit">
                                     <option value="" selected>Select Deposit</option>
                                     <option value=Yes>Yes</option>
                                     <option value=No>No</option>
@@ -402,8 +406,8 @@
 
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_depositType">Deposit Type</label>
-                                <select ng-model="depositType1" ng-change="selectdepodit_type()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Deposit Type</label>
+                                <select ng-model="depositType1" ng-change="selectdepodit_type()" class="dropdown form-control text-bold"  id="broker_depositType">
                                     <option value="" selected>Select Type</option>
                                     <option value="Flat">Flat</option>
                                     <option value="Percent">Percent</option>
@@ -428,8 +432,8 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_paymentMode">Mode Of Payment</label>
-                                <select ng-model="payment1" ng-change="selectModePayment()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Mode Of Payment</label>
+                                <select ng-model="payment1" ng-change="selectModePayment()" class="dropdown form-control text-bold"  id="broker_paymentMode">
                                     <option value="" selected>Select Payment Mode</option>
                                     <option value="Cash">Cash</option>
                                     <option value="Cheque">Cheque</option>  
@@ -479,8 +483,8 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_brokerageType">Liscensee Brokerage Type</label>
-                                <select ng-model="brokerage1" ng-change="selectBrokerage()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Liscensee Brokerage Type</label>
+                                <select ng-model="brokerage1" ng-change="selectBrokerage()" class="dropdown form-control text-bold"  id="broker_brokerageType">
                                     <option value="" selected>select Brokerage Type</option>
                                     <option value="Flat">Flat</option>
                                     <option value="Percent">Percent</option>
@@ -514,8 +518,8 @@
 
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_rentEscPeriod">Period</label>
-                                <select ng-model="period1" ng-change="selectPeriod()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Period</label>
+                                <select ng-model="period1" ng-change="selectPeriod()" class="dropdown form-control text-bold"  id="broker_rentEscPeriod">
                                     <option value="" selected>Select Period</option>
                                     <option value="12 Months">12 Months</option>
                                     <option value="24 Months">24 Months</option>
@@ -526,8 +530,8 @@
 
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_rentEscType">Type</label>
-                                <select ng-model="rentEscType1" ng-change="selectRentEscType()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Type</label>
+                                <select ng-model="rentEscType1" ng-change="selectRentEscType()" class="dropdown form-control text-bold"  id="broker_rentEscType">
                                     <option value="" selected>Select Type</option>
                                     <option value="Flat">Flat</option>
                                     <option value="Percent">Percent</option>
@@ -643,17 +647,13 @@
                     <div class="row">
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
-                                <label for="" class="hidden-xs" id="broker_contactType">Contact Type</label>
-                                <select ng-model="contactType1" ng-change="selectContactType()" class="dropdown form-control text-bold">
+                                <label for="" class="hidden-xs">Contact Type</label>
+                                <select ng-model="contactType1" ng-change="selectContactType()" class="dropdown form-control text-bold"  id="broker_contactType">
                                     <option value="" selected>Select contact Type</option>
-                                    <option value="Owner">Owner</option>
-                                    <option value="Agent">Agent</option>
-                                    <option value="Watchman">Watchman</option>
-                                    <option value="Neighbour">Neighbour</option>
-                                    <option value="Relative">Relative</option>
-                                    <option value="Society Manager">Society Manager</option>
-                                   
-                                </select>
+                                    <option ng-repeat="contact in contacts"
+                                            value="{{contact.id}}">
+                                        {{contact.type}}
+                               </select>
                             </div>
                         </div>
                     </div>

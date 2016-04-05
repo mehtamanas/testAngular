@@ -11,14 +11,14 @@
                 <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
                     <ul class="responsive-tagJS" role="tablist">
                         <li id="TemplateQuotes" class="k-state-active"> <a aria-controls="quotes" role="tab" data-toggle="tab">QUOTES</a></li>
-                        <li id="TemplateAgreements"><a aria-controls="agreement" role="tab" data-toggle="tab">AGREEMENTS</a></li>
+                        <li ng-hide='{{WHO_AM_I === "Broker"}}' id="TemplateAgreements"><a aria-controls="agreement" role="tab" data-toggle="tab">AGREEMENTS</a></li>
                         <li id="TemplateInvoices"><a aria-controls="invoices" role="tab" data-toggle="tab">INVOICES</a></li>
-                        <li id="TemplateChannelPartner"><a aria-controls="channel_partner" role="tab" data-toggle="tab">CHANNEL PARTNER</a></li>
-                        <li id="TemplatePeople"><a aria-controls="people" role="tab" data-toggle="tab">PEOPLE</a></li>
-                        <li id="TemplateQuote"><a aria-controls="quote" role="tab" data-toggle="tab">QUOTE</a></li>
+                        <li ng-hide='{{WHO_AM_I === "Broker"}}' id="TemplateChannelPartner"><a aria-controls="channel_partner" role="tab" data-toggle="tab">CHANNEL PARTNER</a></li>
+                        <li ng-hide='{{WHO_AM_I === "Broker"}}' id="TemplatePeople"><a aria-controls="people" role="tab" data-toggle="tab">PEOPLE</a></li>
+                        <li ng-hide='{{WHO_AM_I === "Broker"}}' id="TemplateQuote"><a aria-controls="quote" role="tab" data-toggle="tab">QUOTE</a></li>
                         <li id="TemplateEmail"><a aria-controls="email_template" role="tab" data-toggle="tab">EMAIL TEMPLATE</a></li>
                         <li id="TemplateForm"><a aria-controls="form" role="tab" data-toggle="tab">FORM</a></li>
-                        <li id="TemplateDemandLetter"><a aria-controls="form" role="tab" data-toggle="tab">DEMAND LETTER</a></li>
+                        <li ng-hide='{{WHO_AM_I === "Broker"}}' id="TemplateDemandLetter"><a aria-controls="form" role="tab" data-toggle="tab">DEMAND LETTER</a></li>
                     </ul>
 
 

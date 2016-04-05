@@ -109,10 +109,10 @@
                                 <a href="" ng-click="activeBar=6"><span class="nav-icon nav-05"></span> People <span class="nav-no">{{total}}</span> <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu7">
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item15" name="Leads"><a href="" ui-sref="app.leads"> Leads <span class="nav-no">{{lead}}</span></a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item16" name="Contacts"><a href="" ui-sref="app.contacts">Contacts <span class="nav-no">{{contact}}</span></a></li>
+                                    <li ng-hide='{{WHO_AM_I === "Broker"}}' data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item16" name="Contacts"><a href="" ui-sref="app.contacts">Contacts <span class="nav-no">{{contact}}</span></a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item17" name="Clients"><a href="" ui-sref="app.client">Clients <span class="nav-no">{{client}}</span> </a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item18" name="By_Company"><a href="" ui-sref="app.company">By Company </a></li>
-                                    <li  data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item19" name="By_Tag"><a href="" ui-sref="app.tags">By Tag </a></li>
+                                    <li ng-hide='{{WHO_AM_I === "Broker"}}' data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item18" name="By_Company"><a href="" ui-sref="app.company">By Company </a></li>
+                                    <li  ng-hide='{{WHO_AM_I === "Broker"}}' data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item19" name="By_Tag"><a href="" ui-sref="app.tags">By Tag </a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" name="List"><a href="" ui-sref="app.list">List</a></li>
                                 </ul>
                             </li><!--People -->
@@ -157,7 +157,7 @@
 
                             <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="support.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==12}"><a href="" ng-click="activeBar=12" name="Support"><span class="nav-icon nav-09"></span> Support</a><ul class="nav-sub-bx sub-menu" id="sub-menu14"></ul></li><!--Support -->
 
-<li  class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==13}" name="Contact_Update">
+                            <li ng-hide='{{WHO_AM_I === "Broker"}}' class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==13}" name="Contact_Update">
                                 <a href="" ui-sref="app.contact_update" ng-click="activeBar=13"><span class="nav-icon nav-09"></span> Contact Update</a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu15"></ul>
                             </li><!--Contact Update -->
