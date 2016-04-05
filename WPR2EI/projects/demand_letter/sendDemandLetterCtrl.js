@@ -35,6 +35,7 @@
            //}
            apiService.post('Template/ClientDemandLetterMapping', letterDetails).then(function (response) {
                var SessionData = response.data;
+               $scope.openSucessfullPopup();
            },
 
        function (error) {
@@ -57,11 +58,11 @@
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/delete.html',
+                templateUrl: 'projects/demand_letter/successfull/sendSuccessful.html',
                 backdrop: 'static',
-                controller: DeleteController,
+                controller: sendSuccessfulCtrl,
                 size: 'lg',
-                resolve: { items: { title: "Email Template" } }
+                resolve: { items: { title: "Demand Letter" } }
 
             });
             $rootScope.$broadcast('REFRESH1', 'EmailTemplateGrid');
