@@ -24,7 +24,7 @@
                                                data-ng-model="params.no_of_units"
                                                minlength="1"
                                                maxlength="10"
-                                               ng-pattern="/^([1-9][0-9]*)$/"
+                                               ng-pattern="/^([0-9][0-9]*)$/"
                                                required />
                                         <div ng-messages="addNewForm.floors.$error" style="color:maroon" role="alert">
                                             <div ng-message="required" data-ng-if="addNewForm.floors.$invalid && (!addNewForm.floors.$pristine || showValid) && !addNewForm.floors.$focus">This field should not be empty </div>
@@ -50,7 +50,7 @@
                                        data-ng-model="params.Unit_Type_desc"
                                        minlength="1"
                                        maxlength="40"
-                                       ng-pattern="/^[a-z 1-9\s.]+$/i"
+                                       ng-pattern="/^[a-z 0-9\s.]+$/i"
                                        required />
                                 <div ng-messages="addNewForm.tname.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.tname.$invalid && (!addNewForm.tname.$pristine || showValid) && !addNewForm.tname.$focus">This field should not be empty </div>
