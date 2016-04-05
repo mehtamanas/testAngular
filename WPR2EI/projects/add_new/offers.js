@@ -47,12 +47,15 @@
 
     $scope.selectoffers = function (id, index)
     {
+        $scope.dicountType[index].enable = true;
+        //$scope.dicountType[index].value = id;
         for (i = 0; i < $scope.dicountType.length; i++)
         {
             $scope.dicountType[i].enable = false;
-            $scope.dicountType[i].value = null;
-        }
+            $scope.dicountType[index].value = null;
 
+        }
+       // $scope.dicountType[index].value = null;
         $scope.dicountType[index].enable = true;
     }
 

@@ -75,44 +75,37 @@
             </div>
 
             <div class="clearfix" style="margin-left: 2%;">
-            <div class="col-md-12">
-                <div class="row" style="margin-bottom: 1%;" >
-                    <div class="col-md-3" ng-repeat="offer in offers" ><input type="radio" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click="selectoffers(offer.id,$index)" id="offerTypeName" /> &nbsp;{{offer.type_name}}  </div>
+                    <div class="col-md-12">
+                        <div class="row" style="margin-bottom: 1%;" >
+                            <div class="col-md-3" ng-repeat="offer in offers" ><input type="radio" ng-value="offer.id" name="test" ng-model="dicountType[$index].id" ng-click="selectoffers(offer.id,$index)" id="offerTypeName" /> &nbsp;{{offer.type_name}}  </div>
                   
-                </div>
-                </div>
-                <div class="com-md-12">
-                    <div class="row">
-                        <div class="col-md-3" ng-repeat="offer in offers">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                                    'has-error' : addNewForm.dperecent.$invalid && (!addNewForm.dperecent.$pristine || showValid),
-                                                                    'has-success': addNewForm.dperecent.$valid && !addNewForm.dperecent.$pristine
-                                                                        }">
-                                <div class="form-group form-bx unit-type">
-                                    <label for=""></label>
-                                    <input type="text" class="form-control" autofocus name="dperecent" id="offerDiscPercent"
+                        </div>
+                    </div>
+                    <div class="com-md-12">
+                        <div class="row">
+                            <div class="col-md-3" ng-repeat="offer in offers">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                                                        'has-error' : addNewForm.dperecent.$invalid && (!addNewForm.dperecent.$pristine || showValid),
+                                                                        'has-success': addNewForm.dperecent.$valid && !addNewForm.dperecent.$pristine
+                                                                            }">
+                                    <div class="form-group form-bx unit-type">
+                                        <label for=""></label>
+                                        <input type="text" class="form-control" autofocus name="dperecent" id="offerDiscPercent"
                                           
-                                           data-ng-model="dicountType[$index].value"
-                                           input-focus 
-                                           ng-disabled="!dicountType[$index].enable"/>
-                                    <div class="text-danger"
-                                         data-ng-if="addNewForm.dperecent.$invalid && (!addNewForm.dperecent.$pristine || showValid) && !addNewForm.dperecent.$focus" id="err_offerDiscPercent">
-                                        {{ 'Enter valid discount percentage' | translate }}
+                                               data-ng-model="dicountType[$index].value"
+                                               input-focus 
+                                               ng-disabled="!dicountType[$index].enable"/>
+                                        <div class="text-danger"
+                                             data-ng-if="addNewForm.dperecent.$invalid && (!addNewForm.dperecent.$pristine || showValid) && !addNewForm.dperecent.$focus" id="err_offerDiscPercent">
+                                            {{ 'Enter valid discount percentage' | translate }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
-            
-    
-                <!--<div class="container">
-                    
-                 </div>-->
-
-
+            </div>
 
             <div class="clearfix">
 
