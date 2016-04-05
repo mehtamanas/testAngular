@@ -1840,10 +1840,11 @@
                 var paymentArr = [];
                 for (i = 0; i < $scope.orgpayment.length; i++) {
                     paymentArr.push(_.pluck(($scope.orgpayment)[i].PaymentScheduleDetailsList, 'Payment_Schedule_Detail_id'));
+                    $cookieStore.put('payment_schedule_id', paymentArr[i]);
                 }
 
-                var uniqPayment = _.uniq(paymentArr[0]);
-                $cookieStore.put('payment_schedule_id', uniqPayment);
+                //var uniqPayment = _.uniq(paymentArr[0]);
+                
             },
            function (error)
            {

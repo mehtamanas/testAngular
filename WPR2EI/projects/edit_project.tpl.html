@@ -105,7 +105,7 @@
                                 <span class="area-txt">acres</span>
                                 <div class="text-danger" 
                                      data-ng-if="addNewForm.totalProject_area.$invalid && (!addNewForm.totalProject_area.$pristine || showValid) && !addNewForm.totalProject_area.$focus" id="err_editProjectTotalArea">
-                                    {{ 'Please enter valid Project Area' | translate }}
+                                    {{ 'Enter valid Project Area' | translate }}
                                 </div>
 
                             </div>
@@ -133,7 +133,7 @@
 
                     <div class="text-danger"
                          data-ng-if="addNewForm.possession_date.$invalid && (!addNewForm.possession_date.$pristine || showValid) && !addNewForm.possession_date.$focus" id="err_editProjectPossesionMonth">
-                        {{ 'Please enter valid possession month' | translate }}
+                        {{ 'Enter valid possession month' | translate }}
                     </div>
                 </div>
 
@@ -155,7 +155,7 @@
                     </div>
                     <!--<div class="text-danger"
                          data-ng-if="addNewForm.project_year.$invalid && (!addNewForm.project_year.$pristine || showValid) && !addNewForm.project_year.$focus">
-                        {{ 'Please enter valid Project Year' | translate }}
+                        {{ 'Enter valid Project Year' | translate }}
                     </div>-->
 
                 </div>
@@ -171,17 +171,17 @@
 
                         <label for="">Price range From:</label>
                         <div class="area-f">
-                            <input class="form-control" name="price1" id="editProjectRange"
+                            <input class="form-control" format name="price1" id="editProjectRange"
                                    minlength="1"
                                    maxlength="10"
                                    data-ng-model="params.Rangefrom"
-                                   ng-pattern="/^([1-9][0-9+./]*)$/"
+                                   ng-pattern="/^([1-9][0-9,./]*)$/"
                                    input-focus />
                             <span class="area-txt"><i class="fa fa-inr"></i></span>
                         </div>
                         <div class="text-danger"
                              data-ng-if="addNewForm.price1.$invalid && (!addNewForm.price1.$pristine || showValid) && !newForm.price1.$focus" id="err_editProjectRange">
-                            {{ 'Enter correct price range' | translate }}
+                            {{ 'Enter valid price range' | translate }}
                         </div>
 
                     </div>
@@ -196,17 +196,17 @@
                         <div class="form-group form-bx form-bx-11">
                             <label for="">To</label>
                             <div class="area-f">
-                                <input class="form-control" name="price2" id="editProjectRangeTo"
+                                <input class="form-control" format name="price2" id="editProjectRangeTo"
                                        minlength="1"
                                        maxlength="10"
                                        data-ng-model="params.Rangeto"
-                                       ng-pattern="/^([1-9][0-9+./]*)$/"
+                                       ng-pattern="/^([1-9][0-9,./]*)$/"
                                        input-focus />
                                 <span class="area-txt"><i class="fa fa-inr"></i></span>
                             </div>
                             <div class="text-danger"
                                  data-ng-if="addNewForm.price2.$invalid && (!addNewForm.price2.$pristine || showValid) && !addNewForm.price2.$focus" id="err_editProjectRangeTo">
-                                {{ 'Enter correct price range' | translate }}
+                                {{ 'Enter valid price range' | translate }}
                             </div>
                         </div>
 
@@ -343,7 +343,7 @@
                                    input-focus />
                             <div class="text-danger"
                                  data-ng-if="addNewForm.Address.$invalid && (!addNewForm.Address.$pristine || showValid) && !addNewForm.Address.$focus" id="err_editProjectAddress">
-                                {{ 'Please enter valid address' | translate }}
+                                {{ 'Enter valid address' | translate }}
                             </div>
                         </div><div id="add-address" ng-class="{'add-input add-input3': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">remove</a></div>
                     </div>
@@ -422,7 +422,7 @@
                                    ng-pattern="/^(0|[1-9][0-9]*)$/" />
                             <div class="text-danger"
                                  data-ng-if="addNewForm.Post.$invalid && (!addNewForm.Post.$pristine || showValid) && !addNewForm.Post.$focus" id="err_editNewProjectPostalCode">
-                                {{ 'Please enter valid postal code' | translate }}
+                                {{ 'Enter valid postal code' | translate }}
                             </div>
                         </div>
 
@@ -449,7 +449,7 @@
                                    input-focus />
                             <div class="text-danger"
                                  data-ng-if="addNewForm.lat.$invalid && (!addNewForm.lat.$pristine || showValid) && !newForm.lat.$focus" id="err_editNewProjectLatitude">
-                                {{ 'Please enter valid latitude' | translate }}
+                                {{ 'Enter valid latitude' | translate }}
                             </div>
 
 
@@ -476,7 +476,7 @@
                                 </div>
                                 <div class="text-danger"
                                      data-ng-if="addNewForm.long.$invalid && (!addNewForm.long.$pristine || showValid) && !addNewForm.long.$focus" id="err_editNewProjectLongitude">
-                                    {{ 'Please enter valid longitude' | translate }}
+                                    {{ 'Enter valid longitude' | translate }}
                                 </div>
                             </div>
 
@@ -500,7 +500,7 @@
                                    input-focus />
                             <div class="text-danger"
                                  data-ng-if="addNewForm.project_website.$invalid && (!addNewForm.project_website.$pristine || showValid) && !newForm.project_website.$focus" id="err_editNewProjectWebsite">
-                                {{ 'Please enter project website' | translate }}
+                                {{ 'Enter valid project website' | translate }}
                             </div>
 
 
@@ -523,7 +523,7 @@
                                     <!--<span class="area-txt">/sq.ft</span>-->
                                     <div class="text-danger"
                                          data-ng-if="addNewForm.builder_website.$invalid && (!addNewForm.builder_website.$pristine || showValid) && !addNewForm.builder_website.$focus" id="err_editNewBuilderWeb">
-                                        {{ 'Please enter builder website' | translate }}
+                                        {{ 'Enter valid builder website' | translate }}
                                     </div>
                                 </div>
 
