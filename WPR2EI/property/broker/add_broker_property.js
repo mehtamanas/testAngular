@@ -20,6 +20,16 @@
             }
         };
 
+
+        projectUrl = "Form/GenerateFormId";
+        apiService.getWithoutCaching(projectUrl).then(function (response) {
+            $scope.params = response.data;
+           
+        },
+    function (error) {
+        alert("Error " + error.state);
+    });
+
         Url = "GetCSC/state";
         apiService.get(Url).then(function (response) {
             $scope.states = response.data;
@@ -94,6 +104,41 @@
          });
 
         //function call
+
+        $scope.selectfurnish = function () {
+            $scope.params.furnishing_id = $scope.furnish1;
+        };
+
+        $scope.selectView = function () {
+            $scope.params.property_view_id = $scope.view1;
+        };
+
+        $scope.selectAvailabilty = function () {
+            $scope.params.availability_id = $scope.available1;
+        };
+
+        $scope.selectLeasePeriod = function () {
+            $scope.params.lease_period = $scope.leasePeriod1;
+        };
+
+
+        $scope.selectPropertyCondition = function () {
+            $scope.params.property_condition_id = $scope.properyCondition1;
+        };
+
+
+        $scope.selectListSource = function () {
+            $scope.params.listing_source_id = $scope.listSource1;
+        };
+
+        $scope.selectcity = function () {
+            $scope.params.city = $scope.city1;
+        };
+
+        $scope.selectstate = function () {
+            $scope.params.state = $scope.state1;
+        };
+
         $scope.selectdeposit = function () {
             $scope.params.deposit_required = $scope.deposit1;
         };
@@ -110,23 +155,45 @@
             $scope.params.licensee_brokerage_type = $scope.brokerage1;
         };
 
-        $scope.selectPeriod = function () {
-            $scope.params.rent_escalation_period = $scope.period1;
+        $scope.selectRentEscPeriod = function () {
+            $scope.params.rent_escalation_period = $scope.rentEscperiod1;
         };
 
         $scope.selectRentEscType = function () {
             $scope.params.rent_escalation_type = $scope.rentEscType1;
         };
 
+        $scope.selectContactType = function () {
+            $scope.params.subpeople_type_id = $scope.contactType1;
+        };
+
         $scope.save = function () {
             var postData = {
                 user_id: $cookieStore.get('userId'),
                 organization_id: $cookieStore.get('orgID'),
+                serial_no: $scope.params.random_id,
+                num_bedrooms: $scope.params.num_bedrooms,
+                num_bathrooms: $scope.params.num_bathrooms,
+                Agreement_area: $scope.params.Agreement_area,
+                Build_up_area: $scope.params.Build_up_area,
+                furnishing_id: $scope.params.furnishing_id,
+                floor_num: $scope.params.floor_num,
+                property_view_id: $scope.params.property_view_id,
+                availability_id: $scope.params.availability_id,
+                lease_period: $scope.params.lease_period,
+                listing_source_id: $scope.params.lease_period,
+                building: $scope.params.building,
+                city: $scope.params.city,
+                state: $scope.params.state,
+                zip_code: $scope.params.zip_code,
+                locality: $scope.params.locality,
                 base_rent: $scope.params.base_rent,
                 advanced_rent: $scope.params.advanced_rent,
                 monthly_rent: $scope.params.monthly_rent,
-                deposit_required:  $scope.params.deposit_required,
+                deposit_required: $scope.params.deposit_required,
+                deposit_type: $scope.params.deposit_type,
                 deposit_amount: $scope.params.deposit_amount,
+                mode_of_payment: $scope.params.mode_of_payment,
                 sale_price_per_sqft: $scope.params.sale_price_per_sqft,
                 car_park_rate: $scope.params.car_park_rate,
                 sale_price_for_car_park: $scope.params.sale_price_for_car_park,
@@ -135,6 +202,12 @@
                 rent_escalation_period: $scope.params.rent_escalation_period,
                 rent_escalation_type: $scope.params.rent_escalation_type,
                 rent_escalation_amount: $scope.params.rent_escalation_amount,
+                subpeople_type_id: $scope.params.subpeople_type_id,
+                first_name: $scope.params.first_name,
+                last_name: $scope.params.last_name,
+                phone_no: $scope.params.phone_no,
+                candid_comments: $scope.params.candid_comments,
+                client_comments: $scope.params.client_comments,
             };
 
             apiService.post("Payment/Create", postData).then(function (response) {
@@ -152,32 +225,20 @@
         Url = "Broker/GetAmenitiesallBroker" 
         apiService.get(Url).then(function (response) {
             $scope.orgAmenities = response.data;
+            for (i = 0; i < $scope.orgAmenities.length; i++) {
+                if ($scope.orgAmenities[i].checkedd===undefined) {
+                    $scope.orgAmenities[i].checkedd = false;
+                }
+            }
+
           
         },
        function (error) {
 
        });
       
-        $scope.checkedIds = [];
-        $scope.onClick = function (e) {
-        $scope.isChecked = [];
-            var n;
-            for (var a in $scope.orgAmenities)
-            {
-                
-                if (n = $( "input:checked" )) {
-                        $scope.isChecked[a] = true;
-                        $scope.checkedIds.push($scope.orgAmenities[a].id);
-                        $cookieStore.put('CheckIDs', $scope.checkedIds);
-                }
-                
-                    break;
-                   
-            }
-           
-        }
+ 
             
-
 
         $scope.addamenity = function () {
             //$cookieStore.put('checkedIds', $scope.checkedIds);
@@ -237,7 +298,4 @@
 
             }
         }
-
-
-       
     });

@@ -4,6 +4,8 @@
         console.log('settingController');
         $scope.inactive_time;
 
+        $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
+
         var orgID = $cookieStore.get('orgID');
         $rootScope.title = 'Dwellar/Settings';
 
