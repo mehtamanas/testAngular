@@ -64,11 +64,11 @@
                             <li id="projectDetailsUsers"><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
                             <li id="projectDetailsTeams" ><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
                             <!--<li><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTYLIST</a></li>-->
-                            <li id="projectDetailsTowerType"><a aria-controls="summary" role="tab" data-toggle="tab">TOWER TYPE</a></li>
-                            <li id="projectDetailsWingType"><a aria-controls="summary" role="tab" data-toggle="tab">WING TYPE</a></li>
-                            <li id="projectDetailsFloorType"><a aria-controls="summary" role="tab" data-toggle="tab">FLOOR TYPE</a></li>
                             <li id="projectDetailsUnitType"><a aria-controls="summary" role="tab" data-toggle="tab">UNIT TYPE</a></li>
-                            <li id="projectDetailsContacts"><a aria-controls="summary" role="tab" data-toggle="tab">CONTACTS</a></li>
+                            <li id="projectDetailsFloorType"><a aria-controls="summary" role="tab" data-toggle="tab">FLOOR TYPE</a></li>
+                            <li id="projectDetailsWingType"><a aria-controls="summary" role="tab" data-toggle="tab">WING TYPE</a></li>
+                            <li id="projectDetailsTowerType"><a aria-controls="summary" role="tab" data-toggle="tab">TOWER TYPE</a></li>
+                            <li id="projectDetailsContacts"><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
                             <li id="projectDetailsTask"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
                             <li id="projectDetailsInventory"><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
                             <li id="projectDetailsPayment"><a aria-controls="summary" role="tab" data-toggle="tab">PAYMENT</a></li>
@@ -79,9 +79,10 @@
                             <li id="projectDetailsEvents"><a aria-controls="summary" role="tab" data-toggle="tab">EVENTS</a></li>
                             <li id="projectDetailsActivityHistory"><a aria-controls="summary" role="tab" data-toggle="tab">ACTIVITY HISTORY</a></li>
                             <li id="projectDetailsUploadView"><a aria-controls="summary" role="tab" data-toggle="tab">UPLOAD VIEW</a></li>
+                            <li id="projectDetailsCharges"><a aria-controls="summary" role="tab" data-toggle="tab">CHARGES</a></li>
                             <li id="projectDetailsServices"><a aria-controls="summary" role="tab" data-toggle="tab">SERVICES</a></li>
                             <li id="projectDetailsOffers"><a aria-controls="summary" role="tab" data-toggle="tab">OFFERS</a></li>
-                            <li id="projectDetailsCharges"><a aria-controls="summary" role="tab" data-toggle="tab">CHARGES</a></li>
+                            
                          </ul>
 
 
@@ -171,7 +172,123 @@
                                 <div kendo-grid k-options="TeamsGrid" selectable="true">
 
                                 </div>
-                            </div> <!--Teams-->                         
+                            </div> <!--Teams-->   
+                        
+                        <div class="tab-pane" id="unit-type">
+                            <div class="tab-content-title tab-content-title-b">Unit Type <a id="projectDetailUnitType" class="add-btn" ng-click="openNewUnitPopup()" data-toggle="modal" style="cursor:pointer">+</a></div>
+
+                            <div class="unit-content-wrap">
+
+                                <div class="unit-bx" ng-repeat="user in orgUsers">
+                                    <div class="unit-title"> {{user.unit_type_desc}} &nbsp; &nbsp;<a id="iconEdit" ng-click="openNewUnitPopup(user)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
+
+                                    <div class="unit-content">
+                                        <div class="unit-img">
+                                            <img src="{{user.Image_Url}}" alt="" class="img-responsive" style="width:162px;height:150px " />
+                                        </div>
+                                        <div class="unit-info">
+                                            <div class="tb-c-wrap">
+                                                <div class="tb-c">
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t06"></span>
+                                                        <span class="tb-sub-txt">Carpet Area<span>{{user.carpet_area}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t04"></span>
+                                                        <span class="tb-sub-txt">Saleable Area<span>{{user.super_built_up_area}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t03"></span>
+                                                        <span class="tb-sub-txt">Bedrooms<span>{{user.num_bedrooms}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t02"></span>
+                                                        <span class="tb-sub-txt">Bathrooms<span>{{user.num_bathrooms}}</span></span>
+                                                    </div>
+                                                    <div class="tb-sub">
+                                                        <span class="tb-sub-t tb-sub-t05"></span>
+                                                        <span class="tb-sub-txt">Car Park<span>{{user.cark_park}}</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- unit-bx ended -->
+                            </div><!-- unit-content-wrap ended -->
+                        </div>           <!-- unit-type ended -->   
+                        
+                        <div class="tab-pane fade" id="floor-type">
+                            <div class="tab-content-title">Floor Types <a id="projectDetailFloorType" class="add-btn" data-toggle="modal" ng-click="openNewFloorPopup()" style="cursor:pointer">+</a></div>
+
+                            <div class="unit-bx" ng-repeat="user in builddetail">
+
+                                <div class="unit-title"> <b>{{user.floor_type}}</b> &nbsp; &nbsp; <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
+
+                                <!--<div class="unit-bx" ng-repeat="floor in user.UnitList1">-->
+                                <!--<h3>Unit {{$index + 1}}</h3>-->
+
+                                <div class="unit-content">
+                                    <div class="unit-img">
+                                        <img src={{user.Image_Url_Floor1}} alt="" class="img-responsive" style="width:162px;height:150px " />
+                                    </div>
+
+                                    <div class="unit-info">
+                                        <div class="tb-c-wrap">
+                                            <div class="tb-c">
+                                                <!--<h3>{{floor.unit_type_desc}}</h3>-->
+                                                <div class="tb-sub">
+                                                    <span class="tb-sub-t tb-sub-t04"></span>
+                                                    <span class="tb-sub-txt">No of Units<span>{{user.no_of_units_floor}}</span></span>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--</div>-->   <!-- unit-bx ended -->
+                                <!-- unit-bx ended -->
+                                <!-- unit-bx ended -->
+
+                            </div><!-- unit-content-wrap ended -->
+                            <!-- unit-content-wrap ended -->
+                        </div>  <!-- floor-type ended -->  
+                        
+                        <div class="tab-pane" id="wing-type">
+
+                            <div class="tab-content-title tab-content-title-b">Wing Type<a id="projectDetailWingType" class="add-btn" ng-click="openNewWingPopup()" data-toggle="modal" style="cursor:pointer">+</a></div>
+
+                            <div class="unit-content-wrap">
+
+                                <div class="unit-bx" ng-repeat="user in builder">
+
+                                    <div class="unit-title"> {{user.wing_code}} &nbsp;<a id="iconEdit" ng-click="openEditWingPopup(user.id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
+                                    <div class="unit-content">
+                                        <div class="unit-img">
+                                            <img src="{{user.image_url_wing1}}" alt="" class="img-responsive" style="width:162px;height:150px " />
+                                        </div>
+                                        <div class="unit-info">
+                                            <div class="tb-c-wrap">
+                                                <div class="tb-c">
+                                                    <div class="tb-sub" ng-repeat="wing in user.FloorList1 ">
+                                                        <span class="tb-sub-t tb-sub-t06"></span>
+                                                        <span class="tb-sub-txt">{{wing.unit_type_desc}}<span>{{wing.no_of_units}}</span></span>
+                                                    </div>
+                                                    <!--<div class="tb-sub">
+                                    <span class="tb-sub-t tb-sub-t02"></span>
+                                    <span class="tb-sub-txt">{{user.floor_type_name}}   <span>{{user.no_of_floors}}</span></span>
+                                </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- unit-bx ended -->
+
+
+
+                            </div><!-- unit-content-wrap ended -->
+
+                        </div>          <!-- wing-type ended -->      
 
                         <div class="container">
                             <div class="col-md-12">
@@ -229,122 +346,11 @@
                             </div>
                         </div>  <!-- tower-type ended -->
 
-                        <div class="tab-pane" id="wing-type">
+                        
 
-                            <div class="tab-content-title tab-content-title-b">Wing Type<a id="projectDetailWingType" class="add-btn" ng-click="openNewWingPopup()" data-toggle="modal" style="cursor:pointer">+</a></div>
+                        
 
-                            <div class="unit-content-wrap">
-
-                                <div class="unit-bx" ng-repeat="user in builder">
-                                   
-                                    <div class="unit-title"> {{user.wing_code}} &nbsp;<a id="iconEdit" ng-click="openEditWingPopup(user.id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
-                                    <div class="unit-content">
-                                        <div class="unit-img">
-                                            <img src="{{user.image_url_wing1}}" alt="" class="img-responsive" style="width:162px;height:150px "/>
-                                        </div>
-                                        <div class="unit-info">
-                                            <div class="tb-c-wrap">
-                                                <div class="tb-c">
-                                                    <div class="tb-sub" ng-repeat="wing in user.FloorList1 ">
-                                                        <span class="tb-sub-t tb-sub-t06"></span>
-                                                        <span class="tb-sub-txt">{{wing.unit_type_desc}}<span>{{wing.no_of_units}}</span></span>
-                                                    </div>
-                                                    <!--<div class="tb-sub">
-                                    <span class="tb-sub-t tb-sub-t02"></span>
-                                    <span class="tb-sub-txt">{{user.floor_type_name}}   <span>{{user.no_of_floors}}</span></span>
-                                </div>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- unit-bx ended -->
-
-
-
-                            </div><!-- unit-content-wrap ended -->
-
-                        </div>          <!-- wing-type ended -->
-
-                        <div class="tab-pane fade" id="floor-type">
-                            <div class="tab-content-title">Floor Types <a id="projectDetailFloorType" class="add-btn" data-toggle="modal" ng-click="openNewFloorPopup()" style="cursor:pointer">+</a></div>
-
-                            <div class="unit-bx" ng-repeat="user in builddetail">
-                               
-                                <div class="unit-title"> <b>{{user.floor_type}}</b> &nbsp; &nbsp; <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
-
-                                <!--<div class="unit-bx" ng-repeat="floor in user.UnitList1">-->
-
-                                    <!--<h3>Unit {{$index + 1}}</h3>-->
-
-                                    <div class="unit-content">
-                                        <div class="unit-img">
-                                            <img src={{user.Image_Url_Floor1}} alt="" class="img-responsive"  style="width:162px;height:150px "/>
-                                        </div>
-
-                                        <div class="unit-info">
-                                            <div class="tb-c-wrap">
-                                                <div class="tb-c">
-                                                    <!--<h3>{{floor.unit_type_desc}}</h3>-->
-                                                    <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t04"></span>
-                                                        <span class="tb-sub-txt">No of Units<span>{{user.no_of_units_floor}}</span></span>
-                                                    </div>
-
-                                      
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <!--</div>-->   <!-- unit-bx ended -->
-                                <!-- unit-bx ended -->
-                                <!-- unit-bx ended -->
-
-                            </div><!-- unit-content-wrap ended -->
-                            <!-- unit-content-wrap ended -->
-                        </div>  <!-- floor-type ended -->
-
-                        <div class="tab-pane" id="unit-type">
-                            <div class="tab-content-title tab-content-title-b">Unit Type <a id="projectDetailUnitType" class="add-btn" ng-click="openNewUnitPopup()" data-toggle="modal" style="cursor:pointer">+</a></div>
-
-                            <div class="unit-content-wrap">
-
-                                <div class="unit-bx" ng-repeat="user in orgUsers">
-                                    <div class="unit-title"> {{user.unit_type_desc}} &nbsp; &nbsp;<a id="iconEdit" ng-click="openNewUnitPopup(user)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
-                                    
-                                    <div class="unit-content">
-                                        <div class="unit-img">
-                                            <img src="{{user.Image_Url}}" alt="" class="img-responsive"style="width:162px;height:150px " />
-                                        </div>
-                                        <div class="unit-info">
-                                            <div class="tb-c-wrap">
-                                                <div class="tb-c">
-                                                    <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t06"></span>
-                                                        <span class="tb-sub-txt">Carpet Area<span>{{user.carpet_area}}</span></span>
-                                                    </div>
-                                                    <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t04"></span>
-                                                        <span class="tb-sub-txt">Saleable Area<span>{{user.super_built_up_area}}</span></span>
-                                                    </div>
-                                                    <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t03"></span>
-                                                        <span class="tb-sub-txt">Bedrooms<span>{{user.num_bedrooms}}</span></span>
-                                                    </div>
-                                                    <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t02"></span>
-                                                        <span class="tb-sub-txt">Bathrooms<span>{{user.num_bathrooms}}</span></span>
-                                                    </div>
-                                                    <div class="tb-sub">
-                                                        <span class="tb-sub-t tb-sub-t05"></span>
-                                                        <span class="tb-sub-txt">Car Park<span>{{user.cark_park}}</span></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- unit-bx ended -->
-                            </div><!-- unit-content-wrap ended -->
-                        </div>  <!-- unit-type ended -->
+                          
 
                         <div class="leads_group" id="record-content">
                                 <div kendo-grid k-options="PeopleGrid" selectable="true">
@@ -418,7 +424,7 @@
                                     <div class="payment-list-row clearfix" ng-repeat="sum in user.PaymentScheduleDetailsList">
                                         <span class="payment-c01">{{sum.description}}</span>
                                  
-                                        <span class="payment-c02">{{sum.percentage}}</span>
+                                        <span class="payment-c02"><a ng-click="demandletterFun(sum.Payment_Schedule_Detail_id)">Send Demand Letter</a>{{sum.percentage}}</span>
                                         
                                     </div>
                                     <div class="payment-list-row clearfix">
@@ -586,6 +592,22 @@
                             </div>
                         </div> <!--Upload View-->
 
+                        <div class="leads_group" id="project_ChargeGrid">
+
+
+
+                            <div class="tab-content-title tab-content-title-b"><b></b>Add Charges<a id="projectDetailUploadAddCharge" data-toggle="modal" class="add-btn" ng-click="openCharges()" style="cursor:pointer">+</a></div>
+                            <div class="">
+
+                                <select ng-model="chargeAction" class="form-control actions-wrap" ng-change="chooseActionForCharge()" id="projectDetailChargeAction">
+                                    <option value='no_action' selected>ACTIONS</option>
+                                    <option value='delete'>DELETE</option>
+                                </select>
+                            </div>
+                            <div id="selectCharges" kendo-grid k-options="ChargesGrid" selectable="true" k-on-change="myGridChangeCharges(dataItem)">
+
+                            </div>
+                        </div> <!--Charge-->
          
                         <div class="leads_group" id="project_ServiceGrid">
 
@@ -616,22 +638,7 @@
                             </div>
                         </div>  <!--Offers-->
 
-                        <div class="leads_group" id="project_ChargeGrid">
-
-                   
-                            
-                            <div class="tab-content-title tab-content-title-b"><b></b>Add Charges<a id="projectDetailUploadAddCharge" data-toggle="modal" class="add-btn" ng-click="openCharges()" style="cursor:pointer">+</a></div>
-                            <div class="">
-
-                                <select ng-model="chargeAction" class="form-control actions-wrap" ng-change="chooseActionForCharge()" id="projectDetailChargeAction">
-                                    <option value='no_action' selected>ACTIONS</option>
-                                    <option value='delete'>DELETE</option>
-                                </select>
-                            </div>
-                            <div id="selectCharges" kendo-grid k-options="ChargesGrid" selectable="true" k-on-change="myGridChangeCharges(dataItem)">
-
-                            </div>
-                        </div> <!--Charge-->
+                        
 
                         
 

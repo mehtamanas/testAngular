@@ -1837,17 +1837,13 @@
             projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;//d028defd-319f-4b89-a51b-55ed9b327200 ";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
                 $scope.orgpayment = response.data;
-                //$scope.PaymentScheduleDetailsList = [];
                 var paymentArr = [];
                 for (i = 0; i < $scope.orgpayment.length; i++) {
-                    if (i == 0) paymentArr.push(_.pluck(($scope.orgpayment)[i].PaymentScheduleDetailsList, 'payment_schedule_id'));
-                    else _.merge(paymentArr[0], (_.pluck(($scope.orgpayment)[i].PaymentScheduleDetailsList, 'payment_schedule_id')));
+                    paymentArr.push(_.pluck(($scope.orgpayment)[i].PaymentScheduleDetailsList, 'Payment_Schedule_Detail_id'));
                 }
 
                 var uniqPayment = _.uniq(paymentArr[0]);
                 $cookieStore.put('payment_schedule_id', uniqPayment);
-
-
             },
            function (error)
            {
@@ -1931,10 +1927,10 @@
              }
 
         }
-        $scope.DemandletterFun = function () {
+        $scope.demandletterFun = function (id) {
+            $scope.PaymentId = $cookieStore.put('payment_schedule_id', id);
             $state.go('app.contactDemandList');
-        }
-      
+        };
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'UserGrid') {
                 $('.k-i-refresh').trigger("click");
@@ -2160,6 +2156,13 @@
             }
             $scope.chargeAction = 'no_action';
             
+        });
+        $scope.$on('REFRESHOFFER', function (event, args) {
+            if (args == 'OfferGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+            
+
         });
 
     });
