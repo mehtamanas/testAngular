@@ -4,6 +4,8 @@
     $scope.title = 'Dwellar Template';
     $scope.templateAction = 'no_action';
 
+    $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
+
     var orgID = $cookieStore.get('orgID');
 
     $scope.openCreateTemplate = function (args) {

@@ -6,6 +6,8 @@
         var userId = $cookieStore.get('userId');
         var orgID = $cookieStore.get('orgID');
 
+        $scope.checkedIds = [];
+
         $scope.choices1 = [{ id: 'choice1' }]; 
         $scope.addNewChoice1 = function (e) {
             var classname = e.currentTarget.className;
@@ -67,7 +69,29 @@
              alert("Error " + error.state);
          });
 
-     
+        Url = "Broker/GetFurnishing";
+        apiService.get(Url).then(function (response) {
+            $scope.furnish = response.data;
+        },
+         function (error) {
+             alert("Error " + error.state);
+         });
+
+        Url = "Broker/GetAvailablity";
+        apiService.get(Url).then(function (response) {
+            $scope.availability = response.data;
+        },
+         function (error) {
+             alert("Error " + error.state);
+         });
+
+        Url = "Broker/GetSubpeopleType";
+        apiService.get(Url).then(function (response) {
+            $scope.contacts = response.data;
+        },
+         function (error) {
+             alert("Error " + error.state);
+         });
 
         //function call
         $scope.selectdeposit = function () {
@@ -122,16 +146,98 @@
                     alert(error.data.Message);
                 else
                     alert("Network issue");
-
             });
         }
 
-        Url = "Amenities/GetAmenities?id=" + orgID;
+        Url = "Broker/GetAmenitiesallBroker" 
         apiService.get(Url).then(function (response) {
             $scope.orgAmenities = response.data;
+          
         },
        function (error) {
 
        });
+      
+        $scope.checkedIds = [];
+        $scope.onClick = function (e) {
+        $scope.isChecked = [];
+            var n;
+            for (var a in $scope.orgAmenities)
+            {
+                
+                if (n = $( "input:checked" )) {
+                        $scope.isChecked[a] = true;
+                        $scope.checkedIds.push($scope.orgAmenities[a].id);
+                        $cookieStore.put('CheckIDs', $scope.checkedIds);
+                }
+                
+                    break;
+                   
+            }
+           
+        }
+            
+
+
+        $scope.addamenity = function () {
+            //$cookieStore.put('checkedIds', $scope.checkedIds);
+            var usersToBeAddedOnServer = [];
+           // $cookieStore.get('checkedIds');
+
+
+            for (var i in $scope.orgAmenities) {
+
+                var newAmenities = {};
+                var found = 0;
+                //   $scope.orgAmenities = response.data;
+                //  newAmenities.amenities_type1 = $scope.orgAmenities[i].amenities_type1;
+                for (var i in $scope.checkedIds) {
+
+                    if ($scope.checkedIds[i] == $scope.orgAmenities[j].id) {
+                        found = 1;
+                        break;
+                    }
+                }
+
+
+                var newMember = {};
+                //newMember.amenities_type1 = $scope.checkedIds[i];
+                newMember.amenity_type_id = $scope.orgAmenities[j].id;
+                newMember.user_id = $cookieStore.get('userId');
+                newMember.organization_id = $cookieStore.get('orgID');
+                newMember.checkedd = found;
+                newMember.description = $scope.description;
+                newMember.id = window.sessionStorage.selectedCustomerID;
+                usersToBeAddedOnServer.push(newMember);
+            }
+
+
+            // Add the new users
+            // alert(id);
+
+
+            apiService.post("Amenities/CreateNew_Amenities", usersToBeAddedOnServer).then(function (response) {
+                var loginSession = response.data;
+                AuditCreate();
+
+                //alert(" Done...");
+                $modalInstance.dismiss();
+                $scope.openUpdatedfullPopup();
+            },
+
+
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
+            attributes: {
+                "class"; "UseHand"
+
+            }
+        }
+
+
        
     });
