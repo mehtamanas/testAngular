@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="">Serial No.</label>
                                 <input type="text" class="form-control text-bold" id="broker_serialno"
-                                       data-ng-model=""
+                                       data-ng-model="params.random_id"
                                        minlength="1"
                                        maxlength="60"
                                        input-focus />
@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label for="">Bedroom</label>
                                 <input type="text" class="form-control text-bold" id="broker_bedroom"
-                                       data-ng-model=""
+                                       data-ng-model="params.num_bedrooms"
                                        minlength="1"
                                        maxlength="60"
                                        ng-pattern="/^[0-9]+$/"
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="">Bathroom</label>
                                 <input type="text" class="form-control text-bold" id="broker_bathroom"
-                                       data-ng-model=""
+                                       data-ng-model="params.num_bathrooms"
                                        minlength="1"
                                        maxlength="60"
                                        ng-pattern="/^[0-9]+$/"
@@ -81,7 +81,7 @@
                                 <label for="">Agreement Area</label>
                                 <div class="area-f">
                                     <input type="text" class="form-control text-bold" id="broker_agreement_area"
-                                           data-ng-model=""
+                                           data-ng-model="params.Agreement_area"
                                            minlength="1"
                                            maxlength="60"
                                            ng-pattern="/^[0-9]+$/"
@@ -96,7 +96,7 @@
                                 <label for="">Build-up Area</label>
                                 <div class="area-f">
                                     <input type="text" class="form-control text-bold" id="broker_BuildUp_area"
-                                           data-ng-model=""
+                                           data-ng-model="params.Build_up_area"
                                            minlength="1"
                                            maxlength="60"
                                            ng-pattern="/^[0-9]+$/"
@@ -139,7 +139,7 @@
                             <div class="form-group">
                                 <label for="">Floor</label>
                                 <input type="text" class="form-control text-bold" id="broker_Floor"
-                                       data-ng-model=""
+                                       data-ng-model="params.floor_num"
                                        minlength="1"
                                        maxlength="60"
                                        ng-pattern="/^[0-9]+$/"
@@ -167,7 +167,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row" style="margin-bottom: 1%;">
-                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-value="{{Amenity.id}}" name="test" ng-click='onClick($index)'/> &nbsp;{{Amenity.amenity_type_code}}
+                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-value="{{Amenity.checkedd}}" name="test" ng-click='onClick($index)'/> &nbsp;{{Amenity.amenity_type_code}}
                                     <h4 ng-if={{}}></h4>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">Possession Date:</label>
                                 <input kendo-date-picker class="form-control" id="broker_possession_date"
-                                       ng-model="due_date"
+                                       ng-model="params.possassion_date"
                                        k-ng-model="k_due_date"
                                        k-format="'dd/MM/yyyy hh:mm tt'" />
                             </div>
@@ -271,7 +271,7 @@
                             <div class="form-group">
                                 <label for="">Building Name</label>
                                 <input type="text" class="form-control text-bold" id="broker_buildingname"
-                                       data-ng-model=""
+                                       data-ng-model="params.building"
                                        minlength="1"
                                        maxlength="60"
                                         />
@@ -324,7 +324,7 @@
                             <div class="form-group">
                                 <label for="">Pin</label>
                                 <input type="text" class="form-control text-bold" id="broker_pin"
-                                       data-ng-model=""
+                                       data-ng-model="params.zip_code"
                                        minlength="1"
                                        maxlength="60"
                                         />
@@ -337,7 +337,7 @@
                             <div class="form-group">
                                 <label for="">Locality</label>
                                 <input type="text" class="form-control text-bold" id="broker_locality"
-                                       data-ng-model=""
+                                       data-ng-model="params.locality"
                                        minlength="1"
                                        maxlength="60"
                                         />
@@ -519,7 +519,7 @@
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="" class="hidden-xs">Period</label>
-                                <select ng-model="period1" ng-change="selectPeriod()" class="dropdown form-control text-bold"  id="broker_rentEscPeriod">
+                                <select ng-model="rentEscperiod1" ng-change="selectRentEscPeriod()" class="dropdown form-control text-bold"  id="broker_rentEscPeriod">
                                     <option value="" selected>Select Period</option>
                                     <option value="12 Months">12 Months</option>
                                     <option value="24 Months">24 Months</option>
@@ -632,16 +632,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Name</label>
-                                <input type="text" class="form-control text-bold" id="broker_contactName"
-                                       data-ng-model=""
+                                <label for="">First Name</label>
+                                <input type="text" class="form-control text-bold" id="broker_bedroom"
+                                       data-ng-model="params.first_name"
                                        minlength="1"
                                        maxlength="60"
-                                        />
+                                       input-focus />
                             </div>
                         </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Last Name</label>
+                                <input type="text" class="form-control text-bold" id="broker_bathroom"
+                                       data-ng-model="params.last_name"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus />
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="row">
@@ -663,10 +674,9 @@
                             <div class="form-group">
                                 <label for="">Phone</label>
                                 <input type="text" class="form-control text-bold" id="broker_contactPhone"
-                                       data-ng-model=""
+                                       data-ng-model="params.phone_no"
                                        minlength="1"
                                        maxlength="60"
-                                       ng-pattern="/^[a-z 0-9\s]+$/i"
                                        input-focus
                                        required />
                             </div>
@@ -699,7 +709,7 @@
                     <div class="clearfix">
                         <div class="form-group form-bx form-bx5">
                             <textarea cols="110" rows="05" name="description" id="broker_candidComment"
-                                      data-ng-model=""
+                                      data-ng-model="params.candid_comments"
                                       minlength="1"
                                       maxlength="500"
                                       input-focus
@@ -711,7 +721,7 @@
                     <div class="clearfix">
                         <div class="form-group form-bx form-bx5">
                             <textarea cols="110" rows="05" name="description" id="broker_clientComment"
-                                      data-ng-model=""
+                                      data-ng-model="params.client_comments"
                                       minlength="1"
                                       maxlength="500"
                                       input-focus

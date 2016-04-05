@@ -61,6 +61,7 @@
                             <li ng-show="Properties.read && WHO_AM_I==='Broker'" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==15}" name="Properties">
                                 <a ui-sref="app.brokerproperty" href="" ng-click="activeBar=15"><span class="nav-icon nav-01"></span> Properties <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu14">
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item30" name="Bookings"><a ui-sref="app.brokerpropertylist" href="">Property List</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item24" name="Residential_Sale"><a href="">Residential Sale</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item25" name="Residential_Rent"><a href="">Residential Rent</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item26" name="Commercial_Sale"><a href="">Commercial Sale</a></li>
@@ -139,7 +140,7 @@
                                 </ul>
                             </li><!--Settings -->
 
-                            <li class="nav-sub-dropdown menu-item"  ng-class="{'active':activeBar==9}" name="Reports" >
+                            <li ng-hide='{{WHO_AM_I === "Broker"}}' class="nav-sub-dropdown menu-item"  ng-class="{'active':activeBar==9}" name="Reports" >
                                 <a href="" ui-sref="app.report" ng-click="activeBar=9"><span class="nav-icon nav-03"></span> Reports<span class="d-arr"></span></a>
 
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu11">

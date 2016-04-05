@@ -25,19 +25,19 @@
                 <ul class="nav nav-tabs responsive-tagJS" role="tablist">
 
                     <li><a aria-controls="summary" role="tab" data-toggle="tab">ORGANIZATION</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">BOOKINGS</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">CHANNEL PARTNERS</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">BOOKINGS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">CHANNEL PARTNERS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
                     <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
                     <li><a aria-controls="summary" role="tab" data-toggle="tab">NOTIFICATIONS</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">BILLING</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">TAGS</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">SECURITY</a></li>
-                    <li><a aria-controls="summary" role="tab" data-toggle="tab">KIOSK</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">BILLING</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">TAGS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">SECURITY</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">KIOSK</a></li>
 
                 </ul>
 

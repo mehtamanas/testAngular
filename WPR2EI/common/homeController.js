@@ -43,7 +43,7 @@ angular.module('common')
         $rootScope.tasks = { 'read': true, 'write': true, 'delete': true };
         $rootScope.billing = { 'read': true, 'write': true, 'delete': true };
         $rootScope.contacts = { 'read': true, 'write': true, 'delete': true };
-        $rootScope.property = { 'read': true, 'write': true, 'delete': true };
+        $rootScope.Properties = { 'read': true, 'write': true, 'delete': true };
         $rootScope.customTags = { 'read': true, 'write': true, 'delete': true };
 
         if ($scope.WHO_AM_I == "Broker") {
@@ -74,7 +74,7 @@ angular.module('common')
                 $rootScope.builders = _.findWhere(nav, { resource: 'Builders' });
                 $rootScope.notifications = _.findWhere(nav, { resource: 'Notifications' });
                 $rootScope.support = _.findWhere(nav, { resource: 'Support' });
-                $rootScope.property = _.findWhere(nav, { resource: 'Property' });
+                $rootScope.Properties = _.findWhere(nav, { resource: 'Property' });
                 $rootScope.sharedListings = _.findWhere(nav, { resource: 'Shared Listings' });
                 $rootScope.campaigns = _.findWhere(nav, { resource: 'Campaigns' });
                 $rootScope.tasks = _.findWhere(nav, { resource: 'Tasks' });
