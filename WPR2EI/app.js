@@ -53,6 +53,8 @@ angular.module('MainApp', [
   'contact_report',
   'ngTagsInput',
     'ngStorage',
+     'testresult',
+  'emailtransactions'
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/login');
