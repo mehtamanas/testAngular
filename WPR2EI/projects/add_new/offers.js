@@ -90,6 +90,7 @@
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            $rootScope.$broadcast('REFRESHOFFER', 'OfferGrid');
         });
     }
 
@@ -111,7 +112,8 @@
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'lg'
+            size: 'lg',
+            resolve: { items: { title: "Offers" } }
         });
 
 

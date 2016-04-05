@@ -55,7 +55,8 @@
                 width: "120px",
                 attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
+
              }
 
             }, {
@@ -64,7 +65,7 @@
                 width: "120px",
                 attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
             }, {
@@ -73,7 +74,7 @@
                 width: "120px",
                 attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
             }, {
@@ -82,7 +83,7 @@
                 width: "120px",
                 attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
             }, {
@@ -91,7 +92,7 @@
                 width: "120px",
                 attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
             }, {
@@ -100,7 +101,7 @@
                width: "120px",
                attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
            }, {
@@ -110,7 +111,7 @@
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
            }, {
@@ -120,7 +121,7 @@
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
            },
@@ -130,7 +131,7 @@
                width: "120px",
                attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
 
@@ -141,7 +142,7 @@
                width: "120px",
                attributes:
              {
-                 "style": "text-align:center"
+                 "style": "text-align:center;cursor:pointer"
              }
 
            }, ]

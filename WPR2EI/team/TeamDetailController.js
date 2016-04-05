@@ -601,8 +601,9 @@
                     apiService.getWithoutCaching(GetUrl).then(function (response) {
 
                         $scope.data = response.data;
-                        // alert($scope.data);
-                        //   alert($scope.seletedCustomerId);
+
+                        $scope.main = response.data;
+                        $scope.image = $scope.main[0];
 
 
                         $scope.name = $scope.data[0].name;
