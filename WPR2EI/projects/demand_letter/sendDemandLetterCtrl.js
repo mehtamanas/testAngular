@@ -21,7 +21,7 @@
        
        for (var i in $scope.totalContact) {
 
-           letterDetails.push({ 'client_id': $scope.totalContact[i], 'template_id': demandLetterTemplate.template_id, template: demandLetterTemplate.template, subject: deemandLetterTemplate.subject, project_id: $scope.project_id, user_id: $cookieStore.get('userId'), organization_id: $cookieStore.get('orgID'), 'payment_detail_scheme_id': $scope.PaymentId, })
+           letterDetails.push({ 'client_id': $scope.totalContact[i], 'template_id': demandLetterTemplate.template_id, 'template': demandLetterTemplate.template, 'subject': demandLetterTemplate.subject, 'project_id': $scope.project_id, 'user_id': $cookieStore.get('userId'), 'organization_id': $cookieStore.get('orgID'), 'payment_detail_scheme_id': $scope.PaymentId, })
 
            //var postData = {
            //    client_id: $scope.totalContact,
