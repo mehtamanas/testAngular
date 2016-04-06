@@ -10120,7 +10120,7 @@ select {
     margin-right: 2%;
     font-weight: bold;
     padding-top: 1px;
-    display:inline-block;
+    display: inline-block;
 }
 /*for content builder*/
 #content-builder #main-content-builder {
@@ -10831,7 +10831,7 @@ input[type=text].rupee_1 {
 }
 
 .k-myTool {
-    background-position:-288px -215px;
+    background-position: -288px -215px;
 }
 
 .quote-subtotal {
@@ -10905,7 +10905,8 @@ input[type=text].rupee_1 {
     margin-top: 2%;
     border-bottom: 1px solid #e5e5e5;
 }
-.campaign-container-btn-pdf{
+
+.campaign-container-btn-pdf {
     background-color: #5cb85c;
     color: white;
     text-align: center;
@@ -10913,17 +10914,20 @@ input[type=text].rupee_1 {
     font-weight: 800;
     margin-right: 7px;
 }
+
 .equal [class*="col-"] {
     float: none;
     vertical-align: top;
 }
- .equal {
+
+.equal {
     display: flex;
 }
 
-.contact_name:hover{
-    text-decoration:underline !important;
+.contact_name:hover {
+    text-decoration: underline !important;
 }
+
 .project-detail-photo_2 {
     background: #efefef;
     text-align: center;
@@ -10932,16 +10936,17 @@ input[type=text].rupee_1 {
     vertical-align: middle;
     position: relative;
 }
+
 .user-photo_3-1 {
     background: #e9e9e9;
     text-align: center;
-    width:204px;
+    width: 204px;
     height: 110px;
     position: relative;
 }
 /*for modal header*/
-.modal-header-top{
-    text-align:left;
+.modal-header-top {
+    text-align: left;
 }
 /*.form-control {
     display: block;
@@ -10961,3 +10966,41 @@ input[type=text].rupee_1 {
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }*/
+
+/* css for add new contact page*/
+.contact-header {
+    border-bottom: none;
+    background: #f7f7f7;
+    padding: 2px 30px;
+    min-height: 0;
+    border-radius: 2px;
+}
+
+.contact-formField {
+    border-bottom: 1px solid #e7e7e7 !important;
+    border: none;
+}
+.contact-label{
+    font-family:lato;
+    font-size:10px;
+    color:#777777;
+    text-transform:uppercase;
+
+}
+
+.checkboxdemoBasicUsage div.flex-xs {
+  min-height: 40px; }
+.checkboxdemoBasicUsage .checkboxDemo1 div {
+  clear: both; }
+.checkboxdemoBasicUsage p {
+  padding-left: 8px; }
+.checkboxdemoBasicUsage fieldset.standard {
+  border-style: solid;
+  border-width: 1px; }
+.checkboxdemoBasicUsage legend {
+  color: #3F51B5; }
+.checkboxdemoBasicUsage legend code {
+  color: #3F51B5;
+  font-weight: normal; }
+.checkboxdemoBasicUsage .ipsum {
+  color: saddlebrown; }
