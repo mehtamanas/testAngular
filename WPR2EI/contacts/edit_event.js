@@ -2,7 +2,7 @@
 
 var EditEventContact = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope,$window) {
     console.log('EditEventContact');
-
+    $scope.loadingDemo = false;
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     $scope.contact1 = $scope.seletedCustomerId;
@@ -136,6 +136,7 @@ var EditEventContact = function ($scope, $state, $cookieStore, apiService, $moda
         apiService.post("Event/EditEvent", postData).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'EventGrid');
 
@@ -167,6 +168,7 @@ var EditEventContact = function ($scope, $state, $cookieStore, apiService, $moda
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
+            $scope.loadingDemo = true;
             if ($scope.remind_me === true) {
                   remind_me = "1";
                 $scope.params.reminder_datetime = (($scope.reminder_time).replace(' min', '')).trim();

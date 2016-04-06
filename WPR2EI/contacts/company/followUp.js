@@ -2,7 +2,7 @@
 var FollowUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-
+    $scope.loadingDemo = false;
     $scope.companyName = $cookieStore.get('company_name');
 
     $scope.leadName = $cookieStore.get('lead_name');
@@ -108,12 +108,13 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
 
     projectUrl = "ToDoItem/CreateTask";
     ProjectCreate = function (param) {
-
+        $scope.loadingDemo = true;
         $scope.params.remind_me = $scope.remind_me;
 
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             AuditCreate();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');

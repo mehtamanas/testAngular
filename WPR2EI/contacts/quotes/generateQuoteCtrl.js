@@ -12,7 +12,7 @@
             animation: true,
             template: $scope.params.htmlcontent,
             backdrop: 'static',
-            size: 'md'
+            size: 'lg'
         });
 
     }
@@ -27,7 +27,7 @@
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'sm',
             resolve: { items: { title: "Quote" } }
         });
     }
@@ -380,7 +380,7 @@ function (error) {
             templateUrl: 'contacts/quotes/generateQuotePreview.html',
             backdrop: 'static',
             controller: quotePreviewCltr,
-            size: 'md',
+            size: 'lg',
             resolve: {
                 previewData :{
                 subscriptionData: $scope.subscription,

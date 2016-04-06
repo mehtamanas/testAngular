@@ -3,7 +3,7 @@
  */
 var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope,$window) {
     console.log('PaymentUpController');
-
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     //Audit log start															
@@ -26,6 +26,7 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
     AuditCreate = function (param) {
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
+            $scope.loadingDemo = false;
         },
    function (error) {
 
@@ -72,6 +73,7 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
             $rootScope.$broadcast('REFRESH', 'PaymentGrid');
             called = true;
         },
+
      function (error) {
 
      });
@@ -135,6 +137,7 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService, $m
             $scope.showValid = true;
             if (isValid)
             {
+                $scope.loadingDemo = true;
                 $scope.finalpost();
                 $rootScope.$broadcast('REFRESH', 'PaymentGrid');
 

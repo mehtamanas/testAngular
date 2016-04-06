@@ -2,7 +2,8 @@
 var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope,$window)
 {
 
-    console.log('AddNewEventContact');   
+    console.log('AddNewEventContact');
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     $scope.contact1 = window.sessionStorage.selectedCustomerID;
@@ -92,6 +93,7 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'EventGrid');
         },
@@ -127,7 +129,7 @@ var AddNewEventContact = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-
+            $scope.loadingDemo = true;
              if ($scope.remind_me === true) {
                 remind_me = "1";
                 $scope.params.reminder_datetime = (($scope.reminder_time).replace(' min', '')).trim();
