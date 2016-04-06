@@ -54,13 +54,14 @@ angular.module('MainApp', [
   'ngTagsInput',
     'ngStorage',
      'testresult',
-  'emailtransactions'
+  'emailtransactions',
+    'angular-ladda',
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/login');
     }])
     .constant('appConstants', {
-        
+
     }).config(['cfpLoadingBarProvider', 'IdleProvider', 'KeepaliveProvider', function (cfpLoadingBarProvider, IdleProvider, KeepaliveProvider) {
         //cfpLoadingBarProvider.latencyThreshold = 500;
         IdleProvider.idle(1200); // in seconds
@@ -68,10 +69,10 @@ angular.module('MainApp', [
         cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
         //cfpLoadingBarProvider.includeBar = false;
     }])
-.run(function ($rootScope, $location, $cookieStore, Idle,$window) {
+.run(function ($rootScope, $location, $cookieStore, Idle, $window) {
     $rootScope.$on("$stateChangeStart", function (event, next, current) {
         //if ($location.protocol() !== 'https') { //redirect http to https
-          //  $window.location.href = $location.absUrl().replace('http', 'https');
+        //  $window.location.href = $location.absUrl().replace('http', 'https');
         //}
         if (($cookieStore.get('userId') === undefined)) {
             if ((next.name).indexOf("app") > -1) {
@@ -80,4 +81,3 @@ angular.module('MainApp', [
         }
     })
 });
-    
