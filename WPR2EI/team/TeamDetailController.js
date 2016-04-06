@@ -262,28 +262,53 @@
                 field: "name",
                 title: "Name",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
             }, {
 
                 field: "listing_date",
                 title: "Listing Date",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
             }, {
 
                 field: "last_updated_date",
                 title: "Last Updated",
                 width: "120px",
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
             }, {
 
                 field: "built_up_area",
                 title: "Built Up",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "super_built_up_area",
                 title: "Super Built Up ",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }]
         };
@@ -328,23 +353,45 @@
                 field: "first_name",
                 title: "First Name",
                 width: "50px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "last_name",
                 title: "Last Name",
                 width: "50px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "people_type",
                 title: "People Type",
                 width: "50px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
+
+
 
             }, {
                 field: "date_of_birth",
                 title: "Date Of Birth",
                 width: "50px",
 
-                format: '{0:dd/MM/yyyy}'
+                format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
             }]
         };
 
@@ -391,18 +438,33 @@
                 field: "team_name",
                 title: "Name",
                 width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "priority",
                 title: "Priority",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             }, {
                 field: "description",
                 title: "Description",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             },
             {
@@ -410,6 +472,11 @@
                 title: "Summary",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             },
             {
@@ -417,6 +484,11 @@
                 title: "Text",
                 width: "120px",
                 format: '{0:dd/MM/yyyy}',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center",
+
+                }
 
             },
             {
