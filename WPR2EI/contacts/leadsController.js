@@ -223,7 +223,7 @@ angular.module('contacts')
                 pageSize: 20
             },
             dataBound: function () {
-                syncData = $interval(syncLeadDataSource, 5000);
+               // syncData = $interval(syncLeadDataSource, 5000);
             },
             groupable: true,
             sortable: true,
