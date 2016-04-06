@@ -45,6 +45,7 @@ angular.module('MainApp', [
     'task',
    'form',
    'blogs',
+   'ngMaterial',
    'ngMessages',
    'templates',
    'ng.deviceDetector',
@@ -56,6 +57,7 @@ angular.module('MainApp', [
      'testresult',
   'emailtransactions',
     'angular-ladda',
+    
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/login');
