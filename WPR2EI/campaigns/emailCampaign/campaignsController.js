@@ -5,6 +5,8 @@
         var orgID = $cookieStore.get('orgID');
         var userID = $cookieStore.get('userId');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+        $scope.campaignAction = 'no_action';
+
 
         //Audit log start               
         AuditCreate = function () {
@@ -83,8 +85,16 @@
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [
-               {
+            columns: [{
+                template: "<input type='checkbox', class='checkbox', data-id='#= campaign_ID #',  ng-click='check($event,dataItem)' />",
+                title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                width: "60px",
+                attributes:
+                 {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+            },{
                    field: "name",
                    title: "NAME",
                    width: "180px",
@@ -148,7 +158,7 @@
                    }, {
                        field: "created_date",
                        title: "Created Date",
-
+                       width: "200px",
                        format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                        attributes: {
                            "class": "UseHand",
@@ -157,7 +167,7 @@
                    }, {
                        field: "start_date1",
                        title: "Start Date",
-
+                       width: "200px",
                        format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                        attributes: {
                            "class": "UseHand",
@@ -186,6 +196,72 @@
             ]
         };
 
+        $scope.chooseAction = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.campaignAction === "no_action") {
+
+                }
+                else if ($scope.campaignAction === "add_tag") {
+                    $state.go($scope.tagOptionPopup());
+                }
+                else if ($scope.campaignAction === "assign_to") {
+                    $state.go($scope.assignToUpPopup());
+                }
+                else if ($scope.campaignAction === "delete") {
+                    var campaignDelete = [];
+                    for (var i in allCheckedIds) {
+                        var contact = {};
+                        contact.id = allCheckedIds[i];
+                        contact.organization_id = $cookieStore.get('orgID');
+                        campaignDelete.push(contact);
+                    }
+                    $cookieStore.put('contactDelete', campaignDelete);
+                    $scope.openConfirmation();
+                }
+            }
+        }
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
+
+
+        $scope.check = function (e, data) {
+            var allListElements = $(".checkbox").toArray();
+            for (var i in allListElements) { // not all checked
+                if (!allListElements[i].checked) {
+                    $('#checkAll').prop('checked', false);
+                    break;
+                }
+                if (i == allListElements.length - 1) // if all are checked manually
+                    $('#checkAll').prop('checked', true);
+            }
+        }
+
+
+        $scope.openConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'campaigns/delete/confirmCampiagn.html',
+                backdrop: 'static',
+                controller: confirmCampiagnCtrl,
+                size: 'sm',
+                resolve: { items: { title: "Campigans" } }
+
+            });
+
+        }
 
         $scope.changeGridChange = function (dataItem) {
             window.sessionStorage.selectedCustomerID = dataItem.campaign_ID;
@@ -253,6 +329,7 @@
             if (args == 'projectGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            $scope.campaignAction = 'no_action';
         });
 
 

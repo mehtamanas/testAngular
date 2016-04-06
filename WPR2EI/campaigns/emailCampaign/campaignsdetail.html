@@ -44,10 +44,9 @@
     <div style="width:100%; background:#e7e7e7; padding:30px">
 
         <div class="pull-left actions-wrap">
-            <select id="Emailcampaignsdetail_ actions-option" class="form-control actions-option">
-                <option>ACTIONS</option>
-                <option>EDIT</option>
-                <option>DELETE</option>
+            <select ng-model="campaignAction" class="form-control actions-wrap" ng-change="chooseAction()" id="campaignAction">
+                <option value='no_action' selected>ACTIONS</option>
+                <option value='delete'>DELETE</option>
             </select>
         </div>
         <div class="pull-right btn-wrap-right">
