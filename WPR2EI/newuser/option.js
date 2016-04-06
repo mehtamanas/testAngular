@@ -188,9 +188,9 @@ var OptionPopUpController = function ($scope, $state, $cookieStore, apiService, 
             $scope.openSucessfullPopup = function () {
                 var modalInstance = $modal.open({
                     animation: true,
-                    templateUrl: 'newuser/sucessfull.tpl.html',
+                    templateUrl: 'projects/AssignTo.html',
                     backdrop: 'static',
-                    controller: sucessfullController,
+                    controller: AssignToController,
                     size: 'sm',
                     resolve: { items: { title: "Role" } }
 
