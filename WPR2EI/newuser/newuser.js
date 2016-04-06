@@ -3,7 +3,7 @@ angular.module('newuser')
       function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
           console.log('TeamListController');
           $rootScope.title = 'Dwellar./Users';
-
+          $scope.userAction = 'no_action';
           var userID = $cookieStore.get('userId');
 
           //alert($cookieStore.get('userId'));
@@ -178,73 +178,76 @@ angular.module('newuser')
               });
           };
 
+          $scope.checkALL = function (e) {
+              if ($('.check-box:checked').length > 0)
+                  $('.checkbox').prop('checked', true);
+              else
+                  $('.checkbox').prop('checked', false);
+          };
 
 
-
-
-
-          $scope.GetValue = function (fruit) {
-
-              var fruitId = $scope.ddlFruits;
-              var fruitName = $.grep($scope.Fruits, function (fruit) {
-                  return fruit.Id == fruitId;
-              })[0].Name;
-
-              $cookieStore.put('Selected Text', fruitName);
-              // $window.alert("Selected Value: " + fruitId + "\nSelected Text: " + fruitName);
-
-
-
-
+          $scope.check = function (e, data) {
+              var allListElements = $(".checkbox").toArray();
+              for (var i in allListElements) { // not all checked
+                  if (!allListElements[i].checked) {
+                      $('#checkAll').prop('checked', false);
+                      break;
+                  }
+                  if (i == allListElements.length - 1) // if all are checked manually
+                      $('#checkAll').prop('checked', true);
+              }
           }
 
-          $scope.addUser = function ()
-          {
-
-              var usersToBeAddedOnServer = [];
+          $scope.chooseAction = function () {
+              var allGridElements = $(".checkbox").toArray();
+              var allCheckedElement = _.filter(allGridElements, function (o)
+              { return o.checked });
+              allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
               $cookieStore.remove('checkedIds');
-              $cookieStore.put('checkedIds', $scope.checkedIds);
-              // Add the new users
-              for (var i in $scope.checkedIds) {
-                  var newMember = {};
-                  newMember.account_email = $scope.checkedIds[i];
-                  newMember.status = $cookieStore.get('Selected Text');
-                  usersToBeAddedOnServer.push(newMember);
-              }
+              $cookieStore.put('checkedIds', allCheckedIds);
 
-              if (usersToBeAddedOnServer.length == 0)
-              {
-                  return;
-              }
-              var Text = $cookieStore.get('Selected Text');
-              if ($cookieStore.get('Selected Text') == "ASSIGN TO PROJECT") {
-                  $state.go($scope.optionPopup());
-                  $state.go($scope.openSucessfullPopup())
-              }
-              else if ($cookieStore.get('Selected Text') == "ASSIGN ROLES") {
-                  $state.go($scope.optionPopup())
+              if (allCheckedIds.length > 0) {
 
-              }
-              else if ($cookieStore.get('Selected Text') == "ADD TO TEAM") {
+                  if ($scope.leadAction === "no_action") {
 
-                  $state.go($scope.optionPopup())
-
-              }
-              else if ($cookieStore.get('Selected Text') == "INACTIVE") {
-                  apiService.post("User/StatusChange", usersToBeAddedOnServer).then(function (response) {
-                      var loginSession = response.data;
-                      $state.go($scope.inactive())
-                  },
-     function (error) {
-         if (error.status === 400)
-             alert(error.data.Message);
-         else
-             alert("Network issue");
-     });
-
+                  }                 
+                  else if ($scope.leadAction === "assign_roles") {
+                      $state.go($scope.optionPopup());
+                  }
+                  else if ($scope.leadAction === "delete") {
+                      var UserDelete = [];
+                      for (var i in allCheckedIds) {
+                          var user = {};
+                          user.id = allCheckedIds[i];
+                          user.organization_id = $cookieStore.get('orgID');
+                          UserDelete.push(user);
+                      }
+                      $cookieStore.put('UserDelete', UserDelete);
+                      $scope.openConfirmation();
+                  }
+                  else if ($scope.leadAction === "Inactive")
+                  {
+                      var userinactive = [];
+                      for (var i in allCheckedIds) {
+                          var user = {};
+                          user.id = allCheckedIds[i];
+                          user.organization_id = $cookieStore.get('orgID');
+                          userinactive.push(user);
+                      }
+                      $cookieStore.put('userinactive', userinactive);
+                      apiService.post("User/StatusChange", userinactive).then(function (response) {
+                          var loginSession = response.data;
+                          $state.go($scope.inactive())
+                      },
+                     function (error) {
+                         if (error.status === 400)
+                             alert(error.data.Message);
+                         else
+                             alert("Network issue");
+                     });
+                  }
               }
           }
-
 
 
           var orgID = $cookieStore.get('orgID');
@@ -282,14 +285,14 @@ angular.module('newuser')
                   buttonCount: 5
               },
               columns: [{
-                  template: "<input type='checkbox', class='checkbox', data-id='#= account_email #',  ng-click='onClick($event)' />",
-                  title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='submit(dataItem)' />",
+                  template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+                  title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
                   width: "60px",
                   attributes:
-                      {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
               }, {
                   field: "first_name",
                   title: "First Name",
@@ -376,76 +379,7 @@ angular.module('newuser')
               }]
           };
 
-          $scope.Fruits = [ {
-              Id: 2,
-              Name: 'INACTIVE',
-             
-          //}, {
-          //    Id: 3,
-          //    Name: 'ADD TO TEAM'
-          //}, {
-          //    Id: 4,
-          //    Name: 'ASSIGN TO PROJECT'
-              //
-          }, {
-              Id: 3,
-              Name: 'ASSIGN ROLES',
-             
-          }
-          ];
-          $scope.checkedIds = [];
-          $scope.showCheckboxes = function () {
 
-
-              for (var i in $scope.checkedIds) {
-
-                 // alert($scope.checkedIds[i]);
-              }
-          };
-
-          $scope.submit = function (e) {
-
-              if ($('.check-box:checked').length > 0)
-                  $('.checkbox').prop('checked', true);
-              else
-                  $('.checkbox').prop('checked', false);
-          }
-
-          $scope.onClick = function (e) {
-              var allListElements = $(".checkbox").toArray();
-              for (var i in allListElements) {
-                  if (!allListElements[i].checked){
-                      $('#checkAll').prop('checked', false);
-                      break;
-                  }
-                  if (i == allListElements.length-1)
-                      $('#checkAll').prop('checked', true);
-              }
-              var element = $(e.currentTarget);
-              var checked = element.is(':checked')
-              row = element.closest("tr")
-              var id = $(e.target).data('id');
-              var fnd = 0;
-              var allListElements = $(".checkbox");
-              for (var i in $scope.checkedIds) {
-                  if(id== $scope.checkedIds[i])
-                  {
-                      $scope.checkedIds.splice(i, 1);
-                      fnd = 1;
-                  }
-                 
-              }
-              if (fnd == 0) {
-                  $scope.checkedIds.push(id);
-              }
-              if (checked) {
-                  row.addClass("k-state-selected");
-              } else {
-                  row.removeClass("k-state-selected");
-              }
-
-              
-          }
 
           function RefreshGrid() {
               setInterval(function () {
@@ -458,11 +392,8 @@ angular.module('newuser')
               if (args == 'mainGridOptions') {
                   $('.k-i-refresh').trigger("click");
               }
-              $scope.ddlFruits = "ACTION";
+              $scope.userAction = 'no_action';
           });
-
-
-       
 
 
           // Kendo Grid on change
@@ -549,6 +480,19 @@ angular.module('newuser')
               });
           };
 
+          $scope.openConfirmation = function () {
+              var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'newuser/deleteuserconfirm.html',
+                  backdrop: 'static',
+                  controller: deleteUserController,
+                  size: 'sm',
+                  resolve: { items: { title: "User" } }
+
+              });
+
+          }
+
           $scope.openBlockPopup = function () {
               var modalInstance = $modal.open({
                   animation: true,
@@ -560,19 +504,6 @@ angular.module('newuser')
 
               });
           };
-
-          //$scope.openInactivePopup = function () {
-          //    var modalInstance = $modal.open({
-          //        animation: true,
-          //        templateUrl: 'newuser/inactive.html',
-          //        backdrop: 'static',
-          //        controller: InactiveController,
-          //        size: 'md',
-
-
-          //    });
-          //};
-
 
           function clearFilters() {
               var gridData = $("#peopleGrid").data("kendoGrid");

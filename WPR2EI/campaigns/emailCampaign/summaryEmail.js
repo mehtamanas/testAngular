@@ -82,6 +82,7 @@
                 emailUrl = "CampaignEmailTemplate/Create";             
                 apiService.post(emailUrl, $scope.postData).then(function (response) {
                     var SessionData = response.data;
+                    $scope.RemoveCookies();
                    
                     },
                 function (error) {
