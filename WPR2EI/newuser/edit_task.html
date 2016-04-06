@@ -92,7 +92,7 @@
                                     class="dropdown form-control" >
                                 <option value="" selected>Select User</option>
                                 <option ng-repeat="user in users"
-                                        value="{{user.assign_user_id}}">
+                                        value="{{user.assign_user_id}}" ng-disabled="assign_user_id !== user1">
                                     {{user.user_name}}
                                 </option>
 
