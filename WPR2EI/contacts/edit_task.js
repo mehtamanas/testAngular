@@ -3,6 +3,7 @@
  */
 var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log(' EditTaskController');
+    $scope.loadingDemo = false;
     var userId = $cookieStore.get('userId');
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
@@ -103,6 +104,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                 var loginSession = response.data;
                 $modalInstance.dismiss();
                 $scope.isDisabled = false;
+                $scope.loadingDemo = false;
                 $scope.openSucessfullPopup();
                 $rootScope.$broadcast('REFRESH', 'TaskGrid');
 
@@ -218,6 +220,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             $scope.isDisabled = true;
             $scope.showValid = true;
             if (isValid) {
+                $scope.loadingDemo = true;
                 if ($scope.remind_me === true) {
                     remind_me = "1";
                     //$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();

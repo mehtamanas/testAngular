@@ -5,6 +5,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
   //  alert("ff");
     $scope.usersInTeam = undefined;
     $scope.OrgTeams = undefined;
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var orgID = $cookieStore.get('orgID');
     var selectedcustomer = $scope.seletedCustomerId;
@@ -132,6 +133,7 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
               // alert('User members updated successfully.')
                 $modalInstance.dismiss();
                 $scope.openSucessfullPopup();
+                $scope.loadingDemo = false;
                 $rootScope.$broadcast('REFRESH', 'TeamsGrid');
             }
         }, function (errors) {
@@ -145,10 +147,11 @@ var AddTeamController = function ($scope, $q, $cookieStore, projectService, proj
             templateUrl: 'projects/AddSuccessful.html',
             backdrop: 'static',
             controller: AddController,
-            size: 'md',
+            size: 'sm',
             resolve: { items: { title: "Team" } }
         });
-
+        $scope.loadingDemo = true;
         $rootScope.$broadcast('REFRESH', 'TeamsGrid');
+        
     };
 };

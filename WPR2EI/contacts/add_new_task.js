@@ -3,6 +3,7 @@
  */
 var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope,$window) {
     console.log('AddNewTaskController');
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     //var day = moment().format();
     var userId = $cookieStore.get('userId');
@@ -131,6 +132,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
     Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.contacts = response.data;
+        $scope.loadingDemo = false;
         $scope.contact1 = $scope.seletedCustomerId;
     },
    function (error) {
@@ -188,6 +190,7 @@ function (error) {
         $scope.isDisabled = true;
         $scope.showValid = true;
         if (isValid) {
+            $scope.loadingDemo = true;
             if ($scope.remind_me === true)
                 remind_me = "1";
             else
