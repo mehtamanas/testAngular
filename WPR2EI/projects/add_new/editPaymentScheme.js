@@ -6,10 +6,7 @@
     var orgID = $cookieStore.get('orgID');
     var payment_sch_id = $cookieStore.get('payment_schedule_id');
 
-    //alert(payment_sch_id);
-
-
-    $scope.showProgress = false;
+    
 
     // FILTERS
 
@@ -45,41 +42,23 @@
 
 
     projectUrl = "Payment/GetPay_Sch_ByID/" + payment_sch_id;
-
-
-    //alert(projectUrl);
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.params = response.data[0];
 
-
-    },
-function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
-}
-    );
+        },
+    function (error)
+    {
+       
+     });
 
 
     projectUrl = "Payment/GetPay_Sch_Detail_Multiple/" + payment_sch_id;
-
-    //alert(projectUrl);
     apiService.getWithoutCaching(projectUrl).then(function (response) {
         $scope.choices2 = response.data;
-
-
-
-
-    },
-function (error) {
-    if (error.status === 400)
-        alert(error.data.Message);
-    else
-        alert("Network issue");
-}
-    );
-
+      },
+    function (error) {
+    
+    });
 
 
     $scope.choices2 = [{ id: 'choice1' }];
@@ -101,7 +80,7 @@ function (error) {
     $scope.addNewChoice2 = function (e) {
         var classname = e.currentTarget.className;
         if (classname == 'remove-field') {
-            // $scope.choices2.pop();
+            
         }
         else if ($scope.choices2.length) {
             var newItemNo2 = $scope.choices2.length + 1;
@@ -216,18 +195,11 @@ function (error) {
     };
 
 
-
-
-
-
-
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 
-    ////$scope.reset = function () {
-    ////    $scope.params = {};
-    ////}
+ 
 
     $scope.orgList = ['ABC Real Estate Ltd'];
 
