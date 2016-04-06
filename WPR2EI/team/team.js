@@ -7,7 +7,7 @@ angular.module('team')
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
 
-        if (!$rootScope.projects.teams) {
+        if (!$rootScope.teams.write) {
             $('#btnSave').hide();
             $('#iconEdit').hide();
             $('#btn_team_Add').hide();

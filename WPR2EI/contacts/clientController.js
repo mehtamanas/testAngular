@@ -307,6 +307,15 @@ angular.module('contacts')
                     "style": "text-align:center"
                 }
             },
+              {
+                  field: "text",
+                  title: "Notes",
+
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              },
             {
                 field: "Tags",
                 template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",

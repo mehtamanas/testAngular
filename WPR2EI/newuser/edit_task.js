@@ -90,7 +90,7 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
         due_date: $scope.params.due_date,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
-        assigned_to_id: $scope.contact1,
+        contact_id: $scope.contact1,
         assign_user_id: $scope.user1,
         class_type: "User",
         reminder_time: $scope.params.reminder_time,
@@ -111,8 +111,9 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
                    due_date: $scope.params.due_date,
                    organization_id: $cookieStore.get('orgID'),
                    user_id: $cookieStore.get('userId'),
-                   assigned_to_id: $scope.params.assigned_to_id,
+                  // assigned_to_id: $scope.params.assigned_to_id,
                    assign_user_id: $scope.params.assign_user_id,
+                   contact_id: $scope.params.contact_id,
                    class_type: "User",
                    reminder_time: $scope.params.reminder_time,
                    task_type_id_: $scope.event1,
@@ -214,8 +215,9 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
            alert("Network issue");
    });
 
-    $scope.selectcontact = function () {
-        $scope.params.assigned_to_id = $scope.contact1;
+    $scope.selectcontact = function ()
+    {
+        $scope.params.contact_id = $scope.contact1;
     };
 
 
@@ -262,9 +264,9 @@ function (error) {
             $scope.showValid = false;
             $scope.params = {
                 name: $scope.params.name,
-                assigned_to_id: $scope.contact1,
+               // assigned_to_id: $scope.contact1,
                 class_type: "User",
-                //due_date: $scope.due_date,
+                contact_id: $scope.contact1,
                 priority: $scope.priority1,
                 project_id: $scope.project1,
                 organization_id: $cookieStore.get('orgID'),
