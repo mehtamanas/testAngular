@@ -1,6 +1,7 @@
 ﻿
 var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope) {
     console.log('EditContactPopUpController');
+    $scope.loadingDemo = false;
     $scope.project_name = [];
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
@@ -249,7 +250,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
             $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
             $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
-           
+            $scope.loadingDemo = false;
 
             var media = [];
             for (var i in $scope.choices1) {
@@ -314,6 +315,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
                 
                 $rootScope.$broadcast('REFRESH1', 'elemeninfo');
                 $rootScope.$broadcast('REFRESH', 'contactcount');
+               
                
             },
            function (error)
@@ -553,10 +555,11 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     $scope.EditContact = function (isValid)
     {
-
-        $scope.showValid = true;
+       
 
         if (isValid) {
+            $scope.loadingDemo = true;
+          
 
             if (uploader.queue.length != 0)
                 uploader.uploadAll();

@@ -3,6 +3,7 @@ angular.module('app.guest.login')
 .controller('LoginController',
     function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, Idle, $filter, apiService, usSpinnerService, $interval) {
         // Init model
+        $scope.loadingDemo = false;
         $scope.params = {
             email: '',
             password: '',
@@ -37,12 +38,14 @@ angular.module('app.guest.login')
         $scope.login = function (isValid) {
             $scope.isSubmitted = true;
             $scope.showValid = true;
+            $scope.loadingDemo = true;
+           
 
             if (isValid) {
                 $scope.params.email = $filter('lowercase')($scope.params.email);
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
-
+                     $scope.loadingDemo = false;
                     $cookieStore.put('loggedUserInfo', response);
 
                     $scope.success = 'Login successful!';

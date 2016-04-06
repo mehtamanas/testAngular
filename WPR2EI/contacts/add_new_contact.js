@@ -1,6 +1,8 @@
 
 var ContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ContactPopUpController');
+    $scope.loadingDemo = false;
+
 
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     var orgID = $cookieStore.get('orgID');
@@ -180,7 +182,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
             $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
             $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
-
+            $scope.loadingDemo = false;
 
             var media = [];
             for (var i in $scope.choices1) {
@@ -534,6 +536,9 @@ function (error) {
         $scope.showValid = true;
        
         if (isValid) {
+            $scope.loadingDemo = true;
+           
+            $scope.showValid = true;
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
             if (uploader.queue.length == 0)

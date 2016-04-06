@@ -231,11 +231,10 @@
 
                         <select kendo-multi-select k-options="selectOptions" name="project" id="contactadd_project" k-ng-model="project_name" k-on-change="selectProject()" class="dropdown form-control"></select>
                     </div>
-
-                    <div class="text-danger"
-                         data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">
-                        {{ 'Enter valid Project' | translate }}
-                    </div>
+                </div>
+                <div class="text-danger"
+                     data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">
+                    {{ 'Enter valid Project' | translate }}
                 </div>
 
                 <div class="form-bx form-bx2" ng-show='{{WHO_AM_I === "Service_industry"}}'>
@@ -535,8 +534,7 @@
 
 
             <div class="modal-btn-wrap clearfix">
-                <button id="btn_contactadd_save" type="submit" class="f-btn">SAVE</button>
-
+                <button id="btn_contactadd_save" type="submit" class="f-btn ladda-button" ladda="loadingDemo"  data-style="expand-right">SAVE</button>
                 <button id="btn_contactadd_cancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
             </div>
         </form>
@@ -545,7 +543,6 @@
     </div><!-- modal-body ended -->
 
 </div><!-- modal ended -->
-
 
 <script>
     function readURL(input) {
