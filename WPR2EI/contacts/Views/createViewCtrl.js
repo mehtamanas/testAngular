@@ -1,8 +1,9 @@
 ﻿createViewCtrl = function ($scope, $state, apiService, $rootScope,$cookieStore, $modalInstance, $modal, viewData) {
     $scope.params = {};
-
+    $scope.loadingDemo = false;
     $scope.createView = function (isValid) {
         if (isValid) {
+            $scope.loadingDemo = true;
             $scope.disabled = true;
             var postData = {
                 organization_id: $cookieStore.get('orgID'),
@@ -15,11 +16,13 @@
             }
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
+
                 $scope.cancel();
                 if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: $scope.params.viewName });
                 if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: $scope.params.viewName });
                 if (viewData.grid == 'client') $rootScope.$broadcast('REFRESH3', { name: 'ViewCreated', data: $scope.params.viewName });
                 if (viewData.grid == 'call') $rootScope.$broadcast('REFRESH', { name: 'ViewCreated', data: $scope.params.viewName });
+                $scope.loadingDemo = false;
             }, function (error) {
 
             })

@@ -3,6 +3,7 @@
  */
 var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log('AddNewNotesController');
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     $scope.params;
@@ -80,6 +81,7 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
         apiService.post(projectUrl, schemeupdate).then(function (response) {
             var choices2 = response.data;
             AuditCreate();
+            $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
 
@@ -119,7 +121,7 @@ function (error) {
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-
+            $scope.loadingDemo = true;
             new ProjectCreate().then(function (response) {
                 console.log(response);
                 $scope.showValid = false;

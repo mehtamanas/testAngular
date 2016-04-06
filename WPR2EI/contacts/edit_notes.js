@@ -3,6 +3,7 @@
  */
 var EditNotesContactController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log('EditNotesContactController');
+    $scope.loadingDemo = false;
     $scope.seletedNotesId = window.sessionStorage.selectedNotesID;
     $scope.selectedCustomerID = window.sessionStorage.selectedCustomerID;
 
@@ -105,6 +106,7 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
         apiService.post("Notes/Edit", postData).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'NotesGrid');
 
@@ -135,6 +137,7 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
         $scope.showValid = true;
         if (isValid)
         {
+            $scope.loadingDemo = true;
             $scope.save();
 
             $scope.showValid = false;
