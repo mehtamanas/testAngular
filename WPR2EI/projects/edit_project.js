@@ -616,6 +616,7 @@ function (error)
 
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
+        $scope.loadingDemo = true;
         if (isValid) {
             $scope.loadingDemo = true;
 
