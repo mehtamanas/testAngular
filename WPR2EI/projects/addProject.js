@@ -144,7 +144,7 @@ var AddUserProjectController = function ($scope, $q, $cookieStore, projectServic
             templateUrl: 'projects/AddSuccessful.html',
             backdrop: 'static',
             controller: AddController,
-            size: 'lg',
+            size: 'sm',
             resolve: { items: { title: "User" } }
         });
 
