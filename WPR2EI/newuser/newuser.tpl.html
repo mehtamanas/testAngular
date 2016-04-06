@@ -6,17 +6,13 @@
 </style>
 <div id="main-content" class="col-xs-12">
     <div class="content-inner">
-        <!--<div class="property-header">-->
+
         <div class="pg-inner-header">
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="pg-inner-title">Users</h2>
-                    <!--<select ng-model="ddlFruits" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                            ng-change="GetValue()"></select>-->
+                   
                 </div>
-
-                <!--<button class="btn btn-default login-btn" ng-click="openUserPopup()">Add New User</button>
-                <button class="btn btn-default login-btn" ng-click="openImportUserPopup()">Import Users</button>-->
 
             </div>
         </div>
@@ -27,28 +23,29 @@
         <form action="">
 
             <div class="clearfix">
+
                 <div class="pull-left actions-wrap">
-                    
-                    <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-                            ng-change="GetValue();addUser()" >
-                    <option value="" selected> ACTION </option>
-                        <option ng-repeat="fruit in Fruits" value="{{fruit.Id}}"><i class="fa fa-ban fa-fw"></i>{{fruit.Name}}</option>
-                    </select>-->
+
+                    <select ng-model="userAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
+                        <option value='no_action' selected>ACTIONS</option>
+                        <option value='Inactive'>INACTIVE</option>
+                        <option value='assign_roles'>ASSIGN ROLES</option>
+                        <option value='delete'>DELETE</option>
+                    </select>
+                </div>
+                <!--<div class="pull-left actions-wrap">
+   
                     <div class="pull-left actions-wrap" id="dropfresh">
                         <select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
                                 ng-change="GetValue();addUser()" id="newUserAction">
                             <option value="" selected> ACTION </option>
                         </select>
-
-                        <!--<select ng-model="ddlFruits" class="form-control actions-wrap" ng-options="fruit.Id as fruit.Name for fruit in Fruits track by fruit.Id"
-        ng-change="GetValue()"></select>-->
+    
                     </div>
-                </div>
+                </div>-->
 
                 <div class="pull-right btn-wrap-right">
                     <a href=""  class="btn-lk" ng-click="openUserPopup()" id="addNewUser">+ ADD NEW USER </a>
-                    <!--<a href="#" class="btn-lk" ng-click="openImportUserPopup()">+ Import Users</a>-->
-                   
                 </div>
             </div>
 

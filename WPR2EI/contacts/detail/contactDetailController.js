@@ -1481,11 +1481,11 @@ angular.module('contacts')
             $scope.NotesAction = 'no_action';
         });
 
-        $scope.$on('REFRESH1', function (event, args) {
-            if (args == 'NotesGrid') {
-                $('.k-i-refresh').trigger("click");
-            }
-        });
+        //$scope.$on('REFRESH1', function (event, args) {
+        //    if (args == 'NotesGrid') {
+        //        $('.k-i-refresh').trigger("click");
+        //    }
+        //});
 
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'PaymentGrid') {
