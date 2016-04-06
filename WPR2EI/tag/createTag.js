@@ -56,7 +56,8 @@ var AddTagPopUpController = function ($scope, $state, $cookieStore, apiService, 
         },
     function (error) {
         if (error.status === 400)
-            alert(error.data.Message);
+          {  //alert(error.data.Message);
+          $scope.errorMessage = error.data.Message;}
         else
             alert("Network issue");
     })
