@@ -71,15 +71,20 @@ angular.module('MainApp', [
         cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
         //cfpLoadingBarProvider.includeBar = false;
     }])
-.run(function ($rootScope, $location, $cookieStore, Idle, $window) {
+
+.run(function ($rootScope, $state, $cookieStore, Idle, $window) {
     $rootScope.$on("$stateChangeStart", function (event, next, current) {
         //if ($location.protocol() !== 'https') { //redirect http to https
         //  $window.location.href = $location.absUrl().replace('http', 'https');
         //}
+
         if (($cookieStore.get('userId') === undefined)) {
             if ((next.name).indexOf("app") > -1) {
-                $location.url('/app/index.html#/login');
+                $state.go('login');
             }
+        }
+        else {
+            $state.go('app.my_day');
         }
     })
 });
