@@ -370,7 +370,7 @@ function (error)
 
         $scope.selectstate = function () {
             $scope.params.state = $scope.state1;
-            //alert($scope.params.state);
+            $scope.city1 = "";
         };
 
 
