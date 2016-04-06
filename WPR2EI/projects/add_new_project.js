@@ -6,7 +6,7 @@ var uploader3_done = false;
 
 var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ProjectPopUpController');
-
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     var uploader = $scope.uploader = new FileUploader({
@@ -239,6 +239,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         apiService.post("Project/ProjectAddress", postData).then(function (response) {
             var loginSession = response.data;
             AuditCreate();
+            $scope.loadingDemo = false;
             console.log("project done");
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
@@ -315,7 +316,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
                 templateUrl: 'newuser/sucessfull.tpl.html',
                 backdrop: 'static',
                 controller: sucessfullController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Project" } }
             });
         }
@@ -562,7 +563,7 @@ function (error) {
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-
+            $scope.loadingDemo = true;
 
             if (uploader.queue.length != 0)
                 uploader.uploadAll();

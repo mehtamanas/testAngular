@@ -6,7 +6,7 @@ var uploader3_done = false;
 
 var EditProjectController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $window, FileUploader, $window, uploadService, $modal, $rootScope) {
     console.log('EditProjectController');
-
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
     var uploader = $scope.uploader = new FileUploader({
@@ -242,6 +242,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             AuditCreate();
            // console.log("project Edit done");
             $modalInstance.dismiss();
+            $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             var media = [];
 
@@ -308,7 +309,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
                 templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
                 controller: EditsucessfullController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Project " } }
 
 
@@ -616,6 +617,8 @@ function (error)
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
+            $scope.loadingDemo = true;
+
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
             if (uploader1.queue.length != 0)
