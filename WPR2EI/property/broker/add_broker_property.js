@@ -5,6 +5,8 @@
 
         var userId = $cookieStore.get('userId');
         var orgID = $cookieStore.get('orgID');
+        $scope.showRenewalDate = {};
+        $scope.showLeased == {};
 
         $scope.checkedIds = [];
 
@@ -20,6 +22,29 @@
             }
         };
 
+        $scope.choices2 = [{ id: 'choice1' }];
+        $scope.addNewChoice2 = function (e) {
+            var classname = e.currentTarget.className;
+            if (classname == 'remove-field') {
+                $scope.choices2.pop();
+            }
+            else if ($scope.choices2.length < 2) {
+                var newItemNo = $scope.choices2.length + 1;
+                $scope.choices2.push({ 'id': 'choice' + newItemNo });
+            }
+        };
+
+        $scope.choices3 = [{ id: 'choice1' }];
+        $scope.addNewChoice3 = function (e) {
+            var classname = e.currentTarget.className;
+            if (classname == 'remove-field') {
+                $scope.choices3.pop();
+            }
+            else if ($scope.choices3.length < 2) {
+                var newItemNo = $scope.choices3.length + 1;
+                $scope.choices3.push({ 'id': 'choice' + newItemNo });
+            }
+        };
 
         projectUrl = "Form/GenerateFormId";
         apiService.getWithoutCaching(projectUrl).then(function (response) {
@@ -115,7 +140,18 @@
 
         $scope.selectAvailabilty = function () {
             $scope.params.availability_id = $scope.available1;
+            //var availabiltyType = (_.findWhere($scope.availability, { id: $scope.available1 })).type
+            //if (availabiltyType == "Leased") {
+            //    $scope.showRenewalDate == 'false';
+            //    $scope.showLeased == 'true';
+            //}
+            //else if (availabiltyType == "Available From:Date") {
+            //    $scope.showRenewalDate == 'true';
+            //    $scope.showLeased == 'false';
+            //}
+           
         };
+
 
         $scope.selectLeasePeriod = function () {
             $scope.params.lease_period = $scope.leasePeriod1;
@@ -176,26 +212,36 @@
          
             $scope.selectedAmenitiesId = [];
             var selectedAmenities = _.filter($scope.orgAmenities, function (o) { return o.checkedd; });
-             selectedAmenitiesId = _.pluck(selectedAmenities, 'id');
+            selectedAmenitiesId = _.pluck(selectedAmenities, 'id');
             var amentiesList = [];
             for (i = 0; i < selectedAmenitiesId.length; i++)
             {
                 amentiesList.push
                     ({
-                    amenity_type_id: selectedAmenitiesId[i],
-                    checkedd: "1",
+                        amenity_type_id: selectedAmenitiesId[i],
+                        checkedd: "1",
                     })
             }
-             
-            var AgentList = [];
-          {
-              
-          }
-          AgentList.push({
-              agent_name: $scope.param.agent_name,
-              agent_phone_no: $scope.param.agent_phone_no,
-          });
 
+            var AgentPhone = [];
+            for (i = 0; i < $scope.choices2.length; i++) {
+                AgentPhone.push({
+                agent_name: $scope.params.name,
+                agent_phone_no: $scope.choices2[i].agent_phone_no
+               
+            })
+            }
+
+            var AgentEmail = [];
+            for (i = 0; i < $scope.choices3.length; i++) {
+                AgentEmail.push({
+                                        
+                    email: $scope.choices3[i].email
+                })
+            }
+
+            var AgentList = [];
+            AgentList = _.merge(AgentPhone, AgentEmail);
 
             var address = [];
             var newadd = {};
@@ -282,6 +328,15 @@
                     alert("Network issue");
             });
         }
+
+        Url = "Broker/GetAgent/" + orgID;
+        apiService.get(Url).then(function (response) {
+            $scope.agentList = response.data;
+            $scope.agentList = _.pluck($scope.agentList, 'name');
+        },
+    function (error) {
+        alert("Error " + error.state);
+    });
 
 
         Url = "Broker/GetAmenitiesallBroker" 

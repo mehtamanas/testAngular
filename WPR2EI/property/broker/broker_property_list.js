@@ -6,18 +6,23 @@
         var orgID = $cookieStore.get('orgID');
         var userId = $cookieStore.get('userId');
 
+        $scope.openPropertyPopup = function () {
+            $state.go('app.brokerproperty');
+        };
+
+
         $scope.PropertyListGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
+                    read: apiService.baseUrl + "Broker/GetBrokerGrid/" + orgID
                 },
                 pageSize: 20,
 
                 schema: {
                     model: {
                         fields: {
-                            due_date: { type: "date" },
+                            possassion_date: { type: "date" },
                             start_date_time: { type: "date" },
                         }
                     }
@@ -44,9 +49,8 @@
                 buttonCount: 5
             },
             columns: [{
-                field: "name",
-                template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
-                title: "Task Name",
+                field: "sale_type",
+                title: "Sale Type",
                 width: "120px",
                 attributes:
              {
@@ -54,8 +58,8 @@
              }
 
             }, {
-                field: "Project_Name",
-                title: "Project",
+                field: "property_type",
+                title: "Property Type",
                 width: "120px",
                 attributes:
              {
@@ -63,8 +67,8 @@
              }
 
             }, {
-                field: "Contact_Name",
-                title: "Contact",
+                field: "Agreement_area",
+                title: "Agreement Area",
                 width: "120px",
                 attributes:
              {
@@ -72,8 +76,8 @@
              }
 
             }, {
-                field: "user_name",
-                title: "Assign To",
+                field: "Build_up_area",
+                title: "Build Up Area",
                 width: "120px",
                 attributes:
              {
@@ -81,17 +85,18 @@
              }
 
             }, {
-                field: "company",
-                title: "Company",
+                field: "floor_num",
+                title: "Floor",
                 width: "120px",
                 attributes:
              {
                  "style": "text-align:center"
              }
 
-            }, {
-                field: "priority",
-                title: "Priority",
+            },
+             {
+                field: "furnishing_id",
+                title: "Furnishing",
                 width: "120px",
                 attributes:
               {
@@ -99,8 +104,8 @@
               }
 
             }, {
-                field: "start_date_time",
-                title: "Start Date",
+                field: "possassion_date",
+                title: "Possession Date",
                 width: "120px",
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                 attributes:
@@ -109,8 +114,8 @@
               }
 
             }, {
-                field: "due_date",
-                title: "Due Date",
+                field: "type_of_agreement",
+                title: "Agreement",
                 width: "120px",
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                 attributes:
@@ -120,8 +125,8 @@
 
             },
            {
-               field: "text",
-               title: "Notes",
+               field: "base_rent",
+               title: "Base Rent",
                width: "120px",
                attributes:
              {
@@ -129,17 +134,141 @@
              }
 
 
-           }, {
-               field: "status",
-               template: '<span id="#= status #"></span>',
-               title: "Status",
-               width: "120px",
-               attributes:
+           },
+            {
+                field: "advanced_rent",
+                title: "Advanced Rent",
+                width: "120px",
+                attributes:
+              {
+                  "style": "text-align:center"
+              }
+            },
+            {
+                field: "mode_of_payment",
+                title: "Payment Mode",
+                width: "120px",
+                attributes:
+              {
+                  "style": "text-align:center"
+              }
+            },
              {
-                 "style": "text-align:center"
-             }
+                 field: "monthly_rent",
+                 title: "Monthly Rent",
+                 width: "120px",
+                 attributes:
+               {
+                   "style": "text-align:center"
+               }
 
-           }, ]
+
+             },
+              {
+                  field: "deposit_type",
+                  title: "Deposit Type",
+                  width: "120px",
+                  attributes:
+                {
+                    "style": "text-align:center"
+                }
+
+
+              },
+               {
+                   field: "deposit_amount",
+                   title: "Deposit Amount",
+                   width: "120px",
+                   attributes:
+                 {
+                     "style": "text-align:center"
+                 }
+
+
+               }, {
+                   field: "agent_name",
+                   title: "Agent Name",
+                   width: "120px",
+                   attributes:
+                 {
+                     "style": "text-align:center"
+                 }
+
+
+               },
+               {
+                   field: "agent_phone_no",
+                   title: "Agent Phone",
+                   width: "120px",
+                   attributes:
+                 {
+                     "style": "text-align:center"
+                 }
+
+
+               },
+                {
+                    field: "people_type",
+                    title: "People Type",
+                    width: "120px",
+                    attributes:
+                  {
+                      "style": "text-align:center"
+                  }
+
+
+                },
+                 {
+                     field: "sale_price_per_sqft",
+                     title: "Sale Price",
+                     width: "120px",
+                     attributes:
+                   {
+                       "style": "text-align:center"
+                   }
+
+
+                 },
+                  {
+                      field: "car_park_rate",
+                      title: "Car Park Rate",
+                      width: "120px",
+                      attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+
+
+                  },
+                   {
+                       field: "licensee_brokerage_type",
+                       title: "Licensee Brokerage",
+                       width: "120px",
+                       attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+
+
+                   },
+                    {
+                        field: "rent_escalation_type",
+                        title: "Rent Escalation Type",
+                        width: "120px",
+                        attributes:
+                      {
+                          "style": "text-align:center"
+                      }
+
+
+                    }]
         };
 
+        $scope.$on('REFRESH', function (event, args) {
+            if (args == 'PropertyListGrid') {
+                $('.k-i-refresh').trigger("click");
+            }
+        });
     });
+
+     

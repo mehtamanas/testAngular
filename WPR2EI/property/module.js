@@ -17,15 +17,16 @@ angular.module('property', [])
                 controller: 'PropertyDetailController',
                 title: 'Properties Details'
             })
-         .state('app.brokerproperty', {
-             url: '/property/broker',
+
+          .state('app.brokerproperty', {
+             url: '/property/brokerdetail',
              templateUrl: 'property/broker/add_broker_property.html',
              controller: 'brokerPropertyController',
              title: 'broker Properties'
-         })
+          })
 
            .state('app.brokerpropertylist', {
-               url: '/property/broker',
+               url: '/property/brokerlist',
                templateUrl: 'property/broker/broker_property_list.html',
                controller: 'brokerPropertyListController',
                title: 'broker list'
