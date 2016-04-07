@@ -1,12 +1,16 @@
-﻿<button type="button" class="close" id="btn_confirmProject" ng-click="$dismiss('cancel')">&times;</button>
+﻿
+<div class="modal-header custom_head_warning">
+    <button type="button" class="close" id="btn_confirmProject" ng-click="$dismiss('cancel')">&times;</button>
+    <h4 class="modal-title custom_head-h4"><i class="fa fa-trash"></i> Confirmation</h4>
+</div>
 <div class="main-content add-new project sucessful-popup" style="padding: 2%;">
      <h3 style="text-align:center" ng-hide="length">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Project</h3>
     <h3 style="text-align:center" ng-show="length<=1">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Project</h3>
     <h3 style="text-align:center" ng-show="length>1">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Projects</h3>
 
-    <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
-        <div style="padding: 2% 0% 3% 19%;">
-            <button type="submit"  class="btn btn-primary " id="btn_confirmProjectYes" ng-click="gotoDelete()">YES</button>
+    <div class="modal-btn-wrap5  clearfix">
+        <div style="padding: 2% 0% 3% 0%;">
+            <button type="submit"  class="btn btn-warning " id="btn_confirmProjectYes" ng-click="gotoDelete()">YES</button>
             <button type="button" class="f-btnTag" id="btn_confirmProjectNo" ng-click="$dismiss('cancel')">NO</button>
         </div>
     </div>

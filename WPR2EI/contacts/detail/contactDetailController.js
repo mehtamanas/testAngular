@@ -1466,7 +1466,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/confirmremoverag.tpl.html',
                 backdrop: 'static',
                 controller: confirmationTagController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Tag" } }
 
             });
