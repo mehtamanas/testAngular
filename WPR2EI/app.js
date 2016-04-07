@@ -83,6 +83,9 @@ angular.module('MainApp', [
                 $location.path('/login');
             }
         }
+        else if (($cookieStore.get('userId') !== undefined)&& $location.path()) {
+            $location.path();
+        }
         else {
             $location.path('home/my_day');
         }
