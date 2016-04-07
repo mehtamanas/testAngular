@@ -349,7 +349,7 @@
                             <input type="email" name="email" class="form-control" id="contactadd_email"
                                    data-ng-model="choice1.contact_element_info_email"
                                    input-focus
-                                   ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
+                                   ng-pattern="emailRegex" />
                             <div class="text-danger"
                                  data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
                                 {{ 'Enter valid email address' | translate }}

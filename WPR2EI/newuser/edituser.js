@@ -1,8 +1,9 @@
 ﻿
-var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieStore, $rootScope, apiService, $modal, $window, FileUploader, uploadService) {
+var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieStore, $rootScope, apiService, $modal, $window, FileUploader, uploadService, PATTERNREGEXS) {
     //console.log("EditUserPopUpController");
     $scope.role_name = [];
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.emailRegex = PATTERNREGEXS.email;
     var orgID = $cookieStore.get('orgID');
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,

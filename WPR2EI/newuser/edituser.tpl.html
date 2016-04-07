@@ -144,7 +144,7 @@
                                    maxlength="30"
                                    input-focus
                                    ng-disabled="$first"
-                                   ng-pattern=".{1,}@[_a-z0-9A-Z]+(\.[a-z0-9A-Z]+)+" />
+                                   ng-pattern="emailRegex" />
                             <label class="normal-message"
                                    data-ng-if="!(newForm.email.$invalid && (!newForm.email.$pristine || showValid))">
                             </label>
