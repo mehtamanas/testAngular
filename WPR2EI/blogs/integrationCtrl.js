@@ -123,20 +123,9 @@
              {
                  "style": "text-align:center"
              }
-
-            },
-           {
-               field: "flag",           
-               title: "Flag",
-               width: "120px",
-               attributes:
-             {
-                 "style": "text-align:center"
-             }
-
-           }, {
-               field: "status",
-               template: '<span id="#= status #"></span>',
+            }, {
+                field: "status",
+                //template: '<span id="#= status #"></span>',
                title: "Status",
                width: "120px",
                attributes:
@@ -241,6 +230,5 @@
                 size: 'lg'
             });
         };
-    }
-);
+    });
 

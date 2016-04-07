@@ -195,7 +195,7 @@ function (error) {
         console.log('Unable to upload file.');
     };
     uploader1.onCompleteItem = function (fileItem, response, status, headers) {
-        //$scope.showProgress = false;
+       
     };
 
     $scope.preview = function () {
