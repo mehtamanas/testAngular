@@ -10982,7 +10982,7 @@ input[type=text].rupee_1 {
 }
 .contact-label{
     font-family:lato;
-    font-size:10px;
+    font-size:11px;
     color:#777777;
     text-transform:uppercase;
 
@@ -11004,3 +11004,27 @@ input[type=text].rupee_1 {
   font-weight: normal; }
 .checkboxdemoBasicUsage .ipsum {
   color: saddlebrown; }
+.custom_head{
+    background: #5cb85c;
+    text-align: left;
+    border-radius: 2px;
+    color: #fff !important;
+}
+.custom_head-h4{
+    color: #fff !important;
+        margin-left: -15px;
+}
+.custom_head_error{
+    background: #d9534f;
+    text-align: left;
+    border-radius: 2px;
+    padding: 2px 30px;
+    color: #fff !important;
+}
+.custom_head_warning{
+    background: #eea236;
+    text-align: left;
+    border-radius: 2px;
+    padding: 7px 30px;
+    color: #fff !important;
+}

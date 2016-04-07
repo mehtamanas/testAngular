@@ -1,10 +1,14 @@
-﻿<button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_addSuccessfulClose">&times;</button>
+﻿<div class="modal-header custom_head">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_addSuccessfulClose">X</button>
+    <h4 class="modal-title custom_head-h4"><i class="fa fa-check"></i> Success</h4>
+</div>
+
 <div class="main-content add-new project sucessful-popup" style="padding:2%">
     <h4 style="text-align:center">{{title}} Updated Successfully.</h4>
    
     <div class="modal-btn-wrap5  clearfix">
         <div style="padding: 2% 0% 3% 0%;">
-            <button type="button" id="btn_addSuccessfulOk" class=" btn btn-primary" ng-click="$dismiss('cancel')">OK</button>
+            <button type="button" id="btn_addSuccessfulOk" class=" btn btn-success" ng-click="$dismiss('cancel')">OK</button>
         </div>
     </div>
     <!--<a data-target="#" href="/index.html#/home/users"> Back to User List </a>-->
