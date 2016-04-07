@@ -1,13 +1,14 @@
-﻿<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
-<div class="main-content add-new project sucessful-popup">
-    <br />
-    <br />
-
-    <h3 style="text-align:center">{{title}}  Sold.</h3>
-    <br />
-    <br />
-    <button type="button" id="btn_success_cancel" class="f-btn f-btn-sucessfull-ok" ng-click="$dismiss('cancel')">OK</button>
-
-    <!--<a data-target="#" href="/index.html#/home/users"> Back to User List </a>-->
+﻿<div class="modal-header custom_head">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_soldSuccessfulClose" data-toggle="tooltip" title="Close Tab">&times;</button>
+    <h4 class="modal-title custom_head-h4"><i class="fa fa-check"></i> Success</h4>
 </div>
+<div class="main-content add-new project sucessful-popup">
 
+    <h4 style="text-align:center">{{title}}  Sold.</h4>
+    <div class="modal-btn-wrap5  clearfix">
+        <div style="padding: 2% 0% 3% 0%;">
+            <button type="button" id="btn_success_cancel" class="btn btn-success" ng-click="$dismiss('cancel')">OK</button>
+            <!--<a data-target="#" href="/index.html#/home/users"> Back to User List </a>-->
+        </div>
+    </div>
+</div>
