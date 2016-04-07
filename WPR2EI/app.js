@@ -72,7 +72,7 @@ angular.module('MainApp', [
         //cfpLoadingBarProvider.includeBar = false;
     }])
 
-.run(function ($rootScope, $state, $cookieStore, Idle, $window) {
+.run(function ($rootScope, $cookieStore, Idle, $location) {
     $rootScope.$on("$stateChangeStart", function (event, next, current) {
         //if ($location.protocol() !== 'https') { //redirect http to https
         //  $window.location.href = $location.absUrl().replace('http', 'https');
@@ -80,11 +80,11 @@ angular.module('MainApp', [
 
         if (($cookieStore.get('userId') === undefined)) {
             if ((next.name).indexOf("app") > -1) {
-                $state.go('login');
+                $location.path('/login');
             }
         }
         else {
-            $state.go('app.my_day');
+            $location.path('home/my_day');
         }
     })
 });
