@@ -223,7 +223,7 @@ angular.module('contacts')
                 pageSize: 20
             },
             dataBound: function () {
-                syncData = $interval(syncLeadDataSource, 5000);
+               // syncData = $interval(syncLeadDataSource, 5000);
             },
             groupable: true,
             sortable: true,
@@ -316,6 +316,14 @@ angular.module('contacts')
              {
                  field: "company",
                  title: "Company",
+
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             }, {
+                 field: "text",
+                 title: "Notes",
 
                  attributes: {
                      "class": "UseHand",
