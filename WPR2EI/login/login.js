@@ -169,9 +169,7 @@ angular.module('app.guest.login')
         })
 
         $scope.$on('spinnerStop', function (event, key) {
-            if ($scope.spinneractive) {
-                usSpinnerService.stop('spinner-1');
-            }
+            $scope.loadingDemo = false;
         })
 
         $scope.spinneractive = false;
