@@ -1,39 +1,40 @@
 ﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
 <div class="modal-header">
-    <h4 class="modal-title">Options</h4>
+    <h4 class="modal-title">Assign Roles</h4>
     <div class="close-btn-wrap" style="height:0px">
         <button type="button" class="close" id="btn_option_close" style="margin-top:-6%;" ng-click="$dismiss('cancel')" data-toggle="tooltip" title="Close Tab">&times;</button>
     </div>
 </div>
-<form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
-    <div class="main-content project add-new" style="padding:2%">
-        <div class="col-sm-9">
-            <!--<label>Option</label>-->
-            <div class="form-group">
-                <div class="">
-                    <input type="hidden" name="Select Project" data-ng-model="params.country">
+<div class="main-content project add-new">
+    <form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
+        <div class="main-content project add-new" style="padding:3%">
+            <div class="form-group form-bx ">
+                
+                    <!--<label>Option</label>-->
+                    <div class="form-group col-md-8">
+                        <div class="">
+                            <input type="hidden" name="Select Project" data-ng-model="params.country">
 
-                    <select ng-change="selectcity()" ng-model="city1"  id="useroption_project" class="dropdown form-control" required>
-                        <option value="" selected>-- Option --</option>
-                        <option ng-repeat="project in states"
-                                value="{{project.id}}">
-                            {{project.name}}
-                        </option>
+                            <select ng-change="selectcity()" ng-model="city1" id="useroption_project" class="dropdown form-control" style="margin-left: 26%;" required >
+                                <option value="" selected>-- Select --</option>
+                                <option ng-repeat="project in states"
+                                        value="{{project.id}}">
+                                    {{project.name}}
+                                </option>
 
-                    </select>
+                            </select>
+                        </div>
+                    </div>
+               
                 </div>
+
+                <div style="text-align:center">
+                    <button class="btn btn-default  login-btn" id="useroption_sub" type="submit">Assign</button>
+                </div>
+
+                <!--<button class="btn organization-btn" type="submit">Submit</button>-->
+
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-5">
-
-            </div>
-            <button class="btn btn-default  login-btn" id="useroption_sub" type="submit">Submit</button>
-        </div>
-
-        <!--<button class="btn organization-btn" type="submit">Submit</button>-->
-
-    </div>
     </form>
+    </div>
 

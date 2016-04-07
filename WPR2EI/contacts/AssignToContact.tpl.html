@@ -3,7 +3,7 @@
 <div class="modal-header">
     <h4 class="form-title modal-header-top">Assign To</h4>
     <div class="close-btn-wrap" style="height:0px!important">
-        <button id="btn_assign_cancel" type="button" class="close" style="margin-top: -4%;" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        <button id="btn_assign_cancel" type="button" class="close" style="margin-top: -7%;" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
     </div>
 </div>
 
@@ -18,7 +18,7 @@
                 <div class="form-group form-bx ">
                     <div class="form-group col-md-8">
                         <select ng-model="user1" name="user" ng-change="selectuser()"
-                                class="dropdown form-control" id="AssignToContact_assignto" required>
+                                class="dropdown form-control" id="AssignToContact_assignto" style="margin-left: 25%;" required>
                             <option value="" selected>Select User</option>
                             <option ng-repeat="User in users"
                                     value="{{User.id}}">
@@ -33,7 +33,7 @@
 
 
             <div style="text-align:center">
-                <button class="btn btn-default  login-btn" id="btn_AssignToContact_sub" type="submit">Submit</button>
+                <button class="btn btn-default  login-btn" id="btn_AssignToContact_sub" type="submit">Assign</button>
             </div>
             <!--<button class="btn organization-btn" type="submit">Submit</button>-->
         </div>

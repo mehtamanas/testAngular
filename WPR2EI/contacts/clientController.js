@@ -604,7 +604,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/AssignToContact.tpl.html',
                 backdrop: 'static',
                 controller: ActionUpController,
-                size: 'lg'
+                size: 'sm'
             });
         };
 
