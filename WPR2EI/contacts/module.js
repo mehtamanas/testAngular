@@ -107,6 +107,27 @@ angular.module('contacts', [])
              controller: 'agentCtrl',
              title: 'agent'
          })
+        .state('app.peoperty_quote', {
+            url: '/peopertyQuotes',
+            templateUrl: 'contacts/propertyQuote/propertyQuote.html',
+            controller: 'peopertyQuote',
+            data: { pageTitle: 'peopertyQuote' }
+        })
+
+
+        .state('app.property_CustomizQuote', {
+            url: '/peopertyCustomizQuotes',
+            templateUrl: 'contacts/propertyQuote/propertyCustomizQuote.html',
+            controller: 'propertyCustomizQuote',
+            data: { pageTitle: 'peopertyQuote' }
+        })
+
+        .state('app.property_CustomizDue', {
+            url: '/peopertyCustomizDue',
+            templateUrl: 'contacts/propertyQuote/property_CustomizDue.html',
+            controller: 'propertyCustomizDue',
+            data: { pageTitle: 'peopertyQuote' }
+        });
 
 
     }]);

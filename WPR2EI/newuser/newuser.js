@@ -8,56 +8,13 @@ angular.module('newuser')
 
           //alert($cookieStore.get('userId'));
 
+          if (!$rootScope.users.write) {
+              $('#btnSave').hide();
+              $('#iconEdit').hide();
+              $('#addNewUser').hide();
+          }
 
-          $('#btnSave').hide();
-          $('#iconEdit').hide();
-          $('#btnAdd').hide();
-
-
-
-          security.isAuthorized().then(function (response) {
-              nav = response;
-              console.log(nav);
-              if (nav.length > 0) {
-
-                  for (i = 0; i < nav.length; i++) {
-                      if (nav[i].resource === "Projects") {
-                          $rootScope.projects = nav[i];
-
-                      }
-                      if (nav[i].resource === "Users") $rootScope.users = nav[i];
-                      if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
-
-                      if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
-                      if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
-                      if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
-                      if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
-                      if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
-                      if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
-                      if (nav[i].resource === "Builders") $rootScope.support = nav[i];
-                      if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
-                      if (nav[i].resource === "Support") $rootScope.support = nav[i];
-                      if (nav[i].resource === "Property") $rootScope.property = nav[i];
-                      if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
-                      if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
-                      if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
-
-                  }
-              }
-
-
-
-              if ($rootScope.users.write) {
-                  event.preventDefault();
-                  $('#btnSave').show();
-                  $('#iconEdit').show();
-                  $('#btnAdd').show();
-              }
-
-
-
-          });
-
+         
 
 
           var loginSession1;
@@ -208,13 +165,13 @@ angular.module('newuser')
 
               if (allCheckedIds.length > 0) {
 
-                  if ($scope.leadAction === "no_action") {
+                  if ($scope.userAction === "no_action") {
 
                   }                 
-                  else if ($scope.leadAction === "assign_roles") {
+                  else if ($scope.userAction === "assign_roles") {
                       $state.go($scope.optionPopup());
                   }
-                  else if ($scope.leadAction === "delete") {
+                  else if ($scope.userAction === "delete") {
                       var UserDelete = [];
                       for (var i in allCheckedIds) {
                           var user = {};
@@ -225,7 +182,7 @@ angular.module('newuser')
                       $cookieStore.put('UserDelete', UserDelete);
                       $scope.openConfirmation();
                   }
-                  else if ($scope.leadAction === "Inactive")
+                  else if ($scope.userAction === "Inactive")
                   {
                       var userinactive = [];
                       for (var i in allCheckedIds) {
