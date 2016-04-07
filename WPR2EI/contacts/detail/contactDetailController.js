@@ -1263,6 +1263,35 @@ angular.module('contacts')
         }
 
 
+
+        $scope.openQuote = function () {
+
+            if ($scope.WHO_AM_I == "Broker") {
+
+                $scope.generateNewQuote();
+
+           
+
+            } else {
+
+                $state.go('app.peoperty_quote');
+
+            }
+        }
+
+        $scope.generateNewQuote = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/quotes/generateQuote.html',
+                backdrop: 'static',
+                controller: generateQuoteCtrl,
+                size: 'lg',
+                resolve: {
+                    contactData: $scope.image
+                }
+            });
+        }
+
     //popup functionality start
         $scope.openEditContactPopup = function () {
             var modalInstance = $modal.open({
