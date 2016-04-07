@@ -13,7 +13,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Broker/GetAgent/" + orgID
                 },
                 pageSize: 20,
 
@@ -49,7 +49,7 @@
             },
             columns: [
                     {
-                        template: " <input type='checkbox' , class='checkbox', data-id='#= task_id #', ng-click='check()'/>",
+                        template: " <input type='checkbox' , class='checkbox', data-id='#= id #', ng-click='check()'/>",
                         title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(TaskGrid)'/>",
                         width: "50px",
 
@@ -72,7 +72,7 @@
                      }
 
                     }, {
-                        field: "phone",
+                        field: "phone_no",
                         title: "Agent Phone",
 
                         attributes:
@@ -150,10 +150,10 @@
         }
 
         $scope.$on('REFRESH', function (event, args) {
-            if (args == 'tagGrid') {
+            if (args == 'agentGrid') {
                 $('.k-i-refresh').trigger("click");
             }
-            $scope.TagAction = 'no_action';
+            
         });
 
         $scope.chooseAction = function () {
