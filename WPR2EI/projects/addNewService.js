@@ -255,7 +255,7 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'md',
+            size: 'sm',
             resolve: { items: { title: "Payment" } }
 
         });
