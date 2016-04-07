@@ -3,17 +3,18 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     console.log('BlogPostEditCtrl');
 
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
-    $scope.flag = $cookieStore.get('Flag');
+    $scope.status = $cookieStore.get('status');
+    var userID = $cookieStore.get('userId');
     $scope.showBlog = true;
     $scope.showPreview = false;
     $scope.params = {}
 
-    GetUrl = "Blogs/EditGet/" + $scope.selectedBlogID; //f2294ca0-0fee-4c16-86af-0483a5718991";
+    GetUrl = "Blogs/EditGet/" + $scope.selectedBlogID + "/" + userID; //f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(GetUrl).then(function (response) {
         $scope.params = response.data[0];
         $scope.params.htmlcontent = response.data[0].description;
         $scope.params.tag_name = response.data[0].tag_name;
-        $scope.flag = response.data[0].flag;
+        $scope.status = response.data[0].status;
        // $cookieStore.put('Flag',$scope.flag);
     },
     function (error) {
@@ -151,7 +152,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                     user_id: $cookieStore.get('userId'),
                     tag_name: $scope.params.tag_name,
                     blog_id: window.sessionStorage.selectedBlogID,
-                    flag: $scope.flag,
+                    status: $scope.status,
                
                 };
 
@@ -267,12 +268,12 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         var postdataApproval = {                  
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
-           // comment: $scope.params.comment,
-            blog_id: window.sessionStorage.selectedBlogID,
+            approval_user_id: $cookieStore.get('userId'),
+            class_id: window.sessionStorage.selectedBlogID,
             status: "Approved",
 
         };
-        apiService.post("Blogs/BlogCommentCreate", postdataApproval).then(function (response) {
+        apiService.post("Blogs/CreateApproval", postdataApproval).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
             $modalInstance.dismiss();
