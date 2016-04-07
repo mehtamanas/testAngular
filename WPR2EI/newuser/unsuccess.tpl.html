@@ -1,9 +1,12 @@
-﻿<button type="button" class="close" id="btn_unsuccess_close" ng-click="$dismiss('cancel')">&times;</button>
+﻿<div class="modal-header custom_head_error">
+    <h4 class="form-title custom_head-h4"><i class="fa fa-exclamation-triangle"></i> Error</h4>
+    <button type="button" class="close" id="btn_unsuccess_close" ng-click="$dismiss('cancel')">&times;</button>
+</div>
 <div class="main-content add-new project sucessful-popup" style="padding:2%">
     <h4 style="text-align:center">  Can not Proceed !</h4>
     <div class="modal-btn-wrap5  clearfix">
         <div style="padding: 2% 0% 3% 0%;">
-            <button type="button" id="btn_sucessfull_ok" class="btn btn-primary" ng-click="$dismiss('cancel')">OK</button>
+            <button type="button" id="btn_sucessfull_ok" class="btn btn-danger" ng-click="$dismiss('cancel')">OK</button>
         </div>
     </div>
 </div>

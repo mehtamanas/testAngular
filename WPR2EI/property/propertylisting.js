@@ -369,7 +369,7 @@
                     templateUrl: 'property/sold.html',
                     backdrop: 'static',
                     controller: SoldController,
-                    size: 'md',
+                    size: 'sm',
                     resolve: { items: { title: "Property " } }
 
                 });
