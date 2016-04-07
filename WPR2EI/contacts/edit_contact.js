@@ -1,9 +1,10 @@
 ﻿
-var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope) {
+var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope, PATTERNREGEXS) {
     console.log('EditContactPopUpController');
     $scope.loadingDemo = false;
     $scope.project_name = [];
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.emailRegex = PATTERNREGEXS.email;
 
     var orgID = $cookieStore.get('orgID');
     $scope.date = new Date();

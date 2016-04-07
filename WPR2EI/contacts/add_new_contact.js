@@ -1,8 +1,8 @@
 
-var ContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
+var ContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope, PATTERNREGEXS) {
     console.log('ContactPopUpController');
     $scope.loadingDemo = false;
-
+    $scope.emailRegex = PATTERNREGEXS.email;
 
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     var orgID = $cookieStore.get('orgID');
