@@ -321,6 +321,14 @@ angular.module('contacts')
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
+             }, {
+                 field: "text",
+                 title: "Notes",
+
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
              },
              {
                  field:"Tags",
