@@ -16,15 +16,10 @@ angular.module('app.guest.login')
         $scope.rememberMe = function () {
             if ($scope.params.remember) {
                 $rootScope.rememberMeOn = true;
-                $cookieStore.put($scope.params.email, JSON.stringify(data = { 'email': $scope.params.email, 'password': $scope.params.password }));
             }
         }
 
         $scope.$watch('params.email', function () {
-            if ($cookieStore.get($scope.params.email) != undefined) {
-                $scope.params.password = (JSON.parse($cookieStore.get($scope.params.email))).password;
-                $scope.params.remember = true;
-            }
             $scope.error = '';
             $scope.success = '';
         });
@@ -38,10 +33,9 @@ angular.module('app.guest.login')
         $scope.login = function (isValid) {
             $scope.isSubmitted = true;
             $scope.showValid = true;
-            $scope.loadingDemo = true;
-           
 
             if (isValid) {
+                $scope.loadingDemo = true;
                 $scope.params.email = $filter('lowercase')($scope.params.email);
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
