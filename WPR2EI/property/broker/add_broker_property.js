@@ -26,17 +26,17 @@
             $scope.params = response.data;
            
         },
-    function (error) {
+       function (error) {
         alert("Error " + error.state);
-    });
+       });
 
         Url = "GetCSC/state";
         apiService.get(Url).then(function (response) {
             $scope.states = response.data;
         },
-    function (error) {
+        function (error) {
         alert("Error " + error.state);
-    });
+        });
 
         $scope.selectstate = function () {
             $scope.params.state = $scope.state1;
@@ -122,12 +122,17 @@
         };
 
 
+        $scope.selectAgreement = function () {
+            $scope.params.type_of_agreement = $scope.agreement1;
+        };
+
+
         $scope.selectPropertyCondition = function () {
             $scope.params.property_condition_id = $scope.properyCondition1;
         };
 
 
-        $scope.selectListSource = function () {
+        $scope.selectListingSource = function () {
             $scope.params.listing_source_id = $scope.listSource1;
         };
 
@@ -162,15 +167,60 @@
         $scope.selectRentEscType = function () {
             $scope.params.rent_escalation_type = $scope.rentEscType1;
         };
-
+        
         $scope.selectContactType = function () {
             $scope.params.subpeople_type_id = $scope.contactType1;
         };
 
         $scope.save = function () {
+         
+            $scope.selectedAmenitiesId = [];
+            var selectedAmenities = _.filter($scope.orgAmenities, function (o) { return o.checkedd; });
+             selectedAmenitiesId = _.pluck(selectedAmenities, 'id');
+            var amentiesList = [];
+            for (i = 0; i < selectedAmenitiesId.length; i++)
+            {
+                amentiesList.push
+                    ({
+                    amenity_type_id: selectedAmenitiesId[i],
+                    checkedd: "1",
+                    })
+            }
+             
+            var AgentList = [];
+          {
+              
+          }
+          AgentList.push({
+              agent_name: $scope.param.agent_name,
+              agent_phone_no: $scope.param.agent_phone_no,
+          });
+
+
+            var address = [];
+            var newadd = {};
+
+            for (i = 0; i < $scope.choices1.length; i++) {
+                if (i == 0) {
+                    if ($scope.choices1[0].Street_1 != undefined)
+                        newadd.Street_1 = $scope.choices1[0].Street_1;
+                }
+                else if (i == 1) {
+                    if ($scope.choices1[1].Street_1 != undefined)
+                        newadd.Street_2 = $scope.choices1[1].Street_1;
+                }
+            }
+
+            var dDate = moment($scope.params.possassion_date, "DD/MM/YYYY hh:mm A")._d;
+            var creDate = moment($scope.params.created_date, "DD/MM/YYYY hh:mm A")._d;
+            var leaseDate = moment($scope.params.renewal_of_lease, "DD/MM/YYYY hh:mm A")._d;
+
+           
             var postData = {
                 user_id: $cookieStore.get('userId'),
                 organization_id: $cookieStore.get('orgID'),
+                sale_type: $scope.radioValue,
+                property_type: $scope.radio1,
                 serial_no: $scope.params.random_id,
                 num_bedrooms: $scope.params.num_bedrooms,
                 num_bathrooms: $scope.params.num_bathrooms,
@@ -178,10 +228,12 @@
                 Build_up_area: $scope.params.Build_up_area,
                 furnishing_id: $scope.params.furnishing_id,
                 floor_num: $scope.params.floor_num,
+                car_park_id: $scope.params.car_park_id,
                 property_view_id: $scope.params.property_view_id,
                 availability_id: $scope.params.availability_id,
                 lease_period: $scope.params.lease_period,
-                listing_source_id: $scope.params.lease_period,
+                listing_source_id: $scope.params.listing_source_id,
+                type_of_agreement: $scope.params.type_of_agreement,
                 building: $scope.params.building,
                 city: $scope.params.city,
                 state: $scope.params.state,
@@ -195,7 +247,7 @@
                 deposit_amount: $scope.params.deposit_amount,
                 mode_of_payment: $scope.params.mode_of_payment,
                 sale_price_per_sqft: $scope.params.sale_price_per_sqft,
-                car_park_rate: $scope.params.car_park_rate,
+                car_park_rate: $scope.params.car_park_rate, 
                 sale_price_for_car_park: $scope.params.sale_price_for_car_park,
                 licensee_brokerage_type: $scope.params.licensee_brokerage_type,
                 licensee_brokerage: $scope.params.licensee_brokerage,
@@ -205,13 +257,22 @@
                 subpeople_type_id: $scope.params.subpeople_type_id,
                 first_name: $scope.params.first_name,
                 last_name: $scope.params.last_name,
+                Street_1: newadd.Street_1,
+                Street_2: newadd.Street_2,
                 phone_no: $scope.params.phone_no,
                 candid_comments: $scope.params.candid_comments,
                 client_comments: $scope.params.client_comments,
+                possassion_date: new Date(dDate).toISOString(),
+                created_date: new Date(creDate).toISOString(),
+                renewal_of_lease: new Date(leaseDate).toISOString(),
+                amentiesList: amentiesList,
+                AgentList: AgentList,
             };
 
-            apiService.post("Payment/Create", postData).then(function (response) {
+            
+            apiService.post("Broker/Create", postData).then(function (response) {
                 var loginSession = response.data;
+                alert("Property Added Successfully..")
                
             },
             function (error) {
@@ -222,80 +283,21 @@
             });
         }
 
+
         Url = "Broker/GetAmenitiesallBroker" 
         apiService.get(Url).then(function (response) {
             $scope.orgAmenities = response.data;
             for (i = 0; i < $scope.orgAmenities.length; i++) {
-                if ($scope.orgAmenities[i].checkedd===undefined) {
+                if ($scope.orgAmenities[i].checkedd===null) {
                     $scope.orgAmenities[i].checkedd = false;
+                   
                 }
             }
-
-          
         },
        function (error) {
 
        });
       
  
-            
-
-        $scope.addamenity = function () {
-            //$cookieStore.put('checkedIds', $scope.checkedIds);
-            var usersToBeAddedOnServer = [];
-           // $cookieStore.get('checkedIds');
-
-
-            for (var i in $scope.orgAmenities) {
-
-                var newAmenities = {};
-                var found = 0;
-                //   $scope.orgAmenities = response.data;
-                //  newAmenities.amenities_type1 = $scope.orgAmenities[i].amenities_type1;
-                for (var i in $scope.checkedIds) {
-
-                    if ($scope.checkedIds[i] == $scope.orgAmenities[j].id) {
-                        found = 1;
-                        break;
-                    }
-                }
-
-
-                var newMember = {};
-                //newMember.amenities_type1 = $scope.checkedIds[i];
-                newMember.amenity_type_id = $scope.orgAmenities[j].id;
-                newMember.user_id = $cookieStore.get('userId');
-                newMember.organization_id = $cookieStore.get('orgID');
-                newMember.checkedd = found;
-                newMember.description = $scope.description;
-                newMember.id = window.sessionStorage.selectedCustomerID;
-                usersToBeAddedOnServer.push(newMember);
-            }
-
-
-            // Add the new users
-            // alert(id);
-
-
-            apiService.post("Amenities/CreateNew_Amenities", usersToBeAddedOnServer).then(function (response) {
-                var loginSession = response.data;
-                AuditCreate();
-
-                //alert(" Done...");
-                $modalInstance.dismiss();
-                $scope.openUpdatedfullPopup();
-            },
-
-
-        function (error) {
-            if (error.status === 400)
-                alert(error.data.Message);
-            else
-                alert("Network issue");
-        });
-            attributes: {
-                "class"; "UseHand"
-
-            }
-        }
+        
     });

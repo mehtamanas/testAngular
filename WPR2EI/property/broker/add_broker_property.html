@@ -27,10 +27,10 @@
                     <div class="clearfix">
 
                         <div style="margin-bottom:2px">
-                            <label><input type="radio" id="broker_sales" name="broker_optn" ng-model="radioValue" value="sale"/>Sales</label>
-                            <label><input type="radio" id="broker_Rent" name="broker_optn" ng-model="radioValue" value="rent" ng-checked="true" /> &nbsp; Rent</label><br />
-                            <label><input type="radio" id="broker_Residential" name="test" ng-model="radio1" value="3" /> &nbsp; Residential</label>
-                            <label><input type="radio" id="broker_Commercial" name="test" ng-model="radio1" value="4" /> &nbsp; Commercial</label>
+                            <label><input type="radio" id="broker_sales" name="broker_optn" ng-model="radioValue" value="sale" ng-checked="true"/>Sales</label>
+                            <label><input type="radio" id="broker_Rent" name="broker_optn" ng-model="radioValue" value="rent" /> &nbsp; Rent</label><br />
+                            <label><input type="radio" id="broker_Residential" name="test" ng-model="radio1" value="Residential" /> &nbsp; Residential</label>
+                            <label><input type="radio" id="broker_Commercial" name="test" ng-model="radio1" value="Commercial" /> &nbsp; Commercial</label>
                         </div>
                     </div>
                    
@@ -114,7 +114,7 @@
                                 <label for="">Carpark/Garage</label>
                                 <div class="area-f">
                                     <input type="text" class="form-control text-bold" id="broker_carpark"
-                                           data-ng-model=""
+                                           data-ng-model="params.car_park_id"
                                            minlength="1"
                                            maxlength="60"
                                            ng-pattern="/^[0-9]+$/"
@@ -167,8 +167,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row" style="margin-bottom: 1%;">
-                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-value="{{Amenity.checkedd}}" name="test" ng-click='onClick($index)'/> &nbsp;{{Amenity.amenity_type_code}}
-                                    <h4 ng-if={{}}></h4>
+                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-model="Amenity.checkedd" name="test" ng-click='onClick($index)'/> &nbsp;{{Amenity.amenity_type_code}}
+                                   
                                 </div>
                             </div>
                         </div>
@@ -192,7 +192,8 @@
                                 <label for="" class="hidden-xs">Lease Period</label>
                                 <select ng-model="leasePeriod1" ng-change="selectLeasePeriod()" class="dropdown form-control text-bold" id="broker_lease_period">
                                     <option value="" selected>Select Lease Period</option>
-                                    <option value="" selected>12 Months</option>
+                                    <option value="12 Months">12 Months</option>
+                                    <option value="24 Months">24 Months</option>
                                 </select>
                             </div>
                         </div>
@@ -201,9 +202,8 @@
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">Date:</label>
                                 <input kendo-date-picker class="form-control" id="broker_date"
-                                       ng-model="due_date"
-                                       k-ng-model="k_due_date"
-                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                                       ng-model="params.renewal_of_lease"
+                                       k-format="'dd/MM/yyyy'" />
                             </div>
                         </div>
                     </div>
@@ -214,8 +214,7 @@
                                 <label for="">Possession Date:</label>
                                 <input kendo-date-picker class="form-control" id="broker_possession_date"
                                        ng-model="params.possassion_date"
-                                       k-ng-model="k_due_date"
-                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                                       k-format="'dd/MM/yyyy'" />
                             </div>
                         </div>
                     </div>
@@ -236,7 +235,7 @@
                         <div class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="" class="hidden-xs">Listing Source</label>
-                                <select ng-model="listSource1" ng-change="selectListSource()" class="dropdown form-control text-bold"  id="broker_listing_source">
+                                <select ng-model="listSource1" ng-change="selectListingSource()" class="dropdown form-control text-bold"  id="broker_listing_source">
                                     <option value="" selected>Select Listing Source</option>
                                     <option ng-repeat="source in sources"
                                             value="{{source.id}}">
@@ -252,7 +251,7 @@
                                 <label for="" class="hidden-xs">Type Of Agreement</label>
                                 <select ng-model="agreement1" ng-change="selectAgreement()" class="dropdown form-control text-bold"  id="broker_agreement">
                                     <option value="" selected>Select Agreement</option>
-                                    <option value="">Leave & Licence</option>
+                                    <option value="Leave & Licence">Leave & Licence</option>
                                 </select>
                             </div>
                         </div>
@@ -285,7 +284,7 @@
                                 <div class="form-group">
                                     <label for="">Address Line{{$index + 1}}</label>
                                     <input type="text" class="form-control text-bold" id="broker_address"
-                                           data-ng-model=""
+                                           data-ng-model="choice.Street_1"
                                            minlength="1"
                                            maxlength="60"
                                             />
@@ -602,7 +601,7 @@
                             <div class="form-group">
                                 <label for="">Agent Name</label>
                                 <input type="text" class="form-control text-bold" id="broker_agentName"
-                                       data-ng-model=""
+                                       data-ng-model="param.agent_name"
                                        minlength="1"
                                        maxlength="60"
                                        />
@@ -615,7 +614,7 @@
                             <div class="form-group">
                                 <label for="">Phone</label>
                                 <input type="text" class="form-control text-bold" id="broker_agentPhone"
-                                       data-ng-model=""
+                                       data-ng-model="param.agent_phone_no"
                                        minlength="1"
                                        maxlength="60"
                                        />
@@ -688,8 +687,7 @@
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">Selet Date/Time</label>
                                 <input kendo-date-time-picker class="form-control" id="broker_contactDate"
-                                       ng-model="due_date"
-                                       k-ng-model="k_due_date"
+                                       ng-model="params.created_date"
                                        k-format="'dd/MM/yyyy hh:mm tt'" />
                             </div>
                         </div>
