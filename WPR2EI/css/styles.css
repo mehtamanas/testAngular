@@ -1476,16 +1476,15 @@ div.k-grid-footer {
     height: 30px;
 }
 
-    .modal-header .close,
-    .close-btn-wrap .close {
-        width: 15px;
-        height: 20px;
-        display: inline-block;
-        background: url("../images/icons-content.png") -71px -230px transparent;
-        text-indent: 99999px;
-        opacity: 0.85;
-        filter: alpha(opacit=85);
-    }
+    .modal-header .close, .close-btn-wrap .close {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    background: url("../images/icons-content.png") -66px -230px transparent;
+    text-indent: 99999px;
+    opacity: 0.85;
+    filter: alpha(opacit=85);
+}
 
     .close-btn-wrap .close {
         position: absolute;
