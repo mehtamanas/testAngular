@@ -19,8 +19,8 @@
     uploader.filters.push({
         name: 'attchementFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
-            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-            var im = '|jpg|png|jpeg|bmp|gif|vnd.openxmlformats-officedocument.spreadsheetml.sheet|pdf|vnd.ms-excel|x-zip-compressed|plain|vnd.openxmlformats-officedocument.wordprocessingml.document|msword|vnd.openxmlformats-officedocument.presentationml.presentation|vnd.ms-powerpoint|'.indexOf(type);
+            var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type);
             if (im === -1) {
 
                 alert('You have selected invalid file type');
@@ -29,7 +29,7 @@
 
                 alert('File size should be less than 10mb');
             }
-            return '|jpg|png|jpeg|bmp|gif|vnd.openxmlformats-officedocument.spreadsheetml.sheet|pdf|vnd.ms-excel|x-zip-compressed|plain|vnd.openxmlformats-officedocument.wordprocessingml.document|msword|vnd.openxmlformats-officedocument.presentationml.presentation|vnd.ms-powerpoint|'.indexOf(type) !== -1;
+            return '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type) !== -1 && item.size <= 10485760;
         }
     });
 
@@ -39,7 +39,7 @@
         var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
         if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
             edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
-        else if (fileType === 'vnd.openxmlformats-officedocument.spreadsheetml.sheet' || fileType === 'pdf' || fileType === 'vnd.ms-excel' || fileType === 'x-zip-compressed' || fileType === 'plain' || fileType === 'vnd.openxmlformats-officedocument.wordprocessingml.document' || fileType === "msword" || fileType === 'vnd.openxmlformats-officedocument.presentationml.presentation' || fileType === 'vnd.ms-powerpoint') {
+        else {
             edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
         }
 
