@@ -24,17 +24,38 @@
     $scope.params.templateList;
     $scope.params.subject;
     $scope.params.bodyText;
+
+
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
     });
+
+    uploader.filters.push({
+        name: 'attchementFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|vnd.openxmlformats-officedocument.spreadsheetml.sheet|pdf|vnd.ms-excel|x-zip-compressed|plain|vnd.openxmlformats-officedocument.wordprocessingml.document|msword|vnd.openxmlformats-officedocument.presentationml.presentation|vnd.ms-powerpoint|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected invalid file type');
+            }
+            if (item.size > 10485760) {
+
+                alert('File size should be less than 10mb');
+            }
+            return '|jpg|png|jpeg|bmp|gif|vnd.openxmlformats-officedocument.spreadsheetml.sheet|pdf|vnd.ms-excel|x-zip-compressed|plain|vnd.openxmlformats-officedocument.wordprocessingml.document|msword|vnd.openxmlformats-officedocument.presentationml.presentation|vnd.ms-powerpoint|'.indexOf(type) !== -1;
+        }
+    });
+
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         loc = response[0].Location;
         var edit = $('#sendEmailEditor').data("kendoEditor");
-        var fileType = fileItem.file.type.slice(fileItem.file.type.lastIndexOf('/') + 1);
+        var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
         if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
             edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
-        else
+        else if (fileType === 'vnd.openxmlformats-officedocument.spreadsheetml.sheet' || fileType === 'pdf' || fileType === 'vnd.ms-excel' || fileType === 'x-zip-compressed' || fileType === 'plain' || fileType === 'vnd.openxmlformats-officedocument.wordprocessingml.document' || fileType === "msword" || fileType === 'vnd.openxmlformats-officedocument.presentationml.presentation' || fileType === 'vnd.ms-powerpoint') {
             edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
+    }
 
     };
 
