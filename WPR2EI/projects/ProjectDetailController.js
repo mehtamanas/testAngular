@@ -1602,7 +1602,7 @@
                     templateUrl: 'newuser/delete.html',
                     backdrop: 'static',
                     controller: DeleteController,
-                    size: 'lg',
+                    size: 'sm',
                     resolve: { items: { title: "Image" } }                                      
                 });
                 $rootScope.$broadcast('REFRESH', 'images');
@@ -1678,7 +1678,7 @@
                 templateUrl: 'projects/confirmService.tpl.html',
                 backdrop: 'static',
                 controller: ServiceconfirmationController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Project" } }
             });
         }
@@ -1689,7 +1689,7 @@
                 templateUrl: 'projects/add_new/confirmCharges.tpl.html',
                 backdrop: 'static',
                 controller: ChargeconfirmationController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Project" } }
             });
         }

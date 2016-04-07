@@ -313,7 +313,7 @@ angular.module('project')
                 templateUrl: 'projects/confirmproject.tpl.html',
                 backdrop: 'static',
                 controller: ProjectconfirmationController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Project" } }
 
             });
