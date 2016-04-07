@@ -44,23 +44,46 @@ var AddAgentPopUpController = function ($scope, $state, $cookieStore, apiService
         $modalInstance.dismiss('cancel');
     };
 
+    //$scope.save = function () {
+    //    var postData = {
+    //        user_id: $cookieStore.get('userId'),
+    //        organization_id: $cookieStore.get('orgID'),
+    //        name: $scope.params.name,
+    //        phone_no: $scope.params.phone_no,
+    //        email: $scope.params.email,
+    //    };
 
-    projectUrl = "Tags/Create";
+    //    apiService.post("Broker/CreateAgent", postData).then(function (response) {
+    //        var loginSession = response.data;
+    //        $scope.openSucessfullPopup();
+    //        $modalInstance.dismiss();
+    //        $rootScope.$broadcast('REFRESH', 'agentGrid');
+
+    //    },
+
+    // function (error) {
+
+    // });
+    //}
+
+    projectUrl = "Broker/CreateAgent";
     ProjectCreate = function (param) {
 
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-            $rootScope.$broadcast('REFRESH', 'tagGrid');
+            $rootScope.$broadcast('REFRESH', 'agentGrid');
         },
     function (error) {
-        if (error.status === 400)
-            alert(error.data.Message);
+        if (error.status === 400) {  //alert(error.data.Message);
+            $scope.errorMessage = error.data.Message;
+        }
         else
             alert("Network issue");
     })
     };
+
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
@@ -69,7 +92,7 @@ var AddAgentPopUpController = function ($scope, $state, $cookieStore, apiService
             backdrop: 'static',
             controller: sucessfullController,
             size: 'sm',
-            resolve: { items: { title: "Tag" } }
+            resolve: { items: { title: "Agent" } }
         });
 
 
@@ -82,14 +105,15 @@ var AddAgentPopUpController = function ($scope, $state, $cookieStore, apiService
 
             $scope.params = {
                 name: $scope.params.name,
+                phone_no: $scope.params.phone_no,
+                email: $scope.params.email,
                 organization_id: $cookieStore.get('orgID'),
-                user_id: $cookieStore.get('userId'),
-                background_color: generateColor()
-
+                user_id: $cookieStore.get('userId'),               
             };
 
             new ProjectCreate($scope.params).then(function (response) {
                 console.log(response);
+               
                 $scope.showValid = false;
                 $state.go('guest.signup.thanks');
             }, function (error) {
@@ -97,6 +121,7 @@ var AddAgentPopUpController = function ($scope, $state, $cookieStore, apiService
             });
 
             $scope.showValid = false;
+           
 
         }
 
