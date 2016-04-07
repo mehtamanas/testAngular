@@ -4,19 +4,19 @@
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
 
     //$scope.title = items.title;
-    $scope.approval = function () 
-    {
-        var postdataApproval = {                  
+    $scope.approval = function () {
+        var postdataApproval = {
             organization_id: $cookieStore.get('orgID'),
-            user_id: $cookieStore.get('userId'),         
-            blog_id: window.sessionStorage.selectedBlogID,
+            user_id: $cookieStore.get('userId'),
+            approval_user_id: $cookieStore.get('userId'),
+            class_id: window.sessionStorage.selectedBlogID,
             status: "Approved",
+
         };
-        apiService.post("Blogs/BlogCommentCreate", postdataApproval).then(function (response) {
+        apiService.post("Blogs/CreateApproval", postdataApproval).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
             $scope.cancel();
-            
         },
               function (error) {
                   if (error.status === 400)
