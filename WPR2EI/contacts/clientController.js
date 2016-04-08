@@ -142,7 +142,7 @@ angular.module('contacts')
                 backdrop: 'static',
                 controller: createViewCtrl,
                 size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'client' } }
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'client', type: 'View' } }
             });
         }
 

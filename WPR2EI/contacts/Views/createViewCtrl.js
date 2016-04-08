@@ -3,13 +3,11 @@
     $scope.loadingDemo = false;
 
   $scope.title = viewData.type;
- 
-
-    $scope.createView = function (isValid) {
+     $scope.createView = function (isValid) {
         if (isValid) {
             $scope.loadingDemo = true;
             $scope.disabled = true;
-            if (viewData.type == 'Filter') {
+            if (viewData.type == 'Filter') {//filter
                 postData = {
                     organization_id: $cookieStore.get('orgID'),
                     user_id: $cookieStore.get('userId'),
@@ -22,20 +20,20 @@
 
             else {
 
-                postData = {
+                postData = {//view
                     organization_id: $cookieStore.get('orgID'),
                     user_id: $cookieStore.get('userId'),
                     grid_name: viewData.grid,
-                    sort_by: viewData.sort.field,
-                    sort_order: viewData.sort.dir,
+                    sort_by: viewData.sort?viewData.sort.field:null,
+                    sort_order: viewData.sort?viewData.sort.dir:null,
                     column_names: viewData.col,
-                    view_name: $scope.params.viewName
+                    view_name: $scope.params.viewName,
+                    query_type: viewData.type
 
                 }
             }
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
-
                 $scope.cancel();
                 if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: $scope.params.viewName });
                 if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: $scope.params.viewName });
