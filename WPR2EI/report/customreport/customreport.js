@@ -180,7 +180,6 @@
 
         $scope.filterFunc = function (Query) {
             var txtdata = Query.toLowerCase();
-            alert(txtdata);
             var Firstname = "";
             var ValidFilter = false;
 
