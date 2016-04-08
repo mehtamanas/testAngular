@@ -540,6 +540,13 @@
                          "style": "text-align:center"
                      }
                 }, {
+                    field: "task_type",
+                    title: "Task Type",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
                     field: "Project_Name",
                     title: "Project",                   
                     attributes:
@@ -642,6 +649,13 @@
                     {
                         "style": "text-align:center"
                     }
+                }, {
+                    field: "task_type",
+                    title: "Task Type",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
                     field: "project_name",
                     title: "Project",
@@ -747,6 +761,13 @@
                     {
                         "style": "text-align:center"
                     }
+                }, {
+                    field: "task_type",
+                    title: "Task Type",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
                 }, {
                     field: "project_name",
                     title: "Project",                  

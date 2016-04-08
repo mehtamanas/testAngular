@@ -60,6 +60,13 @@
              }
 
             }, {
+                field: "task_type",
+                title: "Task Type",
+                attributes:
+                 {
+                     "style": "text-align:center"
+                 }
+            }, {
                 field: "Project_Name",
                 title: "Project",
                 width: "120px",
