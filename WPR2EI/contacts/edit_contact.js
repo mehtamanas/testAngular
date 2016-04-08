@@ -1,5 +1,5 @@
 ﻿
-var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope, PATTERNREGEXS) {
+var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window,$localStorage, uploadService, $modal, $rootScope, PATTERNREGEXS) {
     console.log('EditContactPopUpController');
     $scope.loadingDemo = false;
     $scope.project_name = [];
@@ -191,7 +191,7 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
     var called = false;
 
     var contactAddEditRefresh = function () {
-        apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+        apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + $cookieStore.get('userId') + "&type=Lead").then(function (response) {
             data = response.data;
             for (i = 0; i < data.length; i++) {
                 var tag = (data[i].Tags);
