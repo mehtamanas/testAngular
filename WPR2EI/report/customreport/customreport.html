@@ -1,4 +1,4 @@
-<style type="text/css">
+﻿<style type="text/css">
     .UseHand {
         cursor: pointer !important;
     }
@@ -34,45 +34,25 @@
                     </div>
                 </div>
 
-                <div class="pull-left actions-wrap">
-                    <select ng-model="leadAction" class="form-control actions-wrap" ng-change="chooseAction()" id="contacaction">
-                        <option value='no_action' selected>ACTIONS</option>
-                        <option value='add_tag'>ADD TAG</option>
-                        <option value='assign_to'>ASSIGN TO</option>
-                        <option value='delete'>DELETE</option>
-                    </select>
-                </div>
 
                 <div class="pull-left actions-wrap">
-                    <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeView()" id="contacaction">
-                        <option value='default' selected>Default View</option>
-                        <option ng-repeat="view in views" value={{view.view_name}}>{{view.view_name}}</option>
-                    </select>
-                </div>
-
-                <!--<div class="pull-left actions-wrap">
                     <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeFilter()" id="contacaction1">
                         <option value='default' selected>Default Filter</option>
                         <option ng-repeat="view in filterview" value={{view.view_name}}>{{view.view_name}}</option>
                     </select>
-                </div>-->
+                </div>
 
                 <!--<input type="button" id="btnFilter" value="Filter" />-->
 
                 <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="callFilter()"><u>FILTER</u></a>
-                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="clearFilter()"><u>CLEAR FILTER</u></a>
-                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveView()"><u>SAVE-VIEW</u></a>
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="clearFilter()"><u>CLEAR FILTER</u></a>                
                 <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveFilters()"><u>SAVE-FILTER</u></a>
 
-                <div class="pull-right btn-wrap-right">
-                    <a id="leads_openUploadNotesPopup" href="" class="btn-lk" ng-click="openUploadNotesPopup()" style="cursor:pointer">Upload Notes</a>
-                    <a id="leads_openUploadContactPopup" href="" class="btn-lk" ng-click="openUploadContactPopup()" style="cursor:pointer">Upload Contact</a>
-                    <a id="leads_openContactPopup" href="" class="btn-lk" ng-click="openContactPopup()" style="cursor:pointer">+ Add New Contact </a>
-                </div>
+                
             </div>
-           
+
             <div id="record-content" class="properties-content">
-               
+
                 <div id="contact_kenomain" kendo-grid k-options="LeadGrid" selectable="true" k-on-change="myGridChange(dataItem )">
                 </div>
 

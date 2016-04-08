@@ -1,11 +1,11 @@
 ﻿<div class="modal-header">
     <button type="button" id="btn_createViewClose" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
-    <h4 class="form-title">Create New View</h4>
+    <h4 class="form-title">Create New {{title}}</h4>
 </div>
 
 <div class="modal-body">
     <form name="viewForm" style="text-align:left;padding: 3%;" data-ng-submit="createView(viewForm.$valid)" autocomplete="off">
-        <h4 style="margin-left:45%">View Name</h4>
+        <h4 style="margin-left:45%">{{title}} Name</h4>
         <input type="text" autofocus name="viewName" class="form-control" id="createView_txtViewName"
                data-ng-model="params.viewName"
                style="width: 65%;margin-left: 18%;"

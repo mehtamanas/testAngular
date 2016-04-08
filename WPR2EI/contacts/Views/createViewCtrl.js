@@ -1,18 +1,37 @@
 ﻿createViewCtrl = function ($scope, $state, apiService, $rootScope,$cookieStore, $modalInstance, $modal, viewData) {
     $scope.params = {};
     $scope.loadingDemo = false;
+
+  $scope.title = viewData.type;
+ 
+
     $scope.createView = function (isValid) {
         if (isValid) {
             $scope.loadingDemo = true;
             $scope.disabled = true;
-            var postData = {
-                organization_id: $cookieStore.get('orgID'),
-                user_id: $cookieStore.get('userId'),
-                grid_name: viewData.grid,
-                sort_by: viewData.sort.field,
-                sort_order:viewData.sort.dir,
-                column_names: viewData.col,
-                view_name:$scope.params.viewName
+            if (viewData.type == 'Filter') {
+                postData = {
+                    organization_id: $cookieStore.get('orgID'),
+                    user_id: $cookieStore.get('userId'),
+                    grid_name: viewData.grid,
+                    view_name: $scope.params.viewName,
+                    query_string: viewData.filterQuery,
+                    query_type: viewData.type
+                }
+            }
+
+            else {
+
+                postData = {
+                    organization_id: $cookieStore.get('orgID'),
+                    user_id: $cookieStore.get('userId'),
+                    grid_name: viewData.grid,
+                    sort_by: viewData.sort.field,
+                    sort_order: viewData.sort.dir,
+                    column_names: viewData.col,
+                    view_name: $scope.params.viewName
+
+                }
             }
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
@@ -35,13 +54,15 @@
     }
 
     $scope.openSucessfullPopup = function () {
+
+
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
             size: 'sm',
-            resolve: { items: { title: "View" } }
+            resolve: { items: { title: viewData.type } }
         });
     }
 }
