@@ -11027,3 +11027,82 @@ input[type=text].rupee_1 {
     padding: 7px 30px;
     color: #fff !important;
 }
+.vdivide [class*='col-']:not(:last-child):after {
+    background: #e0e0e0;
+    width: 1px;
+    content: "";
+    display:block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+    min-height: 70px;
+  }
+  
+  .left_email{
+         text-align:left;
+  }
+  .inner-mail{
+      border-bottom:1px solid  #e0e0e0;
+      padding: 0% 8%;
+  }
+   .inner-attach-border{
+      border-bottom:1px solid  #e0e0e0;
+  }
+  
+  .custom-badge{
+      background: #20c494;
+      font-size: 8px;
+      font-weight: 600;
+      
+  
+  }
+  .email_name{
+      font-size:15px;
+      color:#289ff1;
+      line-height: 2.2em;
+      font-weight: 600;
+  }
+  .email_date{
+      font-size: 10px;
+      line-height: 3.2em;
+      color:#a0a0a0;
+  }
+  .email_subject{
+      font-size: 16px;
+      font-weight: 600;
+      color:#565656;
+  }
+  .email_body{
+      padding-top: 3%;
+  }
+  .main_body{
+      padding-left: 2%;
+      padding-right: 2%;
+  }
+  .attachment_section{
+      font-size: 22px;
+      padding-top: 2%;
+   }
+  .serach_bar_filter{
+      height: 35px !important;
+      border-radius: 1px;
+  }
+  .serach_bar_btn{
+    height: 34px !important;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 1px;
+  }
+  
+  .serch_btn_custom{
+    border-right-color: #c5c5c5;
+    border-top-color: #c5c5c5;
+    border-bottom-color: #c5c5c5;
+    border-left:none;
+    color:#289ff1;
+    background:#fff;
+    height: 35px !important;
+
+    border-radius: 1px;
+  }
