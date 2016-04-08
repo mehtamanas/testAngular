@@ -79,7 +79,7 @@ angular.module('contacts')
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views= _.filter(res.data, function (o)
-                { return o.grid_name === 'client'});
+                { return o.grid_name === 'client' && o.query_type === 'View' });
             }, function (err) {
 
             });
