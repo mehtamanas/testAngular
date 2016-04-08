@@ -236,7 +236,7 @@ angular.module('contacts')
                 pageSize: 20
             },
             dataBound: function () {
-               // syncData = $interval(syncLeadDataSource, 5000);
+                syncData = $interval(syncLeadDataSource, 300000);
             },
             groupable: true,
             sortable: true,
@@ -1086,12 +1086,6 @@ angular.module('contacts')
         //end tooltip
 
         // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedCustomerID = dataItem.Contact_Id;
-
-            $state.go('app.contactdetail', { id: dataItem.Contact_Id });
-        };
 
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
@@ -1144,10 +1138,27 @@ angular.module('contacts')
 
         }
 
+        var contactAddEditRefresh = function () {
+            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                data = response.data;
+                for (i = 0; i < data.length; i++) {
+                    var tag = (data[i].Tags);
+                    if (tag !== null) {
+                        tag = JSON.parse(tag);
+                        data[i].Tags = [];
+                        data[i].Tags = tag;
+                    }
+                    else { data[i].Tags = []; }
+                }
+                $localStorage.leadDataSource = data;
+                $('.k-i-refresh').trigger("click");
+            })
+        }
+
         $scope.$on('REFRESH2', function (event, args) {
             if (args.name == 'LeadGrid') {
-                $('.k-i-refresh').trigger("click");
-                //$('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+                $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+                contactAddEditRefresh();
             } else if (args.name == 'ViewCreated') {
                 callViewApi();
                 callFilterApi();
@@ -1179,7 +1190,13 @@ angular.module('contacts')
 
 
         $scope.openContactPopup = function () {
-            $state.go('app.addNewContact');
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/add_new_contact.tpl.html',
+                backdrop: 'static',
+                controller: ContactPopUpController,
+                size: 'lg'
+            });
         };
 
         $scope.openUploadContactPopup = function () {

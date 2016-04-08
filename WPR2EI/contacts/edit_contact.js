@@ -190,6 +190,22 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
 
     var called = false;
 
+    var contactAddEditRefresh = function () {
+        apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+            data = response.data;
+            for (i = 0; i < data.length; i++) {
+                var tag = (data[i].Tags);
+                if (tag !== null) {
+                    tag = JSON.parse(tag);
+                    data[i].Tags = [];
+                    data[i].Tags = tag;
+                }
+                else { data[i].Tags = []; }
+            }
+            $localStorage.leadDataSource = data;
+        })
+    }// to refresh localstorage of lead
+
     $scope.finalpost = function ()
     {
         if (called == true) {
@@ -250,8 +266,11 @@ var EditContactPopUpController = function ($scope, $state, $cookieStore, apiServ
             $rootScope.$broadcast('REFRESH', 'Summary');
             $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
             $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
+            contactAddEditRefresh();
             $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
             $scope.loadingDemo = false;
+
+            
 
             var media = [];
             for (var i in $scope.choices1) {
