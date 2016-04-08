@@ -70,11 +70,13 @@ angular.module('contacts')
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views = _.filter(res.data, function (o)
-                { return o.grid_name === 'lead' });
+                { return o.query_type === 'Filter' && o.grid_name === 'lead' });
             }, function (err) {
 
             });
         }
+
+
 
 
         callViewApi();
