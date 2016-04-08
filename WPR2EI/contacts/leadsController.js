@@ -146,7 +146,7 @@ angular.module('contacts')
                 backdrop: 'static',
                 controller: createViewCtrl,
                 size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead' } }
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead', type: 'View', } }
             });
         }
 

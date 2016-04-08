@@ -192,7 +192,7 @@
                 backdrop: 'static',
                 controller: createViewCtrl,
                 size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'call' } }
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'call', type: 'View', } }
             });
         }
 
