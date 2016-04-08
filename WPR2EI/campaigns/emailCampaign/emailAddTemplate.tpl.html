@@ -85,6 +85,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="progress" ng-show="uploader.progress>0 && uploader.progress<100">
+                                    <div class="progress-bar" role="progressbar"
+                                         ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                </div>
                                 <input ng-show="false" type="file" id="imageBrowser" value="Browse" nv-file-select="" uploader="uploader" />
                                 <div class="clearfix">
                                     <div class="form-group form-bx form-bx8"
