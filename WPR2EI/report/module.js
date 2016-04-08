@@ -15,6 +15,11 @@ angular.module('report', [])
             url: '/home',
             templateUrl: 'common/home.html',
         })
-
+         .state('app.jqlreport', {
+             url: '/jql_report',
+             templateUrl: 'report/customreport/customreport.html',
+             controller: 'CustomreportController',
+             title: 'CustomReport'
+         })
       
     }]);

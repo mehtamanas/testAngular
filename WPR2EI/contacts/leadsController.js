@@ -79,6 +79,19 @@ angular.module('contacts')
 
         callViewApi();
 
+        var callFilterApi = function () {
+
+            apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
+                $scope.filterview = _.filter(res.data, function (o)
+                { return o.query_type === 'Filter' && o.grid_name === 'lead' });
+            }, function (err) {
+
+            });
+        }
+
+
+        callFilterApi();
+
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {
                 //filter by grid name
@@ -349,25 +362,27 @@ angular.module('contacts')
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
+              },   {
+                  field: "last_contacted",
+                  title: "Last Contacted Date",
+                  type: 'date',
+                  format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
               },
-                 {
-                     field: "rating",
-                     title: "Last Contacted Date",
-                     attributes: {
-                         "class": "UseHand",
-                         "style": "text-align:center"
-                     }
-                 },
-             {
-                 field: "Contact_Created_Date",
-                 title: "Updated Date",
-                 //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
-                 attributes: {
-                     "class": "UseHand",
-                     "style": "text-align:center"
-                 }
-             },
-             {
+        {
+            field: "last_updated",
+            title: "Updated Date",
+            type: 'date',
+            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
+            attributes: {
+                "class": "UseHand",
+                "style": "text-align:center"
+            }
+        }, {
                  title: "Action",
                  template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
                  field:'Action',
@@ -379,6 +394,616 @@ angular.module('contacts')
              }, ]
         };
 
+        $scope.changeFilter = function () {
+            if ($scope.gridView !== 'default') {
+                sortObj = _.filter($scope.filterview, function (o) {
+                    return o.view_name === $scope.gridView
+                });
+
+                $scope.textareaText = sortObj[0].query_string;
+                $scope.filterFunc(sortObj[0].query_string);
+            }
+
+        }
+
+        $scope.saveFilters = function () {
+            var Querydata = $scope.textareaText.toLowerCase();
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/Views/createView.html',
+                backdrop: 'static',
+                controller: createViewCtrl,
+                size: 'lg',
+                resolve: { viewData: { sort: null, col: null, grid: 'lead', type: 'Filter', filterQuery: Querydata } }
+            });
+        }
+
+        $scope.DoWork = function () {
+            $scope.callFilter();
+        };
+
+        $scope.filterFunc = function (Query) {
+            var txtdata = Query.toLowerCase();
+            
+            var Firstname = "";
+            var ValidFilter = false;
+
+            var filter = "";
+            var logsplit = "";
+
+
+            if (txtdata.length > 0) {
+
+                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+
+                    filter = { logic: "and", filters: [] };
+                    logsplit = txtdata.split(" and ");
+                }
+                else {
+                    filter = { logic: "or", filters: [] };
+                    logsplit = txtdata.split(" or ");
+                }
+
+                // alert("or split value =  " + logsplit.length);
+                if (logsplit.length > 0) {
+                    for (var j = 0; j < logsplit.length; j++) {
+                        // alert("value for j is " + j);
+
+                        //FOR DATES 
+                        var expsplitIsBefore = logsplit[j].split(" isbefore ");
+                        var expsplitIsAfter = logsplit[j].split(" isafter ");
+                        var expsplitBetween = logsplit[j].split(" between ");
+
+                        var expEQ = logsplit[j].split(" = ");
+                        var expIS = logsplit[j].split(" is ");
+
+                        var expsplit = "";
+                        if (expEQ.length > 1)
+                            expsplit = expEQ;
+
+                        if (expIS.length > 1)
+                            expsplit = expIS;
+
+                        var expsplitCONTAINS = logsplit[j].split(" contains ");
+                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
+
+                        var expsplitIN = logsplit[j].split(" in ");
+
+                        var expSplitGTE = logsplit[j].split(" >= ");
+
+                        var expSplitLTE = logsplit[j].split(" <= ");
+
+                        var expSplitGT = logsplit[j].split(" > ");
+
+                        var expSplitLT = logsplit[j].split(" < ");
+                          // CONTAINS  CHECK   
+                            if (expsplitCONTAINS.length > 1) {
+
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
+                                    Firstname = "Name";
+
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
+                                    Firstname = "Contact_First_Name";
+
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
+                                    Firstname = "Contact_Last_Name";
+
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
+                                    Firstname = "Contact_Email";
+
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
+                                    Firstname = "Contact_Phone";
+
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
+                                    Firstname = "tag1";
+
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
+                                    Firstname = "company";
+
+                                    // for notes still need to confirm with sir
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
+                                    Firstname = "text";
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
+                                ValidFilter = true;
+                            }
+
+                        // IN CHECK
+
+                        if (expsplitIN.length > 1) {
+
+
+                            if (expsplitIN[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "PHONE" || expsplitIN[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                                // for notes still need to confirm with sir
+                            else if (expsplitIN[0].toUpperCase().trim() == "TEXT" || expsplitIN[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
+                            // alert(mystring);
+
+                            var newString = mystring.split(',');
+                            if (newString.length >= 1) {
+                                for (var k = 0; k < newString.length; k++) {
+                                    // newString
+                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
+                                    ValidFilter = true;
+                                }
+                            }
+                        }
+                          // EQUAL TO CHECK 
+                            if (expsplit.length > 1) {
+
+
+                                if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
+                                    Firstname = "Contact_First_Name";
+
+                                if (expsplit[0].toUpperCase().trim() == "LASTNAME")
+                                    Firstname = "Contact_Last_Name";
+
+                                else if (expsplit[0].toUpperCase().trim() == "EMAIL")
+                                    Firstname = "Contact_Email";
+
+                                if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
+                                    Firstname = "Contact_Phone";
+
+                                else if (expsplit[0].toUpperCase().trim() == "TAGS")
+                                    Firstname = "tag1";
+
+                                else if (expsplit[0].toUpperCase().trim() == "COMPANY")
+                                    Firstname = "company";
+
+                                    // for notes still need to confirm with sir
+                                else if (expsplit[0].toUpperCase().trim() == "TEXT" || expsplit[0].toUpperCase().trim() == "NOTES")
+                                    Firstname = "text";
+
+                                else if (expsplit[0].toUpperCase().trim() == "ASSIGNED TO")
+                                    Firstname = "Assigned_To";
+
+                                else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
+                                    Firstname = "leadsource";
+
+                                else if (expsplit[0].toUpperCase().trim() == "NAME")
+                                    Firstname = "Name";
+
+                                else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                    Firstname = "follow_up_count";
+
+                                //if (expsplit[1].trim() == "")
+                                //    expsplit[1].trim() = null;
+
+                                if (Firstname == "follow_up_count") {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                                    ValidFilter = true;
+                                }
+                                else {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                    ValidFilter = true;
+                                }
+                            }
+                         // GREATER THAN EQUAL TO CHECK
+                            if (expSplitGTE.length > 1) {
+
+                                if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                    Firstname = "follow_up_count";
+                                else {
+                                    alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
+                                    return;
+                                }
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
+                                ValidFilter = true;
+                            }
+
+                        // LESSER THAN EQUAL TO CHECK
+                        if (expSplitLTE.length > 1) {
+
+                            if (expSplitLTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+                            else {
+                                alert(" <= Operator cannot be assigned to " + expSplitLTE[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // IS BEFORE CHECK
+
+                        if (expsplitIsBefore.length > 1) {
+
+
+                            if (expsplitIsBefore[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
+
+                            else {
+                                alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                            ValidFilter = true;
+                        }
+
+                        // IS AFTER CHECK
+
+                        if (expsplitIsAfter.length > 1) {
+
+                            if (expsplitIsAfter[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
+
+                            else {
+                                alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                            ValidFilter = true;
+                        }
+
+
+                        //
+                         // BETWEEN OR CHECK 
+                            if (expsplitBetween.length > 1) {
+
+                                if (expsplitBetween[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                    Firstname = "last_contacted";
+
+                                else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
+                                    Firstname = "last_updated";
+
+                                else {
+                                    alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
+                                    return;
+                                }
+
+                                var InnerBetweenSplit = expsplitBetween[1].split("||");
+
+                                if (InnerBetweenSplit.length > 1) {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
+                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
+                                    ValidFilter = true;
+                                }
+                            }
+
+                    } //for loop 
+                } // if loop
+            } //if loop MAIN
+
+
+            // final code to get execute....
+
+            if (ValidFilter == true) {
+                var ds = $('#contact_kenomain').getKendoGrid().dataSource;
+                ds.filter(filter);
+            }
+            else {
+                alert("Please Check Query ! ");
+            }
+        }
+
+        $scope.callFilter = function () {
+
+            var txtdata = $scope.textareaText.toLowerCase();
+            var Firstname = "";
+            var ValidFilter = false;
+
+            var filter = "";
+            var logsplit = "";
+
+
+            if (txtdata.length > 0) {
+
+                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+
+                    filter = { logic: "and", filters: [] };
+                    logsplit = txtdata.split(" and ");
+                }
+                else {
+                    filter = { logic: "or", filters: [] };
+                    logsplit = txtdata.split(" or ");
+                }
+
+                // alert("or split value =  " + logsplit.length);
+                if (logsplit.length > 0) {
+                    for (var j = 0; j < logsplit.length; j++) {
+                        // alert("value for j is " + j);
+
+                        //FOR DATES 
+                        var expsplitIsBefore = logsplit[j].split(" isbefore ");
+                        var expsplitIsAfter = logsplit[j].split(" isafter ");
+                        var expsplitBetween = logsplit[j].split(" between ");
+
+                        var expEQ = logsplit[j].split(" = ");
+                        var expIS = logsplit[j].split(" is ");
+
+                        var expsplit = "";
+                        if (expEQ.length > 1)
+                            expsplit = expEQ;
+
+                        if (expIS.length > 1)
+                            expsplit = expIS;
+
+                        var expsplitCONTAINS = logsplit[j].split(" contains ");
+                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
+
+                        var expsplitIN = logsplit[j].split(" in ");
+
+                        var expSplitGTE = logsplit[j].split(" >= ");
+
+                        var expSplitLTE = logsplit[j].split(" <= ");
+
+                        var expSplitGT = logsplit[j].split(" > ");
+
+                        var expSplitLT = logsplit[j].split(" < ");
+
+                        // CONTAINS  CHECK   
+                        if (expsplitCONTAINS.length > 1) {
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                                // for notes still need to confirm with sir
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
+                            ValidFilter = true;
+                        }
+
+                        // IN CHECK
+
+                        if (expsplitIN.length > 1) {
+
+
+                            if (expsplitIN[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "PHONE" || expsplitIN[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                                // for notes still need to confirm with sir
+                            else if (expsplitIN[0].toUpperCase().trim() == "TEXT" || expsplitIN[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
+                            // alert(mystring);
+
+                            var newString = mystring.split(',');
+                            if (newString.length >= 1) {
+                                for (var k = 0; k < newString.length; k++) {
+                                    // newString
+                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
+                                    ValidFilter = true;
+                                }
+                            }
+                        }
+
+
+                        // EQUAL TO CHECK 
+                        if (expsplit.length > 1) {
+
+
+                            if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplit[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplit[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplit[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplit[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                                // for notes still need to confirm with sir
+                            else if (expsplit[0].toUpperCase().trim() == "TEXT" || expsplit[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            else if (expsplit[0].toUpperCase().trim() == "ASSIGNED TO")
+                                Firstname = "Assigned_To";
+
+                            else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
+                            else if (expsplit[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+
+                            //if (expsplit[1].trim() == "")
+                            //    expsplit[1].trim() = null;
+
+                            if (Firstname == "follow_up_count") {
+                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                                ValidFilter = true;
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                ValidFilter = true;
+                            }
+                        }
+
+
+                        // GREATER THAN EQUAL TO CHECK
+                        if (expSplitGTE.length > 1) {
+
+                            if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+                            else {
+                                alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // LESSER THAN EQUAL TO CHECK
+                        if (expSplitLTE.length > 1) {
+
+                            if (expSplitLTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+                            else {
+                                alert(" <= Operator cannot be assigned to " + expSplitLTE[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // IS BEFORE CHECK
+
+                        if (expsplitIsBefore.length > 1) {
+
+
+                            if (expsplitIsBefore[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
+
+                            else {
+                                alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                            ValidFilter = true;
+                        }
+
+                        // IS AFTER CHECK
+
+                        if (expsplitIsAfter.length > 1) {
+
+                            if (expsplitIsAfter[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
+
+                            else {
+                                alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                            ValidFilter = true;
+                        }
+
+
+                        // 
+
+                        // BETWEEN OR CHECK 
+                        if (expsplitBetween.length > 1) {
+
+                            if (expsplitBetween[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
+
+                            else {
+                                alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
+                                return;
+                            }
+
+                            var InnerBetweenSplit = expsplitBetween[1].split("||");
+
+                            if (InnerBetweenSplit.length > 1) {
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                            }
+                        }
+
+                    } //for loop 
+                } // if loop
+            } //if loop MAIN
+
+
+            // final code to get execute....
+
+            if (ValidFilter == true) {
+                var ds = $('#contact_kenomain').getKendoGrid().dataSource;
+                ds.filter(filter);
+            }
+            else {
+                alert("Please Check Query ! ");
+            }
+        }
+
+        $scope.clearFilter = function () {
+            $('#contact_kenomain').getKendoGrid().dataSource.filter([]);
+            $scope.textareaText = ''
+        }
 
         $scope.checkALL = function (e) {
             if ($('.check-box:checked').length > 0)
@@ -525,12 +1150,14 @@ angular.module('contacts')
                 //$('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
             } else if (args.name == 'ViewCreated') {
                 callViewApi();
+                callFilterApi();
                 $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
 
             callViewApi();
+            callFilterApi();
 
         });
 
