@@ -11089,10 +11089,12 @@ input[type=text].rupee_1 {
       border-radius: 1px;
   }
   .serach_bar_btn{
-    height: 34px !important;
+    height: 35px !important;
     font-size: 11px;
     font-weight: 600;
+    float: right;
     border-radius: 1px;
+    margin-right: 2px;
   }
   
   .serch_btn_custom{
@@ -11100,9 +11102,25 @@ input[type=text].rupee_1 {
     border-top-color: #c5c5c5;
     border-bottom-color: #c5c5c5;
     border-left:none;
-    color:#289ff1;
-    background:#fff;
+    color:#fff;
+    background:#5da15d;
     height: 35px !important;
 
     border-radius: 1px;
+  }
+  .serch_btn_custom:hover {
+      background-color:#477862;
+      border-right-color: #c5c5c5;
+        border-top-color: #c5c5c5;
+        border-bottom-color: #c5c5c5;
+        border-left:none;
+        color:#fff;
+  }
+  .serch_btn_custom:active {
+      background-color:#477862;
+      border-right-color: #c5c5c5;
+        border-top-color: #c5c5c5;
+        border-bottom-color: #c5c5c5;
+        border-left:none;
+        color:#fff !important;
   }
