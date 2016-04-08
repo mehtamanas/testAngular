@@ -26,29 +26,29 @@
 
             <div class="clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 20px;">
-
-                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0px;">
-                        <!--ng-keypress="checkIfEnterKeyWasPressed($event)"-->
-                        <textarea id="text" placeholder="Query" class="form-control serach_bar_filter" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
-                    </div>
-                    <div class="col-lg-1 col-md-1 col-sm-1" style="width: 42px;">
-                        <button type="submit" class="btn btn-primary serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></button>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3">
-                        <button type="submit" class="btn btn-primary serach_bar_btn" ng-click="clearFilter()">CLEAR FILTER</button>
-                        <button type="submit" class="btn btn-primary serach_bar_btn" ng-click="saveFilters()">SAVE-FILTER</button>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 pull-right">
-                        <select ng-model="gridView" class="form-control serach_bar_btn" ng-change="changeFilter()" id="contacaction1">
+                    <div class="col-lg-2 col-md-2 col-sm-2 ">
+                        <select ng-model="gridView" class="form-control serach_bar_btn" style="font-size:14px;" ng-change="changeFilter()" id="contacaction1">
                             <option value='default' selected>Default Filter</option>
                             <option ng-repeat="view in filterview" value={{view.view_name}}>{{view.view_name}}</option>
                         </select>
                     </div>
+                    <div class="col-md-6 col-sm-6" style="margin-top: 0px;width: 61%;">
+                        <!--ng-keypress="checkIfEnterKeyWasPressed($event)"-->
+                        <textarea id="text" placeholder="Query" class="form-control serach_bar_filter" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
+                    </div>
+                    <div class="col-md-1 col-sm-1" style="width: 3%;">
+                        <button type="submit" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></button>
+                    </div>
+                    <div class="col-md-3 col-sm-3 pull-right" style="width: 19%;">
+                        <button type="submit" class="btn btn-primary serach_bar_btn" ng-click="clearFilter()">CLEAR FILTER</button>
+                        <button type="submit" class="btn btn-primary serach_bar_btn" ng-click="saveFilters()">SAVE-FILTER</button>
+                    </div>
+
 
                 </div>
 
 
-              
+
 
                 <!--<input type="button" id="btnFilter" value="Filter" />-->
 
