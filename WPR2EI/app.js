@@ -77,14 +77,18 @@ angular.module('MainApp', [
         //if ($location.protocol() !== 'https') { //redirect http to https
         //  $window.location.href = $location.absUrl().replace('http', 'https');
         //}
-
+     
         if (($cookieStore.get('userId') === undefined)) {
             if ((next.name).indexOf("app") > -1) {
+                var url = $location.path();
+                $cookieStore.put('location', url);
                 $location.path('/login');
             }
         }
         else if (($cookieStore.get('userId') !== undefined)&& $location.path()) {
-            $location.path();
+            var url = $location.path();
+            if (url === '/login') { $location.path('home/my_day'); }
+            else { $location.path(); }
         }
         else {
             $location.path('home/my_day');
