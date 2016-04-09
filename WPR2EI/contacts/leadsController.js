@@ -1,6 +1,6 @@
 angular.module('contacts')
 .controller('LeadListController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window, $localStorage, $sessionStorage, $interval) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window, $localStorage,$sessionStorage, $interval) {
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         console.log('ContactListController');
@@ -161,29 +161,29 @@ angular.module('contacts')
             allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
             $cookieStore.remove('checkedIds');
             $cookieStore.put('checkedIds', allCheckedIds);
+            
+            if (allCheckedIds.length>0){
 
-            if (allCheckedIds.length > 0) {
+            if ($scope.leadAction === "no_action") {
 
-                if ($scope.leadAction === "no_action") {
-
+            }
+            else if ($scope.leadAction === "add_tag") {
+                $state.go($scope.tagOptionPopup());
+            }
+            else if ($scope.leadAction === "assign_to") {
+                $state.go($scope.assignToUpPopup());
+            }
+            else if ($scope.leadAction === "delete") {
+                var contactDelete = [];
+                for (var i in allCheckedIds) {
+                    var contact = {};
+                    contact.id = allCheckedIds[i];
+                    contact.organization_id = $cookieStore.get('orgID');
+                    contactDelete.push(contact);
                 }
-                else if ($scope.leadAction === "add_tag") {
-                    $state.go($scope.tagOptionPopup());
-                }
-                else if ($scope.leadAction === "assign_to") {
-                    $state.go($scope.assignToUpPopup());
-                }
-                else if ($scope.leadAction === "delete") {
-                    var contactDelete = [];
-                    for (var i in allCheckedIds) {
-                        var contact = {};
-                        contact.id = allCheckedIds[i];
-                        contact.organization_id = $cookieStore.get('orgID');
-                        contactDelete.push(contact);
-                    }
-                    $cookieStore.put('contactDelete', contactDelete);
-                    $scope.openConfirmation();
-                }
+                $cookieStore.put('contactDelete', contactDelete);
+                $scope.openConfirmation();
+            }
             }
         }
 
@@ -282,7 +282,7 @@ angular.module('contacts')
                       field: "Name",
                       template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="" class="contact_name">#=Name#</a>',
                       width: "200px",
-                      title: 'Name',
+                      title:'Name',
                       attributes: {
                           "class": "UseHand",
                           "style": "text-align:center"
@@ -346,7 +346,7 @@ angular.module('contacts')
                  }
              },
              {
-                 field: "Tags",
+                 field:"Tags",
                  template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
                  title: "TAGS",
                  width: "220px",
@@ -364,7 +364,7 @@ angular.module('contacts')
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
-              }, {
+              },   {
                   field: "last_contacted",
                   title: "Last Contacted Date",
                   type: 'date',
@@ -385,15 +385,15 @@ angular.module('contacts')
                 "style": "text-align:center"
             }
         }, {
-            title: "Action",
-            template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
-            field: 'Action',
-            attributes:
-              {
-                  "class": "UseHand",
-                  "style": "text-align:center"
-              }
-        }, ]
+                 title: "Action",
+                 template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
+                 field:'Action',
+                 attributes:
+                   {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
+             }, ]
         };
 
         $scope.changeFilter = function () {
@@ -426,7 +426,7 @@ angular.module('contacts')
 
         $scope.filterFunc = function (Query) {
             var txtdata = Query.toLowerCase();
-
+            
             var Firstname = "";
             var ValidFilter = false;
 
@@ -478,37 +478,37 @@ angular.module('contacts')
                         var expSplitGT = logsplit[j].split(" > ");
 
                         var expSplitLT = logsplit[j].split(" < ");
-                        // CONTAINS  CHECK   
-                        if (expsplitCONTAINS.length > 1) {
+                          // CONTAINS  CHECK   
+                            if (expsplitCONTAINS.length > 1) {
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
-                                Firstname = "Name";
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
+                                    Firstname = "Name";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
-                                Firstname = "Contact_First_Name";
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
+                                    Firstname = "Contact_First_Name";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
-                                Firstname = "Contact_Last_Name";
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
+                                    Firstname = "Contact_Last_Name";
 
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
-                                Firstname = "Contact_Email";
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
+                                    Firstname = "Contact_Email";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
-                                Firstname = "Contact_Phone";
+                                if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
+                                    Firstname = "Contact_Phone";
 
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
-                                Firstname = "tag1";
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
+                                    Firstname = "tag1";
 
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
-                                Firstname = "company";
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
+                                    Firstname = "company";
 
-                                // for notes still need to confirm with sir
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
-                                Firstname = "text";
+                                    // for notes still need to confirm with sir
+                                else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
+                                    Firstname = "text";
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
-                            ValidFilter = true;
-                        }
+                                filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
+                                ValidFilter = true;
+                            }
 
                         // IN CHECK
 
@@ -552,69 +552,69 @@ angular.module('contacts')
                                 }
                             }
                         }
-                        // EQUAL TO CHECK 
-                        if (expsplit.length > 1) {
+                          // EQUAL TO CHECK 
+                            if (expsplit.length > 1) {
 
 
-                            if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
-                                Firstname = "Contact_First_Name";
+                                if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
+                                    Firstname = "Contact_First_Name";
 
-                            if (expsplit[0].toUpperCase().trim() == "LASTNAME")
-                                Firstname = "Contact_Last_Name";
+                                if (expsplit[0].toUpperCase().trim() == "LASTNAME")
+                                    Firstname = "Contact_Last_Name";
 
-                            else if (expsplit[0].toUpperCase().trim() == "EMAIL")
-                                Firstname = "Contact_Email";
+                                else if (expsplit[0].toUpperCase().trim() == "EMAIL")
+                                    Firstname = "Contact_Email";
 
-                            if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
-                                Firstname = "Contact_Phone";
+                                if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
+                                    Firstname = "Contact_Phone";
 
-                            else if (expsplit[0].toUpperCase().trim() == "TAGS")
-                                Firstname = "tag1";
+                                else if (expsplit[0].toUpperCase().trim() == "TAGS")
+                                    Firstname = "tag1";
 
-                            else if (expsplit[0].toUpperCase().trim() == "COMPANY")
-                                Firstname = "company";
+                                else if (expsplit[0].toUpperCase().trim() == "COMPANY")
+                                    Firstname = "company";
 
-                                // for notes still need to confirm with sir
-                            else if (expsplit[0].toUpperCase().trim() == "TEXT" || expsplit[0].toUpperCase().trim() == "NOTES")
-                                Firstname = "text";
+                                    // for notes still need to confirm with sir
+                                else if (expsplit[0].toUpperCase().trim() == "TEXT" || expsplit[0].toUpperCase().trim() == "NOTES")
+                                    Firstname = "text";
 
-                            else if (expsplit[0].toUpperCase().trim() == "ASSIGNED TO")
-                                Firstname = "Assigned_To";
+                                else if (expsplit[0].toUpperCase().trim() == "ASSIGNED TO")
+                                    Firstname = "Assigned_To";
 
-                            else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
-                                Firstname = "leadsource";
+                                else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
+                                    Firstname = "leadsource";
 
-                            else if (expsplit[0].toUpperCase().trim() == "NAME")
-                                Firstname = "Name";
+                                else if (expsplit[0].toUpperCase().trim() == "NAME")
+                                    Firstname = "Name";
 
-                            else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-                                Firstname = "follow_up_count";
+                                else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                    Firstname = "follow_up_count";
 
-                            //if (expsplit[1].trim() == "")
-                            //    expsplit[1].trim() = null;
+                                //if (expsplit[1].trim() == "")
+                                //    expsplit[1].trim() = null;
 
-                            if (Firstname == "follow_up_count") {
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                                if (Firstname == "follow_up_count") {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                                    ValidFilter = true;
+                                }
+                                else {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                    ValidFilter = true;
+                                }
+                            }
+                         // GREATER THAN EQUAL TO CHECK
+                            if (expSplitGTE.length > 1) {
+
+                                if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                    Firstname = "follow_up_count";
+                                else {
+                                    alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
+                                    return;
+                                }
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
                                 ValidFilter = true;
                             }
-                            else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
-                                ValidFilter = true;
-                            }
-                        }
-                        // GREATER THAN EQUAL TO CHECK
-                        if (expSplitGTE.length > 1) {
-
-                            if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-                                Firstname = "follow_up_count";
-                            else {
-                                alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
-                                return;
-                            }
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
-                            ValidFilter = true;
-                        }
 
                         // LESSER THAN EQUAL TO CHECK
                         if (expSplitLTE.length > 1) {
@@ -671,28 +671,28 @@ angular.module('contacts')
 
 
                         //
-                        // BETWEEN OR CHECK 
-                        if (expsplitBetween.length > 1) {
+                         // BETWEEN OR CHECK 
+                            if (expsplitBetween.length > 1) {
 
-                            if (expsplitBetween[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-                                Firstname = "last_contacted";
+                                if (expsplitBetween[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                    Firstname = "last_contacted";
 
-                            else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
-                                Firstname = "last_updated";
+                                else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
+                                    Firstname = "last_updated";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
-                                return;
+                                else {
+                                    alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
+                                    return;
+                                }
+
+                                var InnerBetweenSplit = expsplitBetween[1].split("||");
+
+                                if (InnerBetweenSplit.length > 1) {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
+                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
+                                    ValidFilter = true;
+                                }
                             }
-
-                            var InnerBetweenSplit = expsplitBetween[1].split("||");
-
-                            if (InnerBetweenSplit.length > 1) {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
-                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
-                                ValidFilter = true;
-                            }
-                        }
 
                     } //for loop 
                 } // if loop
@@ -1158,19 +1158,14 @@ angular.module('contacts')
         }
 
         $scope.$on('REFRESH2', function (event, args) {
-
             if (args.name == 'LeadGrid') {
-                if (args.data === null) {
-                    $('.k-i-refresh').trigger("click");
-                }else{
-                    $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
-                    contactAddEditRefresh();
-                }
-                } else if (args.name == 'ViewCreated') {
-                    callViewApi();
-                    callFilterApi();
-                    $scope.gridView = args.data;
-                }
+                $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+                contactAddEditRefresh();
+            } else if (args.name == 'ViewCreated') {
+                callViewApi();
+                callFilterApi();
+                $scope.gridView = args.data;
+            }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
 

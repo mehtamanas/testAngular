@@ -1,7 +1,7 @@
 angular.module('app.guest.login')
 
 .controller('LoginController',
-    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, Idle, $filter, apiService, $localStorage, usSpinnerService, $interval, $location) {
+    function ($scope, $state, security, $modal, $http, $cookieStore, $rootScope, deviceDetector, Idle, $filter, apiService, usSpinnerService, $interval) {
         // Init model
         $scope.loadingDemo = false;
         $scope.params = {
@@ -13,10 +13,9 @@ angular.module('app.guest.login')
         $scope.error = '';
         $scope.success = '';
 
-        $scope.rememberMe = function () {//keep me logged IN
+        $scope.rememberMe = function () {
             if ($scope.params.remember) {
                 $rootScope.rememberMeOn = true;
-                $localStorage.alive = { rememberMeOn:true}
             }
         }
 
@@ -38,17 +37,14 @@ angular.module('app.guest.login')
             if (isValid) {
                 $scope.loadingDemo = true;
                 $scope.params.email = $filter('lowercase')($scope.params.email);
-                if ($rootScope.rememberMeOn) { $localStorage.alive.user = $scope.params}
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
                      $scope.loadingDemo = false;
-                     $cookieStore.put('loggedUserInfo', response);
-                     $localStorage.alive ? $localStorage.alive.loggedUserInfo = response:null;//keep me logged IN
+                    $cookieStore.put('loggedUserInfo', response);
 
                     $scope.success = 'Login successful!';
                     $scope.error = '';
                     $cookieStore.put('loggedUser', response.first_name);
-                    $localStorage.alive ? $localStorage.alive.loggedUser = response.first_name : null;//keep me logged IN
 
                     if (!security.redirect()) {
                         if ($cookieStore.get('builderflow') == "yes") {
@@ -56,16 +52,19 @@ angular.module('app.guest.login')
                             return;
                         }
                         Idle.watch();
-                        url = $cookieStore.get('location');
-                        if (url === '/login' || url===undefined) { $location.path('home/my_day'); }
-                        else { $location.path(url); }
-                        $cookieStore.remove('location');
+                        $state.go('app.my_day');
                     }
 
                 },
 
                     $http.get('http://ipinfo.io/json').success(function (data) {
                         $scope.loginSession1 = data;
+
+                        //alert('Login Session : ' + $scope.loginSession1.ip);
+                        //alert('Location : ' + $scope.loginSession1.loc);
+                        //alert('Country : ' + $scope.loginSession1.country);
+                        //alert('platform : ' + navigator.platform);
+
                         var browser = '';
                         var browserVersion = 0;
 
@@ -122,18 +121,12 @@ angular.module('app.guest.login')
             }
         };
 
-        if ($localStorage.alive) {
-            $scope.params.email = $localStorage.alive.user.email;
-            $scope.params.password = $localStorage.alive.user.password;
-            $scope.remember = $localStorage.alive.rememberMeOn;
-            $scope.login(true);
-        }
-
 
         $scope.openSignupPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'login/signup_free_account.tpl.html',
+
                 controller: SignupFreeAccountController,
                 size: 'lg'
             });
@@ -240,8 +233,7 @@ angular.module('app.guest.login')
             $cookieStore.remove('wing_id');
             $cookieStore.remove('tower_id');
             $cookieStore.remove('teamid');
-            delete $localStorage.leadDataSource;
-            delete $localStorage.alive;
+            localStorage.clear();
             if (window.syncData !== undefined) { $interval.cancel(syncData); }
             console.log("loggedout");
             $state.go('login');
