@@ -1,7 +1,7 @@
 ﻿
 
 <div id="main-content" class="col-xs-12">
-    <div class="content-inner">
+    <div class="content-inner" style="padding:0px">
 
         <div class="pg-inner-header">
             <div class="row">
@@ -15,15 +15,15 @@
 
     </div><!-- content-inner ended -->
 
-    <div class="pg-inner-content">
+    <div class="task_maincontent">
 
         <div class="project-detail">
 
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
 
-                    <div class="bx-h1">
-                        <div class="bx-h1-head clearfix">
+                    <div class="task_head">
+                        <div class="bx-h1-head clearfix"  style="margin-bottom: 13px;border-radius:1px;">
                             <div class="pull-left title">Today + Overdue Tasks</div>
                             <div class="pull-right bx-h1-link">
                                 <a ng-click="taskShowHideGrid('today')" href="javascript:" id="taskContactToday" ng-class="{active:showTaskTodayGrid}">Overdue</a>
@@ -31,7 +31,85 @@
                                 <a ng-click="taskShowHideGrid('next7Days')" href="javascript:" id="taskContactWeek" ng-class="{active:showTaskNext7Grid}">Next 7 Days</a>
                             </div>
                         </div>
-                        <div class="bx-h1-content overdue-tasks-tb clearfix">
+                        <div ng-repeat="task in taskToday" ng-show="showTaskTodayGrid" class="col-md-12 equal" style="margin-top: 20px;">
+                            <div class="col-md-1 circle" style="width:4%">
+                                <icon id="{{task.task_type==='Follow Up'?image_followup:task.task_type}}"></icon>
+
+                            </div>
+                            <div class="col-md-11 myDayTaskRight">
+                                <!--task title-->
+                                <div class="myDayTaskTitle">
+                                    {{task.name}}
+                                    <span class="task_due_date">Due Date: {{task.due_date | date:'dd/MM/yyyy hh:mm a'}}</span>
+                                </div>
+                                <!--contact name-->
+                                <span><small>Related Contact</small></span>
+                                <div class="myDaycontact">
+                                    <span class="myDayTaskContact"><a href="">{{task.Contact_Name}}</a></span>  <span> <small>{{task.company}}</small></span>
+                                </div>
+                                <!--task note-->
+                                <div class="myDayTaskNote">
+                                    <p>
+                                        {{task.text}}
+                                    </p>
+                                </div>
+                                <div id="pointer"></div>
+                            </div>
+                        </div> <!--over due-->
+
+                        <div ng-repeat="task in taskTomorrow " ng-show="showTaskTomorrowGrid" class="col-md-12 equal" style="margin-top: 20px;">
+                            <div class="col-md-1 circle" style="width:4%">
+                                <icon id="{{task.task_type==='Follow Up'?image_followup:task.task_type}}"></icon>
+
+                            </div>
+                            <div class="col-md-11 myDayTaskRight">
+                                <!--task title-->
+                                <div class="myDayTaskTitle">
+                                    {{task.name}}
+                                    <span class="task_due_date">Due Date: {{task.due_date | date:'dd/MM/yyyy hh:mm a'}}</span>
+                                </div>
+                                <!--contact name-->
+                                <span><small>Related Contact</small></span>
+                                <div class="myDaycontact">
+                                    <span class="myDayTaskContact"><a href="">{{task.Contact_Name}}</a></span>  <span> <small>{{task.company}}</small></span>
+                                </div>
+                                <!--task note-->
+                                <div class="myDayTaskNote">
+                                    <p>
+                                        {{task.text}}
+                                    </p>
+                                </div>
+                                <div id="pointer"></div>
+                            </div>
+                        </div> <!--over tomorrow-->
+
+                        <div ng-repeat="task in taskNext7" ng-show="showTaskNext7Grid" class="col-md-12" style="padding: 13px;">
+                            <div class="col-md-1" style="width:4%">
+                                <icon id="{{task.task_type==='Follow Up'?image_followup:task.task_type}}"></icon>
+                                
+                            </div>
+                            <div class="col-md-11 myDayTaskRight">
+                                <!--task title-->
+                                <div class="myDayTaskTitle">
+                                    {{task.name}}
+                                    <span class="task_due_date">Due Date: {{task.due_date | date:'dd/MM/yyyy hh:mm a'}}</span>
+                                </div>
+                                <!--contact name-->
+                                <span><small>Related Contact</small></span>
+                                <div class="myDaycontact">
+                                    <span class="myDayTaskContact"><a href="">{{task.Contact_Name}}</a></span>  <span> <small>{{task.company}}</small></span>
+                                </div>
+                                <!--task note-->
+                                <div class="myDayTaskNote">
+                                    <p>
+                                       {{task.text}}
+                                    </p>
+                                </div>
+                                <div id="pointer"></div>
+                            </div>
+                        </div> <!--over Next7-->
+
+                        <!--<div class="bx-h1-content overdue-tasks-tb clearfix">
                             <div ng-show="showTaskTodayGrid" id="record-content" class="properties-content">
                                 <div kendo-grid k-options="taskTodayGrid" selectable="true" k-on-change="myGridChange( dataItem )">
                                 </div>
@@ -44,12 +122,12 @@
                                 <div kendo-grid k-options="taskNext7Grid" selectable="true" k-on-change="myGridChange( dataItem )">
                                 </div>
                             </div>
-                        </div><!-- bx-h1 ended -->
+                        </div>-->
 
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
-              
+
                     <div class="bx-h1">
                         <div class="bx-h1-head clearfix">
                             <div class="pull-left title">People</div>
@@ -78,9 +156,9 @@
 
                 </div>
 
-               
 
-            
+
+
 
             </div><!-- project-detail ended -->
 
@@ -145,5 +223,5 @@
             </div>
         </div>
     </div><!-- modal ended -->
- </div>
+</div>
 
