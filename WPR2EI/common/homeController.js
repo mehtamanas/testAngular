@@ -136,6 +136,7 @@ angular.module('common')
             $cookieStore.remove('tower_id');
             $cookieStore.remove('teamid');
             delete $localStorage.leadDataSource;
+            delete $localStorage.alive;
             console.log("loggedout");
             if (window.syncData !== undefined) { $interval.cancel(syncData); }
             $location.url('/app/index.html#/login');

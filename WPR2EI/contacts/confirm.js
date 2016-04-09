@@ -1,4 +1,4 @@
-﻿var confirmationController = function ($scope, items, $state, $rootScope, $modal, apiService, $cookieStore, $modalInstance) {
+﻿var confirmationController = function ($scope, items, $state, $rootScope, $modal, apiService, $cookieStore, $modalInstance,$localStorage) {
     console.log('confirmationController');
 
     $scope.title = items.title;
@@ -58,11 +58,16 @@
     $scope.length = parseInt(contactDelete.length);
     $scope.gotoDelete = function () {
             apiService.post("Contact/DeleteMultipleContact", contactDelete).then(function (response) {
-            var loginSession = response.data;
+                var loginSession = response.data;
+                for (i = 0; i < contactDelete.length; i++) {
+                    var a = _.remove($localStorage.leadDataSource, function (o) {
+                        return o.Contact_Id == contactDelete[i].id
+                    });
+                }
             $scope.openSucessDeletefullPopup();
-            $rootScope.$broadcast('REFRESH1', 'contactGrid');
-            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data:null });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: null });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: null });
             $rootScope.$broadcast('REFRESH', 'contactcount');
             $modalInstance.dismiss();
 
