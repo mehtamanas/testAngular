@@ -20,8 +20,13 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             type: "json",
             serverFiltering: true,
             transport: {
-                read: {
-                    url: apiService.baseUrl + "Role/Get/442aa5f4-4298-4740-9e43-36ee021df1e7"
+                read: function (options) {
+                    apiService.getWithoutCaching("Role/Get/442aa5f4-4298-4740-9e43-36ee021df1e7").then(function (res) {
+                        $scope.roles = res.data;
+                        options.success($scope.roles);
+                    }, function (err) {
+                        options.error([]);
+                    })
                 }
             }
         }
@@ -328,9 +333,10 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
             };
         if ($scope.params.first_name != undefined && $scope.params.last_name != undefined && $scope.params.role_name != undefined) {
             apiService.post("User/Edit", postData).then(function (response) {
-                var loginSession = response.data;
+                var loginSession = response.data;                               
                 $scope.openSucessfullPopup();
                 $modalInstance.dismiss();
+                $scope.getUserRole(postData.role_name);
             },
             function (error) {
                 if (error.status === 400)
@@ -401,10 +407,21 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                    alert("Network issue");
            });
 
+           
+
         }
 
     }
 
+
+    $scope.getUserRole=function(id)
+    {
+        $cookieStore.remove('UserRole');
+        roles = [];
+        for (i = 0; i < id.length;i++)
+        roles.push(_.find($scope.roles, function (o) { return o.id == id[i]; }).name)
+        $cookieStore.put('UserRole',roles);
+    }
 
     $(document).on("click", ".remove-field", function () {
         var removedElement = $(this).parent().find('#edituser_mail').val();

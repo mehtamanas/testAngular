@@ -70,6 +70,13 @@ angular.module('security', [
                     $cookieStore.put('Who_Am_i', currentUser.who_am_i);
 
                 });
+                
+                apiService.get('Role/GetRoleByUser/' + userId).then(function (response) {
+                    var currentUser = response.data;
+                    var UserRole = _.pluck(response.data, 'name')
+                    $cookieStore.put('UserRole', UserRole);
+
+                });
 
                 apiService.get('User/Get?id=' + userId).then(function (response) {
                     var currentUser = response.data;
@@ -120,6 +127,9 @@ angular.module('security', [
 
             return deferred.promise;
         },
+
+
+
 
         // Logout the current user and redirect
         logout: function(redirectTo) {
