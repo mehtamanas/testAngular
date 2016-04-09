@@ -1058,7 +1058,7 @@ angular.module('contacts')
                         duration: 100
                     }
                 },
-                filter: "td:nth-child(10)", //this filter selects the  column cells
+                filter: "td:nth-child(11)", //this filter selects the  column cells
                 position: "top",
                 beforeShow: function (e) {
                     console.log(e);
