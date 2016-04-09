@@ -1477,14 +1477,14 @@ div.k-grid-footer {
 }
 
     .modal-header .close, .close-btn-wrap .close {
-    width: 22px;
-    height: 22px;
-    display: inline-block;
-    background: url("../images/icons-content.png") -66px -230px transparent;
-    text-indent: 99999px;
-    opacity: 0.85;
-    filter: alpha(opacit=85);
-}
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+        background: url("../images/icons-content.png") -66px -230px transparent;
+        text-indent: 99999px;
+        opacity: 0.85;
+        filter: alpha(opacit=85);
+    }
 
     .close-btn-wrap .close {
         position: absolute;
@@ -8377,7 +8377,7 @@ LEFT
 .bx-h1-head {
     background: #2799e7;
     color: #fff;
-    padding: 12px 12px 12px 18px;
+    padding: 7px 12px 7px 18px;
     border-radius: 4px 4px 0 0;
     position: relative;
 }
@@ -10979,148 +10979,312 @@ input[type=text].rupee_1 {
     border-bottom: 1px solid #e7e7e7 !important;
     border: none;
 }
-.contact-label{
-    font-family:lato;
-    font-size:11px;
-    color:#777777;
-    text-transform:uppercase;
 
+.contact-label {
+    /*font-family: lato;*/
+    font-size: 11px;
+    color: #777777;
+    text-transform: uppercase;
 }
 
 .checkboxdemoBasicUsage div.flex-xs {
-  min-height: 40px; }
+    min-height: 40px;
+}
+
 .checkboxdemoBasicUsage .checkboxDemo1 div {
-  clear: both; }
+    clear: both;
+}
+
 .checkboxdemoBasicUsage p {
-  padding-left: 8px; }
+    padding-left: 8px;
+}
+
 .checkboxdemoBasicUsage fieldset.standard {
-  border-style: solid;
-  border-width: 1px; }
+    border-style: solid;
+    border-width: 1px;
+}
+
 .checkboxdemoBasicUsage legend {
-  color: #3F51B5; }
-.checkboxdemoBasicUsage legend code {
-  color: #3F51B5;
-  font-weight: normal; }
+    color: #3F51B5;
+}
+
+    .checkboxdemoBasicUsage legend code {
+        color: #3F51B5;
+        font-weight: normal;
+    }
+
 .checkboxdemoBasicUsage .ipsum {
-  color: saddlebrown; }
-.custom_head{
+    color: saddlebrown;
+}
+
+.custom_head {
     background: #5cb85c;
     text-align: left;
     border-radius: 2px;
     color: #fff !important;
 }
-.custom_head-h4{
+
+.custom_head-h4 {
     color: #fff !important;
-        margin-left: -15px;
+    margin-left: -15px;
 }
-.custom_head_error{
+
+.custom_head_error {
     background: #d9534f;
     text-align: left;
     border-radius: 2px;
     padding: 2px 30px;
     color: #fff !important;
 }
-.custom_head_warning{
+
+.custom_head_warning {
     background: #eea236;
     text-align: left;
     border-radius: 2px;
     padding: 7px 30px;
     color: #fff !important;
 }
+
 .vdivide [class*='col-']:not(:last-child):after {
     background: #e0e0e0;
     width: 1px;
     content: "";
-    display:block;
+    display: block;
     position: absolute;
-    top:0;
+    top: 0;
     bottom: 0;
     right: 0;
     min-height: 70px;
-  }
-  
-  .left_email{
-         text-align:left;
-  }
-  .inner-mail{
-      border-bottom:1px solid  #e0e0e0;
-      padding: 0% 8%;
-  }
-   .inner-attach-border{
-      border-bottom:1px solid  #e0e0e0;
-  }
-  
-  .custom-badge{
-      background: #20c494;
-      font-size: 8px;
-      font-weight: 600;
-      
-  
-  }
-  .email_name{
-      font-size:15px;
-      color:#289ff1;
-      line-height: 2.2em;
-      font-weight: 600;
-  }
-  .email_date{
-      font-size: 10px;
-      line-height: 3.2em;
-      color:#a0a0a0;
-  }
-  .email_subject{
-      font-size: 16px;
-      font-weight: 600;
-      color:#565656;
-  }
-  .email_body{
-      padding-top: 3%;
-  }
-  .main_body{
-      padding-left: 2%;
-      padding-right: 2%;
-  }
-  .attachment_section{
-      font-size: 22px;
-      padding-top: 2%;
-   }
-  .serach_bar_filter{
-      height: 35px !important;
-      border-radius: 1px;
-  }
-  .serach_bar_btn{
+}
+
+.left_email {
+    text-align: left;
+}
+
+.inner-mail {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0% 8%;
+}
+
+.inner-attach-border {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.custom-badge {
+    background: #20c494;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.email_name {
+    font-size: 15px;
+    color: #289ff1;
+    line-height: 2.2em;
+    font-weight: 600;
+}
+
+.email_date {
+    font-size: 10px;
+    line-height: 3.2em;
+    color: #a0a0a0;
+}
+
+.email_subject {
+    font-size: 16px;
+    font-weight: 600;
+    color: #565656;
+}
+
+.email_body {
+    padding-top: 3%;
+}
+
+.main_body {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.attachment_section {
+    font-size: 22px;
+    padding-top: 2%;
+}
+
+.serach_bar_filter {
+    height: 35px !important;
+    border-radius: 1px;
+}
+
+.serach_bar_btn {
     height: 35px !important;
     font-size: 11px;
     font-weight: 600;
     float: right;
     border-radius: 1px;
     margin-right: 2px;
-  }
-  
-  .serch_btn_custom{
+}
+
+.serch_btn_custom {
     border-right-color: #c5c5c5;
     border-top-color: #c5c5c5;
     border-bottom-color: #c5c5c5;
-    border-left:none;
-    color:#fff;
-    background:#5da15d;
+    border-left: none;
+    color: #fff;
+    background: #5da15d;
     height: 35px !important;
-
     border-radius: 1px;
-  }
-  .serch_btn_custom:hover {
-      background-color:#477862;
-      border-right-color: #c5c5c5;
+}
+
+    .serch_btn_custom:hover {
+        background-color: #477862;
+        border-right-color: #c5c5c5;
         border-top-color: #c5c5c5;
         border-bottom-color: #c5c5c5;
-        border-left:none;
-        color:#fff;
-  }
-  .serch_btn_custom:active {
-      background-color:#477862;
-      border-right-color: #c5c5c5;
+        border-left: none;
+        color: #fff;
+    }
+
+    .serch_btn_custom:active {
+        background-color: #477862;
+        border-right-color: #c5c5c5;
         border-top-color: #c5c5c5;
         border-bottom-color: #c5c5c5;
-        border-left:none;
-        color:#fff !important;
-  }
+        border-left: none;
+        color: #fff !important;
+    }
+
+.side_panel_task {
+    padding: 10px;
+    background-color: #fff;
+    margin-top: 1%;
+}
+
+#Call {
+    background-image: url(../images/call-task.png);
+    height: 43px;
+    width: 43px;
+    display: block;
+}
+
+#Other {
+    background-image: url(../images/others-task.png);
+    height: 43px;
+    width: 43px;
+    display: block;
+}
+
+#image_followup {
+    background-image: url(../images/followup-task.png);
+    height: 43px;
+    width: 43px;
+    display: block;
+}
+
+#Email {
+    background-image: url(../images/email-task.png);
+    height: 43px;
+    width: 43px;
+    display: block;
+}
+
+#SMS {
+    background-image: url(../images/sms-task.png);
+    height: 43px;
+    width: 43px;
+    display: block;
+}
+
+.myDayTaskTitle {
+    font-size: 20px;
+    color: #3a3a3a;
+    font-weight: 400;
+}
+
+.myDayTaskContact {
+    font-size: 14px;
+    color: #2091df;
+    font-weight: 600;
+}
+
+.myDayTaskRight {
+    background-color: #fff;
+    width: 95%;
+    padding: 20px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    float: right;
+}
+
+myDayTaskRight:after {
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: solid 10px #659EC7;
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+}
+
+.myDayTaskNote {
+    margin-top: 12px;
+}
+
+#pointer {
+    border-right: solid 23px #FFF;
+    border-left: solid 5px transparent;
+    border-top: solid 20px transparent;
+    border-bottom: solid 20px transparent;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 4px;
+    left: -14px;
+}
+
+.circle:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 38%;
+    border: 1px solid;
+    /* border-width: 0 0 0 1px; */
+    width: 2px;
+}
+
+.task_head {
+    margin-bottom: 24px;
+    padding: 16px;
+    margin-top: -15px;
+}
+.task_maincontent{
+     background: #e7e7e7;
+    padding-bottom: 0px;
+}
+.task_due_date{
+    float: right;
+    font-size: 11px;
+    text-shadow: 0.03em .04em #c5c5c5;
+}
+/*material angular*/
+md-radio-button {
+    box-sizing: border-box;
+    display: inline-block!important;
+    margin-bottom: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+}
+.image-upload-wrap-1 .photo-upload-bx-1 {
+    background: url("../images/defaultcontact.png") no-repeat  #f4f4f4;
+    border: 2px solid #ddd;
+    height: 136px;
+    line-height: 102px;
+    width: 140px;
+    text-align: center;
+    overflow: hidden;
+}
