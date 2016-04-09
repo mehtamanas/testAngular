@@ -59,15 +59,15 @@
                             </li><!--Projects-->
 
                             <li ng-show="Properties.read && WHO_AM_I==='Broker'" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==15}" name="Properties">
-                                <a ui-sref="app.brokerproperty" href="" ng-click="activeBar=15"><span class="nav-icon nav-01"></span> Properties <span class="d-arr"></span></a>
+                                <a href="" ng-click="activeBar=15"><span class="nav-icon nav-01"></span> Properties <span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu14">
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item30" name="Bookings"><a ui-sref="app.brokerpropertylist" href="">Property List</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item24" name="Residential_Sale"><a href="">Residential Sale</a></li>
+                                    <!--<li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item24" name="Residential_Sale"><a href="">Residential Sale</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item25" name="Residential_Rent"><a href="">Residential Rent</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item26" name="Commercial_Sale"><a href="">Commercial Sale</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item27" name="Commercial_Rent"><a href="">Commercial Rent</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item28" name="Contacts"><a href="">Contacts</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item29" name="Bookings"><a href="">Bookings</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item29" name="Bookings"><a href="">Bookings</a></li>-->
                                 </ul>
                             </li>
 
@@ -130,9 +130,7 @@
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="tasks.read" id="sub-menu-item20" name="Tasks"><a href="" ui-sref="app.tasks">Tasks</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item21" name="Calls"><a href="" ui-sref="app.calls">Calls</a></li>
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item22" name="Events"><a href="" ui-sref="app.campaigns">Events</a></li>
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item23" name="emailTransactions">
-                                        <a href="" ui-sref="app.emailtransactions">Email Transaction</a>
-                                    </li>
+
                                 </ul>
                             </li><!--Activities -->
 
@@ -148,7 +146,6 @@
 
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu11">
                                     <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown" ui-sref="app.contact_report"name="Lead_Reports" ><a href="" >Lead Reports</a></li><!--Contact Report -->
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown" ui-sref="app.jqlreport" name="custom_Reports"><a href="">Custom Reports</a></li><!--Custom Report -->
                                 </ul>
                             </li><!--Reports -->
                             <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="notifications.read" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==10}" name="Notifications"><a href="" ng-click="activeBar=10"><span class="nav-icon nav-27"></span>Notifications</a><ul class="nav-sub-bx sub-menu" id="sub-menu12"></ul></li><!--Notification -->
@@ -156,7 +153,7 @@
                             <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==11}" name="Security">
                                 <a href="" ng-click="activeBar=11"><span class="nav-icon nav-08"></span> Security<span class="d-arr"></span></a>
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu13">
-                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item24 ng-show="auditTrail.read"><a href="" ui-sref="app.audit" name="Audit_Trail">Audit Trail</a></li>
+                                    <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item23" ng-show="auditTrail.read"><a href="" ui-sref="app.audit" name="Audit_Trail">Audit Trail</a></li>
                                 </ul>
                             </li><!--Security -->
 

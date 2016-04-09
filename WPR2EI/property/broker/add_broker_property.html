@@ -167,8 +167,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row" style="margin-bottom: 1%;">
-                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-model="Amenity.checkedd" name="test" ng-click='onClick($index)'/> &nbsp;{{Amenity.amenity_type_code}}
-                                   
+                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-model="Amenity.checkedd" name="test"/> &nbsp;{{Amenity.amenity_type_code}}
                                 </div>
                             </div>
                         </div>
@@ -187,7 +186,9 @@
                             </div>
                         </div>
 
-                        <div class="pull-left f-half-6">
+                       
+
+                        <div ng-show="showLeased" class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="" class="hidden-xs">Lease Period</label>
                                 <select ng-model="leasePeriod1" ng-change="selectLeasePeriod()" class="dropdown form-control text-bold" id="broker_lease_period">
@@ -198,7 +199,7 @@
                             </div>
                         </div>
 
-                        <div class="pull-left f-half-6">
+                        <div ng-show="showRenewalDate" class="pull-left f-half-6">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">Date:</label>
                                 <input kendo-date-picker class="form-control" id="broker_date"
@@ -207,6 +208,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="row">
                         <div class="pull-left f-half-6">
@@ -593,33 +595,51 @@
                                 <h2 class="pg-inner-title">Agent Details</h2>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Agent Name</label>
-                                <input type="text" class="form-control text-bold" id="broker_agentName"
-                                       data-ng-model="param.agent_name"
-                                       minlength="1"
-                                       maxlength="60"
-                                       />
-                            </div>
+                        <div class="col-md-6" >
+                            <label for="">Agent Name</label>
+                            <input kendo-auto-complete ng-model="params.name" id="broker_agentName" k-data-source="agentList" class="form-control" />
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" ng-repeat="choice in choices2">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Phone</label>
+                                <label for="">Phone{{$index + 1}}</label>
                                 <input type="text" class="form-control text-bold" id="broker_agentPhone"
-                                       data-ng-model="param.agent_phone_no"
+                                       data-ng-model="choice.agent_phone_no"
                                        minlength="1"
                                        maxlength="60"
                                        />
                             </div>
                         </div>
+
+                        <!--<div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Email{{$index + 1}}</label>
+                                <input type="text" class="form-control text-bold" id="broker_agentPhone"
+                                       data-ng-model="choice.email"
+                                       minlength="1"
+                                       maxlength="60" />
+                            </div>
+                        </div>-->
+
+                        <div id="broker_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
+                    </div>
+
+                    <div class="row" ng-repeat="choice in choices3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Email{{$index + 1}}</label>
+                                <input type="text" class="form-control text-bold" id="broker_agentPhone"
+                                       data-ng-model="choice.email"
+                                       minlength="1"
+                                       maxlength="60" />
+                            </div>
+                        </div>
+                        <div id="broker_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice3($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
                     </div>
 
                     <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
@@ -726,15 +746,11 @@
                                       style="float:left" />
                         </div>
                     </div>
-                    <div class="row">
-
-                        <button type="submit" id="btn_broker_save" class="f-btn f-btn2"  ng-click="save()">Save</button>
-
-                        <button type="button" id="btn_broker_cancel" class="f-btn f-btn2"  ng-click="cancel()">CANCEL</button>
-
-
+                  
+                    <div class="modal-btn-wrap clearfix">
+                        <button id="btn_broker_save" type="submit" class="f-btn ladda-button" ladda="loadingDemo" data-style="expand-right" ng-click="save()">SAVE</button>
+                        <button id="btn_broker_cancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
                     </div>
-
                 </form>
             </div>
             <!--</div>--><!-- project-detail ended -->
@@ -758,5 +774,5 @@
             }
         });
     });
- </script>
+</script>
 <!-- main-content ended -->
