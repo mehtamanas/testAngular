@@ -234,6 +234,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             long1: $scope.params.long1,
             ZipCode: $scope.params.ZipCode,
             project_type: $scope.params.project_type,
+            project_main_unit_config: $scope.params.project_main_unit_config
             
         };
        
@@ -599,6 +600,7 @@ function (error)
         possasion_month: $scope.possasion_month,
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId'),
+        project_main_unit_config: $scope.project_main_unit_config
 
 
     };

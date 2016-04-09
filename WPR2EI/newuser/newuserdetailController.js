@@ -1538,6 +1538,7 @@ columnMenu: {
                         $scope.state = $scope.data[0].state;
                         $scope.city = $scope.data[0].city;
                         $scope.media_url = $scope.data[0].media_url;
+                        $scope.area = $scope.data[0].area;
                         // alert($scope.media_url);
 
                         if ($scope.data.contact_mobile !== '') {
