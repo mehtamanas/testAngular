@@ -1,0 +1,43 @@
+﻿<div class="modal-header">
+    <div class="close-btn-wrap">
+        <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Re-Launch Email Campaign</h4>
+    </div>
+</div>
+<div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+    <!-- modal-header ended -->
+
+    <div class="modal-body">
+
+        <form class="form-content" name="newForm" autocomplete="off" novalidate
+              data-ng-submit="emailLaunch(newForm.$valid)">
+
+
+
+
+            <div class="clearfix">
+                <div class="form-group form-bx ">
+                    <label for="">Start Date </label>
+                    <input kendo-date-time-picker class="form-control" id="emailLaunch_startDate"
+                           data-ng-model="params.start_date"
+                           k-ng-model="dateObject"
+                           k-format="'MMMM d, yyyy h:mm tt'"
+                           required />
+
+                </div> 
+                 <br /><br /><br /><br />
+                <label><input type="checkbox" id="emailLaunch_check" ng-model="showcontent" value="1" checked="checked"/>Send only to new people</label> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+             <button class="btn organization-btn" id="addEmailCampaign_save" type="submit" ng-click="launchCampaign()">
+                    LAUNCH
+             </button>
+
+            </div>
+
+        </form>
+    </div><!-- modal-body ended -->
+
+
+</div><!-- modal ended -->

@@ -182,8 +182,8 @@
                            "class": "UseHand",
                            "style": "text-align:center"
                        }
-                   }, {
-                       template: "<a id='RunNow' class='btn btn-primary' data-toggle='modal'>Run Now</a> </div>",
+                   }, {                       
+                       template: '#if (status=="Completed") {# <a class="btn btn-primary" ng-click="openLaunch(dataItem)">Re-Launch</a> #}#',
                        title: "ACTION",
                        width: "120px",
                        attributes: {
@@ -339,6 +339,18 @@
                 templateUrl: 'campaigns/campaigns.tpl.html',
                 backdrop: 'static',
                 controller: campaignsController,
+                size: 'lg'
+            });
+        };
+
+        $scope.openLaunch = function (id) {
+            var campaign_ID = id.campaign_ID;
+            $cookieStore.put('campaign_ID', campaign_ID);
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'campaigns/emailCampaign/emailLaunch.tpl.html',
+                backdrop: 'static',
+                controller: emialLaunchController,
                 size: 'lg'
             });
         };
