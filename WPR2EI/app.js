@@ -57,6 +57,7 @@ angular.module('MainApp', [
      'testresult',
   'emailtransactions',
     'angular-ladda',
+    'Bookings'
     
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {

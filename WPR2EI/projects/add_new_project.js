@@ -229,7 +229,8 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             project_website: $scope.params.project_website,
             builder_website: $scope.params.builder_website,
             lat1: $scope.params.lat1,
-            long1: $scope.params.long1
+            long1: $scope.params.long1,
+            project_main_unit_config: $scope.params.unit_confg
 
 
         };
@@ -546,6 +547,7 @@ function (error) {
         facebook: $scope.facebook,
         twitter: $scope.twitter,
         linkedin: $scope.linkedin,
+        project_main_unit_config:$scope.unit_confg
     };
 
 

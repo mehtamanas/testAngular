@@ -647,6 +647,33 @@
 
             </div>
 
+
+            <div class="clearfix">
+                <div class="form-group"
+                     data-ng-class="{
+                                                'has-error' : addNewForm.Unit_Configuration.$invalid && (!addNewForm.Unit_Configuration.$pristine || showValid) && !addNewForm.Unit_Configuration.$focus,
+                                                'has-success': addNewForm.Unit_Configuration.$valid && !addNewForm.Unit_Configuration.$pristine && !addNewForm.Unit_Configuration.$focus
+                                                                 }">
+
+                    <div class="form-group form-bx form-bx8">
+                        <label for="">Main Unit Configuration </label>
+                        <input type="text" class="form-control text-bold" id="addNewprojectArea" autofocus name="Area"
+                               placeholder="Unit_Configuration"
+                               data-ng-model="params.unit_confg"
+                                maxlength="100"
+                          
+                               input-focus />
+                        <div class="text-danger"
+                             data-ng-if="addNewForm.Unit_Configuration.$invalid && (!addNewForm.Unit_Configuration.$pristine || showValid) && !addNewForm.Unit_Configuration.$focus" id="err_addNewprojectUnit_Configuration">
+                            {{ 'Enter valid Area' | translate }}
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
             <div class="progress" ng-show="((uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4)>0">
                 <div class="progress-bar" role="progressbar"
                      ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress)/4 + '%' }"></div>
