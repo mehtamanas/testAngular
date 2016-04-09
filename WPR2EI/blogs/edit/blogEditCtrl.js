@@ -2,7 +2,9 @@
 var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize,$window) {
     console.log('BlogPostEditCtrl');
     var authRights = ($cookieStore.get('UserRole'));
-    $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; }))=='Content Writer'?true:false
+    $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
+    $scope.isContentApprover = (_.find(authRights, function (o) { return o == 'Content Approver'; })) == 'Content Approver' ? true : false
+    $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
     var userID = $cookieStore.get('userId');
     $scope.showBlog = true;
@@ -153,7 +155,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                     user_id: $cookieStore.get('userId'),
                     tag_name: $scope.params.tag_name,
                     blog_id: window.sessionStorage.selectedBlogID,
-                    status: $scope.status,
+                    status: "Draft",
                
                 };
 
@@ -273,7 +275,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
             approval_user_id: $cookieStore.get('userId'),
-            class_id: window.sessionStorage.selectedBlogID,
+            blog_id: window.sessionStorage.selectedBlogID,
             status: "Approved",
 
         };
