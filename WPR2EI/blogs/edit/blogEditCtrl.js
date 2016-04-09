@@ -1,9 +1,9 @@
 ﻿
 var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize,$window) {
     console.log('BlogPostEditCtrl');
-
+    var authRights = ($cookieStore.get('UserRole'));
+    $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; }))=='Content Writer'?true:false
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
-    $scope.status = $cookieStore.get('status');
     var userID = $cookieStore.get('userId');
     $scope.showBlog = true;
     $scope.showPreview = false;
@@ -67,6 +67,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         uploader.uploadAll();
     }
+
     $scope.editorOption = {
         tools: ["bold",
                 "italic",
@@ -221,6 +222,9 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     $scope.cancel = function () {
         $modalInstance.dismiss();
     }
+    $scope.ok = function () {
+        $modalInstance.dismiss();
+    }
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
@@ -273,7 +277,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             status: "Approved",
 
         };
-        apiService.post("Blogs/CreateApproval", postdataApproval).then(function (response) {
+        apiService.post("Blogs/BlogCommentCreate", postdataApproval).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
             $modalInstance.dismiss();
@@ -283,6 +287,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                       alert(error.data.Message);
               });
     }
+
 
     $scope.decline = function () {
         var postdataDecline = {

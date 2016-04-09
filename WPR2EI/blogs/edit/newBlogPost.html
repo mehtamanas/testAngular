@@ -68,7 +68,7 @@
     </div>
 
     <div class="clearfix">     
-        <div class="form-group form-bx form-bx5" ng-hide='status === "Draft" ||status === "Not Approved"'>
+        <div class="form-group form-bx form-bx5" ng-hide='isContentWriter && status === "Sent For Approval"||status === "Draft"' >
             <label for="">Comment</label>
             <textarea cols="110" rows="05" name="description"
                       data-ng-model="params.comment"                   
@@ -95,16 +95,13 @@
         </div>
 
         <div class="modal-btn-wrap-1 clearfix">
-            <button type="button" class=" f-btn" id="editBlog_btn_approve" ng-click="approval()" ng-hide='status === "Approved"||status === "Draft"||status === "Not Approved"||status === "Published"'> APPROVE </button>
-            <button type="button" class=" f-btn" id="editBlog_btn_sendforapproval" ng-click="sendForApproval()" ng-hide='status === "Sent For Approval"||status === "Approved"||status === "Published"'>SEND FOR APPROVE </button>
-            <button type="button" class=" f-btn f-btn-19" id="editBlog_btn_decline"  ng-click="decline()" ng-hide='status === "Draft"||status === "Not Approved"||status === "Published"'> DECLINE </button>
-            <button type="button" class=" f-btn" id="editBlog_btn_publish" ng-click="publish()" ng-hide='status === "Sent For Approval"||status === "Draft"||status === "Not Approved"||status === "Published"'> PUBLISH </button>
-            <button type="submit" id="editBlog_btn_save" class="f-btn" ng-hide='status === "Approved"||status === "Published"||status === "Sent For Approval"'> SAVE DRAFT </button>
-            <!--<button type="button" class=" f-btn f-btn-20 " ng-click="preview()"> PREVIEW </button>-->
 
-
-
-
+            <!--<button type="button" class=" f-btn" id="editBlog_btn_approve" ng-click="approval()" ng-hide='status === "Approved"||status === "Draft"||status === "Not Approved"||status === "Published"'> APPROVE </button>-->
+            <button type="button" class=" f-btn" id="editBlog_btn_approve" ng-click="approval()" ng-hide='isContentWriter && status === "Sent For Approval"||status === "Draft"'> APPROVE </button>
+            <button type="button" class=" f-btn" id="editBlog_btn_sendforapproval" ng-click="sendForApproval()" ng-show='isContentWriter && status === "Draft"'>SEND FOR APPROVAL </button>
+            <button type="button" class=" f-btn f-btn-19" id="editBlog_btn_decline"  ng-click="decline()" ng-hide='isContentWriter && status === "Sent For Approval"||status === "Draft"'> DECLINE </button>
+            <button type="button" class=" f-btn" id="editBlog_btn_publish" ng-click="publish()" ng-show='isContentWriter && status === "Approved"'> PUBLISH </button>
+            <button type="submit" id="editBlog_btn_save" class="f-btn" ng-show='isContentWriter && status === "Draft"'> SAVE DRAFT </button>           
         </div>
 </form>
 <!-- for image fetch -->
