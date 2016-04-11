@@ -2,6 +2,11 @@
 .controller('IntegrationController',
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window) {
 
+        var authRights = ($cookieStore.get('UserRole'));
+        $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
+        $scope.isContentApprover = (_.find(authRights, function (o) { return o == 'Content Approver'; })) == 'Content Approver' ? true : false
+        $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
+
         console.log('IntegrationController');
         $rootScope.title = 'Dwellar - Blog';
      
