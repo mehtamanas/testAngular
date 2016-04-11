@@ -29,10 +29,15 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
             if (error.status === 400)
                 alert(error.data.Message);
             else
-                alert("Network issue");
+                //alert("Network issue");
+        sweetAlert(
+                  'Oops...',
+                  'Network issue!',
+                  'error'
+                )
         });
     };
-   
+
     //end
 
     $scope.params = {};
@@ -162,7 +167,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
         apiService.post('SendEmail/SaveEmail', postData).then(function (response) {
             data = response.data;
             //$scope.openSucessfullPopup();
-           // $scope.cancel();
+            // $scope.cancel();
         },
        function (error) {
 
@@ -170,10 +175,8 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
 
     }
 
-    $scope.next = function ()
-    {
-        if ($scope.params.bodyText != null)
-        {
+    $scope.next = function () {
+        if ($scope.params.bodyText != null) {
             var postData = {
                 template: $scope.params.bodyText,
                 template_id: $scope.params.template,
@@ -184,16 +187,16 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
             AuditCreate();
             $state.go('app.summaryEmail');
         }
-        else
-        {
-            alert("Enter Description");
+        else {
+            //alert("Enter Description");
+            swal("Error!", "Pleas Enter Description", 'info')
             $state.go('app.addTemplate');
         }
-       
 
-       
-   
-}
+
+
+
+    }
 
     $scope.preview = function () {
         var modalInstance = $modal.open({
@@ -222,8 +225,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
     $scope.sendEmail = function (isValid) {
         $scope.showValid = true;
 
-        if (isValid)
-        {
+        if (isValid) {
 
             $scope.showValid = false;
         }

@@ -34,13 +34,15 @@
                
                apiService.post(projectUrl, param).then(function (response) {
                    var loginSession = response.data;
-                   alert("Password Recovered By Your Email..!!");
+                   swal("Success","Password Recovered By Your Email..!!",'success')
+                   //alert("Password Recovered By Your Email..!!");
                    
 
 
                },
           function (error) {
-              alert("Entered email address belongs to inactive user and/or ");
+              swal("Failure", "Entered email address belongs to inactive user and/or invalid user !!", 'error')
+              //alert("Entered email address belongs to inactive user and/or ");
           });
            };
 
