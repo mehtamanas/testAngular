@@ -53,7 +53,7 @@
             backdrop: 'static',
             controller: uploadSuccessController,
             size: 'sm',
-            resolve: { items: { title: "Contact Uploaded" } }
+            resolve: { items: { title: "Contacts Uploaded" } }
         });
        
     };
