@@ -10,7 +10,7 @@
         $scope.seletedCustomerId = $stateParams.id;
         $scope.showEventTodayGrid = true;
         $scope.showContactTodayGrid = true;
-        $scope.showTaskTodayGrid = true;
+        $scope.showTaskTomorrowGrid = true;
         var userID = $cookieStore.get('userId');
        
         console.log('my_dayController');
