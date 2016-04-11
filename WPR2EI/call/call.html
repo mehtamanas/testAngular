@@ -12,13 +12,28 @@
     <div class="pg-inner-content">
         <form action="">
             <div class="clearfix">
-                <div class="pull-left actions-wrap">
-                    <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeView()" id="contacaction">
-                        <option value='default' selected>Default View</option>
-                        <option ng-repeat="view in views" value={{view.view_name}}>{{view.view_name}}</option>
-                    </select>
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <label for="text">Query</label>:
+                            <!--ng-keypress="checkIfEnterKeyWasPressed($event)"-->
+                            <textarea id="text" class="form-control actions-wrap" cols="40" rows="2" style="height:300px;width:900px" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
+                        </div>
+                        <!--<a class="pull-left" style="margin:1%;font-weight:bold;margin-left:-297px" href="" ng-click="callFilter()"><u>FILTER</u></a>-->
+                    </div>
                 </div>
-                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveView()"><u>SAVE VIEW</u></a>
+
+                <!--<div class="pull-left actions-wrap">
+            <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeFilter()" id="contacaction1">
+                <option value='default' selected>Default Filter</option>
+                <option ng-repeat="view in filterview" value={{view.view_name}}>{{view.view_name}}</option>
+            </select>
+        </div>-->
+                <!--<input type="button" id="btnFilter" value="Filter" />-->
+
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="callFilter()"><u>FILTER</u></a>
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="clearFilter()"><u>CLEAR FILTER</u></a>
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveFilters()"><u>SAVE-FILTER</u></a>
             </div>
             <div id="record-content" class="properties-content">
                 <div id="project-record-list" kendo-grid k-options="callrecordGrid" selectable="true">
