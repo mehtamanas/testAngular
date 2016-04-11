@@ -1503,7 +1503,7 @@ angular.module('contacts')
         }
 
 
-        $scope.$on('REFRESH', function (event, args) {
+        $scope.$on('REFRESHNOTE', function (event, args) {
             if (args == 'NotesGrid') {
                 $('.k-i-refresh').trigger("click");
             }
