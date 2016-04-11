@@ -10138,10 +10138,11 @@ select {
 }
 
 #followUp {
-    color: #ffffff;
-    font-size: 11px;
-    padding: 3px;
-    font-weight: bold;
+color: #ffffff;
+ font-size: 11px;
+ padding: 3px;
+ font-weight: bold;
+
 }
 
 #RunNow {
@@ -10696,18 +10697,18 @@ input[type=text].rupee_1 {
 }
 
 .contact-detail-txt {
-    padding: 8px 22px;
+    padding: 10px 1px 0px 22px;
     color: #434343;
     line-height: 28px;
     font-family: arial;
     font-weight: 600;
-    font-size:18px;
+    font-size: 18px;
 }
 
 .contact_p {
     font-size: 9px;
     font-weight: 400;
-    margin-top: 17%;
+   margin-top: 11%;
     text-align: center;
 }
 
@@ -10725,19 +10726,20 @@ input[type=text].rupee_1 {
     font-weight: normal;
     color: #a0a0a0;
     font-size: 10px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .contact_links {
-    color: #1DD468 !important;
-    font-size: 11px;
-    font-weight: 700;
+    color: #23ae89 !important;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .contact_link_1 {
     float: right;
     margin-top: 9px;
     padding: 0% 0% 0% 10%;
+
 }
 
 .contact_title_1 {
@@ -11115,8 +11117,7 @@ input[type=text].rupee_1 {
     height: 35px !important;
     border-radius: 1px;
     resize: none !important;
-    border-right:none;
-
+    border-right: none;
 }
 
 .serach_bar_btn {
@@ -11124,6 +11125,13 @@ input[type=text].rupee_1 {
     font-size: 11px;
     font-weight: 600;
     float: right;
+    border-radius: 1px;
+    margin-right: 2px;
+}
+.serach_bar_btn-1 {
+    height: 35px !important;
+    font-size: 11px;
+    font-weight: 600;
     border-radius: 1px;
     margin-right: 2px;
 }
@@ -11138,6 +11146,7 @@ input[type=text].rupee_1 {
     height: 35px !important;
     border-radius: 1px;
 }
+
 .search_btn_cancel {
     border-right-color: #c5c5c5;
     border-top-color: #c5c5c5;
@@ -11149,32 +11158,33 @@ input[type=text].rupee_1 {
     height: 35px !important;
     border-radius: 1px;
 }
-.search_btn_cancel:hover{
+
+    .search_btn_cancel:hover {
         background-color: #fff;
         border-right-color: #c5c5c5;
         border-top-color: #c5c5c5;
         border-bottom-color: #c5c5c5;
         border-left: none;
         color: #289ff1;
+    }
+
+.serch_btn_custom:hover {
+    background-color: #477862;
+    border-right-color: #c5c5c5;
+    border-top-color: #c5c5c5;
+    border-bottom-color: #c5c5c5;
+    border-left: none;
+    color: #fff;
 }
 
-    .serch_btn_custom:hover {
-        background-color: #477862;
-        border-right-color: #c5c5c5;
-        border-top-color: #c5c5c5;
-        border-bottom-color: #c5c5c5;
-        border-left: none;
-        color: #fff;
-    }
-
-    .serch_btn_custom:active {
-        background-color: #477862;
-        border-right-color: #c5c5c5;
-        border-top-color: #c5c5c5;
-        border-bottom-color: #c5c5c5;
-        border-left: none;
-        color: #fff !important;
-    }
+.serch_btn_custom:active {
+    background-color: #477862;
+    border-right-color: #c5c5c5;
+    border-top-color: #c5c5c5;
+    border-bottom-color: #c5c5c5;
+    border-left: none;
+    color: #fff !important;
+}
 
 .side_panel_task {
     padding: 10px;
@@ -11285,11 +11295,13 @@ myDayTaskRight:after {
     padding: 16px;
     margin-top: -15px;
 }
-.task_maincontent{
-     background: #e7e7e7;
+
+.task_maincontent {
+    background: #e7e7e7;
     padding-bottom: 0px;
 }
-.task_due_date{
+
+.task_due_date {
     float: right;
     font-size: 11px;
     text-shadow: 0.03em .04em #c5c5c5;
@@ -11297,14 +11309,15 @@ myDayTaskRight:after {
 /*material angular*/
 md-radio-button {
     box-sizing: border-box;
-    display: inline-block!important;
+    display: inline-block !important;
     margin-bottom: 16px;
     white-space: nowrap;
     cursor: pointer;
     position: relative;
 }
+
 .image-upload-wrap-1 .photo-upload-bx-1 {
-    background: url("../images/defaultcontact.png") no-repeat  #f4f4f4;
+    background: url("../images/defaultcontact.png") no-repeat #f4f4f4;
     border: 2px solid #ddd;
     height: 136px;
     line-height: 102px;
@@ -11312,3 +11325,29 @@ md-radio-button {
     text-align: center;
     overflow: hidden;
 }
+.contact_date{
+    margin-left: 82%;
+    margin-top: 7%;
+    width: 100%;"
+}
+/*custom media*/
+
+@media screen 
+    and (min-width: 1280px)
+    and (max-width:1366px) {
+    .custom_class {
+            width: 62% !important;
+    }
+ .contact_p_1 {
+    font-weight: normal;
+    color: #a0a0a0;
+    font-size: 8px;
+    font-weight: bold;
+}
+ .contact_link_1 {
+    float: right;
+    margin-top: 9px;
+    padding: 0% 0% 0% 9%;
+}
+}
+
