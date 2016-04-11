@@ -7,7 +7,7 @@
         var userID = $cookieStore.get('userId');
 
         var orgID = $cookieStore.get('orgID');
-       
+
         $scope.callrecordGrid = {
             dataSource: {
                 type: "json",
@@ -20,7 +20,7 @@
                         fields: {
                             starttime: { type: "date" },
                             Recording: { type: "audio/mpeg" },
-                          
+
                         }
                     }
                 },
@@ -38,7 +38,8 @@
                     filter: "Apply filter",
                     sortAscending: "Sort (asc)",
                     sortDescending: "Sort (desc)"
-                }},
+                }
+            },
             pageable: {
                 refresh: true,
                 pageSizes: true,
@@ -59,9 +60,9 @@
                     title: "Caller Number",
                     attributes:
                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
                 },
                 {
                     field: "lead_name",
@@ -77,9 +78,9 @@
                     title: "Lead Number",
                     attributes:
                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
                 }, {
                     field: "calltype",
                     title: "Call Type",
@@ -93,31 +94,31 @@
                     template: "<audio controls><source type='audio/mpeg' src='#= recordingurl #'></audio>",
                     title: "Recording",
                     field: 'recordingurl',
-                    width:'314px',
+                    width: '314px',
                     attributes:
                       {
                           "class": "UseHand",
                           "style": "text-align:center"
                       }
-                },                 
+                },
                 {
                     field: "starttime",
                     title: "Date & Time",
                     format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                     attributes:
                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
                 }, {
                     field: "direction",
                     title: "Direction",
                     attributes:
                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
+                       "class": "UseHand",
+                       "style": "text-align:center"
                    }
-                },]
+                }, ]
         };
 
         $scope.filterNow = function () {
@@ -252,11 +253,11 @@
                 $scope.gridView = args.data;
             }
         });
-        
-        // by saroj on 9th april 2016
 
+        // by saroj on 9th april 2016
+        // jQL coading 
         $scope.DoWork = function () {
-            alert('hii');
+            //  alert('hii');
             $scope.callFilter();
         };
 
@@ -269,7 +270,6 @@
 
             var filter = "";
             var logsplit = "";
-
 
             if (txtdata.length > 0) {
 
@@ -324,7 +324,7 @@
 
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "CALLER NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "CALLER")
                                 Firstname = "caller_name";
-                                                       
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }
@@ -608,9 +608,10 @@
 
 
             // final code to get execute....
+            // 11-04-2016
 
             if (Firstname == "") {
-                alert("Invalid Feild Name.");
+                alert("Invalid Feild.");
                 return;
             }
 
@@ -622,7 +623,29 @@
                 alert("Please Check Query ! ");
             }
         }
-        
+
+        $scope.clearFilter = function () {
+            $('#project-record-list').getKendoGrid().dataSource.filter([]);
+            $scope.textareaText = ''
+        }
+
+        $scope.saveFilters = function () {
+
+            if ($scope.textareaText == "") {
+                alert("Please write query.")
+                return;
+            }
+
+            var Querydata = $scope.textareaText.toLowerCase();
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/Views/createView.html',
+                backdrop: 'static',
+                controller: createViewCtrl,
+                size: 'lg',
+                resolve: { viewData: { sort: null, col: null, grid: 'call', type: 'Filter', filterQuery: Querydata } }
+            });
+        }
 
     }
 );

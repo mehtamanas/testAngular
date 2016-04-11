@@ -174,7 +174,7 @@
         }
 
         $scope.DoWork = function () {
-            alert('enter hit');
+          //  alert('enter hit');
             $scope.callFilter();
         };
 
@@ -383,7 +383,9 @@
                                     I need recent monday dates and current dates 
                                     */
 
-                                    var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
+                                    // var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
+
+                                    var mondayOfCurrentWeek = moment().startOf('isoweek')._d;
 
                                     // For Last week 
                                     /*
@@ -473,7 +475,7 @@
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "YESTERDAY") {
+                                    else if (expsplit[1].trim().toUpperCase() == "YESTERDAY") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
@@ -482,35 +484,49 @@
                                         // filter.filters.push({ field: Firstname.trim(), operator: "eq", value: YesterDayDate.toDateString() });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
+                                    else if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
 
                                         filter = { logic: "and", filters: [] };
-                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
-                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                        if (mondayOfCurrentWeek.getDate() == CurrentDate.getDate()) {
+
+                                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                        }
+                                        else {
+                                            filter.filters.push({ field: Firstname.trim(), operator: "gte", value: mondayOfCurrentWeek });
+                                            filter.filters.push({ field: Firstname.trim(), operator: "lte", value: CurrentDate });
+                                        }
+
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "LAST WEEK") {
+                                    else if (expsplit[1].trim().toUpperCase() == "LAST WEEK") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: lastweekmonday });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastweeksunday });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
+                                    else if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
 
                                         filter = { logic: "and", filters: [] };
+                                        //if (firstDayOfCurrentMonth.getDate() == CurrentDate.getDate()) {
+                                        //    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
+                                        //    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate.getDate() + 1 });
+                                        //}
+                                        //else {
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                        // }
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "LAST MONTH") {
+                                    else if (expsplit[1].trim().toUpperCase() == "LAST MONTH") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayPrevMonth });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastDayPrevMonth });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "THIS QUARTER" || expsplit[1].trim().toUpperCase() == "CURRENT QUARTER") {
+                                    else if (expsplit[1].trim().toUpperCase() == "THIS QUARTER" || expsplit[1].trim().toUpperCase() == "CURRENT QUARTER") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOfcurrQuarter });
@@ -518,34 +534,51 @@
                                     }
 
 
-                                    if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
+                                    else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "YEAR TO DATE") {
+                                    else if (expsplit[1].trim().toUpperCase() == "YEAR TO DATE") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: currentYearFirstDay });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "THIS FINANCIAL YEAR") {
+                                    else if (expsplit[1].trim().toUpperCase() == "THIS FINANCIAL YEAR") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
                                     }
 
-                                    if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
+                                    else if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: lastFinancialYearFirstDay });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastFinancialYearLastDay });
                                     }
 
+                                    else if (expsplit[1].trim().toUpperCase() == "NEVER") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "eq", value: '' });
+                                    }
+                                    else {
+                                        //new chnage 9-4-16
+                                        filter = { logic: "and", filters: [] };
+
+                                        var Date1 = moment(expsplit[1].trim(), 'D/M/YYYY');
+                                        var Datex = moment(expsplit[1].trim(), 'D/M/YYYY');
+                                        var Date2 = Datex.add('days', 1);
+
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: Date1 });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: Date2 });
+
+                                    }
                                 }
 
                                 else {
@@ -623,7 +656,6 @@
                             ValidFilter = true;
                         }
 
-
                         // 
 
                         // BETWEEN OR CHECK 
@@ -645,8 +677,9 @@
                             if (InnerBetweenSplit.length > 1) {
 
                                 filter = { logic: "and", filters: [] };
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
-                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "gte", value: moment(InnerBetweenSplit[0].trim().toString(), 'DD-MM-YYYY').startOf('day')._d });
+                                filter.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
                                 ValidFilter = true;
                             }
                         }
@@ -658,12 +691,17 @@
 
             // final code to get execute....
 
+            if (Firstname == "") {
+                alert("Invalid Feild.");
+                return;
+            }
+
             if (ValidFilter == true) {
                 var ds = $('#contact_kenomain').getKendoGrid().dataSource;
                 ds.filter(filter);
             }
             else {
-                alert("Please Check Query ! ");
+                alert("Please Check Query.");
             }
         }
 
