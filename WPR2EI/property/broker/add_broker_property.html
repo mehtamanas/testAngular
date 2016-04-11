@@ -107,7 +107,7 @@
                                                maxlength="10"
                                                ng-pattern="/^([1-9][0-9+./]*)$/"
                                                input-focus 
-                                               required/>
+                                               />
                                         <span class="area-txt">sq.ft</span>
                                         <div ng-messages="addNewForm.Agreement_area.$error" style="color:maroon" role="alert">
                                             <!--<div ng-message="required" data-ng-if="addNewForm.Agreement_area.$invalid && (!addNewForm.Agreement_area.$pristine || showValid) && !addNewForm.Agreement_area.$focus">This field should not be empty </div>-->
@@ -803,7 +803,7 @@
                                 <input type="text" class="form-control text-bold" id="broker_agentPhone" name="email"
                                        data-ng-model="choice.email"
                                        ng-pattern="emailRegex" />
-                                   <div ng-messages="addNewForm.agent_phone.$error" style="color:maroon" role="alert">
+                                   <div ng-messages="addNewForm.email.$error" style="color:maroon" role="alert">
                                        <div ng-message="pattern">Enter valid Email</div>
                                  </div>
                                </div>

@@ -361,7 +361,18 @@
        function (error) {
 
        });
-      
+
+        $scope.addNewBroker = function (isValid) {
+            $scope.showValid = true;
+
+            if (isValid) {
+                $scope.loadingDemo = true;
+
+                $scope.save();
+
+                $scope.showValid = false;
+            }
+        }
  
         
     });
