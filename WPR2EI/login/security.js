@@ -81,8 +81,6 @@ angular.module('security', [
                 apiService.get('User/Get?id=' + userId).then(function (response) {
                     var currentUser = response.data;
                     if (currentUser) {
-                     
-                      
                         $cookieStore.put('currentUser', currentUser);
                         $cookieStore.put('authToken', authToken);
                         apiService.setAuthTokenHeader(authToken);

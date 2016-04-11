@@ -41,7 +41,6 @@ angular.module('app.guest.login')
                 if ($rootScope.rememberMeOn) { $localStorage.alive.user = $scope.params}
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
-                     $scope.loadingDemo = false;
                      $cookieStore.put('loggedUserInfo', response);
                      $localStorage.alive ? $localStorage.alive.loggedUserInfo = response:null;//keep me logged IN
 
