@@ -165,12 +165,12 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                     data = response.data[0];
                     if ($scope.flag == "Sent For Approval")
                     {
-                        $scope.openConfirmationBlog();
+                       // $scope.openConfirmationBlog();
                                    
                     }
                     else
                     {
-                        $scope.openConfirmationApproval();
+                        //$scope.openConfirmationApproval();
                     }
                    
                     $scope.cancel();
