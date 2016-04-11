@@ -1,6 +1,7 @@
 ﻿createViewCtrl = function ($scope, $state, apiService, $rootScope,$cookieStore, $modalInstance, $modal, viewData) {
     $scope.params = {};
     $scope.loadingDemo = false;
+    $scope.title = viewData.type;
 
   $scope.title = viewData.type;
      $scope.createView = function (isValid) {
