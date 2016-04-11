@@ -15,7 +15,32 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Broker/GetBrokerGrid/" + orgID
+                    read: function (options) {
+                        apiService.getWithoutCaching("Broker/GetBrokerGrid/" + orgID).then(function (response) {
+                            data = response.data;
+
+                            for (i = 0; i < data.length; i++)
+                            {
+                                var agent = (data[i].GetAgentList);
+                                for (j = 0; j <= agent.length; j++)
+                                {
+                                    if (agent.length != 0 && agent[j] !=undefined)
+                                    {
+                                     
+                                        agent_name = agent[j].agent_name;
+                                        agent_phone_no = agent[j].agent_phone_no;
+                                        continue;
+                                    }
+                                   
+                                }
+                               
+                            }
+                            options.success(data);
+                        }, function (error) {
+                            options.error(error);
+                        })
+
+                    },
                 },
                 pageSize: 20,
 
@@ -188,6 +213,7 @@
                  {
                      field: "agent_name",
                      title: "Agent Name",
+                     template: "<span ng-repeat='agent in dataItem.GetAgentList' 'ng-hide='{{$index>1}}'>{{agent.agent_name}}<br/></span>",
                      width: "120px",
                      attributes:
                    {
@@ -199,6 +225,7 @@
                {
                    field: "agent_phone_no",
                    title: "Agent Phone",
+                   template: "<span ng-repeat='agent in dataItem.GetAgentList' 'ng-hide='{{$index>1}}'>{{agent.agent_phone_no}}<br/></span> ",
                    width: "120px",
                    attributes:
                  {
