@@ -141,14 +141,13 @@ angular.module('contacts')
             { return !o.hidden });
             colObject = (_.pluck(colObject, 'field')).join(',');
 
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/Views/createView.html',
                 backdrop: 'static',
                 controller: createViewCtrl,
                 size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead', type: 'View', } }
+                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead', type: 'View', filterQuery: null } }
             });
         }
 
@@ -420,299 +419,16 @@ angular.module('contacts')
             });
         }
 
+       
+
         $scope.DoWork = function () {
             $scope.callFilter();
         };
 
-        $scope.filterFunc = function (Query) {
-            var txtdata = Query.toLowerCase();
-
-            var Firstname = "";
-            var ValidFilter = false;
-
-            var filter = "";
-            var logsplit = "";
-
-
-            if (txtdata.length > 0) {
-
-                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
-
-                    filter = { logic: "and", filters: [] };
-                    logsplit = txtdata.split(" and ");
-                }
-                else {
-                    filter = { logic: "or", filters: [] };
-                    logsplit = txtdata.split(" or ");
-                }
-
-                // alert("or split value =  " + logsplit.length);
-                if (logsplit.length > 0) {
-                    for (var j = 0; j < logsplit.length; j++) {
-                        // alert("value for j is " + j);
-
-                        //FOR DATES 
-                        var expsplitIsBefore = logsplit[j].split(" isbefore ");
-                        var expsplitIsAfter = logsplit[j].split(" isafter ");
-                        var expsplitBetween = logsplit[j].split(" between ");
-
-                        var expEQ = logsplit[j].split(" = ");
-                        var expIS = logsplit[j].split(" is ");
-
-                        var expsplit = "";
-                        if (expEQ.length > 1)
-                            expsplit = expEQ;
-
-                        if (expIS.length > 1)
-                            expsplit = expIS;
-
-                        var expsplitCONTAINS = logsplit[j].split(" contains ");
-                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
-
-                        var expsplitIN = logsplit[j].split(" in ");
-
-                        var expSplitGTE = logsplit[j].split(" >= ");
-
-                        var expSplitLTE = logsplit[j].split(" <= ");
-
-                        var expSplitGT = logsplit[j].split(" > ");
-
-                        var expSplitLT = logsplit[j].split(" < ");
-                        // CONTAINS  CHECK   
-                        if (expsplitCONTAINS.length > 1) {
-
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
-                                Firstname = "Name";
-
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
-                                Firstname = "Contact_First_Name";
-
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
-                                Firstname = "Contact_Last_Name";
-
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
-                                Firstname = "Contact_Email";
-
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
-                                Firstname = "Contact_Phone";
-
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
-                                Firstname = "tag1";
-
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
-                                Firstname = "company";
-
-                                // for notes still need to confirm with sir
-                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
-                                Firstname = "text";
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
-                            ValidFilter = true;
-                        }
-
-                        // IN CHECK
-
-                        if (expsplitIN.length > 1) {
-
-
-                            if (expsplitIN[0].toUpperCase().trim() == "NAME")
-                                Firstname = "Name";
-
-                            if (expsplitIN[0].toUpperCase().trim() == "FIRSTNAME")
-                                Firstname = "Contact_First_Name";
-
-                            if (expsplitIN[0].toUpperCase().trim() == "LASTNAME")
-                                Firstname = "Contact_Last_Name";
-
-                            else if (expsplitIN[0].toUpperCase().trim() == "EMAIL")
-                                Firstname = "Contact_Email";
-
-                            if (expsplitIN[0].toUpperCase().trim() == "PHONE" || expsplitIN[0].toUpperCase().trim() == "NUMBER")
-                                Firstname = "Contact_Phone";
-
-                            else if (expsplitIN[0].toUpperCase().trim() == "TAGS")
-                                Firstname = "tag1";
-
-                            else if (expsplitIN[0].toUpperCase().trim() == "COMPANY")
-                                Firstname = "company";
-
-                                // for notes still need to confirm with sir
-                            else if (expsplitIN[0].toUpperCase().trim() == "TEXT" || expsplitIN[0].toUpperCase().trim() == "NOTES")
-                                Firstname = "text";
-
-                            var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
-                            // alert(mystring);
-
-                            var newString = mystring.split(',');
-                            if (newString.length >= 1) {
-                                for (var k = 0; k < newString.length; k++) {
-                                    // newString
-                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
-                                    ValidFilter = true;
-                                }
-                            }
-                        }
-                        // EQUAL TO CHECK 
-                        if (expsplit.length > 1) {
-
-
-                            if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
-                                Firstname = "Contact_First_Name";
-
-                            if (expsplit[0].toUpperCase().trim() == "LASTNAME")
-                                Firstname = "Contact_Last_Name";
-
-                            else if (expsplit[0].toUpperCase().trim() == "EMAIL")
-                                Firstname = "Contact_Email";
-
-                            if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
-                                Firstname = "Contact_Phone";
-
-                            else if (expsplit[0].toUpperCase().trim() == "TAGS")
-                                Firstname = "tag1";
-
-                            else if (expsplit[0].toUpperCase().trim() == "COMPANY")
-                                Firstname = "company";
-
-                                // for notes still need to confirm with sir
-                            else if (expsplit[0].toUpperCase().trim() == "TEXT" || expsplit[0].toUpperCase().trim() == "NOTES")
-                                Firstname = "text";
-
-                            else if (expsplit[0].toUpperCase().trim() == "ASSIGNED TO")
-                                Firstname = "Assigned_To";
-
-                            else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
-                                Firstname = "leadsource";
-
-                            else if (expsplit[0].toUpperCase().trim() == "NAME")
-                                Firstname = "Name";
-
-                            else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-                                Firstname = "follow_up_count";
-
-                            //if (expsplit[1].trim() == "")
-                            //    expsplit[1].trim() = null;
-
-                            if (Firstname == "follow_up_count") {
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
-                                ValidFilter = true;
-                            }
-                            else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
-                                ValidFilter = true;
-                            }
-                        }
-                        // GREATER THAN EQUAL TO CHECK
-                        if (expSplitGTE.length > 1) {
-
-                            if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-                                Firstname = "follow_up_count";
-                            else {
-                                alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
-                                return;
-                            }
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
-                            ValidFilter = true;
-                        }
-
-                        // LESSER THAN EQUAL TO CHECK
-                        if (expSplitLTE.length > 1) {
-
-                            if (expSplitLTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-                                Firstname = "follow_up_count";
-                            else {
-                                alert(" <= Operator cannot be assigned to " + expSplitLTE[0]);
-                                return;
-                            }
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
-                            ValidFilter = true;
-                        }
-
-                        // IS BEFORE CHECK
-
-                        if (expsplitIsBefore.length > 1) {
-
-
-                            if (expsplitIsBefore[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-                                Firstname = "last_contacted";
-
-                            else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
-                                Firstname = "last_updated";
-
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
-                                return;
-                            }
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
-                        }
-
-                        // IS AFTER CHECK
-
-                        if (expsplitIsAfter.length > 1) {
-
-                            if (expsplitIsAfter[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-                                Firstname = "last_contacted";
-
-                            else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
-                                Firstname = "last_updated";
-
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
-                                return;
-                            }
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
-                        }
-
-
-                        //
-                        // BETWEEN OR CHECK 
-                        if (expsplitBetween.length > 1) {
-
-                            if (expsplitBetween[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-                                Firstname = "last_contacted";
-
-                            else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
-                                Firstname = "last_updated";
-
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
-                                return;
-                            }
-
-                            var InnerBetweenSplit = expsplitBetween[1].split("||");
-
-                            if (InnerBetweenSplit.length > 1) {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
-                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
-                                ValidFilter = true;
-                            }
-                        }
-
-                    } //for loop 
-                } // if loop
-            } //if loop MAIN
-
-
-            // final code to get execute....
-
-            if (ValidFilter == true) {
-                var ds = $('#contact_kenomain').getKendoGrid().dataSource;
-                ds.filter(filter);
-            }
-            else {
-                alert("Please Check Query ! ");
-            }
-        }
-
         $scope.callFilter = function () {
 
             var txtdata = $scope.textareaText.toLowerCase();
+            var txtdata = txtdata;
             var Firstname = "";
             var ValidFilter = false;
 
@@ -793,6 +509,9 @@ angular.module('contacts')
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
                                 Firstname = "text";
 
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }
@@ -826,6 +545,9 @@ angular.module('contacts')
                                 // for notes still need to confirm with sir
                             else if (expsplitIN[0].toUpperCase().trim() == "TEXT" || expsplitIN[0].toUpperCase().trim() == "NOTES")
                                 Firstname = "text";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
 
                             var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
                             // alert(mystring);
@@ -876,18 +598,205 @@ angular.module('contacts')
                             else if (expsplit[0].toUpperCase().trim() == "NAME")
                                 Firstname = "Name";
 
+                            else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
                             else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
 
-                            //if (expsplit[1].trim() == "")
-                            //    expsplit[1].trim() = null;
+                            if (expsplit[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            if (expsplit[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
 
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
                                 ValidFilter = true;
                             }
                             else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                //"last_updated":"2016-04-07T04:20:42.953+00:00"
+
+                                if (Firstname == "last_contacted" || Firstname == "last_updated") {
+
+
+                                    var CurrentDate = moment().startOf('day')._d;
+                                    var TommDate = moment().startOf('day').add(+1, 'days')._d;
+                                    var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
+
+                                    // For This week 
+                                    /*
+                                    I need recent monday dates and current dates 
+                                    */
+
+                                    var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
+
+                                    // For Last week 
+                                    /*
+                                    I need recent monday dates and current dates 
+                                    */
+
+                                    var d = new Date();
+
+                                    // set to Monday of this week
+                                    d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+
+                                    // set to previous Monday
+                                    d.setDate(d.getDate() - 7);
+
+                                    // create new date of day before
+                                    var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+                                    var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
+
+
+
+
+                                    // Last Financial Current year 
+
+                                    var lastFinancialYearFirstDay = new Date(new Date().getFullYear() - 1, 3, 1); // last year first day of financial yr
+
+                                    var lastFinancialYearLastDay = new Date(new Date().getFullYear(), 2, 31); // current year march month
+
+
+
+                                    // Financial Current year 
+
+                                    var cfyFirstDay = new Date(new Date().getFullYear(), 4, 1);
+
+
+
+                                    // Current year 
+
+                                    var currentYearFirstDay = new Date(new Date().getFullYear(), 0, 1);
+
+
+                                    // Dates for Current Quarter
+                                    var dd = new Date();
+                                    var currQuarter = (dd.getMonth() - 1) / 3 + 1;
+
+                                    var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
+                                    var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
+
+                                    lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
+
+
+
+
+                                    // Dates for Current Quarter
+                                    var ddlast = new Date();
+                                    var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
+
+
+                                    var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
+                                    var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
+
+                                    lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
+
+
+
+
+
+                                    // Current Month First date 
+
+                                    var firstDayOfCurrentMonth = new Date(CurrentDate.getFullYear(), CurrentDate.getMonth(), 1);
+
+                                    //For Last Month
+                                    //  First Date 
+                                    var firstDayPrevMonth = new Date(CurrentDate.getFullYear(), CurrentDate.getMonth() - 1, 1);
+                                    //Last Date
+
+
+                                    var lastDayPrevMonth = new Date(); // current date
+                                    lastDayPrevMonth.setDate(1); // going to 1st of the month
+                                    lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
+
+
+
+                                    if (expsplit[1].trim().toUpperCase() == "TODAY") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+
+                                        // filter.filters.push({ field: Firstname.trim(), operator: "eq", value: YesterDayDate.toDateString() });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "LAST WEEK") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: lastweekmonday });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastweeksunday });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "LAST MONTH") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayPrevMonth });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastDayPrevMonth });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "THIS QUARTER" || expsplit[1].trim().toUpperCase() == "CURRENT QUARTER") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOfcurrQuarter });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOfcurrQuarter });
+                                    }
+
+
+                                    if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "YEAR TO DATE") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: currentYearFirstDay });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "THIS FINANCIAL YEAR") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    }
+
+                                    if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
+
+                                        filter = { logic: "and", filters: [] };
+                                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: lastFinancialYearFirstDay });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastFinancialYearLastDay });
+                                    }
+
+                                }
+
+                                else {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                }
                                 ValidFilter = true;
                             }
                         }
@@ -959,7 +868,6 @@ angular.module('contacts')
                             filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
                             ValidFilter = true;
                         }
-
 
                         // 
 
@@ -980,6 +888,8 @@ angular.module('contacts')
                             var InnerBetweenSplit = expsplitBetween[1].split("||");
 
                             if (InnerBetweenSplit.length > 1) {
+
+                                filter = { logic: "and", filters: [] };
                                 filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
                                 filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
                                 ValidFilter = true;
@@ -998,9 +908,10 @@ angular.module('contacts')
                 ds.filter(filter);
             }
             else {
-                alert("Please Check Query ! ");
+                alert("Please Check Query.");
             }
         }
+
 
         $scope.clearFilter = function () {
             $('#contact_kenomain').getKendoGrid().dataSource.filter([]);
