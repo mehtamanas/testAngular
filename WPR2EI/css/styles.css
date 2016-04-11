@@ -9982,21 +9982,39 @@ select {
     height: 46px;
 }
 
-#newcontact_social {
-    background: url(../images/facebook.png) no-repeat scroll 18px 18px;
+#AddNewProjectSocialFb {
+    background: url(../images/facebook.png) no-repeat scroll 18px 14px;
     padding-left: 43px;
     padding-top: -3px;
 }
 
-#newcontact_twitter {
-    background: url(../images/twitter.png) no-repeat scroll 18px 18px;
+#AddNewProjectSocialTwit {
+    background: url(../images/twitter.png) no-repeat scroll 18px 14px;
     padding-left: 43px;
     padding-top: -3px;
 }
 
 
-#newcontact_linked {
-    background: url(../images/linkedin.png) no-repeat scroll 18px 18px;
+#AddNewProjectSocialLink {
+    background: url(../images/linkedin.png) no-repeat scroll 18px 14px;
+    padding-left: 43px;
+    padding-top: -3px;
+}
+#editNewProjectFb {
+    background: url(../images/facebook.png) no-repeat scroll 18px 14px;
+    padding-left: 43px;
+    padding-top: -3px;
+}
+
+#editNewProjectTwit {
+    background: url(../images/twitter.png) no-repeat scroll 18px 14px;
+    padding-left: 43px;
+    padding-top: -3px;
+}
+
+
+#editNewProjectLink {
+    background: url(../images/linkedin.png) no-repeat scroll 18px 14px;
     padding-left: 43px;
     padding-top: -3px;
 }
@@ -11104,7 +11122,7 @@ input[type=text].rupee_1 {
 }
 
 .main_body {
-    padding-left: 2%;
+    padding-left: 4%;
     padding-right: 2%;
 }
 
@@ -11328,7 +11346,23 @@ md-radio-button {
 .contact_date{
     margin-left: 82%;
     margin-top: 7%;
-    width: 100%;"
+    width: 100%;
+}
+.center{
+  position: relative;
+top: 30%;
+text-align: center;
+left: 50%;
+white-space: normal;
+padding: 10px;
+margin: 358px 0 0 -120px;
+width: 240px;
+background:#f4f4f4;
+
+}
+.email_name1{
+    font-size: 12px;
+    text-transform:capitalize;
 }
 /*custom media*/
 

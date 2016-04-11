@@ -24,8 +24,8 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
             var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
             if (im === -1) {
-
-                alert('You have selected inavalid file type');
+                sweetAlert("Oops...", "You have selected inavalid file type!", "error");
+                //alert('You have selected inavalid file type');
             }
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
@@ -154,7 +154,8 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                 function (error)
                 {
                     if (error.status === 400)
-                        alert(error.data.Message);
+                        //sweetAlert("Oops...", error.data.Message, "error");
+                       alert(error.data.Message);
                 });
             }
        
@@ -174,6 +175,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
             },
                   function (error) {
                       if (error.status === 400)
+
                           alert(error.data.Message);
                   });
         }
@@ -186,7 +188,9 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
         $scope.tagList = _.pluck($scope.tagList, 'tag_name');
     },
 function (error) {
+
     alert("Error " + error.state);
+
 });
 
 
@@ -219,7 +223,7 @@ function (error) {
             templateUrl: 'newuser/sucessfull.tpl.html',
             backdrop: 'static',
             controller: sucessfullController,
-            size: 'lg',
+            size: 'sm',
             resolve: { items: { title: "Blog" } }
         });
         $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');      
