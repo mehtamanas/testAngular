@@ -41,6 +41,7 @@
             var loginSession = response.data;
             AuditCreate();
             $modalInstance.dismiss();
+            $rootScope.$broadcast('REFRESHNOTE', 'NotesGrid');
             $scope.openSucessfullPopup();
            
         },
@@ -61,7 +62,7 @@
                 resolve: { items: { title: "Notes" } }
 
             });
-            $rootScope.$broadcast('REFRESH1', 'NotesGrid');
+            
         }
 
     }
