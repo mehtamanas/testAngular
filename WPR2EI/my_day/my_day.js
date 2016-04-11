@@ -4,8 +4,6 @@
         //var userID = $cookieStore.get('user_id');
         $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
         $scope.selectedTaskID = $stateParams.id;
-
-
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         $scope.seletedCustomerId = $stateParams.id;
         $scope.showEventTodayGrid = true;
@@ -493,7 +491,8 @@
 
         }
 
-        var taskAPI = function () { 
+        var taskAPI = function () {
+
         apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/overdue").then(function (res) {
             $scope.taskToday = res.data;
         }, function (err) {
@@ -651,8 +650,6 @@
         }
 
 
-
-
         $scope.contactShowHideGrid = function (taskType) {
             if (taskType === 'today') {
                 $scope.showContactTodayGrid = true;
@@ -726,61 +723,4 @@
             window.sessionStorage.selectedCustomerID = dataItem.id;
             $state.go('app.contactdetail', { id: dataItem.id });
         };
-
-
-        // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
-            window.sessionStorage.selectedTaskID = dataItem.task_id;
-            $state.go('app.edit_task_myday', { id: dataItem.task_id });
-        };
-        // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
-
-
-            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
-            apiService.getWithoutCaching(contactUrl).then(function (response) {
-                $scope.params = response.data[0];
-
-                var stat = $scope.params.status;
-                if (stat == "Completed") {
-                    alert(" Completed task can not be edited...");
-                }
-                else {
-                    window.sessionStorage.selectedTaskID = dataItem.task_id;
-                    $state.go('app.edit_task_myday', { id: dataItem.task_id });
-
-                };
-            },
-             function (error) {
-
-             });
-
-        };
-
-        // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
-
-
-            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
-            apiService.getWithoutCaching(contactUrl).then(function (response) {
-                $scope.params = response.data[0];
-
-                var stat = $scope.params.status;
-                if (stat == "Completed") {
-                    alert(" Completed task can not be edited...");
-                }
-                else {
-                    window.sessionStorage.selectedTaskID = dataItem.task_id;
-                    $state.go('app.edit_task_myday', { id: dataItem.task_id });
-
-                };
-            },
-             function (error) {
-
-             });
-        };
-
-
-       
-
     });
