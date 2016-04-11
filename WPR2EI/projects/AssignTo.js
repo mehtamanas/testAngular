@@ -4,15 +4,12 @@
     $scope.title = items.title;
     //Audit log start
     $scope.params = {
-
-        device_os: "windows10",
-        device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
-        action_id: "Addnew TEAM View",
-        details: "Addnew TEAM detail",
+        device_os: $cookieStore.get('Device_os'),
+        device_type: $cookieStore.get('Device'),
+        module_id: "Addnew Project",
+        action_id: "Addnew Project View",
+        details: "Addnew Project detail",
         application: "angular",
-
         browser: $cookieStore.get('browser'),
         ip_address: $cookieStore.get('IP_Address'),
         location: $cookieStore.get('Location'),
@@ -22,10 +19,8 @@
 
 
     AuditCreate = function (param) {
-
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
-
         },
    function (error) {
 

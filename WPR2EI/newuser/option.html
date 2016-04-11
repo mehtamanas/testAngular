@@ -6,30 +6,30 @@
     </div>
 </div>
 <div class="main-content project add-new">
-    <form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
+    <form name="roleForm" novalidate data-ng-submit="addNew(roleForm.$valid)" autocomplete="off" class="form-horizontal">
         <div class="main-content project add-new" style="padding:3%">
             <div class="form-group form-bx ">
                 
                     <!--<label>Option</label>-->
                     <div class="form-group col-md-8">
                         <div class="">
-                            <input type="hidden" name="Select Project" data-ng-model="params.country">
-
-                            <select ng-change="selectcity()" ng-model="city1" id="useroption_project" class="dropdown form-control" style="margin-left: 26%;" required >
-                                <option value="" selected>-- Select --</option>
-                                <option ng-repeat="project in states"
-                                        value="{{project.id}}">
-                                    {{project.name}}
-                                </option>
-
-                            </select>
+                                <select ng-change="selectRole()" ng-model="role" name="roleName" id="useroption_project" class="dropdown form-control" style="margin-left: 26%;" required>
+                                    <option value="" selected>-- Select --</option>
+                                    <option ng-repeat="role in roles"
+                                            value="{{role.id}}">
+                                        {{role.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        <div ng-messages="roleForm.roleName.$error" data-ng-if="roleForm.roleName.$invalid && (!roleForm.roleName.$pristine || showValid) && !roleForm.roleName.$focus" style="color:maroon" role="alert">
+                            <div ng-message="required" id="err_emailTemplateName">This field should not be empty</div>
                         </div>
                     </div>
                
                 </div>
 
                 <div style="text-align:center">
-                    <button class="btn btn-default  login-btn" id="useroption_sub" type="submit">Assign</button>
+                    <button class="btn btn-default  login-btn" ladda="loadingDemo"  data-style="expand-right" id="useroption_sub" type="submit" ng-click="showValid=true">Assign</button>
                 </div>
 
                 <!--<button class="btn organization-btn" type="submit">Submit</button>-->
