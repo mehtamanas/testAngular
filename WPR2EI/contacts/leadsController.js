@@ -367,6 +367,9 @@ angular.module('contacts')
                   field: "last_contacted",
                   title: "Last Contacted Date",
                   type: 'date',
+                  filterable: {
+                      ui: "datepicker"
+                  },
                   format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                   attributes: {
                       "class": "UseHand",
@@ -377,6 +380,9 @@ angular.module('contacts')
             field: "last_updated",
             title: "Updated Date",
             type: 'date',
+            filterable: {
+                ui: "datepicker"
+            },
             format: '{0:dd/MM/yyyy hh:mm:ss tt}',
             //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
             attributes: {
@@ -570,7 +576,6 @@ angular.module('contacts')
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
 
-
                             if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
@@ -614,6 +619,7 @@ angular.module('contacts')
                             if (expsplit[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
+
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
                                 ValidFilter = true;
@@ -623,8 +629,9 @@ angular.module('contacts')
 
                                 if (Firstname == "last_contacted" || Firstname == "last_updated") {
 
-
                                     var CurrentDate = moment().startOf('day')._d;
+                                    var CurrentEndDate = moment().endOf('day')._d;
+                                    // alert(CurrentEndDate);
                                     var TommDate = moment().startOf('day').add(+1, 'days')._d;
                                     var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
 
@@ -632,7 +639,6 @@ angular.module('contacts')
                                     /*
                                     I need recent monday dates and current dates 
                                     */
-
                                     // var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
 
                                     var mondayOfCurrentWeek = moment().startOf('isoweek')._d;
@@ -654,69 +660,37 @@ angular.module('contacts')
                                     var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
                                     var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
 
-
-
-
                                     // Last Financial Current year 
 
                                     var lastFinancialYearFirstDay = new Date(new Date().getFullYear() - 1, 3, 1); // last year first day of financial yr
-
                                     var lastFinancialYearLastDay = new Date(new Date().getFullYear(), 2, 31); // current year march month
 
-
-
                                     // Financial Current year 
-
                                     var cfyFirstDay = new Date(new Date().getFullYear(), 4, 1);
-
-
-
                                     // Current year 
-
                                     var currentYearFirstDay = new Date(new Date().getFullYear(), 0, 1);
-
-
                                     // Dates for Current Quarter
                                     var dd = new Date();
                                     var currQuarter = (dd.getMonth() - 1) / 3 + 1;
 
                                     var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
                                     var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
-
                                     lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
-
-
-
-
                                     // Dates for Current Quarter
                                     var ddlast = new Date();
                                     var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
-
-
                                     var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
                                     var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
-
                                     lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
-
-
-
-
-
                                     // Current Month First date 
-
                                     var firstDayOfCurrentMonth = new Date(CurrentDate.getFullYear(), CurrentDate.getMonth(), 1);
-
                                     //For Last Month
                                     //  First Date 
                                     var firstDayPrevMonth = new Date(CurrentDate.getFullYear(), CurrentDate.getMonth() - 1, 1);
                                     //Last Date
-
-
                                     var lastDayPrevMonth = new Date(); // current date
                                     lastDayPrevMonth.setDate(1); // going to 1st of the month
                                     lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
-
-
 
                                     if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
@@ -729,7 +703,7 @@ angular.module('contacts')
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
-                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
 
                                         // filter.filters.push({ field: Firstname.trim(), operator: "eq", value: YesterDayDate.toDateString() });
                                     }
@@ -743,8 +717,8 @@ angular.module('contacts')
                                             filter.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
                                         }
                                         else {
-                                            filter.filters.push({ field: Firstname.trim(), operator: "gte", value: mondayOfCurrentWeek });
-                                            filter.filters.push({ field: Firstname.trim(), operator: "lte", value: CurrentDate });
+                                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
+                                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                         }
 
                                     }
@@ -765,7 +739,7 @@ angular.module('contacts')
                                         //}
                                         //else {
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
-                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                         // }
                                     }
 
@@ -795,14 +769,14 @@ angular.module('contacts')
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: currentYearFirstDay });
-                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                     }
 
                                     else if (expsplit[1].trim().toUpperCase() == "THIS FINANCIAL YEAR") {
 
                                         filter = { logic: "and", filters: [] };
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
-                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                     }
 
                                     else if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
@@ -815,7 +789,7 @@ angular.module('contacts')
                                     else if (expsplit[1].trim().toUpperCase() == "NEVER") {
 
                                         filter = { logic: "and", filters: [] };
-                                        filter.filters.push({ field: Firstname.trim(), operator: "eq", value: '' });
+                                        filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
                                         //new chnage 9-4-16
@@ -827,15 +801,21 @@ angular.module('contacts')
 
                                         filter.filters.push({ field: Firstname.trim(), operator: "gt", value: Date1 });
                                         filter.filters.push({ field: Firstname.trim(), operator: "lt", value: Date2 });
-
                                     }
                                 }
 
                                 else {
-                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                    if (expsplit[1].toUpperCase().trim() == "BLANK") {
+                                        filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
+                                    }
+                                    else {
+                                        filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                    }
                                 }
-                                ValidFilter = true;
                             }
+
+                            ValidFilter = true;
+
                         }
 
 
