@@ -31,21 +31,14 @@
             </div>
         </div>
         
-                <div class="clearfix">
-                   
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Project:</label>
-                            <select ng-model="getProject12" ng-change="selectproject()" id="opt_addTaskProject"
-                                    class="dropdown form-control">
-                                <option value="" selected>Select Project</option>
+                <div class="clearfix">               
+                            <label for="" class="hidden-xs" id="document_projectType">Select Project</label>
+                            <select ng-model="params.projectSelected" ng-change="selectproject()" class="dropdown form-control text-bold">
+                                <option value="" selected>--Select Project--</option>
                                 <option ng-repeat="project in projects"
                                         value="{{project.id}}">
                                     {{project.name}}
-                                </option>
-
-                            </select>
-                        </div>
-                   
+                            </select>                                    
                 </div>
 
         <div class="clearfix">

@@ -388,6 +388,21 @@
 
     }
 
+    $scope.ROEdit = function (dataItem) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'template/edit/RO/ROEdit.html',
+            backdrop: 'static',
+            controller: ROEditCtrl,
+            size: 'lg',
+            resolve: {
+                emailData: dataItem
+            }
+        });
+
+    }
+
+
     $scope.openDemandLetterPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
