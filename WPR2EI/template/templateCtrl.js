@@ -4,6 +4,9 @@
     $scope.title = 'Dwellar Template';
     $scope.templateAction = 'no_action';
 
+    var authRights = ($cookieStore.get('UserRole'));
+    $scope.isOrgAdmin = (_.find(authRights, function (o) { return o == 'Organization Admin'; })) == 'Organization Admin' ? true : false
+
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
 
     var orgID = $cookieStore.get('orgID');
@@ -71,6 +74,15 @@
                 templateUrl: 'template/create/emails/emailCreate.html',
                 backdrop: 'static',
                 controller: emailCreateCtrl,
+                size: 'lg'
+            });
+        }
+        else if (args === 'RO') {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'template/create/RO/ROCreate.html',
+                backdrop: 'static',
+                controller: ROCreateCtrl,
                 size: 'lg'
             });
         }
@@ -289,6 +301,78 @@
         });
     };
 
+    $scope.ROTemplateGrid = {
+        dataSource: {
+            type: "json",
+            transport: {
+                read: apiService.baseUrl + "Template/GetTemplateGrid/" + $cookieStore.get('orgID') + '/b987a90f-197e-467d-bf5d-1f0ddad58627'
+            },
+            pageSize: 5,
+            refresh: true,
+            schema: {
+                model: {
+                    fields: {
+                        date: { type: "date" }
+                    }
+                }
+            }
+        },
+        groupable: true,
+        sortable: true,
+        selectable: "multiple",
+        reorderable: true,
+        resizable: true,
+        filterable: true,
+        columnMenu: {
+            messages: {
+                columns: "Choose columns",
+                filter: "Apply filter",
+                sortAscending: "Sort (asc)",
+                sortDescending: "Sort (desc)"
+            }
+        },
+        pageable: {
+            refresh: true,
+            pageSizes: true,
+            buttonCount: 5
+        },
+        columns: [{
+            template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+            title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+            width: "60px",
+            attributes:
+               {
+                   "style": "text-align:center"
+               }
+        }, {
+            field: "template_name",
+            title: "Name",
+            width: "120px",
+            attributes:
+             {
+                 "style": "text-align:center"
+             }
+        }, {
+            field: "subject",
+            title: "Title",
+            width: "120px",
+            attributes:
+             {
+                 "style": "text-align:center"
+             }
+
+        }, {
+            field: "description",
+            title: "Content",
+            width: "120px",
+            attributes:
+             {
+                 "style": "text-align:center"
+             }
+        }]
+
+    };
+
 
     $scope.emailEdit = function (dataItem) {
         var modalInstance = $modal.open({
@@ -328,6 +412,13 @@
         });
 
     }
+
+    $scope.$on('REFRESH', function (event, args) {
+        if (args == 'RO') {
+            $('.k-i-refresh').trigger("click");
+        }
+    });
+
 
     $scope.$on('REFRESH', function (event, args) {
         if (args == 'emailCreated') {
