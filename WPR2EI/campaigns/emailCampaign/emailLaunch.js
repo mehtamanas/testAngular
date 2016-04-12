@@ -2,7 +2,7 @@
 
 var emialLaunchController = function ($scope, $state, $modalInstance,$cookieStore, apiService, $modal, $rootScope) {
     console.log("emialLaunchController");
-   
+    $scope.showcontent = true;
 
     Url = "CampaignEmailTemplate/GetPeoplelistInCampaign/" + $cookieStore.get('campaign_ID');
 

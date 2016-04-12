@@ -11445,6 +11445,17 @@ md-radio-button {
     border: 1px;
     
 }
+.contact_stats_1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #289ff1;
+}
+#launch_now{
+     color: #ffffff;
+    font-size: 11px;
+    padding: 3px;
+    font-weight: bold;
+}
 /*custom media*/
 
 @media screen and (min-width: 1280px) and (max-width:1366px) {

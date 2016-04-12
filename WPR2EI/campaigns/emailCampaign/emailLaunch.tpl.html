@@ -27,11 +27,16 @@
 
                 </div> 
                  <br /><br /><br /><br />
-                <label><input type="checkbox" id="emailLaunch_check" ng-model="showcontent" value="1" ng-checked="true"/>Send only to new people</label> &nbsp;&nbsp;&nbsp;
-                <label>Number of New People:</label>{{peoeplecount}}
+
+           
+                    <md-checkbox  id="emailLaunch_check" ng-model="showcontent" value="1" >
+                    </md-checkbox>
+                    <span>Send only to new people </span>
+                <h5 style="margin-top: -12px;margin-left: 35px;">Number of New People: <span class="contact_stats_1">{{peoeplecount || 0}}</span></h5>
+            
             </div>
             <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
-             <button class="btn organization-btn" id="addEmailCampaign_save" type="submit" ng-click="launchCampaign()">
+             <button class="btn btn-primary" style="margin-left: 22%;font-weight: 600;font-size: 12px" id="addEmailCampaign_save" type="submit" ng-click="launchCampaign()">
                     LAUNCH
              </button>
 
