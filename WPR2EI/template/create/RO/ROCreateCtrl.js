@@ -1,5 +1,5 @@
-﻿emailCreateCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, FileUploader) {
-
+﻿ROCreateCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, FileUploader) {
+    console.log('ROCreateCtrl');
     $scope.showTemplate = true;
     $scope.showPreview = false;
     $scope.params = {}
@@ -8,7 +8,7 @@
     $scope.params.userid = $cookieStore.get('userId')
     $scope.params.templateName;
     $scope.params.subject;
-    $scope.params.projectSelected;
+    //$scope.params.projectSelected;
     //$scope.params.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
     //$scope.params.htmlcontent = $scope.params.orightml;
 
@@ -98,15 +98,33 @@
     }
 
     var callApi = function () {
+
+    
+
+     
         apiService.get("TemplateField/Get").then(function (response) {
             $scope.fieldList = response.data;
         })
         apiService.get("Project/Get").then(function (response) {
             $scope.projectList = response.data;
         })
+
+      
     }
 
     callApi();
+   
+    Url = "project/Get/" + $cookieStore.get('orgID');
+    apiService.get(Url).then(function (response) {
+        $scope.projects = response.data;
+    },
+   function (error) {
+
+   });
+    $scope.selectproject = function () {
+        $scope.params.project_id = $scope.getProject12;
+    };
+
 
     $scope.saveTemplate = function (isvalid) {
         if (isvalid) { 
@@ -117,7 +135,8 @@
             description: $scope.params.htmlcontent,
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
-            document_type_id:"6978399d-7ee7-42a6-85dd-6fec5b7312c2"
+            project_id:$scope.params.project_id,
+            document_type_id: "b987a90f-197e-467d-bf5d-1f0ddad58627"
         };
 
         console.log($scope.params.htmlcontent);
@@ -134,6 +153,9 @@
         });
         }
     }
+
+
+   
 
     $scope.preview=function(){
         $scope.showTemplate = false;
@@ -212,5 +234,10 @@
             margins
         )
     }
+
+    
+
+ 
+
     
 };

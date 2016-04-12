@@ -19,6 +19,7 @@
                         <li id="TemplateEmail"><a aria-controls="email_template" role="tab" data-toggle="tab">EMAIL TEMPLATE</a></li>
                         <li id="TemplateForm"><a aria-controls="form" role="tab" data-toggle="tab">FORM</a></li>
                         <li ng-hide='{{WHO_AM_I === "Broker"}}' id="TemplateDemandLetter"><a aria-controls="form" role="tab" data-toggle="tab">DEMAND LETTER</a></li>
+                        <li ng-show="isOrgAdmin" id="TemplateRO"><a aria-controls="RO_template" role="tab" data-toggle="tab">RO TEMPLATE</a></li>
                     </ul>
 
 
@@ -152,6 +153,13 @@
                             <div class="tab-content-title">Demand Letter <a id="AddDemandLetter" class="add-btn" data-toggle="modal" ng-click="openDemandLetterPopup()" style="cursor:pointer">+</a></div>
                         </div>
                         <div kendo-grid k-options="DemandLetterGrid" selectable="true" k-on-change="agreementEdit( dataItem )"></div>
+                    </div>  <!--demand letter-->
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="summary">
+                            <div class="tab-content-title">RO Template <a id="AddROTemplate" class="add-btn" data-toggle="modal" ng-click="openCreateTemplate('RO')" style="cursor:pointer">+</a></div>
+                        </div>
+                        <div kendo-grid k-options="ROTemplateGrid" selectable="true" k-on-change="agreementEdit( dataItem )"></div>
                     </div>  <!--demand letter-->
 
                 </div>
