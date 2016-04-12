@@ -1150,15 +1150,21 @@ angular.module('contacts')
         };
 
 
+        //$scope.openContactPopup = function () {
+        //    var modalInstance = $modal.open({
+        //        animation: true,
+        //        templateUrl: 'contacts/add_new_contact.tpl.html',
+        //        backdrop: 'static',
+        //        controller: ContactPopUpController,
+        //        size: 'lg'
+        //    });
+        //};
+
+
         $scope.openContactPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/add_new_contact.tpl.html',
-                backdrop: 'static',
-                controller: ContactPopUpController,
-                size: 'lg'
-            });
-        };
+            $state.go('app.addNewContact');
+        };// add new contact page
+
 
         $scope.openUploadContactPopup = function () {
             var modalInstance = $modal.open({
