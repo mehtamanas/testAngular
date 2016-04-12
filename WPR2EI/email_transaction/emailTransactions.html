@@ -36,7 +36,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-3 left_email"  style="overflow: auto;height: 770px; outline: none!important;">
                         <div class="inner-mail" ng-repeat="email in emailData">
                             <span class="email_name capt"><a ui-sref="app.contactdetail({id:email.contact_id})">{{email.contact_name | limitTo:10}}</a></span> <span class="badge custom-badge">0</span> <span class=" pull-right  email_date ">{{email.email_send_date_time | date:'dd/MM/yyyy hh:mm a'}} </span>
-                            <div ng-click="showDetail(email.contact_id)" style=" outline: none;">
+                            <div ng-click="showDetail($index)" style=" outline: none;">
                                 <p class="email_subject" style="font-size: 15px;text-transform:capitalize">{{email.subject}}</p>
                                 <p class="email_name1" ng-bind-html="email.template | limitTo:50">
                                 </p>
