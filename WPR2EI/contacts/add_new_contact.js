@@ -1,11 +1,12 @@
 
-var ContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope, PATTERNREGEXS) {
+angular.module('contacts')     
+.controller ('ContactPopUpController' , function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope) {
     console.log('ContactPopUpController');
     $scope.loadingDemo = false;
-    $scope.emailRegex = PATTERNREGEXS.email;
-
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     var orgID = $cookieStore.get('orgID');
+    var userId = $cookieStore.get('userId');
+    $scope.contact_number = [];
 
     $scope.date = new Date();
     $scope.myOptions = {
@@ -27,7 +28,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         $scope.directory1 = "";
     }
     if (people_type == "Contact") {
-      $scope.title = 'contact';
+        $scope.title = 'contact';
       
     }
     else if (people_type == "Client") {
@@ -100,8 +101,9 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
 
     //end
-
-
+    // Occupation radio button for addNew Contact
+   
+  
     // CALLBACKS
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
@@ -141,7 +143,22 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
 
         }
 
+        $scope.selectedProjectId = [];
+        var selectedProjects = _.filter($scope.projects, function (o) { return o.checkedd; });
+        selectedProjectId = _.pluck(selectedProjects, 'id');
+        var ProjectList = [];
+        for (i = 0; i < selectedProjectId.length; i++) {
+            ProjectList.push
+                ({
+                    project_id: selectedProjectId[i],
+                    user_id: $cookieStore.get('userId'),
+                    organization_id: $cookieStore.get('orgID'),
+                    
+                })
+        }
+
         var dDate = moment($scope.params.Date_Of_Birth, "DD/MM/YYYY hh:mm A")._d;
+        var anvDate = moment($scope.params.anniversary_date, "DD/MM/YYYY hh:mm A")._d;
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
@@ -149,7 +166,7 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             media_url: $scope.media_url,
             first_name: $scope.params.first_name,
             income: $scope.params.income,
-
+            middle_name: $scope.params.middle_name,
             Date_Of_Birth: new Date(dDate).toISOString(),
             gender: $scope.directory2,
             salutation: $scope.params.salutation,
@@ -157,26 +174,39 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
             people_type: $scope.directory1,
             designation: $scope.params.designation,
             contact_element_info_email: $scope.choices1[0].contact_element_info_email,
-            contact_element_info_phone: $scope.choices[0].contact_element_info_phone,
+            contact_element_info_phone: $scope.params.primary_contact,
             state: $scope.params.state,
             project_id: $scope.params.project_id,
             city: $scope.params.city,
             zip_code: $scope.params.zip_code,
             class_type: "Person",
             area: $scope.params.area,
-            Street_1: newadd.Street_1,
-            Street_2: newadd.Street_2,
+            Street_1: $scope.params.Street_1,
+            Street_2: $scope.params.Street_2,
             mappinguser_id: $scope.params.mappinguser_id,
             company: $scope.params.company,
             designation: $scope.params.designation,
+            interested_appartment:$scope.params.interested_appartment,
             no_of_project: $scope.params.no_of_project,
-
+            occupation: $scope.occup,
+            budget: $scope.budget,
+            sources: $scope.sources,
+            age_group: $scope.age_group,
+            family_type: $scope.family_type,
+            ProjectList: ProjectList,
+            no_of_family_members: $scope.params.no_of_family_members,
+            no_of_cars_owned: $scope.params.no_of_cars_owned,
+            interests: $scope.params.interests,
+            channel_partner_details: $scope.params.channel_partner_details,
+            remarks: $scope.params.remarks,
+            anniversary_date: new Date(anvDate).toISOString(),
+         
         };
 
         apiService.post("Contact/CreateNew", postData).then(function (response) {
             var loginSession = response.data;
-            $scope.openSucessfullPopup();
-            $modalInstance.dismiss();
+            //$scope.openSucessfullPopup();
+            //$modalInstance.dismiss();
 
             AuditCreate();
             $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
@@ -197,17 +227,26 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
                 media.push(postData_email);
             }
 
-            for (var i in $scope.choices) {
-                var postData_phone =
-                    {
-                        id: $scope.choices[i].class_id,
-                        class_id: loginSession.id,
-                        class_type: "Person",
-                        element_type: "phone_contact",
-                        element_info1: $scope.choices[i].contact_element_info_phone,
-                    }
-                media.push(postData_phone);
-            }
+            //for (var i in $scope.choices) {
+            //    var postData_phone =
+            //        {
+            //            id: $scope.choices[i].class_id,
+            //            class_id: loginSession.id,
+            //            class_type: "Person",
+            //            element_type: "mobile_contact",
+            //            element_info1: $scope.choices[i].contact_element_info_phone,
+            //        }
+
+            //    media.push(postData_phone);
+            //}
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "mobile_contact", element_info1: $scope.params.mobile_number, });
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "home_contact", element_info1: $scope.params.home_number, });
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "office_contact", element_info1: $scope.params.office_number, });
+
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "email1_contact", element_info1: $scope.params.email1, });
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "email2_contact", element_info1: $scope.params.email2, });
+                 
+                
 
             var postData_budget =
             {
@@ -331,13 +370,19 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         first_name: $scope.first_name,
         last_name: $scope.last_name,
         contact_element_info_email: $scope.contact_element_info_email,
-        contact_element_info_phone: $scope.contact_element_info_phone,
+        primary_contact: $scope.primary_contact,
+        mobile_number: $scope.mobile_number,
+        home_number: $scope.home_number,
+        office_number: $scope.office_number,
+        email1: $scope.email1,
+        email2: $scope.email2,
         state: $scope.state,
         project_id: $scope.project_id,
         city: $scope.city,
         Date_Of_Birth: $scope.Date_Of_Birth,
         gender: $scope.gender,
         zip_code: $scope.zip_code,
+        middle_name: $scope.middle_name,
         people_type: $scope.people_type,
         designation: $scope.designation,
         organization_id: $cookieStore.get('orgID'),
@@ -346,13 +391,19 @@ var ContactPopUpController = function ($scope, $state, $cookieStore, apiService,
         street_2: $scope.street_2,
         mappinguser_id: $scope.mappinguser_id,
         designation: $scope.designation,
+        interested_appartment:$scope.interested_appartment,
         company: $scope.company,
-        salutation: $scope.salutation
+        salutation: $scope.salutation,
+        no_of_family_members: $scope.no_of_family_members,
+        no_of_cars_owned: $scope.no_of_cars_owned,
+        interests: $scope.interests,
+        channel_partner_details: $scope.channel_partner_details,
+        remarks: $scope.remarks,
+        anniversary_date: $scope.anniversary_date,
     };
 
 
     $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
     };
 
     $scope.choices = [{ id: 'choice1' }];
@@ -500,6 +551,7 @@ function (error) {
     alert("Error " + error.state);
 });
 
+  
 
 
     $scope.selectOptions = {
@@ -537,8 +589,6 @@ function (error) {
        
         if (isValid) {
             $scope.loadingDemo = true;
-           
-            $scope.showValid = true;
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
             if (uploader.queue.length == 0)
@@ -549,6 +599,6 @@ function (error) {
     }
 
 
-};
+});
 
 
