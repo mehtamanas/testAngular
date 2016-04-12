@@ -34,11 +34,9 @@
             <label class="custom-file-input">
                 <input type="file" class="image-upload-f" id="blog_Create_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
             </label>
-
-
-
         </div>
     </div>
+
     <div class="form-group form-bx form-bx8">
         <label for="">Blog Name</label>
         <input type="text" class="form-control text-bold" id="addnewBlog_name" autofocus name="Blog_name"
@@ -52,16 +50,26 @@
     </div>
 
     <div class="clearfix">
-
         <div class="form-group">
             <div class="col-xs-12">
                 <label> Tag</label>
-
                 <div class="form-bx13" style="padding-bottom: 29px;">
-
                     <input id="Blog_tag" kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" />
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <div class="form-group form-bx form-bx8">
+            <label for="">Select Template</label>
+            <select ng-model="params.template" name="templateSelect" ng-change="selectTemplate()" class="dropdown form-control text-bold" id="emailAddTemplate_Select Template" required>
+                <option value="" selected>--Select Template--</option>
+                <option ng-repeat="template in params.templateList"
+                        value="{{template.id}}">
+                    {{template.template_name}}
+                </option>
+            </select>
         </div>
     </div>
    
