@@ -234,7 +234,8 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             long1: $scope.params.long1,
             ZipCode: $scope.params.ZipCode,
             project_type: $scope.params.project_type,
-            project_main_unit_config: $scope.params.project_main_unit_config
+            project_main_unit_config: $scope.params.project_main_unit_config,
+            project_code: $scope.params.project_code
             
         };
        
@@ -572,7 +573,20 @@ function (error)
         alert(error.data.Message);
 });
 
+    $scope.confirmation = function () {
 
+        projectUrl = "Project/ProjectCodeExists/" + $cookieStore.get('orgID') + "/" + $scope.params.project_code + "/" + $scope.seletedCustomerId//f2294ca0-0fee-4c16-86af-0483a5718991";
+        apiService.getWithoutCaching(projectUrl).then(function (response) {
+            $scope.params.checkProjectCode = response.data.checkProjectCode;
+            if ($scope.params.checkProjectCode == false) {
+            }
+            else {
+                swal("Error", "This project code already exist. Please enter another code..!!!", 'error');
+                $scope.params.project_code = null;
+            }
+        })
+
+    }
   
 
     $scope.params = {
@@ -600,8 +614,8 @@ function (error)
         possasion_month: $scope.possasion_month,
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId'),
-        project_main_unit_config: $scope.project_main_unit_config
-
+        project_main_unit_config: $scope.project_main_unit_config,
+        project_code:$scope.project_code
 
     };
     

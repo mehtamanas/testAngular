@@ -82,6 +82,35 @@
 
             </div>
 
+            <div class="clearfix">
+                <div class="pull-left f-half-3">
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
+                                                        'has-error' : addNewForm.ProjNo.$invalid && (!addNewForm.ProjNo.$pristine || showValid),
+                                                        'has-success': addNewForm.ProjNo.$valid && !addNewForm.ProjNo.$pristine
+                                                            }">
+                            <div class="form-group form-bx unit-type">
+                                <label for="">Project No</label>
+                                <input type="text" class="form-control" autofocus name="ProjNo"  ng-blur ="confirmation()" id="addNewProject No"
+                                       placeholder="Project No"
+                                       data-ng-model="params.project_code"
+                                       minlength="1"
+                                       maxlength="3"
+                                       ng-pattern="/^[a-z 0-9.\s]+$/i"
+                                       input-focus
+                                       required />
+                                <div ng-messages="addNewForm.ProjNo.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.ProjNo.$invalid && (!addNewForm.ProjNo.$pristine || showValid) && !addNewForm.ProjNo.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern" id="err_addNewUnitType">Enter valid value for Confirmation No</div>
+                                </div>
+                            </div>
+                            <span class="field-md5 field-req">*</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
             <div class="clearfix">
@@ -213,6 +242,10 @@
                     </div>
                 </div>
             </div>
+            
+
+
+
             <h4 class="form-sub-title">Images</h4>
 
             <div class="clearfix image-upload-container">
