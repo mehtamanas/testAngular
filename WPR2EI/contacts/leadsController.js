@@ -148,7 +148,7 @@ angular.module('contacts')
                 templateUrl: 'contacts/Views/createView.html',
                 backdrop: 'static',
                 controller: createViewCtrl,
-                size: 'lg',
+                size: 'sm',
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
         }
