@@ -183,7 +183,7 @@
                            "style": "text-align:center"
                        }
                    }, {                       
-                       template: '#if (status=="Completed") {# <a class="btn btn-primary" ng-click="openLaunch(dataItem)">Re-Launch</a> #}#',
+                       template: '#if (status=="Completed") {# <a class="btn btn-primary" ng-click="openLaunch(dataItem)">Relaunch</a> #}#',
                        title: "ACTION",
                        width: "120px",
                        attributes: {

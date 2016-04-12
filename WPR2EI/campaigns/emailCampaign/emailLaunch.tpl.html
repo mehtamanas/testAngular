@@ -1,7 +1,7 @@
 ﻿<div class="modal-header">
     <div class="close-btn-wrap">
         <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Re-Launch Email Campaign</h4>
+        <h4 class="modal-title">Relaunch Email Campaign</h4>
     </div>
 </div>
 <div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -27,7 +27,8 @@
 
                 </div> 
                  <br /><br /><br /><br />
-                <label><input type="checkbox" id="emailLaunch_check" ng-model="showcontent" value="1" checked="checked"/>Send only to new people</label> &nbsp;&nbsp;&nbsp;
+                <label><input type="checkbox" id="emailLaunch_check" ng-model="showcontent" value="1" ng-checked="true"/>Send only to new people</label> &nbsp;&nbsp;&nbsp;
+                <label>Number of New People:</label>{{peoeplecount}}
             </div>
             <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
              <button class="btn organization-btn" id="addEmailCampaign_save" type="submit" ng-click="launchCampaign()">
