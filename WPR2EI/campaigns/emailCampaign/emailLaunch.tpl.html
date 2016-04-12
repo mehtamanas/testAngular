@@ -29,7 +29,7 @@
                  <br /><br /><br /><br />
 
            
-                    <md-checkbox  id="emailLaunch_check" ng-model="showcontent" value="1" >
+                    <md-checkbox  id="emailLaunch_check" ng-model="showcontent" ng-change="selectcheckbox()" value="1" >
                     </md-checkbox>
                     <span>Send only to new people </span>
                 <h5 style="margin-top: -12px;margin-left: 35px;">Number of New People: <span class="contact_stats_1">{{peoeplecount || 0}}</span></h5>
