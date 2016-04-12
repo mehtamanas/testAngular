@@ -3,6 +3,25 @@
 var emialLaunchController = function ($scope, $state, $modalInstance,$cookieStore, apiService, $modal, $rootScope) {
     console.log("emialLaunchController");
    
+
+    Url = "CampaignEmailTemplate/GetPeoplelistInCampaign/" + $cookieStore.get('campaign_ID');
+
+    apiService.get(Url).then(function (response) {
+
+        $scope.data1 = response.data;
+        $scope.peoeplecount = $scope.data1.PeopleCount;
+       
+
+
+    },
+function (error) {
+    if (error.status === 400)
+        alert(error.data.Message);
+    else
+        alert("Network issue");
+});
+
+
     $scope.params={        
         start_date : $scope.start_date,
         whom_to_send: $scope.whom_to_send,
