@@ -84,7 +84,7 @@ angular.module('contacts')
             if ($scope.gridView !== 'default') {
                 //filter by grid name
                 viewObj = _.filter($scope.views, function (o)
-                { return o.view_name === $scope.gridView });
+                { return o.id === $scope.gridView });
 
                 //get the grid datasource
                 var grid = $('#contact_kenomain').getKendoGrid();
@@ -153,6 +153,33 @@ angular.module('contacts')
             });
         }
 
+
+        $scope.editView = function () {
+            var viewName = _.filter($scope.views, function (o)
+            { return o.id == $scope.gridView });
+
+            var grid = $('#contact_kenomain').getKendoGrid();
+
+            if (grid.dataSource._sort) {
+                var sortObject = grid.dataSource._sort[0];
+            }
+
+            if ($scope.textareaText) {
+                var Querydata = $scope.textareaText.toLowerCase();
+            }
+            //var colObject = _.filter(grid.columns, function (o)
+            //{ return !o.hidden });
+            //colObject = (_.pluck(colObject, 'field')).join(',');
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/Views/editView.html',
+                backdrop: 'static',
+                controller: editViewCtrl,
+                size: 'lg',
+                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName:viewName[0].view_name,viewId:$scope.gridView } }
+            });
+        }
 
 
         $scope.chooseAction = function () {
