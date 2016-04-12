@@ -11199,6 +11199,7 @@ input[type=text].rupee_1 {
     font-weight: normal !important;
     height: 35px !important;
     border-radius: 1px;
+        margin-left: -5px;
 }
 
     .search_btn_cancel:hover {
@@ -11401,6 +11402,48 @@ md-radio-button {
     padding: 6px;
     margin-left: 16px;
     border-radius: 2px;
+}
+.head_filter{
+    margin-top: -20px;
+    margin-left: -20px;
+    margin-right: -18px;
+    /* margin-top: -15px; */
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+    padding-top: 10px !important;
+    background: #fafcfe;
+    border-top: 1px solid #f0f0f0;
+}
+.head_action{
+        margin: 7px 2px;
+}
+.btn-lk-1-1 {
+
+    color: #2f98e1;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 9px 15px;
+    text-transform: uppercase;
+}
+
+.btn_refresh{
+    background: #fff;
+    margin-left: 10px;
+
+    
+}
+.button_save_del{
+    background: #fff;
+    border: 1px solid #d7d7d7;
+    border-radius: 2px;
+
+}
+.sel_action{
+    font-size:14px;
+    border-radius:3px;
+    border: 1px;
+    
 }
 /*custom media*/
 

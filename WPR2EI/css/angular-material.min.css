@@ -1383,6 +1383,7 @@ md-checkbox .md-container {
     width: 20px;
     height: 20px;
     left: 0;
+    color: #1f90e0 !important;
     right: auto;
 }
 
