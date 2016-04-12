@@ -183,7 +183,7 @@
                            "style": "text-align:center"
                        }
                    }, {                       
-                       template: '#if (status=="Completed") {# <a class="btn btn-primary" ng-click="openLaunch(dataItem)">Relaunch</a> #}#',
+                       template: '#if (status=="Completed") {# <a class="btn btn-primary" id="launch_now" ng-click="openLaunch(dataItem)">Relaunch</a> #}#',
                        title: "ACTION",
                        width: "120px",
                        attributes: {
@@ -351,7 +351,7 @@
                 templateUrl: 'campaigns/emailCampaign/emailLaunch.tpl.html',
                 backdrop: 'static',
                 controller: emialLaunchController,
-                size: 'lg'
+                size: 'sm'
             });
         };
 
