@@ -643,7 +643,16 @@ angular.module('contacts')
                              "style": "text-align:center"
                          }
 
-                    }, {
+                    },
+                    {
+                        field: "task_code",
+                        title: "Task Code",
+                        attributes:
+                         {
+                             "style": "text-align:center"
+                         }
+
+                    },{
                         field: "priority",
                         title: "Priority",
 

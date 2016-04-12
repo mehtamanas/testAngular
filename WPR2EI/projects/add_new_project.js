@@ -230,8 +230,8 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             builder_website: $scope.params.builder_website,
             lat1: $scope.params.lat1,
             long1: $scope.params.long1,
-            project_main_unit_config: $scope.params.unit_confg
-
+            project_main_unit_config: $scope.params.unit_confg,
+            project_code:$scope.params.projectcode
 
         };
 
@@ -239,6 +239,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         //alert(postData.media_url);
         apiService.post("Project/ProjectAddress", postData).then(function (response) {
             var loginSession = response.data;
+           // $scope.project_id = loginSession.id
             AuditCreate();
             $scope.loadingDemo = false;
             console.log("project done");
@@ -547,10 +548,27 @@ function (error) {
         facebook: $scope.facebook,
         twitter: $scope.twitter,
         linkedin: $scope.linkedin,
-        project_main_unit_config:$scope.unit_confg
+        project_main_unit_config: $scope.unit_confg,
+        project_code:$scope.projectcode
     };
 
+    var project_id = "";
 
+    $scope.confirmation = function () {
+
+        projectUrl = "Project/ProjectCodeExists/" + $cookieStore.get('orgID') + "/" + $scope.params.projectcode + "/" + project_id//f2294ca0-0fee-4c16-86af-0483a5718991";
+        apiService.getWithoutCaching(projectUrl).then(function (response) {
+            $scope.params.checkProjectCode = response.data.checkProjectCode;
+            if ($scope.params.checkProjectCode == false) {
+            }
+            else {
+               
+                swal("Error","This project code already exist. Please enter another code..!!!",'error');
+                $scope.params.projectcode = null;
+            }
+        })
+       
+        }
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
