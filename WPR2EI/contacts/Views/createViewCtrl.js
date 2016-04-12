@@ -8,18 +8,7 @@
         if (isValid) {
             $scope.loadingDemo = true;
             $scope.disabled = true;
-            if (viewData.type == 'Filter') {//filter
-                postData = {
-                    organization_id: $cookieStore.get('orgID'),
-                    user_id: $cookieStore.get('userId'),
-                    grid_name: viewData.grid,
-                    view_name: $scope.params.viewName,
-                    query_string: viewData.filterQuery,
-                    query_type: viewData.type
-                }
-            }
 
-            else {
 
                 postData = {//view
                     organization_id: $cookieStore.get('orgID'),
@@ -27,12 +16,13 @@
                     grid_name: viewData.grid,
                     sort_by: viewData.sort?viewData.sort.field:null,
                     sort_order: viewData.sort?viewData.sort.dir:null,
-                    column_names: viewData.col,
+                    column_names: viewData.col?JSON.stringify(viewData.col):null,
                     view_name: $scope.params.viewName,
-                    query_type: viewData.type
+                    query_string: viewData.filterQuery?JSON.stringify(viewData.filterQuery):null,
+                    query_type: viewData.type,
+                    filters: viewData.filterObj ? JSON.stringify(viewData.filterObj) : null
 
                 }
-            }
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
                 $scope.cancel();
