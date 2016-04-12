@@ -145,7 +145,9 @@ angular.module('contacts')
                 var sortObject = grid.dataSource._sort[0];
             }
 
-            var Querydata = $scope.textareaText.toLowerCase();
+            if ($scope.textareaText) {
+                var Querydata = $scope.textareaText.toLowerCase();
+            }
             //var colObject = _.filter(grid.columns, function (o)
             //{ return !o.hidden });
             //colObject = (_.pluck(colObject, 'field')).join(',');
