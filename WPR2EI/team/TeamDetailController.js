@@ -587,6 +587,7 @@
                 animation: true,
                 templateUrl: 'team/users/addUsers.html',
                 backdrop: 'static',
+                size: 'lg',
                 controller: AddUsersController,
                 windowClass: 'addUser',
                 resolve: {

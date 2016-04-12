@@ -212,6 +212,7 @@ angular.module('contacts')
              groupable: true,
              sortable: true,
              selectable: "multiple",
+             height: window.innerHeight - 210,
              reorderable: true,
              resizable: true,
              filterable: true,
