@@ -136,7 +136,7 @@ var AddUsersController = function ($scope, $q, $cookieStore, teamService, $modal
             templateUrl: 'projects/AddSuccessful.html',
             backdrop: 'static',
             controller: AddController,
-            size: 'lg',
+            size: 'sm',
             resolve: { items: { title: "User" } }
         });
 

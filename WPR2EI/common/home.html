@@ -11,9 +11,9 @@
         </div><!-- logo ended -->
 
         <div class="pull-right user-sec">
-            <div class="dropdown">
+            <div class="dropdown home_logged" >
                 <!--<a id="user-dropdown" data-target="#" href="http://example.com" data-toggle="dropdown" >-->
-                <span class="avatar badge">{{badge}}</span> <span class="welcome">Welcome</span>  {{loggedUser}}
+                <span class="avatar badge">{{badge}}</span> <span class="welcome">Welcome</span> <span>  {{loggedUser}} </span> <span class="home_logout_btn" ng-click="logout()">Logout</span>
             </div>
         </div><!-- user-sec ended -->
 
@@ -168,7 +168,7 @@
                                 <ul class="nav-sub-bx sub-menu" id="sub-menu15"></ul>
                             </li><!--Contact Update -->
 
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'active':activeBar==14}"><a href="" ng-click="logout()" name="Signout"><span class="nav-icon nav-10"></span> Signout</a></li><!--Signout -->
+                            <!--<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'active':activeBar==14}"><a href="" ng-click="logout()" name="Signout"><span class="nav-icon nav-10"></span> Signout</a></li>--><!--Signout -->
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
