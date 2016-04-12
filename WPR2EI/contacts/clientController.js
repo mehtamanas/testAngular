@@ -91,35 +91,46 @@ angular.module('contacts')
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {
                 //filter by grid name
-                sortObj = _.filter($scope.views, function (o)
+                viewObj = _.filter($scope.views, function (o)
                 { return o.view_name === $scope.gridView });
 
                 //get the grid datasource
                 var grid = $('#contact_kenomain').getKendoGrid();
-                var sort = [];
-                sort.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
-                var col = (sortObj[0].column_names).split(',');
-                for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+
+                if (viewObj.sort_by) {//sort
+                    var sort = [];
+                    sort.push({ field: viewObj[0].sort_by, dir: viewObj[0].sort_order });
+                    grid.dataSource.sort(sort);
+                }
+
+
+                var col = JSON.parse(viewObj[0].column_names);
+                for (i = 0; i < grid.columns.length; i++) {
                     var colFlag = false;
                     for (j = 0; j < col.length; j++) {
-                        if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].field) {
-                            $('#contact_kenomain').getKendoGrid().showColumn(i);
-                            colFlag = true;
-                            break;
+                        if (col[j].field === grid.columns[i].field) {
+                            if (!col[j].hidden) {
+                                grid.showColumn(i);
+                                colFlag = true;
+                                break;
+                            }
                         }
                         if (j === col.length - 1 && colFlag == false) {
-                            $('#contact_kenomain').getKendoGrid().hideColumn(i);
+                            grid.hideColumn(i);
                         }
                     }
                 }
 
-                $('#contact_kenomain').getKendoGrid().dataSource.sort(sort);
-                $('#contact_kenomain').getKendoGrid().showColumn(0);
+                $scope.textareaText = viewObj[0].query_string;
+                grid.dataSource.filter(JSON.parse(viewObj[0].filters));
             }
             else {
                 $('#contact_kenomain').getKendoGrid().dataSource.sort({});
+                $('#contact_kenomain').getKendoGrid().dataSource.filter({});
+                $scope.textareaText = null;
                 for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
                     $('#contact_kenomain').getKendoGrid().showColumn(i);
+
                 }
 
             }
@@ -128,13 +139,15 @@ angular.module('contacts')
 
         $scope.saveView = function () {
             var grid = $('#contact_kenomain').getKendoGrid();
+
             if (grid.dataSource._sort) {
                 var sortObject = grid.dataSource._sort[0];
             }
-            var colObject = _.filter(grid.columns, function (o)
-            { return !o.hidden });
-            colObject = (_.pluck(colObject, 'field')).join(',');
 
+            var Querydata = $scope.textareaText.toLowerCase();
+            //var colObject = _.filter(grid.columns, function (o)
+            //{ return !o.hidden });
+            //colObject = (_.pluck(colObject, 'field')).join(',');
 
             var modalInstance = $modal.open({
                 animation: true,
@@ -142,7 +155,7 @@ angular.module('contacts')
                 backdrop: 'static',
                 controller: createViewCtrl,
                 size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'client', type: 'View' } }
+                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
         }
 
