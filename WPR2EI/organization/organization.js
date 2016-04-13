@@ -4,7 +4,7 @@ angular.module('organization')
       function ($scope, $state, security, $cookieStore, $modal,apiService, $window, $rootScope) {
           console.log('OrganizationController');
           var orgID = $cookieStore.get('orgID');
-          $rootScope.title = 'Dwellar./Organization';
+          $rootScope.title = 'Dwellar-Organization';
           $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
           $('#btnSave').hide();
           $('#iconEdit').hide();

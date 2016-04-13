@@ -2,7 +2,7 @@ angular.module('newuser')
 .controller('newuserController',
       function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
           console.log('TeamListController');
-          $rootScope.title = 'Dwellar./Users';
+          $rootScope.title = 'Dwellar-Users';
           $scope.userAction = 'no_action';
           var userID = $cookieStore.get('userId');
 
@@ -187,7 +187,7 @@ angular.module('newuser')
                       var userinactive = [];
                       for (var i in allCheckedIds) {
                           var user = {};
-                          user.id = allCheckedIds[i];
+                          user.id = allCheckedIds[i]
                           user.organization_id = $cookieStore.get('orgID');
                           userinactive.push(user);
                       }
