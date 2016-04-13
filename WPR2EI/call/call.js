@@ -192,33 +192,38 @@
         }
 
         $scope.deleteView = function () {
-            swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
-                closeOnConfirm: false
-            }).then(function (isConfirm) {
-                if (isConfirm) {
-                    postData = [{ id: $scope.gridView, organization_id: $cookieStore.get('orgID') }];
-                    apiService.post('Notes/DeleteGridView', postData).then(function (res) {
-                        swal(
-                      'Deleted!',
-                      'Your file has been deleted.',
-                      'success'
-                    );
-                    }, function (err) {
-                        swal(
-                    'Not Deleted!',
-                    'Something went wrong. Try again later.',
-                    'error'
-                  );
-                    })
-                }
-            })
+            if ($scope.gridView !== 'default') {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    closeOnConfirm: false
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                        postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
+                        apiService.post('Notes/DeleteGridView', postData).then(function (res) {
+                            swal(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        );
+                        }, function (err) {
+                            swal(
+                        'Not Deleted!',
+                        'Something went wrong. Try again later.',
+                        'error'
+                      );
+                        })
+                    }
+                })
+            }
+            else {
+                alert('cannot delete this view')
+            }
         }
 
         function applyFilter(filterField, filterValue) {
