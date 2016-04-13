@@ -121,6 +121,15 @@
                   }
 
              }, {
+                 field: "template_name",
+                 title: "Template Name",
+                 width: "120px",
+                 attributes:
+                  {
+                      "style": "text-align:center"
+                  }
+
+             }, {
                 field: "description",
                 title: "Description",
                 width: "120px",

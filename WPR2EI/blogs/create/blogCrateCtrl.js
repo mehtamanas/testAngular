@@ -1,10 +1,11 @@
 ﻿
-var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize) {
+var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader,uploadService, $modal, $rootScope, $sanitize) {
     console.log('BlogPostPopUpCtrl');
 
     $scope.showBlog = true;
     $scope.showPreview = false;
     $scope.params = {}
+    $scope.params.bodyText;
 
     var orgID = $cookieStore.get('orgID');
     var uploader = $scope.uploader = new FileUploader({
@@ -144,20 +145,21 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                 return;
             }
             
-                $scope.params.htmlcontent = $sanitize($scope.params.htmlcontent);
+            $scope.params.bodyText = $sanitize($scope.params.bodyText);
                 var postdata = {
                     name:$scope.params.name,
                     media_type:"image",
                     //media_name: uploadResult.Name,
                     media_url: $scope.media_url,
-                    description: $scope.params.htmlcontent,
+                    description:  $scope.params.bodyText,
                     organization_id: $cookieStore.get('orgID'),
                     user_id: $cookieStore.get('userId'),
                     tag_name: $scope.params.tag_name,
+                    template_id: $scope.params.template,
                
                 };
 
-                console.log($scope.params.htmlcontent);
+                console.log($scope.params.bodyText);
                 apiService.post("Blogs/CreateBlogTag", postdata).then(function (response)
                 {
                     data = response.data[0];
@@ -246,7 +248,7 @@ function (error) {
         media_url: $scope.media_url,
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId'),      
-        description: $scope.description,
+        description: $scope.bodyText,
         tag_name: $scope.tag_name,
         name: $scope.name,
 
