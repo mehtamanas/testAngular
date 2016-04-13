@@ -48,22 +48,22 @@
 
                             <div class="pull_left_day">
 
-                                <div class="day-info-btn clearfix" ng-click="setFollowUp('hour')" ng-class="{'div_calender_hour_selected':followSelect==1}">
+                                <div class="day-info-btn clearfix" ng-click="setFollowUp('hour')" id="dayInfo_hour" ng-class="{'div_calender_hour_selected':followSelect==1}">
                                     <span class="pull-right-1">An Hour</span>
                                     <span class="pull-right"></span>
                                 </div>
 
-                                <div class="tommmorow-info-btn clearfix" ng-click="setFollowUp('tomorrow')" ng-class="{'div_calender_tommorow_selected':followSelect==2}">
+                                <div class="tommmorow-info-btn clearfix" ng-click="setFollowUp('tomorrow')" id="dayInfo_tomorrow"  ng-class="{'div_calender_tommorow_selected':followSelect==2}">
                                    <span class="pull-right-1">Tomorrow</span>
                                     <span class="pull-right"></span>
                                 </div>
 
-                                <div class="week-info-btn clearfix" ng-click="setFollowUp('week')" ng-class="{'div_calender_week_selected':followSelect==3}">
+                                <div class="week-info-btn clearfix" ng-click="setFollowUp('week')" id="dayInfo_week"  ng-class="{'div_calender_week_selected':followSelect==3}">
                                    <span class="pull-right-1">In A Week</span>
                                     <span class="pull-right"></span>
                                 </div>
 
-                                <div class="month-info-btn clearfix" ng-click="setFollowUp('month')" ng-class="{'div_calender_selected':followSelect==4}">
+                                <div class="month-info-btn clearfix" ng-click="setFollowUp('month')" id="dayInfo_month"  ng-class="{'div_calender_selected':followSelect==4}">
                                  <span class="pull-right-1" > In A Month</span>
                                     <span class="pull-right"></span>
                                 </div>
@@ -75,7 +75,7 @@
                                
                                     <div class="form-group form-bx4 form-bx3-1">
                                         <label for="">Choose Date</label>
-                                        <input kendo-date-time-picker class=""
+                                        <input kendo-date-time-picker class="" 
                                                ng-model="due_date"
                                                id="companyDatetime"
                                                k-ng-model="k_start_date"

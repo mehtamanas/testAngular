@@ -30,6 +30,14 @@
                             <h4 class="contact-header-label">ESSENTIALS</h4>
                         </div>
 
+
+
+                        <div class="checkbox c-checkbox needsclick">
+                        <label class="needsclick">
+                            <input type="checkbox" required="" name="checkbox" ng-model="checkbox" class="needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required" style=""><span class="fa fa-check"></span> Option one</label></div>
+
+
+
                         <div class="md-padding">
                             <div class="clearfix image-upload-container">
                                 <div class="modal-body image-upload-wrap-1">
@@ -71,13 +79,16 @@
                                            'has-error' : newForm.salutation.$invalid && (!newForm.salutation.$pristine || showValid) && !newForm.salutation.$focus,
                                             'has-success': newForm.salutation.$valid && !newForm.salutation.$pristine && !newForm.salutation.$focus
                                      }">
-                                            <label class="contact-label">SALUTATION</label>
-                                            <select id="contactadd_salutation"  name="salutation"  ng-change="selectsalutation()" ng-model="salutation1" class="dropdown form-control contact-formField">
-                                                <option value="" selected>Select Salutation</option>
-                                                <option value="Mr.">Mr.</option>
-                                                <option value="Ms.">Ms.</option>
-                                                <option value="Mrs.">Mrs.</option>
-                                            </select>
+                                            <md-input-container class="md-block">
+                                                <label class="contact-label">SALUTATION</label>
+                                                <md-select id="contactadd_salutation"  name="salutation"  ng-change="selectsalutation()" ng-model="salutation1" class="dropdown">
+                                                    <md-option value="" selected>Select Salutation</md-option>
+                                                    <md-option value="Mr.">Mr.</md-option>
+                                                    <md-option value="Ms.">Ms.</md-option>
+                                                    <md-option value="Mrs.">Mrs.</md-option>
+                                                </md-select>
+                                            </md-input-container>
+
                                             <div ng-messages="newForm.salutation.$error" style="color:maroon" role="alert">
 
                                                 <div ng-message="pattern">Enter valid salutation</div>
@@ -98,7 +109,6 @@
                                             }">
 
                                                 <md-input-container>
-
                                                     <label class="contact-label">First Name</label>
                                                     <input name="firstName" id="contactadd_firstname"
                                                            data-ng-model="params.first_name"
@@ -667,7 +677,7 @@
                                                            minlength="1"
                                                            maxlength="7"
                                                            input-focus
-                                                           ng-pattern="/^[0-9]{1,7}$/" />
+                                                           ng-pattern="/^[0-9]{1,6}$/" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">
                                                         {{ 'Please enter valid pin' | translate }}
