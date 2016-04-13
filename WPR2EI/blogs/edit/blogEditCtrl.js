@@ -1,29 +1,52 @@
 ﻿
 var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize,$window) {
     console.log('BlogPostEditCtrl');
+
+    var orgID = $cookieStore.get('orgID');
+    var userID = $cookieStore.get('userId');
+
     var authRights = ($cookieStore.get('UserRole'));
+
     $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
     $scope.isContentApprover = (_.find(authRights, function (o) { return o == 'Content Approver'; })) == 'Content Approver' ? true : false
     $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
-    var userID = $cookieStore.get('userId');
+ 
+
+
     $scope.showBlog = true;
     $scope.showPreview = false;
-    $scope.params = {}
+    //$scope.params = {}
+ //   $scope.params.template;
+
+    apiService.get('Template/GetAllTemplates?orgId=' + orgID).then(function (response) {
+        $scope.templateList = response.data;
+    });
+
+
+    $scope.selectTemplate = function () {
+        $scope.params.template_name = $scope.params.template;
+        if ($scope.params.template !== "") {
+            $scope.params.bodyText = $sanitize((_.findWhere($scope.templateList, { id: $scope.params.template })).description);
+        }
+        else
+            $scope.params.bodyText = "";
+    }
 
     GetUrl = "Blogs/EditGet/" + $scope.selectedBlogID + "/" + userID; //f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(GetUrl).then(function (response) {
         $scope.params = response.data[0];
-        $scope.params.htmlcontent = response.data[0].description;
+        $scope.params.bodyText = response.data[0].description;
         $scope.params.tag_name = response.data[0].tag_name;
         $scope.status = response.data[0].status;
+        $scope.params.template = response.data[0].template_id;
        // $cookieStore.put('Flag',$scope.flag);
     },
     function (error) {
 
     });
     //var flag=$cookieStore.get(Flag);
-    var orgID = $cookieStore.get('orgID');
+   
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
 
@@ -69,6 +92,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         uploader.uploadAll();
     }
+
+
 
     $scope.editorOption = {
         tools: ["bold",
@@ -145,12 +170,13 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             if (called == true) {
                 return;
             }          
-                $scope.params.htmlcontent = $sanitize($scope.params.htmlcontent);
+            $scope.params.bodyText = $sanitize($scope.params.bodyText);
                 var postdata = {
                     name: $scope.params.name,
                     media_type:"image",                
                     media_url: $scope.params.media_url,
-                    description: $scope.params.htmlcontent,
+                    template_id: $scope.params.template,
+                    description: $scope.params.bodyText,
                     organization_id: $cookieStore.get('orgID'),
                     user_id: $cookieStore.get('userId'),
                     tag_name: $scope.params.tag_name,
@@ -159,7 +185,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                
                 };
 
-                console.log($scope.params.htmlcontent);
+                console.log($scope.params.bodyText);
                 apiService.post("Blogs/Edit", postdata).then(function (response)
                 {
                     data = response.data[0];
@@ -244,9 +270,10 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         media_url: $scope.media_url,
         organization_id: $cookieStore.get('orgID'),
         User_ID: $cookieStore.get('userId'),      
-        description: $scope.description,
         tag_name: $scope.tag_name,
         name: $scope.name,
+        template_id: $scope.template,
+        description: $scope.bodyText,
 
     };
     $scope.sendForApproval = function () {
