@@ -3,6 +3,7 @@
 .controller('newuserdetailController',
     function ($scope, $state, security, $cookieStore, $modal, $rootScope, apiService, $window, $rootScope, newuserService) {
         console.log('newuserdetailController');
+        $rootScope.title = 'Dwellar-User Details';
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
 
@@ -57,8 +58,7 @@
 
 
         });
-        //   $rootScope.title = 'Dwellar./UserDetails';
-        $rootScope.title = 'Dwellar./users/details';
+       
         //Audit log start															
         $scope.params =
             {

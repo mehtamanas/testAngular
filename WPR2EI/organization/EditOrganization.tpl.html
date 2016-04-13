@@ -264,7 +264,7 @@
                         </div>
                     </div>
 
-                    <div class="clearfix">
+                    <!--<div class="clearfix">
                         <div class="form-bx form-bx6">
                             <div class="form-group"
                                  data-ng-class="{
@@ -287,7 +287,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
 
                 <!--Test-->
@@ -305,9 +305,8 @@
                                            data-ng-model="choice1.email"
                                            minlength="1"
                                            maxlength="50"
-                                          
                                            input-focus
-                                           ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" />
+                                           ng-pattern="emailRegex" />
                                     <div class="text-danger"
                                          data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
                                         {{ 'Please Enter Valid Email Id' | translate }}

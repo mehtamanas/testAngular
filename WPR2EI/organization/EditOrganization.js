@@ -1,7 +1,7 @@
 ﻿
-var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieStore,$rootScope, apiService, $modal, $window, FileUploader, uploadService) {
+var EditOrgPopUpController = function ($scope, $state, $modalInstance, $cookieStore, $rootScope, apiService, $modal, $window, FileUploader, uploadService, PATTERNREGEXS) {
     console.info("EditOrgPopUpController");
-  
+    $scope.emailRegex = PATTERNREGEXS.email;
     var orgID = $cookieStore.get('orgID');
     var uploader = $scope.uploader = new FileUploader({
        url: apiService.uploadURL,
@@ -321,9 +321,9 @@ function (error)
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'newuser/Edited.tpl.html',
+                templateUrl: 'projects/UpdateSuccessful.tpl.html',
                 backdrop: 'static',
-                controller: EditsucessfullController,
+                controller: UpdateController,
                 size: 'sm',
                 resolve: { items: { title: "Organization" } }
             });
