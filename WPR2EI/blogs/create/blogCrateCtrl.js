@@ -107,7 +107,21 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
     }
 
 
- 
+
+    apiService.get('Template/GetAllTemplates?orgId=' + orgID).then(function (response) {
+        $scope.params.templateList = response.data;
+    });
+
+    $scope.selectTemplate = function () {
+        if ($scope.params.template !== "") {
+            //$scope.params.subject = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).subject;
+            $scope.params.bodyText = $sanitize((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description);
+        }
+        else
+            $scope.params.bodyText = "";
+    }
+
+
     //start
     // CALLBACKS
     var uploadResult;
