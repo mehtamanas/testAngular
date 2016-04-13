@@ -458,7 +458,25 @@ angular.module('contacts')
                 "class": "UseHand",
                 "style": "text-align:center"
             }
-        }, {
+        },
+        //saroj on 13-04-2016
+           {
+               field: "created_at",
+               hidden: true,
+               title: "Created Date",
+               type: 'date',
+               filterable: {
+                   ui: "datepicker"
+               },
+               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+               // template: "<span style='display:none;' ></span>",
+               //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') ,#",
+               attributes: {
+                   "class": "UseHand",
+                   "style": "text-align:center"
+               }
+           },
+        {
             title: "Action",
             template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
             field: 'Action',
@@ -660,6 +678,8 @@ angular.module('contacts')
                             if (expsplit[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
+                            if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
 
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
@@ -668,7 +688,7 @@ angular.module('contacts')
                             else {
                                 //"last_updated":"2016-04-07T04:20:42.953+00:00"
 
-                                if (Firstname == "last_contacted" || Firstname == "last_updated") {
+                                if (Firstname == "last_contacted" || Firstname == "last_updated" || Firstname == "created_at") {
 
                                     var CurrentDate = moment().startOf('day')._d;
                                     var CurrentEndDate = moment().endOf('day')._d;
@@ -899,6 +919,9 @@ angular.module('contacts')
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
+
                             else {
                                 alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
                                 return;
@@ -917,6 +940,9 @@ angular.module('contacts')
 
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
+
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
 
                             else {
                                 alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
@@ -937,6 +963,9 @@ angular.module('contacts')
 
                             else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
+
+                            else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
 
                             else {
                                 alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
@@ -975,6 +1004,7 @@ angular.module('contacts')
                 alert("Please Check Query.");
             }
         }
+
 
 
         $scope.clearFilter = function () {
