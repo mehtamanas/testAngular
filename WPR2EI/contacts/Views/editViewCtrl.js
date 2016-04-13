@@ -4,6 +4,7 @@
     $scope.title = viewData.type;
     $scope.params.viewName = viewData.viewName;
     $scope.title = viewData.type;
+    $scope.setDefault = viewData.isViewDefault;
     $scope.editView = function (isValid) {
         if (isValid) {
             $scope.loadingDemo = true;
@@ -11,6 +12,8 @@
 
 
             postData = {//view
+                default_view: $scope.setDefault,
+                id:viewData.viewId,
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
                 grid_name: viewData.grid,
@@ -23,7 +26,7 @@
                 filters: viewData.filterObj ? JSON.stringify(viewData.filterObj) : null
 
             }
-            apiService.post('Notes/GetEditData/' + viewData.viewId, postData).then(function (response) {
+            apiService.post('Notes/EditGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
                 $scope.cancel();
                 if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: $scope.params.viewName });

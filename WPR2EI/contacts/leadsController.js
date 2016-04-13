@@ -130,55 +130,95 @@ angular.module('contacts')
         }
 
         $scope.saveView = function () {
-            var grid = $('#contact_kenomain').getKendoGrid();
+                var grid = $('#contact_kenomain').getKendoGrid();
 
-            if (grid.dataSource._sort) {
-                var sortObject = grid.dataSource._sort[0];
+                if (grid.dataSource._sort) {
+                    var sortObject = grid.dataSource._sort[0];
+                }
+
+                if ($scope.textareaText) {
+                    var Querydata = $scope.textareaText.toLowerCase();
+                }
+                //var colObject = _.filter(grid.columns, function (o)
+                //{ return !o.hidden });
+                //colObject = (_.pluck(colObject, 'field')).join(',');
+
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'contacts/Views/createView.html',
+                    backdrop: 'static',
+                    controller: createViewCtrl,
+                    size: 'sm',
+                    resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
+                });
             }
-
-            if ($scope.textareaText){
-                var Querydata = $scope.textareaText.toLowerCase();
-            }
-            //var colObject = _.filter(grid.columns, function (o)
-            //{ return !o.hidden });
-            //colObject = (_.pluck(colObject, 'field')).join(',');
-
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/Views/createView.html',
-                backdrop: 'static',
-                controller: createViewCtrl,
-                size: 'sm',
-                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
-            });
-        }
 
 
         $scope.editView = function () {
-            var viewName = _.filter($scope.views, function (o)
-            { return o.id == $scope.gridView });
+            if ($scope.gridView !== 'default') {
+                var viewName = _.filter($scope.views, function (o)
+                { return o.id == $scope.gridView });
 
-            var grid = $('#contact_kenomain').getKendoGrid();
+                var grid = $('#contact_kenomain').getKendoGrid();
 
-            if (grid.dataSource._sort) {
-                var sortObject = grid.dataSource._sort[0];
+                if (grid.dataSource._sort) {
+                    var sortObject = grid.dataSource._sort[0];
+                }
+
+                if ($scope.textareaText) {
+                    var Querydata = $scope.textareaText.toLowerCase();
+                }
+                //var colObject = _.filter(grid.columns, function (o)
+                //{ return !o.hidden });
+                //colObject = (_.pluck(colObject, 'field')).join(',');
+
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'contacts/Views/editView.html',
+                    backdrop: 'static',
+                    controller: editViewCtrl,
+                    size: 'sm',
+                    resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
+                });
             }
-
-            if ($scope.textareaText) {
-                var Querydata = $scope.textareaText.toLowerCase();
+            else{
+                alert('Cannot edit this view');
             }
-            //var colObject = _.filter(grid.columns, function (o)
-            //{ return !o.hidden });
-            //colObject = (_.pluck(colObject, 'field')).join(',');
+        }
 
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/Views/editView.html',
-                backdrop: 'static',
-                controller: editViewCtrl,
-                size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName:viewName[0].view_name,viewId:$scope.gridView } }
-            });
+        $scope.deleteView = function () {
+            if ($scope.gridView !== 'default') {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    closeOnConfirm: false
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                        postData = [{ id: $scope.gridView, organization_id: $cookieStore.get('orgID') }];
+                        apiService.post('Notes/DeleteGridView', postData).then(function (res) {
+                            swal(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        );
+                        }, function (err) {
+                            swal(
+                        'Not Deleted!',
+                        'Something went wrong. Try again later.',
+                        'error'
+                      );
+                        })
+                    }
+                })
+            }
+            else {
+                alert('cannot delete this view')
+            }
         }
 
 
@@ -367,7 +407,7 @@ angular.module('contacts')
              }, {
                  field: "text",
                  title: "Notes",
-                 template: "<span  ng-bind-html='dataItem.text | limitTo:50'></span>",
+                 template: "<span  ng-bind-html='dataItem.text | limitTo:200'></span>",
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"
