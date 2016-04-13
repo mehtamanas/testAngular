@@ -36,15 +36,42 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="" class="hidden-xs" id="addnewproject_state">Task  Type</label>
-                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" id="UsereditTask_taskType" >
+                            <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" id="UsereditTask_taskType">
                                 <option value="" selected>Choose Task Type</option>
                                 <option ng-repeat="event in events"
                                         value="{{event.id}}">
                                     {{event.type}}
                             </select>
                         </div>
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx unit-type">
+                                <label for="">Task Code</label>
+                                <input type="text" class="form-control" disabled autofocus name="task id" id="edittaskTaskId"
+                                       placeholder="Task Code"
+                                       data-ng-model="params.task_code"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!--<div class="clearfix">
+                    <div class="pull-left f-half-3">
+                        <div class="clearfix">
+                            <div class="form-group">
+                                <div class="form-group form-bx unit-type">
+                                    <label for="">Task Code</label>
+                                    <input type="text" class="form-control" disabled autofocus name="task id" id="edittaskTaskId"
+                                           placeholder="Task Code"
+                                           data-ng-model="params.task_code"
+                                           input-focus
+                                           required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
 
                 <div class="clearfix">
                     <div class="pull-left f-half-6">
@@ -115,7 +142,9 @@
                     </div>
 
                 </div>
+
                 <strong class="duration_time form-content form-bx8"> Due Date And Time</strong>
+
                 <div class="clearfix">
 
                     <div class="pull-left f-half-6">
@@ -155,6 +184,7 @@
                 </div>
 
                 <strong class="duration_time form-content form-bx8">Add Notes</strong>  
+
                 <div class="clearfix">
                     <div class="form-group form-bx form-bx5">
                        
@@ -166,6 +196,7 @@
                                    />
                     </div>
                 </div>
+
                 <div class="modal-btn-wrap-1 clearfix">
                     <button type="submit" class="f-btn" id="btn_UsereditTask_save"> SAVE</button>
                     <button type="button" class="f-btn f-btn2" ng-click="cancel()" id="btn_UsereditTask_cancel">CANCEL</button>
