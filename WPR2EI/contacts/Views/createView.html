@@ -11,7 +11,7 @@
                style="width: 65%;margin-left: 18%;"
                input-focus
                required /><br/>
-        <md-checkbox id="emailLaunch_check" style="margin-left:34%" ng-model="showcontent" value="1">Set as default view
+        <md-checkbox id="emailLaunch_check" style="margin-left:34%" ng-model="setDefault" value=true>Set as default view
         </md-checkbox>
         <div ng-messages="viewForm.viewName.$error" data-ng-if="viewForm.viewName.$invalid && (!viewForm.viewName.$pristine || showValid) && !viewForm.viewName.$focus" style="color:maroon" role="alert">
             <div ng-message="required" id="err_createView"  style="width: 65%;margin-left: 18%">You did not enter a field</div>

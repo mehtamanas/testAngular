@@ -1,7 +1,7 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var EditNotesContactController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
+var EditNotesContactController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window, FileUploader) {
     console.log('EditNotesContactController');
     $scope.loadingDemo = false;
     $scope.seletedNotesId = window.sessionStorage.selectedNotesID;
@@ -42,6 +42,92 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
     AuditCreate();
 
     //end
+
+
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiService.uploadURL,
+    });
+
+    uploader.filters.push({
+        name: 'attchementFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected invalid file type');
+            }
+            if (item.size > 10485760) {
+
+                alert('File size should be less than 10mb');
+            }
+            return '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type) !== -1 && item.size <= 10485760;
+        }
+    });
+
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        loc = response[0].Location;
+        var edit = $('#sendEmailEditor').data("kendoEditor");
+        var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
+        if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
+            edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
+        else {
+            edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
+        }
+
+    };
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        uploader.uploadAll();
+    }
+
+    $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
+        tools: ["bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "justifyLeft",
+                "justifyCenter",
+                "justifyRight",
+                "justifyFull",
+                "insertUnorderedList",
+                "insertOrderedList",
+                "indent",
+                "outdent",
+                "createLink",
+                'pdf',
+                "unlink",
+                "fontName",
+                "fontSize",
+                "foreColor",
+                "backColor",
+                "print",
+                'createTable',
+                {
+                    name: "myTool",
+                    tooltip: "Insert Image",
+                    exec: function (e) {
+                        $('#imageBrowser').trigger("click");
+                    }
+                },
+                  {
+                      name: "insertHtml",
+                      items: [
+                          { text: "Last Name", value: "{{last_name}}" },
+                          { text: "First Name", value: "{{first_name}}" },
+                          { text: "My First Name", value: "{{my_first_name}}" },
+                          { text: "My Last Name", value: "{{my_last_name}}" },
+                          { text: "Salutation", value: "{{salutation}}" },
+                           { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
+
+                      ]
+                  },
+                  "viewHtml",
+        ],
+    }
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
