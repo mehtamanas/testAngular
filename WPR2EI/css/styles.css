@@ -11456,6 +11456,12 @@ md-radio-button {
     padding: 3px;
     font-weight: bold;
 }
+*:focus {
+    outline: none;
+}
+.contact_form_head{
+        width: 104%;
+}
 /*custom media*/
 
 @media screen and (min-width: 1280px) and (max-width:1366px) {
