@@ -552,7 +552,7 @@ function (error) {
         project_code:$scope.projectcode
     };
 
-    var project_id = "";
+    var project_id = null;
 
     $scope.confirmation = function () {
 

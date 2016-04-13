@@ -154,6 +154,7 @@
     }
     $scope.selectPayment = function () {
         $scope.paymentList;
+        $cookieStore.put("PaymentScheduled", $scope.paymentList);
  
         schemeDetails();
 

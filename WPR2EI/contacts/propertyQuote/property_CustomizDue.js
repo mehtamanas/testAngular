@@ -9,9 +9,7 @@
 
     var project_id = $cookieStore.get("projectId");
     var customer_id = $cookieStore.get("customerId");
-
     var typeOfOffer = $cookieStore.get("OfferType");
-
     var towerDetalis = $cookieStore.get("Tower_id");
     var wingDetails = $cookieStore.get("wing_id");
     var floorDetails = $cookieStore.get("floor_id");
@@ -19,6 +17,7 @@
     var radio_value = $cookieStore.get("discountType");
     var additionalDiscountValue = $cookieStore.get("additionaldiscountValue");
     var offerDiscount = $cookieStore.get("DiscountValue");
+    var paymentScheduled = $cookieStore.get("PaymentScheduled");
 
     $scope.proprty_Details = $cookieStore.get("PropertyDetails");
 
@@ -286,13 +285,14 @@
             contact_id:customer_id,
             user_id:UserId,
             organization_id: org_id,
-            project_id:project_id,
+            project_id: project_id,
+            payment_schedule_id:paymentScheduled,
             total_consideration:$scope.proprty_Details.total_considarationValue,
             discount: offerDiscount,
             additional_discount: additionalDiscountValue,
             additional_discount_type:radio_value,
             final_total:$scope.totalValue,
-            unit_type_id: UnitDetail.unit_id,
+            unit_id: UnitDetail.unit_id,
             price_per_sq_ft:$scope.proprty_Details.Rps,
         }
         apiService.post("PropertyQuotes/CreateQuoteUnitCharge", postData).then(function (response) {
