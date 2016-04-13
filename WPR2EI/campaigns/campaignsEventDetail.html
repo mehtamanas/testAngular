@@ -3,13 +3,17 @@
         <div class="pg-inner-header">
             <div class="row">
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h2 class="pg-inner-title">Events</h2>
+                </div>
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right">
+                        <a id="campaignsEventDetail_opencontactpopup" href="" class="btn-blk-create" ng-click="openCampaignsPopUp()" style="cursor:pointer">+ Create New Event</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!--<div class="content-inner">
         <div class="pg-inner-header">
             <div class="row">
@@ -41,21 +45,27 @@
 
     </div>--><!-- content-inner ended -->
 
-    <div style="width:100%; background:#e7e7e7; padding:30px">
 
-        <div class="pull-left actions-wrap">
-            <select id="campaignsEventDetail_actions-option" class="form-control actions-option">
-                <option>ACTIONS</option>
-                <option>EDIT</option>
-                <option>DELETE</option>
-            </select>
-        </div>
-        <div class="pull-right btn-wrap-right">
-            <a id="campaignsEventDetail_opencontactpopup" href="" class="btn-lk" ng-click="openCampaignsPopUp()" style="cursor:pointer">+ Create New Event</a>
-        </div>
-    </div>
+
+       
+        
+ 
 
         <div class="pg-inner-content">
+            <div class="clearfix action-spacer">
+                <div class="col-lg-12 head_action">
+                    <div class="">
+                        <div class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
+                            <select id="campaignsEventDetail_actions-option" class="form-control serach_bar_btn sel_action">
+                                <option>Action</option>
+                                <option>Edit</option>
+                                <option>Delete</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn_refresh"><img src="./images/refresh2.png" /></button>
+                </div>
+            </div>
             <div class="project-detail">
                 <div class="top-row" style="padding:60px; background:#ffffff; padding-top:0px; padding-bottom:0px;">
                     <div class="row">
@@ -81,4 +91,5 @@
 
 
 
+   
     </div><!-- main-content ended -->

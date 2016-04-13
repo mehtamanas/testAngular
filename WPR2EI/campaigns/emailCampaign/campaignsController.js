@@ -1,4 +1,5 @@
-﻿angular.module('campaigns')
+﻿
+angular.module('campaigns')
 .controller('campaignsDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $window) {
         console.log('campaignsDetailController');

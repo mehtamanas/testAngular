@@ -10124,9 +10124,18 @@ select {
     font-weight: 600;
     color: #fff;
     border-radius: 9px;
-    padding: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 2px 7px 1px 6px;
+}
+.btn-blk-create{
+     background-color: #2f98e1;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 9px 15px;
+    margin-right: 35px;
+    text-transform: uppercase;
 }
 
 .capt {
@@ -11472,6 +11481,10 @@ md-radio-button {
     margin-top: 17px;
     overflow-y: auto;
     height: 150px;
+}
+.action-spacer{
+    margin-top: -20px;
+
 }
 
 

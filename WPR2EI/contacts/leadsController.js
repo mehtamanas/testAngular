@@ -367,7 +367,7 @@ angular.module('contacts')
              }, {
                  field: "text",
                  title: "Notes",
-
+                 template: "<span ng-bind='dataItem.text | limitTo:50'></span>",
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"
