@@ -199,7 +199,7 @@ angular.module('contacts')
                     closeOnConfirm: false
                 }).then(function (isConfirm) {
                     if (isConfirm) {
-                        postData = [{ id: $scope.gridView, organization_id: $cookieStore.get('orgID') }];
+                        postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             swal(
                           'Deleted!',
