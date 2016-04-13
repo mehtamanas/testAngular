@@ -830,7 +830,7 @@ angular.module('contacts')
                  }, {
                 field: "text",
                 title: "Notes",
-                template: "<span  ng-bind-html='dataItem.text | limitTo:200'></span>",
+                template: "<span ng-bind='dataItem.text | limitTo:50'></span>",
                
                 attributes:
                {
