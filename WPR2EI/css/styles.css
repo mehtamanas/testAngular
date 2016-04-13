@@ -11462,6 +11462,19 @@ md-radio-button {
 .contact_form_head{
         width: 104%;
 }
+.contact_spacer{
+        margin-left: 34px;
+}
+.contact_spacer_inrest{
+        margin-left: 67px;
+}
+.intrested_projects{
+    margin-top: 17px;
+    overflow-y: auto;
+    height: 150px;
+}
+
+
 /*custom media*/
 
 @media screen and (min-width: 1280px) and (max-width:1366px) {

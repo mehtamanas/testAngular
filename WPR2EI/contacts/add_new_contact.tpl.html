@@ -72,7 +72,7 @@
                                             'has-success': newForm.salutation.$valid && !newForm.salutation.$pristine && !newForm.salutation.$focus
                                      }">
                                             <label class="contact-label">SALUTATION</label>
-                                            <select id="contactadd_salutation" name="salutation" ng-change="selectsalutation()" ng-model="salutation1" class="dropdown form-control contact-formField">
+                                            <select id="contactadd_salutation"  name="salutation"  ng-change="selectsalutation()" ng-model="salutation1" class="dropdown form-control contact-formField">
                                                 <option value="" selected>Select Salutation</option>
                                                 <option value="Mr.">Mr.</option>
                                                 <option value="Ms.">Ms.</option>
@@ -98,6 +98,7 @@
                                             }">
 
                                                 <md-input-container>
+
                                                     <label class="contact-label">First Name</label>
                                                     <input name="firstName" id="contactadd_firstname"
                                                            data-ng-model="params.first_name"
@@ -323,7 +324,7 @@
                             <h4 class="contact-header-label">INTERESTED IN PROJECTS</h4>
                         </div>
                         <!-- add checkbox code here -->
-                        <div class="clearfix">
+                        <div class="clearfix intrested_projects">
                             <div class="col-md-9">
                                 <div class="md-padding" ng-repeat="project in projects">
                                     <md-checkbox ng-model="project.checkedd">
@@ -602,7 +603,7 @@
                                     <div class="form-group form-bx form-bx8">
                                         <md-input-container class="md-block">
                                             <label class="contact-label">Area</label>
-                                            <input id="contactadd_area" autofocus name="Area"
+                                            <input id="contactadd_area"  name="Area"
                                                    data-ng-model="params.area"
                                                    minlength="1"
                                                    maxlength="255"
@@ -638,7 +639,7 @@
                                             </md-input-container>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 contact_spacer">
                                         <div class="form-bx form-bx3" style="margin-left: 10%;">
                                             <md-input-container class="md-block">
                                                 <label for="" class="contact-label">City</label>
@@ -652,7 +653,7 @@
                                             </md-input-container>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 contact_spacer">
                                         <div class="form-bx form-bx3">
                                             <div class="form-group"
                                                  data-ng-class="{
@@ -757,7 +758,7 @@
 
                                         </div>
                                     </div><span class="field-mdl field-req">*</span>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 contact_spacer_inrest">
                                         <div class="form-bx">
                                             <div class="form-group"
                                                  data-ng-class="{
@@ -798,7 +799,7 @@
 
                                         <md-input-container class="md-block">
                                             <label class="contact-label">SPOUSE'S NAME</label>
-                                            <input id="contactadd_area" autofocus name="spouse"
+                                            <input id="contactadd_area"  name="spouse"
                                                    data-ng-model="params.spouse_name"
                                                    minlength="1"
                                                    maxlength="100"
@@ -864,7 +865,7 @@
                                             <div class="form-group">
                                                 <md-input-container class="md-block">
                                                     <label class="contact-label">NUMBER OF FAMILY MEMBER</label>
-                                                    <input id="contactadd_family" autofocus name="family_member"
+                                                    <input id="contactadd_family"   name="family_member"
                                                            placeholder="Family Members"
                                                            data-ng-model="params.no_of_family_members"
                                                            ng-pattern="/^[0-9]{1,2}$/" />
@@ -887,7 +888,7 @@
                                             <div class="form-group">
                                                 <md-input-container class="md-block">
                                                     <label class="contact-label">NUMBER OF CAR OWNED</label>
-                                                    <input id="contactadd_carOwned" autofocus name="family"
+                                                    <input id="contactadd_carOwned"   name="family"
                                                            placeholder="No. Of Cars"
                                                            data-ng-model="params.params.no_of_cars_owned"
                                                            ng-pattern="/^[0-9]{1,9}$/" />
@@ -939,7 +940,7 @@
                              ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                     </div>
                     <div class="modal-btn-wrap " style="margin-top:2%">
-                        <button id="btn_contactadd_save" type="submit" class="f-btn ladda-button" ladda="loadingDemo" data-color="red" data-style="expand-right">SAVE</button><
+                        <button id="btn_contactadd_save" type="submit" class="f-btn ladda-button" ladda="loadingDemo" data-color="red" data-style="expand-right">SAVE</button>
 
                         <button id="btn_contactadd_cancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
                     </div>
@@ -1017,7 +1018,7 @@
                                          'has-success': newForm.income.$valid && !newForm.income.$pristine && !newForm.income.$focus
                                                                      }">
                                     <label for="">Income</label>
-                                    <input type="text" class="form-control text-bold" autofocus name="income" id="contactadd_income"
+                                    <input type="text" class="form-control text-bold"   name="income" id="contactadd_income"
                                            data-ng-model="params.income"
                                            minlength="1"
                                            maxlength="50"
@@ -1071,7 +1072,7 @@
                                           'has-success': newForm.ProjectNo.$valid && !newForm.ProjectNo.$pristine && !newForm.ProjectNo.$focus
                                            }">
                                 <label>No. of Projects</label>
-                                <input type="text" autofocus name="ProjectNo" class="form-control" id="contactadd_projectno"
+                                <input type="text"   name="ProjectNo" class="form-control" id="contactadd_projectno"
                                        data-ng-model="params.no_of_project"
                                        minlength="1"
                                        maxlength="50"
@@ -1115,6 +1116,6 @@
     $("#contactadd_uploader1").change(function () {
         readURL(this);
     });
-
+   
 
 </script>
