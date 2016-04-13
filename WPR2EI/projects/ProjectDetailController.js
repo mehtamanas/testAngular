@@ -941,17 +941,18 @@
                     }
                 },
 
-                {
-                template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
-                "<span style='padding-left:10px' class='property-photo'> </span>",
-                title: "Photo",
+                //{
+                //template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
+                //"<span style='padding-left:10px' class='property-photo'> </span>",
+                //title: "Photo",
                
-                attributes: {
-                    "class": "UseHand",
-                    "style": "text-align:center"
+                //attributes: {
+                //    "class": "UseHand",
+                //    "style": "text-align:center"
 
-                }
-            }, {
+                //}
+                //},
+            {
                   field: "tower_name",
                   title: "Name",
               
@@ -1590,34 +1591,22 @@
             var id = $scope.Gallery[index].id;
             $scope.Gallery[index] = undefined;
             var postdata = { id: id }
-
-            apiService.post("MediaElement/Delete", postdata).then(function (response) {
-                var loginSession = response.data;
-                //$modalInstance.dismiss();
-                $scope.openSucessfullPopup();
-
-            },
-
-
-        function (error) {
-            if (error.status === 400)
-                alert(error.data.Message);
-            else
-                alert("Network issue");
-        });
-            $scope.openSucessfullPopup = function () {
-                var modalInstance = $modal.open({
-                    animation: true,
-                    templateUrl: 'newuser/delete.html',
-                    backdrop: 'static',
-                    controller: DeleteController,
-                    size: 'sm',
-                    resolve: { items: { title: "Image" } }                                      
-                });
-                $rootScope.$broadcast('REFRESH', 'images');
-            }
+            $cookieStore.put('imagepostdata', postdata);
+            $scope.openImageConfirmation();
+          
 
         }
+
+        $scope.openImageConfirmation = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/removeimageconfirm.html',
+                backdrop: 'static',
+                controller: confirmProjectImageController,
+                size: 'lg'
+            });
+        };
+
 
         $scope.openEventCampaignPopup = function () {
             var modalInstance = $modal.open({

@@ -73,7 +73,7 @@
 
     //end
        $scope.cancel = function () {
-           $state.go('app.my_day');
+           $state.Url
         };
 
         $scope.reset = function () {
