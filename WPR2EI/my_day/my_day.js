@@ -491,27 +491,341 @@
 
         }
 
-        var taskAPI = function () {
+    //    var taskAPI = function () {
 
-        apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/overdue").then(function (res) {
-            $scope.taskToday = res.data;
-        }, function (err) {
+    //    apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/overdue").then(function (res) {
+    //        $scope.taskToday = res.data;
+    //    }, function (err) {
 
-        })
+    //    })
 
-        apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/today").then(function (res) {
-            $scope.taskTomorrow = res.data;
-        }, function (err) {
+    //    apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/today").then(function (res) {
+    //        $scope.taskTomorrow = res.data;
+    //    }, function (err) {
 
-        })
+    //    })
 
-        apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/7days").then(function (res) {
-            $scope.taskNext7 = res.data;
-        }, function (err) {
+    //    apiService.get("ToDoItem/GetTaskByUserId/" + userID + "/7days").then(function (res) {
+    //        $scope.taskNext7 = res.data;
+    //    }, function (err) {
 
-        })
-    }
+    //    })
+    //}
 
+        var taskGrid = function () {
+            $scope.taskTodayGrid = {
+                dataSource: {
+                    type: "json",
+                    transport: {
+
+                        read: apiService.baseUrl + "ToDoItem/GetTaskByUserId/" + userID + "/overdue"
+
+                    },
+                    pageSize: 5,
+
+                    schema: {
+                        model: {
+                            fields: {
+                                due_date: { type: "date" },
+                            }
+                        }
+                    }
+                },
+                groupable: true,
+                sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "name",
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
+                    title: "Task Name",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "Project_Name",
+                    title: "Project",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "user_name",
+                    title: "Assigned To",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "Contact_Name",
+                    title: "Contact",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "company",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "remind_me",
+                    title: "Remind Me",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "status",
+                    template: '<span id="#= status #"></span>',
+                    title: "Status",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "due_date",
+                    title: "Due Date",
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, ]
+
+            }
+            $scope.taskTomorrowGrid = {
+                dataSource: {
+                    type: "json",
+                    transport: {
+
+                        read: apiService.baseUrl + "ToDoItem/GetTaskByUserId/" + userID + "/today"
+
+                    },
+                    pageSize: 5,
+
+                    schema: {
+                        model: {
+                            fields: {
+                                due_date: { type: "date" },
+                            }
+                        }
+                    }
+                },
+                groupable: true,
+                sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "name",
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="">#=name#</a>',
+                    title: "Task Name",
+
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "project_name",
+                    title: "Project",
+
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "user_name",
+                    title: "Assigned To",
+
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "Contact_name",
+                    title: "Contact",
+                    width: 200,
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "remind_me",
+                    title: "Remind Me",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "status",
+                    template: '<span id="#= status #"></span>',
+                    title: "Status",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "due_date",
+                    title: "Due Date",
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, ]
+
+
+            }
+            $scope.taskNext7Grid = {
+                dataSource: {
+                    type: "json",
+                    transport: {
+
+                        read: apiService.baseUrl + "ToDoItem/GetTaskByUserId/" + userID + "/7days"
+
+                    },
+                    pageSize: 5,
+
+                    schema: {
+                        model: {
+                            fields: {
+                                due_date: { type: "date" },
+                            }
+                        }
+                    }
+                },
+                groupable: true,
+                sortable: true,
+                selectable: "multiple",
+                reorderable: true,
+                resizable: true,
+                filterable: true,
+                columnMenu: {
+                    messages: {
+                        columns: "Choose columns",
+                        filter: "Apply filter",
+                        sortAscending: "Sort (asc)",
+                        sortDescending: "Sort (desc)"
+                    }
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "name",
+                    template: '<a ui-sref="app.edit_task_myday({id:dataItem.task_id})" href="">#=name#</a>',
+                    title: "Task Name",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "project_name",
+                    title: "Project",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "user_name",
+                    title: "Assigned To",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "Contact_name",
+                    title: "Contact",
+                    width: 200,
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "company_name",
+                    title: "Company",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "remind_me",
+                    title: "Remind Me",
+                    width: "200px",
+                    attributes:
+                     {
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "status",
+                    template: '<span id="#= status #"></span>',
+                    title: "Status",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, {
+                    field: "due_date",
+                    title: "Due Date",
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                }, ]
+
+
+            }
+
+        }
 
 
         $scope.schedulerOptions = {
@@ -592,7 +906,7 @@
 
         contactGrid();
         eventGrid();
-        taskAPI();
+        taskGrid();
 
         $scope.mailInboxGrid = {
             dataSource: {
