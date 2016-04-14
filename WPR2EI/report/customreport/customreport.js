@@ -3,7 +3,7 @@
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, teamService, $window, $localStorage, $sessionStorage, $interval) {
 
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-        console.log('CustomreportController');
+        console.log('ContactListController');
         $scope.gridView = 'default';
         $scope.leadAction = 'no_action';
 
@@ -70,114 +70,434 @@
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views = _.filter(res.data, function (o)
-                { return o.grid_name === 'lead' && o.query_type !== 'Filter' });
+                { return o.query_type === 'View' && o.grid_name === 'lead' });
             }, function (err) {
 
             });
         }
+
+
 
 
         callViewApi();
-
-        var callFilterApi = function () {
-
-            apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
-                $scope.filterview = _.filter(res.data, function (o)
-                { return o.query_type === 'Filter' && o.grid_name === 'lead' });
-            }, function (err) {
-
-            });
-        }
-
-
-        callFilterApi();
-
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {
                 //filter by grid name
-                sortObj = _.filter($scope.views, function (o)
-                { return o.view_name === $scope.gridView });
+                viewObj = _.filter($scope.views, function (o)
+                { return o.id === $scope.gridView });
 
                 //get the grid datasource
                 var grid = $('#contact_kenomain').getKendoGrid();
-                var sort = [];
-                sort.push({ field: sortObj[0].sort_by, dir: sortObj[0].sort_order });
-                var col = (sortObj[0].column_names).split(',');
-                for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
+
+                if (viewObj.sort_by) {//sort
+                    var sort = [];
+                    sort.push({ field: viewObj[0].sort_by, dir: viewObj[0].sort_order });
+                    grid.dataSource.sort(sort);
+                }
+
+
+                var col = JSON.parse(viewObj[0].column_names);
+                for (i = 0; i < grid.columns.length; i++) {
                     var colFlag = false;
                     for (j = 0; j < col.length; j++) {
-                        if (col[j] === $('#contact_kenomain').getKendoGrid().columns[i].field) {
-                            $('#contact_kenomain').getKendoGrid().showColumn(i);
-                            colFlag = true;
-                            break;
+                        if (col[j].field === grid.columns[i].field) {
+                            if (!col[j].hidden) {
+                                grid.showColumn(i);
+                                colFlag = true;
+                                break;
+                            }
                         }
                         if (j === col.length - 1 && colFlag == false) {
-                            $('#contact_kenomain').getKendoGrid().hideColumn(i);
+                            grid.hideColumn(i);
                         }
                     }
                 }
 
-                $('#contact_kenomain').getKendoGrid().dataSource.sort(sort);
+                // saroj on 14-04-2016
+                // removing " " from string otherwise JQL will not work
+                var str = viewObj[0].query_string;
+                str = str.replace(/"/g, "");
+                $scope.textareaText = str;
+
+                grid.dataSource.filter(JSON.parse(viewObj[0].filters));
             }
             else {
                 $('#contact_kenomain').getKendoGrid().dataSource.sort({});
+                $('#contact_kenomain').getKendoGrid().dataSource.filter({});
+                $scope.textareaText = null;
                 for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
                     $('#contact_kenomain').getKendoGrid().showColumn(i);
+
                 }
 
             }
-        }
-
-        $scope.changeFilter = function () {
-            if ($scope.gridView !== 'default') {
-                sortObj = _.filter($scope.filterview, function (o) {
-                    return o.view_name === $scope.gridView
-                });
-
-                $scope.textareaText = sortObj[0].query_string;
-                $scope.callFilter();
-
-            }
 
         }
-
-        $scope.saveFilters = function () {
-            var Querydata = $scope.textareaText.toLowerCase();
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/Views/createView.html',
-                backdrop: 'static',
-                controller: createViewCtrl,
-                size: 'lg',
-                resolve: { viewData: { sort: null, col: null, grid: 'lead', type: 'Filter', filterQuery: Querydata } }
-            });
-        }
-
 
         $scope.saveView = function () {
             var grid = $('#contact_kenomain').getKendoGrid();
+
             if (grid.dataSource._sort) {
                 var sortObject = grid.dataSource._sort[0];
             }
-            var colObject = _.filter(grid.columns, function (o)
-            { return !o.hidden });
-            colObject = (_.pluck(colObject, 'field')).join(',');
+
+            if ($scope.textareaText) {
+                var Querydata = $scope.textareaText.toLowerCase();
+            }
+            //var colObject = _.filter(grid.columns, function (o)
+            //{ return !o.hidden });
+            //colObject = (_.pluck(colObject, 'field')).join(',');
 
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/Views/createView.html',
                 backdrop: 'static',
                 controller: createViewCtrl,
-                size: 'lg',
-                resolve: { viewData: { sort: sortObject, col: colObject, grid: 'lead', type: 'View', filterQuery: null } }
+                size: 'sm',
+                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
         }
 
-        $scope.DoWork = function () {
-          //  alert('enter hit');
-            $scope.callFilter();
+
+        $scope.editView = function () {
+            if ($scope.gridView !== 'default') {
+                var viewName = _.filter($scope.views, function (o)
+                { return o.id == $scope.gridView });
+
+                var grid = $('#contact_kenomain').getKendoGrid();
+
+                if (grid.dataSource._sort) {
+                    var sortObject = grid.dataSource._sort[0];
+                }
+
+                if ($scope.textareaText) {
+                    var Querydata = $scope.textareaText.toLowerCase();
+                }
+                //var colObject = _.filter(grid.columns, function (o)
+                //{ return !o.hidden });
+                //colObject = (_.pluck(colObject, 'field')).join(',');
+
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'contacts/Views/editView.html',
+                    backdrop: 'static',
+                    controller: editViewCtrl,
+                    size: 'sm',
+                    resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
+                });
+            }
+            else {
+                alert('Cannot edit this view');
+            }
+        }
+
+        $scope.deleteView = function () {
+            if ($scope.gridView !== 'default') {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    closeOnConfirm: false
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                        postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
+                        apiService.post('Notes/DeleteGridView', postData).then(function (res) {
+                            swal(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        );
+                        }, function (err) {
+                            swal(
+                        'Not Deleted!',
+                        'Something went wrong. Try again later.',
+                        'error'
+                      );
+                        })
+                    }
+                })
+            }
+            else {
+                alert('cannot delete this view')
+            }
+        }
+
+
+        $scope.chooseAction = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.leadAction === "no_action") {
+
+                }
+                else if ($scope.leadAction === "add_tag") {
+                    $state.go($scope.tagOptionPopup());
+                }
+                else if ($scope.leadAction === "assign_to") {
+                    $state.go($scope.assignToUpPopup());
+                }
+                else if ($scope.leadAction === "delete") {
+                    var contactDelete = [];
+                    for (var i in allCheckedIds) {
+                        var contact = {};
+                        contact.id = allCheckedIds[i];
+                        contact.organization_id = $cookieStore.get('orgID');
+                        contactDelete.push(contact);
+                    }
+                    $cookieStore.put('contactDelete', contactDelete);
+                    $scope.openConfirmation();
+                }
+            }
+        }
+
+        //Sync
+        var syncLeadDataSource = function () {
+            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                data = response.data;
+                for (i = 0; i < data.length; i++) {
+                    var tag = (data[i].Tags);
+                    if (tag !== null) {
+                        tag = JSON.parse(tag);
+                        data[i].Tags = [];
+                        data[i].Tags = tag;
+                    }
+                    else { data[i].Tags = []; }
+                }
+                $localStorage.leadDataSource = data;
+            })
+        };
+        //Sync Ends
+
+        // Kendo code
+        $scope.LeadGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: function (options) {
+                        if ($localStorage.leadDataSource)
+                        { options.success($localStorage.leadDataSource); }
+                        else {
+                            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                                data = response.data;
+                                for (i = 0; i < data.length; i++) {
+                                    var tag = (data[i].Tags);
+                                    if (tag !== null) {
+                                        tag = JSON.parse(tag);
+                                        data[i].Tags = [];
+                                        data[i].Tags = tag;
+                                    }
+                                    else
+                                        data[i].Tags = [];
+                                }
+                                $localStorage.leadDataSource = data;
+                                options.success(data);
+                            }, function (error) {
+                                options.error(error);
+                            })
+                        }
+                    },
+
+                },
+                pageSize: 20
+            },
+            dataBound: function () {
+                syncData = $interval(syncLeadDataSource, 300000);
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            height: screen.height - 350,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+            pageable: {
+                refresh: true,
+            },
+            columns: [
+                  {
+                      template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                      title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                      width: "60px",
+                      attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+                  }, {
+                      template: "<div class='user-photo_1' style='margin-left:35%'><img class='image2' src='#= Contact_Image #'/></div>" +
+                                "<span style='padding-left:10px' class='customer-name'> </span>",
+                      width: "120px",
+                      title: "Picture",
+                      field: 'Contact_Image',
+                      attributes:
+                      {
+                          "class": "UseHand",
+                      }
+                  }, {
+                      field: "Name",
+                      template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="" class="contact_name">#=Name#</a>',
+                      width: "200px",
+                      title: 'Name',
+                      attributes: {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
+                  }, {
+                      field: "Contact_Phone",
+                      title: "Phone",
+                      attributes: {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
+                  }, {
+                      field: "Contact_Email",
+                      title: " Email",
+
+                      attributes: {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
+                  }, {
+                      field: "City",
+                      title: "City",
+
+                      attributes:
+                      {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
+                  }, {
+                      field: "Assigned_To",
+                      title: "Assigned To",
+
+                      attributes: {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
+                  }, {
+                      field: "Type",
+                      title: "Type",
+
+                      attributes: {
+                          "class": "UseHand",
+                          "style": "text-align:center"
+                      }
+                  },
+             {
+                 field: "company",
+                 title: "Company",
+
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             }, {
+                 field: "text",
+                 title: "Notes",
+                 template: "<span  ng-bind-html='dataItem.text | limitTo:200'></span>",
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             },
+             {
+                 field: "Tags",
+                 template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
+                 title: "TAGS",
+                 width: "220px",
+
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             },
+              {
+                  field: "leadsource",
+                  title: "Lead Source",
+
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              }, {
+                  field: "last_contacted",
+                  title: "Last Contacted Date",
+                  type: 'date',
+                  filterable: {
+                      ui: "datepicker"
+                  },
+                  format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              },
+        {
+            field: "last_updated",
+            title: "Updated Date",
+            type: 'date',
+            filterable: {
+                ui: "datepicker"
+            },
+            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
+            attributes: {
+                "class": "UseHand",
+                "style": "text-align:center"
+            }
+        },
+        //saroj on 13-04-2016
+           {
+               field: "created_at",
+               hidden: true,
+               title: "Created Date",
+               type: 'date',
+               filterable: {
+                   ui: "datepicker"
+               },
+               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+               // template: "<span style='display:none;' ></span>",
+               //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') ,#",
+               attributes: {
+                   "class": "UseHand",
+                   "style": "text-align:center"
+               }
+           },
+        {
+            title: "Action",
+            template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
+            field: 'Action',
+            attributes:
+              {
+                  "class": "UseHand",
+                  "style": "text-align:center"
+              }
+        }, ]
         };
 
+
+
+        $scope.DoWork = function () {
+            $scope.callFilter();
+        };
 
         $scope.callFilter = function () {
 
@@ -363,6 +683,8 @@
                             if (expsplit[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
+                            if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
 
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
@@ -371,7 +693,7 @@
                             else {
                                 //"last_updated":"2016-04-07T04:20:42.953+00:00"
 
-                                if (Firstname == "last_contacted" || Firstname == "last_updated") {
+                                if (Firstname == "last_contacted" || Firstname == "last_updated" || Firstname == "created_at") {
 
                                     var CurrentDate = moment().startOf('day')._d;
                                     var CurrentEndDate = moment().endOf('day')._d;
@@ -602,6 +924,9 @@
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
+
                             else {
                                 alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
                                 return;
@@ -620,6 +945,9 @@
 
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
+
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
 
                             else {
                                 alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
@@ -640,6 +968,9 @@
 
                             else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
+
+                            else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
 
                             else {
                                 alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
@@ -679,601 +1010,12 @@
             }
         }
 
-        //var ValidFilter = false;
-        //var filter = "";
-        //var logsplit = "";
 
 
-        //$scope.callFilter = function () {
-        //    var txtdata = $scope.textareaText.toLowerCase();
-        //    var Firstname = "";
-
-        //    var AndSpl = txtdata.split(" and ");
-
-
-        //    if (AndSpl.length == 1) {
-        //        filter = { logic: "and", filters: [] };
-        //        callPush(AndSpl);
-        //    }
-
-        //    if (AndSpl.length > 1) {
-        //        var ORSpl1 = AndSpl[1].split(" or ");
-
-        //        if (ORSpl1.length == 1) {
-        //            filter = { logic: "and", filters: [] };
-        //            callPush(AndSpl);
-        //            //callPush(AndSpl[1]);
-        //        }
-        //        else if (ORSpl1.length > 1) {
-        //            filter = { logic: "or", filters: [] };
-        //            callPush(ORSpl1);
-        //        }
-
-        //        var ORSpl2 = AndSpl[0].split(" or ");
-
-        //        if (ORSpl2.length == 1) {
-        //            filter = { logic: "and", filters: [] };
-        //            callPush(ORSpl2);
-        //            //callPush(AndSpl[1]);
-        //        }
-        //        else if (ORSpl2.length > 1) {
-        //            filter = { logic: "or", filters: [] };
-        //            callPush(ORSpl2);
-        //        }
-        //    }
-
-        //    //else {
-        //    //    filter = { logic: "or", filters: [] };
-        //    //    callPush(AndSpl[0]);
-
-        //    //}
-
-
-
-        //    //filter = { logic: "or", filters: [] };
-
-        //    //if (txtdata.length > 0) {
-        //    //    logsplit = txtdata.split(" or ");
-
-        //    //    callPush(txtdata, logsplit);
-
-        //    if (ValidFilter == true) {
-        //        var ds = $('#contact_kenomain').getKendoGrid().dataSource;
-        //        ds.filter(filter);
-        //    }
-        //    else {
-        //        alert("Please Check Query ! ");
-        //    }
-
-        //}
-
-        //function callPush(logsplit) {
-
-        //    // alert("or split value =  " + logsplit.length);
-        //    if (logsplit.length > 0) {
-        //        for (var j = 0; j < logsplit.length; j++) {
-        //            // alert("value for j is " + j);
-
-        //            //FOR DATES 
-        //            var expsplitIsBefore = logsplit[j].split(" isbefore ");
-        //            var expsplitIsAfter = logsplit[j].split(" isafter ");
-        //            var expsplitBetween = logsplit[j].split(" between ");
-
-        //            var expEQ = logsplit[j].split(" = ");
-        //            var expIS = logsplit[j].split(" is ");
-
-        //            var expsplit = "";
-        //            if (expEQ.length > 1)
-        //                expsplit = expEQ;
-
-        //            if (expIS.length > 1)
-        //                expsplit = expIS;
-
-        //            var expsplitCONTAINS = logsplit[j].split(" contains ");
-        //            // var expsplitIN = logsplit[j].split(/in(.*)?/);
-
-        //            var expsplitIN = logsplit[j].split(" in ");
-
-        //            var expSplitGTE = logsplit[j].split(" >= ");
-
-        //            var expSplitLTE = logsplit[j].split(" <= ");
-
-        //            var expSplitGT = logsplit[j].split(" > ");
-
-        //            var expSplitLT = logsplit[j].split(" < ");
-
-        //            // CONTAINS  CHECK   
-        //            if (expsplitCONTAINS.length > 1) {
-
-        //                if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
-        //                    Firstname = "Name";
-
-        //                if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
-        //                    Firstname = "Contact_First_Name";
-
-        //                if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
-        //                    Firstname = "Contact_Last_Name";
-
-        //                else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
-        //                    Firstname = "Contact_Email";
-
-        //                if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
-        //                    Firstname = "Contact_Phone";
-
-        //                else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
-        //                    Firstname = "tag1";
-
-        //                else if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
-        //                    Firstname = "company";
-
-        //                    // for notes still need to confirm with sir
-        //                else if (expsplitCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
-        //                    Firstname = "text";
-
-        //                filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
-        //                ValidFilter = true;
-        //            }
-
-
-
-        //            // IN CHECK
-
-        //            if (expsplitIN.length > 1) {
-
-
-        //                if (expsplitIN[0].toUpperCase().trim() == "NAME")
-        //                    Firstname = "Name";
-
-        //                if (expsplitIN[0].toUpperCase().trim() == "FIRSTNAME")
-        //                    Firstname = "Contact_First_Name";
-
-        //                if (expsplitIN[0].toUpperCase().trim() == "LASTNAME")
-        //                    Firstname = "Contact_Last_Name";
-
-        //                else if (expsplitIN[0].toUpperCase().trim() == "EMAIL")
-        //                    Firstname = "Contact_Email";
-
-        //                if (expsplitIN[0].toUpperCase().trim() == "PHONE" || expsplitIN[0].toUpperCase().trim() == "NUMBER")
-        //                    Firstname = "Contact_Phone";
-
-        //                else if (expsplitIN[0].toUpperCase().trim() == "TAGS")
-        //                    Firstname = "tag1";
-
-        //                else if (expsplitIN[0].toUpperCase().trim() == "COMPANY")
-        //                    Firstname = "company";
-
-        //                    // for notes still need to confirm with sir
-        //                else if (expsplitIN[0].toUpperCase().trim() == "TEXT" || expsplitIN[0].toUpperCase().trim() == "NOTES")
-        //                    Firstname = "text";
-
-        //                var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
-        //                // alert(mystring);
-
-        //                var newString = mystring.split(',');
-        //                if (newString.length >= 1) {
-        //                    for (var k = 0; k < newString.length; k++) {
-        //                        // newString
-        //                        filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
-        //                        ValidFilter = true;
-        //                    }
-        //                }
-        //            }
-
-
-        //            // EQUAL TO CHECK 
-        //            if (expsplit.length > 1) {
-
-
-        //                if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
-        //                    Firstname = "Contact_First_Name";
-
-        //                if (expsplit[0].toUpperCase().trim() == "LASTNAME")
-        //                    Firstname = "Contact_Last_Name";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "EMAIL")
-        //                    Firstname = "Contact_Email";
-
-        //                if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
-        //                    Firstname = "Contact_Phone";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "TAGS")
-        //                    Firstname = "tag1";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "COMPANY")
-        //                    Firstname = "company";
-
-        //                    // for notes still need to confirm with sir
-        //                else if (expsplit[0].toUpperCase().trim() == "TEXT" || expsplit[0].toUpperCase().trim() == "NOTES")
-        //                    Firstname = "text";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "ASSIGNED TO")
-        //                    Firstname = "Assigned_To";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
-        //                    Firstname = "leadsource";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "NAME")
-        //                    Firstname = "Name";
-
-        //                else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-        //                    Firstname = "follow_up_count";
-
-        //                //if (expsplit[1].trim() == "")
-        //                //    expsplit[1].trim() = null;
-
-        //                if (Firstname == "follow_up_count") {
-        //                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
-        //                    ValidFilter = true;
-        //                }
-        //                else {
-        //                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
-        //                    ValidFilter = true;
-        //                }
-        //            }
-
-
-        //            // GREATER THAN EQUAL TO CHECK
-        //            if (expSplitGTE.length > 1) {
-
-        //                if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-        //                    Firstname = "follow_up_count";
-        //                else {
-        //                    alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
-        //                    return;
-        //                }
-
-        //                filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
-        //                ValidFilter = true;
-        //            }
-
-        //            // LESSER THAN EQUAL TO CHECK
-        //            if (expSplitLTE.length > 1) {
-
-
-
-        //                if (expSplitLTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
-        //                    Firstname = "follow_up_count";
-        //                else {
-        //                    alert(" <= Operator cannot be assigned to " + expSplitLTE[0]);
-        //                    return;
-        //                }
-
-        //                filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
-        //                ValidFilter = true;
-        //            }
-
-        //            // IS BEFORE CHECK
-
-        //            if (expsplitIsBefore.length > 1) {
-
-
-        //                if (expsplitIsBefore[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-        //                    Firstname = "last_contacted";
-
-        //                else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
-        //                    Firstname = "last_updated";
-
-        //                else {
-        //                    alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
-        //                    return;
-        //                }
-
-        //                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-        //                ValidFilter = true;
-        //            }
-
-        //            // IS AFTER CHECK
-
-        //            if (expsplitIsAfter.length > 1) {
-
-        //                if (expsplitIsAfter[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-        //                    Firstname = "last_contacted";
-
-        //                else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
-        //                    Firstname = "last_updated";
-
-        //                else {
-        //                    alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
-        //                    return;
-        //                }
-
-        //                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
-        //                ValidFilter = true;
-        //            }
-
-
-        //            // 
-
-        //            // BETWEEN OR CHECK 
-        //            if (expsplitBetween.length > 1) {
-
-        //                if (expsplitBetween[0].toUpperCase().trim() == "LAST CONTACTED DATE")
-        //                    Firstname = "last_contacted";
-
-        //                else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
-        //                    Firstname = "last_updated";
-
-        //                else {
-        //                    alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
-        //                    return;
-        //                }
-
-        //                var InnerBetweenSplit = expsplitBetween[1].split("||");
-
-        //                if (InnerBetweenSplit.length > 1) {
-        //                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
-        //                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
-        //                    ValidFilter = true;
-        //                }
-        //            }
-
-        //        }
-        //    }
-        //}
-
-
-
-        $scope.chooseAction = function () {
-            var allGridElements = $(".checkbox").toArray();
-            var allCheckedElement = _.filter(allGridElements, function (o)
-            { return o.checked });
-            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
-            $cookieStore.remove('checkedIds');
-            $cookieStore.put('checkedIds', allCheckedIds);
-
-            if (allCheckedIds.length > 0) {
-
-                if ($scope.leadAction === "no_action") {
-
-                }
-                else if ($scope.leadAction === "add_tag") {
-                    $state.go($scope.tagOptionPopup());
-                }
-                else if ($scope.leadAction === "assign_to") {
-                    $state.go($scope.assignToUpPopup());
-                }
-                else if ($scope.leadAction === "delete") {
-                    var contactDelete = [];
-                    for (var i in allCheckedIds) {
-                        var contact = {};
-                        contact.id = allCheckedIds[i];
-                        contact.organization_id = $cookieStore.get('orgID');
-                        contactDelete.push(contact);
-                    }
-                    $cookieStore.put('contactDelete', contactDelete);
-                    $scope.openConfirmation();
-                }
-            }
-        }
-
-        //Sync
         $scope.clearFilter = function () {
-            $('#contact_kenomain').getKendoGrid().dataSource.filter([]);
+            $('#contact_kenomain').getKendoGrid().dataSource.filter({});
             $scope.textareaText = ''
         }
-
-
-        var syncLeadDataSource = function () {
-            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
-                data = response.data;
-                for (i = 0; i < data.length; i++) {
-                    var tag = (data[i].Tags);
-                    if (tag !== null) {
-                        tag = JSON.parse(tag);
-                        data[i].Tags = [];
-                        data[i].Tags = tag;
-                    }
-                    else { data[i].Tags = []; }
-                }
-                $localStorage.leadDataSource = data;
-            })
-        };
-        //Sync Ends
-
-        // Kendo code
-        $scope.LeadGrid = {
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: function (options) {
-                        if ($localStorage.leadDataSource)
-                        { options.success($localStorage.leadDataSource); }
-                        else {
-                            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
-                                data = response.data;
-                                for (i = 0; i < data.length; i++) {
-                                    var tag = (data[i].Tags);
-                                    if (tag !== null) {
-                                        tag = JSON.parse(tag);
-                                        data[i].Tags = [];
-                                        data[i].Tags = tag;
-                                    }
-                                    else
-                                        data[i].Tags = [];
-                                }
-                                $localStorage.leadDataSource = data;
-                                options.success(data);
-                            }, function (error) {
-                                options.error(error);
-                            })
-                        }
-                    },
-
-                },
-                pageSize: 20
-            },
-            dataBound: function () {
-                //syncData = $interval(syncLeadDataSource, 5000);
-            },
-            groupable: true,
-            sortable: true,
-            selectable: "multiple",
-            reorderable: true,
-            height: screen.height - 350,
-            resizable: true,
-            filterable: true,
-            columnMenu: {
-                messages: {
-                    columns: "Choose columns",
-                    filter: "Apply filter",
-                    sortAscending: "Sort (asc)",
-                    sortDescending: "Sort (desc)"
-                }
-            },
-            pageable: {
-                refresh: true,
-            },
-            columns: [
-                  {
-                      template: "<input type='checkbox', class='checkbox', data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' />",
-                      title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
-                      width: "60px",
-                      field: 'Contact_Id',
-                      attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
-                  }, {
-                      template: "<div class='user-photo_1' style='margin-left:35%'><img class='image2' src='#= Contact_Image #'/></div>" +
-                                "<span style='padding-left:10px' class='customer-name'> </span>",
-                      width: "120px",
-                      title: "Picture",
-                      field: 'Contact_Image',
-                      attributes:
-                      {
-                          "class": "UseHand",
-                      }
-                  }, {
-                      field: "Name",
-                      template: '<a ui-sref="app.contactdetail({id:dataItem.Contact_Id})" href="" class="contact_name">#=Name#</a>',
-                      width: "200px",
-                      title: 'Name',
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "Contact_Phone",
-                      title: "Phone",
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-
-                      }
-                  }, {
-                      field: "Contact_Email",
-                      title: " Email",
-
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "City",
-                      title: "City",
-
-                      attributes:
-                      {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "Assigned_To",
-                      title: "Assigned To",
-
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  }, {
-                      field: "Type",
-                      title: "Type",
-
-                      attributes: {
-                          "class": "UseHand",
-                          "style": "text-align:center"
-                      }
-                  },
-        {
-            field: "company",
-            title: "Company",
-
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        },
-        {
-            field: "Tags",
-            template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
-            title: "TAGS",
-            width: "220px",
-
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        },
-        {
-            field: "leadsource",
-            title: "Lead Source",
-
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        },
-        //{
-        //    field: "follow_up_count",
-        //    title: "Follow Up",
-        //    type:'number',
-        //    attributes: {
-        //        "class": "UseHand",
-        //        "style": "text-align:center"
-        //    }
-        //},
-        {
-            field: "last_contacted",
-            title: "Last Contacted Date",
-            type: 'date',
-            filterable: {
-                ui: "datepicker"
-
-            },
-            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        },
-        {
-            field: "last_updated",
-            title: "Updated Date",
-            type: 'date',
-            filterable: {
-                ui: "datepicker"
-
-            },
-            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-            //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        },
-        {
-            title: "Action",
-            template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
-            field: 'Action',
-            attributes:
-            {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        }, ]
-        };
-
 
         $scope.checkALL = function (e) {
             if ($('.check-box:checked').length > 0)
@@ -1326,7 +1068,7 @@
                         duration: 100
                     }
                 },
-                filter: "td:nth-child(10)", //this filter selects the  column cells
+                filter: "td:nth-child(11)", //this filter selects the  column cells
                 position: "top",
                 beforeShow: function (e) {
                     console.log(e);
@@ -1356,12 +1098,6 @@
         //end tooltip
 
         // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
-            // dataItem will contain the row that was selected
-            window.sessionStorage.selectedCustomerID = dataItem.Contact_Id;
-
-            $state.go('app.contactdetail', { id: dataItem.Contact_Id });
-        };
 
         $scope.filterNow = function () {
             if ($scope.lastNameFilter)
@@ -1414,20 +1150,43 @@
 
         }
 
+        var contactAddEditRefresh = function () {
+            apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + userID + "&type=Lead").then(function (response) {
+                data = response.data;
+                for (i = 0; i < data.length; i++) {
+                    var tag = (data[i].Tags);
+                    if (tag !== null) {
+                        tag = JSON.parse(tag);
+                        data[i].Tags = [];
+                        data[i].Tags = tag;
+                    }
+                    else { data[i].Tags = []; }
+                }
+                $localStorage.leadDataSource = data;
+                $('.k-i-refresh').trigger("click");
+            })
+        }
+
         $scope.$on('REFRESH2', function (event, args) {
+
             if (args.name == 'LeadGrid') {
-                // $('.k-i-refresh').trigger("click");
-                $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
-            } else if (args.name == 'LeadGrid') {
+                if (args.data === null) {
+                    $('.k-i-refresh').trigger("click");
+                } else {
+                    $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+                    contactAddEditRefresh();
+                }
+            } else if (args.name == 'ViewCreated') {
                 callViewApi();
                 callFilterApi();
-                $scope.gridView = args;
+                $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
 
             callViewApi();
             callFilterApi();
+
         });
 
         $scope.openFollowUp = function (d) {
@@ -1447,16 +1206,21 @@
         };
 
 
-        $scope.openContactPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/add_new_contact.tpl.html',
-                backdrop: 'static',
+        //$scope.openContactPopup = function () {
+        //    var modalInstance = $modal.open({
+        //        animation: true,
+        //        templateUrl: 'contacts/add_new_contact.tpl.html',
+        //        backdrop: 'static',
+        //        controller: ContactPopUpController,
+        //        size: 'lg'
+        //    });
+        //};
 
-                controller: ContactPopUpController,
-                size: 'lg'
-            });
-        };
+
+        $scope.openContactPopup = function () {
+            $state.go('app.addNewContact');
+        };// add new contact page
+
 
         $scope.openUploadContactPopup = function () {
             var modalInstance = $modal.open({
@@ -1514,7 +1278,7 @@
                 templateUrl: 'contacts/AssignToContact.tpl.html',
                 backdrop: 'static',
                 controller: ActionUpController,
-                size: 'lg'
+                size: 'sm'
             });
         };
 
@@ -1524,7 +1288,7 @@
                 templateUrl: 'contacts/confirm.tpl.html',
                 backdrop: 'static',
                 controller: confirmationController,
-                size: 'lg',
+                size: 'sm',
                 resolve: { items: { title: "Contact" } }
 
             });
