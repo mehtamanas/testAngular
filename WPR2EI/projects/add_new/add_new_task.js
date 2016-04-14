@@ -5,7 +5,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
     console.log('AddNewTaskProject');
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-    $scope.reminder_time = "0";
+   // $scope.reminder_time = "0";
     //$scope.due_date = moment().format();
   
     $scope.project1 = $scope.seletedCustomerId;
@@ -50,6 +50,22 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
     }
 
    
+    Url = "ToDoItem/GetReminderTime"
+    apiService.get(Url).then(function (response) {
+        $scope.reminders = response.data;
+    },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+
+    $scope.selectReminderTime = function () {
+        $scope.params.reminder_time = $scope.reminder_time1;
+        $scope.reminderTime = (_.findWhere($scope.reminders, { id: $scope.reminder_time1 })).time_in_minutes;
+
+    };
 
 
     projectUrl = "ToDoItem/CreateTask";
@@ -58,6 +74,7 @@ var AddNewTaskProject = function ($scope, $state, $cookieStore, apiService, $mod
       
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
+            alert("Your Task Code is " + loginSession.task_code);
             $modalInstance.dismiss();
             AuditCreate();
             $scope.openSucessfullPopup();
@@ -150,8 +167,6 @@ function (error) {
             size: 'lg',
             resolve: { items: { title: "Task" } }
         });
-
-
     }
    
 
@@ -164,7 +179,7 @@ function (error) {
             else
                 remind_me = "0";
 
-            $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.reminder_time, 'minutes')._d;
+            $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.reminderTime, 'minutes')._d;
             var dDate = moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
 
 
@@ -182,6 +197,7 @@ function (error) {
                 task_type_id: $scope.event1,
                 text: $scope.text,
                 remind_me: remind_me,
+                reminder_timespan_id: $scope.reminder_time1,
                 reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
             };
 

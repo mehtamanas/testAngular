@@ -1,15 +1,13 @@
-﻿/**
- * Created by dwellarkaruna on 24/10/15.
- */
-var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
-    console.log('AddNewTaskUserController');
+﻿angular.module('task')
 
-   
+.controller ('AddTaskController' , function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope) {
+    console.log('AddTaskController');
+    $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
-   // $scope.reminder_time = "15 min";
-    //$scope.due_date = moment().format();
-
-    
+    //var day = moment().format();
+    var userId = $cookieStore.get('userId');
+    //$scope.reminder_time = "15";
+    $scope.due_date = moment().add(1, 'days').format('DD/MM/YYYY hh:mm A');
     //Audit log start
     $scope.params = {
 
@@ -20,7 +18,6 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         action_id: "Addnew TEAM View",
         details: "Addnew TEAM detail",
         application: "angular",
-
         browser: $cookieStore.get('browser'),
         ip_address: $cookieStore.get('IP_Address'),
         location: $cookieStore.get('Location'),
@@ -28,12 +25,9 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         User_ID: $cookieStore.get('userId')
     };
 
-
     AuditCreate = function (param) {
-
         apiService.post("AuditLog/Create", param).then(function (response) {
             var loginSession = response.data;
-
         },
    function (error) {
        if (error.status === 400)
@@ -45,20 +39,12 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
     AuditCreate($scope.params);
 
     //end
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
 
-    $scope.reset = function () {
-        $scope.params = {};
-    }
-
-    $scope.user1 = $scope.seletedCustomerId;
-
+    //API functionality start
     $scope.params = {
         name: $scope.name,
         contact_id: $scope.contact1,
-        class_type: "User",
+        class_type: "Contact",
         due_date: $scope.due_date,
         priority: $scope.priority1,
         project_id: $scope.project1,
@@ -68,24 +54,18 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
         end_date_time: $scope.end_date_time,
         task_type_id: $scope.event1,
         text: $scope.text,
+        remind_me: $scope.remind_me,
         reminder_time: $scope.reminder_time,
-        
     };
-
 
     projectUrl = "ToDoItem/CreateTask";
     ProjectCreate = function (param) {
-        //if ($scope.realyesno == 1) {
 
-        //    $scope.remind_me = "1";
-        //}
-        //else {
-        //    $scope.remind_me = "0";
-        //}
-
-       // $scope.params.remind_me = $scope.remind_me;
+        $scope.params.remind_me = $scope.remind_me;
+       
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
+            alert("Your Task Code is " + loginSession.task_code);
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
@@ -116,6 +96,23 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
 
     };
 
+    Url = "ToDoItem/TaskAssignTo/" + $cookieStore.get('orgID');
+    apiService.get(Url).then(function (response) {
+        $scope.users = response.data;
+    },
+   function (error) {
+       if (error.status === 400)
+           alert(error.data.Message);
+       else
+           alert("Network issue");
+   });
+
+    $scope.selectuser = function () {
+        $scope.params.assign_user_id = $scope.user1;
+    };
+
+
+
     Url = "ToDoItem/GetPriority" ;
     apiService.get(Url).then(function (response) {
         $scope.priority = response.data;
@@ -126,10 +123,13 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
        else
            alert("Network issue");
    });
-    $scope.priority1 = "be8072b1-6992-466d-a34b-2fc9d31994a6";
+
+    //$scope.priority1 = "be8072b1-6992-466d-a34b-2fc9d31994a6";
     $scope.selectpriority = function () {
         $scope.params.priority = $scope.priority1;
+      
     };
+
 
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
@@ -144,12 +144,14 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
 
     $scope.selectproject = function () {
         $scope.params.project_id = $scope.project1;
-       
     };
+
 
     Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.contacts = response.data;
+        $scope.loadingDemo = false;
+        $scope.contact1 = $scope.seletedCustomerId;
     },
    function (error) {
        if (error.status === 400)
@@ -160,23 +162,6 @@ var AddNewTaskUserController = function ($scope, $state, $cookieStore, apiServic
 
     $scope.selectcontact = function () {
         $scope.params.contact_id = $scope.contact1;
-
-        
-    };
-
-    Url = "ToDoItem/TaskAssignTo/" + $cookieStore.get('orgID');
-    apiService.get(Url).then(function (response) {
-        $scope.users = response.data;
-    },
-   function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-   });
-
-    $scope.selectuser = function () {
-        $scope.params.assign_user_id = $scope.user1;
     };
 
     Url = "TaskType/GetTaskType";
@@ -194,9 +179,10 @@ function (error) {
         $scope.params.task_type_id = $scope.event1;
     };
 
-    
 
 
+    //end
+    //popup functionality start
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
@@ -206,14 +192,23 @@ function (error) {
             size: 'sm',
             resolve: { items: { title: "Task" } }
         });
+    }
 
+    //end
 
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.reset = function () {
+        $scope.params = {};
     }
 
     $scope.addNew = function (isValid) {
         $scope.isDisabled = true;
         $scope.showValid = true;
         if (isValid) {
+            $scope.loadingDemo = true;
             if ($scope.remind_me === true)
                 remind_me = "1";
             else
@@ -227,7 +222,7 @@ function (error) {
                 name: $scope.name,
                 start_date_time: new Date().toISOString(),
                 contact_id: $scope.contact1,
-                class_type: "User",
+                class_type: "Contact",
                 due_date: new Date(dDate).toISOString(),
                 priority: $scope.priority1,
                 project_id: $scope.project1,
@@ -256,7 +251,7 @@ function (error) {
 
     }
 
-};
+});
 
 
 

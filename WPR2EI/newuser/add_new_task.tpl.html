@@ -158,17 +158,14 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Select Time</label>
-                            <select data-ng-model="reminder_time" class="dropdown form-control" id="UseraddNewTask_selectTime">
-                                <option value=0 selected>Select Time</option>
-                                <option value=15>15 min</option>
-                                <option value=30>30 min</option>
-                                <option value=45>45 min</option>
-                                <option value=60>60 min</option>
-                                <option value=0>no reminder</option>
+                            <select ng-model="reminder_time1" ng-change="selectReminderTime()" id="opt_addTaskAssignSetPriority" class="dropdown form-control">
+                                <option value="" selected>Select Time</option>
+                                <option ng-repeat="remind in reminders"
+                                        value="{{remind.id}}">
+                                    {{remind.key_name}}
+                                </option>
                             </select>
-
                         </div>
-
                     </div>
                 </div>
 
