@@ -6,58 +6,66 @@
                     <h2 class="pg-inner-title">Create New Email Campaign </h2>
                 </div>
             </div>
-            <div class="pg-inner-content">
+        </div>
+    </div>
+            <div class="pg-inner-content pg-inner-content-camp">
+
+                <!--step wizard-->
                 <div class="col-md-12 tab_head">
-                    <div class="row " style="padding: 1px 0px 1px 16px;">
-                        <div class="col-md-2 email_tabs2">Campaign info</div>
-                        <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Set Budget</div>
-                        <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Select contact</div>
-                        <div class="col-md-1 tabarrow"><img src="images/gray_blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs_active">Add template</div>
-                        <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs_active">Summary</div>
+                    <div class="row " style="padding: 35px 42px 1px 100px;">
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Contact</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot"><span class="email_tab_text"> Add template</span></div>
+                        <div class="col-md-2 email_tabs2"></div>
+                        <div class="col-md-1 tabdot"><span class="email_tab_text">Summary</span></div>
                     </div>
                 </div>
-                <div class="project-detail">
+                <!--end step wizard-->
+                <div class="project-detail inner_page_inside">
                     <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                       
-                            <div class="col-lg-3 pull-left">
+                            <!--<div class="col-lg-3 pull-left">
                                 <div class="right-inner-addon" style="padding-top: 12px;">
                                    <h2 cass="pg-inner-title">Select Contact List</h2>
                                 </div>
-                            </div>
+                            </div>-->
 
-                        <div class="row left-inner-addon">
-                            <div class="col-lg-3 pull-right">
-                                <div class="right-inner-addon" style="padding-top: 12px;">
-                                    <i class="fa fa-search"></i>
-                                    <input type="text" ng-model="contactListFilter.name" class="form-control" id=" optionEmail_add_users_to_team" placeholder="Search Contact List" />
+                        <div class="row left-inner-addon" >
+                            <div class="col-lg-5" >
+                                <div class="right-inner-addon" style="padding-top: 50px;margin-left:11%;">
+                                    <div class="right-inner-addon" style="padding-top:12px;">
+                                        <i class="fa fa-search" style="bottom: -2px;"></i>
+                                        <input type="text" ng-model="contactListFilter.name" style="height:35px" class="form-control" id=" optionEmail_add_users_to_team" placeholder="Search Contact List" />
+                                    </div>
+                                    <!--<md-input-container md-no-float class="md-block">
+                                        <input ng-model="contactListFilter.name" type="text" placeholder="Search contact list " id=" optionEmail_add_users_to_team">
+                                        <md-icon md-font-icon="fa fa-search" style="display:inline-block;"></md-icon>
+                                    </md-input-container>-->
                                 </div>
-                            </div>
+                                    
+                                </div>
                         </div>
                     </div>
-                    <div class="user_details1">
-                        <div class="user_details">
-                            <div class="row row_content" ng-repeat="user in orgUsers | filter: contactListFilter:strict">
-
+                    <div class="checkuser">
+                        <div class="user_details-1  col-md-5" style="margin-left: 28px;">
+                            <div class="row row_content-1" ng-repeat="user in orgUsers | filter: contactListFilter:strict">
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <p class="user_name">
                                         {{user.name }}
                                     </p>
-                                    <!--<p class="user_mail">
-
-                        </p>-->
                                 </div>
-                                <div class="col-lg-8 col-md-6 col-sm-3">
+                                <div class="col-lg-9 col-md-6 col-sm-3" style="margin-top: 18px;">
                                     <span class="pull-right" ng-click="addRemoveUser(user)">
                                         <img ng-src="assets/images/{{user.isTeamMember ? 'ok': 'plus'}}_icon.png" />
                                     </span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div>
+                    
                     <div class="top-row" style="width:100%; background:#fff; padding:60px">
                         <div class="user_list_content">
 
@@ -75,23 +83,31 @@
                                     
                                     <div class="col-lg-2 col-md-2 col-sm-1"></div>
                                 
-
                                 </div>
-                                <button type="submit" class="btn campaign-container-btn" id="btn_optionEmail_back" ng-click="back()" >BACK</button>
-                                <button type="submit" class="btn campaign-container-btn" id="btn_optionEmail_cancel" style="margin-left: 32%;margin-right: 3%;" ng-click="cancel()">CANCEL</button>
-                                <button type="button" class="btn organization-btn-1-2" ng-click="next()" id="btn_optionEmail_next"> Next &gt;</button>
+                                
+                               
+                                <!--<button type="submit" class="btn campaign-container-btn" id="btn_optionEmail_cancel" style="margin-left: 32%;margin-right: 3%;" ng-click="cancel()">CANCEL</button>-->
+                                
                             </div>
+                            
                         </div>
+                        
                     </div>
+
                     <div class="col-md-12">
-                      
+                        
                       </div>
                     
 
                 </div>
                     </div>
-                
+                    <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                        <div class="modal-btn-wrap5 modal-btn-wrap6" style="text-align:left;">
+                            <button type="button" class="btn btn-primary" ng-click="next()" id="btn_optionEmail_next"><b> Next</b></button>
+                            <button type="submit" class="btn odd_btn" id="btn_optionEmail_back" ng-click="back()">Back</button>
+                        </div>
+                        </div>
 
-        </div>
-    </div>
-</div>
+
+
+                    </div>
