@@ -1579,8 +1579,10 @@ function (error) {
     });
 
     $scope.$on('REFRESH', function (event, args) {
-        if (args == 'TaskGrid') {
-            delete $localStorage.taskDataSource;
+        if (args.name == 'TaskGrid') {
+            _.remove($localStorage.taskDataSource, function (o) {
+                return o.custId == args.id;
+            });
             $('.k-i-refresh').trigger("click");
         }
         $scope.TaskAction = 'no_action';
