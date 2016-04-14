@@ -103,7 +103,7 @@
                 //$modalInstance.dismiss();
                 $scope.openSucessfullPopup();
                 $state.go('app.tasks');
-                $rootScope.$broadcast('REFRESH', 'TaskGrid');
+                $rootScope.$broadcast('REFRESH', { name: TaskGrid , id:$scope.params.id});
 
             },
             function (error) {
