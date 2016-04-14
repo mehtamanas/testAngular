@@ -1,7 +1,7 @@
 ﻿angular.module('task')
 
 .controller('TaskGridController',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window) {
 
         var orgID = $cookieStore.get('orgID');
 
@@ -15,20 +15,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
-                    read: function (options) {
-                        if ($localStorage.common_taskDataSource)
-                        { options.success($localStorage.common_taskDataSource); }
-                        else {
-                            apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (response) {
-                                data = response.data;
-                                $localStorage.common_taskDataSource = data;
-                                options.success(data);
-                            }, function (error) {
-                                options.error(error);
-                            })
-                        }
-                    }
+                    read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
                 },
                 pageSize: 20,
 
@@ -47,7 +34,7 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: window.innerHeight - 180,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -62,6 +49,17 @@
                 buttonCount: 5
             },
             columns: [{
+                //template: "<input type='checkbox', class='checkbox',  ng-click='check($event,dataItem)' />",
+                //title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
+                template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                width: "60px",
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+            }, {
                 field: "name",
                 template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
                 title: "Task Name",
@@ -167,6 +165,22 @@
 
            }, ]
         };
+
+        //$scope.openAddtaskPopup = function () {
+        //    var modalInstance = $modal.open({
+        //        animation: true,
+        //        templateUrl: 'task/add_new_task.tpl.html',
+        //        backdrop: 'static',
+        //        controller: AddTaskController,
+        //        size: 'lg'
+
+        //    });
+        //    $rootScope.$broadcast('REFRESH', 'TaskGrid');
+        //};
+
+        $scope.openAddtaskPopup = function () {
+            $state.go('app.add_new_task');
+        };// add new contact page
 
 
         //Audit log start															
