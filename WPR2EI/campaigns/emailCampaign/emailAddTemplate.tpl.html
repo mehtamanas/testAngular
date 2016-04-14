@@ -3,131 +3,148 @@
     <div class="content-inner">
         <div class="pg-inner-header">
             <div class="row">
-                <div class="col-md-12" >
+                <div class="col-md-12">
                     <h2 class="pg-inner-title">Create New Email Campaign</h2>
-                </div>
-            </div>
-            <div class="pg-inner-content">
-                <div class="col-md-12 tab_head">
-                    <div class="row " style="padding: 1px 0px 1px 16px;">
-                        <div class="col-md-2 email_tabs2">Campaign info</div>
-                        <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Set Budget</div>
-                        <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Select contact</div>
-                        <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Add template</div>
-                        <div class="col-md-1 tabarrow"><img src="images/gray_blue_arrow.png" class="arrow-height" /></div>
-                        <div class="col-md-2 email_tabs_active">Summary</div>
-                    </div>
-                </div>
-                <div class="project-detail">
-                    <form class="form-content form-content2 edit-organization-setting" name="emailForm" novalidate data-ng-submit="sendEmail(emailForm.$valid)" autocomplete="off">
-                        <div class="top-row" style="width:100%; background:#fff; padding:60px;">
-                            <!-- content start -->
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6 pull-left">
-                                            <div class="clearfix">
-                                                <div class="form-group">
-                                                    <h2 class="pg-inner-title">Select Template</h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <div class="col-md-2"></div>
-
-                                    <div class="col-md-3">
-                                        <div id="email-wrap">
-                                            <div id="email-no" class="">
-                                                <input autofocus name="email" class="form-control" id="emailAddTemplate_email" type="text" 
-                                                       placeholder="Enter the Email Address"
-                                                       data-ng-model="params.emailTo"
-                                                       required />
-                                            </div>
-                                            
-                                         </div>
-                                        
-                                       </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-primary" style="width:100px;padding: 11px" id="btn_emailAddTemplate_send" ng-click="showValid=true"> SEND </button>
-                                        </div>
-                                    </div>
-                             </div>
-                            </div>
-                        <div class="user_details2">
-                            <div class="clearfix tab-head-inner" style="margin-top: 2%;">
-
-                                <div class="clearfix" >
-                                    <div class="form-group form-bx form-bx8">
-                                        <label for="">Select Template</label>
-                                        <select ng-model="params.template" name="templateSelect" ng-change="selectTemplate()" class="dropdown form-control text-bold" id="emailAddTemplate_Select Template" required>
-                                            <option value="" selected>--Select Template--</option>
-                                            <option ng-repeat="template in params.templateList"
-                                                    value="{{template.id}}">
-                                                {{template.template_name}}
-                                            </option>
-                                        </select>
-                                        <!--<div ng-messages="emailForm.templateSelect.$error" data-ng-if="emailForm.templateSelect.$invalid && (!emailForm.templateSelect.$pristine || showValid) && !emailForm.templateSelect.$focus" style="color:maroon" role="alert">
-                                            <div ng-message="required">This field is mandatory</div>
-                                        </div>-->
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <div class="form-group form-bx form-bx5">
-                                        <label for=""> Subject </label>
-                                        <div>
-                                            <input type="text" autofocus name="Subject" class="form-control" id="emailAddTemplate_subject-id"
-                                                   placeholder="Subject"
-                                                   data-ng-model="params.subject" 
-                                                   input-focus
-                                                    />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="progress" ng-show="uploader.progress>0 && uploader.progress<100">
-                                    <div class="progress-bar" role="progressbar"
-                                         ng-style="{ 'width': uploader.progress + '%' }"></div>
-                                </div>
-                                <input ng-show="false" type="file" id="imageBrowser" value="Browse" nv-file-select="" uploader="uploader" />
-                                <div class="clearfix">
-                                    <div class="form-group form-bx form-bx8"
-                                         data-ng-class="{
-                                                  'has-error' : emailForm.bodyTextBox.$invalid && (!emailForm.bodyTextBox.$pristine || showValid),
-                                                  'has-success': emailForm.bodyTextBox.$valid && !emailForm.bodyTextBox.$pristine
-                                                }">
-                                        <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px" name="emailAddTemplate_editor" kendo-editor k-ng-model="params.bodyText" name="bodyTextBox" k-options="editorOption" resizable="true" required></textarea>
-                                       
-                                         <!--<div ng-messages="emailForm.bodyTextBox.$error" style="color:maroon" role="alert">
-                                            <div ng-message="required" data-ng-if="emailForm.bodyTextBox.$invalid && (!emailForm.bodyTextBox.$pristine || showValid) && !emailForm.bodyTextBox.$focus">This field should not be empty </div>                                           
-                                        </div>-->
-
-                                        <div ng-messages="emailForm.bodyTextBox.$error" data-ng-if="emailForm.bodyTextBox.$invalid && (!emailForm.bodyTextBox.$pristine || showValid) && !emailForm.bodyTextBox.$focus" style="color:maroon" role="alert">
-                                            <div ng-message="required" id="err_emailAddTemplate_required">This field is mandatory</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            </div>
-                        <div class="top-row" style="width:100%; background:#fff; padding:60px">
-                            <div class="user_list_content">
-                                <div class="modal-btn-wrap5 modal-btn-wrap6 tab-head-inner-1" style="text-align:right;">
-                                    <button type="submit" class="btn organization-btn-1" id="btn_emailAddTemplate_next" style="margin-right: 9%;" ng-click="next()"><b> Next &gt;</b></button>
-                                  
-                                    <button class="btn organization-btn-1" style="margin-left: 16%;margin-right: 3%;" id="btn_emailAddTemplate_preview" type="button" ng-click="preview()">
-                                        Preview
-                                    </button>
-                                    <button class="btn campaign-container-btn" id="btn_emailAddTemplate_back" type="button" style="margin-left:0px;" ng-click="back()">
-                                        Back
-                                    </button>
-                                </div>
-                                </div>
-                              
-                            </div>
-                </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+            <div class="pg-inner-content pg-inner-content-camp">
+                <!--step wizard-->
+                <div class="col-md-12 tab_head">
+                    <div class="row " style="padding: 35px 42px 1px 100px;">
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Contact</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Add template</span></div>
+                        <div class="col-md-2 email_tabs2_active"></div>
+                        <div class="col-md-1 tabdot"><span class="email_tab_text">Summary</span></div>
+                    </div>
+                </div>
+                <!--end step wizard-->
+
+            </div>
+            <div class="project-detail inner_page_inside">
+                <form class="form-content form-content2 edit-organization-setting" name="emailForm" novalidate data-ng-submit="sendEmail(emailForm.$valid)" autocomplete="off">
+                    <div class="top-row" style="width:100%; background:#fff; padding:60px;">
+                        <!-- content start -->
+
+                    </div>
+                    <div class="user_details2-1">
+                        <div class="clearfix tab-campaign" style="margin-top:0%;">
+
+                            <div class="clearfix">
+                                <div class="form-group form-bx form-bx8">
+                                    <!--<label for="">Select Template</label>
+                                    <select ng-model="params.template" name="templateSelect" ng-change="selectTemplate()" class="dropdown form-control text-bold" id="emailAddTemplate_Select Template" required>
+                                        <option value="" selected>--Select Template--</option>
+                                        <option ng-repeat="template in params.templateList"
+                                                value="{{template.id}}">
+                                            {{template.template_name}}
+                                        </option>
+
+                                    </select>-->
+                                  
+                                    <md-input-container class="md-block">
+                                        
+                                        <md-select  name="salutation" ng-change="selectTemplate()" ng-model="params.template" class="dropdown" id="emailAddTemplate_Select Template" >
+                                            <md-option value="" selected>SELECT TEMPLATE</md-option>
+                                            <md-option ng-repeat="template in params.templateList" value="{{template.id}}">{{template.template_name}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <!--<div ng-messages="emailForm.templateSelect.$error" data-ng-if="emailForm.templateSelect.$invalid && (!emailForm.templateSelect.$pristine || showValid) && !emailForm.templateSelect.$focus" style="color:maroon" role="alert">
+                                        <div ng-message="required">This field is mandatory</div>
+                                    </div>-->
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="form-group form-bx form-bx5">
+                                    <!--<label for=""> Subject </label>
+                                    <div>
+                                        <input type="text" autofocus name="Subject" class="form-control" id="emailAddTemplate_subject-id"
+                                               placeholder="Subject"
+                                               data-ng-model="params.subject"
+                                               input-focus />
+                                    </div>-->
+                                    <md-input-container class="md-block">
+                                        <label for=""> SUBJECT</label>
+                                        <input name="Subject" 
+                                               id="emailAddTemplate_subject-id"
+                                               data-ng-model="params.subject"
+                                                input-focus/>
+
+                                    </md-input-container>
+
+                                </div>
+                            </div>
+                            <div class="progress" ng-show="uploader.progress>0 && uploader.progress<100">
+                                <div class="progress-bar" role="progressbar"
+                                     ng-style="{ 'width': uploader.progress + '%' }"></div>
+                            </div>
+                            <input ng-show="false" type="file" id="imageBrowser" value="Browse" nv-file-select="" uploader="uploader" />
+                            <div class="clearfix">
+                                <div class="form-group form-bx form-bx8"
+                                     data-ng-class="{
+                                                  'has-error' : emailForm.bodyTextBox.$invalid && (!emailForm.bodyTextBox.$pristine || showValid),
+                                                  'has-success': emailForm.bodyTextBox.$valid && !emailForm.bodyTextBox.$pristine
+                                                }">
+                                    <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px" name="emailAddTemplate_editor" kendo-editor k-ng-model="params.bodyText" name="bodyTextBox" k-options="editorOption" resizable="true" required></textarea>
+
+                                    <!--<div ng-messages="emailForm.bodyTextBox.$error" style="color:maroon" role="alert">
+                                        <div ng-message="required" data-ng-if="emailForm.bodyTextBox.$invalid && (!emailForm.bodyTextBox.$pristine || showValid) && !emailForm.bodyTextBox.$focus">This field should not be empty </div>
+                                    </div>-->
+
+                                    <div ng-messages="emailForm.bodyTextBox.$error" data-ng-if="emailForm.bodyTextBox.$invalid && (!emailForm.bodyTextBox.$pristine || showValid) && !emailForm.bodyTextBox.$focus" style="color:maroon" role="alert">
+                                        <div ng-message="required" id="err_emailAddTemplate_required">This field is mandatory</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pull-right">
+                                    <div class="col-md-4">
+                                        <div id="email-wrap">
+                                            <!--<div id="email-no" class="">
+                                                <input autofocus name="email" class="form-control" id="emailAddTemplate_email" type="text"
+                                                       placeholder="Enter the Email Address"
+                                                       data-ng-model="params.emailTo"
+                                                       required />
+                                                </div>-->
+                                            <md-input-container class="md-block">
+                                                <label class="contact-label">Enter the Email Address</label>
+                                                <input name="email" id="emailAddTemplate_email"
+                                                        data-ng-model="params.emailTo" />
+
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1" style="margin-left: 2%;">
+                                        <button class="btn btn-primary"  id="btn_emailAddTemplate_send" ng-click="showValid=true"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-row" style="width:100%; background:#fff; padding: 1px 1px 28px 46px;">
+                        <div class="user_list_content">
+                            <div class="modal-btn-wrap5 modal-btn-wrap6 tab-head-inner-2" style="text-align:left;">
+                                <button class="btn odd_btn"  id="btn_emailAddTemplate_back" type="button" ng-click="back()">
+                                    Back
+                                </button>
+                              
+                                <button class="btn btn-primary" style="margin-right: 4px;"  id="btn_emailAddTemplate_preview" type="button" ng-click="preview()">
+                                    <b>Preview</b>
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="btn_emailAddTemplate_next" ng-click="next()"><b>Next</b></button>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+
