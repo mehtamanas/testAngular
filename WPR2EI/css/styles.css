@@ -9967,21 +9967,20 @@ select {
     margin-left: 23px;
     text-align: center;
 }
-
-/*.email_tabs2 {
+.email_tabs2 {
     background: #2799e7;
     padding: 13px;
     color: #fff;
     font-weight: 900;
     text-align: center;
 
-}*/
-.email_tabs2{
+}
+.email_tabs3{
 border-top: 4px solid #c5c5c5;
  margin-top: 6px; 
  width:20%;
 }
-.email_tabs2_active{
+.email_tabs3_active{
 border-top: 4px solid #289ff1;
  margin-top: 6px; 
  color:#1f90e0;
