@@ -241,6 +241,7 @@ angular.module('app.guest.login')
             $cookieStore.remove('teamid');
             delete $localStorage.leadDataSource;
             delete $localStorage.alive;
+            delete $localStorage.common_taskDataSource;
             if (window.syncData !== undefined) { $interval.cancel(syncData); }
             console.log("loggedout");
             $state.go('login');
