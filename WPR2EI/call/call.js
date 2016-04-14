@@ -138,93 +138,28 @@
             });
         }
 
-        callViewApi();
+        $scope.saveFilters = function () {
 
-        $scope.saveView = function () {
-            var grid = $('#contact_kenomain').getKendoGrid();
-
-            if (grid.dataSource._sort) {
-                var sortObject = grid.dataSource._sort[0];
+            if ($scope.textareaText == "") {
+                alert("Please write query.")
+                return;
             }
 
-            if ($scope.textareaText) {
-                var Querydata = $scope.textareaText.toLowerCase();
-            }
-            //var colObject = _.filter(grid.columns, function (o)
-            //{ return !o.hidden });
-            //colObject = (_.pluck(colObject, 'field')).join(',');
-
+            var Querydata = $scope.textareaText.toLowerCase();
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/Views/createView.html',
                 backdrop: 'static',
                 controller: createViewCtrl,
-                size: 'sm',
-                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'call', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
+                size: 'lg',
+                resolve: { viewData: { sort: null, col: null, grid: 'call', type: 'Filter', filterQuery: Querydata } }
             });
         }
 
-        $scope.editView = function () {
-            var viewName = _.filter($scope.views, function (o)
-            { return o.id == $scope.gridView });
+        callViewApi();
 
-            var grid = $('#contact_kenomain').getKendoGrid();
 
-            if (grid.dataSource._sort) {
-                var sortObject = grid.dataSource._sort[0];
-            }
 
-            if ($scope.textareaText) {
-                var Querydata = $scope.textareaText.toLowerCase();
-            }
-            //var colObject = _.filter(grid.columns, function (o)
-            //{ return !o.hidden });
-            //colObject = (_.pluck(colObject, 'field')).join(',');
-
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/Views/editView.html',
-                backdrop: 'static',
-                controller: editViewCtrl,
-                size: 'sm',
-                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'call', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
-            });
-        }
-
-        $scope.deleteView = function () {
-            if ($scope.gridView !== 'default') {
-                swal({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
-                    closeOnConfirm: false
-                }).then(function (isConfirm) {
-                    if (isConfirm) {
-                        postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
-                        apiService.post('Notes/DeleteGridView', postData).then(function (res) {
-                            swal(
-                          'Deleted!',
-                          'Your file has been deleted.',
-                          'success'
-                        );
-                        }, function (err) {
-                            swal(
-                        'Not Deleted!',
-                        'Something went wrong. Try again later.',
-                        'error'
-                      );
-                        })
-                    }
-                })
-            }
-            else {
-                alert('cannot delete this view')
-            }
-        }
 
         function applyFilter(filterField, filterValue) {
 
@@ -283,10 +218,10 @@
             }
         });
 
-        // by saroj on 9th april 2016
-        // jQL coading 
+
+        // by saroj on 14-04-2016
+        // Applying JQL Query 
         $scope.DoWork = function () {
-            //  alert('hii');
             $scope.callFilter();
         };
 
@@ -297,7 +232,8 @@
             var Firstname = "";
             var ValidFilter = false;
 
-            var filter = "";
+            var filter = [];
+            var abc = [];
             var logsplit = "";
 
             if (txtdata.length > 0) {
@@ -362,7 +298,6 @@
 
                         if (expsplitIN.length > 1) {
 
-
                             if (expsplitIN[0].toUpperCase().trim() == "CALLER NAME" || expsplitIN[0].toUpperCase().trim() == "CALLER")
                                 Firstname = "caller_name";
 
@@ -387,16 +322,14 @@
                             if (expsplit[0].toUpperCase().trim() == "CALLER NAME" || expsplit[0].toUpperCase().trim() == "CALLER")
                                 Firstname = "caller_name";
 
-                            if (expsplit[0].toUpperCase().trim() == "CALLDATE" || expsplit[0].toUpperCase().trim() == "DATE")
+                            if (expsplit[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-
-
-
-                            //"last_updated":"2016-04-07T04:20:42.953+00:00"
 
                             if (Firstname == "starttime") {
 
                                 var CurrentDate = moment().startOf('day')._d;
+                                var CurrentEndDate = moment().endOf('day')._d;
+                                // alert(CurrentEndDate);
                                 var TommDate = moment().startOf('day').add(+1, 'days')._d;
                                 var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
 
@@ -404,8 +337,9 @@
                                 /*
                                 I need recent monday dates and current dates 
                                 */
+                                // var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
 
-                                var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
+                                var mondayOfCurrentWeek = moment().startOf('isoweek')._d;
 
                                 // For Last week 
                                 /*
@@ -424,170 +358,183 @@
                                 var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
                                 var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
 
-
-
-
                                 // Last Financial Current year 
 
                                 var lastFinancialYearFirstDay = new Date(new Date().getFullYear() - 1, 3, 1); // last year first day of financial yr
-
                                 var lastFinancialYearLastDay = new Date(new Date().getFullYear(), 2, 31); // current year march month
 
-
-
                                 // Financial Current year 
-
-                                var cfyFirstDay = new Date(new Date().getFullYear(), 4, 1);
-
-
-
+                                var cfyFirstDay = new Date(new Date().getFullYear(), 3, 1);
                                 // Current year 
-
                                 var currentYearFirstDay = new Date(new Date().getFullYear(), 0, 1);
-
-
                                 // Dates for Current Quarter
                                 var dd = new Date();
                                 var currQuarter = (dd.getMonth() - 1) / 3 + 1;
 
                                 var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
                                 var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
-
                                 lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
-
-
-
-
                                 // Dates for Current Quarter
                                 var ddlast = new Date();
                                 var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
-
-
                                 var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
                                 var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
-
                                 lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
-
-
                                 // Current Month First date 
-
                                 var firstDayOfCurrentMonth = new Date(CurrentDate.getFullYear(), CurrentDate.getMonth(), 1);
-
                                 //For Last Month
                                 //  First Date 
                                 var firstDayPrevMonth = new Date(CurrentDate.getFullYear(), CurrentDate.getMonth() - 1, 1);
                                 //Last Date
-
-
                                 var lastDayPrevMonth = new Date(); // current date
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
-
-
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                    filter.filters.push(abc);
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "YESTERDAY") {
+                                else if (expsplit[1].trim().toUpperCase() == "YESTERDAY") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
-
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                    filter.filters.push(abc);
                                     // filter.filters.push({ field: Firstname.trim(), operator: "eq", value: YesterDayDate.toDateString() });
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
+                                else if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    abc = { logic: "and", filters: [] };
+                                    if (mondayOfCurrentWeek.getDate() == CurrentDate.getDate()) {
+
+                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                    }
+                                    else {
+                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                    }
+                                    filter.filters.push(abc);
+
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "LAST WEEK") {
+                                else if (expsplit[1].trim().toUpperCase() == "LAST WEEK") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: lastweekmonday });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastweeksunday });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: lastweekmonday });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastweeksunday });
+                                    filter.filters.push(abc);
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
+                                else if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    abc = { logic: "and", filters: [] };
+                                    //if (firstDayOfCurrentMonth.getDate() == CurrentDate.getDate()) {
+                                    //    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
+                                    //    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate.getDate() + 1 });
+                                    //}
+                                    //else {
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                    filter.filters.push(abc);
+                                    // }
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "LAST MONTH") {
+                                else if (expsplit[1].trim().toUpperCase() == "LAST MONTH") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayPrevMonth });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastDayPrevMonth });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayPrevMonth });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastDayPrevMonth });
+                                    filter.filters.push(abc);
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "THIS QUARTER" || expsplit[1].trim().toUpperCase() == "CURRENT QUARTER") {
+                                else if (expsplit[1].trim().toUpperCase() == "THIS QUARTER" || expsplit[1].trim().toUpperCase() == "CURRENT QUARTER") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOfcurrQuarter });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOfcurrQuarter });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOfcurrQuarter });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOfcurrQuarter });
+                                    filter.filters.push(abc);
                                 }
 
 
-                                if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
+                                else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                    filter.filters.push(abc);
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "YEAR TO DATE") {
+                                else if (expsplit[1].trim().toUpperCase() == "YEAR TO DATE") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: currentYearFirstDay });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: currentYearFirstDay });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                    filter.filters.push(abc);
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "THIS FINANCIAL YEAR") {
+                                else if (expsplit[1].trim().toUpperCase() == "THIS FINANCIAL YEAR") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                    filter.filters.push(abc);
                                 }
 
-                                if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
+                                else if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
 
-                                    filter = { logic: "and", filters: [] };
-                                    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: lastFinancialYearFirstDay });
-                                    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: lastFinancialYearLastDay });
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: lastFinancialYearFirstDay });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastFinancialYearLastDay });
+                                    filter.filters.push(abc);
                                 }
 
+                                else if (expsplit[1].trim().toUpperCase() == "NEVER") {
+
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
+                                    filter.filters.push(abc);
+                                }
+                                else {
+                                    //new chnage 9-4-16
+                                    abc = { logic: "and", filters: [] };
+
+                                    var Date1 = moment(expsplit[1].trim(), 'D/M/YYYY');
+                                    var Datex = moment(expsplit[1].trim(), 'D/M/YYYY');
+                                    var Date2 = Datex.add('days', 1);
+
+                                    abc.push({ field: Firstname.trim(), operator: "gt", value: Date1 });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: Date2 });
+                                    filter.filters.push(abc);
+                                }
                             }
+
                             else {
-
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
-
+                                if (expsplit[1].toUpperCase().trim() == "BLANK") {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
+                                }
+                                else {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                }
                             }
                             ValidFilter = true;
 
                         }
 
 
-
-
                         // IS BEFORE CHECK
 
                         if (expsplitIsBefore.length > 1) {
 
-
-                            if (expsplitIsBefore[0].toUpperCase().trim() == "CALLDATE" || expsplitIsBefore[0].toUpperCase().trim() == "DATE")
+                            if (expsplitIsBefore[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-
                             else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
+                                alert(" Invalid Operator cannot be assigned to " + expsplitIsBefore[0]);
                                 return;
                             }
 
@@ -599,34 +546,38 @@
 
                         if (expsplitIsAfter.length > 1) {
 
-                            if (expsplitIsAfter[0].toUpperCase().trim() == "CALLDATE" || expsplitIsAfter[0].toUpperCase().trim() == "DATE")
+                            if (expsplitIsAfter[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
                             else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
+                                alert(" Invalid Operator cannot be assigned to " + expsplitIsAfter[0]);
                                 return;
                             }
-
                             filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
                             ValidFilter = true;
                         }
 
+                        // 
+
                         // BETWEEN OR CHECK 
                         if (expsplitBetween.length > 1) {
 
-                            if (expsplitBetween[0].toUpperCase().trim() == "CALLDATE" || expsplitBetween[0].toUpperCase().trim() == "DATE")
+                            if (expsplitBetween[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-
                             else {
-                                alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
+                                alert(" Invalid Operator cannot be assigned to " + expsplitBetween[0]);
                                 return;
                             }
 
                             var InnerBetweenSplit = expsplitBetween[1].split("||");
+
                             if (InnerBetweenSplit.length > 1) {
 
-                                filter = { logic: "and", filters: [] };
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(InnerBetweenSplit[0].trim(), 'DD-MM-YYYY')._d });
-                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(InnerBetweenSplit[1].trim(), 'DD-MM-YYYY')._d });
+                                abc = { logic: "and", filters: [] };
+
+                                abc.filters.push({ field: Firstname.trim(), operator: "gte", value: moment(InnerBetweenSplit[0].trim().toString(), 'DD-MM-YYYY').startOf('day')._d });
+                                abc.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
+                                filter.filters.push(abc);
+
                                 ValidFilter = true;
                             }
                         }
@@ -646,6 +597,7 @@
 
             if (ValidFilter == true) {
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
+
                 ds.filter(filter);
             }
             else {
@@ -658,22 +610,148 @@
             $scope.textareaText = ''
         }
 
-        $scope.saveFilters = function () {
+        $scope.saveView = function () {
+            var grid = $('#project-record-list').getKendoGrid();
 
-            if ($scope.textareaText == "") {
-                alert("Please write query.")
-                return;
+            if (grid.dataSource._sort) {
+                var sortObject = grid.dataSource._sort[0];
             }
 
-            var Querydata = $scope.textareaText.toLowerCase();
+            if ($scope.textareaText) {
+                var Querydata = $scope.textareaText.toLowerCase();
+            }
+            //var colObject = _.filter(grid.columns, function (o)
+            //{ return !o.hidden });
+            //colObject = (_.pluck(colObject, 'field')).join(',');
+
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/Views/createView.html',
                 backdrop: 'static',
                 controller: createViewCtrl,
-                size: 'lg',
-                resolve: { viewData: { sort: null, col: null, grid: 'call', type: 'Filter', filterQuery: Querydata } }
+                size: 'sm',
+                resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'call', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
+        }
+
+        $scope.editView = function () {
+            if ($scope.gridView !== 'default') {
+                var viewName = _.filter($scope.views, function (o)
+                { return o.id == $scope.gridView });
+
+                var grid = $('##project-record-list').getKendoGrid();
+
+                if (grid.dataSource._sort) {
+                    var sortObject = grid.dataSource._sort[0];
+                }
+
+                if ($scope.textareaText) {
+                    var Querydata = $scope.textareaText.toLowerCase();
+                }
+                //var colObject = _.filter(grid.columns, function (o)
+                //{ return !o.hidden });
+                //colObject = (_.pluck(colObject, 'field')).join(',');
+
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'contacts/Views/editView.html',
+                    backdrop: 'static',
+                    controller: editViewCtrl,
+                    size: 'sm',
+                    resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'call', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
+                });
+            }
+            else {
+                alert('Cannot edit this view');
+            }
+        }
+
+        $scope.deleteView = function () {
+            if ($scope.gridView !== 'default') {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    closeOnConfirm: false
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                        postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
+                        apiService.post('Notes/DeleteGridView', postData).then(function (res) {
+                            swal(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        );
+                        }, function (err) {
+                            swal(
+                        'Not Deleted!',
+                        'Something went wrong. Try again later.',
+                        'error'
+                      );
+                        })
+                    }
+                })
+            }
+            else {
+                alert('cannot delete this view')
+            }
+        }
+
+        $scope.changeView = function () {
+            if ($scope.gridView !== 'default') {
+                //filter by grid name
+                viewObj = _.filter($scope.views, function (o)
+                { return o.id === $scope.gridView });
+
+                //get the grid datasource
+                var grid = $('#project-record-list').getKendoGrid();
+
+                if (viewObj.sort_by) {//sort
+                    var sort = [];
+                    sort.push({ field: viewObj[0].sort_by, dir: viewObj[0].sort_order });
+                    grid.dataSource.sort(sort);
+                }
+
+
+                var col = JSON.parse(viewObj[0].column_names);
+                for (i = 0; i < grid.columns.length; i++) {
+                    var colFlag = false;
+                    for (j = 0; j < col.length; j++) {
+                        if (col[j].field === grid.columns[i].field) {
+                            if (!col[j].hidden) {
+                                grid.showColumn(i);
+                                colFlag = true;
+                                break;
+                            }
+                        }
+                        if (j === col.length - 1 && colFlag == false) {
+                            grid.hideColumn(i);
+                        }
+                    }
+                }
+                // saroj on 14-04-2016
+                // removing " " from string otherwise JQL will not work
+                var str = viewObj[0].query_string;
+                str = str.replace(/"/g, "");
+
+                $scope.textareaText = str;
+                grid.dataSource.filter(JSON.parse(viewObj[0].filters));
+            }
+            else {
+                $('#project-record-list').getKendoGrid().dataSource.sort({});
+                $('#project-record-list').getKendoGrid().dataSource.filter({});
+                $scope.textareaText = null;
+                for (i = 0; i < $('#project-record-list').getKendoGrid().columns.length; i++) {
+                    $('#project-record-list').getKendoGrid().showColumn(i);
+
+                }
+
+            }
+
         }
 
     }

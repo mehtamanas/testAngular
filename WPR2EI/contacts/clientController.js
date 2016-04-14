@@ -159,6 +159,9 @@ angular.module('contacts')
                     if (isConfirm) {
                         postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
+                            $('#contact_kenomain').getKendoGrid().dataSource.filter({});
+                            $scope.textareaText = ''
+                            $scope.gridView = 'default';
                             swal(
                           'Deleted!',
                           'Your file has been deleted.',
@@ -662,6 +665,7 @@ angular.module('contacts')
         function clearFilters() {
             var gridData = $("#peopleGrid").data("kendoGrid");
             gridData.dataSource.filter({});
+            $scope.gridView = 'default';
         }
     }
 );
