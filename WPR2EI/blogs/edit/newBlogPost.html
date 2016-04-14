@@ -93,12 +93,22 @@
     </div>
     <div class="clearfix">
         <div class="pull-left f-half-6" ng-show='isContentPublisher && status === "Approved"'>
-            <div class="form-group form-bx form-bx3-1">
+            <!--<div class="form-group form-bx form-bx3-1">
                 <label for="">Date:</label>
-                <input kendo-date-picker class="form-control "
-                       ng-model="params.duedate"
+                <input kendo-date-time-picker class="form-control"
+                       ng-model="params.due_date"
+                       id="addNewBlogDate"
                        k-ng-model="k_due_date"
-                       k-format="'dd/MM/yyyy'" />
+                       k-format="'dd/MM/yyyy hh:mm tt'" required/>
+            </div>-->
+                <div class="form-group form-bx form-bx3-1">
+                    <label for="">Date:</label>
+                    <input kendo-date-time-picker class="form-control "
+                           ng-model="params.due_date"
+                           id="addTaskDate"
+                           k-ng-model="k_due_date"
+                           k-format="'dd/MM/yyyy hh:mm tt'" />
+                
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
 
     var orgID = $cookieStore.get('orgID');
     var userID = $cookieStore.get('userId');
-
+   
     var authRights = ($cookieStore.get('UserRole'));
 
     $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
@@ -12,6 +12,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
  
+   
 
 
     $scope.showBlog = true;
@@ -339,24 +340,29 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     }
    
     $scope.publish = function () {
-        var date = moment($scope.params.duedate, "DD/MM/YYYY hh:mm A")._d;
-        var postdataPublished = {
-            organization_id: $cookieStore.get('orgID'),
-            user_id: $cookieStore.get('userId'),
-            publication_date: new Date(date).toISOString(),
-            blog_id: window.sessionStorage.selectedBlogID,
-            status: "Published",
+        var date = moment($scope.params.due_date, "DD/MM/YYYY hh:mm A")._d;
+        if ($scope.params.due_date != null) {
+            var postdataPublished = {
+                organization_id: $cookieStore.get('orgID'),
+                user_id: $cookieStore.get('userId'),
+                publication_date: new Date(date).toISOString(),
+                blog_id: window.sessionStorage.selectedBlogID,
+                //publication_date: date,
+                status: "Published",
 
-        };
-        apiService.post("Blogs/BlogCommentCreate", postdataPublished).then(function (response) {
-            data = response.data[0];
-            $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
-        },
-              function (error) {
-                  if (error.status === 400)
-                      alert(error.data.Message);
-              });
+            };
+
+            apiService.post("Blogs/BlogCommentCreate", postdataPublished).then(function (response) {
+                data = response.data[0];
+                $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+                $modalInstance.dismiss();
+            });
+
+        }
+        else
+        {
+            swal("Error!", "Pleas Enter Date And Time", 'info')
+        }
     }
 
 
