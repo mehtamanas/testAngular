@@ -1,7 +1,7 @@
 ﻿angular.module('task')
 
 .controller('TaskGridController',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage) {
 
         var orgID = $cookieStore.get('orgID');
 
@@ -15,7 +15,20 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
+                    //read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
+                    read: function (options) {
+                        if ($localStorage.common_taskDataSource)
+                        { options.success($localStorage.common_taskDataSource); }
+                        else {
+                            apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (response) {
+                                data = response.data;
+                                $localStorage.common_taskDataSource = data;
+                                options.success(data);
+                            }, function (error) {
+                                options.error(error);
+                            })
+                        }
+                    }
                 },
                 pageSize: 20,
 
