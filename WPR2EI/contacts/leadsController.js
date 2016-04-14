@@ -80,6 +80,7 @@ angular.module('contacts')
 
 
         callViewApi();
+
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {
                 //filter by grid name
@@ -112,8 +113,12 @@ angular.module('contacts')
                         }
                     }
                 }
+                // saroj on 14-04-2016
+                // removing " " from string otherwise JQL will not work
+                var str = viewObj[0].query_string;
+                str = str.replace(/"/g, "");
 
-                $scope.textareaText = viewObj[0].query_string;
+                $scope.textareaText = str;
                 grid.dataSource.filter(JSON.parse(viewObj[0].filters));
             }
             else {
@@ -122,12 +127,13 @@ angular.module('contacts')
                 $scope.textareaText = null;
                 for (i = 0; i < $('#contact_kenomain').getKendoGrid().columns.length; i++) {
                     $('#contact_kenomain').getKendoGrid().showColumn(i);
-                    
+
                 }
 
             }
 
         }
+
 
         $scope.saveView = function () {
                 var grid = $('#contact_kenomain').getKendoGrid();
@@ -494,6 +500,7 @@ angular.module('contacts')
             $scope.callFilter();
         };
 
+       
         $scope.callFilter = function () {
 
             var txtdata = $scope.textareaText.toLowerCase();
