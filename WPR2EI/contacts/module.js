@@ -29,7 +29,12 @@ angular.module('contacts', [])
              templateUrl: 'contacts/add_new_contact.tpl.html',
              controller: 'ContactPopUpController',
             })
- 
+
+            .state('app.editContact', {
+                url: '/edit_contact',
+                templateUrl: 'contacts/edit_contact.tpl.html',
+                controller: 'EditContactPopUpController',
+            })
 
         .state('app.contactdetail', {
             url: '/contactsdetails?id',

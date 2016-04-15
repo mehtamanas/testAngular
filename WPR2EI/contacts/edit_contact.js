@@ -1,5 +1,5 @@
-﻿
-var EditContactPopUpController = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window,$localStorage, uploadService, $modal, $rootScope, PATTERNREGEXS) {
+﻿angular.module('contacts')
+.controller('EditContactPopUpController', function ($scope, $state, $cookieStore, apiService, FileUploader, $window, $localStorage, uploadService, $modal, $rootScope, PATTERNREGEXS) {
     console.log('EditContactPopUpController');
     $scope.loadingDemo = false;
     $scope.project_name = [];
@@ -610,7 +610,7 @@ function (error) {
     alert("Error " + error.state);
 });
 
-};
+});
 
 
 
