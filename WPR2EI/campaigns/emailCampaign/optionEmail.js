@@ -164,7 +164,7 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
     $scope.cancel = function () {
 
         $cookieStore.remove('usersToBeAddedOnServer1');
-        $state.go('app.campaigns');
+        $state.go('app.campaignsEmail');
     };
 
     $scope.back = function ()
