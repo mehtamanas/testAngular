@@ -2021,10 +2021,17 @@ h4.form-sub-title {
     background-position: -30px -434px;
 }
 
-#sidebar .navbar-default .navbar-nav > li a {
+/*#sidebar .navbar-default .navbar-nav > li a {
     padding-left: 20px;
     font-size: 14px;
     font-weight: 600;
+}*/
+
+#sidebar .navbar-default .navbar-nav > li a {
+    display: block;
+    padding: 11px 10px 14px 20px;
+    color: #8a8a8a;
+    font-size: 13px;
 }
 
 #sidebar .navbar-default .navbar-nav .nav-no {
@@ -11775,4 +11782,27 @@ md-input-container label:not(.md-container-ignore) {
     background: #fff;
     overflow-y: auto;
     height: 520px;
+}
+.summary_value span{
+    line-height: 28px !important;
+    display: block;
+    color: #505050;
+    padding:0px 5px 17px 1px;
+    font-size:15px !important;
+    font-weight: 500;
+}
+.summary_half {
+    width: 200px;
+    padding: 70px 0px 17px 0px;
+}
+.cancel_btn{
+    margin-right: 7px;
+    background: rgb(255,82,82);
+    color:#fff;
+    font-weight:600;
+}
+.md-custom-label{
+    left: 20px !important;
+    right: auto !important;
+    margin-bottom: 1px !important;
 }
