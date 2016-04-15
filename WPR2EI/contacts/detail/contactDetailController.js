@@ -636,6 +636,7 @@ angular.module('contacts')
                     }, {
                         field: "name",
                         title: "Task Name",
+                        template: '#if (status!="Completed") {# <a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a> #} else {#<a ng-click="taskComplete()" href="">#=name#</a>#}#',
                         width: "250px",
                         attributes:
                      {
