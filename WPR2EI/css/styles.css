@@ -2031,6 +2031,7 @@ h4.form-sub-title {
     display: block;
     padding: 11px 10px 14px 20px;
     color: #8a8a8a;
+    font-weight: 600;
     font-size: 13px;
 }
 
@@ -11819,4 +11820,19 @@ md-input-container label:not(.md-container-ignore) {
     width:60px;
     padding:7px 7px ;
 
+}
+.lead_count{
+    font-size: 12px;
+    font-weight: bold;
+    color: #289ff1;
+}
+.marktng_count{
+    font-size: 12px;
+    font-weight: bold;
+    color: #1ab394;
+}
+.followup_count{
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(255,82,82);
 }
