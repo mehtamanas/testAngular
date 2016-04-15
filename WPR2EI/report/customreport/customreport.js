@@ -323,7 +323,7 @@
             reorderable: true,
             height: screen.height - 350,
             resizable: true,
-            filterable: true,
+            filterable: false,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -1213,14 +1213,14 @@
                 }
             } else if (args.name == 'ViewCreated') {
                 callViewApi();
-                callFilterApi();
+                
                 $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
 
             callViewApi();
-            callFilterApi();
+            
 
         });
 

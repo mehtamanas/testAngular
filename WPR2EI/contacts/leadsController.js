@@ -322,7 +322,7 @@ angular.module('contacts')
             reorderable: true,
             height: window.innerHeight - 240,
             resizable: true,
-            filterable: true,
+            filterable: false,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -759,13 +759,18 @@ angular.module('contacts')
                                     // Dates for Current Quarter
                                     var dd = new Date();
                                     var currQuarter = (dd.getMonth() - 1) / 3 + 1;
-
+                                 //   alert("currQuarter"+ currQuarter);
                                     var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
                                     var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
                                     lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
                                     // Dates for Current Quarter
                                     var ddlast = new Date();
+
+                                    //moment().subtract(1, 'quarter').startOf('quarter')._d
+                                    //moment().subtract(1, 'quarter').endOf('quarter')._d
+
                                     var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
+                                  //  alert("lastQuarter" + currQuarter);
                                     var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
                                     var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
                                     lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
@@ -1218,14 +1223,14 @@ angular.module('contacts')
                 }
             } else if (args.name == 'ViewCreated') {
                 callViewApi();
-                callFilterApi();
+                
                 $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
 
             callViewApi();
-            callFilterApi();
+            
 
         });
 
