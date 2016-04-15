@@ -520,7 +520,6 @@
             },
             columns: [{
                 field: "name",
-                template: '<a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a>',
                 title: "Task Name",
               
                 attributes:
@@ -540,6 +539,7 @@
             }, {
                 field: "user_name",
                 title: "Assign To",
+             
                 attributes:
              {
                  "style": "text-align:center"
@@ -572,7 +572,7 @@
              }
 
             }, {
-                field: "start_date_timeFormatted",
+                field: "start_date_time",
                 title: "Start Date",
              
                 format: '{0:dd/MM/yyyy hh:mm:ss}',
@@ -582,7 +582,7 @@
              }
 
             }, {
-                field: "due_date_timeFormatted",
+                field: "due_date",
                 title: "Due Date",
                
                 format: '{0:dd/MM/yyyy hh:mm:ss}',
@@ -593,7 +593,7 @@
 
             },
              {
-                 field: "reminder_date_timeFormatted",
+                 field: "reminder_time",
                  title: "Reminder Date",
                
                  format: '{0:dd/MM/yyyy hh:mm:ss}',
@@ -1650,8 +1650,7 @@
 
         };
 
-        $scope.openEditTask = function (d) {
-            window.sessionStorage.selectedTaskID = d;
+        $scope.openEditTask = function () {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/add_new/edit_task.html',
@@ -1714,10 +1713,10 @@
         };
 
             // Kendo Grid on change
-        //$scope.myGridChange = function (dataItem) {        
-        //    window.sessionStorage.selectedTaskID = dataItem.task_id;           
-        //    $scope.openEditTask();
-        //};
+        $scope.myGridChange = function (dataItem) {        
+            window.sessionStorage.selectedTaskID = dataItem.task_id;           
+            $scope.openEditTask();
+        };
 
         $scope.myGridChangeEvent = function (dataItem) {            
             window.sessionStorage.selectedEventID = dataItem.id;          

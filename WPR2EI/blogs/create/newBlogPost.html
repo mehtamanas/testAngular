@@ -81,18 +81,15 @@
     </div>
 
     <input ng-show="false" id="BlogimageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-    <div class="progress" ng-show="uploader.progress>0 && uploader.progress<100">
+    <div class="progress" ng-show="((uploader.progress)/1)>0">
         <div class="progress-bar" role="progressbar"
-             ng-style="{ 'width': uploader.progress + '%' }"></div>
-    </div>
-    <div class="progress" ng-show="uploader1.progress>0 && uploader1.progress<100">
-        <div class="progress-bar" role="progressbar"
-             ng-style="{ 'width': uploader1.progress + '%' }"></div>
+             ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
     </div>
 
-    <div class="modal-btn-wrap-1 clearfix">    
-        <button type="submit" id="add_blog_saveDraft"  class="f-btn" ng-disabled="showValid"> Save Draft</button>
-        <button type="submit" id="add_blog_approval" class=" f-btn" style="margin:1px" ng-click="saveAndSend()" ng-disabled="showValid && sendApproval">Send For Approval </button>
+    <div class="modal-btn-wrap-1 clearfix">
+       
+        <button type="submit" id="add_blog_saveDraft"  class="f-btn" > Save Draft</button>
+        <button type="button" id="add_blog_approval" class=" f-btn" style="margin:1px" ng-click="sendForApproval()">Send For Approval </button>
         <!--<button type="button" class=" f-btn" style="margin:1px"> Publish </button>-->
     </div>
 </form>

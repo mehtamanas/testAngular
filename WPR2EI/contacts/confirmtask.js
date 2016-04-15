@@ -2,7 +2,6 @@
     console.log('confirmTaskController');
 
     $scope.title = items.title;
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var taskDelete = $cookieStore.get('taskDelete');
     $scope.length = parseInt(taskDelete.length);
     $scope.gotoDelete = function () {
@@ -10,7 +9,7 @@
             var loginSession = response.data;
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
-            $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', action: 'delete', id: $scope.seletedCustomerId });
+
         },
     function (error) {
         if (error.status === 400)
@@ -29,7 +28,7 @@
                 resolve: { items: { title: "Task" } }
 
             });
-            
+            $rootScope.$broadcast('REFRESH', 'TaskGrid');
         }
     }
 

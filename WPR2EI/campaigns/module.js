@@ -18,7 +18,6 @@ angular.module('campaigns', [])
                 controller: 'campaignsEventController',
                 title: 'campaigns'
             })
-
             .state('app.addNewCampaign', {
                 url: '/addNewCampaign',
                 templateUrl: 'campaigns/addNewCampaign.tpl.html',
@@ -54,7 +53,6 @@ angular.module('campaigns', [])
             controller: 'budgetEmailController',
             data: { pageTitle: 'Budget Page' }
         })
-
          .state('app.summaryEmail', {
              url: '/summaryEmail',
              templateUrl: 'campaigns/emailCampaign/summaryEmail.html',
@@ -62,7 +60,6 @@ angular.module('campaigns', [])
              data: { pageTitle: 'summary Page' }
 
          })
-
         .state('app.optionEmail', {
             url: '/optionEmail',
             templateUrl: 'campaigns/emailCampaign/optionEmail.tpl.html',
@@ -71,7 +68,7 @@ angular.module('campaigns', [])
 
         })
 
-         .state('app.addTemplate', {
+                .state('app.addTemplate', {
                     url: '/addTemplate',
                     templateUrl: 'campaigns/emailCampaign/emailAddTemplate.tpl.html',
                     controller: 'emailAddTemplate',

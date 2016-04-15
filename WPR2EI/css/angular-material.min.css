@@ -2629,7 +2629,7 @@ md-input-container .md-errors-spacer bdo[dir=ltr] {
 
 md-input-container > md-icon {
     position: absolute;
-    top: 12px;
+    top: 5px;
     left: 2px;
     right: auto;
 }
@@ -2693,7 +2693,7 @@ md-input-container label:not(.md-container-ignore) bdo[dir=ltr] {
 }
 
 md-input-container.md-has-icon {
-    padding-left: 15px;
+    padding-left: 36px;
     padding-right: 0;
 }
 

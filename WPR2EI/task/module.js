@@ -16,10 +16,4 @@
              title: 'Edit Task'
          })
 
-          .state('app.add_new_task', {
-              url: '/taskpage',
-              templateUrl: 'task/add_new_task.tpl.html',
-              controller: 'AddTaskController',
-              title: 'form'
-          })
     }]);

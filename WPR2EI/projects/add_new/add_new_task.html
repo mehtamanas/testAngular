@@ -21,17 +21,16 @@
                                    data-ng-model="name"
                                    minlength="1"
                                    id="addNewTaskName"
-                                   maxlength="200"
+                                   maxlength="50"
                                    input-focus
                                    required />
-                            <div ng-messages="addNewForm.TaskName.$error" style="color:maroon" role="alert">
-                                <div ng-message="required" data-ng-if="addNewForm.TaskName.$invalid && (!addNewForm.TaskName.$pristine || showValid) && !addNewForm.TaskName.$focus">This field should not be empty </div>
-                                <div ng-message="pattern">Enter valid Task Name</div>
+                            <div class="text-danger"
+                                 data-ng-if="addNewForm.TaskName.$invalid && (!addNewForm.TaskName.$pristine || showValid) && !addNewForm.TaskName.$focus"  id="err_addNewTaskName">
+                                {{ 'Please enter Task Name' | translate }}
                             </div>
                         </div>
 
                     </div>
-                    <span class="field-mdl field-req">*</span>
                 </div>
 
                 <div class="clearfix">
@@ -52,16 +51,18 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Project:</label>
-                                <select ng-model="project1" ng-change="selectproject()" id="addNewTaskProject" name="project"
-                                        class="dropdown form-control">
-                                    <option value="" selected>Select Project</option>
-                                    <option ng-repeat="project in projects"
-                                            value="{{project.id}}"
-                                            ng-disabled="project.id !== project1">
-                                        {{project.name}}
-                                    </option>
-                                </select>
-                            </div><div class="field-md0 field-req">*</div>
+                            <select ng-model="project1" ng-change="selectproject()" id="addNewTaskProject"
+                                    class="dropdown form-control" >
+                                <option value="" selected>Select Project</option>
+                                <option ng-repeat="project in projects"
+                                        value="{{project.id}}"
+                                        ng-disabled="project.id !== project1">
+                                    
+                                    {{project.name}}
+                                </option>
+
+                            </select>
+                        </div>
                     </div>
 
                     <!--<div class="pull-left f-half-6">
@@ -156,14 +157,17 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Select Time</label>
-                            <select ng-model="reminder_time1" ng-change="selectReminderTime()" id="opt_addTaskAssignSetPriority" class="dropdown form-control">
-                                <option value="" selected>Select Time</option>
-                                <option ng-repeat="remind in reminders"
-                                        value="{{remind.id}}">
-                                    {{remind.key_name}}
-                                </option>
+                            <select data-ng-model="reminder_time" class="dropdown form-control" id="addNewTaskSelectTime">
+                                <option value=0 selected>Select Time</option>
+                                <option value=15>15 min</option>
+                                <option value=30>30 min</option>
+                                <option value=45>45 min</option>
+                                <option value=60>60 min</option>
+                                <option value=0>no reminder</option>
                             </select>
+
                         </div>
+
                     </div>
                 </div>
 

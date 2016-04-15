@@ -249,9 +249,9 @@
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'projects/UpdateSuccessful.tpl.html',
+                templateUrl: 'newuser/Edited.tpl.html',
                 backdrop: 'static',
-                controller: UpdateController,
+                controller: EditsucessfullController,
                 size: 'sm',
                 resolve: { items: { title: "Task" } }
             });

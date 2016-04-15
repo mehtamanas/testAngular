@@ -4,12 +4,12 @@
 var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log(' EditTaskController');
     $scope.loadingDemo = false;
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var userId = $cookieStore.get('userId');
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
 
     $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
+    $scope.project1 = $scope.seletedCustomerId;
 
 
     contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
@@ -17,7 +17,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
         $scope.params = response.data[0];
 
         remindTime = moment.duration(moment.utc(moment(response.data[0].due_date).diff(moment(response.data[0].reminder_time))).format("HH:mm:ss")).asMinutes();
-        $scope.reminder_time1 = (_.findWhere($scope.reminders, { key_name: remindTime.toString() + ' minutes' })).id;
+        $scope.reminder_time = remindTime.toString();
         $scope.due_date = moment(moment.utc(response.data[0].due_date).toDate()).format("DD/MM/YYYY HH:mm A");
         //  $scope.params.end_date = moment(moment.utc(response.data[0].end_date).toDate()).format("DD/MM/YYYY HH:mm A");
         if (response.data[0].remind_me==="1")
@@ -44,7 +44,8 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
 
         device_os: "windows10",
         device_type: "mobile",
-        module_id: "Add new task",
+        device_mac_id: "34:#$::43:434:34:45",
+        module_id: "Addnew TEAM",
         action_id: "Addnew TEAM View",
         details: "Addnew TEAM detail",
         application: "angular",
@@ -105,7 +106,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                 $scope.isDisabled = false;
                 $scope.loadingDemo = false;
                 $scope.openSucessfullPopup();
-                $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', action: 'edit', id: $scope.seletedCustomerId, });
+                $rootScope.$broadcast('REFRESH', 'TaskGrid');
 
             },
             function (error) {
@@ -132,23 +133,6 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             else
                 alert("Network issue");
         })
-        };
-
-        Url = "ToDoItem/GetReminderTime"
-        apiService.get(Url).then(function (response) {
-            $scope.reminders = response.data;
-        },
-       function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
-       });
-
-        $scope.selectReminderTime = function () {
-            $scope.params.reminder_time = $scope.reminder_time1;
-            $scope.reminderTime = (_.findWhere($scope.reminders, { id: $scope.reminder_time1 })).time_in_minutes;
-
         };
 
 
@@ -243,8 +227,8 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                     //$scope.params.reminder_datetime = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss').subtract($scope.params.reminder_datetime, 'minutes')._d;
                     //$scope.due_date = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss')._d;
 
- 			//$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
- 			$scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.reminderTime, 'minutes')._d;
+ 			$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
+                    $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.params.reminder_datetime, 'minutes')._d;
                     var dDate = moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
                 }
                 else remind_me = "0";
@@ -262,10 +246,10 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                     task_type_id: $scope.event1,
                     text: $scope.params.text,
                     remind_me: remind_me,
-                    reminder_timespan_id: $scope.reminder_time1,
- 		            due_date: new Date(dDate).toISOString(),
- 	                reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
- 	                id: $scope.selectedTaskID,
+                    //reminder_time: $scope.params.reminder_datetime,
+ 		    due_date: new Date(dDate).toISOString(),
+ 	            reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
+ 	            id: $scope.selectedTaskID,
                 };
 
                 $scope.save($scope.params);

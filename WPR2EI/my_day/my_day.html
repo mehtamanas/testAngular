@@ -15,39 +15,6 @@
 
     </div><!-- content-inner ended -->
 
-    <!--view starts-->
-    <div class="pg-inner-content">
-        <div class="clearfix head_filter">
-            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 10px;">
-
-                <div class="col-lg-2 col-md-2 col-sm-2 " style="margin-left: 21px;">
-                    <select ng-model="gridView" class="form-control serach_bar_btn" style="font-size:14px;" ng-change="changeView()" id="contacaction">
-                        <option value='default' selected>Default View</option>
-                        <option ng-repeat="view in views" value={{view.id}}>{{view.view_name}}</option>
-                    </select>
-                </div>
-                <div class="col-md-9 col-sm-9">
-                    <div class="form-inline">
-                        <!--ng-keypress="checkIfEnterKeyWasPressed($event)"-->
-                        <textarea id="text" class="form-control serach_bar_filter custom_class" style="width: 73%;" placeholder="Query" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
-                        <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
-                        <a href="" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></a>
-                        <!--<button class="btn btn-primary serach_bar_btn-1" ng-click="saveView()"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>-->
-                        <a herf="" class="btn btn-primary serach_bar_btn-1" data-toggle="tooltip" title="Save View" ng-click="saveView()">SAVE VIEW</i></a>
-                        <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" title="Edit" ng-click="editView()"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
-                        <!--<button class="btn  serach_bar_btn-1 button_save_del" ng-click="editView()"  ><img src="../images/update_query.png" /></button>-->
-                        <a herf="" class="btn  serach_bar_btn-1 button_save_del" ng-click="deleteView()"><img src="../images/delete_query.png" /></a>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-    </div>
-    <!--view ends-->
-
     <div class="task_maincontent">
 
         <div class="project-detail">
