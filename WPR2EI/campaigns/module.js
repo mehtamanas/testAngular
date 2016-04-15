@@ -5,15 +5,15 @@ angular.module('campaigns', [])
 
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider
-            .state('app.campaigns', {
-                url: '/campaigns',
+            .state('app.campaignsEmail', {
+                url: '/campaignsEmail',
                 templateUrl: 'campaigns/emailCampaign/campaignsdetail.html',
                 controller: 'campaignsDetailController',
                 title: 'campaigns'
             })
 
             .state('app.campaignsEvent', {
-                url: '/campaigns',
+                url: '/campaignsEvent',
                 templateUrl: 'campaigns/campaignsEventDetail.html',
                 controller: 'campaignsEventController',
                 title: 'campaigns'
@@ -33,7 +33,7 @@ angular.module('campaigns', [])
             data: { pageTitle: 'Budget Page' }
         })
 
-        .state('app.summaryEvent', {
+        .state('app.summaryEvent',{
             url: '/summaryEvent',
             templateUrl: 'campaigns/summaryEvent.html',
             controller: 'summaryEventController',

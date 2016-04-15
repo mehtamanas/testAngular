@@ -56,7 +56,7 @@
         };
 
         $scope.user = function () {
-            $state.go('app.campaigns');
+            $state.go('app.campaignsEmail');
         }
         $scope.cancel = function ()
         {
@@ -71,7 +71,7 @@
             $cookieStore.remove('Sales');
             $cookieStore.remove('channel_type_id');
             $cookieStore.remove('campaign_ID');
-            $state.go('app.campaigns');
+            $state.go('app.campaignsEmail');
         }
 
 
