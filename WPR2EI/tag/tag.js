@@ -45,6 +45,11 @@
                  {
                      template: " <input type='checkbox' , class='checkbox', data-id='#= id #', ng-click='check($event,dataItem)'/>",
                      title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(dataItem)'/>",
+
+
+
+
+
                      width: "10px",
                      attributes:
                 {

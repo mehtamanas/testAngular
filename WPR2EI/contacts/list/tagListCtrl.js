@@ -1,6 +1,6 @@
 ﻿angular.module('contacts')
 .controller('tagListCtrl',
-function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, listService, $modal, $localStorage) {
+function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, listService) {
     console.log('tagListCtrl');
     $scope.tagFilter = '';
     $scope.tagSelected = true;
@@ -38,18 +38,6 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
             for (i = 0; i < $scope.orgUsers.length; i++) {
                 $scope.orgUsers[i].Name = $scope.orgUsers[i].name;
             }
-            if ($cookieStore.get('tagsToBeAdded')) {
-                $scope.tagslist=   $cookieStore.get('tagsToBeAdded');
-                //if user has clicked baqck from next page
-                
-                for (i = 0; i < $scope.tagslist.length; i++)
-                {
-                    var a = ($cookieStore.get('tagsToBeAdded'))[i].tag_id;
-                    var userObject = (_.findWhere($scope.orgUsers, { id: a }));
-                    $scope.addUser(userObject);
-                }
-               
-            }
 
             // Now, find out the users already in the team and mark them
             angular.forEach($scope.usersInTeam, function (existingUser) {
@@ -58,13 +46,6 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
             })
         });
     };
-
-    //if ($cookieStore.get('Taglist')) { //if user has clicked baqck from next page
-
-    //    var taglistID = $cookieStore.get('Taglist');
-    //    $scope.addUser(taglistID);
-    //}
-
 
     $scope.loadList = function () {
 
@@ -84,36 +65,18 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
 
     $scope.loadUsers();
     $scope.loadList();
- 
-
 
     $scope.tagGrid = {
         dataSource: {
             type: "json",
             transport: {
                 read: function (options) {
-                    if ($localStorage.leadDataSource)
-                    { options.success($localStorage.leadDataSource); }
-                        apiService.get('Contact/GetpeoplebyTags?id=' + $cookieStore.get('orgID') + '&type=' + taglist).then(function (response) {
-                            data = response.data;                          
-                            for (i = 0; i < data.length; i++) {
-                                var tag = (data[i].Tags);
-                                if (tag !== null) {
-                                    tag = JSON.parse(tag);
-                                    data[i].Tags = [];
-                                    data[i].Tags = tag;
-                                }
-                                else
-                                    data[i].Tags = [];
-                            }
-                            
-                            options.success(data);
-                        }, function (error) {
-                            options.error(error);
-                        });
-                    }
-                    
-                
+                    apiService.get('Contact/GetpeoplebyTags?id=' + $cookieStore.get('orgID') + '&type=' + taglist).then(function (response) {
+                        options.success(response.data);
+                    }, function (error) {
+                        options.error(error);
+                    });
+                }
             },
             pageSize: 20
         },
@@ -169,10 +132,7 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
                  }
              }, {
                  field: "Tags",
-                 template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
-                 title: "TAGS",
-                 width: "220px",
-
+                 title: "Tags",
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"
@@ -185,17 +145,12 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
 
     $scope.loadUsers();
 
-    if ($cookieStore.get('tagsToBeAdded')) {
-        var a = ($cookieStore.get('tagsToBeAdded')).tag_id;
-        $scope.orgUsers
-    }
-
     usersToBeRemoved = [];
     usersToBeAdded = [];
 
     listToBeRemoved = [];
     listToBeAdded = [];
-    NewPeopleList = [];
+
     // Get the collection of users to be removed
     $scope.removeUser = function (user) {
         if (user.isTeamMember) {
@@ -213,7 +168,6 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
             });
         }
         taglist = usersToBeAdded.join(',');
-        //$cookieStore.put('Taglist', taglist);
         $('.k-i-refresh').trigger("click");
     };
 
@@ -234,7 +188,7 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
             });
         }
     };
-  
+
     // Get the collection of users to be added
     $scope.addUser = function (user) {
         if (!user.isTeamMember) {
@@ -246,7 +200,6 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
             if (existingUsers.indexOf(user.id) == -1 && usersToBeAdded.indexOf(user.id) == -1) {
                 {
                     usersToBeAdded.push(user.id);
-                  
                 }
             }
 
@@ -255,7 +208,6 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
                 return removeMe == user.id;
             });
             taglist = usersToBeAdded.join(',');
-            //$cookieStore.put('Taglist', taglist);
             // $scope.tagGrid.dataSource.transport.read();
             $('.k-i-refresh').trigger("click");
         }
@@ -275,8 +227,6 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
             if (existingList.indexOf(list.Contact_Id) == -1 && listToBeAdded.indexOf(list.Contact_Id) == -1) {
                 {
                     listToBeAdded.push(list.Contact_Id);
-            
-                    
                 }
             }
 
@@ -285,12 +235,8 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
                 return removeMe == list.Contact_Id;
             });
         }
-        taglist = listToBeAdded;
-        //else
-        //{
-        //    NewPeopleListByPerson.pop(list);
-        //    $scope.removeList(list);
-        //}
+        else
+            $scope.removeList(list);
     };
     // Final update to the server
     $scope.updateTeamUsers = function () {
@@ -402,20 +348,9 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
         $state.go('app.listSummary');
     }
 
-    $scope.cancel = function ()
-    {
-
+    $scope.cancel = function () {
     };
 
-    $scope.backlist = function ()
-    {
-        var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'contacts/list/addList.html',
-            backdrop: 'static',
-            controller: addListCtrl,
-            size: 'lg'
-        });
-    
-    };
+    $scope.back = function () {
+    }
 });

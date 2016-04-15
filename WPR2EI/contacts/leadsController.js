@@ -503,8 +503,7 @@ angular.module('contacts')
             if (txtdata.text != '')
                 $scope.callFilter();
         };
-
-
+        
         $scope.callFilter = function () {
 
             var txtdata = $scope.textareaText.toLowerCase();
@@ -711,7 +710,16 @@ angular.module('contacts')
                                     var CurrentDate = moment().startOf('day')._d;
                                     var CurrentEndDate = moment().endOf('day')._d;
                                     // alert(CurrentEndDate);
+
                                     var TommDate = moment().startOf('day').add(+1, 'days')._d;
+                                    var TommEndDate = moment().endOf('day').add(+1, 'days')._d;
+
+                                    var next7Day = moment().endOf('day').add(+7, 'days')._d;
+                                   // alert(next7Day);
+
+                                    // alert(TommDate);
+                                    //  alert(TommEndDate);
+
                                     var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
 
                                     // For This week 
@@ -783,10 +791,17 @@ angular.module('contacts')
 
                                         abc = { logic: "and", filters: [] };
                                         abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
-                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
                                         filter.filters.push(abc);
 
-                                        // filter.filters.push({ field: Firstname.trim(), operator: "eq", value: YesterDayDate.toDateString() });
+                                    }
+
+                                    else if (expsplit[1].trim().toUpperCase() == "TOMORROW") {
+
+                                        abc = { logic: "and", filters: [] };
+                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentEndDate });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                        filter.filters.push(abc);
                                     }
 
                                     else if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
@@ -812,7 +827,7 @@ angular.module('contacts')
                                         filter.filters.push(abc);
                                     }
 
-                                    else if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
+                                    else if (expsplit[1].trim().toUpperCase() == "THIS MONTH") {
 
                                         abc = { logic: "and", filters: [] };
                                         //if (firstDayOfCurrentMonth.getDate() == CurrentDate.getDate()) {
@@ -1023,7 +1038,7 @@ angular.module('contacts')
             // final code to get execute....
 
             if (Firstname == "") {
-                alert("Invalid Feild.");
+                alert("Invalid Query.");
                 return;
             }
 
@@ -1035,8 +1050,6 @@ angular.module('contacts')
                 alert("Please Check Query.");
             }
         }
-
-
 
         $scope.clearFilter = function () {
             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
@@ -1311,6 +1324,7 @@ angular.module('contacts')
                 size: 'lg'
             });
         };
+
 
         $scope.assignToUpPopup = function () {
             var modalInstance = $modal.open({

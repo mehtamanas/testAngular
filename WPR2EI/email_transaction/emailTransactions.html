@@ -31,7 +31,7 @@
 
         </form>-->
         <div class="clearfix" style="background: #fff;" id="emailContent">
-            <div class="col-lg-12 col-md-12 col-sm-12" >
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="vdivide">
                     <div class="col-lg-3 col-md-3 col-sm-3 left_email"  style="overflow: auto;height: 770px; outline: none!important;">
                         <div class="inner-mail" ng-repeat="email in emailData" style="min-height:104px">
@@ -40,7 +40,7 @@
                                 <!--<p class="email_subject" style="font-size: 15px;text-transform:capitalize;">{{email.subject | limitTo:20}}</p>-->
                                 <p class="email_name1" ng-bind-html="email.template | limitTo:80">
                                 </p>
-                                <div class="col-md-12"><span style="float:right;margin-bottom:0px;" class="badge custom-badge">0</span></div>
+                                <div class="col-md-12"><span style="float:right;margin-bottom:0px" class="badge custom-badge">0</span></div>
                             </div>
                         </div>
                     </div>
@@ -49,10 +49,10 @@
                            <span>Select an item to view</span>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9  main_body" style="overflow: auto;height: 770px; outline: none!important;" ng-show="showEmailDetail">
+                    <div class="col-lg-9 col-md-9 col-sm-9 main_body" style="overflow: auto;height: 770px; outline: none!important;" ng-show="showEmailDetail">
                         
                         <div class="email_body inner-attach-border " >
-                            <div class=""><span style="font-size: 11px;color: #a0a0a0;float:left"><i class="fa fa-clock-o"></i> {{emailDetail.email_send_date_time | date:' EEEE dd/MM/yyyy  hh:mm a '}}</span><span style="float:right"><a href="" style="color:#e0e0e0"><i class="fa fa-trash"></i></a></span></div>
+                            <div class=""><span style="font-size: 10px;color: #a0a0a0;float:left"><i class="fa fa-clock-o"></i> {{emailDetail.email_send_date_time | date:' EEEE dd/MM/yyyy  hh:mm a '}}</span><span style="float:right"><a href="" style="color:#e0e0e0"><i class="fa fa-trash"></i></a></span></div>
                             <!--subject-->
                             <br/>
                             <span class="email_subject">{{emailDetail.subject }}</span>
@@ -69,17 +69,3 @@
         </div>
     </div>
 </div>
-   <script>
-  $('.left_email').mCustomScrollbar({
-        theme: "minimal-dark",
-        scrollbarPosition: "outside",
-        scrollInertia: 200,
-        advanced: { autoExpandHorizontalScroll: true }
-  });
-  $(document).ready(function () {
-      $('.inner-mail').on('click', function () {
-          $(this).toggleClass('beenclicked');
-      });
-  });
-  
-    </script>

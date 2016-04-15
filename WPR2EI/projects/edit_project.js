@@ -572,7 +572,7 @@ function (error)
     if (error.status === 400)
         alert(error.data.Message);
 });
-
+d
     $scope.confirmation = function () {
 
         projectUrl = "Project/ProjectCodeExists/" + $cookieStore.get('orgID') + "/" + $scope.params.project_code + "/" + $scope.seletedCustomerId//f2294ca0-0fee-4c16-86af-0483a5718991";
