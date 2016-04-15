@@ -350,7 +350,7 @@ a {
 
 .k-widget {
     border-color: #ECECEC;
-    /*border: none;*/
+    border: none;
 }
 
 .k-grouping-header {
@@ -2632,9 +2632,9 @@ form.callback {
 
 .project-detail-tabs {
     background-color: #fff;
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    /*-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);*/
 }
 
 
@@ -11818,7 +11818,7 @@ md-input-container label:not(.md-container-ignore) {
 }
 .contact_image{
     width:60px;
-    padding:7px 7px ;
+    padding:6px 13px ;
 
 }
 .lead_count{
@@ -11835,4 +11835,18 @@ md-input-container label:not(.md-container-ignore) {
     font-size: 12px;
     font-weight: bold;
     color: rgb(255,82,82);
+}
+.span_contact{
+    font-size: 12px;
+    color: #c5c5c5;
+}
+.span_company{
+    font-size: 14px;
+    font-weight: 600;
+    color: #a0a0a0;
+}
+.validationStarRed {
+    color: red;
+    margin-left: 5px;
+    font-size: 10px;
 }
