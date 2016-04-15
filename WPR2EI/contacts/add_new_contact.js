@@ -205,8 +205,7 @@ angular.module('contacts')
 
         apiService.post("Contact/CreateNew", postData).then(function (response) {
             var loginSession = response.data;
-            //$scope.openSucessfullPopup();
-            //$modalInstance.dismiss();
+           
 
             AuditCreate();
             $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
@@ -293,10 +292,12 @@ angular.module('contacts')
 
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
+                $scope.openSucessfullPopup();
+                $modalInstance.dismiss();
                 called = true;
                 $rootScope.$broadcast('REFRESH1', 'elemeninfo');
                 $rootScope.$broadcast('REFRESH', 'contactcount');
-
+                $state.go('app.contacts');
             },
            function (error) {
                if (error.status === 400)
