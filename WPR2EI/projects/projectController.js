@@ -172,8 +172,16 @@ angular.module('project')
                            "class": "UseHand",
                            "style": "text-align:center"
                        }
-                 },
-               {
+                 }, {
+                     field: "project_code",
+                     title: "Project Code",
+
+                     attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                 }, {
                    field: "name",
                    title: "NAME",
                  
