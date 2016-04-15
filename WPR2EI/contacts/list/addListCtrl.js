@@ -6,6 +6,9 @@
 
     var userId = $cookieStore.get('userId');
     var orgID = $cookieStore.get('orgID');
+    $scope.name = $cookieStore.get('Name');
+    $scope.description = $cookieStore.get('Description');
+   
 
 
     //API functionality start

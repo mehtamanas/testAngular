@@ -335,13 +335,15 @@ angular.module('campaigns')
 
 
         $scope.openCampaignsPopUp = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'campaigns/campaigns.tpl.html',
-                backdrop: 'static',
-                controller: campaignsController,
-                size: 'lg'
-            });
+            $rootScope.selectedEvent = "89755882-e7f3-4e19-9070-7a0fb94d1a6f";
+            $state.go('app.addEmailCampaign');
+            //var modalInstance = $modal.open({
+            //    animation: true,
+            //    templateUrl: 'campaigns/campaigns.tpl.html',
+            //    backdrop: 'static',
+            //    controller: campaignsController,
+            //    size: 'lg'
+            //});
         };
 
         $scope.openLaunch = function (id) {

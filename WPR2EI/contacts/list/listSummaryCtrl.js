@@ -96,6 +96,9 @@
                         alert("Network issue");
                 });
                 $scope.openSucessfullPopup();
+                $cookieStore.remove('Name');
+                $cookieStore.remove('Description');
+                $cookieStore.remove('tagsToBeAdded');
                 $state.go('app.list');
          
             },
@@ -128,9 +131,12 @@
             }
 
         }
+        $scope.backtagList = function ()
+        {
+            $state.go('app.tagList');
+        };
 
-        $cookieStore.remove('Name');
-        $cookieStore.remove('Description');
+    
         
 
     });

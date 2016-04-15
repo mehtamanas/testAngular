@@ -41,6 +41,7 @@
                    placeholder="Blog Name"
                    data-ng-model="params.name"
                    input-focus
+                   ng-disabled="params.name"
                    required />
             <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
                 <div ng-message="required">Enter your name</div>
@@ -93,12 +94,14 @@
     </div>
     <div class="clearfix">
         <div class="pull-left f-half-6" ng-show='isContentPublisher && status === "Approved"'>
-            <div class="form-group form-bx form-bx3-1">
-                <label for="">Date:</label>
-                <input kendo-date-picker class="form-control "
-                       ng-model="params.duedate"
-                       k-ng-model="k_due_date"
-                       k-format="'dd/MM/yyyy'" />
+                <div class="form-group form-bx form-bx3-1">
+                    <label for="">Date:</label>
+                    <input kendo-date-time-picker class="form-control "
+                           ng-model="params.due_date"
+                           id="addTaskDate"
+                           k-ng-model="k_due_date"
+                           k-format="'dd/MM/yyyy hh:mm tt'" />
+                
             </div>
         </div>
     </div>

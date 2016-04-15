@@ -1,7 +1,7 @@
 ﻿
-var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader,uploadService, $modal, $rootScope, $sanitize) {
+var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope, $sanitize) {
+    $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
     console.log('BlogPostPopUpCtrl');
-
     $scope.showBlog = true;
     $scope.showPreview = false;
     $scope.params = {}
@@ -16,6 +16,22 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
     var uploader1 = $scope.uploader1 = new FileUploader({
         url: apiService.uploadURL,
 
+    });
+    uploader.filters.push({
+        name: 'attchementFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected invalid file type');
+            }
+            if (item.size > 10485760) {
+
+                alert('File size should be less than 10mb');
+            }
+            return '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type) !== -1 && item.size <= 10485760;
+        }
     });
 
     // FILTERS
@@ -38,22 +54,27 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
         }
     }
 
-
-
-    $scope.showProgress = false;
-
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
-        img = response[0].Location;       
-        var edit = $('#editor').data("kendoEditor");
-        edit.exec('inserthtml', { value: "<img alt=''  src='" + img + "' />" });
+        loc = response[0].Location;
+        var edit = $('#Blog_editor').data("kendoEditor");
+        var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
+        if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
+            edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
+        else {
+            edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
+        }
 
     };
-
 
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         uploader.uploadAll();
     }
+
+
     $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
         tools: ["bold",
                 "italic",
                 "underline",
@@ -79,32 +100,23 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                     name: "myTool",
                     tooltip: "Insert Image",
                     exec: function (e) {
-                        $('#imageBrowser').trigger("click");
+                        $('#BlogimageBrowser').trigger("click");
                     }
                 },
-                 
-                  "insertFile",
+                  {
+                      name: "insertHtml",
+                      items: [
+                          { text: "Last Name", value: "{{last_name}}" },
+                          { text: "First Name", value: "{{first_name}}" },
+                          { text: "My First Name", value: "{{my_first_name}}" },
+                          { text: "My Last Name", value: "{{my_last_name}}" },
+                          { text: "Salutation", value: "{{salutation}}" },
+                           { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
+
+                      ]
+                  },
                   "viewHtml",
         ],
-       
-        fileBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Read",
-                destroy: {
-                    url: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Destroy",
-                    type: "POST"
-                },
-                create: {
-                    url: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Create",
-                    type: "POST"
-                },
-                uploadUrl: "http://demos.telerik.com/kendo-ui/service/FileBrowser/Upload",
-                fileUrl: "http://demos.telerik.com/kendo-ui/service/FileBrowser/File?fileName={0}"
-            }
-        }
     }
 
 
@@ -130,21 +142,11 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
         // post image upload call the below api to update the database
         console.log("uploader1 called");
         $scope.media_url = response[0].Location;
-        uploader_done = true;
-        if (uploader_done == true) {
-            $scope.showProgress = false;
             $scope.saveTemplate();
-        }
     };
-        var called = false;
 
         $scope.saveTemplate = function ()
-        {
-         
-            if (called == true) {
-                return;
-            }
-            
+        {            
             $scope.params.bodyText = $sanitize($scope.params.bodyText);
                 var postdata = {
                     name:$scope.params.name,
@@ -158,17 +160,20 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                     template_id: $scope.params.template,
                
                 };
-
-                console.log($scope.params.bodyText);
                 apiService.post("Blogs/CreateBlogTag", postdata).then(function (response)
                 {
-                    data = response.data[0];
+                    data = response.data;
+                    $scope.blog_id = data.blog_id;
                     $scope.openSucessfullPopup();
-                    $modalInstance.dismiss();
                     $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+                    $modalInstance.dismiss();
+                    if ($scope.sendApproval) {
+                        $scope.sendForApproval();
+                    }
                 },
                 function (error)
                 {
+                    $scope.showValid = false;
                     if (error.status === 400)
                         //sweetAlert("Oops...", error.data.Message, "error");
                        alert(error.data.Message);
@@ -181,7 +186,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
                 // comment: $scope.params.comment,
-                blog_id: window.sessionStorage.selectedBlogID,
+                blog_id: $scope.blog_id,
                 status: "Sent For Approval",
 
             };
@@ -190,6 +195,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                 $modalInstance.dismiss();
             },
                   function (error) {
+                      $scope.showValid = false;
                       if (error.status === 400)
 
                           alert(error.data.Message);
@@ -254,17 +260,20 @@ function (error) {
 
     };
 
+    $scope.saveAndSend = function () {
+        $scope.sendApproval = true;
+    }
 
     $scope.addNewContact = function (isValid) {
-        $scope.showValid = true;
-
         if (isValid) {
+            $scope.showValid = true;
             if (uploader1.queue.length != 0)
                 uploader1.uploadAll();
-            if (uploader1.queue.length == 0)
+            else {
                 $scope.saveTemplate();
+            }
 
-            $scope.showValid = false;
+            
         }
     }
 

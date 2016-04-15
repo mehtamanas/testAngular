@@ -1337,7 +1337,7 @@ div.k-grid-footer {
     }
 
 .form-content .form-control {
-    // height: 48px;
+
     border-color: #d7d7d7;
 }
 
@@ -2021,10 +2021,17 @@ h4.form-sub-title {
     background-position: -30px -434px;
 }
 
-#sidebar .navbar-default .navbar-nav > li a {
+/*#sidebar .navbar-default .navbar-nav > li a {
     padding-left: 20px;
     font-size: 14px;
     font-weight: 600;
+}*/
+
+#sidebar .navbar-default .navbar-nav > li a {
+    display: block;
+    padding: 11px 10px 14px 20px;
+    color: #8a8a8a;
+    font-size: 13px;
 }
 
 #sidebar .navbar-default .navbar-nav .nav-no {
@@ -2048,7 +2055,7 @@ h4.form-sub-title {
 }
 
 #content h2.pg-inner-title {
-    font: 600 20px 'Open Sans', arial, sans-serif;
+    font: 600 16px 'Open Sans', arial, sans-serif;
     color: #989898;
     margin-bottom: 20px;
     /*margin-top: 35px;*/
@@ -9309,10 +9316,13 @@ input:focus {
 }
 
 .row_content {
-    border-bottom: 1px solid #d8d0d0;
+    border-bottom: 1px solid #ececec;
     padding: 15px 8px 11px 0px;
 }
-
+.row_content-1 {
+    border-bottom: 1px solid #ececec;
+    padding: 0px 8px 11px 0px;
+}
 .form-content .form-bx3-2 {
     width: 594px;
 }
@@ -9964,13 +9974,65 @@ select {
     margin-left: 23px;
     text-align: center;
 }
-
 .email_tabs2 {
     background: #2799e7;
     padding: 13px;
     color: #fff;
     font-weight: 900;
     text-align: center;
+
+}
+.email_tabs3{
+border-top: 4px solid #c5c5c5;
+ margin-top: 6px; 
+ width:20%;
+}
+.email_tabs3_active{
+border-top: 4px solid #289ff1;
+ margin-top: 6px; 
+ color:#1f90e0;
+ width:20%;
+
+}
+.email_tab_text{
+    display: inline-block;
+    margin-top: 21px;
+    text-align: center;
+    margin-left: -38px;
+    float: left;
+    width: 95px;
+    color: #909090;
+    font-weight: 500;
+}
+.email_tab_text_active{
+    display: inline-block;
+    margin-top: 21px;
+    text-align: center;
+    margin-left: -38px;
+    color:#1f90e0;
+    float: left;
+    width: 95px;
+    font-weight: 500;
+}
+.tabdot{
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    background: #c5c5c5;
+}
+.tabdot_active{
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    background: #1f90e0;
+}
+.inner_page_inside{
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+.pg-inner-content-camp{
+    padding: 10px 20px !important;
 }
 
 .tab_head {
@@ -10188,6 +10250,14 @@ select {
     font-size: 11px;
     padding: 3px;
     font-weight: bold;
+}
+#postpone_now
+{
+    color: #ffffff;
+    font-size: 11px;
+    padding: 3px;
+    font-weight: bold;
+
 }
 
 #RunNow {
@@ -11183,9 +11253,21 @@ input[type=text].rupee_1 {
     height: 35px !important;
     font-size: 11px;
     font-weight: 600;
-    border-radius: 1px;
+    border-radius: 4px;
     margin-right: 2px;
 }
+
+
+.serach_bar_btn-2 {
+    height: 35px !important;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-right: 2px;
+    font-weight: bold;
+    padding-top: 8px;
+}
+
 
 .serch_btn_custom {
     border-right-color: #c5c5c5;
@@ -11194,6 +11276,7 @@ input[type=text].rupee_1 {
     border-left: none;
     color: #fff;
     background: #5da15d;
+    margin-left: -4px;
     height: 35px !important;
     border-radius: 1px;
 }
@@ -11208,7 +11291,7 @@ input[type=text].rupee_1 {
     font-weight: normal !important;
     height: 35px !important;
     border-radius: 1px;
-        margin-left: -5px;
+    margin-left: -5px;
 }
 
     .search_btn_cancel:hover {
@@ -11521,20 +11604,39 @@ md-radio-button {
 /*added by himangshu*/
 .k-block, .k-widget
 {
-    background:#fafcfe;
+    /*background:#fafcfe;*/
 }
 .k-grid .k-grouping-header
 {
         color: #DCDCDC;
     padding: 5px;
 }
+.bold_txt{
+    font-weight:bold;
+}
+.goals_btn{
+    background: #63D4A6;
+    color: #fff;
+    font-weight: 600;
+    padding-left: 6px;
+    font-size: 15px;
+    padding-right: 6px;
+    border-radius: 5px;
+}
+.odd_btn{
+    background: #646464;
+    float: left;
+    margin-right: 11px;
+    color: #fff;
+    font-weight: 600;
+}
 .c-checkbox span, .c-radio span {
     position: relative;
     display: inline-block;
     vertical-align: top;
     margin-left: -20px;
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     border-radius: 2px;
     border: 1px solid #ccc;
     margin-right: 5px;
@@ -11612,4 +11714,95 @@ input[type=checkbox]:focus, input[type=file]:focus, input[type=radio]:focus {
     color: #fff;
     opacity: 1;
     transition: color .3s ease-out;
+}
+.odd_btn1{
+    background: #646464;
+   
+    color: #fff;
+    font-weight: 600;
+}
+
+.odd_btn1:hover
+{
+    color:#fff;
+    background:#424242;
+}
+
+.btn_complete{
+    background: #6CB767;
+     margin-right: 10px;
+    margin-left: 10px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn_complete:hover
+{
+    color:#fff;
+    background:#589854;
+
+}
+.selectedPageBreadcrumb
+{
+    color:#2899E7;
+}
+.user_details-1 {
+    background: #fff;
+    padding: 0px 49px 21px 56px;
+}
+.user_details1-1 {
+    background: #fff;
+    padding: 0px 49px 21px 56px;
+    /* border-bottom: 3px solid #D8D0D0; */
+    /* border-top: 3px solid #D8D0D0; */
+    overflow-y: scroll;
+    height: 520px;
+}
+.user_details2-1 {
+    background: #fff;
+    padding: 0px 49px 21px 56px;
+}
+.tab-campaign {
+    margin-left: 17%;
+    margin-top: 5%;
+}
+.tab-head-inner-2 {
+    /* margin-left: 17%; */
+    margin-top: 5%;
+}
+md-input-container label:not(.md-container-ignore) {
+    position: absolute;
+    bottom: 100%;
+    font-size: 14px !important;
+    left: 0;
+    right: auto;
+}
+.checkuser{
+    
+    background: #fff;
+    overflow-y: auto;
+    height: 520px;
+}
+.summary_value span{
+    line-height: 28px !important;
+    display: block;
+    color: #505050;
+    padding:0px 5px 17px 1px;
+    font-size:15px !important;
+    font-weight: 500;
+}
+.summary_half {
+    width: 200px;
+    padding: 70px 0px 17px 0px;
+}
+.cancel_btn{
+    margin-right: 7px;
+    background: rgb(255,82,82);
+    color:#fff;
+    font-weight:600;
+}
+.md-custom-label{
+    left: 20px !important;
+    right: auto !important;
+    margin-bottom: 1px !important;
 }

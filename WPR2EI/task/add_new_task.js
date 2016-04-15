@@ -1,8 +1,7 @@
-﻿/**
- * Created by dwellarkaruna on 24/10/15.
- */
-var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope,$window) {
-    console.log('AddNewTaskController');
+﻿angular.module('task')
+
+.controller ('AddTaskController' , function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope) {
+    console.log('AddTaskController');
     $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     //var day = moment().format();
@@ -69,7 +68,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
             alert("Your Task Code is " + loginSession.task_code);
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-            $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', action: 'add', id: $scope.seletedCustomerId });
+            $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
     function (error) {
         if (error.status === 400)
@@ -125,7 +124,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
            alert("Network issue");
    });
 
-    $scope.priority1 = "be8072b1-6992-466d-a34b-2fc9d31994a6";
+    //$scope.priority1 = "be8072b1-6992-466d-a34b-2fc9d31994a6";
     $scope.selectpriority = function () {
         $scope.params.priority = $scope.priority1;
       
@@ -183,7 +182,7 @@ function (error) {
 
 
     //end
- //popup functionality start
+    //popup functionality start
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
@@ -252,11 +251,7 @@ function (error) {
 
     }
 
-
-
-
-
-};
+});
 
 
 

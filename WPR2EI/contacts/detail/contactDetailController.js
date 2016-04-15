@@ -1,6 +1,6 @@
 
 angular.module('contacts')
-.controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, $stateParams)
+.controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, $stateParams, $localStorage)
 {
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     if (!$rootScope.contacts.write) {
@@ -559,7 +559,33 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId
+                    //read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId
+                    read: function (options) {
+                        if ($localStorage.taskDataSource) {
+                            taskData = _.find($localStorage.taskDataSource, function (o) {
+                                return o.custId === $scope.seletedCustomerId;
+                            })
+                            if (taskData) { options.success(taskData.data); }
+                            else {
+                                apiService.getWithoutCaching("ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId).then(function (res) {
+                                    data = res.data;
+                                    $localStorage.taskDataSource.push({ 'custId': $scope.seletedCustomerId, 'data': data });
+                                    options.success(data);
+                                }, function (err) {
+                                    options.error();
+                                })
+                            }
+                        } else {
+                            apiService.getWithoutCaching("ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId).then(function (res) {
+                                data = res.data;
+                                $localStorage.taskDataSource = [];
+                                $localStorage.taskDataSource.push({ 'custId': $scope.seletedCustomerId, 'data': data });
+                                options.success(data);
+                            }, function (err) {
+                                options.error();
+                            })
+                        }
+                    }
                 },
                 pageSize: 20,
 
@@ -610,6 +636,7 @@ angular.module('contacts')
                     }, {
                         field: "name",
                         title: "Task Name",
+                        template: '#if (status!="Completed") {# <a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a> #} else {#<a ng-click="taskComplete()" href="">#=name#</a>#}#',
                         width: "250px",
                         attributes:
                      {
@@ -660,7 +687,7 @@ angular.module('contacts')
                              "style": "text-align:center"
                          }
 
-                    },{
+                    }, {
                         field: "priority",
                         title: "Priority",
 
@@ -1321,6 +1348,25 @@ angular.module('contacts')
             });
         };
 
+        $scope.openPostpone = function (d) {
+            $scope.taskID = d.task_id;
+            window.sessionStorage.selectedCustomerID = $scope.taskID;
+            $cookieStore.put('company_name', d.company_name);
+            $cookieStore.put('contactID', d.contact_id);
+            $cookieStore.put('lead_name', d.Contact_name);
+            $cookieStore.put('task_name', d.name);
+            $cookieStore.put('taskID', $scope.taskID);
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/postponed/taskpostponed.html',
+                backdrop: 'static',
+                controller: postponedController,
+                size: 'lg'
+
+            });
+
+        };
+
         $scope.openNewPaymentPopup = function () {
 
             var modalInstance = $modal.open({
@@ -1406,7 +1452,8 @@ angular.module('contacts')
             });
         };
 
-        $scope.openEditTask = function () {
+        $scope.openEditTask = function (d) {
+            window.sessionStorage.selectedTaskID = d;
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/edit_task.html',
@@ -1416,7 +1463,12 @@ angular.module('contacts')
 
             });
 
-        };
+        }; 
+
+        $scope.taskComplete=function()
+        {
+            alert("Task is Complete..You Can't Edit")
+        }
 
         $scope.sendEmail = function () {
             var modalInstance = $modal.open({
@@ -1554,7 +1606,10 @@ angular.module('contacts')
         });
 
         $scope.$on('REFRESH', function (event, args) {
-            if (args == 'TaskGrid') {
+            if (args.name == 'TaskGrid') {
+                _.remove($localStorage.taskDataSource, function (o) {
+                    return o.custId == args.id;
+                });
                 $('.k-i-refresh').trigger("click");
             }
             $scope.TaskAction = 'no_action';
@@ -1768,26 +1823,26 @@ angular.module('contacts')
       
 
     // Kendo Grid on change
-        $scope.myGridChange = function (dataItem) {
+        //$scope.myGridChange = function (dataItem) {
 
-            contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
-            apiService.getWithoutCaching(contactUrl).then(function (response) {
-                $scope.params = response.data[0];
+        //    contactUrl = "ToDoItem/EditGet/" + dataItem.task_id;
+        //    apiService.getWithoutCaching(contactUrl).then(function (response) {
+        //        $scope.params = response.data[0];
 
-                var stat = $scope.params.status;
-                if (stat == "Completed") {
-                    alert(" Completed task can not be edited...");
-                }
-                else {
-                    window.sessionStorage.selectedTaskID = dataItem.task_id;
-                    $scope.openEditTask();
+        //        var stat = $scope.params.status;
+        //        if (stat == "Completed") {
+        //            alert(" Completed task can not be edited...");
+        //        }
+        //        else {
+        //            window.sessionStorage.selectedTaskID = dataItem.task_id;
+        //            $scope.openEditTask();
 
-                };
-            },
-             function (error) {
+        //        };
+        //    },
+        //     function (error) {
 
-             });
-        };
+        //     });
+        //};
 
 
     // Kendo Grid on change

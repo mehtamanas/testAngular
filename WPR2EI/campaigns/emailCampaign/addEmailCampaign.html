@@ -12,109 +12,126 @@
         </div><!-- pg-inner-header ended -->
 
     </div><!-- content-inner ended -->
-   
-    <div class="pg-inner-content" style="">
+
+    <div class="pg-inner-content pg-inner-content-camp" >
+        <!--step wizard-->
         <div class="col-md-12 tab_head">
-            <div class="row " style="padding: 1px 0px 1px 16px;">
-                <div class="col-md-2 email_tabs2">Campaign info</div>
-                <div class="col-md-1 tabarrow"><img src="images/gray_blue_arrow.png" class="arrow-height" /></div>
-                <div class="col-md-2 email_tabs_active">Set Budget</div>
-                <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height" /></div>
-                <div class="col-md-2 email_tabs_active">Select contact</div>
-                <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height"/></div>
-                <div class="col-md-2 email_tabs_active">Add template</div>
-                <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height" /></div>
-                <div class="col-md-2 email_tabs_active">Summary</div>
+            <div class="row " style="padding: 35px 42px 1px 100px;">
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Set Budget</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Select Contact</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text"> Add template</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Summary</span></div>
+                
+               
             </div>
         </div>
+        <!--end step wizard-->
+   
+    </div>
 
-        <div class="project-detail">
-
-            <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
-                <div class="col-lg-12 pull-left">
-                    <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
-                        <h2 class="pg-inner-title"> Campaign Info</h2>
-                    </div>
-                </div>
-
-            </div>
-            <div class="top-row" style="width:100%; background:#fff; padding:60px">
-                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
-                    <div class="clearfix tab-head-inner" >
-                        <div class="clearfix">
-                            <div class="form-group form-bx form-bx5">
-                                <label for="">Campaign Name</label>
-                                <input type="text" class="form-control text-bold" autofocus name="Campaign_name" id="addEmailCampaign_Campaign_name"
-                                       placeholder="Campaign Name"
+    <div class="project-detail inner_page_inside">
+        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                <div class="clearfix tab-head-inner-2">
+                    <div class="clearfix">
+                        <div class="form-group col-md-5">
+                            <!--<label for="">Campaign Name</label>
+                            <input type="text" class="form-control text-bold" autofocus name="Campaign_name" id="addEmailCampaign_Campaign_name"
+                                   placeholder="Campaign Name"
+                                   data-ng-model="params.name"
+                                   minlength="1"
+                                   maxlength="60"
+                                   ng-pattern="/^[a-z 0-9\s]+$/i"
+                                   input-focus
+                                   required />-->
+                            <md-input-container class="md-block">
+                                <label class="contact-label">Campaign Name</label>
+                                <input name="Campaign_name" id="addEmailCampaign_Campaign_name"
                                        data-ng-model="params.name"
                                        minlength="1"
                                        maxlength="60"
                                        ng-pattern="/^[a-z 0-9\s]+$/i"
-                                       input-focus
-                                       required />
-                            </div>
+                                  
+                                       required  />
+
+                            </md-input-container>
+
+
                         </div>
-
-                        <div class="clearfix">
-                            <div class="form-group form-bx form-bx5">
-                                <label for="">Project</label>
-                                <select ng-model="project1" ng-change="selectproject()" id="addEmailCampaign_project"
-                                        class="dropdown form-control">
-                                    <option value="" selected>Select Project</option>
-                                    <option ng-repeat="project in projects"
-                                            value="{{project.id}}">
-                                        {{project.name}}
-                                    </option>
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="clearfix">
-                            <div class="form-group form-bx ">
-
-
-                                <label for="">Start Date </label>
-                                <input kendo-date-time-picker class="form-control" id="addEmailCampaign_startDate" 
-                                       data-ng-model="params.start_date1"
-                                       k-ng-model="dateObject"
-                                       k-format="'MMMM d, yyyy h:mm tt'"
-                                        required/>
-
-                            </div>
-                        </div>
-
-                        <!--<div class="pull-left f-half-6">
-            <div class="form-group form-bx4 form-bx3-1" style="width:390px">
-                <label for="">End Date</label>
-
-                <input kendo-date-picker class="form-control"
-                       data-ng-model="params.end_date"
-                       k-ng-model="dateObject"
-                       k-format="'dd/MM/yyyy hh:mm tt'" />
-
-            </div>
-
-        </div>-->
                     </div>
 
-                    <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;margin-left: 16%;">
-                        <button class="btn campaign-container-btn" id="addEmailCampaign_cancel" type="button" ng-click="cancel()">
-                            CANCEL
-                        </button>
+                    <div class="clearfix">
+                        <div class="form-group col-md-5">
+                            <!--<label for="">Project</label>
+                            <select ng-model="project1" ng-change="selectproject()" id="addEmailCampaign_project"
+                                    class="dropdown form-control">
+                                <option value="" selected>Select Project</option>
+                                <option ng-repeat="project in projects"
+                                        value="{{project.id}}">
+                                   
+                                </option>
 
-                        <button class="btn organization-btn" id="addEmailCampaign_save" type="submit">
-                            NEXT
-                        </button>
+                            </select>-->
 
+                            <md-input-container class="md-block">
+                                <md-select  ng-model="project1" ng-change="selectproject()" id="addEmailCampaign_project" class="dropdown" >
+                                    <md-option  selected>PROJECT TYPE</md-option>
+                                    <md-option ng-repeat="project in projects" value="{{project.id}}"> {{project.name}} </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <!--</div>--><!-- project-detail ended -->
 
-        </div><!-- pg-inner-content ended -->
+                    <div class="clearfix">
+                        <div class="form-group col-md-5" style="margin-top:23px">
+                            <label for="" style="font-size: 14px;">START DATE / TIME</label>
+                            <input kendo-date-time-picker class="form-control" id="addEmailCampaign_startDate"
+                                   data-ng-model="params.start_date1"
+                                   k-ng-model="dateObject"
+                                   k-format="'MMMM d, yyyy h:mm tt'"
+                                   required />
 
-    </div><!-- main-content ended -->
+                            <!--<md-datepicker ng-model="myDate" datetime-picker date-format="yyyy-MM-dd HH:mm:ss"  md-placeholder="Enter date" class="md-block"  md-date-filter="onlyWeekendsPredicate">
 
+                            </md-datepicker>-->
 
+                        </div>
+                    </div>
+
+                    <!--<div class="pull-left f-half-6">
+                        <div class="form-group form-bx4 form-bx3-1" style="width:390px">
+                            <label for="">End Date</label>
+
+                            <input kendo-date-picker class="form-control"
+                                   data-ng-model="params.end_date"
+                                   k-ng-model="dateObject"
+                                   k-format="'dd/MM/yyyy hh:mm tt'" />
+
+                        </div>
+
+                    </div>-->
+                </div>
+
+                <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:left;margin-left: 0%;">
+                    <!--<button class="btn campaign-container-btn" id="addEmailCampaign_cancel" type="button" ng-click="cancel()">
+                        CANCEL
+                    </button>-->
+
+                    <button class="btn btn-primary bold_txt" style="" id="addEmailCampaign_save" type="submit">
+                        Next
+                    </button>
+
+                </div>
+            </form>
+        </div>
+        <!--</div>--><!-- project-detail ended -->
+
+    </div><!-- pg-inner-content ended -->
+
+</div><!-- main-content ended -->
 </div>
