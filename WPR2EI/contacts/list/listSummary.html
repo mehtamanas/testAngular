@@ -7,7 +7,6 @@
                 <div class="col-md-12">
                     <h2 class="pg-inner-title">Create New Contact List</h2>
                 </div>
-
             </div>
         </div><!-- pg-inner-header ended -->
 
@@ -29,42 +28,30 @@
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
                     <div class="project-detail">
                         <div class="content-inner-bx">
-                            <div class="clearfix tab-inner" style="margin-left: 5%;">
+                            <div class="clearfix tab-inner">
 
-                                <div class="pull-left company-profile-half">
+                                <div class="pull-left ">
                                     <div class="company-profile-row clearfix">
-                                        <div class="pull-left profile-row1">List Name:</div>
-                                        <div class="pull-right profile-row2">
-                                            <label class="label-group">
-                                                <span ng-bind="params.name">{{params.name}}</span>
-                                            </label>
+                                        <div class="pull-left profile-row1 summary_value">List Name
+                                            <span ng-bind="params.name">{{params.name}}</span>
                                         </div>
+   
                                     </div>
 
                                     <div class="company-profile-row clearfix">
-                                        <div class="pull-left profile-row1">Description:</div>
-                                        <div class="pull-right profile-row2">
-                                            <label class="label-group">
-                                                <span ng-bind="params.description">{{params.description}}</span>
-                                            </label>
+                                        <div class="pull-left profile-row1 summary_value">Description
+                                            <span ng-bind="params.description">{{params.description}}</span>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-1"></div>
-
                         </div>
                     </div>
-
-                    <button class="btn organization-btn" style="margin-left: 26%;" type="submit" id="btn_ListSummerySave"><b>SAVE</b></button>
-                    <button class="btn campaign-container-btn-1-1" id="btn_ListSummaryBack" type="button" ng-click="backtagList()">
+                    <button class="btn odd_btn" id="btn_ListSummaryBack" type="button" ng-click="backtagList()">
                         BACK
                     </button>
-                   
-                    <a href="" class=""></a>
-
-
+                    <button class="btn btn-primary"  type="submit" id="btn_ListSummerySave"><b>SAVE</b></button>
 
                 </form>
             </div>
