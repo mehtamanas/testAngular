@@ -697,7 +697,7 @@ angular.module('contacts')
                       }
 
                     }, {
-                        field: "start_date_time",
+                        field: "start_date_timeFormatted",
                         title: "Start Date",
 
                         format: '{0:dd/MM/yyyy hh:mm:ss tt}',
@@ -707,7 +707,7 @@ angular.module('contacts')
                       }
 
                     }, {
-                        field: "due_date",
+                        field: "due_date_timeFormatted",
                         title: "Due Date",
 
                         format: '{0:dd/MM/yyyy hh:mm:ss tt}',
@@ -719,7 +719,7 @@ angular.module('contacts')
                     },
 
            {
-               field: "reminder_time",
+               field: "reminder_date_timeFormatted",
                title: "Reminder Date",
 
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',

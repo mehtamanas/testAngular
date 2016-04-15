@@ -23,7 +23,7 @@
                             apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (res) {
                                 data = res.data;
                                 $localStorage.common_taskDataSource = [];
-                                $localStorage.common_taskDataSource.push(data);
+                                $localStorage.common_taskDataSource=data;
                                 options.success(data);
                             }, function (err) {
                                 options.error();
