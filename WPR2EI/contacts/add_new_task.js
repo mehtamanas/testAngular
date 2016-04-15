@@ -69,7 +69,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
             alert("Your Task Code is " + loginSession.task_code);
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-            $rootScope.$broadcast('REFRESH', 'TaskGrid');
+            $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', action: 'add', id: $scope.seletedCustomerId });
         },
     function (error) {
         if (error.status === 400)

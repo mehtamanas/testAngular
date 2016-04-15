@@ -1,6 +1,6 @@
 
 angular.module('contacts')
-.controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, $stateParams)
+.controller('ContactDetailControllerdm', function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, $stateParams, $localStorage)
 {
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     if (!$rootScope.contacts.write) {
@@ -559,7 +559,33 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId
+                    //read: apiService.baseUrl + "ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId
+                    read: function (options) {
+                        if ($localStorage.taskDataSource) {
+                            taskData = _.find($localStorage.taskDataSource, function (o) {
+                                return o.custId === $scope.seletedCustomerId;
+                            })
+                            if (taskData) { options.success(taskData.data); }
+                            else {
+                                apiService.getWithoutCaching("ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId).then(function (res) {
+                                    data = res.data;
+                                    $localStorage.taskDataSource.push({ 'custId': $scope.seletedCustomerId, 'data': data });
+                                    options.success(data);
+                                }, function (err) {
+                                    options.error();
+                                })
+                            }
+                        } else {
+                            apiService.getWithoutCaching("ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId).then(function (res) {
+                                data = res.data;
+                                $localStorage.taskDataSource = [];
+                                $localStorage.taskDataSource.push({ 'custId': $scope.seletedCustomerId, 'data': data });
+                                options.success(data);
+                            }, function (err) {
+                                options.error();
+                            })
+                        }
+                    }
                 },
                 pageSize: 20,
 
@@ -609,9 +635,6 @@ angular.module('contacts')
 
                     }, {
                         field: "name",
-                        template: '#if (status!="Completed") {# <a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a> #} else {#<a ng-click="taskComplete()" href="">#=name#</a>#}#',
-                        //template: '#if (status!="Completed") {# <a id="launch_now" ng-click="openEditTask(dataItem.task_id)"href="">#=name#</a> #} {Task is Copmleted}#',
-                        //template: '<a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a>',
                         title: "Task Name",
                         width: "250px",
                         attributes:
@@ -663,7 +686,7 @@ angular.module('contacts')
                              "style": "text-align:center"
                          }
 
-                    },{
+                    }, {
                         field: "priority",
                         title: "Priority",
 
@@ -673,7 +696,7 @@ angular.module('contacts')
                       }
 
                     }, {
-                        field: "start_date_timeFormatted",
+                        field: "start_date_time",
                         title: "Start Date",
 
                         format: '{0:dd/MM/yyyy hh:mm:ss tt}',
@@ -683,7 +706,7 @@ angular.module('contacts')
                       }
 
                     }, {
-                        field: "due_date_timeFormatted",
+                        field: "due_date",
                         title: "Due Date",
 
                         format: '{0:dd/MM/yyyy hh:mm:ss tt}',
@@ -695,7 +718,7 @@ angular.module('contacts')
                     },
 
            {
-               field: "reminder_date_timeFormatted",
+               field: "reminder_time",
                title: "Reminder Date",
 
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
@@ -720,14 +743,6 @@ angular.module('contacts')
                template: '<span id="#= status #"></span>',
                title: "Status",
 
-               attributes:
-             {
-                 "style": "text-align:center"
-             }
-
-           }, {
-               title: "postpone",
-               template: '#if (status!="Completed") {# <a class="btn btn-primary" id="postpone_now" ng-click="openPostpone(dataItem)">Postpone</a> #}#',
                attributes:
              {
                  "style": "text-align:center"
@@ -1590,7 +1605,10 @@ angular.module('contacts')
         });
 
         $scope.$on('REFRESH', function (event, args) {
-            if (args == 'TaskGrid') {
+            if (args.name == 'TaskGrid') {
+                _.remove($localStorage.taskDataSource, function (o) {
+                    return o.custId == args.id;
+                });
                 $('.k-i-refresh').trigger("click");
             }
             $scope.TaskAction = 'no_action';
