@@ -19,7 +19,7 @@
                 sort_order: viewData.sort ? viewData.sort.dir : null,
                 column_names: viewData.col ? JSON.stringify(viewData.col) : null,
                 view_name: $scope.params.viewName,
-                query_string: viewData.filterQuery ? JSON.stringify(viewData.filterQuery) : null,
+                query_string: viewData.filterQuery ? viewData.filterQuery : null,
                 query_type: viewData.type,
                 filters: viewData.filterObj ? JSON.stringify(viewData.filterObj) : null
 
