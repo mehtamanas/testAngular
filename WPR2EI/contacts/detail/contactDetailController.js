@@ -749,6 +749,14 @@ angular.module('contacts')
                  "style": "text-align:center"
              }
 
+           }, {
+               title: "postpone",
+               template: '#if (status!="Completed") {# <a class="btn btn-primary" id="postpone_now" ng-click="openPostpone(dataItem)">Postpone</a> #}#',
+               attributes:
+             {
+                 "style": "text-align:center"
+             }
+
            }, ]
         };
 
