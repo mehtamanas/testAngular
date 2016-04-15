@@ -1,7 +1,7 @@
 ﻿angular.module('task')
 
 .controller('TaskGridController',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage) {
 
         var orgID = $cookieStore.get('orgID');
 
@@ -15,7 +15,21 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
+                    //read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
+                    read: function (options) {
+                        if ($localStorage.commonTaskDataSource) {
+                            options.success(data);
+                        } else {
+                            apiService.getWithoutCaching("ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId).then(function (res) {
+                                data = res.data;
+                                $localStorage.commonTaskDataSource = [];
+                                $localStorage.commonTaskDataSource.push(data);
+                                options.success(data);
+                            }, function (err) {
+                                options.error();
+                            })
+                        }
+                    }
                 },
                 pageSize: 20,
 
@@ -114,35 +128,35 @@
              }
 
             }, {
-               field: "priority",
-               title: "Priority",
-               width: "120px",
-               attributes:
-             {
-                 "style": "text-align:center;cursor:pointer"
-             }
+                field: "priority",
+                title: "Priority",
+                width: "120px",
+                attributes:
+              {
+                  "style": "text-align:center;cursor:pointer"
+              }
 
-           }, {
-               field: "start_date_time",
-               title: "Start Date",
-               width: "120px",
-               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-               attributes:
-             {
-                 "style": "text-align:center;cursor:pointer"
-             }
+            }, {
+                field: "start_date_time",
+                title: "Start Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                attributes:
+              {
+                  "style": "text-align:center;cursor:pointer"
+              }
 
-           }, {
-               field: "due_date",
-               title: "Due Date",
-               width: "120px",
-               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-               attributes:
-             {
-                 "style": "text-align:center;cursor:pointer"
-             }
+            }, {
+                field: "due_date",
+                title: "Due Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                attributes:
+              {
+                  "style": "text-align:center;cursor:pointer"
+              }
 
-           },
+            },
            {
                field: "text",
                title: "Notes",
@@ -154,7 +168,7 @@
 
 
            }, {
-               field:"status",
+               field: "status",
                template: '<span id="#= status #"></span>',
                title: "Status",
                width: "120px",
