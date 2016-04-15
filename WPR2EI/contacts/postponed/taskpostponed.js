@@ -1,7 +1,7 @@
 ﻿
 var postponedController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
 
-    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+    $scope.seletedContactID = $cookieStore.get('contactID');
     $scope.loadingDemo = false;
     $scope.companyName = $cookieStore.get('company_name');
 
@@ -101,9 +101,10 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
         user_id: $cookieStore.get('userId'),       
         remind_me: $scope.remind_me,
         reminder_time: $scope.reminder_time,
-        contact_id: $scope.seletedCustomerId,
+        contact_id: $scope.seletedContactID,
         assign_user_id: $cookieStore.get('userId'),
         type: $scope.Selescted_Day,
+        id:$scope.taskID,
         task_type: $scope.selected_email_call,
     };
 
@@ -116,7 +117,7 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.loadingDemo = false;
-            $scope.openSucessfullPopup();
+            $scope.openSucessfullyPopup();
             AuditCreate();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
@@ -130,14 +131,14 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
 
     //end
     //popup functionality start
-    $scope.openSucessfullPopup = function () {
+    $scope.openSucessfullyPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'login/successfully.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: sucessfullyController,
             size: 'sm',
-            resolve: { items: { title: "Follow Up Task" } }
+            resolve: { items: { title: "Task Postponed" } }
         });
     }
 
@@ -179,9 +180,10 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
                 text: $scope.text,
+                id: $scope.taskID,
                 remind_me: remind_me,
                 reminder_time: $scope.params.reminder_datetime,
-                contact_id: $scope.seletedCustomerId,
+                contact_id: $scope.seletedContactID,
                 assign_user_id: $cookieStore.get('userId'),
                 type: $scope.Selescted_Day,
                 task_type: $scope.selected_email_call,
