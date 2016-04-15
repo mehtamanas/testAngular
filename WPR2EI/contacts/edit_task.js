@@ -4,12 +4,12 @@
 var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
     console.log(' EditTaskController');
     $scope.loadingDemo = false;
+    $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     var userId = $cookieStore.get('userId');
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
 
     $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
-    $scope.project1 = $scope.seletedCustomerId;
 
 
     contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
@@ -44,8 +44,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
 
         device_os: "windows10",
         device_type: "mobile",
-        device_mac_id: "34:#$::43:434:34:45",
-        module_id: "Addnew TEAM",
+        module_id: "Add new task",
         action_id: "Addnew TEAM View",
         details: "Addnew TEAM detail",
         application: "angular",
@@ -106,7 +105,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                 $scope.isDisabled = false;
                 $scope.loadingDemo = false;
                 $scope.openSucessfullPopup();
-                $rootScope.$broadcast('REFRESH', 'TaskGrid');
+                $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', action: 'edit', id: $scope.seletedCustomerId, });
 
             },
             function (error) {
