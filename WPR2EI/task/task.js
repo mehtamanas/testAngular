@@ -163,7 +163,7 @@
              //saroj on 15-04-2016
            {
                field: "created_date_time",
-               hidden: true,
+               hidden: false,
                title: "Created Date",
                type: 'date',
                filterable: {
@@ -171,7 +171,7 @@
                },
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes: {
-                   "class": "UseHand",
+                  
                    "style": "text-align:center"
                }
            },
@@ -755,7 +755,6 @@
 
                                     abc = { logic: "and", filters: [] };
                                     if (mondayOfCurrentWeek.getDate() == CurrentDate.getDate()) {
-
                                         abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
                                         abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
                                     }
@@ -879,7 +878,7 @@
                             if (expsplitIsBefore[0].toUpperCase().trim() == "DUE DATE")
                                 Firstname = "due_date";
 
-                            if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date_time";
 
                             else {
