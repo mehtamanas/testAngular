@@ -10181,10 +10181,10 @@ border-top: 4px solid #289ff1;
 }
 
 .type-contact {
-    background: #EC9D23;
     font-size: 9px;
+    border: 1px solid #EC9D23;
     font-weight: 600;
-    color: #fff;
+    color: #EC9D23;
     border-radius: 9px;
     padding: 2px 7px 1px 6px;
 }
@@ -10816,7 +10816,7 @@ input[type=text].rupee_1 {
     color: #434343;
     line-height: 28px;
     font-family: arial;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
 }
 
@@ -11802,7 +11802,21 @@ md-input-container label:not(.md-container-ignore) {
     font-weight:600;
 }
 .md-custom-label{
-    left: 20px !important;
+    left: 31px !important;
     right: auto !important;
+    margin-left: -14px !important;
     margin-bottom: 1px !important;
+}
+.contact-detail-photo{
+    background: #fff;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    position: relative;
+}
+.contact_image{
+    width:60px;
+    padding:7px 7px ;
+
 }
