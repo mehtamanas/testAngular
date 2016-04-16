@@ -290,17 +290,6 @@
         }]
     };
 
-    $scope.openAgreementPreview = function (d) {
-        var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'template/preview.html',
-            backdrop: 'static',
-            controller: previewCtrl,
-            size: 'lg',
-            resolve: { agreementData: d }
-        });
-    };
-
     $scope.ROTemplateGrid = {
         dataSource: {
             type: "json",
@@ -371,6 +360,17 @@
              }
         }]
 
+    };
+
+    $scope.openAgreementPreview = function (d) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'template/preview.html',
+            backdrop: 'static',
+            controller: previewCtrl,
+            size: 'lg',
+            resolve: { agreementData: d }
+        });
     };
 
 
