@@ -31,7 +31,7 @@
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         loc = response[0].Location;
-        var edit = $('#sendEmailEditor').data("kendoEditor");
+        var edit = $('#demandLeterDescription').data("kendoEditor");
         var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
         if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
             edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
