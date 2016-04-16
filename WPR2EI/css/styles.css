@@ -98,10 +98,12 @@ a {
         }
 
 #main-content .content-inner {
-    margin-top: -11px;
+   margin-top: -11px;
+    margin-bottom: -3px !important;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
-    padding-top:14px !important;
-    background:#fafcfe;
+    padding-top: 15px !important;
+    background: #fafcfe;
+    position: relative;
 }
 
 .page-title {
@@ -10515,10 +10517,9 @@ input[type=text].rupee_1 {
 }
 
 .contact_title {
-    border-bottom: 1px solid #e0e0e0;
-    font-weight: bold;
-    font-size: 14px;
-    color: #3c3c3c;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 13px;
+    color: #999999;
     padding-bottom: 5px;
 }
 
@@ -10840,14 +10841,13 @@ input[type=text].rupee_1 {
 
 .contact_p_1 {
     font-weight: normal;
-    color: #a0a0a0;
-    font-size: 10px;
-    font-weight: bold;
+    color: #848484;
+    font-size: 12px;
 }
 
 .contact_links {
-    color: #23ae89 !important;
-    font-size: 13px;
+    color: #30D0A5 !important;
+    font-size: 11px;
     font-weight: bold;
 }
 
@@ -11822,31 +11822,90 @@ md-input-container label:not(.md-container-ignore) {
 
 }
 .lead_count{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    color: #289ff1;
+    color: #1f90e0;
 }
 .marktng_count{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: #1ab394;
 }
 .followup_count{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    color: rgb(255,82,82);
+    color: #f5682e;
 }
 .span_contact{
-    font-size: 12px;
-    color: #c5c5c5;
+    font-size: 13px;
+    color: #999999;
 }
 .span_company{
     font-size: 14px;
     font-weight: 600;
-    color: #a0a0a0;
+    color: #696969;
 }
 .validationStarRed {
     color: red;
     margin-left: 5px;
     font-size: 10px;
+}
+#contact_followup{
+    color: #ffffff;
+    font-size: 12px;
+    padding: 2px 10px 3px 10px;
+    font-weight: bold;
+    background:#56c487;
+    border-color:#56c487;
+
+    border-radius: 2px;
+}
+.tags-div{
+    background:#F7F7F7;
+    padding:20px 15px 20px 24px;
+}
+.contact_project_selected {
+    
+    font-size: 13px;
+    color: #999999;
+    padding-bottom: 5px;
+}
+.project_contact{
+    font-size: 15px;
+    font-weight: bold;
+    color: #289ff1;
+}
+.spacer{
+        padding: 0px 1px 18px 1px;
+}
+.contact_header{
+    padding: 15px 20px !important;
+    background: #fff !important;
+}
+.conatct_name-2{
+    line-height: 15px;
+    font-size: 18px;
+    color: #535353;
+}
+.essntl_box{
+        margin-top: -6px !important;
+    margin-left: -2px !important;
+    margin-right: -2px !important;
+}
+.contact-nav {
+    text-transform:capitalize !important;
+}
+.address_contact{
+    color:#747474;
+}
+.contact1_value{
+      color:#434343;
+}
+.seperator_contact {
+    margin-bottom: 0px;
+    padding: 10px;
+}
+.note_date{
+    color:#7b7b7b;
+    font-size:13px;
 }

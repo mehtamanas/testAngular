@@ -1197,7 +1197,9 @@ html .km-pane-wrapper .km-widget, .k-ie .km-pane-wrapper .k-widget, .k-ie .km-pa
 }
 
 .k-tabstrip-items .k-state-default .k-link, .k-panelbar > li.k-state-default > .k-link {
-    color: #fff;
+   color: #808080;
+    font-weight: 500;
+    font-size: 13px;
 }
 
     .k-tabstrip-items .k-state-hover .k-link, .k-panelbar > li.k-state-hover > .k-link, .k-panelbar > li.k-state-default > .k-link.k-state-hover {
@@ -1927,7 +1929,7 @@ td.k-state-focused.k-state-selected {
 
 .k-tabstrip > .k-tabstrip-items > .k-item {
     border-radius: 0;
-    background:#696969;
+    background:#fff;
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
 }
@@ -1938,6 +1940,7 @@ td.k-state-focused.k-state-selected {
 
 .k-tabstrip .k-content.k-state-active {
     border-color: transparent;
+ 
 }
 
 .k-tabstrip-items .k-item.k-state-hover {
@@ -1945,7 +1948,8 @@ td.k-state-focused.k-state-selected {
 }
 
 .k-tabstrip-items .k-state-hover .k-link {
-    color: #fff;
+    color: #2899e7;
+    
 }
 
 .k-group, .k-flatcolorpicker.k-group, .k-menu, .k-menu .k-group, .k-popup.k-widget.k-context-menu {
