@@ -92,18 +92,14 @@ angular.module('contacts')
 
                 // Age Calculation starts
                 $scope.data = response.data;
-                var dDate = moment($scope.data.Date_Of_Birth).format('YYYY/MM/DD');
-                //var convDate = new Date(dDate).toISOString();
-                var birthdate = new Date(dDate);
-                var cur = new Date();
-                var diff = cur - birthdate;
-                $scope.calage = Math.floor(diff / 31536000000);
+                var dob = moment($scope.data.Date_Of_Birth);
+                var age = moment().diff(dob, 'years');
                 // ends
 
 
                 $scope.main = response.data;
                 $scope.image = $scope.main;
-              
+                $scope.gender = $scope.data.gender;
                 $scope.Contact_First_Name = $scope.data.Contact_First_Name;
                 $scope.Contact_Last_Name = $scope.data.Contact_Last_Name;
                 $scope.zipcode = $scope.data.zipcode;
@@ -111,7 +107,7 @@ angular.module('contacts')
 		        $scope.Street = $scope.data.street1;
 		        $scope.Street2 = $scope.data.street2;
                 $scope.area = $scope.data.area;
-                $scope.age = $scope.calage;
+                $scope.age = age;
                 $scope.choices1[0].Contact_Email = response.data.Contact_Email;
                 $scope.choices[0].Contact_Phone = response.data.Contact_Phone;
                 $scope.choices2[0].Street_1 = response.data.street1;
@@ -123,7 +119,7 @@ angular.module('contacts')
                 $scope.Title = $scope.data.Title;
                 $scope.income = $scope.data.income;
                 $scope.company = $scope.data.company;
-                $scope.Date_Of_Birth = moment($scope.data.Date_Of_Birth).format('YYYY/MM/DD');
+                $scope.Date_Of_Birth = moment($scope.data.Date_Of_Birth).format('DD/MM/YYYY');
                 $scope.channel_partner_details = $scope.data.channel_partner_details;
                 $scope.Age_Group = $scope.data.Age_Group;
               
@@ -809,7 +805,15 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId
+                    //read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId
+                    read: function (options) {
+                        apiService.get("Notes/GetByID/" + $scope.seletedCustomerId).then(function (res) {
+                            $scope.notes = res.data;
+                            options.success($scope.notes);
+                        }, function (err) {
+                            options.error()
+                        })
+                    }
                 },
                 pageSize: 5,
                 refresh: true,
