@@ -108,7 +108,8 @@
                 <li id="contact_notes"><a aria-controls="summary" role="tab" data-toggle="tab">NOTES</a></li>
                 <li id="contact_assignedto"><a aria-controls="summary" role="tab" data-toggle="tab">ASSIGNED TO</a></li>
                 <li id="contact_events"><a aria-controls="summary" role="tab" data-toggle="tab">EVENTS</a></li>
-                <li id="contact_activity_history"><a aria-controls="summary" role="tab" data-toggle="tab">ACTIVITY HISTORY</a></li>
+                <li id="contact_activity"><a aria-controls="summary" role="tab" data-toggle="tab">ACTIVITY</a></li>
+                <li id="contact_history"><a aria-controls="summary" role="tab" data-toggle="tab">HISTORY</a></li>
             </ul>
 
             <div class="content-inner-bx essntl_box" >
@@ -469,6 +470,9 @@
                 <div kendo-grid k-options="engagementGrid" selectable="true" k-on-change="myGridChangeactivity(dataItem)"></div>
             </div>
 
+            <div class="leads_group" id="EventGridDiv">
+                <div kendo-grid k-options="historyGrid" selectable="true" k-on-change="myGridChangeactivity(dataItem)"></div>
+            </div>
 
         </div>
     </div>
