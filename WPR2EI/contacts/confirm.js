@@ -65,9 +65,9 @@
                     });
                 }
             $scope.openSucessDeletefullPopup();
-            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data:null });
-            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: null });
-            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: null });
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: contactDelete, action: 'delete' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: contactDelete, action: 'delete' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: contactDelete, action: 'delete' });
             $rootScope.$broadcast('REFRESH', 'contactcount');
             $modalInstance.dismiss();
 

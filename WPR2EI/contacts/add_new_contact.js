@@ -205,12 +205,12 @@ angular.module('contacts')
 
         apiService.post("Contact/CreateNew", postData).then(function (response) {
             var loginSession = response.data;
-           
+            var addedContact = response.data;
 
             AuditCreate();
-            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession,action:'add' });
-            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession, action: 'add' });
-            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession, action: 'add' });
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: addedContact, action: 'add' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: addedContact, action: 'add' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: addedContact, action: 'add' });
             $scope.loadingDemo = false;
 
             var media = [];
@@ -293,11 +293,10 @@ angular.module('contacts')
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
                 $scope.openSucessfullPopup();
-                $modalInstance.dismiss();
                 called = true;
                 $rootScope.$broadcast('REFRESH1', 'elemeninfo');
                 $rootScope.$broadcast('REFRESH', 'contactcount');
-                $state.go('app.contacts');
+                $state.go('app.contactdetail', { id: addedContact.id });
             },
            function (error) {
                if (error.status === 400)

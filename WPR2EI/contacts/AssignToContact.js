@@ -96,9 +96,9 @@ var ActionUpController = function ($scope, $state, $cookieStore, apiService, $ro
             var loginSession = response.data;
             AuditCreate();
             $modalInstance.dismiss();
-            $rootScope.$broadcast('REFRESH1', 'contactGrid');
-            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: null, action: 'assignTo' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: null, action: 'assignTo' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: null, action: 'assignTo' });
             $scope.openSucessfullPopup();
 
         },
