@@ -38,6 +38,7 @@
                         fields: {
                             due_date: { type: "date" },
                             start_date_time: { type: "date" },
+                            created_date: { type: "date" },
                         }
                     }
                 }
@@ -138,6 +139,10 @@
                 field: "start_date_time",
                 title: "Start Date",
                 width: "120px",
+                type: 'date',
+                filterable: {
+                    ui: "datepicker"
+                },
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                 attributes:
               {
@@ -162,9 +167,10 @@
 
              //saroj on 15-04-2016
            {
-               field: "created_date_time",
-               hidden: false,
+               field: "created_date",
+               hidden: true,
                title: "Created Date",
+               width: "120px",
                type: 'date',
                filterable: {
                    ui: "datepicker"
@@ -172,7 +178,7 @@
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes: {
                   
-                   "style": "text-align:center"
+                   "style": "text-align:center;cursor:pointer"
                }
            },
            {
@@ -639,11 +645,11 @@
                                 Firstname = "due_date";
 
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
-                                Firstname = "created_date_time";
+                                Firstname = "created_date";
 
                             //"last_updated":"2016-04-07T04:20:42.953+00:00"
 
-                            if (Firstname == "due_date" || Firstname == "created_date_time") {
+                            if (Firstname == "due_date" || Firstname == "created_date") {
 
                                 var CurrentDate = moment().startOf('day')._d;
                                 var CurrentEndDate = moment().endOf('day')._d;
@@ -879,7 +885,7 @@
                                 Firstname = "due_date";
 
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
-                                Firstname = "created_date_time";
+                                Firstname = "created_date";
 
                             else {
                                 alert(" Operator cannot be assigned to " + expsplitIsBefore[0]);
@@ -898,7 +904,7 @@
                                 Firstname = "due_date";
 
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
-                                Firstname = "created_date_time";
+                                Firstname = "created_date";
 
                             else {
                                 alert(" Operator cannot be assigned to " + expsplitIsAfter[0]);
@@ -918,7 +924,7 @@
                                 Firstname = "due_date";
 
                             else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
-                                Firstname = "created_date_time";
+                                Firstname = "created_date";
 
                             else {
                                 alert(" Operator cannot be assigned to " + expsplitBetween[0]);
