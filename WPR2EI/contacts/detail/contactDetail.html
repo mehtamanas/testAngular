@@ -15,7 +15,7 @@
         <div class="clearfix project-detail-info-1 pg-inner-content_1 contact_header" >
 
             <div class="row" style="background:#fff;margin-top: 15px;">
-                <div class="col-md-3 col-sm-3 contact_image">
+                <div class="col-md-1 col-sm-1 contact_image">
                     <div class="contact-detail-photo"><img src={{image.Contact_Image}} alt="" class="image1 img-rounded" /></div>
                 </div>
                 <div class="col-md-3 col-sm-3 contact-detail-txt">
@@ -26,29 +26,17 @@
                         <!--<p style="font-weight: 600;font-size:12px; color:#434343;">Customer ID : {{customerId}}</>-->
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-7" style="margin-top: 8px;">
-                    <div class="col-md-2" style="width: 100px;" id="Contact_Lead_LeadScoreCount"><span class="contact_p_1" id="Contact_Lead_Score">Lead Score: </span> <span class="lead_count" id="Contact_lead_score_count">0</span> </div>
-                    <div class="col-md-3" style="width:150px;" id="Contact_Lead_Market"><span class="contact_p_1" id="Contact_ Marketing_Count"> Marketing Count:</span> <span class="marktng_count" id="Contact_Lead_Marketing_Count">{{image.marketing_count || 0}}</span> </div>
-                    <div class="col-md-3" style="width:150px;" id="Contact_Lead_Follow"><span class="contact_p_1" id="Contact_Follow_Up_Count">Follow Up Count: </span> <span class="followup_count" id="Contact_Lead_Follow_Up_Count">{{image.follow_up_count|| 0}}</span> </div>
+                <div class="col-md-5 col-sm-5" style="margin-top:8px;">
+                    <div class="col-md-2" style="" id="Contact_Lead_LeadScoreCount"><span class="contact_p_1" id="Contact_Lead_Score">Lead Score: </span> <span class="lead_count" id="Contact_lead_score_count">0</span> </div>
+                    <div class="col-md-3" style="" id="Contact_Lead_Market"><span class="contact_p_1" id="Contact_ Marketing_Count"> Marketing Count:</span> <span class="marktng_count" id="Contact_Lead_Marketing_Count">{{image.marketing_count || 0}}</span> </div>
+                    <div class="col-md-3" style="" id="Contact_Lead_Follow"><span class="contact_p_1" id="Contact_Follow_Up_Count">Follow Up Count: </span> <span class="followup_count" id="Contact_Lead_Follow_Up_Count">{{image.follow_up_count|| 0}}</span> </div>
                     <div class="col-md-4"><a id="contact_followup" class="btn btn-primary" ng-click="openFollowUp()" data-toggle="modal" style="cursor:pointer">Follow up </a></div>
-                <span style="float:right"><a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer;width: 43px;" ><i class="fa fa-trash fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a></span>
-                    <span style="float:right"><a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a></span>
+                    
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <div class="col-md-2" style="float:right">
+                    <span><a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer;width: 43px;"><i class="fa fa-trash fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a></span>
+                    <span ><a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_edit_contact" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a></span>
+                    </div>
 
 
                 <!--<div class="col-md-3 col-sm-3 contact-detail-txt">
@@ -213,12 +201,12 @@
                                     <span class="contact_title_1">About</span>
 
                                 </div>-->
-                                <div class="bx-h1-content clearfix" style="min-height: 535px;">
+                                <div class="bx-h1-content clearfix" style="min-height: 568px;">
                                     <!--interested project-->
                                     <div class="cxo-wrap1">
                                         <div class="cxo-bx1" style="border-bottom:1px solid #e0e0e0">
                                             <div class="contact_project_selected">Interested In Projects</div>
-                                            <div class="contact_value">
+                                            <div class="contact_value" ng-repeat="Interested in Interests" >
                                             <h7 class="project_contact"  id="contact_Interseted_project">DB Crown</h7>
                                             <p>Prabhadevi, Mumbai</p> <!--this is hard coded binding required-->
                                             <h7 class="project_contact" id="contact_Interseted_project">DB Woods</h7>
@@ -230,10 +218,10 @@
                                     <div class="cxo-wrap1">
                                         <div class="cxo-bx1">
                                             <div class="contact_project_selected">Recent Activity</div>
-                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Added To <span style="color:#289ff1;font-weight:600">dwellar hot lead contact list 2015</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div><!--this is hard coded binding required-->
-                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Quotation Sent <span style="color:#289ff1;font-weight:600">quotation July 12 2015</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div><!--this is hard coded binding required-->
-                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Uploaded a document <span style="color:#289ff1;font-weight:600">pan card</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div><!--this is hard coded binding required-->
-                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Shown interest in <span style="color:#289ff1;font-weight:600">DB Crown</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div><!--this is hard coded binding required-->
+                                            <!--<div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Added To <span style="color:#289ff1;font-weight:600">dwellar hot lead contact list 2015</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div>
+                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Quotation Sent <span style="color:#289ff1;font-weight:600">quotation July 12 2015</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div>
+                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Uploaded a document <span style="color:#289ff1;font-weight:600">pan card</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div>
+                                            <div class="contact_value" style="padding: 10px 0px;"><h7 id="recentActivity">Shown interest in <span style="color:#289ff1;font-weight:600">DB Crown</span></h7><br><small style="color:#BFBCBC" id="dateActivity">Dec 24 1:15 pm</small></div>-->
                                         </div>
                                     </div>
                             
@@ -250,7 +238,7 @@
                             <div class="bx-h1-content clearfix">
                                 <div class="cxo-wrap1">
                                     <div class="cxo-bx1">
-                                        <div class="contact_title">Personal Infromation / Family</div>
+                                        <div class="contact_title">Personal Information / Family</div>
                                      
                                         <div class="company-profile-row col-md-3  clearfix" style="margin-right: 20%;">
                                             <div class="clearfix spacer" style="margin-top: 20px;">
@@ -310,7 +298,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="company-profile-row col-md-4  clearfix" style="margin-top: 20px;">
+                                        <div class="company-profile-row col-md-3  clearfix" style="margin-top: 20px;">
                                             <div class="clearfix spacer">
                                                 <div class="pull-left  profile-row1">Budget :</div>
                                                 <div class="pull-right profile-row2">
@@ -323,15 +311,15 @@
                                                 <div class="pull-left  profile-row1">Source :</div>
                                                 <div class="pull-right profile-row2">
                                                     <label class="label-group">
-                                                        <span class="contact_value" ng-bind="budget1" id="contact_source"></span>
+                                                        <span class="contact_value" ng-bind="Sources" id="contact_source"></span>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="clearfix spacer">
-                                                <div class="pull-left  profile-row1">Number Of Car Owned :</div>
+                                                <div class="pull-left  profile-row1">Number Of Cars Owned :</div>
                                                 <div class="pull-right profile-row2">
                                                     <label class="label-group">
-                                                        <span class="contact_value" ng-bind="budget1" id="contact_source"></span>
+                                                        <span class="contact_value" ng-bind="No_Of_Cars_Owned" id="contact_source"></span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -360,21 +348,21 @@
                     <span class="contact_title_1">About</span>
 
                 </div>-->
-                            <div class="bx-h1-content clearfix">
-                                <!--interested project-->
-                                <div class="cxo-wrap1">
+                            <div class="bx-h1-content clearfix" style="min-height: 317px;">
+                               
+                                <div class="cxo-wrap1" >
                                     <div class="cxo-bx1" style="border-bottom:1px solid #e0e0e0">
                                         <div class="contact_project_selected">Notes</div>
-                                        
+
                                     </div>
                                     <!--end-->
                                 </div>
-                                <div class="cxo-wrap1">
-                                    <div class="cxo-bx1" ng-repeat="note in notes">
-                                      
-                                        <div class="note_date">{{note.date | date:'dd/MM/yyyy hh:mm a'}}</div>
+                                <div class="cxo-wrap1"  style="    padding: 1px 36px 19px 21px;">
+                                    <div class="cxo-bx1" ng-repeat="note in notes" style="padding-bottom:15px;">
+                                        <!-- ngRepeat: note in notes -->
+                                        <div class="note_date"><i class="fa fa-clock-o"></i> {{note.date | date:'dd/MM/yyyy hh:mm a'}}</div>
                                         <div class="" ng-bind-html="note.text | limitTo:120"><span ng-show="note.text.length>200">...</span></div>
-                                        <div class="project_contact capt" >{{note.attention}}</div>
+                                        <div class="notes_name capt" >{{note.attention}}</div>
                                     </div>
                                 </div>
 
