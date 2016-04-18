@@ -1240,6 +1240,16 @@
 
         };
 
+        // for help 
+        $scope.helpjqlpopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/helpjql.html',
+                backdrop: 'static',
+                controller: helpjqlController,
+                size: 'lg'
+            });
+        };
 
         //$scope.openContactPopup = function () {
         //    var modalInstance = $modal.open({
