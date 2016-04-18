@@ -126,7 +126,7 @@
 
 
                                                 <md-input-container>
-                                                    <label class="contact-label">Middle Name<span class="validationStarRed">*</span></label>
+                                                    <label class="contact-label">Middle Name<span class="validationStarRed"></span></label>
                                                     <input name="middleName" id="contactadd_middlename"
                                                            ng-model="params.middle_name"
                                                            minlength="1"
@@ -669,7 +669,7 @@
                             <div class="clearfix">
                                 <div class="col-md-6" style="margin-bottom:2%">
                                     <label for="" class="contact-label">Designation</label>
-                                    <input kendo-auto-complete ng-model="params.company" id="contactadd_Designation" k-data-source="companyList" style="width:100%" />
+                                    <input kendo-auto-complete ng-model="params.designation" id="contactadd_Designation" k-data-source="titleList" style="width:100%" />
                                 </div>
                             </div><!--designation-->
 
@@ -774,10 +774,10 @@
                             <div class="clearfix">
                                 <div class="col-md-3">
                                     <div class="form-bx">
-                                        <label for="" class="contact-label">ANNYVERSARY</label>
+                                        <label for="" class="contact-label">ANNIVERSARY</label>
                                         <input id="contactadd_datepicker" kendo-date-picker k-options="myOptions" style="width:100%"
                                                ng-model="params.anniversary_date"
-                                               k-ng-model="k_due_date"
+                                               k-ng-model="k_due_date1"
                                                k-format="'dd/MM/yyyy'" />
 
 
@@ -842,9 +842,9 @@
                                        }">
                                             <div class="form-group">
                                                 <md-input-container class="md-block">
-                                                    <label class="contact-label">NUMBER OF CAR OWNED</label>
+                                                    <label class="contact-label">NUMBER OF CARS OWNED</label>
                                                     <input id="contactadd_carOwned"   name="family"
-                                                           data-ng-model="params.params.no_of_cars_owned"
+                                                           data-ng-model="params.no_of_cars_owned"
                                                            ng-pattern="/^[0-9]{1,9}$/" />
                                                 </md-input-container>
                                             </div>

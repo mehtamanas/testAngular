@@ -158,7 +158,7 @@ angular.module('contacts')
         }
 
         var dDate = moment($scope.params.Date_Of_Birth, "DD/MM/YYYY hh:mm A")._d;
-        var anvDate = moment($scope.params.anniversary_date, "DD/MM/YYYY hh:mm A")._d;
+        $scope.anvDate = moment($scope.params.anniversary_date, "DD/MM/YYYY hh:mm A")._d;
         var postData = {
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
@@ -199,7 +199,7 @@ angular.module('contacts')
             interests: $scope.params.interests,
             channel_partner_details: $scope.params.channel_partner_details,
             remarks: $scope.params.remarks,
-            anniversary_date: new Date(anvDate).toISOString(),
+            anniversary_date: new Date($scope.anvDate).toISOString(),
          
         };
 
