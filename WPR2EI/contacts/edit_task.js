@@ -1,7 +1,7 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
+var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window, contactData) {
     console.log(' EditTaskController');
     $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -26,7 +26,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             $scope.remind_me = false;
         $scope.priority1 = response.data[0].priority_id;
         $scope.project1 = response.data[0].project_id;
-        $scope.contact1 = response.data[0].contact_id;
+        $scope.selectedContact_id = response.data[0].contact_id;
         $scope.event1 = response.data[0].task_type_id;
         $scope.user1 = response.data[0].assign_user_id;
         // $scope.reminder_time = response.data[0].reminder_time
@@ -88,7 +88,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             due_date: $scope.params.due_date,
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
-            assigned_to_id: $scope.contact1,
+            assigned_to_id: $scope.selectedContact_id,
             assign_user_id: $scope.user1,
             class_type: "Contact",
             reminder_time: $scope.params.reminder_time,
@@ -183,21 +183,22 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             $scope.params.project_id = $scope.project1;
 
         };
+        $scope.selectedContact_id = contactData.Contact_Id;
+        $scope.selectedContact_name = contactData.Name;
 
-
-        Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
-        apiService.get(Url).then(function (response) {
-            $scope.contacts = response.data;
-        },
-       function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
-       });
+       // Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
+       // apiService.get(Url).then(function (response) {
+       //     $scope.contacts = response.data;
+       // },
+       //function (error) {
+       //    if (error.status === 400)
+       //        alert(error.data.Message);
+       //    else
+       //        alert("Network issue");
+       //});
 
         $scope.selectcontact = function () {
-            $scope.params.assigned_to_id = $scope.contact1;
+            $scope.params.assigned_to_id = $scope.selectedContact_id;
         };
 
 
@@ -251,7 +252,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                 $scope.showValid = false;
                 $scope.params = {
                     name: $scope.params.name,
-                    assigned_to_id: $scope.contact1,
+                    assigned_to_id: $scope.selectedContact_id,
                     class_type: "Contact",
                     //due_date: $scope.due_date,
                     priority: $scope.priority1,

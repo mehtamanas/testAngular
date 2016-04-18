@@ -1037,16 +1037,16 @@ columnMenu: {
                     }
                 },
 
-                {
-		    template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
-                    "<span style='padding-left:10px' class='property-photo'> </span>",
-                    title: "Photo",
-                    width: "120px",
-                    attributes:
-                      {
-                          "class": "UseHand",
-                      }
-                },
+            //    {
+		    //template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
+            //        "<span style='padding-left:10px' class='property-photo'> </span>",
+            //        title: "Photo",
+            //        width: "120px",
+            //        attributes:
+            //          {
+            //              "class": "UseHand",
+            //          }
+            //    },
 
                 {
                     field: "tower_name",
