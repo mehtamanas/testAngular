@@ -78,6 +78,7 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
 
             angular.forEach($scope.orgList, function (list) {//adda property isSelected
                 list.isSelected = false;
+                list.addedFromTag = false;
             })
         });
     };
@@ -85,13 +86,24 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
     $scope.loadUsers();
     $scope.loadList();
     leadDataSource = [];
+    peopleByTagList = [];
     NewPeopleList = [];
     $scope.GetpeoplebyTags = function () {
         apiService.get('Contact/GetpeoplebyTags?id=' + $cookieStore.get('orgID') + '&type=' + taglist).then(function (response) {
 
             var data = response.data;
 
+            angular.forEach($scope.orgList, function (list) {//adda property isSelected
+                list.addedFromTag = false;
+            })
+        
             for (i = 0; i < data.length; i++) {
+                var contact=_.find($scope.orgList, function (o) {
+                    return o.Contact_Id === data[i].Contact_Id;
+                })
+                if (contact)
+                    contact.addedFromTag = true;
+                
                 var tag = (data[i].Tags);
                 if (tag !== null) {
                     tag = JSON.parse(tag);
@@ -101,8 +113,8 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
                 else
                     data[i].Tags = [];
             }
-            leadDataSource = data;
-            leadDataSource = leadDataSource.concat(NewPeopleList);
+            peopleByTagList = data;
+            leadDataSource = peopleByTagList.concat(NewPeopleList);
             refreshGrid();
         });
     };
@@ -301,35 +313,41 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
     };
 
     $scope.addList = function (list) {
-        if (!list.isSelected) {
-            list.isSelected = true;
-            
-            var existingList=[];
+        if (!list.addedFromTag) {
+            if (!list.isSelected) {
+                list.isSelected = true;
 
-            // User should not be already existing and do not add duplicate entry
-            if (existingList.indexOf(list.Contact_Id) == -1 && listToBeAdded.indexOf(list.Contact_Id) == -1) {
-                {
-                    listToBeAdded.push(list.Contact_Id);
-                    NewPeopleList.push(list);
-                    leadDataSource.push(list);
-                    refreshGrid();
+                var existingList = [];
+
+                // User should not be already existing and do not add duplicate entry
+                if (existingList.indexOf(list.Contact_Id) == -1 && listToBeAdded.indexOf(list.Contact_Id) == -1) {
+                    {
+                        listToBeAdded.push(list.Contact_Id);
+                        NewPeopleList.push(list);
+                        leadDataSource.push(list);
+                        refreshGrid();
+                    }
                 }
-            }
 
-            // Remove the user if just added
-            listToBeRemoved = _.remove(listToBeRemoved, function (removeMe) {
-                return removeMe == list.Contact_Id;
-            });
-        }
-        //taglist = listToBeAdded;
-        else
-        {
-        //    NewPeopleListByPerson.pop(list);
-            $scope.removeList(list);
+                // Remove the user if just added
+                listToBeRemoved = _.remove(listToBeRemoved, function (removeMe) {
+                    return removeMe == list.Contact_Id;
+                });
+            }
+                //taglist = listToBeAdded;
+            else {
+                //    NewPeopleListByPerson.pop(list);
+                $scope.removeList(list);
+            }
         }
     };
 
     var refreshGrid = function () {
+        leadDataSource = _.map(_.groupBy(leadDataSource, function (doc) {
+            return doc.Contact_Id;
+        }), function (grouped) {
+            return grouped[0];
+        });
         $('.k-i-refresh').trigger("click");
     };
     // Final update to the server
@@ -424,6 +442,22 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
     $scope.contactsummary = function () {
         $scope.updateTeamUsers();
         $scope.updateList();
+
+        $scope.email = [];
+        for (i = 0; i < leadDataSource.length; i++) {
+            var contact_id = leadDataSource[i].Contact_Id;
+            $scope.email[i] = _.findWhere(leadDataSource, { Contact_Id: contact_id }).Contact_Email;
+        }
+        $scope.contactCount = 0;
+        for (i = 0; i < $scope.email.length; i++) {
+            if ($scope.email[i] == '' || $scope.email[i] == null) {
+                $scope.contactCount = $scope.contactCount + 1;
+            }
+        }
+        if ($scope.contactCount > 0) {
+            sweetAlert("", "Number of people with invalid email Id: " + $scope.contactCount);
+        }
+
         $cookieStore.put('tagsToBeAdded', usersToBeAddedOnServer);
         $cookieStore.put('tagsToBeRemove', usersToBeRemovedOnServer);
         $cookieStore.put('ContacListToBeAdded', listToBeAddedOnServer);
@@ -434,6 +468,22 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
     $scope.saveList = function () {
         $scope.updateTeamUsers();
         $scope.updateList();
+
+        $scope.email = [];
+        for (i = 0; i < leadDataSource.length; i++) {
+            var contact_id = leadDataSource[i].Contact_Id;
+            $scope.email[i] = _.findWhere(leadDataSource, { Contact_Id: contact_id }).Contact_Email;
+        }
+        $scope.contactCount = 0;
+        for (i = 0; i < $scope.email.length; i++) {
+            if ($scope.email[i] == '' || $scope.email[i] == null) {
+                $scope.contactCount = $scope.contactCount + 1;
+            }
+        }
+        if ($scope.contactCount > 0) {
+            sweetAlert("", "Number of people with invalid email Id: " + $scope.contactCount);
+        }
+
         $cookieStore.put('tagsToBeAdded', usersToBeAddedOnServer);
         $cookieStore.put('tagsToBeRemove', usersToBeRemovedOnServer);
         $cookieStore.put('ContacListToBeAdded', listToBeAddedOnServer);
@@ -444,7 +494,13 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, lis
 
     $scope.cancel = function ()
     {
-
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'contacts/list/addList.html',
+            backdrop: 'static',
+            controller: addListCtrl,
+            size: 'lg'
+        });
     };
 
     $scope.backlist = function ()
