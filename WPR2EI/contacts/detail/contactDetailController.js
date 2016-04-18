@@ -1353,13 +1353,7 @@ angular.module('contacts')
 
     //popup functionality start
         $scope.openEditContactPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/edit_contact.tpl.html',
-                backdrop: 'static',
-                controller: EditContactPopUpController,
-                size: 'lg'
-            });
+            $state.go('app.editContact');
         };
 
         $scope.openPostpone = function (d) {

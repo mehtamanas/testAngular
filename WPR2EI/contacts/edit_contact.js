@@ -190,22 +190,6 @@
 
     var called = false;
 
-    var contactAddEditRefresh = function () {
-        apiService.getWithoutCaching("Contact/GetAllContactDetails?Id=" + $cookieStore.get('userId') + "&type=Lead").then(function (response) {
-            data = response.data;
-            for (i = 0; i < data.length; i++) {
-                var tag = (data[i].Tags);
-                if (tag !== null) {
-                    tag = JSON.parse(tag);
-                    data[i].Tags = [];
-                    data[i].Tags = tag;
-                }
-                else { data[i].Tags = []; }
-            }
-            $localStorage.leadDataSource = data;
-        })
-    }// to refresh localstorage of lead
-
     $scope.finalpost = function ()
     {
         if (called == true) {
@@ -260,14 +244,14 @@
 
         apiService.post("Contact/Edit", postData).then(function (response) {
             var loginSession = response.data[0];
+            var editedContact = response.data[0];
             AuditCreate();
             $scope.openSucessfullPopup();
             $modalInstance.dismiss();
             $rootScope.$broadcast('REFRESH', 'Summary');
-            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
-            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
-            contactAddEditRefresh();
-            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: editedContact, action: 'edit' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: editedContact, action: 'edit' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: editedContact, action: 'edit' });
             $scope.loadingDemo = false;
 
             
@@ -335,7 +319,7 @@
                 
                 $rootScope.$broadcast('REFRESH1', 'elemeninfo');
                 $rootScope.$broadcast('REFRESH', 'contactcount');
-               
+                $state.go('app.contactdetail', { id: editedContact.id });
                
             },
            function (error)
