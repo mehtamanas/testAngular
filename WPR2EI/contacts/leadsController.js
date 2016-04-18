@@ -320,7 +320,7 @@ angular.module('contacts')
             sortable: true,
             selectable: "multiple",
             reorderable: true,
-            height: window.innerHeight - 240,
+            height: window.innerHeight - 210,
             resizable: true,
             filterable: false,
             columnMenu: {
