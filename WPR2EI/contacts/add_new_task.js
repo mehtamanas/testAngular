@@ -1,7 +1,7 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope,$window) {
+var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window, contactData) {
     console.log('AddNewTaskController');
     $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -44,7 +44,7 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
     //API functionality start
     $scope.params = {
         name: $scope.name,
-        contact_id: $scope.contact1,
+        contact_id: $scope.selectedContact_id,
         class_type: "Contact",
         due_date: $scope.due_date,
         priority: $scope.priority1,
@@ -146,23 +146,24 @@ var AddNewTaskController = function ($scope, $state, $cookieStore, apiService, $
     $scope.selectproject = function () {
         $scope.params.project_id = $scope.project1;
     };
+    $scope.selectedContact_id = contactData.Contact_Id;
+    $scope.selectedContact_name = contactData.Name;
 
-
-    Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
-    apiService.get(Url).then(function (response) {
-        $scope.contacts = response.data;
-        $scope.loadingDemo = false;
-        $scope.contact1 = $scope.seletedCustomerId;
-    },
-   function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-   });
+   // Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
+   // apiService.get(Url).then(function (response) {
+   //     $scope.contacts = response.data;
+   //     $scope.loadingDemo = false;
+   //     $scope.selectedContact_id = $scope.seletedCustomerId;
+   // },
+   //function (error) {
+   //    if (error.status === 400)
+   //        alert(error.data.Message);
+   //    else
+   //        alert("Network issue");
+   //});
 
     $scope.selectcontact = function () {
-        $scope.params.contact_id = $scope.contact1;
+        $scope.params.contact_id = $scope.selectedContact_id;
     };
 
     Url = "TaskType/GetTaskType";
@@ -222,7 +223,7 @@ function (error) {
             $scope.params = {
                 name: $scope.name,
                 start_date_time: new Date().toISOString(),
-                contact_id: $scope.contact1,
+                contact_id: $scope.selectedContact_id,
                 class_type: "Contact",
                 due_date: new Date(dDate).toISOString(),
                 priority: $scope.priority1,

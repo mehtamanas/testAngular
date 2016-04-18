@@ -78,8 +78,12 @@
                    
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
-                            <label for="">Person:</label>                           
-                            <select kendo-combo-box class="dropdown form-control"
+                            <label for="">Person:</label>        
+                            <input type="text" class="form-control  text-bold" autofocus name="contactName"
+                                   data-ng-model="selectedContact_name"
+                                   id="contact_editTask_Person"
+                                   ng-disabled="true" />                   
+                            <!--<select kendo-combo-box class="dropdown form-control"
                                     id="contact_editTask_Person"
                                     k-placeholder="'Select Contact'"
                                     k-data-text-field="'Contact_Name'"
@@ -89,7 +93,7 @@
                                     ng-change="selectcontact()"
                                     k-auto-bind="false"
                                     k-min-length="3"
-                                    k-data-source="contacts"></select>
+                                    k-data-source="contacts"></select>-->
                         </div>
                     </div>
                 </div>
