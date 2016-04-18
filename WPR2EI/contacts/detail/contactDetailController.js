@@ -803,19 +803,70 @@ angular.module('contacts')
                 }, ]
         };
 
+        $scope.historyGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+
+                    read: apiService.baseUrl + "Contact/GetAuditTrail/" + $scope.seletedCustomerId
+                },
+                pageSize: 20,
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                 {
+                     field: "field_name",
+                     title: "Field",
+
+                     attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+
+                 }, {
+                     field: "original_value",
+                     title: "Original Value",
+
+                     attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+
+                 }, {
+                     field: "new_value",
+                     title: "New Value",
+
+                     attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+
+                 }]
+        };
+
         $scope.NotesGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    //read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId
-                    read: function (options) {
-                        apiService.get("Notes/GetByID/" + $scope.seletedCustomerId).then(function (res) {
-                            $scope.notes = res.data;
-                            options.success($scope.notes);
-                        }, function (err) {
-                            options.error()
-                        })
-                    }
+                    read: apiService.baseUrl + "Notes/GetByID/" + $scope.seletedCustomerId + "/ToDo_Item_N_Notes"
                 },
                 pageSize: 5,
                 refresh: true,
@@ -854,9 +905,9 @@ angular.module('contacts')
                      width: "60px",
                      attributes:
                 {
-                 "style": "text-align:center"
+                    "style": "text-align:center"
                 }
-                    
+
                  },
                  {
                      field: "user_name",
@@ -877,16 +928,15 @@ angular.module('contacts')
                     }
 
                  }, {
-                field: "text",
-                title: "Notes",
-                template: "<span  ng-bind-html='dataItem.text | limitTo:200'></span>",
-               
-                attributes:
-               {
-                   "style": "text-align:center"
-               }
+                     field: "text",
+                     title: "Notes",
+                     template: "<span  ng-bind-html='dataItem.text | limitTo:200'></span>",
 
-            },
+                     attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                 },
             {
                 field: "date",
                 title: "Date",
@@ -896,8 +946,16 @@ angular.module('contacts')
               {
                   "style": "text-align:center"
               }
-            }, 
-            ]
+            }, {
+                field: "task_code",
+                title: "Task_Code",
+                template: '#if (task_code!=null){#<a ng-click="openEditTaskPopUp(dataItem.task_id)" href="">#=task_code#</a> #}#',
+                attributes:
+              {
+                  "style": "text-align:center"
+              }
+
+            }]
         };
 
         $scope.QuotesGrid = {
@@ -1471,7 +1529,19 @@ angular.module('contacts')
 
             });
 
-        }; 
+        };
+
+        $scope.openEditTaskPopUp = function (task_id) {
+            window.sessionStorage.selectedTaskID = task_id;
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/edit_task.html',
+                backdrop: 'static',
+                controller: EditTaskController,
+                size: 'lg'
+
+            });
+        };
 
         $scope.taskComplete=function()
         {
