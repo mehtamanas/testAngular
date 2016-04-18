@@ -169,7 +169,8 @@ function (error)
                 zip_code: $scope.zip_code,
                 country: $scope.country1,
                 first_month_of_financial_year: $scope.month1,
-                timezone:$scope.timezone1
+                timezone: $scope.timezone1,
+                
 
 
 
@@ -241,9 +242,7 @@ function (error)
         };
        
         $scope.params = {
-
             name: $scope.name,
-
             street_1: $scope.street_1,
             street_2: $scope.street_2,
             description: $scope.description,
