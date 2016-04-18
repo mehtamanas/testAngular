@@ -282,8 +282,6 @@ a {
 }
 
     .k-grid-header th.k-header {
-        padding-top: 12px;
-        padding-bottom: 12px;
         font-weight: bold;
         text-align: center;
         font-size:11px;
@@ -367,7 +365,7 @@ a {
 
 .k-grid .k-header,
 .k-grid td {
-    /*border-color: #eeeeee;*/
+    border-color: #eeeeee;
 }
 
 .k-grid td {
@@ -377,7 +375,7 @@ a {
 }
 
 .k-grid-header-wrap .k-header {
-    /*background: #f4f4f4;*/
+    background: #f4f4f4;
 }
 
 div.k-grid-header,
@@ -386,8 +384,8 @@ div.k-grid-footer {
 }
 
 .k-grid-pager {
-    /*background: #fff;
-        box-shadow: 0px -1px 22px #EAEAEA;*/
+    background: #fff !important;
+    box-shadow: 0px -1px 22px #EAEAEA;
 }
 
 .k-grid-header-wrap, .k-grid-footer-wrap {
@@ -2152,7 +2150,7 @@ h4.form-sub-title {
 
 .properties-content .k-grouping-header {
    background: #fff;
-    margin-bottom: 1px;
+    margin-bottom: 0px;
     
     /*box-shadow: 1px 1px 1px rgba(0,0,0,0.1)*/
 }
@@ -8670,7 +8668,7 @@ LEFT
 }
 
 .bx-h1-content .properties-content .k-grid-header-wrap .k-header {
-    background: #e9e9e9;
+    background: #f4f4f4;
     font-size: 11px;
     font-weight: bold;
     text-transform: none;
@@ -10717,7 +10715,7 @@ input[type=text].rupee_1 {
 
 .k-grid th.k-header,
 .k-grid-header {
-      border-bottom: 2px solid #e5e5e5;
+      border-bottom: 1px solid #e5e5e5;
 }
 
 /*.k-grid th.k-header,
@@ -11515,6 +11513,7 @@ md-radio-button {
 .head_filter{
     margin-top: -20px;
     margin-left: -20px;
+    position:relative;
     margin-right: -18px;
     /* margin-top: -15px; */
     box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
@@ -11687,6 +11686,7 @@ md-radio-button {
 }
 .k-grid .k-grouping-header
 {
+    background:#f4f4f4;
         color: #DCDCDC;
     padding: 5px;
     border-bottom-color:#eeeeee;
@@ -12034,4 +12034,30 @@ md-input-container label:not(.md-container-ignore) {
 .alt_text{
     color: #cdcccc;
     font-size: 11px;
+}
+
+
+#Medium:after{
+    content: "\f176";
+    font-family: FontAwesome;
+    position: absolute;
+    font-size: 12px;
+    margin-left: 7px;
+    color: #FFA500;
+}
+#Low:after{
+    content: "\f175";
+    font-family: FontAwesome;
+    position: absolute;
+    font-size: 12px;
+    margin-left: 7px;
+    color: #40c671;
+}
+#High:after{
+    content: "\f176";
+    font-family: FontAwesome;
+    position: absolute;
+    font-size: 12px;
+    margin-left: 7px;
+    color: red;
 }
