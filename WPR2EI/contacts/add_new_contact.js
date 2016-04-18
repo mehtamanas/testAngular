@@ -208,9 +208,9 @@ angular.module('contacts')
            
 
             AuditCreate();
-            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession });
-            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession });
-            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession });
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: loginSession,action:'add' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: loginSession, action: 'add' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: loginSession, action: 'add' });
             $scope.loadingDemo = false;
 
             var media = [];

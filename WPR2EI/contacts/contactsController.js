@@ -162,6 +162,9 @@ angular.module('contacts')
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
                             $scope.textareaText = ''
+                            _.remove($scope.views, function (o) { // remove view name from column
+                                return o.id == $scope.gridView;
+                            })
                             $scope.gridView = 'default';
                             swal(
                           'Deleted!',
@@ -546,8 +549,8 @@ angular.module('contacts')
                 $('.k-i-refresh').trigger("click");
             }
         else if (args.name == 'ViewCreated') {
-                callViewApi();
-                $scope.gridView = args.data;
+               $scope.views.push(args.data);//push new view into view list
+                $scope.gridView = args.data.id; // select currently created view in view list
             }
             $scope.contactAction = 'no_action';
             $('#checkAll').prop('checked', false);
