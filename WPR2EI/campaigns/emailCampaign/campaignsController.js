@@ -154,7 +154,7 @@ angular.module('campaigns')
             },
              {
                  field: "bounces",
-                 hidden: false,
+                 hidden: true,
                  title: "Bounces",
                  attributes:
                    {
@@ -164,7 +164,7 @@ angular.module('campaigns')
              },
               {
                   field: "opens",
-                  hidden: false,
+                  hidden: true,
                   title: "Opens",
                   attributes:
                     {
@@ -174,7 +174,7 @@ angular.module('campaigns')
               },
                {
                    field: "unsubscribes",
-                   hidden: false,
+                   hidden: true,
                    title: "Unsubscribes",
                    attributes:
                      {
@@ -184,7 +184,7 @@ angular.module('campaigns')
                },
                 {
                     field: "open_rate",
-                    hidden: false,
+                    hidden: true,
                     title: "Open_rate",
                     attributes:
                       {
