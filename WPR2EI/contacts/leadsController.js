@@ -111,7 +111,10 @@ angular.module('contacts')
                         }
                     }
                 }
+                // saroj on 14-04-2016
+                // removing " " from string otherwise JQL will not work
                 var str = viewObj[0].query_string;
+                str = str.replace(/"/g, "");
 
                 $scope.textareaText = str;
                 grid.dataSource.filter(JSON.parse(viewObj[0].filters));
@@ -204,11 +207,8 @@ angular.module('contacts')
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
                             $scope.textareaText = ''
-                            
-                            _.remove($scope.views, function (o) { // remove view name from column
-                                return o.id == $scope.gridView;
-                            })
                             $scope.gridView = 'default';
+
                             swal(
                           'Deleted!',
                           'Your file has been deleted.',
@@ -320,7 +320,7 @@ angular.module('contacts')
             sortable: true,
             selectable: "multiple",
             reorderable: true,
-            height: window.innerHeight - 210,
+            height: window.innerHeight - 240,
             resizable: true,
             filterable: false,
             columnMenu: {
@@ -328,8 +328,7 @@ angular.module('contacts')
                     columns: "Choose columns",
                     filter: "Apply filter",
                     sortAscending: "Sort (asc)",
-                    sortDescending: "Sort (desc)",
-                   
+                    sortDescending: "Sort (desc)"
                 }
             },
             pageable: {
@@ -444,6 +443,7 @@ angular.module('contacts')
               }, {
                   field: "last_contacted",
                   title: "Last Contacted Date",
+                  hidden: true,
                   type: 'date',
                   filterable: {
                       ui: "datepicker"
@@ -456,6 +456,7 @@ angular.module('contacts')
               },
         {
             field: "last_updated",
+            hidden:true,
             title: "Updated Date",
             type: 'date',
             filterable: {
@@ -467,7 +468,40 @@ angular.module('contacts')
                 "class": "UseHand",
                 "style": "text-align:center"
             }
+
+
         },
+
+        , {
+            field: "Formatted_last_contacted_date",
+            title: "Last Contacted Date",
+            type: 'date',
+            filterable: {
+                ui: "datepicker"
+            },
+            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            attributes: {
+                "class": "UseHand",
+                "style": "text-align:center"
+            }
+        },
+        {
+            field: "Formatted_last_updated_date",
+            title: "Updated Date",
+            type: 'date',
+            filterable: {
+                ui: "datepicker"
+            },
+            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
+            attributes: {
+                "class": "UseHand",
+                "style": "text-align:center"
+            }
+
+
+        },
+
         //saroj on 13-04-2016
            {
                field: "created_at",
@@ -596,6 +630,14 @@ angular.module('contacts')
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
 
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }
@@ -635,6 +677,14 @@ angular.module('contacts')
 
                             else if (expsplitIN[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
                             // alert(mystring);
@@ -921,6 +971,14 @@ angular.module('contacts')
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
+                                        if (Firstname == "")
+                                        {
+                                            // 18-04-2016
+                                            //saroj
+                                            ValidFilter = false;
+                                            alert("Invalid Query.");
+                                            return;
+                                        }
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
                                 }
@@ -940,6 +998,13 @@ angular.module('contacts')
                                 alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
                                 return;
                             }
+                            // by saroj on 18-04-2016
+                           
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
                             ValidFilter = true;
@@ -950,8 +1015,11 @@ angular.module('contacts')
 
                             if (expSplitLTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
-                            else {
-                                alert(" <= Operator cannot be assigned to " + expSplitLTE[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -973,8 +1041,11 @@ angular.module('contacts')
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -995,8 +1066,11 @@ angular.module('contacts')
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -1018,8 +1092,11 @@ angular.module('contacts')
                             else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -1213,37 +1290,24 @@ angular.module('contacts')
             })
         }
 
-        $rootScope.$on('REFRESH2', function (event, args) {
+        $scope.$on('REFRESH2', function (event, args) {
 
             if (args.name == 'LeadGrid') {
-                if (args.action === 'add') {
-                    //$('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+                if (args.data === null) {
+                    $('.k-i-refresh').trigger("click");
+                } else {
+                    $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
                     contactAddEditRefresh();
                 }
-                else if (args.action === 'edit') {
-                    contactAddEditRefresh();
-                }
-                else if (args.action === 'delete') {
-                    for (i = 0; i < args.data.length; i++) {
-                        var a = _.remove($localStorage.leadDataSource, function (o) {
-                            return o.Contact_Id == args.data[i].id
-                        });
-                    }
-                    contactAddEditRefresh();
-                }
-                else if (args.action == 'tag') {
-                    contactAddEditRefresh();
-                }
-                else if (args.action == 'assignTo') {
-                    contactAddEditRefresh();
-                }
-
             } else if (args.name == 'ViewCreated') {
-                $scope.views.push(args.data);//push new view into view list
-                $scope.gridView = args.data.id; // select currently created view in view list
+                callViewApi();
+                
+                $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
+
+            callViewApi();
             
 
         });
