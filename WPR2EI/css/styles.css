@@ -11909,3 +11909,8 @@ md-input-container label:not(.md-container-ignore) {
     color:#7b7b7b;
     font-size:13px;
 }
+.notes_name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #289ff1;
+}

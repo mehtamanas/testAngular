@@ -107,7 +107,7 @@ angular.module('contacts')
 		        $scope.Street = $scope.data.street1;
 		        $scope.Street2 = $scope.data.street2;
                 $scope.area = $scope.data.area;
-                $scope.age = age;
+                $scope.age = age ? age : 0;
                 $scope.choices1[0].Contact_Email = response.data.Contact_Email;
                 $scope.choices[0].Contact_Phone = response.data.Contact_Phone;
                 $scope.choices2[0].Street_1 = response.data.street1;
@@ -119,7 +119,7 @@ angular.module('contacts')
                 $scope.Title = $scope.data.Title;
                 $scope.income = $scope.data.income;
                 $scope.company = $scope.data.company;
-                $scope.Date_Of_Birth = moment($scope.data.Date_Of_Birth).format('DD/MM/YYYY');
+                $scope.Date_Of_Birth = $scope.data.Date_Of_Birth ? moment($scope.data.Date_Of_Birth).format('DD/MM/YYYY') :
                 $scope.channel_partner_details = $scope.data.channel_partner_details;
                 $scope.Age_Group = $scope.data.Age_Group;
               
