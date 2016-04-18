@@ -207,7 +207,7 @@ a {
 }
 
 .k-button {
-    border-radius: 3px;
+    border-radius: 0px;
     padding: 2px 22px;
     font-size: 15px;
     border: none;
@@ -286,6 +286,9 @@ a {
         padding-bottom: 12px;
         font-weight: bold;
         text-align: center;
+        font-size:11px;
+        color:#717171;
+        
     }
 
 .k-header .k-link {
@@ -364,7 +367,7 @@ a {
 
 .k-grid .k-header,
 .k-grid td {
-    /*border-color: #f4f4f6*/
+    /*border-color: #eeeeee;*/
 }
 
 .k-grid td {
@@ -374,7 +377,7 @@ a {
 }
 
 .k-grid-header-wrap .k-header {
-    background: #f3f4f6;
+    /*background: #f4f4f4;*/
 }
 
 div.k-grid-header,
@@ -383,7 +386,8 @@ div.k-grid-footer {
 }
 
 .k-grid-pager {
-    background: #f1f1f1;
+    /*background: #fff;
+        box-shadow: 0px -1px 22px #EAEAEA;*/
 }
 
 .k-grid-header-wrap, .k-grid-footer-wrap {
@@ -2069,6 +2073,10 @@ h4.form-sub-title {
 
 #content .pg-inner-content {
     padding: 20px 20px;
+    padding-bottom:0px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:20px;
     /*background: #e7e7e7;
     padding-bottom: 0px;*/
 }
@@ -2092,12 +2100,14 @@ h4.form-sub-title {
 }
 
 #record-content {
-    background: #fff;
+        background: #fff;
+
+    box-shadow:1px 1px 2px #EFEFEF;
 }
 
 .properties-content {
     /*margin-top: 15px;*/
-    border: 1px solid;
+    /*border: 1px solid;*/
     border-color: #E4E4E4;
 }
 
@@ -2136,13 +2146,14 @@ h4.form-sub-title {
 
 .properties-content tr td {
     font-size: 13px;
-    color: #4f4f4f;
+   color: #4f4f4f;
     text-align: center;
 }
 
 .properties-content .k-grouping-header {
-    background: #fff;
+   background: #fff;
     margin-bottom: 1px;
+    
     /*box-shadow: 1px 1px 1px rgba(0,0,0,0.1)*/
 }
 
@@ -8397,8 +8408,8 @@ LEFT
 
 
 .bx-h1 {
-    margin-bottom: 24px;
-    padding: 10px;
+    /*margin-bottom: 24px;
+    padding: 10px;*/
 }
 
 .bx-h1-head {
@@ -10706,7 +10717,7 @@ input[type=text].rupee_1 {
 
 .k-grid th.k-header,
 .k-grid-header {
-    border-bottom: 2px solid #e5e5e5;
+      border-bottom: 2px solid #e5e5e5;
 }
 
 /*.k-grid th.k-header,
@@ -10718,13 +10729,13 @@ input[type=text].rupee_1 {
 /*rows*/
 
 .k-grid-content > table > tbody > tr {
-    background: #f1f1f1;
-    height: 67px;
+    background: #fff;
+    height: 65px;
 }
 
 
 .k-grid-content > table > tbody > .k-alt {
-    background: #f6f6f6;
+    background: #f9f9f9;
 }
 
 /*selection*/
@@ -11510,6 +11521,7 @@ md-radio-button {
     padding-top: 10px !important;
     background: #fafcfe;
     border-top: 1px solid #f0f0f0;
+    
 }
 .head_action{
         margin: 7px 2px;
@@ -11585,7 +11597,7 @@ md-radio-button {
 
 @media screen and (min-width: 1280px) and (max-width:1366px) {
     .custom_class {
-        width: 62% !important;
+        width: 60% !important;
     }
 
     .contact_p_1 {
@@ -11602,15 +11614,82 @@ md-radio-button {
     }
 }
 
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+.custom_class {
+        width: 60% !important;
+    }
+
+    .contact_p_1 {
+        font-weight: normal;
+        color: #a0a0a0;
+        font-size: 8px;
+        font-weight: bold;
+    }
+
+    .contact_link_1 {
+        float: right;
+        margin-top: 9px;
+        padding: 0% 0% 0% 9%;
+    }
+}
+@media only screen and (min-width :1345px) {
+.custom_class {
+        width: 70% !important;
+    }
+
+   
+
+    .contact_link_1 {
+        float: right;
+        margin-top: 9px;
+        padding: 0% 0% 0% 9%;
+    }
+}
+@media only screen and (max-width :1550px) {
+.custom_class {
+        width: 60% !important;
+    }
+
+
+
+    .contact_link_1 {
+        float: right;
+        margin-top: 9px;
+        padding: 0% 0% 0% 9%;
+    }
+}
+@media only screen and (min-width : 1824px) {
+.custom_class {
+        width: 60% !important;
+    }
+
+    .contact_p_1 {
+        font-weight: normal;
+        color: #a0a0a0;
+        font-size: 8px;
+        font-weight: bold;
+    }
+
+    .contact_link_1 {
+        float: right;
+        margin-top: 9px;
+        padding: 0% 0% 0% 9%;
+    }
+}
+
+
 /*added by himangshu*/
 .k-block, .k-widget
 {
-    /*background:#fafcfe;*/
+   background:#efefef;
 }
 .k-grid .k-grouping-header
 {
         color: #DCDCDC;
     padding: 5px;
+    border-bottom-color:#eeeeee;
 }
 .bold_txt{
     font-weight:bold;
@@ -11636,12 +11715,13 @@ md-radio-button {
     display: inline-block;
     vertical-align: top;
     margin-left: -20px;
-    width: 18px;
-    height: 18px;
-    border-radius: 2px;
+    width: 14px;
+    height: 14px;
+    background:#fff;
     border: 1px solid #ccc;
     margin-right: 5px;
     text-align: center;
+    border-radius:0px !important;
 }
 
 
@@ -11902,8 +11982,8 @@ md-input-container label:not(.md-container-ignore) {
       color:#434343;
 }
 .seperator_contact {
-    margin-bottom: 0px;
-    padding: 10px;
+     margin-bottom: -4px;
+    /*padding: 10px;*/
 }
 .note_date{
     color:#7b7b7b;
@@ -11913,4 +11993,45 @@ md-input-container label:not(.md-container-ignore) {
     font-size: 15px;
     font-weight: 500;
     color: #289ff1;
+}
+/* added form kendo tabgrid */
+.k-tabstrip .k-content
+{
+     margin:20px !important;
+     padding-top:0px;
+}
+.k-tabstrip .k-content.k-state-active
+{
+    margin:20px !important;
+    padding-top:0px;
+}
+
+.k-tabstrip > .k-tabstrip-items > .k-item
+{
+    padding-left:25px;
+    padding-right:25px;
+}
+
+.k-tabstrip > .k-button
+{
+        background: #fff !important;
+    box-shadow: 0px 0px 0px #888888;
+    height: 43px;
+    margin-top: -2px;
+    width: 44px;
+    margin-left: -7px;
+    padding-top: 7px;
+    margin-right: -7px;
+}
+
+
+.k-tabstrip-scrollable .k-tabstrip-items
+{
+    margin-left:0px !important;
+    margin-right:0px !important;
+}
+/*end*/
+.alt_text{
+    color: #cdcccc;
+    font-size: 11px;
 }
