@@ -64,9 +64,9 @@ function (error) {
             AuditCreate();
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-           $rootScope.$broadcast('REFRESH1', 'contactGrid');
-            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+            $rootScope.$broadcast('REFRESH1', {name:'contactGrid',data:null});
+            $rootScope.$broadcast('REFRESH2', {name:'LeadGrid',data:null});
+            $rootScope.$broadcast('REFRESH3', {name:'ClientContactGrid',data:null});
             $rootScope.$broadcast('REFRESHTAG', 'Tag');
         },
         function (error)

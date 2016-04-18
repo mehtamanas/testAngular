@@ -111,10 +111,7 @@ angular.module('contacts')
                         }
                     }
                 }
-                // saroj on 14-04-2016
-                // removing " " from string otherwise JQL will not work
                 var str = viewObj[0].query_string;
-                str = str.replace(/"/g, "");
 
                 $scope.textareaText = str;
                 grid.dataSource.filter(JSON.parse(viewObj[0].filters));
@@ -207,8 +204,11 @@ angular.module('contacts')
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
                             $scope.textareaText = ''
+                            
+                            _.remove($scope.views, function (o) { // remove view name from column
+                                return o.id == $scope.gridView;
+                            })
                             $scope.gridView = 'default';
-
                             swal(
                           'Deleted!',
                           'Your file has been deleted.',
@@ -328,7 +328,8 @@ angular.module('contacts')
                     columns: "Choose columns",
                     filter: "Apply filter",
                     sortAscending: "Sort (asc)",
-                    sortDescending: "Sort (desc)"
+                    sortDescending: "Sort (desc)",
+                   
                 }
             },
             pageable: {
@@ -339,6 +340,7 @@ angular.module('contacts')
                       template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                       title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                       width: "60px",
+                      locked:true,
                       attributes:
                        {
                            "class": "UseHand",
@@ -1215,6 +1217,16 @@ angular.module('contacts')
         $scope.$on('REFRESH2', function (event, args) {
 
             if (args.name == 'LeadGrid') {
+                if (args.action === 'add') {
+                }
+                else if (args.action === 'edit') {
+                }
+                else if (args.action === 'delete') {
+                }
+                else if (args.action == 'tag') {
+                }
+
+
                 if (args.data === null) {
                     $('.k-i-refresh').trigger("click");
                 } else {
@@ -1222,14 +1234,11 @@ angular.module('contacts')
                     contactAddEditRefresh();
                 }
             } else if (args.name == 'ViewCreated') {
-                callViewApi();
-                
-                $scope.gridView = args.data;
+                $scope.views.push(args.data);//push new view into view list
+                $scope.gridView = args.data.id; // select currently created view in view list
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
-
-            callViewApi();
             
 
         });

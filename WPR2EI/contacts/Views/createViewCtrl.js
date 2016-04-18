@@ -25,12 +25,13 @@
 
             }
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
+                view = response.data;
                 $scope.openSucessfullPopup();
                 $scope.cancel();
-                if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: $scope.params.viewName });
-                if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: $scope.params.viewName });
-                if (viewData.grid == 'client') $rootScope.$broadcast('REFRESH3', { name: 'ViewCreated', data: $scope.params.viewName });
-                if (viewData.grid == 'call') $rootScope.$broadcast('REFRESH', { name: 'ViewCreated', data: $scope.params.viewName });
+                if (view.grid_name == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: view });
+                if (view.grid_name == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: view });
+                if (view.grid_name == 'client') $rootScope.$broadcast('REFRESH3', { name: 'ViewCreated', data: view });
+                if (view.grid_name == 'call') $rootScope.$broadcast('REFRESH', { name: 'ViewCreated', data: view });
                 $scope.loadingDemo = false;
             }, function (error) {
 
