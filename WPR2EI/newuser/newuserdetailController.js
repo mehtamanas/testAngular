@@ -813,6 +813,7 @@ columnMenu: {
             },
              {
                  field: "priority",
+                 template: '<span id="#= priority #">#= priority #</span>',
                  title: "Priority",
                  width: "120px",
                  attributes:

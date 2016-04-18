@@ -5,7 +5,33 @@
         <div class="main-content project add-new">
             <h3>Add Tag</h3>
 
+
             <div class="col-sm-8">
+                <!--<label>Add Tag</label>-->
+                <div class="form-group">
+                    <div class="col-xs-12">
+
+                        <div class="form-bx13" style="padding-bottom: 29px;">
+                            <select kendo-combo-box
+                                    k-placeholder="'Select Tag'"
+                                    k-data-text-field="'tag_name'"
+                                    k-data-value-field="'tag_name'"
+                                    k-filter="'contains'"
+                                    k-auto-bind="false"
+                                    k-min-length="3"
+                                    k-data-source="tagList"
+                                    style="width: 100%"
+                                    ng-model="params.tag_name"
+                                    id="addCompanyTag"></select>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="col-sm-8">
                 <div class="form-group">
                     <div class="col-xs-12">
 
@@ -15,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="row">
                 <div class="col-md-5">

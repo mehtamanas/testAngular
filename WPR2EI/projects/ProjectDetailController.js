@@ -564,6 +564,7 @@
 
             },{
                 field: "priority",
+                template: '<span id="#= priority #">#= priority #</span>',
                 title: "Priority",
               
                 attributes:
