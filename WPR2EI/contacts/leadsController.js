@@ -340,7 +340,6 @@ angular.module('contacts')
                       template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                       title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                       width: "60px",
-                      locked:true,
                       attributes:
                        {
                            "class": "UseHand",
