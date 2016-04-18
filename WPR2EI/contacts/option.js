@@ -63,9 +63,9 @@ function (error) {
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.openSucessfullPopup();
-            $rootScope.$broadcast('REFRESH1', 'contactGrid');
-            $rootScope.$broadcast('REFRESH2', 'LeadGrid');
-            $rootScope.$broadcast('REFRESH3', 'ClientContactGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: null, action: 'tag' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: null, action: 'tag' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: null, action: 'tag' });
         },
     function (error) {
         if (error.status === 400)
