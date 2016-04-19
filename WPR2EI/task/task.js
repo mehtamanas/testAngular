@@ -658,7 +658,7 @@
                                 var TommDate = moment().startOf('day').add(+1, 'days')._d;
                                 var TommEndDate = moment().endOf('day').add(+1, 'days')._d;
 
-                                var next7Day = moment().endOf('day').add(+7, 'days')._d;
+                                var next7Day = moment().endOf('day').add(+8, 'days')._d;
                                 // alert(next7Day);
 
                                 // alert(TommDate);
@@ -742,7 +742,7 @@
                                 else if (expsplit[1].trim().toUpperCase() == "NEXT 7 DAYS") {
 
                                     abc = { logic: "and", filters: [] };
-                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: TommDate });
                                     abc.filters.push({ field: Firstname.trim(), operator: "lt", value: next7Day });
                                     filter.filters.push(abc);
                                 }

@@ -456,7 +456,7 @@ angular.module('contacts')
               },
         {
             field: "last_updated",
-            hidden:true,
+            hidden: true,
             title: "Updated Date",
             type: 'date',
             filterable: {
@@ -470,9 +470,7 @@ angular.module('contacts')
             }
 
 
-        },
-
-        , {
+        }, {
             field: "Formatted_last_contacted_date",
             title: "Last Contacted Date",
             type: 'date',
@@ -498,8 +496,6 @@ angular.module('contacts')
                 "class": "UseHand",
                 "style": "text-align:center"
             }
-
-
         },
 
         //saroj on 13-04-2016
@@ -538,8 +534,41 @@ angular.module('contacts')
             if (txtdata.text != '')
                 $scope.callFilter();
         };
-        
+
+        function setQuarter(startMonth) {
+            var obj = {};
+            if (startMonth == 'january') {
+
+                obj.quarter1 = { start: moment().month(0).startOf('month'), end: moment().month(2).endOf('month') }
+                obj.quarter2 = { start: moment().month(3).startOf('month'), end: moment().month(5).endOf('month') }
+                obj.quarter3 = { start: moment().month(6).startOf('month'), end: moment().month(8).endOf('month') }
+                obj.quarter4 = { start: moment().month(9).startOf('month'), end: moment().month(11).endOf('month') }
+                console.log(obj);
+                return obj;
+            }
+            else if (startMonth == 'april') {
+
+                obj.quarter1 = { start: moment().month(3).startOf('month'), end: moment().month(5).endOf('month') }
+                obj.quarter2 = { start: moment().month(6).startOf('month'), end: moment().month(8).endOf('month') }
+                obj.quarter3 = { start: moment().month(9).startOf('month'), end: moment().month(11).endOf('month') }
+                obj.quarter4 = { start: moment().month(0).startOf('month').add('years', 1), end: moment().month(2).endOf('month').add('years', 1) }
+                console.log(obj);
+                return obj;
+            }
+        }
+
         $scope.callFilter = function () {
+            // setQuarter('april');
+
+            //quarterAdjustment = (moment().month() % 3) + 1;
+            //var lastQuarterEndDate = moment().subtract({ months: quarterAdjustment }).endOf('month');
+            //var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
+
+            var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
+            var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
+
+            //alert(prevQuarterStartDay);
+            //alert(prevQuarterEndDay);
 
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
@@ -766,7 +795,7 @@ angular.module('contacts')
                                     var TommEndDate = moment().endOf('day').add(+1, 'days')._d;
 
                                     var next7Day = moment().endOf('day').add(+7, 'days')._d;
-                                   // alert(next7Day);
+                                    // alert(next7Day);
 
                                     // alert(TommDate);
                                     //  alert(TommEndDate);
@@ -810,7 +839,7 @@ angular.module('contacts')
                                     // Dates for Current Quarter
                                     var dd = new Date();
                                     var currQuarter = (dd.getMonth() - 1) / 3 + 1;
-                                 //   alert("currQuarter"+ currQuarter);
+                                    //   alert("currQuarter"+ currQuarter);
                                     var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
                                     var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
                                     lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
@@ -821,7 +850,7 @@ angular.module('contacts')
                                     //moment().subtract(1, 'quarter').endOf('quarter')._d
 
                                     var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
-                                  //  alert("lastQuarter" + currQuarter);
+                                    //  alert("lastQuarter" + currQuarter);
                                     var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
                                     var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
                                     lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
@@ -917,8 +946,8 @@ angular.module('contacts')
                                     else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
                                         abc = { logic: "and", filters: [] };
-                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
-                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: prevQuarterStartDay });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: prevQuarterEndDay });
                                         filter.filters.push(abc);
                                     }
 
@@ -971,8 +1000,7 @@ angular.module('contacts')
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
-                                        if (Firstname == "")
-                                        {
+                                        if (Firstname == "") {
                                             // 18-04-2016
                                             //saroj
                                             ValidFilter = false;
@@ -999,7 +1027,7 @@ angular.module('contacts')
                                 return;
                             }
                             // by saroj on 18-04-2016
-                           
+
                             if (Firstname == "") {
                                 ValidFilter = false;
                                 alert("Invalid Query.");
@@ -1301,14 +1329,14 @@ angular.module('contacts')
                 }
             } else if (args.name == 'ViewCreated') {
                 callViewApi();
-                
+
                 $scope.gridView = args.data;
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
 
             callViewApi();
-            
+
 
         });
 
