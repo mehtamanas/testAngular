@@ -122,7 +122,7 @@
                             <div class="contact-bx-h1-head tags-div">
                                 <div class="tagsspan" ng-hide="tags.length>0">
                                     <span  style="margin-bottom:15px;cursor: pointer;"  id="posts">
-                                        <i class="alt_text">No tags assigned for this contact yet </i>
+                                        <i class="alt_text">No tags assigned for this {{Type}} yet </i>
                                     </span>
                                 </div>
                                 <div class="tagsspan"  ng-show="tags.length>0">
@@ -213,7 +213,7 @@
                                     <div class="cxo-bx1" style="border-bottom:1px solid #e0e0e0;min-height: 150px;">
                                         <div class="contact_project_selected">Interested In Projects</div>
                                         <div class="contact_value" ng-hide="Interests>0">
-                                           <i class="alt_text">The contact has not shown any interest yet to any projects</i>
+                                           <i class="alt_text">The {{Type}} has not shown any interest yet to any projects</i>
                                         </div>
                                         <div class="contact_value" ng-repeat="Interested in Interests" ng-show="Interests>0">
                                             <h7 class="project_contact" id="contact_Interseted_project">DB Crown</h7>
@@ -228,7 +228,7 @@
                                     <div class="cxo-bx1">
                                         <div class="contact_project_selected">Recent Activity</div>
                                         <div class="contact_value">
-                                            <i class="alt_text">There is no recent activity for this contact</i>
+                                            <i class="alt_text">There is no recent activity for this {{Type}}</i>
                                             </div>
 
 
@@ -300,7 +300,7 @@
                                                 <div class="pull-left  profile-row1">Anniversary Date :</div>
                                                 <div class="pull-right profile-row2">
                                                     <label class="label-group">
-                                                        <span class="contact_value" ng-bind="Family_Type" id="Family_Type"></span>
+                                                        <span class="contact_value" ng-bind="Anniversary_Date" id="Anniversary_Date"></span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -308,7 +308,7 @@
                                                 <div class="pull-left  profile-row1">Family Type :</div>
                                                 <div class="pull-right profile-row2">
                                                     <label class="label-group">
-                                                        <span class="contact_value" ng-bind="Family_Type" id="Family_Type"></span>
+                                                        <span class="contact_value" ng-bind="Family_Type" id="contact_Family_Type"></span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -323,7 +323,7 @@
                                                 </div>
                                             </div>
                                             <div class="clearfix spacer">
-                                                <div class="pull-left  profile-row1">Source :</div>
+                                                <div class="pull-left  profile-row1">Income Source :</div>
                                                 <div class="pull-right profile-row2">
                                                     <label class="label-group">
                                                         <span class="contact_value" ng-bind="Sources" id="contact_source"></span>
@@ -338,6 +338,15 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="clearfix spacer">
+                                                <div class="pull-left  profile-row1">Lead Source :</div>
+                                                <div class="pull-right profile-row2">
+                                                    <label class="label-group">
+                                                        <span class="contact_value" ng-bind="leadsource" id="Lead_source"></span>
+                                                    </label>
+                                                </div>
+                                                </div>
+                                          
                                             <div class="clearfix " style="margin-top: 4%;">
                                                 <a ng-href="" id="contactFB.png">
                                                     <img src="images/contactFB.png">
@@ -374,7 +383,7 @@
                                 </div>
                                 <div class="cxo-wrap1" style=" padding: 1px 36px 19px 21px;" ng-hide="notes.length>0">
                                    
-                                        <i class="alt_text">There is no notes for this contact</i>
+                                        <i class="alt_text">There is no notes for this {{Type}}</i>
                                     
                                 </div>
                                 <div class="cxo-wrap1" style="padding: 1px 36px 19px 21px;" >

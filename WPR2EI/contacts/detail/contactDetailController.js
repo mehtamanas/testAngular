@@ -117,11 +117,20 @@ angular.module('contacts')
                 $scope.State = $scope.data.state_name;
                 $scope.City = $scope.data.City;
                 $scope.Title = $scope.data.Title;
+                $scope.Type = $scope.data.Type;
+                $scope.Spouse_Name = $scope.data.Spouse_Name;
+                $scope.No_Of_Cars_Owned = $scope.data.No_Of_Cars_Owned;
+                $scope.leadsource = $scope.data.leadsource;
+                $scope.Sources = $scope.data.Sources;
+                $scope.Age_Group = $scope.data.Age_Group;
+                $scope.Family_Type = $scope.data.Family_Type;
                 $scope.income = $scope.data.income;
                 $scope.company = $scope.data.company;
                 $scope.Date_Of_Birth = $scope.data.Date_Of_Birth ? moment($scope.data.Date_Of_Birth).format('DD/MM/YYYY') : 'Not Specified';
+                $scope.Anniversary_Date = $scope.data.Anniversary_Date ? moment($scope.data.Anniversary_Date).format('DD/MM/YYYY') : 'Not Specified';
                 $scope.channel_partner_details = $scope.data.channel_partner_details;
-                $scope.Age_Group = $scope.data.Age_Group;
+             
+
               
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
@@ -1752,11 +1761,17 @@ angular.module('contacts')
                         $scope.State = $scope.data.state_name;
                         $scope.City = $scope.data.City;
                         $scope.Title = $scope.data.Title;
+                        $scope.Type = $scope.data.Type;
+                        $scope.leadsource = $scope.data.leadsource;
+                        $scope.Spouse_Name = $scope.data.Spouse_Name;
+                        $scope.Age_Group = $scope.data.Age_Group;
+                        $scope.Family_Type = $scope.data.Family_Type;
                         $scope.income = $scope.data.income;
                         $scope.company = $scope.data.company;
                         $scope.Date_Of_Birth = $scope.data.Date_Of_Birth ? moment($scope.data.Date_Of_Birth).format('DD/MM/YYYY') : 'Not Specified';
+                        $scope.Anniversary_Date = $scope.data.Anniversary_Date ? moment($scope.data.Anniversary_Date).format('DD/MM/YYYY') : 'Not Specified';
                         $scope.channel_partner_details = $scope.data.channel_partner_details;
-                        $scope.Age_Group = $scope.data.Age_Group;
+                        
 
                         if ($scope.data.contact_mobile !== '') {
                             $scope.mobile = $scope.data.contact_mobile;

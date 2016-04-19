@@ -188,7 +188,7 @@
                                                                ng-pattern="/^[0-9\-]{8,12}$/" required />
                                                         <div ng-messages="newForm.primary_phone_no.$error" style="color:maroon" role="alert">
                                                             <div ng-message="required" data-ng-if="newForm.primary_phone_no.$invalid && (!newForm.primary_phone_no.$pristine || showValid) && !newForm.primary_phone_no.$focus">This field should not be empty </div>
-                                                            <div ng-message="pattern">Enter valid primary phone number</div>
+                                                            <div ng-message="pattern">Enter valid phone number</div>
                                                         </div>
 
                                                     </md-input-container>
@@ -214,10 +214,10 @@
                                                         <input name="Primary_email" id="contactadd_email"
                                                                data-ng-model="choice1.contact_element_info_email"
                                                                input-focus
-                                                               ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" required />
-                                                        <div class="text-danger"
-                                                             data-ng-if="newForm.Primary_email.$invalid && (!newForm.Primary_email.$pristine || showValid) && !newForm.Primary_email.$focus">
-                                                            {{ 'Enter valid email address' | translate }}
+                                                               ng-pattern="/^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/" required />
+                                                        <div ng-messages="newForm.Primary_email.$error" style="color:maroon" role="alert">
+                                                            <div ng-message="required" data-ng-if="newForm.Primary_email.$invalid && (!newForm.Primary_email.$pristine || showValid) && !newForm.Primary_email.$focus">This field should not be empty </div>
+                                                            <div ng-message="pattern">Enter valid email Ad</div>
                                                         </div>
                                                     </md-input-container>
                                                 </div>
@@ -802,7 +802,7 @@
                                 <div class="col-md-9">
                                     <md-container>
                                         <label class="contact-label">FAMILY</label><br />
-                                        <md-radio-group ng-model="family_type">
+                                        <md-radio-group ng-model="family">
                                             <md-radio-button value=" Neclear Family" class="md-primary"> nuclear family</md-radio-button>&nbsp;&nbsp;
                                             <md-radio-button value=" Joint Family"> Joint Family </md-radio-button>&nbsp;&nbsp;
                                         </md-radio-group>
@@ -844,7 +844,7 @@
                                                 <md-input-container class="md-block">
                                                     <label class="contact-label">NUMBER OF CARS OWNED</label>
                                                     <input id="contactadd_carOwned"   name="family"
-                                                           data-ng-model="params.no_of_cars_owned"
+                                                           data-ng-model="params.no_of_car_own"
                                                            ng-pattern="/^[0-9]{1,9}$/" />
                                                 </md-input-container>
                                             </div>
