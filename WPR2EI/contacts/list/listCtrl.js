@@ -97,13 +97,8 @@
     });
 
     $scope.openListPopup = function () {
-        var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'contacts/list/addList.html',
-            backdrop: 'static',
-            controller: addListCtrl,
-            size: 'lg'
-        });
+        $state.go('app.addNewList');
     };
+
 
 });

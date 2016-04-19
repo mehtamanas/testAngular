@@ -2070,7 +2070,7 @@ h4.form-sub-title {
 
 
 #content .pg-inner-content {
-    padding: 20px 20px;
+  
     padding-bottom:0px;
     padding-left:20px;
     padding-right:20px;
@@ -3717,10 +3717,7 @@ form.callback {
     padding-left: 54px;
 }
 
-#content #main-content {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-}
+
 
 #sidebar .mCSB_scrollTools .mCSB_draggerContainer {
     left: 11px;
@@ -3869,7 +3866,7 @@ form.callback {
     left: 22px;
 }
 .mCustomScrollBox{
-    border-right:#EAEAEA 1px solid;
+     border-right:#EAEAEA 1px solid;
 }		
 
 
@@ -4201,11 +4198,12 @@ form.callback {
 
 .cxo-wrap1 {
     padding: 20px 22px 15px;
+   
 }
 
 .cxo-wrap3-1 {
     padding: 13px 22px 54px;
-    min-height: 200px;
+    min-height: 206px;
 }
 
 
@@ -6465,7 +6463,7 @@ form.callback {
         float: left;
         padding: 20px 0 0;
         position: fixed;
-        // overflow-y:auto;
+       
     }
 
     #content #main-content {
@@ -6473,7 +6471,7 @@ form.callback {
         float: none;
         height: 100%;
         overflow: hidden;
-        overflow-y: auto;
+        /*overflow-y: auto;*/
         width: auto;
         padding: 60px 0 0;
         margin-left: 258px;
@@ -9329,11 +9327,12 @@ input:focus {
 
 .row_content {
     border-bottom: 1px solid #ececec;
-    padding: 15px 8px 11px 0px;
+    padding: 0px 8px 11px 0px;
 }
 .row_content-1 {
-    border-bottom: 1px solid #ececec;
+     border-bottom: 1px solid #eaeaea;
     padding: 0px 8px 11px 0px;
+        border-left: 1px solid #eaeaea;
 }
 .form-content .form-bx3-2 {
     width: 594px;
@@ -9803,14 +9802,15 @@ select {
 }
 
 .stats-label {
-    font-size: 20px;
+   font-size: 20px;
     color: #9E9898;
+    font-weight:300;
 }
 
 .stats-label-1 {
-    font-size: 30px;
+    font-size: 38px;
     color: #1ec2c5;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 .cxo-wrap3-2 {
@@ -9819,15 +9819,15 @@ select {
 }
 
 .stats-label2 {
-    font-weight: 600;
     color: #9E9898;
+    margin-top: 5px;
     margin-left: 2%;
 }
 
 .stats-label3 {
     padding-bottom: 1%;
-    padding-top: 1%;
-    margin-left: 13px;
+     font-size: 18px;
+    margin-left: 2%;
 }
 
 .bx-h1-head-1 {
@@ -9840,8 +9840,9 @@ select {
 }
 
 .bx-h2-1 {
-    margin-bottom: 5px;
-    padding: 4px;
+    /*margin-bottom: 5px;*/
+    padding-bottom: 4px;
+    padding-right:4px;
 }
 
 /*status classes for new user details page*/
@@ -9938,12 +9939,12 @@ select {
 
 .stats_tem_div {
     background: #fff;
-    height: 400px;
+    height: 500px;
 }
 
 .right-inner-addon i {
     position: absolute;
-    right: 0px;
+    right: 16px;
     padding: 10px 13px;
     font-size: 21px;
     pointer-events: none;
@@ -9999,6 +10000,18 @@ border-top: 4px solid #c5c5c5;
  margin-top: 6px; 
  width:20%;
 }
+.list_tab{
+border-top: 4px solid #c5c5c5;
+ margin-top: 6px; 
+
+}
+.list_tab_Active{
+border-top: 4px solid #289ff1;
+ margin-top: 6px;
+ color:#1f90e0;
+  
+
+}
 .email_tabs3_active{
 border-top: 4px solid #289ff1;
  margin-top: 6px; 
@@ -10012,7 +10025,7 @@ border-top: 4px solid #289ff1;
     text-align: center;
     margin-left: -38px;
     float: left;
-    width: 95px;
+    width: 100px;
     color: #909090;
     font-weight: 500;
 }
@@ -11958,6 +11971,10 @@ md-input-container label:not(.md-container-ignore) {
 .spacer{
         padding: 0px 1px 18px 1px;
 }
+.spacer-1 {
+   padding: 10px 1px 14px 1px;
+    border-bottom: 1px solid hsla(0, 3%, 87%, 0.51);
+}
 .contact_header{
     padding: 15px 20px !important;
     background: #fff !important;
@@ -12060,4 +12077,76 @@ md-input-container label:not(.md-container-ignore) {
     font-size: 12px;
     margin-left: 7px;
     color: red;
+}
+.user_details-2 {
+    background: #fff;
+    /*padding: 25px 25px 16px 7px;*/
+}
+.list_search{
+    
+    padding: 14px 17px 14px 20px;
+    background: #f4f4f4;
+
+}
+
+.nav-tabs1 > li > a
+{
+    display:block;
+}
+
+
+
+.nav-tabs1 > li > a
+{
+    display:block;
+    color: #c5c5c5;
+}
+
+
+
+.nav-tabs1 > li.active > a, .nav-tabs1 > li.active > a:focus, .nav-tabs1 > li.active > a:hover
+{
+    color: #03A9F4;
+    cursor: default;
+     background-color: #fff;
+     
+    border-bottom: 3px solid;
+}
+
+.nav1 > li > a:focus, .nav1 > li > a:hover
+
+    {
+    color: #03A9F4;
+    cursor: default;
+     background-color: #fff;
+    border-bottom: 3px solid;
+}
+
+.nav1 ul{
+    width:100%;
+}
+
+.nav1 > li > a:focus, .nav1 > li
+{
+    list-style-type:none;
+    float:left;
+    width:50%;
+    text-align: center;
+    display:block;
+}
+.email-stc-title
+{
+    color: #6D6D6D;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.profile-row1-1{
+    font-size: 15px;
+}
+.stats_value {
+    padding-top: 5px;
+    color: #170E0E;
+    font-size: 16px;
+    font-weight: 500;
 }

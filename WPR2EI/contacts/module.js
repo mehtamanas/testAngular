@@ -78,6 +78,11 @@ angular.module('contacts', [])
           controller: 'listCtrl',
           data: { pageTitle: 'List' }
       })
+            .state('app.addNewList', {
+                url: '/addNewList',
+                templateUrl: 'contacts/list/addList.html',
+                controller: 'addListCtrl',
+            })
 
       .state('app.listSummary', {
           url: '/listSummary',
