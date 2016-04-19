@@ -1,4 +1,5 @@
-﻿var addListCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope , $window) {
+﻿angular.module('contacts')
+.controller('addListCtrl', function ($scope, $state, $cookieStore, apiService,  $rootScope, $window) {
     console.log('addListCtrl');
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
 
@@ -25,7 +26,7 @@
         if (isValid) {
             $cookieStore.put('Name', $scope.params.name);
             $cookieStore.put('Description', $scope.params.description);
-            $modalInstance.dismiss();
+           
             $state.go('app.tagList');
             $scope.showValid = false;
 
@@ -35,9 +36,9 @@
     $scope.cancel = function () {
         $cookieStore.remove('Name');
         $cookieStore.remove('Description');
-        $modalInstance.dismiss('cancel');
+       
     };
 
-};
+});
 
 
