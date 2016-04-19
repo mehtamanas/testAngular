@@ -375,6 +375,10 @@ angular.module('campaigns')
             if (args == 'projectGrid') {
                 $('.k-i-refresh').trigger("click");
             }
+            else if (args.name == 'ViewCreated') {
+                $scope.views.push(args.data);//push new view into view list
+                $scope.gridView = args.data.id; // select currently created view in view list
+            }
             $scope.campaignAction = 'no_action';
         });
 
@@ -496,7 +500,7 @@ angular.module('campaigns')
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'email', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
         }
-        
+
         $scope.editView = function () {
             if ($scope.gridView !== 'default') {
                 var viewName = _.filter($scope.views, function (o)
@@ -705,6 +709,9 @@ angular.module('campaigns')
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
 
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
+                                Firstname = "name";
+
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
 
@@ -721,6 +728,8 @@ angular.module('campaigns')
 
                         if (expsplitIN.length > 1) {
 
+                            if (expsplitIN[0].toUpperCase().trim() == "NAME")
+                                Firstname = "name";
 
                             if (expsplitIN[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
@@ -748,6 +757,12 @@ angular.module('campaigns')
 
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
+
+                            if (expsplit[0].toUpperCase().trim() == "NAME")
+                                Firstname = "name";
+
+                            if (expsplit[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
 
                             if (expsplit[0].toUpperCase().trim() == "OPEN RATE")
                                 Firstname = "open_rate";
@@ -778,12 +793,16 @@ angular.module('campaigns')
                                 alert("Invalid Query.");
                                 return;
                             }
-
-                            filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                            if (Firstname == "status" || Firstname == "name") {
+                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                            }
                             ValidFilter = true;
 
                         }
-                        
+
                         // GREATER THAN EQUAL TO CHECK
                         if (expSplitGTE.length > 1) {
 
@@ -948,14 +967,14 @@ angular.module('campaigns')
             if (ValidFilter == true && ValidClause == false) {
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
-               // alert('Query Executed Successfully.');
+                // alert('Query Executed Successfully.');
             }
             else if (ValidFilter == false && ValidClause == true) {
                 var dsSort = [];
                 dsSort.push({ field: feild1, dir: dir1 });
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.sort(dsSort);
-              //  alert('Query Executed Successfully.');
+                //  alert('Query Executed Successfully.');
             }
             else if (ValidFilter == true && ValidClause == true) {
                 var dsSort = [];
@@ -963,7 +982,7 @@ angular.module('campaigns')
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
                 ds.sort(dsSort);
-               // alert('Query Executed Successfully.');
+                // alert('Query Executed Successfully.');
             }
             else {
                 alert("Please Check Query.");

@@ -507,17 +507,9 @@
 
 
         $scope.callFilter = function () {
-            // setQuarter('april');
-
-            //quarterAdjustment = (moment().month() % 3) + 1;
-            //var lastQuarterEndDate = moment().subtract({ months: quarterAdjustment }).endOf('month');
-            //var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
 
             var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
             var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
-
-            //alert(prevQuarterStartDay);
-            //alert(prevQuarterEndDay);
 
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
@@ -527,7 +519,6 @@
             var filter = [];
             var abc = [];
             var logsplit = "";
-
 
             if (txtdata.length > 0) {
 
@@ -540,7 +531,6 @@
                     filter = { logic: "or", filters: [] };
                     logsplit = txtdata.split(" or ");
                 }
-
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
                     for (var j = 0; j < logsplit.length; j++) {
@@ -726,6 +716,14 @@
 
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
+
+                            if (Firstname == "") {
+                                // 18-04-2016
+                                //saroj
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
@@ -949,13 +947,7 @@
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
-                                        if (Firstname == "") {
-                                            // 18-04-2016
-                                            //saroj
-                                            ValidFilter = false;
-                                            alert("Invalid Query.");
-                                            return;
-                                        }
+
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
                                 }
@@ -971,12 +963,8 @@
 
                             if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
-                            else {
-                                alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
-                                return;
-                            }
-                            // by saroj on 18-04-2016
 
+                            // by saroj on 18-04-2016
                             if (Firstname == "") {
                                 ValidFilter = false;
                                 alert("Invalid Query.");
@@ -1004,8 +992,42 @@
                             ValidFilter = true;
                         }
 
-                        // IS BEFORE CHECK
 
+                        // GREATER THAN TO CHECK
+                        if (expSplitGT.length > 1) {
+
+                            if (expSplitGT[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+
+                            // by saroj on 19-04-2016
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGTE[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // LESSER THAN TO CHECK
+                        if (expSplitLT.length > 1) {
+
+                            if (expSplitLT[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+
+                            // by saroj on 19-04-2016
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: parseFloat(expSplitLT[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+
+                        // IS BEFORE CHECK
                         if (expsplitIsBefore.length > 1) {
 
 

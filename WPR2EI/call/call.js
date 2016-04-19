@@ -31,7 +31,7 @@
             selectable: "multiple",
             reorderable: true,
             resizable: true,
-            filterable: true,
+            filterable: false,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -299,6 +299,12 @@
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "CALLER NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "CALLER")
                                 Firstname = "caller_name";
 
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }
@@ -309,6 +315,12 @@
 
                             if (expsplitIN[0].toUpperCase().trim() == "CALLER NAME" || expsplitIN[0].toUpperCase().trim() == "CALLER")
                                 Firstname = "caller_name";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
                             // alert(mystring);
@@ -333,6 +345,12 @@
 
                             if (expsplit[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             if (Firstname == "starttime") {
 
@@ -399,6 +417,11 @@
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
+
+                                var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
+                                var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
+
+
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
                                     abc = { logic: "and", filters: [] };
@@ -440,7 +463,7 @@
                                     filter.filters.push(abc);
                                 }
 
-                                else if (expsplit[1].trim().toUpperCase() == "CURRENT MONTH") {
+                                else if (expsplit[1].trim().toUpperCase() == "THIS MONTH") {
 
                                     abc = { logic: "and", filters: [] };
                                     //if (firstDayOfCurrentMonth.getDate() == CurrentDate.getDate()) {
@@ -474,8 +497,8 @@
                                 else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
                                     abc = { logic: "and", filters: [] };
-                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
-                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: prevQuarterStartDay });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: prevQuarterEndDay });
                                     filter.filters.push(abc);
                                 }
 
@@ -542,8 +565,10 @@
 
                             if (expsplitIsBefore[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-                            else {
-                                alert(" Invalid Operator cannot be assigned to " + expsplitIsBefore[0]);
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -557,23 +582,27 @@
 
                             if (expsplitIsAfter[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-                            else {
-                                alert(" Invalid Operator cannot be assigned to " + expsplitIsAfter[0]);
+                            
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
                             ValidFilter = true;
                         }
 
-                        // 
-
+                   
                         // BETWEEN OR CHECK 
                         if (expsplitBetween.length > 1) {
 
                             if (expsplitBetween[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-                            else {
-                                alert(" Invalid Operator cannot be assigned to " + expsplitBetween[0]);
+                            
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -600,17 +629,16 @@
             // 11-04-2016
 
             if (Firstname == "") {
-                alert("Invalid Feild.");
+                alert("Invalid Query.");
                 return;
             }
 
             if (ValidFilter == true) {
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
-
                 ds.filter(filter);
             }
             else {
-                alert("Please Check Query ! ");
+                alert("Please Check Query.");
             }
         }
 

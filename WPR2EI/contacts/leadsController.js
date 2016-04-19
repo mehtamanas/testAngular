@@ -536,40 +536,11 @@ angular.module('contacts')
                 $scope.callFilter();
         };
 
-        function setQuarter(startMonth) {
-            var obj = {};
-            if (startMonth == 'january') {
-
-                obj.quarter1 = { start: moment().month(0).startOf('month'), end: moment().month(2).endOf('month') }
-                obj.quarter2 = { start: moment().month(3).startOf('month'), end: moment().month(5).endOf('month') }
-                obj.quarter3 = { start: moment().month(6).startOf('month'), end: moment().month(8).endOf('month') }
-                obj.quarter4 = { start: moment().month(9).startOf('month'), end: moment().month(11).endOf('month') }
-                console.log(obj);
-                return obj;
-            }
-            else if (startMonth == 'april') {
-
-                obj.quarter1 = { start: moment().month(3).startOf('month'), end: moment().month(5).endOf('month') }
-                obj.quarter2 = { start: moment().month(6).startOf('month'), end: moment().month(8).endOf('month') }
-                obj.quarter3 = { start: moment().month(9).startOf('month'), end: moment().month(11).endOf('month') }
-                obj.quarter4 = { start: moment().month(0).startOf('month').add('years', 1), end: moment().month(2).endOf('month').add('years', 1) }
-                console.log(obj);
-                return obj;
-            }
-        }
-
+     
         $scope.callFilter = function () {
-            // setQuarter('april');
-
-            //quarterAdjustment = (moment().month() % 3) + 1;
-            //var lastQuarterEndDate = moment().subtract({ months: quarterAdjustment }).endOf('month');
-            //var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
 
             var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
             var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
-
-            //alert(prevQuarterStartDay);
-            //alert(prevQuarterEndDay);
 
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
@@ -579,8 +550,7 @@ angular.module('contacts')
             var filter = [];
             var abc = [];
             var logsplit = "";
-
-
+            
             if (txtdata.length > 0) {
 
                 if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
@@ -592,7 +562,6 @@ angular.module('contacts')
                     filter = { logic: "or", filters: [] };
                     logsplit = txtdata.split(" or ");
                 }
-
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
                     for (var j = 0; j < logsplit.length; j++) {
@@ -778,6 +747,14 @@ angular.module('contacts')
 
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
+
+                            if (Firstname == "") {
+                                // 18-04-2016
+                                //saroj
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
@@ -966,7 +943,7 @@ angular.module('contacts')
                                         abc.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
                                         abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                         filter.filters.push(abc);
-                                    }
+                                    }   
 
                                     else if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
 
@@ -1001,13 +978,7 @@ angular.module('contacts')
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
-                                        if (Firstname == "") {
-                                            // 18-04-2016
-                                            //saroj
-                                            ValidFilter = false;
-                                            alert("Invalid Query.");
-                                            return;
-                                        }
+                                       
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
                                 }
@@ -1023,12 +994,8 @@ angular.module('contacts')
 
                             if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
-                            else {
-                                alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
-                                return;
-                            }
+                            
                             // by saroj on 18-04-2016
-
                             if (Firstname == "") {
                                 ValidFilter = false;
                                 alert("Invalid Query.");
@@ -1056,8 +1023,42 @@ angular.module('contacts')
                             ValidFilter = true;
                         }
 
-                        // IS BEFORE CHECK
 
+                        // GREATER THAN TO CHECK
+                        if (expSplitGT.length > 1) {
+
+                            if (expSplitGT[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+                            
+                            // by saroj on 19-04-2016
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGTE[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // LESSER THAN TO CHECK
+                        if (expSplitLT.length > 1) {
+
+                            if (expSplitLT[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+
+                            // by saroj on 19-04-2016
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: parseFloat(expSplitLT[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+
+                        // IS BEFORE CHECK
                         if (expsplitIsBefore.length > 1) {
 
 
