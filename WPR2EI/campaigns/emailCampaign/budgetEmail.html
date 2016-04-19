@@ -78,7 +78,7 @@
                                        style="margin-left: 6px;"
                                        data-ng-model="params.budget"
                                        ng-pattern="/^([1-9][0-9,./]*)$"
-                                       required />
+                                        />
                                 <div ng-messages="projectForm.clientName.$error"></div>
                                 <div ng-messages="addNewForm.Budget.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.Budget.$invalid && (!addNewForm.Budget.$pristine || showValid) && !addNewForm.Budget.$focus">This field should not be empty </div>
@@ -108,7 +108,7 @@
                                        data-ng-model="params.no_of_leads"
                                        ng-pattern="/^([1-9][0-9,./]*)$"
                                        style="margin-left: 6px;"
-                                       required />
+                                      />
                                 <div ng-messages="addNewForm.Leads.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.Leads.$invalid && (!addNewForm.Leads.$pristine || showValid) && !addNewForm.Leads.$focus">This field should not be empty </div>
                                     <div ng-message="pattern" id="err_budgetEmail_lead">Enter valid value for Lead</div>
@@ -144,7 +144,7 @@
                                        data-ng-model="params.sales"
                                        ng-pattern="/^([1-9][0-9,./]*)$"
                                        style="margin-left: 6px;"
-                                       required />
+                                       />
                                 <div ng-messages="addNewForm.sales.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.sales.$invalid && (!addNewForm.sales.$pristine || showValid) && !addNewForm.sales.$focus">This field should not be empty </div>
                                     <div ng-message="pattern" id="err_budgetEmail_sales">Enter valid value for Sales</div>

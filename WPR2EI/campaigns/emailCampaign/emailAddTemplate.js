@@ -176,7 +176,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
     }
 
     $scope.next = function () {
-        if ($scope.params.bodyText != null) {
+        if ($scope.params.bodyText != null && $scope.params.subject != null) {
             var postData = {
                 template: $scope.params.bodyText,
                 template_id: $scope.params.template,
@@ -189,7 +189,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
         }
         else {
             //alert("Enter Description");
-            swal("Error!", "Pleas Enter Description", 'info')
+            swal("Error!", "Pleas Enter Description And Subject", 'info')
             $state.go('app.addTemplate');
         }
 
