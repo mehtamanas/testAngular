@@ -75,10 +75,10 @@
                                
                                     <div class="form-group form-bx4 form-bx3-1">
                                         <label for="">Choose Date</label>
-                                        <input kendo-date-time-picker class="" 
-                                               ng-model="due_date"
-                                               id="companyDatetime"
+                                        <input  id="datetimepicker" kendo-date-time-picker class="" 
+                                               ng-model="due_date"                                              
                                                k-ng-model="k_start_date"
+                                               k-on-change="dateChange()"
                                                k-format="'MMMM d, yyyy h:mm tt'" />
                                     </div>
 

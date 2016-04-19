@@ -27,30 +27,50 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.setFollowUp=function(followType){
         if (followType === 'hour') {
             $scope.followSelect = 1;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'hour')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "hour";
+           
         }
         else if (followType === 'tomorrow') {
             $scope.followSelect = 2;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'day')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "tomorrow";
+            
         }
         else if (followType === 'week') {
             $scope.followSelect = 3;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'week')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "week";
+            
         }
-        else {
+        else if (followType === 'month') {
             $scope.followSelect = 4;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'month')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "month";
+            
+        }
+        else if (followType === 'uncheck') {
+            $scope.followSelect = 0;
+            $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
         }
     }
 
+   
+
+    $scope.dateChange = function () {
+       
+        $scope.setFollowUp('uncheck');
+    }
+
+   
 
     var userId = $cookieStore.get('userId');
     $scope.reminder_time = "15 min";
@@ -94,7 +114,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.params = {
         name: $scope.name,      
         class_type: "Contact",
-        due_date: $scope.due_date,     
+        due_date: $scope.dueDate,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         text: $scope.text,
@@ -173,7 +193,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
             $scope.params = {
                 name: $scope.name,             
                 class_type: "Contact",
-                due_date: dDate,
+                due_date: $scope.dueDate,
                 start_date_time: new Date().toISOString(),
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),            
