@@ -86,6 +86,8 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
         {
             user.isTeamMember = true;
             var existingUsers = _.pluck($scope.usersInTeam, 'id');
+
+        
             
             // User should not be already existing and do not add duplicate entry
             
@@ -155,6 +157,32 @@ function ($scope, $state, $cookieStore, apiService, $rootScope, $window, $q, ema
             return;
         }
         $scope.updateTeamUsers();
+        Url = "PeopleList/GetPeopleListByPeopleId/" + usersToBeAddedOnServer[0].people_list_id;
+
+        apiService.get(Url).then(function (response) {
+            $scope.data1 = response.data;
+            $scope.contactCount = 0;
+            $scope.totalcontactCount = 0;
+            for (i = 0; i < $scope.data1.length; i++)
+            {
+                $scope.totalcontactCount = $scope.totalcontactCount + 1;
+                if ($scope.data1[i].email == null || $scope.data1[i].email == '')
+                {
+                    $scope.contactCount = $scope.contactCount + 1;
+                }
+            }
+           
+                
+            sweetAlert("", "Number of people with invalid email Id: " + $scope.contactCount + "     and Total number of people:" + $scope.totalcontactCount);
+            
+            $cookieStore.put("totalPersonCount", $scope.totalcontactCount);
+        },
+    function (error) {
+        if (error.status === 400)
+            alert(error.data.Message);
+        else
+            alert("Network issue");
+    });
         $cookieStore.put('usersToBeAddedOnServer1', usersToBeAddedOnServer);
         $cookieStore.put('usersToBeRemovedOnServer1', usersToBeRemovedOnServer);
         $state.go('app.addTemplate');

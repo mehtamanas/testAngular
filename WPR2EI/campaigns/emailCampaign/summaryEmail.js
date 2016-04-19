@@ -6,10 +6,12 @@
         var emailTemplate = JSON.parse(window.localStorage.getItem("emailAddTemplate"));
         window.localStorage.removeItem('emailAddTemplate');
         var tagToBeAdded = $cookieStore.get('usersToBeAddedOnServer1');
-        var tagToBeRemove= $cookieStore.get('usersToBeRemovedOnServer1');
+        var tagToBeRemove = $cookieStore.get('usersToBeRemovedOnServer1');
+        $scope.totalperson = $cookieStore.get('totalPersonCount');
         $scope.start_date = $cookieStore.get('htmldate1');
+        
         $scope.params = {};
-     
+        
 
         //Audit log start               
         AuditCreate = function () {
