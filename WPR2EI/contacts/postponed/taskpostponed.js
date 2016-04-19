@@ -94,32 +94,31 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
 
     //API functionality start
     $scope.params = {
-        name: $scope.name,
-        class_type: "Contact",
+        
+        task_postpone:'yes',
         due_date: $scope.due_date,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),       
         remind_me: $scope.remind_me,
         reminder_time: $scope.reminder_time,
         contact_id: $scope.seletedContactID,
-        assign_user_id: $cookieStore.get('userId'),
         type: $scope.Selescted_Day,
         id:$scope.taskID,
         task_type: $scope.selected_email_call,
     };
 
-    projectUrl = "ToDoItem/EditTaskWithNotes";
-    ProjectCreate = function (param) {
+    //projectUrl = "ToDoItem/EditTaskWithNotes";
+    $scope.ProjectCreate = function (params) {
         $scope.loadingDemo = true;
         $scope.params.remind_me = $scope.remind_me;
 
-        apiService.post(projectUrl, param).then(function (response) {
+        apiService.post("ToDoItem/EditTaskWithNotes", params).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
             $scope.loadingDemo = false;
             $scope.openSucessfullyPopup();
             AuditCreate();
-            $rootScope.$broadcast('REFRESH', 'TaskGrid');
+            $rootScope.$broadcast('REFRESH', { args: 'TaskGrid', id: $scope.taskID, action: 'task' });
         },
     function (error) {
         if (error.status === 400)
@@ -173,30 +172,28 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
             else
                 task_type_id = '322e4275-9e8b-47b9-ade2-a18fd9668b69'//call
             $scope.params = {
-                name: $scope.name,
-                class_type: "Contact",
+               task_postpone:'yes',
                 due_date: dDate,
                 start_date_time: new Date().toISOString(),
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
-                text: $scope.text,
                 id: $scope.taskID,
                 remind_me: remind_me,
                 reminder_time: $scope.params.reminder_datetime,
-                contact_id: $scope.seletedContactID,
-                assign_user_id: $cookieStore.get('userId'),
+                contact_id: $scope.seletedContactID,                
                 type: $scope.Selescted_Day,
                 task_type: $scope.selected_email_call,
                 task_type_id: task_type_id
             };
 
-            new ProjectCreate($scope.params).then(function (response) {
-                console.log(response);
-                $scope.showValid = false;
-                $state.go('guest.signup.thanks');
-            }, function (error) {
-                console.log(error);
-            });
+            //new ProjectCreate($scope.params).then(function (response) {
+            //    console.log(response);
+            //    $scope.showValid = false;
+            //    $state.go('guest.signup.thanks');
+            //}, function (error) {
+            //    console.log(error);
+            //});
+            $scope.ProjectCreate($scope.params);
 
             $scope.showValid = false;
 
