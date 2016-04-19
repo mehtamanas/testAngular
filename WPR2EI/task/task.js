@@ -539,6 +539,7 @@
 
         $scope.callFilter = function () {
 
+
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
             var Firstname = "";
@@ -548,6 +549,7 @@
             var abc = [];
             var logsplit = "";
 
+          
 
             if (txtdata.length > 0) {
 
@@ -603,6 +605,14 @@
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
 
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }
@@ -617,6 +627,14 @@
 
                             if (expsplitIN[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
                             // alert(mystring);
@@ -647,9 +665,21 @@
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
-                            //"last_updated":"2016-04-07T04:20:42.953+00:00"
+                           
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             if (Firstname == "due_date" || Firstname == "created_date") {
+
+
+                                var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
+                                var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
+
 
                                 var CurrentDate = moment().startOf('day')._d;
                                 var CurrentEndDate = moment().endOf('day')._d;
@@ -813,8 +843,8 @@
                                 else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
                                     abc = { logic: "and", filters: [] };
-                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
-                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: prevQuarterStartDay });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: prevQuarterEndDay });
                                     filter.filters.push(abc);
                                 }
 
@@ -887,8 +917,11 @@
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
-                            else {
-                                alert(" Operator cannot be assigned to " + expsplitIsBefore[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -906,8 +939,11 @@
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
-                            else {
-                                alert(" Operator cannot be assigned to " + expsplitIsAfter[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -926,8 +962,11 @@
                             else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
-                            else {
-                                alert(" Operator cannot be assigned to " + expsplitBetween[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
