@@ -10,7 +10,20 @@
                 <div class="col-xs-12">
 
                     <div class="form-bx13" style="padding-bottom: 29px;">
-                        <input kendo-auto-complete k-data-source="tagList" id="contactAddTags" class="form-control" ng-model="params.tag_name" />
+                        <select kendo-combo-box
+                                k-placeholder="'Select Tag'"
+                                k-data-text-field="'tag_name'"
+                                k-data-value-field="'tag_name'"
+                                k-filter="'contains'"
+                                k-auto-bind="false"
+                                k-min-length="3"
+                                k-data-source="tagList"
+                                style="width: 100%"
+                                ng-model="params.tag_name"
+                                id="option_tagName"></select>
+
+
+
                     </div>
                 </div>
             </div>
