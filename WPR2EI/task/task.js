@@ -433,8 +433,7 @@
             }
 
         }
-
-
+        
         $scope.saveView = function () {
             var grid = $('#project-record-list').getKendoGrid();
 
@@ -539,7 +538,6 @@
 
         $scope.callFilter = function () {
 
-
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
             var Firstname = "";
@@ -605,6 +603,9 @@
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
 
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
+
                             // by saroj on 18-04-2016
 
                             if (Firstname == "") {
@@ -627,6 +628,9 @@
 
                             if (expsplitIN[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
 
                             // by saroj on 18-04-2016
 
@@ -653,11 +657,14 @@
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "TASK")
+                            if (expsplit[0].toUpperCase().trim() == "TASK NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "TASK")
                                 Firstname = "name";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
+                            if (expsplit[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
+
+                            if (expsplit[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
 
                             if (expsplit[0].toUpperCase().trim() == "DUE DATE")
                                 Firstname = "due_date";
@@ -753,6 +760,8 @@
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
+
+                               
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
                                     abc = { logic: "and", filters: [] };
@@ -951,8 +960,7 @@
                             ValidFilter = true;
                         }
 
-                        // 
-
+                 
                         // BETWEEN OR CHECK 
                         if (expsplitBetween.length > 1) {
 
