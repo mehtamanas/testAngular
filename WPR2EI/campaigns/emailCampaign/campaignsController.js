@@ -948,12 +948,14 @@ angular.module('campaigns')
             if (ValidFilter == true && ValidClause == false) {
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
+               // alert('Query Executed Successfully.');
             }
             else if (ValidFilter == false && ValidClause == true) {
                 var dsSort = [];
                 dsSort.push({ field: feild1, dir: dir1 });
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.sort(dsSort);
+              //  alert('Query Executed Successfully.');
             }
             else if (ValidFilter == true && ValidClause == true) {
                 var dsSort = [];
@@ -961,6 +963,7 @@ angular.module('campaigns')
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
                 ds.sort(dsSort);
+               // alert('Query Executed Successfully.');
             }
             else {
                 alert("Please Check Query.");
