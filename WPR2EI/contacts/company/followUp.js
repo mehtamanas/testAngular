@@ -65,8 +65,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
 
    
 
-    $scope.dateChange = function () {
-       
+    $scope.dateChange = function () {       
         $scope.setFollowUp('uncheck');
     }
 
@@ -173,7 +172,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-            if ($scope.due_date === undefined || $scope.due_date === '') {
+            if ($scope.due_date === undefined || $scope.due_date === '' || $scope.due_date === null) {
                 dDate = moment($scope.dueDate, 'DD/MM/YYYY HH:mm:ss')._d
             }
             else dDate = moment($scope.due_date, 'MMMM DD, YYYY hh:mm A')._d;
@@ -191,7 +190,7 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
                 else
                 task_type_id='322e4275-9e8b-47b9-ade2-a18fd9668b69'//call
             $scope.params = {
-                name: $scope.name,             
+                name: $scope.dueDate,
                 class_type: "Contact",
                 due_date: $scope.dueDate,
                 start_date_time: new Date().toISOString(),

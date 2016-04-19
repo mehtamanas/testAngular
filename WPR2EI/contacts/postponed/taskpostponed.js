@@ -29,28 +29,40 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
     $scope.setFollowUp = function (followType) {
         if (followType === 'hour') {
             $scope.followSelect = 1;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'hour')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "hour";
         }
         else if (followType === 'tomorrow') {
             $scope.followSelect = 2;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'day')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "tomorrow";
         }
         else if (followType === 'week') {
             $scope.followSelect = 3;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'week')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "week";
         }
-        else {
+        else if (followType === 'month') {
             $scope.followSelect = 4;
+            $scope.due_date = null;
             $scope.dueDate = moment().add(1, 'month')._d;
             $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
             $scope.Selescted_Day = "month";
         }
+        else if (followType === 'uncheck') {
+            $scope.followSelect = 0;
+            $scope.dueDate = moment($scope.dueDate).format('DD/MM/YYYY HH:mm:ss');
+        }
+    }
+
+    $scope.dateChange = function () {
+        $scope.setFollowUp('uncheck');
     }
 
 
@@ -154,7 +166,7 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         if (isValid) {
-            if ($scope.due_date === undefined || $scope.due_date === '') {
+            if ($scope.due_date === undefined || $scope.due_date === '' || $scope.due_date === null) {
                 dDate = moment($scope.dueDate, 'DD/MM/YYYY HH:mm:ss')._d
             }
             else dDate = moment($scope.due_date, 'MMMM DD, YYYY hh:mm A')._d;
