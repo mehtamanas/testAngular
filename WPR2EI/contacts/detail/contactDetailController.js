@@ -817,11 +817,23 @@ angular.module('contacts')
                 type: "json",
                 transport: {
 
-                    read: apiService.baseUrl + "Contact/GetAuditTrail/" + $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Contact/GetAuditTrail/f5985168-6307-4881-aa64-959f8546ae60" //+ $scope.seletedCustomerId
                 },
-                pageSize: 20,
+                schema: {
+                    model: {
+                        fields: {
+                            Name: { type: "string" },
+                            OriginalValue: { type: "string" },
+                            NewValue: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 5,
+                group: {
+                    field: "field_name"
+
+                },
             },
-            groupable: true,
             sortable: true,
             selectable: "multiple",
             reorderable: true,
@@ -958,7 +970,7 @@ angular.module('contacts')
             }, {
                 field: "task_code",
                 title: "Task_Code",
-                template: '#if (task_code!=null){#<a ng-click="openEditTaskPopUp(dataItem.task_id)" href="">#=task_code#</a> #}#',
+                template: '#if (task_code!=null){#<a ng-click="openEditTask(dataItem.task_id)" href="">#=task_code#</a> #}#',
                 attributes:
               {
                   "style": "text-align:center"
@@ -972,7 +984,7 @@ angular.module('contacts')
                 type: "json",
                 transport: {
 
-                    read: apiService.baseUrl + "Quotation/GetQuoteGrid/" + organization_id
+                    read: apiService.baseUrl + "Quotation/GetQuoteGridWithAttachement/" + organization_id
                 },
                 pageSize: 5,
 
@@ -980,17 +992,10 @@ angular.module('contacts')
                     model: {
                         fields: {
 
-                            expiry_date: { type: "date" },
-
-
-
+                            careted_date: { type: "date" },
                         }
                     }
                 }
-
-                //group: {
-                //    field: 'sport'
-                //}
             },
             groupable: true,
             sortable: true,
@@ -1012,8 +1017,8 @@ angular.module('contacts')
                 buttonCount: 5
             },
             columns: [{
-                field: "service_name",
-                title: "Service Name",
+                field: "created_by",
+                title: "Created By",
 
                 attributes:
                        {
@@ -1022,8 +1027,8 @@ angular.module('contacts')
                        }
 
             }, {
-                field: "description",
-                title: "Description",
+                field: "total_consideration",
+                title: "Total Consideration",
 
                 attributes:
                        {
@@ -1032,8 +1037,8 @@ angular.module('contacts')
                        }
 
             }, {
-                field: "final_amount",
-                title: "Price",
+                field: "final_total",
+                title: "Final Total",
 
                 attributes:
                        {
@@ -1043,19 +1048,8 @@ angular.module('contacts')
 
 
             }, {
-                field: "tax_value",
-                title: "Tax",
-
-                attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
-
-            }, {
-                field: "expiry_date",
+                field: "careted_date",
                 title: "Date",
-
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                 attributes:
                        {
@@ -1063,18 +1057,17 @@ angular.module('contacts')
                            "style": "text-align:center"
                        }
 
-            },
-            {
-                field: "attachment",
+            }, {
+                field: "attachement",
                 title: "Attachment",
-
                 attributes:
                        {
                            "class": "UseHand",
                            "style": "text-align:center"
                        }
 
-            }]
+            }
+            ]
         };
 
         $scope.AssignmentToGrid = {

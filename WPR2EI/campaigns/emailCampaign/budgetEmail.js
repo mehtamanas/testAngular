@@ -45,10 +45,7 @@
             $scope.params = response.data;
             $cookieStore.put('campaign_id', $scope.params.campaign_ID);
         },
-    function (error) {
-        
-    }
-        );
+    function (error) {});
     }
 
         $scope.params = {
@@ -75,10 +72,8 @@
                 $state.go('app.optionEmail');
                                    
                 $scope.showValid = false;
-
             }
         }
-
 
         $scope.cancel = function () {
             $cookieStore.remove('Name');
@@ -96,11 +91,8 @@
          
         $scope.back = function ()
         {
-             $state.go('app.addEmailCampaign');
-           
-         }
-
-        
+             $state.go('app.addEmailCampaign');           
+         }      
        
     });
 
