@@ -317,10 +317,11 @@ angular.module('contacts')
                 syncData = $interval(syncLeadDataSource, 300000);
             },
             groupable: true,
+            columnMenu: true,
             sortable: true,
             selectable: "multiple",
             reorderable: true,
-            height: window.innerHeight - 240,
+            height: window.innerHeight - 210,
             resizable: true,
             filterable: false,
             columnMenu: {
@@ -1479,6 +1480,7 @@ angular.module('contacts')
 
             $scope.gridView = 'default';
         }
+       
     }
 );
 
