@@ -1,6 +1,10 @@
 ﻿angular.module('task')
+   // .controller('TaskGridController',
+   // function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage) {
 
- var EditTaskGridController = function ($scope, $state, $cookieStore, apiService,  $modal, $rootScope, $window, $stateParams) {
+
+ .controller ('EditTaskGridController', 
+ function ($scope, $state, $cookieStore, apiService, $modal, $rootScope, $window, $stateParams) {
     console.log(' EditTaskGridController');
     var userId = $cookieStore.get('userId');
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
@@ -255,7 +259,7 @@
 
 
         }
-    };
+    });
 
 
 

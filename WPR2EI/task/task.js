@@ -267,7 +267,7 @@
                 }
                 else {
                     window.sessionStorage.selectedTaskID = dataItem.task_id;
-                    $state.go('app.edit_task', { id: dataItem.task_id });
+                   // $state.go('app.edit_task', { id: dataItem.task_id });
                     //$scope.openEditTask();
                 };
             },
