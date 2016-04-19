@@ -15,6 +15,10 @@
           },
           pageSize: 20,
           refresh: true,
+          sort: {
+              field: "created_date",
+              dir: "desc"
+          }
       },
 
       groupable: true,

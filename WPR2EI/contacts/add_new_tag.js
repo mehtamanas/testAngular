@@ -38,6 +38,8 @@ var AddTagController = function ($scope, $state, $cookieStore, apiService, $root
     Url = "Tags/GetAllTags?id=" + orgID
     apiService.get(Url).then(function (response) {
         $scope.tagList = response.data;
+        $scope.tagList = _.sortBy($scope.tagList, function (o) { return o.tag_name; });
+
         //$scope.tagList = _.pluck($scope.tagList, 'tag_name');
     },
 function (error) {
