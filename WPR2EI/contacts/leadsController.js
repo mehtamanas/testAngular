@@ -1318,24 +1318,37 @@ angular.module('contacts')
             })
         }
 
-        $scope.$on('REFRESH2', function (event, args) {
+        $rootScope.$on('REFRESH2', function (event, args) {
 
             if (args.name == 'LeadGrid') {
-                if (args.data === null) {
-                    $('.k-i-refresh').trigger("click");
-                } else {
-                    $('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
+                if (args.action === 'add') {
+                    //$('#contact_kenomain').getKendoGrid().dataSource.insert(0, { 'Name': args.data.first_name + '' + args.data.last_name, 'Contact_Id': args.data.id, 'Contact_Image': 'https://dwellarstorageuat.blob.core.windows.net/personphoto/655faf0a-1295-4390-bb5d-23febc9ae672default.jpg' });
                     contactAddEditRefresh();
                 }
-            } else if (args.name == 'ViewCreated') {
-                callViewApi();
+                else if (args.action === 'edit') {
+                    contactAddEditRefresh();
+                }
+                else if (args.action === 'delete') {
+                    for (i = 0; i < args.data.length; i++) {
+                        var a = _.remove($localStorage.leadDataSource, function (o) {
+                            return o.Contact_Id == args.data[i].id
+                        });
+                    }
+                    contactAddEditRefresh();
+                }
+                else if (args.action == 'tag') {
+                    contactAddEditRefresh();
+                }
+                else if (args.action == 'assignTo') {
+                    contactAddEditRefresh();
+                }
 
-                $scope.gridView = args.data;
+            } else if (args.name == 'ViewCreated') {
+                $scope.views.push(args.data);//push new view into view list
+                $scope.gridView = args.data.id; // select currently created view in view list
             }
             $scope.leadAction = 'no_action';
             $('#checkAll').prop('checked', false);
-
-            callViewApi();
 
 
         });
