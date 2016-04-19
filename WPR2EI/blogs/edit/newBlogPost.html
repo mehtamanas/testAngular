@@ -40,8 +40,7 @@
             <input type="text" class="form-control text-bold" id="edit_blog_name" autofocus name="Blog_name"
                    placeholder="Blog Name"
                    data-ng-model="params.name"
-                   input-focus
-                   ng-disabled="params.name"
+                   input-focus                  
                    required />
             <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
                 <div ng-message="required">Enter your name</div>
