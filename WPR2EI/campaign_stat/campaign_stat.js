@@ -42,7 +42,49 @@
                         });
                 });
               
-              
+                pieData = [{
+                    category: "Opens",
+                    value: 60,
+                    color: "#29C2A4",
+                    visibleInLegend:false,
+                }, {
+                    category: "Unopend",
+                    value: 15,
+                    color: "#DF983C",
+                    visibleInLegend: false,
+                }, {
+                    category: "Clicks",
+                    color: "#34A853",
+                    value: 10,
+                    visibleInLegend: false,
+                }, {
+                    category: "Unique Clicks",
+                    color: "#4D5DCE",
+                    value: 10,
+                    visibleInLegend: false,
+                }, {
+                    category: "Unsubscribe",
+                    color: "#775A56",
+                    value: 10,
+                    visibleInLegend: false,
+                },
+
+                {
+                    category: "Bounced",
+                    color: "#4FA3AE",
+                    value: 10,
+                    visibleInLegend: false,
+                },
+
+                 {
+                     category: "Spam Report",
+                     color: "#E3563A",
+                     value: 10,
+                     visibleInLegend: false,
+                 }
+
+
+                ];
                 createChart(pieData);
             });  }
 
@@ -81,16 +123,18 @@
         //}],
 
         var createChart = function (data) {
-            var totalEmail = $scope.emailStats.total_mails_sent;
+            //var totalEmail = $scope.emailStats.total_mails_sent;
             $("#chart").kendoChart({
                 title: {
-                    text: totalEmail+", total emails",
-                    position:'bottom'
+                    text: 10001+", total emails",
+                    position: 'bottom',
+                   
                 },
                 legend: {
-                    position: "right",
+                    position: "center",
                     padding: '1',
                     margin: '1',
+                   
                     
                 },
                
@@ -104,6 +148,11 @@
                     template: "#= category # - #= kendo.format('{0:P}', percentage) #"
                 }
             });
+        }
+        var chart = $("#chart").data("kendoChart");
+        //to check the chart exist or not if exist then redraw it..
+        if (chart) {
+            chart.redraw();
         }
 
         //$scope.pieData = new kendo.data.DataSource({
