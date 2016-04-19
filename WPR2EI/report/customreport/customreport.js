@@ -507,6 +507,17 @@
 
 
         $scope.callFilter = function () {
+            // setQuarter('april');
+
+            //quarterAdjustment = (moment().month() % 3) + 1;
+            //var lastQuarterEndDate = moment().subtract({ months: quarterAdjustment }).endOf('month');
+            //var lastQuarterStartDate = lastQuarterEndDate.clone().subtract({ months: 3 }).startOf('month');
+
+            var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
+            var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
+
+            //alert(prevQuarterStartDay);
+            //alert(prevQuarterEndDay);
 
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
@@ -597,6 +608,14 @@
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
 
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }
@@ -636,6 +655,14 @@
 
                             else if (expsplitIN[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
                             // alert(mystring);
@@ -712,8 +739,16 @@
                                     var CurrentDate = moment().startOf('day')._d;
                                     var CurrentEndDate = moment().endOf('day')._d;
                                     // alert(CurrentEndDate);
+
                                     var TommDate = moment().startOf('day').add(+1, 'days')._d;
                                     var TommEndDate = moment().endOf('day').add(+1, 'days')._d;
+
+                                    var next7Day = moment().endOf('day').add(+7, 'days')._d;
+                                    // alert(next7Day);
+
+                                    // alert(TommDate);
+                                    //  alert(TommEndDate);
+
                                     var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
 
                                     // For This week 
@@ -753,13 +788,18 @@
                                     // Dates for Current Quarter
                                     var dd = new Date();
                                     var currQuarter = (dd.getMonth() - 1) / 3 + 1;
-
+                                    //   alert("currQuarter"+ currQuarter);
                                     var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
                                     var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
                                     lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
                                     // Dates for Current Quarter
                                     var ddlast = new Date();
+
+                                    //moment().subtract(1, 'quarter').startOf('quarter')._d
+                                    //moment().subtract(1, 'quarter').endOf('quarter')._d
+
                                     var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
+                                    //  alert("lastQuarter" + currQuarter);
                                     var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
                                     var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
                                     lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
@@ -787,6 +827,7 @@
                                         abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
                                         abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
                                         filter.filters.push(abc);
+
                                     }
 
                                     else if (expsplit[1].trim().toUpperCase() == "TOMORROW") {
@@ -854,8 +895,8 @@
                                     else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
                                         abc = { logic: "and", filters: [] };
-                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstdayOflastQuarter });
-                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: lastdayOflastQuarter });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "gt", value: prevQuarterStartDay });
+                                        abc.filters.push({ field: Firstname.trim(), operator: "lt", value: prevQuarterEndDay });
                                         filter.filters.push(abc);
                                     }
 
@@ -908,6 +949,13 @@
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
+                                        if (Firstname == "") {
+                                            // 18-04-2016
+                                            //saroj
+                                            ValidFilter = false;
+                                            alert("Invalid Query.");
+                                            return;
+                                        }
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
                                 }
@@ -927,6 +975,13 @@
                                 alert(" >= Operator cannot be assigned to " + expSplitGTE[0]);
                                 return;
                             }
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
                             ValidFilter = true;
@@ -937,8 +992,11 @@
 
                             if (expSplitLTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
-                            else {
-                                alert(" <= Operator cannot be assigned to " + expSplitLTE[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -960,8 +1018,11 @@
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsBefore[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -982,8 +1043,11 @@
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitIsAfter[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
@@ -1005,8 +1069,11 @@
                             else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
-                            else {
-                                alert(" < Operator cannot be assigned to " + expsplitBetween[0]);
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
                                 return;
                             }
 
