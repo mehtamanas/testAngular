@@ -3,6 +3,8 @@
 .controller('emailAddTemplate',
 function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize) {
     var orgID = $cookieStore.get('orgID');
+
+    $scope.loadingDemo = false;
     //Audit log start               
     AuditCreate = function () {
         var postdata =
@@ -166,11 +168,12 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
         }
         apiService.post('SendEmail/SaveEmail', postData).then(function (response) {
             data = response.data;
+            $scope.loadingDemo = false;
             //$scope.openSucessfullPopup();
             // $scope.cancel();
         },
        function (error) {
-
+           $scope.loadingDemo = false;
        });
 
     }
@@ -224,9 +227,8 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
 
     $scope.sendEmail = function (isValid) {
         $scope.showValid = true;
-
         if (isValid) {
-
+            $scope.loadingDemo = true;
             $scope.showValid = false;
         }
     }
