@@ -2,6 +2,7 @@
 angular.module('campaigns')
 .controller('campaignsDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $window) {
+        $scope.gridView = 'default';
         console.log('campaignsDetailController');
         var orgID = $cookieStore.get('orgID');
         var userID = $cookieStore.get('userId');
@@ -455,7 +456,9 @@ angular.module('campaigns')
                 str = str.replace(/"/g, "");
 
                 $scope.textareaText = str;
-                grid.dataSource.filter(JSON.parse(viewObj[0].filters));
+                //sss
+                $scope.callFilter();
+                //grid.dataSource.filter(JSON.parse(viewObj[0].filters));
             }
             else {
                 $('#project-record-list').getKendoGrid().dataSource.sort({});
@@ -493,8 +496,7 @@ angular.module('campaigns')
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'email', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
         }
-
-
+        
         $scope.editView = function () {
             if ($scope.gridView !== 'default') {
                 var viewName = _.filter($scope.views, function (o)
@@ -543,6 +545,7 @@ angular.module('campaigns')
                         postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#project-record-list').getKendoGrid().dataSource.filter({});
+                            $('#project-record-list').getKendoGrid().dataSource.sort({});
                             $scope.textareaText = ''
                             $scope.gridView = 'default';
 
@@ -581,7 +584,7 @@ angular.module('campaigns')
             var txtdata = txtdata;
             var Firstname = "";
             var ValidFilter = false;
-
+            var ValidClause = false;
             var filter = [];
             var abc = [];
             var logsplit = "";
@@ -589,37 +592,83 @@ angular.module('campaigns')
 
             if (txtdata.length > 0) {
 
+                var pos = txtdata.indexOf("order by");
                 var aryClause = txtdata.split(" order by ");
                 var feild1 = "";
                 var dir1 = "";
-                if (aryClause.length >= 2) {
+                var fValue = "";
+
+                if (pos >= 0) {
                     var arydir = "";
-                    if (aryClause[1].split(" asc").length > aryClause[1].split(" desc").length) {
-
-                        arydir = aryClause[1].split(" asc");
-                        dir1 = "asc";
-                        feild1 = arydir[0];
-                    }
-                    else if (aryClause[1].split(" desc").length >= 2) {
-
-                        arydir = aryClause[1].split(" desc");
-                        dir1 = "desc";
-                        feild1 = arydir[0];
+                    if (pos == 0) {
+                        if (aryClause[0].split(" asc").length > aryClause[0].split(" desc").length) {
+                            arydir = aryClause[0].split(" asc");
+                            dir1 = "asc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[0].split(" desc").length >= 2) {
+                            arydir = aryClause[0].split(" desc");
+                            dir1 = "desc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                        }
                     }
                     else {
-
-                        ValidFilter = false;
+                        if (aryClause[1].split(" asc").length > aryClause[1].split(" desc").length) {
+                            arydir = aryClause[1].split(" asc");
+                            dir1 = "asc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[1].split(" desc").length >= 2) {
+                            arydir = aryClause[1].split(" desc");
+                            dir1 = "desc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                        }
+                    }
+                    if (ValidClause == true) {
+                        if (fValue == "NAME")
+                            feild1 = "name";
+                        else if (fValue == "CHANNEL")
+                            feild1 = "channel_type_name";
+                        else if (fValue == "BUDGET")
+                            feild1 = "budget";
+                        else if (fValue == "SPENT")
+                            feild1 = "spent";
+                        else if (fValue == "CLICKS")
+                            feild1 = "clicks";
+                        else if (fValue == "CON.RATE")
+                            feild1 = "conversion_rate";
+                        else if (fValue == "LEAD")
+                            feild1 = "no_of_leads";
+                        else if (fValue == "CREATED DATE")
+                            feild1 = "created_date";
+                        else if (fValue == "START DATE")
+                            feild1 = "start_date1";
+                        else if (fValue == "STATUS")
+                            feild1 = "status";
                     }
                 }
 
-                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+
+                if (aryClause[0].split(" and ").length > aryClause[0].split(" or ").length) {
 
                     filter = { logic: "and", filters: [] };
-                    logsplit = txtdata.split(" and ");
+                    logsplit = aryClause[0].split(" and ");
                 }
                 else {
                     filter = { logic: "or", filters: [] };
-                    logsplit = txtdata.split(" or ");
+                    logsplit = aryClause[0].split(" or ");
                 }
 
                 // alert("or split value =  " + logsplit.length);
@@ -640,9 +689,62 @@ angular.module('campaigns')
                         if (expIS.length > 1)
                             expsplit = expIS;
 
+                        var expsplitCONTAINS = logsplit[j].split(" contains ");
+                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
+
+                        var expsplitIN = logsplit[j].split(" in ");
+
                         var expSplitGTE = logsplit[j].split(" >= ");
 
                         var expSplitLTE = logsplit[j].split(" <= ");
+
+                        var expSplitGT = logsplit[j].split(" > ");
+
+                        var expSplitLT = logsplit[j].split(" < ");
+
+                        // CONTAINS  CHECK   
+                        if (expsplitCONTAINS.length > 1) {
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
+                            ValidFilter = true;
+                        }
+
+
+                        if (expsplitIN.length > 1) {
+
+
+                            if (expsplitIN[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            var mystring = expsplitIN[1].trim().replace(/["'\(\)]/g, "");
+                            // alert(mystring);
+
+                            var newString = mystring.split(',');
+                            if (newString.length >= 1) {
+                                for (var k = 0; k < newString.length; k++) {
+                                    // newString
+                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
+                                    ValidFilter = true;
+                                }
+                            }
+
+                        }
+
 
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
@@ -668,12 +770,20 @@ angular.module('campaigns')
                             else if (expsplit[0].toUpperCase().trim() == "CONVERSIONS")
                                 Firstname = "conversion_rate";
 
+                            else if (expsplit[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
                             ValidFilter = true;
 
                         }
-
-
+                        
                         // GREATER THAN EQUAL TO CHECK
                         if (expSplitGTE.length > 1) {
 
@@ -697,6 +807,15 @@ angular.module('campaigns')
 
                             else if (expSplitGTE[0].toUpperCase().trim() == "CONVERSIONS")
                                 Firstname = "conversion_rate";
+
+                            else if (expSplitGTE[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
                             ValidFilter = true;
@@ -726,7 +845,90 @@ angular.module('campaigns')
                             else if (expSplitLTE[0].toUpperCase().trim() == "CONVERSIONS")
                                 Firstname = "conversion_rate";
 
+                            else if (expSplitLTE[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // GREATER THAN  TO CHECK
+                        if (expSplitGT.length > 1) {
+
+                            if (expSplitGT[0].toUpperCase().trim() == "OPEN RATE")
+                                Firstname = "open_rate";
+
+                            if (expSplitGT[0].toUpperCase().trim() == "OPENS")
+                                Firstname = "opens";
+
+                            if (expSplitGT[0].toUpperCase().trim() == "BOUNCES")
+                                Firstname = "bounces";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "UNSUBSCRIBES")
+                                Firstname = "unsubscribes";
+
+                            if (expSplitGT[0].toUpperCase().trim() == "BUDGET")
+                                Firstname = "budget";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "REVENUE")
+                                Firstname = "revenue";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "CONVERSIONS")
+                                Firstname = "conversion_rate";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGT[1].trim()) });
+                            ValidFilter = true;
+                        }
+
+                        // LESSER THAN CHECK
+                        if (expSplitLT.length > 1) {
+
+                            if (expSplitLT[0].toUpperCase().trim() == "OPEN RATE")
+                                Firstname = "open_rate";
+
+                            if (expSplitLT[0].toUpperCase().trim() == "OPENS")
+                                Firstname = "opens";
+
+                            if (expSplitLT[0].toUpperCase().trim() == "BOUNCES")
+                                Firstname = "bounces";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "UNSUBSCRIBES")
+                                Firstname = "unsubscribes";
+
+                            if (expSplitLT[0].toUpperCase().trim() == "BUDGET")
+                                Firstname = "budget";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "REVENUE")
+                                Firstname = "revenue";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "CONVERSIONS")
+                                Firstname = "conversion_rate";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: parseFloat(expSplitLT[1].trim()) });
                             ValidFilter = true;
                         }
 
@@ -738,18 +940,24 @@ angular.module('campaigns')
 
             // final code to get execute....
 
-            if (Firstname == "") {
+            if (Firstname == "" && ValidClause == false) {
                 alert("Invalid Query.");
                 return;
             }
 
-            if (ValidFilter == true) {
-
+            if (ValidFilter == true && ValidClause == false) {
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.filter(filter);
+            }
+            else if (ValidFilter == false && ValidClause == true) {
                 var dsSort = [];
                 dsSort.push({ field: feild1, dir: dir1 });
-                //  dsSort.push({ field: "budget", dir: "desc" });
-                //ds.dataSource.sort(dsSort);
-                // var ds = $('#project-record-list').getKendoGrid().dataSource.sort(dsSort);
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.sort(dsSort);
+            }
+            else if (ValidFilter == true && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
                 ds.sort(dsSort);
@@ -761,6 +969,7 @@ angular.module('campaigns')
 
         $scope.clearFilter = function () {
             $('#project-record-list').getKendoGrid().dataSource.filter({});
+            $('#project-record-list').getKendoGrid().dataSource.sort({});
             $scope.textareaText = ''
             $scope.gridView = 'default';
         }

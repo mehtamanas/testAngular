@@ -32,6 +32,7 @@
                 if (view.grid_name == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: view });
                 if (view.grid_name == 'client') $rootScope.$broadcast('REFRESH3', { name: 'ViewCreated', data: view });
                 if (view.grid_name == 'call') $rootScope.$broadcast('REFRESH', { name: 'ViewCreated', data: view });
+                if (view.grid_name == 'email') $rootScope.$broadcast('REFRESH', { name: 'ViewCreated', data: view });
                 $scope.loadingDemo = false;
             }, function (error) {
 
