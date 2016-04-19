@@ -2,9 +2,9 @@
  .controller('emailTransactionController',
     function ($scope, $state, security, $cookieStore, apiService) {
         var orgID = $cookieStore.get('orgID');
-        $scope.showDetail = function (index) {
+        $scope.showDetail = function (email) {
             $scope.showEmailDetail = true;
-            $scope.emailDetail = $scope.emailData[index];
+            $scope.emailDetail = email;
         }
 
         var emailTransactionAPI = function () {
