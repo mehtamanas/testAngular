@@ -30,7 +30,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 10px;">
                     
                     <div class="col-lg-2 col-md-2 col-sm-2 " style="margin-left: 21px;">
-                        <select ng-model="gridView" class="form-control serach_bar_btn" style="font-size:14px;" ng-change="changeView()" id="contacaction">
+                        <select ng-model="gridView" class="form-control serach_bar_btn" style="font-size:14px;" ng-change="changeView()" id="contactLeadAction">
                             <option value='default' selected>Default View</option>
                             <option ng-repeat="view in views" value={{view.id}}>{{view.view_name}}</option>
                         </select>
@@ -39,15 +39,15 @@
                         <div class="form-inline">
                             <!--ng-keypress="checkIfEnterKeyWasPressed($event)"-->
 
-                            <textarea id="text" class="form-control serach_bar_filter custom_class" style="width: 71%;" placeholder="Query" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
-                            <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
-                            <a href="" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></a>
+                            <textarea id="leadQuerySearch" class="form-control serach_bar_filter custom_class" style="width: 71%;" placeholder="Query" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
+                            <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()" id="btn_searchCancel"><i class="fa fa-times"></i></a>
+                            <a href="" class="btn serch_btn_custom" ng-click="callFilter()" id="btn_searchCustomCheck"><i class="fa fa-check"></i></a>
                             <!--<button class="btn btn-primary serach_bar_btn-1" ng-click="saveView()"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>-->
-                            <a herf="" class="btn btn-primary serach_bar_btn-2" ng-click="saveView()" >SAVE VIEW</a>
-                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" data-placement="top" title="Edit" ng-click="editView()"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
+                            <a herf="" class="btn btn-primary serach_bar_btn-2" ng-click="saveView()" id="btn_SaveView" >SAVE VIEW</a>
+                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" data-placement="top" title="Edit" ng-click="editView()" id="btn_editView"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
                             
-                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" data-placement="top" title="Delete"  ng-click="deleteView()"><i class="fa fa-trash-o fa-2x"  style="color: #BFBCBC;" aria-hidden="true"></i></a>
-                            <a href="" ng-click="helpjqlpopup()"  > <img src="./images/jql-help-icon.png" style="margin-left:2%" /></a>
+                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" data-placement="top" title="Delete"  ng-click="deleteView()" id="btn_deleteView"><i class="fa fa-trash-o fa-2x"  style="color: #BFBCBC;" aria-hidden="true"></i></a>
+                            <a href="" ng-click="helpjqlpopup()" id="btn_jqlHelp" > <img src="./images/jql-help-icon.png" style="margin-left:2%" /></a>
                            
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                 <div class="col-lg-12 head_action">
                     <div class="">
                         <div class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
-                            <select ng-model="leadAction" class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="contacaction">
+                            <select ng-model="leadAction" class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="contactLeadTagaction">
                                 <option value='no_action' selected>Action</option>
                                 <option value='add_tag'>Add Tag</option>
                                 <option value='assign_to'>Assign To</option>
@@ -68,7 +68,7 @@
                             </select>
                         </div>
                         </div>
-                        <button type="button" class="btn btn_refresh" data-toggle="tooltip" data-placement="top" title="Refresh"><img src="./images/refresh2.png" /></button>
+                        <button type="button" class="btn btn_refresh" data-toggle="tooltip" data-placement="top" title="Refresh" id="btn_leadRefresh"><img src="./images/refresh2.png" /></button>
                     </div>
                 </div>
 
