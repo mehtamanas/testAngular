@@ -3,18 +3,15 @@
     .modal-dialog {
         /* new custom width */
         width: 100% !important;
-        margin-top: 0px !important;
+        padding-top: 0px;
+        padding-left:30px;
+        padding-right:30px;
         /* must be half of the width, minus scrollbar on the left (30px) */
     }
+
 </style>
-
-
-
-
-<div class="modal-dialog modal-lg" ng-class="size ? 'modal-' + size : ''" style="width: 100%;">
+<div class="modal-dialog modal-lg" ng-class="size ? 'modal-' + size : ''" style="width: 100%;padding:0px">
     <div id="add_new_team" tabindex="-1" role="dialog" style="width:100% !important;" aria-labelledby="myLargeModalLabel">
-
-
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
@@ -23,7 +20,7 @@
         <form class="form-content edit-organization-setting" name="addNewForm" style="text-align:left" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
 
             <div class="clearfix">
-                <div class="form-group form-bx form-bx8">
+                <div class="form-group col-md-12">
                     <label for="">From</label>
                     <tags-input ng-model="params.Name" input-focus name="from" placeholder="Contacts" id="contact_addNewNotes_From">
                         <auto-complete source="loadTags($query)"></auto-complete>
@@ -33,17 +30,25 @@
             <div class="clearfix">
                 <div class="">
                     <label for="">Add Note</label>
-                    <textarea id="contact_addNewNotes_addNote" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.description" resizable="true"></textarea>
+                    <textarea id="contact_addNewNotes_addNote" rows="10" cols="30" style="width:100%;" kendo-editor k-options="editorOption" k-ng-model="params.description" resizable="true"></textarea>
                 </div>
             </div>
             <div class="clearfix" style="margin-top:2%">
                 <div class="modal-btn-wrap clearfix">
 
-                    <button type="submit" class="f-btn ladda-button" ladda="loadingDemo" data-style="expand-right" id="contact_addNewNotes_save">Save</button>
+                    <button type="submit" class="btn btn-primary ladda-button" ladda="loadingDemo" data-style="expand-right" id="contact_addNewNotes_save"><b>Save</b></button>
 
-                    <button type="button" class="f-btn f-btn2" ng-click="cancel()" id="contact_addNewNotes_cancel">CANCEL</button>
+                    <button type="button" style="float:none" class="btn odd_btn" ng-click="cancel()" id="contact_addNewNotes_cancel">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+
+    var notePopupHeight = window.innerHeight - 300;
+    document.getElementById("contact_addNewNotes_addNote").style.height = notePopupHeight + "px";
+
+
+</script>
