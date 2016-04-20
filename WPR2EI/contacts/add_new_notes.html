@@ -1,14 +1,15 @@
 ﻿
 <style>
-   .modal.in .modal-dialog {
-    /* new custom width */
-    width: 100% !important;
-   height:100% !important
-    /* must be half of the width, minus scrollbar on the left (30px) */
-   
-}
-
+    .modal-dialog {
+        /* new custom width */
+        width: 100% !important;
+        margin-top: 0px !important;
+        /* must be half of the width, minus scrollbar on the left (30px) */
+    }
 </style>
+
+
+
 
 <div class="modal-dialog modal-lg" ng-class="size ? 'modal-' + size : ''" style="width: 100%;">
     <div id="add_new_team" tabindex="-1" role="dialog" style="width:100% !important;" aria-labelledby="myLargeModalLabel">
