@@ -201,35 +201,7 @@
                  "style": "text-align:center;cursor:pointer"
              }
 
-           }, {
-               title: "postpone",
-               template: '#if (status!="Completed") {# <a class="btn btn-primary" id="postpone_now" ng-click="openPostpone(dataItem)">Postpone</a> #}#',
-               attributes:
-             {
-                 "style": "text-align:center"
-             }
-
            }, ]
-        };
-
-
-        $scope.openPostpone = function (d) {
-            $scope.taskID = d.task_id;
-            window.sessionStorage.selectedCustomerID = $scope.taskID;
-            $cookieStore.put('company_name', d.company_name);
-            $cookieStore.put('contactID', d.contact_id);
-            $cookieStore.put('lead_name', d.Contact_name);
-            $cookieStore.put('task_name', d.name);
-            $cookieStore.put('taskID', $scope.taskID);
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'contacts/postponed/taskpostponed.html',
-                backdrop: 'static',
-                controller: postponedController,
-                size: 'lg'
-
-            });
-
         };
 
         //$scope.openAddtaskPopup = function () {
@@ -408,6 +380,18 @@
         }
 
         callViewApi();
+
+        // for help 
+        $scope.helpjqlpopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'task/Grammar_Task.html',
+                backdrop: 'static',
+                controller: helpjqlController,
+                size: 'lg'
+            });
+        };
+
 
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {

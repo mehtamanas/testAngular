@@ -104,7 +104,7 @@
                 {
                     field: "starttime",
                     title: "Date & Time",
-                    format: '{0:dd/MM/yyyy hh:mm tt}',
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                     attributes:
                    {
                        "class": "UseHand",
@@ -162,7 +162,7 @@
         $scope.helpjqlpopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'contacts/helpjql.html',
+                templateUrl: 'call/Grammar_Call.html',
                 backdrop: 'static',
                 controller: helpjqlController,
                 size: 'lg'
