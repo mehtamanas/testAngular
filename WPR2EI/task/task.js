@@ -356,10 +356,37 @@
 
         }
 
-        $scope.$on('REFRESH', function (event, args) {
-            if (args == 'TaskGrid') {
+
+        var outTaskGridRefresh = function () {
+            apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (response) {
+                data = response.data;               
+                $localStorage.common_taskDataSource = data;
                 $('.k-i-refresh').trigger("click");
+            })
+        }
+
+
+        $rootScope.$on('REFRESH', function (event, args) {
+
+            if (args.name == 'outTaskGrid') {
+                if (args.action === 'add') {
+                    $localStorage.common_taskDataSource = [];
+                    outTaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                }
+                else if (args.action === 'edit') {
+                    $localStorage.common_taskDataSource = [];
+                    outTaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                }              
+                else if (args.action == 'postpone') {
+                    $localStorage.common_taskDataSource = [];
+                    outTaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                }
+              
             }
+            
         });
 
         function clearFilters() {

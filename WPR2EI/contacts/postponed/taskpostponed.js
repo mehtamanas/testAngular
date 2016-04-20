@@ -131,6 +131,7 @@ var postponedController = function ($scope, $state, $cookieStore, apiService, $m
             $scope.openSucessfullyPopup();
             AuditCreate();
             $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', id: $scope.seletedContactID, action: 'task' });
+            $rootScope.$broadcast('REFRESH', { name: 'outTaskGrid', data: null, action: 'postpone' });
         },
     function (error) {
         if (error.status === 400)
