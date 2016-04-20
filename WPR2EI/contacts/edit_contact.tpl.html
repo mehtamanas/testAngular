@@ -68,7 +68,7 @@
                                      }">
                                             <md-input-container class="md-block">
                                                 <label class="contact-label">SALUTATION</label>
-                                                <md-select id="contactadd_salutation" name="salutation" ng-change="selectsalutation()" ng-model="salutation" class="dropdown">
+                                                <md-select id="contactadd_salutation" name="salutation" ng-change="selectsalutation()" ng-model="salutation1" class="dropdown">
                                                     <md-option value="" selected>Select Salutation</md-option>
                                                     <md-option value="Mr.">Mr.</md-option>
                                                     <md-option value="Ms.">Ms.</md-option>
@@ -98,7 +98,7 @@
                                             <md-input-container>
                                                 <label class="contact-label">First Name</label>
                                                 <input name="firstName" id="contactadd_firstname"
-                                                       data-ng-model="params.first_name"
+                                                       data-ng-model="params.Contact_First_Name"
                                                        minlength="1"
                                                        maxlength="40"
                                                        alphabets-only
@@ -125,11 +125,10 @@
                                             <md-input-container>
                                                 <label class="contact-label">Middle Name</label>
                                                 <input name="middleName" id="contactadd_middlename"
-                                                       ng-model="params.middle_name"
+                                                       ng-model="params.Contact_Middle_Name"
                                                        minlength="1"
                                                        maxlength="50"
                                                        alphabets-only
-                                                       required
                                                        ng-pattern="/^[a-zA-Z\s]*$/" />
 
                                             </md-input-container>
@@ -149,7 +148,7 @@
 
                                             <md-input-container>
                                                 <label class="contact-label">Last Name</label>
-                                                <input name="lastName" ng-model="params.last_name" id="contactadd_lastname"
+                                                <input name="lastName" ng-model="params.Contact_Last_Name" id="contactadd_lastname"
                                                        minlength="1"
                                                        maxlength="50"
                                                        alphabets-only
@@ -212,7 +211,7 @@
                                                     <md-input-container class="md-block">
                                                         <label class="contact-label">Primary Email Address</label>
                                                         <input name="Primary_email" id="contactadd_email"
-                                                               data-ng-model="choice1.contact_element_info_email"
+                                                               data-ng-model="params.primary_email"
                                                                input-focus
                                                                ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" required />
                                                         <div class="text-danger"
@@ -234,7 +233,7 @@
                                     <div class="col-md-2">
                                         <md-input-container class="md-block">
                                             <label for="" class="contact-label">SELECT LEAD TYPE</label>
-                                            <md-select placeholder="Assign to user" name="type" id="contactadd_type" ng-change="selecttype()" class="dropdown" ng-model="directory1">
+                                            <md-select placeholder="Assign to user" name="type" id="contactadd_type" ng-change="selecttype()" class="dropdown" ng-model="people_type">
                                                 <md-option value="" selected>Select Type</md-option>
                                                 <md-option value="Client">Client</md-option>
                                                 <md-option value="Lead">Lead</md-option>
@@ -365,7 +364,7 @@
                                                     <input name="mobile_no" id="contactadd_phoneno"
                                                            data-ng-model="params.mobile_number"
                                                            input-focus
-                                                           ng-pattern="/^[0-9\-]{8,12}$/" required />
+                                                           ng-pattern="/^[0-9\-]{8,12}$/" />
                                                     <div ng-messages="newForm.mobile_no.$error" style="color:maroon" role="alert">
                                                         <div ng-message="required" data-ng-if="newForm.mobile_no.$invalid && (!newForm.mobile_no.$pristine || showValid) && !newForm.mobile_no.$focus">This field should not be empty </div>
                                                         <div ng-message="pattern">Enter valid mobile number</div>
@@ -400,7 +399,7 @@
                                                     <input name="home_no" id="contactadd_phoneno"
                                                            data-ng-model="params.home_number"
                                                            input-focus
-                                                           ng-pattern="/^[0-9\-]{8,12}$/" required />
+                                                           ng-pattern="/^[0-9\-]{8,12}$/" />
                                                     <div ng-messages="newForm.home_no.$error" style="color:maroon" role="alert">
                                                         <div ng-message="required" data-ng-if="newForm.home_no.$invalid && (!newForm.home_no.$pristine || showValid) && !newForm.home_no.$focus">This field should not be empty </div>
                                                         <div ng-message="pattern">Enter valid secondary home number</div>
@@ -438,7 +437,7 @@
                                                     <input name="office_no" id="contactadd_phoneno"
                                                            data-ng-model="params.office_number"
                                                            input-focus
-                                                           ng-pattern="/^[0-9\-]{8,12}$/" required />
+                                                           ng-pattern="/^[0-9\-]{8,12}$/" />
                                                     <div ng-messages="newForm.office_no.$error" style="color:maroon" role="alert">
                                                         <div ng-message="required" data-ng-if="newForm.office_no.$invalid && (!newForm.office_no.$pristine || showValid) && !newForm.office_no.$focus">This field should not be empty </div>
                                                         <div ng-message="pattern">Enter valid primary phone number</div>
@@ -473,9 +472,9 @@
                                                 <md-input-container class="md-block">
                                                     <label class="contact-label">Email1 </label>
                                                     <input name="Primary_email1" id="contactadd_email"
-                                                           data-ng-model="params.email1"
+                                                           data-ng-model="params.secondaryEmail1"
                                                            input-focus
-                                                           ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" required />
+                                                           ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Primary_email1.$invalid && (!newForm.Primary_email1.$pristine || showValid) && !newForm.Primary_email1.$focus">
                                                         {{ 'Enter valid email address' | translate }}
@@ -505,9 +504,9 @@
                                                 <md-input-container class="md-block">
                                                     <label class="contact-label">Email2 </label>
                                                     <input name="Primary_email2" id="contactadd_email"
-                                                           data-ng-model="params.email2"
+                                                           data-ng-model="params.secondaryEmail2"
                                                            input-focus
-                                                           ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" required />
+                                                           ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Primary_email2.$invalid && (!newForm.Primary_email2.$pristine || showValid) && !newForm.Primary_email2.$focus">
                                                         {{ 'Enter valid email address' | translate }}
@@ -542,7 +541,7 @@
                                             <md-input-container class="md-block" style="margin-top: 2%;">
                                                 <label class="contact-label">Address Line 1</label>
                                                 <input name="Address" id="contactadd_address"
-                                                       data-ng-model="params.Street_1"
+                                                       data-ng-model="params.street1"
                                                        minlength="1"
                                                        maxlength="255"
                                                        input-focus />
@@ -571,7 +570,7 @@
                                             <md-input-container class="md-block" style="margin-top: 4%;">
                                                 <label class="contact-label">Address Line2</label>
                                                 <input name="Address2" id="contactadd_address"
-                                                       data-ng-model="params.Street_2"
+                                                       data-ng-model="params.street2"
                                                        minlength="1"
                                                        maxlength="255"
                                                        input-focus />
@@ -689,7 +688,7 @@
                             <div class="clearfix">
                                 <div class="col-md-9">
                                     <md-container>
-                                        <md-radio-group ng-model="occup">
+                                        <md-radio-group ng-model="occupation">
                                             <md-radio-button value="Business"> Business</md-radio-button>
                                             <md-radio-button value="Salaried"> Salaried </md-radio-button>
                                             <md-radio-button value="Professional">Professional</md-radio-button>
@@ -706,7 +705,7 @@
                             <div class="clearfix">
                                 <div class="col-md-6" style="margin-bottom:2%">
                                     <label for="" class="contact-label">Designation</label>
-                                    <input kendo-auto-complete ng-model="params.company" id="contactadd_Designation" k-data-source="companyList" class="form-control" />
+                                    <input kendo-auto-complete ng-model="params.designation" id="contactadd_Designation" k-data-source="titleList" class="form-control" />
                                 </div>
                             </div><!--designation-->
 
@@ -714,7 +713,7 @@
                                 <div class="col-md-9">
                                     <md-container>
                                         <label class="contact-label">BUDGET</label><br />
-                                        <md-radio-group ng-model="budget">
+                                        <md-radio-group ng-model="params.budget">
                                             <md-radio-button value="Up to 1cr<" class="md-primary">Up to 1cr</md-radio-button>
                                             <md-radio-button value=" 1cr-5cr "> 1cr-5cr </md-radio-button>
                                             <md-radio-button value="6cr-10cr">6cr-10cr</md-radio-button>
@@ -765,7 +764,7 @@
 
                                                 <md-input-container class="md-block" style="margin-top: 6%;margin-left:3%;">
                                                     <label class="contact-label">Gender</label>
-                                                    <md-select id="contactadd_gender" name="gender" ng-change="selectgender()" ng-model="directory2" class="dropdown">
+                                                    <md-select id="contactadd_gender" name="gender" ng-change="selectgender()" ng-model="gender1" class="dropdown">
                                                         <md-option value="" selected>Select Gender</md-option>
                                                         <md-option value="Male">Male</md-option>
                                                         <md-option value="Female">Female</md-option>
@@ -797,7 +796,7 @@
                                         <md-input-container class="md-block">
                                             <label class="contact-label">SPOUSE'S NAME</label>
                                             <input id="contactadd_area" name="spouse"
-                                                   data-ng-model="params.spouse_name"
+                                                   data-ng-model="params.Spouse_Name"
                                                    minlength="1"
                                                    maxlength="100"
                                                    ng-pattern="/^[a-zA-Z\s]*$/"
@@ -815,8 +814,8 @@
                                     <div class="form-bx">
                                         <label for="" class="contact-label">ANNYVERSARY</label>
                                         <input id="contactadd_datepicker" kendo-date-picker k-options="myOptions" class="form-control  "
-                                               ng-model="params.anniversary_date"
-                                               k-ng-model="k_due_date"
+                                               ng-model="params.Anniversary_Date"
+                                               k-ng-model="k_due_date1"
                                                k-format="'dd/MM/yyyy'" />
 
 
@@ -864,7 +863,7 @@
                                                     <label class="contact-label">NUMBER OF FAMILY MEMBER</label>
                                                     <input id="contactadd_family" name="family_member"
                                                            placeholder="Family Members"
-                                                           data-ng-model="params.no_of_family_members"
+                                                           data-ng-model="params.No_Of_Family_Members"
                                                            ng-pattern="/^[0-9]{1,2}$/" />
                                                 </md-input-container>
                                                 <div ng-messages="newForm.family_member.$error" style="color:maroon" role="alert">
@@ -887,7 +886,7 @@
                                                     <label class="contact-label">NUMBER OF CAR OWNED</label>
                                                     <input id="contactadd_carOwned" name="family"
                                                            placeholder="No. Of Cars"
-                                                           data-ng-model="params.params.no_of_cars_owned"
+                                                           data-ng-model="params.No_Of_Cars_Owned"
                                                            ng-pattern="/^[0-9]{1,9}$/" />
                                                 </md-input-container>
                                             </div>
@@ -910,13 +909,13 @@
                         <md-input-container class="md-block">
                             <div class="col-lg-6">
                                 <label for="" class="contact-label">INTERESTS</label>
-                                <textarea id="comment1" data-ng-model="params.interests"></textarea>
+                                <textarea id="comment1" data-ng-model="params.Interests"></textarea>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <div class="col-lg-6">
                                 <label for="" class="contact-label">CHANNEL PARTNER DETAILS</label>
-                                <textarea rows="3" id="comment2" data-ng-model="params.channel_partner_details"></textarea>
+                                <textarea rows="3" id="comment2" data-ng-model="params.Channel_Partner_Details"></textarea>
                             </div>
                         </md-input-container>
 
@@ -924,7 +923,7 @@
                         <md-input-container class="md-block">
                             <div class="col-lg-6">
                                 <label for="" class="contact-label">REMARKS</label>
-                                <textarea rows="3" id="comment3" data-ng-model="params.remarks"></textarea>
+                                <textarea rows="3" id="comment3" data-ng-model="params.Remarks"></textarea>
                             </div>
                         </md-input-container>
 
