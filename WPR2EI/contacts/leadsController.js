@@ -10,7 +10,6 @@ angular.module('contacts')
         var userID = $cookieStore.get('userId');
         //alert($cookieStore.get('userId'));
         $cookieStore.put("people_type", "Lead");
-
         $rootScope.title = 'Dwellar - Lead Details';
         var loginSession1;
         var orgID = $cookieStore.get('orgID');
@@ -337,8 +336,10 @@ angular.module('contacts')
             },
             columns: [
                   {
-                      template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
-                      title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                      //template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                      //title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= Contact_Id #',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                      template: "<input type='checkbox' class='checkbox'  data-id='#= Contact_Id #', ng-click='onClick($event)' />",
+                      title: "<input id='checkAll', type='checkbox', class='check-box' data-id='#= Contact_Id #',  ng-click='checkALL(dataItem)' />",
                       width: "60px",
                       attributes:
                        {
