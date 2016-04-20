@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-10">
                 <div class="pull-right btn-wrap-right">
-                    <a href="" id="btn_team_Add" class="btn-blk-create" ng-click="openCampaignsPopUp()">+ Create New Email Campaign</a>
+                    <a href="" id="btn_CreateEmailCamp" class="btn-blk-create" ng-click="openCampaignsPopUp()">+ Create New Email Campaign</a>
                 </div>
             </div>
             </div>
@@ -58,17 +58,17 @@
                             <option ng-repeat="view in views" value={{view.id}}>{{view.view_name}}</option>
                         </select>
                     </div>
-                    <div class="col-md-9 col-sm-9">
+                    <div class="col-md-9 col-sm-9" style="width: 81%;">
                         <div class="form-inline">
-                            <textarea id="text" class="form-control serach_bar_filter custom_class" style="width: 73%;" placeholder="Query" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
-                            <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
-                            <a href="" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></a>
+                            <textarea id="textCampaign" class="form-control serach_bar_filter custom_class" style="width: 73%;" placeholder="Query" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
+                            <a herf="" class="btn search_btn_cancel" id="btn_CampCancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
+                            <a href="" class="btn serch_btn_custom" id="btn_CampCheck" ng-click="callFilter()"><i class="fa fa-check"></i></a>
 
-                            <a herf="" class="btn btn-primary serach_bar_btn-2" data-toggle="tooltip" title="Save View" ng-click="saveView()">SAVE VIEW</i></a>
-                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" title="Edit" ng-click="editView()"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
+                            <a herf="" class="btn btn-primary serach_bar_btn-2" id="btn_CampSave" data-toggle="tooltip" title="Save View" ng-click="saveView()">SAVE VIEW</i></a>
+                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_CampEdit" data-toggle="tooltip" title="Edit" ng-click="editView()"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
 
-                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" ng-click="deleteView()"><i class="fa fa-trash-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
-                            <a href="" ng-click="helpjqlpopup()"><img src="./images/jql-help-icon.png" style="margin-left:2%" /></a>
+                            <a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_CampDelete" ng-click="deleteView()"><i class="fa fa-trash-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
+                            <a href="" ng-click="helpjqlpopup()" id="btn_CampInfo"><img src="./images/jql-help-icon.png" style="margin-left:2%" /></a>
 
                         </div>
                     </div>

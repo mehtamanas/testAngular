@@ -49,9 +49,9 @@
                                 </div>
                         </div>
                     </div>
-                    <div class="checkuser">
+                    <div class="checkuser" id="options">
                         <div class="user_details-1  col-md-5" style="margin-left: 28px;">
-                            <div class="row row_content-1" ng-repeat="user in orgUsers | filter: contactListFilter:strict">
+                            <div class="row campaign_row" ng-repeat="user in orgUsers | filter: contactListFilter:strict">
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <p class="user_name">
                                         {{user.name }}
@@ -113,3 +113,11 @@
                     </div>
                 </div>
     </div>
+<script>
+    $('#options').mCustomScrollbar({
+        theme: "minimal-dark",
+        scrollbarPosition: "outside",
+        scrollInertia: 200,
+        advanced: { autoExpandHorizontalScroll: true }
+    });
+</script>
