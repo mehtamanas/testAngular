@@ -173,7 +173,7 @@ angular.module('contacts')
             last_name: $scope.params.last_name,
             people_type: $scope.directory1,
             designation: $scope.params.designation,
-            contact_element_info_email: $scope.choices1[0].contact_element_info_email,
+            contact_element_info_email: $scope.params.contact_element_info_email,
             contact_element_info_phone: $scope.params.primary_contact,
             state: $scope.params.state,
             project_id: $scope.params.project_id,
@@ -215,17 +215,17 @@ angular.module('contacts')
             $scope.loadingDemo = false;
 
             var media = [];
-            for (var i in $scope.choices1) {
-                var postData_email =
-                    {
-                        id: $scope.choices1[i].class_id,
-                        class_id: loginSession.id,
-                        class_type: "Person",
-                        element_type: "email_contact",
-                        element_info1: $scope.choices1[i].contact_element_info_email,
-                    }
-                media.push(postData_email);
-            }
+            //for (var i in $scope.choices1) {
+            //    var postData_email =
+            //        {
+            //            id: $scope.choices1[i].class_id,
+            //            class_id: loginSession.id,
+            //            class_type: "Person",
+            //            element_type: "email_contact",
+            //            element_info1: $scope.choices1[i].contact_element_info_email,
+            //        }
+            //    media.push(postData_email);
+            //}
 
             //for (var i in $scope.choices) {
             //    var postData_phone =
@@ -239,6 +239,8 @@ angular.module('contacts')
 
             //    media.push(postData_phone);
             //}
+            media.push({ class_id: loginSession.id, class_type: "Person", element_type: "primary_contact", element_info1: $scope.params.primary_contact, });
+            media.push({ class_id: loginSession.id, class_type: "Person", element_type: "primary_email", element_info1: $scope.params.contact_element_info_email, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "mobile_contact", element_info1: $scope.params.mobile_number, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "home_contact", element_info1: $scope.params.home_number, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "office_contact", element_info1: $scope.params.office_number, });
@@ -585,18 +587,31 @@ function (error) {
     $scope.selectbuy = function () {
         $scope.buy = $scope.buy1;
     };
+    //add by pradip patil
+    $scope.scrollWin = function ()
+    {
+        window.scrollTo(5000, 100);
+    }
 
     $scope.addNewContact = function (isValid) {
         $scope.showValid = true;
        
-        if (isValid) {
+        if (isValid == true)
+        {
             $scope.loadingDemo = true;
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
             if (uploader.queue.length == 0)
                 $scope.finalpost();
-          
+
             $scope.showValid = false;
+        }
+        else
+        {
+            $scope.scrollWin();
+        }
+        if (isValid) {
+          
         }
     }
 
