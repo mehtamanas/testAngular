@@ -104,7 +104,7 @@
                 {
                     field: "starttime",
                     title: "Date & Time",
-                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    format: '{0:dd/MM/yyyy hh:mm tt}',
                     attributes:
                    {
                        "class": "UseHand",
