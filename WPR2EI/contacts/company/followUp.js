@@ -190,9 +190,9 @@ var FollowUpController = function ($scope, $state, $cookieStore, apiService, $mo
                 else
                 task_type_id='322e4275-9e8b-47b9-ade2-a18fd9668b69'//call
             $scope.params = {
-                name: $scope.dueDate,
+                name: $scope.name,
                 class_type: "Contact",
-                due_date: $scope.dueDate,
+                due_date: dDate,
                 start_date_time: new Date().toISOString(),
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),            
