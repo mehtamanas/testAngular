@@ -49,19 +49,7 @@
 
                 },
                 pageSize: 20,
-                schema:
-                     {
-                         model: {
-                             fields: {
-
-                                 start_date1: { type: "date" },
-                                 created_date: { type: "date" }
-
-
-                             }
-                         }
-                     }
-
+               
             },
             groupable: true,
             sortable: true,
@@ -145,19 +133,15 @@
                            "style": "text-align:center"
                        }
                    }, {
-                       field: "created_date",
+                       field: "created_date_Formatted",
                        title: "Created Date",
-
-                       format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                        attributes: {
                            "class": "UseHand",
                            "style": "text-align:center"
                        }
                    }, {
-                       field: "start_date1",
+                       field: "start_date_Formatted",
                        title: "Start Date",
-
-                       format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                        attributes: {
                            "class": "UseHand",
                            "style": "text-align:center"

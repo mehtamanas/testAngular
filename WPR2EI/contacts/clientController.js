@@ -377,7 +377,7 @@ angular.module('contacts')
                  }
              },
                 {
-                    field: "rating",
+                    field: "Formatted_last_contacted_date",
                     title: "Last Contacted Date",
                     attributes: {
                         "class": "UseHand",
@@ -385,7 +385,7 @@ angular.module('contacts')
                     }
                 },
             {
-                field: "Contact_Created_Date",
+                field: "Formatted_last_updated_date",
                 title: "Updated Date",
                 //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
                 attributes: {
