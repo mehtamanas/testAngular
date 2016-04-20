@@ -5,125 +5,185 @@
 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
     <div style="font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:13px; line-height:1.8; text-align:left; height:650px; overflow:auto;">
         <strong><span style="font-size:x-large;color:#3399cc;">Grammar For JQL</span></strong>
-
-        <br>
-        <strong>In Lead Page Grid can be filtered using the following Grammars.</strong><br>
-        <br>
-        A. &nbsp;For String &nbsp;: <br>
-        Following Feilds can be used with string operators<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. FirstName<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. LastName<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Email<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Number or Phone<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. Tags<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. Notes<br>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.Company<br>
-        <br>
-        &nbsp; &nbsp;Feilds can be filtered using the follwing Operators. There should be space before and after every operator.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-        &nbsp; &nbsp; a. "contains" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name contains priya<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where name feild has word priya.<br>
-        &nbsp; <br>
-        &nbsp; &nbsp; b. &nbsp;"in" &nbsp; &nbsp; &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1,Value2...&gt;<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name in (priya,Rishikesh...) <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where "Name" feild will have words "priya,Rishikesh.<br>
-        <br>
-        &nbsp; &nbsp; c. &nbsp;"=" &nbsp; &nbsp; &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1&gt;<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Name = priya Gym<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return the rows where "Name" feild will have exact word "priya Gym"<br>
-        <br>
-        &nbsp; <br>
-        &nbsp; &nbsp;Empty Data or Blank Data can be filtered using the follwing operators. There should be space before and after every operator.<br>
-        &nbsp; &nbsp; <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-        &nbsp; &nbsp; a. &nbsp; "is" &nbsp; &nbsp; &nbsp;Syntax : &lt;Feild&gt; is "blank"<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name is blank<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where name feild has no data.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Note : "blank" is a keyword defined in our JQL. <br>
-        &nbsp; <br>
-        &nbsp; &nbsp; b. &nbsp;"=" &nbsp; &nbsp; &nbsp; Syntax : &lt;Feild&gt; = "blank"<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name is blank<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where name feild has no data.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Note : "blank" is a keyword defined in our JQL. <br>
-        <br>
-        <br>
-        B. For Numbers &nbsp;: Feilds can be filtered using the following Operators. There should be space before and after every operator.<br>
-        <br>
-        &nbsp; &nbsp;Following &nbsp;Feild can be used with string operators <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. Follow up count<br>
-        <br>
-        <br>
-        &nbsp; a. "&gt;=" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Follow up count &gt;= 5<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Follow up count" is greater then equal (" &gt;= ") to 5.<br>
-        <br>
-        <br>
-        b. "&lt;=" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Follow up count &lt;= 5<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where feild "Follow up count" is less then equal (" &lt;= ") to 5.<br>
-        <br>
-        <br>
-        c. &nbsp;"=" &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1&gt;<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : ollow up count= 1<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Follow up count" is equal (" = ") to 1.<br>
-        <br>
-        <br>
-        C. &nbsp;For Date &nbsp;: &nbsp;Feilds can be filtered using the following Operators. There should be space before and after every operator.<br>
-        <br>
-        &nbsp; &nbsp;Following &nbsp;Feild can be used with string operators <br>
-        &nbsp; &nbsp; &nbsp;1. Last Contacted Date <br>
-        &nbsp; &nbsp; &nbsp;2. Updated Date <br>
-        <br>
-        &nbsp; &nbsp; &nbsp;a. "isbefore" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;DD-MM-YYYY&gt; <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date isbefore 01-03-2016<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" is greater than 01-03-2016.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note : No space between word is and before it is joint word as "isbefore"<br>
-        <br>
-        &nbsp; &nbsp; &nbsp;b. "isafter" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;DD-MM-YYYY&gt; <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date isafter 01-03-2016<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" is less than 01-03-2016.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note : No space between word is and after it is joint word as "isafter"<br>
-        <br>
-        &nbsp; &nbsp; &nbsp;c. "between || " : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;between DD-MM-YYYY || DD-MM-YYYY&gt; <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date between 01-03-2016 || 01-04-2016<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" is greater than 01-03-2016 or lesser then &nbsp;01-04-2016.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note : Space present between words "between ||"<br>
-        <br>
-        <br>
-        <br>
-        &nbsp; &nbsp; Empty Data or Blank Data can be filtered using the follwing operator. There should be space before and after every operator.<br>
-        <br>
-        &nbsp; &nbsp; &nbsp;a. "is": &nbsp; &nbsp; &nbsp; Syntax &nbsp;: &lt;Feild&gt; is "never"<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is never<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" has no data.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note &nbsp; : "never" is a keyword defined in our JQL. <br>
-        <br>
-        &nbsp; &nbsp; &nbsp;b. "=" : &nbsp; &nbsp; &nbsp; Syntax &nbsp;: &lt;Feild&gt; = "never"<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is never<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" has no data.<br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note &nbsp; : "never" is a keyword defined in our JQL. <br>
-        <br>
-        <br>
-        <br>
-        Syntax for Complete "OR" Clause Query<br>
-        <br>
-        Name contains priya or Email in (burzin@dwellar.com,pradip@dwellar.com) or Follow up count = 6<br>
-        Output : This query will Result where <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Name" feild will contain "priya" or <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Email" feild will contain "burzin@dwellar.com" or "pradip@dwellar.com" <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;or Follow up count = 6<br>
-        <br>
-        <br>
-        Syntax for Complete "AND" Clause Query<br>
-        <br>
-        Name contains priya and Email in (burzin@dwellar.com,pradip@dwellar.com) and Follow up count = 6<br>
-        Output : This query will Result where <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Name" feild should contain "priya" and <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Email" feild should contain "burzin@dwellar.com" and "pradip@dwellar.com" <br>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;and Follow up count should be = 6<br>
-        <br>
-        <br>
-        <br>
+        <br />
+        <strong>In Lead Page Grid can be filtered using the following Grammar.</strong><br />
+        <br />
+        A. &nbsp;For String &nbsp;:&nbsp;<br />
+        &nbsp; &nbsp; &nbsp;Following Feilds can be used with string operators<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1. Name<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2. FirstName<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3. LastName<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4. Email<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 5. Number or Phone<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 5. Tags<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6. Notes or Text<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7. Company<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8. Lead Source<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9. Assigned To<br />
+        <br />
+        &nbsp; &nbsp;Above Feilds can be filtered using the follwing Operators. There should be space before and after every operator.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; a. "contains" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name contains priya<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output &nbsp;: This query will return All the rows where name feild has word priya.<br />
+        &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; b. &nbsp;"in" &nbsp; &nbsp; &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1,Value2...&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Name in (priya,Rishikesh...)&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where "Name" feild will have words "priya,Rishikesh.<br />
+        <br />
+        &nbsp; &nbsp; c. &nbsp;"=" &nbsp; &nbsp; &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name = priya Gym<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output &nbsp;: This query will return the rows where "Name" feild will have exact word "priya Gym"<br />
+        &nbsp;<br />
+        &nbsp;&nbsp;<br />
+        &nbsp; &nbsp;Empty Data or Blank String Data can be filtered using the follwing operators. There should be space before and after every operator.<br />
+        &nbsp; &nbsp;&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; a. &nbsp; "is" &nbsp; &nbsp; &nbsp; Syntax : &lt;Feild&gt; is "blank"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name is blank<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where name feild has no data.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Note : "blank" is a keyword defined in our JQL.&nbsp;<br />
+        &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; b. &nbsp; &nbsp;"=" &nbsp; &nbsp; &nbsp; Syntax : &lt;Feild&gt; = "blank"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Name = blank<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where name feild has no data.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Note : "blank" is a keyword defined in our JQL.&nbsp;<br />
+        <br />
+        <br />
+        B. &nbsp;For Date &nbsp;: &nbsp;<br />
+        &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; &nbsp;1. Last Contacted Date&nbsp;<br />
+        &nbsp; &nbsp; &nbsp;2. Updated Date&nbsp;<br />
+        <br />
+        &nbsp; &nbsp; Above Feilds can be filtered using the following Operators. There should be space before and after every operator.<br />
+        &nbsp; &nbsp;&nbsp;<br />
+        &nbsp; &nbsp; &nbsp;a. "isbefore" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;DD-MM-YYYY&gt;&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date isbefore 01-03-2016<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" is greater than 01-03-2016.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note : No space between word is and before it is joint word as "isbefore"<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;b. "isafter" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;DD-MM-YYYY&gt;&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date isafter 01-03-2016<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" is less than 01-03-2016.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note : No space between word is and after it is joint word as "isafter"<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;c. "between || " : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;between DD-MM-YYYY || DD-MM-YYYY&gt;&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date between 01-03-2016 || 01-04-2016<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Last Contacted Date" is greater than 01-03-2016 or lesser then &nbsp;01-04-2016.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note : Space is present between words "between ||"<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;<br />
+        <br />
+        &nbsp; &nbsp; Empty Data or Blank Date Data can be filtered using the follwing operator. There should be space before and after every operator.<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;a. &nbsp;"is": &nbsp; &nbsp; &nbsp; Syntax &nbsp;: &lt;Feild&gt; is "never"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is never<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has no data.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note &nbsp; &nbsp;: "never" is a keyword defined in our JQL.&nbsp;<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;b. &nbsp;"=" : &nbsp; &nbsp; &nbsp; Syntax &nbsp;: &lt;Feild&gt; = "never"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is never<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has no data.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Note &nbsp; &nbsp;: "never" is a keyword defined in our JQL.&nbsp;<br />
+        <br />
+        <br />
+        &nbsp; &nbsp; Variables can also be used to filter dates values.<br />
+        &nbsp;<br />
+        <br />
+        &nbsp; &nbsp; a. "Today" &nbsp; &nbsp; &nbsp;: &nbsp; &nbsp;Syntax &nbsp;: &lt;Feild&gt; is "Today"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is Today<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" is same as current date (Today's date).<br />
+        <br />
+        &nbsp; &nbsp;b. &nbsp;"Yesterday" &nbsp;:   Syntax &nbsp;: &lt;Feild&gt; is "Yesterday"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Example : Last Contacted Date is Yesterday<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" is same as yesterday's date. (1 day before current date starting from 00:00 to 23:59) <br />
+        <br />
+        &nbsp; &nbsp;c. &nbsp;"This Week" &nbsp;:   Syntax &nbsp;: &lt;Feild&gt; is "This Week"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Example : Last Contacted Date is This Week<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 on most recent Monday to current time.<br />
+        <br />
+        &nbsp; &nbsp;d. &nbsp;"Last Week" &nbsp;:   Syntax &nbsp;: &lt;Feild&gt; is "Last Week"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Example : Last Contacted Date is Last Week<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 on Monday before most recent Monday to Sunday 11:59 before most recent Monday.<br />
+        <br />
+        &nbsp; &nbsp;e. &nbsp;"This Month" &nbsp;:   Syntax &nbsp;: &lt;Feild&gt; is "This Month"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Example : Last Contacted Date is This Month<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 from 1st day of month to current time.<br />
+        <br />
+        &nbsp; &nbsp;f. &nbsp;"Last Month" &nbsp;:   Syntax &nbsp;: &lt;Feild&gt; is "Last Month"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is Last Month<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 from 1st of last month to 11:59 on last day of last month.<br />
+        <br />
+        &nbsp; &nbsp;g. &nbsp;"This Quarter" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; is "This Quarter"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is This Quarter<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 from 1st of current quarter to current time.<br />
+        <br />
+        &nbsp; &nbsp;h. &nbsp;"Last Quarter" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; is "Last Quarter"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is Last Quarter<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 from 1st of last quarter to 11:59 on last day of last quarter.&nbsp;<br />
+        <br />
+        &nbsp; &nbsp;i. "Year to Date" &nbsp;: &nbsp;Syntax &nbsp;: &lt;Feild&gt; is "Year to Date"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Last Contacted Date is Year to Date<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from 00:00 from 1st of this year to current time.&nbsp;<br />
+        <br />
+        <br />
+        &nbsp; &nbsp;j. "This Financial Year" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; is "This Financial Year"<br />
+        &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Last Contacted Date is This Financial Year<br />
+        &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from Apr 1 of this year to current time.&nbsp;<br />
+        <br />
+        &nbsp; &nbsp;k. "Last Financial Year" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; is "Last Financial Year"<br />
+        &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Last Contacted Date is Last Financial Year<br />
+        &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output &nbsp;: This query will return All the rows where feild "Last Contacted Date" has value starting from Apr 1 of last year to 11:59 Mar 31 of this year.&nbsp;<br />
+        <br />
+        <br />
+        C. For Numbers &nbsp;:&nbsp;<br />
+        &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; &nbsp;1. Follow up count<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;Above Feilds can be filtered using the following Operators. There should be space before and after every operato &nbsp; &nbsp;&nbsp;<br />
+        <br />
+        &nbsp; a. "&gt;=" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Follow up count &gt;= 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Follow up count" is greater then equal (" &gt;= ") to 5.<br />
+        <br />
+        &nbsp;<br />
+        b. "&lt;=" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Follow up count &lt;= 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where feild "Follow up count" is less then equal (" &lt;= ") to 5.<br />
+        &nbsp;&nbsp;<br />
+        &nbsp;<br />
+        c. &nbsp;"=" &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : ollow up count= 1<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where feild "Follow up count" is equal (" = ") to 1.<br />
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; d. &nbsp;"&gt;" &nbsp; &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Follow up count &gt; 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Follow up count" is greater then (" &gt; ") to 5.<br />
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        e. &nbsp;"&lt;" &nbsp; &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Follow up count &lt; 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Follow up count" is less then (" &lt; ") to 5.<br />
+        <br />
+        <br />
+        <br />
+        Syntax for Complete "OR" Clause Query<br />
+        <br />
+        Name contains priya or Email in (burzin@dwellar.com,pradip@dwellar.com) or Follow up count = 6<br />
+        Output : This query will Result where&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Name" feild will contain "priya" or&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Email" feild will contain "burzin@dwellar.com" or "pradip@dwellar.com" &nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;or Follow up count = 6<br />
+        <br />
+        <br />
+        Syntax for Complete "AND" Clause Query<br />
+        <br />
+        Name contains priya and Email in (burzin@dwellar.com,pradip@dwellar.com) and Follow up count = 6<br />
+        Output : This query will Result where&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Name" feild should contain "priya" and&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Email" feild should contain "burzin@dwellar.com" and "pradip@dwellar.com" &nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;and Follow up count should be = 6<br />
+        <br />
     </div>
 </form>

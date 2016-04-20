@@ -30,11 +30,11 @@
                             <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
                             <a href="" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></a>
                             <!--<button class="btn btn-primary serach_bar_btn-1" ng-click="saveView()"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>-->
-                            <a herf="" class="btn btn-primary serach_bar_btn-1" data-toggle="tooltip" title="Save View" ng-click="saveView()">SAVE VIEW</i></a>
+                            <a herf="" class="btn btn-primary serach_bar_btn-1" style="padding: 9px;" data-toggle="tooltip" title="Save View" ng-click="saveView()"><b>SAVE VIEW</b></a>
                             <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" title="Edit" ng-click="editView()"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
                             <!--<button class="btn  serach_bar_btn-1 button_save_del" ng-click="editView()"  ><img src="../images/update_query.png" /></button>-->
                             <a herf="" class="btn  serach_bar_btn-1 button_save_del" ng-click="deleteView()"><img src="../images/delete_query.png" /></a>
-                            <a href="" ng-click="helpjqlpopup()"><img src="../images/jql-help-icon.png" style="margin-left:2%" /></a>
+                            <a href="" ng-click="helpjqlpopup()"><img src="./images/jql-help-icon.png" style="margin-left:2%" /></a>
 
                         </div>
                     </div>
@@ -43,7 +43,7 @@
 
             </div>
 
-            <div id="record-content" class="properties-content">
+            <div id="record-content" class="properties-content" style=" margin-top: 20px;">
                 <div id="project-record-list" kendo-grid k-options="callrecordGrid" selectable="true">
                 </div>
             </div>

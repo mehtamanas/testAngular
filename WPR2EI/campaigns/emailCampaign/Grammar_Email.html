@@ -1,0 +1,105 @@
+<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<button type="button" id="btn_AddTagClose" class="close" ng-click="$dismiss('cancel')">&times;</button>
+
+<form class="form-content form-content2 edit-organization-setting" name="addNewForm" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
+    <div style="font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:13px; line-height:1.8; text-align:left; height:650px; overflow:auto;">
+        <span style="color:#0099cc;font-size:x-large;"><strong>Grammar For JQL</strong></span>
+        <br />
+        
+        <strong>Email Page Grid can be filtered using the following Grammars.</strong><br />
+        <br />
+        A. &nbsp;For String &nbsp;:&nbsp;<br />
+        &nbsp; &nbsp; Following Feilds can be used with string operators<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. Name<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2. Status  &nbsp;<br />
+        <br />
+        &nbsp; &nbsp;Above Feilds can be filtered using the follwing Operators. There should be space before and after every operator.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; a. "contains" : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Status contains Running<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output &nbsp;: This query will return All the rows where Status feild has word Running.<br />
+        &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; b. &nbsp;"in" &nbsp; &nbsp; &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1,Value2...&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Status in (Running,Completed,...)&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp;: This query will return All the rows where "Status" feild will have words "Running,Completed....<br />
+        <br />
+        &nbsp; &nbsp; c. &nbsp;"=" &nbsp; &nbsp; &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Status = Running<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output &nbsp;: This query will return the rows where "Status" feild will have exact word "Running"<br />
+        &nbsp;<br />
+        &nbsp;&nbsp;<br />
+        &nbsp; &nbsp;Empty Data or Blank String Data can be filtered using the follwing operators. There should be space before and after every operator.<br />
+        &nbsp; &nbsp;&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; a. &nbsp; "is" &nbsp; &nbsp; &nbsp; Syntax : &lt;Feild&gt; is "blank"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Status is blank<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where Status feild has no data.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Note &nbsp; : "blank" is a keyword defined in our JQL.&nbsp;<br />
+        &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; b. &nbsp; &nbsp;"=" &nbsp; &nbsp; &nbsp; Syntax : &lt;Feild&gt; = "blank"<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Status = blank<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where Status feild has no data.<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Note &nbsp; : "blank" is a keyword defined in our JQL.&nbsp;<br />
+        <br />
+        <br />
+        B. For Numbers &nbsp;:&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. OPEN RATE<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2. OPENS<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3. BOUNCES<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4. UNSUBSCRIBES<br />
+        &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;5. BUDGET<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;6. REVENUE&nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7. CONVERSIONS<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8. CLICKS<br />
+        <br />
+        &nbsp; &nbsp; &nbsp;Above Feilds can be filtered using the following Operators. There should be space before and after every operato &nbsp; &nbsp;&nbsp;<br />
+        <br />
+        &nbsp; a. "&gt;=" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Open Rate &gt;= 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Open Rate" is greater then equal (" &gt;= ") to 5.<br />
+        <br />
+        &nbsp;<br />
+        b. "&lt;=" &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Open Rate &lt;= 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where feild "Open Rate" is less then equal (" &lt;= ") to 5.<br />
+        &nbsp;&nbsp;<br />
+        &nbsp;<br />
+        c. &nbsp;"=" &nbsp; : Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value1&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Example : Open Rate = 1<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Output : This query will return All the rows where feild "Open Rate" is equal (" = ") to 1.<br />
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; d. &nbsp;"&gt;" &nbsp; &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Open Rate &gt; 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Open Rate" is greater then (" &gt; ") to 5.<br />
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp;<br />
+        e. &nbsp;"&lt;" &nbsp; &nbsp;: Syntax &nbsp;: &lt;Feild&gt; &lt;Operator&gt; &lt;Value&gt;<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example : Open Rate &lt; 5<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output : This query will return All the rows where feild "Open Rate" is less then (" &lt; ") to 5.<br />
+        <br />
+        <br />
+        <br />
+        Order by Clause &nbsp;: Here grid can be arranged either in ascending order or desending order using the following Syntax.<br />
+        <br />
+        &nbsp; &nbsp; a. "asc" &nbsp;: &nbsp; &nbsp; &nbsp;Syntax &nbsp; &nbsp;: Order by &lt;Feild&gt; asc<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example 1 : Order by Open Rate asc<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp; &nbsp;: This query will rearrange the grid with "Open Rate" Feild in ascending order.<br />
+        <br />
+        &nbsp; &nbsp; Example 2 : Budget &gt;= 5000 Order by Open Rate asc<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp; &nbsp;: This query will return all the rows where budget &gt;= 5000 and then those rows it will rearrange with "Open Rate" Feild in ascending order.<br />
+        <br />
+        <br />
+        &nbsp; &nbsp; &nbsp;a. "desc" &nbsp;: &nbsp; &nbsp;Syntax &nbsp; &nbsp;: Order by &lt;Feild&gt; desc<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example 1 : Order by Open Rate desc<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp; &nbsp;: This query will rearrange the grid with "Open Rate" Feild in descending order.<br />
+        <br />
+        &nbsp; &nbsp; Example 2 : Budget &gt;= 5000 Order by Open Rate desc<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Output &nbsp; &nbsp;: This query will return all the rows where budget &gt;= 5000 and then those rows it will rearrange with "Open Rate" Feild in descending order.<br />
+        <br /> 
+    </div>
+</form>
+
+
+

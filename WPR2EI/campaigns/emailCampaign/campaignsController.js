@@ -420,6 +420,16 @@ angular.module('campaigns')
         }
 
         callViewApi();
+        // for help 
+        $scope.helpjqlpopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'campaigns/emailCampaign/Grammar_Email.html',
+                backdrop: 'static',
+                controller: helpjqlController,
+                size: 'lg'
+            });
+        };
 
         $scope.changeView = function () {
             if ($scope.gridView !== 'default') {
