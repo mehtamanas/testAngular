@@ -12150,3 +12150,8 @@ md-input-container label:not(.md-container-ignore) {
     font-size: 16px;
     font-weight: 500;
 }
+.campaign_row {
+    border-bottom: 1px solid #eaeaea;
+    padding: 0px 19px 11px 21px;
+    /* border-left: 1px solid #eaeaea; */
+}
