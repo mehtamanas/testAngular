@@ -60,11 +60,11 @@
                    "style": "text-align:center"
                }
            }, {
-               field: "created_date",
+               field: "created_date_formatted",
                title: "CREATED DATE",
                width: "120px",
-               type: "date",
-               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+               //type: "date",
+               //format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes: {
                    "class": "UseHand",
                    "style": "text-align:center"

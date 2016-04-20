@@ -443,28 +443,28 @@ angular.module('contacts')
                       "style": "text-align:center"
                   }
               }, {
-                  field: "last_contacted",
+                  field: "Formatted_last_contacted_date",
                   title: "Last Contacted Date",
                   hidden: true,
-                  type: 'date',
+                  //type: 'date',
                   filterable: {
                       ui: "datepicker"
                   },
-                  format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                  // format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                   attributes: {
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
               },
         {
-            field: "last_updated",
+            field: "Formatted_last_updated_date",
             hidden: true,
             title: "Updated Date",
-            type: 'date',
+            // type: 'date',
             filterable: {
                 ui: "datepicker"
             },
-            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            //format: '{0:dd/MM/yyyy hh:mm:ss tt}',
             //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
             attributes: {
                 "class": "UseHand",
@@ -475,11 +475,11 @@ angular.module('contacts')
         }, {
             field: "Formatted_last_contacted_date",
             title: "Last Contacted Date",
-            type: 'date',
+            // type: 'date',
             filterable: {
                 ui: "datepicker"
             },
-            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            // format: '{0:dd/MM/yyyy hh:mm:ss tt}',
             attributes: {
                 "class": "UseHand",
                 "style": "text-align:center"
@@ -488,18 +488,17 @@ angular.module('contacts')
         {
             field: "Formatted_last_updated_date",
             title: "Updated Date",
-            type: 'date',
+            //type: 'date',
             filterable: {
                 ui: "datepicker"
             },
-            format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+            //format: '{0:dd/MM/yyyy hh:mm:ss tt}',
             //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
             attributes: {
                 "class": "UseHand",
                 "style": "text-align:center"
             }
         },
-
         //saroj on 13-04-2016
            {
                field: "created_at",

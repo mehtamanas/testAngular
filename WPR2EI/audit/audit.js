@@ -121,10 +121,10 @@
                 }
             },
              {
-                 field: "timestamp",
+                 field: "timestamp_Formatted",
                  title: "TIMESTAMP",
                  width: "120px",
-                 format: '{0:dd/MM/yyyy}',
+                 //format: '{0:dd/MM/yyyy}',
                  attributes: {
                      "class": "UseHand",
                      "style": "text-align:center"

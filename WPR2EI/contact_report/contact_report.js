@@ -311,10 +311,10 @@
                   }
               },
              {
-                 field: "Contact_Created_Date",
+                 field: "Formatted_last_updated_date",
                  title: "Updated Date",
                  width: "120px",
-                 format: '{0:dd-MM-yyyy }',
+                 //format: '{0:dd-MM-yyyy }',
                  template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
                  attributes: {
                      "class": "UseHand",
@@ -636,10 +636,10 @@
                   }
               },
              {
-                 field: "last_contacted",
+                 field: "Formatted_contacted_date",
                  title: "Last Contacted Date",
                  width: "120px",
-                 format: '{0:dd-MM-yyyy }',
+                 //format: '{0:dd-MM-yyyy }',
                  template: "#= kendo.toString(kendo.parseDate(last_contacted, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
                  attributes: {
                      "class": "UseHand",
