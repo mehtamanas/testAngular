@@ -731,6 +731,12 @@ angular.module('campaigns')
                                 return;
                             }
 
+                            if (Firstname == "status" && expsplitCONTAINS[1].trim().toUpperCase() == "IN PROGRESS") {
+                                expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/\s/g, '');
+                            }
+
+                            expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/"/g, "");
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                         }

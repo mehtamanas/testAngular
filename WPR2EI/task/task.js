@@ -6,7 +6,7 @@
         var orgID = $cookieStore.get('orgID');
 
         $rootScope.title = 'Dwellar./Task';
-
+        $scope.gridView = 'default';
         var userId = $cookieStore.get('userId');
 
         $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
@@ -636,6 +636,7 @@
                     filter = { logic: "or", filters: [] };
                     logsplit = txtdata.split(" or ");
                 }
+
                 var spiltOK = false;
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
@@ -797,6 +798,9 @@
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
 
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
                             // by saroj on 18-04-2016
 
                             if (Firstname == "") {
@@ -808,6 +812,7 @@
                             if (Firstname == "status" && expsplitCONTAINS[1].trim().toUpperCase() == "IN PROGRESS") {
                                 expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/\s/g, '');
                             }
+                            expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/"/g, "");
 
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
@@ -827,6 +832,9 @@
 
                             if (expsplitIN[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
 
                             // by saroj on 18-04-2016
 
@@ -874,6 +882,8 @@
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
+                            if (expsplit[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
 
                             // by saroj on 18-04-2016
 
@@ -1079,7 +1089,7 @@
                                     if (Firstname == "status" && expsplit[1].trim().toUpperCase() == "IN PROGRESS") {
                                         expsplit[1] = expsplit[1].replace(/\s/g, '');
                                     }
-
+                                    expsplit[1] = expsplit[1].replace(/"/g, "");
                                     filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                 }
                             }
