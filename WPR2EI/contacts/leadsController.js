@@ -154,6 +154,8 @@ angular.module('contacts')
                 size: 'sm',
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'lead', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
+
+
         }
 
 
@@ -187,6 +189,7 @@ angular.module('contacts')
             else {
                 alert('Cannot edit this view');
             }
+
         }
 
         $scope.deleteView = function () {
@@ -206,8 +209,8 @@ angular.module('contacts')
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
                             $scope.textareaText = ''
-                            $scope.gridView = 'default';
-
+                            // $scope.gridView = 'default';
+                            callViewApi();
                             swal(
                           'Deleted!',
                           'Your file has been deleted.',
@@ -478,7 +481,7 @@ angular.module('contacts')
               {
                   field: "Formatted_last_contacted_date",
                   title: "Last Contacted Date",
-                 
+
                   filterable: {
                       ui: "datepicker"
                   },
@@ -490,7 +493,7 @@ angular.module('contacts')
         {
             field: "Formatted_last_updated_date",
             title: "Updated Date",
-           
+
             filterable: {
                 ui: "datepicker"
             },
@@ -546,22 +549,116 @@ angular.module('contacts')
             var txtdata = txtdata;
             var Firstname = "";
             var ValidFilter = false;
-
+            var ValidClause = false;
             var filter = [];
             var abc = [];
             var logsplit = "";
 
             if (txtdata.length > 0) {
 
-                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+                var pos = txtdata.indexOf("order by");
+                var aryClause = txtdata.split(" order by ");
+                var feild1 = "";
+                var dir1 = "";
+                var fValue = "";
+
+                if (pos >= 0) {
+                    var arydir = "";
+                    if (pos == 0) {
+                        if (aryClause[0].split(" asc").length > aryClause[0].split(" desc").length) {
+                            arydir = aryClause[0].split(" asc");
+                            dir1 = "asc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[0].split(" desc").length >= 2) {
+                            arydir = aryClause[0].split(" desc");
+                            dir1 = "desc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                        }
+                    }
+                    else {
+                        if (aryClause[1].split(" asc").length > aryClause[1].split(" desc").length) {
+                            arydir = aryClause[1].split(" asc");
+                            dir1 = "asc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[1].split(" desc").length >= 2) {
+                            arydir = aryClause[1].split(" desc");
+                            dir1 = "desc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                        }
+                    }
+
+                    if (ValidClause == true) {
+                        if (fValue == "NAME")
+                            feild1 = "Name";
+                        else if (fValue == "PHONE")
+                            feild1 = "Contact_Phone";
+                        else if (fValue == "EMAIL")
+                            feild1 = "Contact_Email";
+                        else if (fValue == "CITY")
+                            feild1 = "City";
+                        else if (fValue == "ASSIGNED TO")
+                            feild1 = "Assigned_To";
+                        else if (fValue == "TYPE")
+                            feild1 = "Type";
+                        else if (fValue == "COMPANY")
+                            feild1 = "company";
+                        else if (fValue == "NOTES")
+                            feild1 = "text";
+                        else if (fValue == "TAGS")
+                            feild1 = "Tags";
+                        else if (fValue == "LEAD SOURCE")
+                            feild1 = "leadsource";
+                        else if (fValue == "LAST CONTACTED DATE")
+                            feild1 = "last_contacted";
+                        else if (fValue == "UPDATED DATE")
+                            feild1 = "last_updated";
+                        else if (fValue == "LAST CONTACTED DATE")
+                            feild1 = "Formatted_last_contacted_date";
+                        else if (fValue == "UPDATED DATE")
+                            feild1 = "Formatted_last_updated_date";
+                        else if (fValue == "CREATED DATE")
+                            feild1 = "created_at";
+                        else if (fValue == "ACTION")
+                            feild1 = "Action";
+                    }
+                }
+                
+                if (aryClause[0].split(" and ").length > aryClause[0].split(" or ").length) {
 
                     filter = { logic: "and", filters: [] };
-                    logsplit = txtdata.split(" and ");
+                    logsplit = aryClause[0].split(" and ");
                 }
                 else {
                     filter = { logic: "or", filters: [] };
-                    logsplit = txtdata.split(" or ");
+                    logsplit = aryClause[0].split(" or ");
                 }
+
+
+                //if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+
+                //    filter = { logic: "and", filters: [] };
+                //    logsplit = txtdata.split(" and ");
+                //}
+                //else {
+                //    filter = { logic: "or", filters: [] };
+                //    logsplit = txtdata.split(" or ");
+                //}
+
+
                 var spiltOK = false;
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
@@ -747,7 +844,9 @@ angular.module('contacts')
                                 alert("Invalid Query.");
                                 return;
                             }
-
+                           
+                            expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/"/g, "");
+                           
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                             spiltOK = false;
@@ -1274,12 +1373,12 @@ angular.module('contacts')
                             //    ValidFilter = true;
                             //    spiltOK = false;
                             //}
-                                                       
+
                             //else {
 
-                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-                                ValidFilter = true;
-                                spiltOK = false;
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                            ValidFilter = true;
+                            spiltOK = false;
                             //}
                         }
 
@@ -1352,18 +1451,38 @@ angular.module('contacts')
 
             // final code to get execute....
 
-            if (Firstname == "") {
+            if (Firstname == "" && ValidClause == false) {
                 alert("Invalid Query.");
                 return;
             }
 
-            if (ValidFilter == true) {
+            if (ValidFilter == true && ValidClause == false) {
                 var ds = $('#contact_kenomain').getKendoGrid().dataSource;
                 ds.filter(filter);
+                // alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == false && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#contact_kenomain').getKendoGrid().dataSource;
+                ds.sort(dsSort);
+                //  alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == true && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#contact_kenomain').getKendoGrid().dataSource;
+                ds.filter(filter);
+                ds.sort(dsSort);
+                // alert('Query Executed Successfully.');
             }
             else {
                 alert("Please Check Query.");
             }
+
+         
+
+
         }
 
         $scope.clearFilter = function () {
