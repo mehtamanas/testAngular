@@ -605,7 +605,7 @@
 
         $scope.DoWork = function () {
             var txtdata = $scope.textareaText.toLowerCase();
-            if (txtdata.text != '')
+            if (txtdata != '')
                 $scope.callFilter();
         };
 
@@ -620,8 +620,6 @@
             var abc = [];
             var logsplit = "";
 
-          
-
             if (txtdata.length > 0) {
 
                 if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
@@ -633,39 +631,154 @@
                     filter = { logic: "or", filters: [] };
                     logsplit = txtdata.split(" or ");
                 }
-
+                var spiltOK = false;
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
                     for (var j = 0; j < logsplit.length; j++) {
                         // alert("value for j is " + j);
 
-                        //FOR DATES 
-                        var expsplitIsBefore = logsplit[j].split(" isbefore ");
-                        var expsplitIsAfter = logsplit[j].split(" isafter ");
-                        var expsplitBetween = logsplit[j].split(" between ");
+                        var expsplitIsBefore = [];
+                        var expsplitIsAfter = [];
+                        var expsplitBetween = [];
 
-                        var expEQ = logsplit[j].split(" = ");
-                        var expIS = logsplit[j].split(" is ");
+                        var expsplitCONTAINS = [];
+                        var expsplitIN = [];
+                        var expSplitGTE = [];
+                        var expSplitLTE = [];
+                        var expSplitGT = [];
+                        var expSplitLT = [];
+                        var expsplit = [];
 
-                        var expsplit = "";
-                        if (expEQ.length > 1)
-                            expsplit = expEQ;
+                        if (spiltOK == false) {
 
-                        if (expIS.length > 1)
-                            expsplit = expIS;
+                            var oplen = (" is before ").length;
+                            var startpos = logsplit[j].indexOf(" is before ");
+                            if (startpos >= 0) {
+                                expsplitIsBefore[0] = logsplit[j].substr(0, startpos);
+                                expsplitIsBefore[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
 
-                        var expsplitCONTAINS = logsplit[j].split(" contains ");
-                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
+                            //expsplitIsBefore = logsplit[j].split(" is before ");
+                            //if (expsplitIsBefore.length > 2)
+                        }
 
-                        var expsplitIN = logsplit[j].split(" in ");
+                        if (spiltOK == false) {
 
-                        var expSplitGTE = logsplit[j].split(" >= ");
+                            var oplen = (" is after ").length;
+                            var startpos = logsplit[j].indexOf(" is after ");
+                            if (startpos >= 0) {
+                                expsplitIsAfter[0] = logsplit[j].substr(0, startpos);
+                                expsplitIsAfter[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
 
-                        var expSplitLTE = logsplit[j].split(" <= ");
+                        if (spiltOK == false) {
 
-                        var expSplitGT = logsplit[j].split(" > ");
+                            var oplen = (" between ").length;
+                            var startpos = logsplit[j].indexOf(" between ");
+                            if (startpos >= 0) {
+                                expsplitBetween[0] = logsplit[j].substr(0, startpos);
+                                expsplitBetween[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
 
-                        var expSplitLT = logsplit[j].split(" < ");
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" = ").length;
+                            var startpos = logsplit[j].indexOf(" = ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+
+                            //expEQ = logsplit[j].split(" = ");
+                            //if (expEQ.length > 2) {
+                            //    expsplit = expEQ;
+                            //    spiltOK = true;
+                            //}
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" is ").length;
+                            var startpos = logsplit[j].indexOf(" is ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" contains ").length;
+                            var startpos = logsplit[j].indexOf(" contains ");
+                            if (startpos >= 0) {
+                                expsplitCONTAINS[0] = logsplit[j].substr(0, startpos);
+                                expsplitCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+                            var oplen = (" in ").length;
+                            var startpos = logsplit[j].indexOf(" in ");
+                            if (startpos >= 0) {
+                                expsplitIN[0] = logsplit[j].substr(0, startpos);
+                                expsplitIN[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" >= ").length;
+                            var startpos = logsplit[j].indexOf(" >= ");
+                            if (startpos >= 0) {
+                                expSplitGTE[0] = logsplit[j].substr(0, startpos);
+                                expSplitGTE[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" <= ").length;
+                            var startpos = logsplit[j].indexOf(" <= ");
+                            if (startpos >= 0) {
+                                expSplitLTE[0] = logsplit[j].substr(0, startpos);
+                                expSplitLTE[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" > ").length;
+                            var startpos = logsplit[j].indexOf(" > ");
+                            if (startpos >= 0) {
+                                expSplitGT[0] = logsplit[j].substr(0, startpos);
+                                expSplitGT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" < ").length;
+                            var startpos = logsplit[j].indexOf(" < ");
+                            if (startpos >= 0) {
+                                expSplitLT[0] = logsplit[j].substr(0, startpos);
+                                expSplitLT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
 
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
@@ -687,8 +800,13 @@
                                 return;
                             }
 
+                            if (Firstname == "status" && expsplitCONTAINS[1].trim().toUpperCase() == "IN PROGRESS") {
+                                expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/\s/g, '');
+                            }
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
                         // IN CHECK
@@ -696,10 +814,10 @@
                         if (expsplitIN.length > 1) {
 
 
-                            if (expsplitIN[0].toUpperCase().trim() == "TASK NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "TASK")
+                            if (expsplitIN[0].toUpperCase().trim() == "TASK NAME" || expsplitIN[0].toUpperCase().trim() == "TASK")
                                 Firstname = "name";
 
-                            if (expsplitIN[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
+                            if (expsplitIN[0].toUpperCase().trim() == "ASSIGNEE" || expsplitIN[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
 
                             if (expsplitIN[0].toUpperCase().trim() == "STATUS")
@@ -717,23 +835,29 @@
                             // alert(mystring);
 
                             var newString = mystring.split(',');
+
+                            abc = { logic: "or", filters: [] };
+
                             if (newString.length >= 1) {
                                 for (var k = 0; k < newString.length; k++) {
-                                    // newString
-                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
-                                    ValidFilter = true;
+                                    if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        newString[k] = newString[k].replace(/\s/g, '');
+                                    }
+                                    abc.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
                                 }
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
                             }
                         }
-
 
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
 
-                            if (expsplit[0].toUpperCase().trim() == "TASK NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "TASK")
+                            if (expsplit[0].toUpperCase().trim() == "TASK NAME" || expsplit[0].toUpperCase().trim() == "TASK")
                                 Firstname = "name";
 
-                            if (expsplit[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
+                            if (expsplit[0].toUpperCase().trim() == "ASSIGNEE" || expsplit[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
 
                             if (expsplit[0].toUpperCase().trim() == "STATUS")
@@ -745,7 +869,7 @@
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
-                           
+
                             // by saroj on 18-04-2016
 
                             if (Firstname == "") {
@@ -756,53 +880,28 @@
 
                             if (Firstname == "due_date" || Firstname == "created_date") {
 
-
                                 var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
                                 var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
 
-
                                 var CurrentDate = moment().startOf('day')._d;
                                 var CurrentEndDate = moment().endOf('day')._d;
-                                // alert(CurrentEndDate);
-
                                 var TommDate = moment().startOf('day').add(+1, 'days')._d;
                                 var TommEndDate = moment().endOf('day').add(+1, 'days')._d;
-
                                 var next7Day = moment().endOf('day').add(+8, 'days')._d;
-                                // alert(next7Day);
-
-                                // alert(TommDate);
-                                //  alert(TommEndDate);
-
                                 var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
-
-                                // For This week 
-                                /*
-                                I need recent monday dates and current dates 
-                                */
-                                // var mondayOfCurrentWeek = moment(moment().weekday(1).format('DD/MM/YYYY'))._d;
-
                                 var mondayOfCurrentWeek = moment().startOf('isoweek')._d;
 
-                                // For Last week 
-                                /*
-                                I need recent monday dates and current dates 
-                                */
-
                                 var d = new Date();
-
                                 // set to Monday of this week
                                 d.setDate(d.getDate() - (d.getDay() + 6) % 7);
-
                                 // set to previous Monday
                                 d.setDate(d.getDate() - 7);
 
-                                // create new date of day before
+                                //last week
                                 var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
                                 var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
 
                                 // Last Financial Current year 
-
                                 var lastFinancialYearFirstDay = new Date(new Date().getFullYear() - 1, 3, 1); // last year first day of financial yr
                                 var lastFinancialYearLastDay = new Date(new Date().getFullYear(), 2, 31); // current year march month
 
@@ -833,8 +932,9 @@
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
+                                expsplit[1] = expsplit[1].replace(/"/g, "");
+                                alert(expsplit[1]);
 
-                               
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
                                     abc = { logic: "and", filters: [] };
@@ -867,8 +967,6 @@
                                     filter.filters.push(abc);
                                 }
 
-
-
                                 else if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
 
                                     abc = { logic: "and", filters: [] };
@@ -894,15 +992,9 @@
                                 else if (expsplit[1].trim().toUpperCase() == "THIS MONTH") {
 
                                     abc = { logic: "and", filters: [] };
-                                    //if (firstDayOfCurrentMonth.getDate() == CurrentDate.getDate()) {
-                                    //    filter.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
-                                    //    filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate.getDate() + 1 });
-                                    //}
-                                    //else {
                                     abc.filters.push({ field: Firstname.trim(), operator: "gt", value: firstDayOfCurrentMonth });
                                     abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                     filter.filters.push(abc);
-                                    // }
                                 }
 
                                 else if (expsplit[1].trim().toUpperCase() == "LAST MONTH") {
@@ -979,15 +1071,18 @@
                                     filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                 }
                                 else {
+                                    if (Firstname == "status" && expsplit[1].trim().toUpperCase() == "IN PROGRESS") {
+                                        expsplit[1] = expsplit[1].replace(/\s/g, '');
+                                    }
+
                                     filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                 }
                             }
 
 
                             ValidFilter = true;
-
+                            spiltOK = false;
                         }
-
 
                         // IS BEFORE CHECK
 
@@ -1007,8 +1102,102 @@
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
+                            startdate = moment();
+                            startdate.subtract(1, 'd');
+
+                            //  alert(startdate.subtract(1, 'd'));
+
+                            //moment().startOf('day')._d;
+                            var CurrentDate = moment().startOf('day');
+                            CurrentDate = CurrentDate.subtract(1, 'd')._d;
+
+                            //moment().startOf('day').add(+1, 'days')._d;
+                            var TommDate = moment().startOf('day').add(+1, 'days')
+                            TommDate = TommDate.subtract(1, 'd')._d;
+
+                            //moment().endOf('day').add(+1, 'days')._d;
+                            var TommEndDate = moment().endOf('day').add(+1, 'days');
+                            TommEndDate = TommEndDate.subtract(1, 'd')._d;
+
+                            //alert(CurrentDate);
+                            //alert(TommDate);
+                            //alert(TommEndDate);
+
+                            var next7Day = moment().endOf('day').add(-8, 'days')._d;
+
+                            // alert("next7Day" + next7Day);
+
+                            var YesterDayDate = moment().startOf('day').add(-1, 'days');
+                            YesterDayDate = YesterDayDate.subtract(1, 'd')._d;
+
+                            // alert("YesterDayDate" + YesterDayDate);
+
+                            var mondayOfCurrentWeek = moment().startOf('isoweek');
+
+                            mondayOfCurrentWeek = mondayOfCurrentWeek.subtract(1, 'week')._d;
+
+                            //  alert("mondayOfCurrentWeek" + mondayOfCurrentWeek);
+
+                            var d = new Date();
+                            // set to Monday of this week
+                            d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+                            // set to previous Monday
+                            d.setDate(d.getDate() - 7);
+
+                            //last week
+                            var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+                            var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
+
+
+                            if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
+
+                                abc = { logic: "and", filters: [] };
+                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
+
+                                abc = { logic: "and", filters: [] };
+                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentEndDate });
+                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                abc = { logic: "and", filters: [] };
+                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "THIS WEEK") {
+
+                                abc = { logic: "and", filters: [] };
+
+                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
+                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+                            else {
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+
                         }
 
                         // IS AFTER CHECK
@@ -1031,9 +1220,9 @@
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
-                 
                         // BETWEEN OR CHECK 
                         if (expsplitBetween.length > 1) {
 
@@ -1061,6 +1250,7 @@
                                 abc.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
                                 filter.filters.push(abc);
                                 ValidFilter = true;
+                                spiltOK = false;
                             }
                         }
 
@@ -1084,6 +1274,8 @@
                 alert("Please Check Query.");
             }
         }
+
+
 
         $scope.clearFilter = function () {
             $('#project-record-list').getKendoGrid().dataSource.filter({});
