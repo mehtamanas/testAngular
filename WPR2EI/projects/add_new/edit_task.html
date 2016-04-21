@@ -58,56 +58,49 @@
                             </div>
                        </div>
                   </div>
-                <!--<div class="clearfix">
-                    <div class="pull-left f-half-3">
-                        <div class="clearfix">
-                            <div class="form-group">
-                               <div class="form-group form-bx unit-type">
-                                    <label for="">Task Code</label>
-                                    <input type="text" class="form-control"  disabled autofocus name="task id" id="edittaskTaskId"
-                                           placeholder="Task Code"
-                                           data-ng-model="params.task_code"
-                                           input-focus
-                                           required />
+                
+
+                <div class="clearfix">
+                    <div class="form-group"
+                         data-ng-class="{
+                                  'has-error' : addNewForm.project_task.$invalid && (!addNewForm.project_task.$pristine || showValid) && !addNewForm.project_task.$focus,
+                                  'has-success': addNewForm.project_task.$valid && !addNewForm.project_task.$pristine && !addNewForm.project_task.$focus
+                                                     }">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Project:</label>
+                                <select ng-model="project1" name="project_task" ng-change="selectproject()" id="editTaskProject"
+                                        class="dropdown form-control" required>
+                                    <option value="" selected>Select Project</option>
+                                    <option ng-repeat="project in projects"
+                                            value="{{project.id}}"
+                                            ng-disabled="project.id !== project1">
+                                        {{project.name}}
+                                    </option>
+                                </select>
+                                <div ng-messages="addNewForm.project_task.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.project_task.$invalid && (!addNewForm.project_task.$pristine || showValid) && !addNewForm.project_task.$focus">This field should not be empty </div>                                  
                                 </div>
+                            </div><div class="field-md0 field-req">*</div>
+                        </div>
+                    </div>
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Person:</label>
+                                <select kendo-combo-box class="dropdown form-control"
+                                        id="editTaskPerson"
+                                        k-placeholder="'Select Contact'"
+                                        k-data-text-field="'Contact_Name'"
+                                        k-data-value-field="'Contact_id'"
+                                        k-filter="'contains'"
+                                        ng-model="contact1"
+                                        k-auto-bind="false"
+                                        ng-change="selectcontact()"
+                                        k-min-length="3"
+                                        k-data-source="contacts"></select>
                             </div>
                         </div>
                     </div>
-                </div>-->
-
-                <div class="clearfix">
-                    <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Project:</label>
-                            <select ng-model="project1" ng-change="selectproject()" id="editTaskProject"
-                                    class="dropdown form-control">
-                                <option value="" selected>Select Project</option>
-                                <option ng-repeat="project in projects"
-                                        value="{{project.id}}"
-                                        ng-disabled="project.id !== project1">
-                                    {{project.name}}
-                                </option>
-                            </select>
-                        </div><div class="field-md0 field-req">*</div>
-                    </div>
-                  
-                <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Person:</label>                        
-                            <select kendo-combo-box class="dropdown form-control"
-                                    id="editTaskPerson"
-                                    k-placeholder="'Select Contact'"
-                                    k-data-text-field="'Contact_Name'"
-                                    k-data-value-field="'Contact_id'"
-                                    k-filter="'contains'"
-                                    ng-model="contact1"
-                                    k-auto-bind="false"
-                                    ng-change="selectcontact()"
-                                    k-min-length="3"
-                                    k-data-source="contacts"></select>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="clearfix">
                     <div class="pull-left f-half-6">
@@ -195,9 +188,13 @@
 
                
                 <div class="modal-btn-wrap-1 clearfix">
-                    <button type="submit" id="btn_editTaskSave" class="f-btn"> SAVE</button>
+                    <!--<button type="submit" id="btn_editTaskSave" class="f-btn"> SAVE</button>
                     <button type="button" id="btn_editTaskCancel" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
-                    <button type="button" id="btn_editTaskComplete" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
+                    <button type="button" id="btn_editTaskComplete" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>-->
+
+                    <button type="submit" class="btn btn-primary bold_txt" id="btn_editTask_save">Save</button>
+                    <button type="button" class="btn btn_complete" ng-click="completeFun()" id="btn_editTask_complete">Complete</button>
+                    <button type="button" class="btn odd_btn1" ng-click="cancel()" id="btn_editTask_cancel">Cancel</button>
                 </div>
                     
             </form>

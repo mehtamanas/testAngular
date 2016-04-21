@@ -16,7 +16,7 @@
                                   'has-success': addNewForm.TaskName.$valid && !addNewForm.TaskName.$pristine && !addNewForm.TaskName.$focus
                                                      }">
                         <div class="form-group form-bx form-bx14">
-                            <label for="">Task Name</label>
+                            <label for="">Task Name<span class="validationStarRed">*</span></label></label>
                             <input type="text" class="form-control text-bold" autofocus name="TaskName"
                                    data-ng-model="name"
                                    minlength="1"
@@ -31,7 +31,7 @@
                         </div>
 
                     </div>
-                    <span class="field-mdl field-req">*</span>
+                   
                 </div>
 
                 <div class="clearfix">
@@ -49,11 +49,16 @@
                 </div>
 
                 <div class="clearfix">
-                    <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
-                            <label for="">Project:</label>
+                    <div class="form-group"
+                         data-ng-class="{
+                                  'has-error' : addNewForm.project.$invalid && (!addNewForm.project.$pristine || showValid) && !addNewForm.project.$focus,
+                                  'has-success': addNewForm.project.$valid && !addNewForm.project.$pristine && !addNewForm.project.$focus
+                                                     }">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Project<span class="validationStarRed">*</span></label>
                                 <select ng-model="project1" ng-change="selectproject()" id="addNewTaskProject" name="project"
-                                        class="dropdown form-control">
+                                        class="dropdown form-control" required>
                                     <option value="" selected>Select Project</option>
                                     <option ng-repeat="project in projects"
                                             value="{{project.id}}"
@@ -61,7 +66,12 @@
                                         {{project.name}}
                                     </option>
                                 </select>
-                            </div><div class="field-md0 field-req">*</div>
+                                <div ng-messages="addNewForm.project.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.project.$invalid && (!addNewForm.project.$pristine || showValid) && !addNewForm.project.$focus">This field should not be empty </div>
+                               
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!--<div class="pull-left f-half-6">
@@ -80,7 +90,7 @@
                     </div>-->
 
                     <div class="pull-left f-half-6">
-                        <div class="form-group form-bx form-bx3-1">
+                        <div class="form-group ">
                             <label for="">Person:</label>
                             <select kendo-combo-box class="dropdown form-control"
                                     id="addNewTaskPerson"
@@ -184,10 +194,11 @@
                 
 
                 <div class="modal-btn-wrap clearfix">
+                    <button type="button" id="btn_addNewTaskCancel" class="btn odd_btn" ng-click="cancel()">CANCEL</button>
 
-                    <button type="submit" id="btn_addNewTaskSave" class="f-btn" ng-disabled="isDisabled">Save</button>
+                    <button type="submit" id="btn_addNewTaskSave" class="btn btn-primary" ng-disabled="isDisabled">Save</button>
 
-                    <button type="button" id="btn_addNewTaskCancel" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                 
                 </div>
             </form>
 
