@@ -158,8 +158,8 @@
             ProjectList.push
                 ({
                     project_id: selectedProjectId[i],
-                    user_id: $cookieStore.get('userId'),
-                    organization_id: $cookieStore.get('orgID'),
+                   // user_id: $cookieStore.get('userId'),
+                    //organization_id: $cookieStore.get('orgID'),
 
                 })
         }

@@ -143,19 +143,37 @@ angular.module('contacts')
 
         }
 
-        $scope.selectedProjectId = [];
-        var selectedProjects = _.filter($scope.projects, function (o) { return o.checkedd; });
-        selectedProjectId = _.pluck(selectedProjects, 'id');
-        var ProjectList = [];
-        for (i = 0; i < selectedProjectId.length; i++) {
-            ProjectList.push
-                ({
-                    project_id: selectedProjectId[i],
-                    user_id: $cookieStore.get('userId'),
-                    organization_id: $cookieStore.get('orgID'),
+        //$scope.selectedProjectId = [];
+        //var selectedProjects = _.filter($scope.projects, function (o) { return o.checkedd; });
+        //selectedProjectId = _.pluck(selectedProjects, 'id');
+        //var ProjectList = [];
+        //for (i = 0; i < selectedProjectId.length; i++) {
+        //    ProjectList.push
+        //        ({
+        //            project_id: selectedProjectId[i],
+        //            user_id: $cookieStore.get('userId'),
+        //            organization_id: $cookieStore.get('orgID'),
                     
-                })
+        //        })
+        //}
+        var GetSelectedProject = function () {
+            $scope.selectedProjectId = [];
+            var selectedProjects = _.filter($scope.projects, function (o) { return o.checkedd; });
+            selectedProjectId = _.pluck(selectedProjects, 'id');
+            var ProjectList = [];
+            for (i = 0; i < selectedProjectId.length; i++) {
+                ProjectList.push
+                    ({
+                        project_id: selectedProjectId[i],
+                        //user_id: $cookieStore.get('userId'),
+                        //organization_id: $cookieStore.get('orgID'),
+
+                    })
+            }
+            return ProjectList;
+
         }
+
 
         var dDate = moment($scope.params.Date_Of_Birth, "DD/MM/YYYY hh:mm A")._d;
         $scope.anvDate = moment($scope.params.anniversary_date, "DD/MM/YYYY hh:mm A")._d;
@@ -194,7 +212,7 @@ angular.module('contacts')
             sources: $scope.sources,
             age_group: $scope.age_group,
             family_type: $scope.family,
-            ProjectList: ProjectList,
+            ProjectList: GetSelectedProject(),
             no_of_family_members: $scope.params.no_of_family_members,
             no_of_car_own: $scope.params.no_of_car_own,
             interests: $scope.params.interests,
@@ -438,6 +456,7 @@ angular.module('contacts')
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
     },
+    
    function (error) {
        alert("Error " + error.state);
    });
