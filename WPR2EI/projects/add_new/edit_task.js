@@ -151,6 +151,7 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
         apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            $scope.openSucessfullyPopup();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
     function (error) {
@@ -160,6 +161,18 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
             alert("Network issue");
     })
     };
+
+
+    $scope.openSucessfullyPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'login/successfully.html',
+            backdrop: 'static',
+            controller: sucessfullyController,
+            size: 'sm',
+            resolve: { items: { title: "Task Completed" } }
+        });
+    }
 
 
     Url = "ToDoItem/GetReminderTime"

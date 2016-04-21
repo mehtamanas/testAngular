@@ -171,7 +171,7 @@ function (error) {
    
 
     $scope.addNew = function (isValid) {
-        $scope.isDisabled = true;
+        
         $scope.showValid = true;
         if (isValid) {
             if ($scope.remind_me === true)

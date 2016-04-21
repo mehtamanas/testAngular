@@ -520,7 +520,8 @@
             },
             columns: [{
                 field: "name",
-                template: '<a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a>',
+                //template: '<a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a>',
+                template: '#if (status!="Completed") {# <a ng-click="openEditTask(dataItem.task_id)" href="">#=name#</a> #} else {#<a ng-click="taskComplete()" href="">#=name#</a>#}#',
                 title: "Task Name",
               
                 attributes:
@@ -621,6 +622,14 @@
              {
                  "style": "text-align:center"
              }
+            }, {
+                title: "postpone",
+                template: '#if (status!="Completed") {# <a class="btn btn-primary" id="postpone_now" ng-click="openPostpone(dataItem)">Postpone</a> #}#',
+                attributes:
+              {
+                  "style": "text-align:center"
+              }
+
             }, ]
         };
 
@@ -851,6 +860,30 @@
             },
 
             ]
+        };
+
+
+        $scope.taskComplete = function () {
+            alert("Task is Complete..You Can't Edit")
+        }
+
+        $scope.openPostpone = function (d) {
+            $scope.taskID = d.task_id;
+            window.sessionStorage.selectedCustomerID = $scope.taskID;
+            $cookieStore.put('company_name', d.company_name);
+            $cookieStore.put('contactID', d.contact_id);
+            $cookieStore.put('lead_name', d.Contact_name);
+            $cookieStore.put('task_name', d.name);
+            $cookieStore.put('taskID', $scope.taskID);
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/postponed/taskpostponed.html',
+                backdrop: 'static',
+                controller: postponedController,
+                size: 'lg'
+
+            });
+
         };
 
         $scope.filterNow = function () {
