@@ -189,7 +189,7 @@ angular.module('contacts')
             interested_appartment:$scope.params.interested_appartment,
             no_of_project: $scope.params.no_of_project,
             spouse_name: $scope.params.spouse_name,
-            occupation: $scope.occup,
+            occupation: $scope.occupation,
             budget: $scope.budget,
             sources: $scope.sources,
             age_group: $scope.age_group,
@@ -239,59 +239,24 @@ angular.module('contacts')
 
             //    media.push(postData_phone);
             //}
-            media.push({ class_id: loginSession.id, class_type: "Person", element_type: "primary_contact", element_info1: $scope.params.primary_contact, });
-            media.push({ class_id: loginSession.id, class_type: "Person", element_type: "primary_email", element_info1: $scope.params.contact_element_info_email, });
+            //var postData_budget =
+            //{
+            //    // id: $scope.choices[i].class_id,
+            //    class_id: loginSession.id,
+            //    class_type: "Person",
+            //    element_type: "Budget",
+            //    element_info1: $scope.budget,
+            //}
+            //media.push(postData_budget);
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "primary_contact", element_info1: $scope.params.primary_contact, });
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "primary_email", element_info1: $scope.params.contact_element_info_email, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "mobile_contact", element_info1: $scope.params.mobile_number, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "home_contact", element_info1: $scope.params.home_number, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "office_contact", element_info1: $scope.params.office_number, });
-
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "email1_contact", element_info1: $scope.params.email1, });
                 media.push({ class_id: loginSession.id, class_type: "Person", element_type: "email2_contact", element_info1: $scope.params.email2, });
-                 
+                media.push({ class_id: loginSession.id, class_type: "Person", element_type: "Budget", element_info1: $scope.budget, });
                 
-
-            var postData_budget =
-            {
-                // id: $scope.choices[i].class_id,
-                class_id: loginSession.id,
-                class_type: "Person",
-                element_type: "Budget",
-                element_info1: $scope.budget,
-            }
-            media.push(postData_budget);
-
-            var postData_service =
-          {
-              // id: $scope.choices[i].class_id,
-              class_id: loginSession.id,
-              class_type: "Person",
-              element_type: "service",
-              element_info1: $scope.service,
-          }
-            media.push(postData_service);
-
-            var postData_duration =
-           {
-               //id: $scope.choices[i].class_id,
-               class_id: loginSession.id,
-               class_type: "Person",
-               element_type: "PurchaseDuration",
-               element_info1: $scope.buy,
-           }
-            media.push(postData_duration);
-
-            for (var i in $scope.project_name) {
-                var postData_project =
-                    {
-                        //id: $scope.choices[i].class_id,
-                        class_id: loginSession.id,
-                        class_type: "Person",
-                        element_type: "InterestedProjects",
-                        element_info1: $scope.project_name[i],
-                    }
-                media.push(postData_project);
-            }
-
 
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
@@ -467,18 +432,6 @@ angular.module('contacts')
             $scope.choices2.push({ 'id': 'choice' + newItemNo2 });
         }
 
-    };
-
-    Url = "Services/GetServices/" + $cookieStore.get('orgID');
-    apiService.get(Url).then(function (response) {
-        $scope.services = response.data;
-    },
-   function (error) {
-       alert("Error " + error.state);
-   });
-
-    $scope.selectservices = function () {
-        $scope.service = $scope.service1;
     };
 
     Url = "project/Get/" + $cookieStore.get('orgID');

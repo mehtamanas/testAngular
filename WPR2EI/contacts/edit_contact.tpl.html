@@ -96,7 +96,7 @@
                                             }">
 
                                             <md-input-container>
-                                                <label class="contact-label">First Name</label>
+                                                <label class="contact-label">First Name<span class="validationStarRed">*</span></label>
                                                 <input name="firstName" id="contactadd_firstname"
                                                        data-ng-model="params.Contact_First_Name"
                                                        minlength="1"
@@ -112,7 +112,7 @@
                                             </div>
                                         </div>
 
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
                                     <div class="col-md-2">
 
                                         <div class="form-group"
@@ -137,7 +137,7 @@
                                                 <div ng-message="pattern">Enter valid Middle Name</div>
                                             </div>
                                         </div>
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
                                     <div class="col-md-2">
 
                                         <div class="form-group"
@@ -147,7 +147,7 @@
                                                                      }">
 
                                             <md-input-container>
-                                                <label class="contact-label">Last Name</label>
+                                                <label class="contact-label">Last Name<span class="validationStarRed">*</span></label>
                                                 <input name="lastName" ng-model="params.Contact_Last_Name" id="contactadd_lastname"
                                                        minlength="1"
                                                        maxlength="50"
@@ -160,7 +160,7 @@
                                                 <div ng-message="pattern">Enter valid last name</div>
                                             </div>
                                         </div>
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
 
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                             <div id="phone-wrap" class="clearfix">
                                                 <div id="phone-no" class="form-bx form-bx2">
                                                     <md-input-container class="md-block">
-                                                        <label class="contact-label">Phone Number</label>
+                                                        <label class="contact-label">Phone Number<span class="validationStarRed">*</span></label>
                                                         <input name="primary_phone_no" id="contactadd_phoneno"
                                                                data-ng-model="params.primary_contact"
                                                                input-focus
@@ -189,7 +189,7 @@
 
                                                     </md-input-container>
                                                 </div>
-                                                <!--<div id="contact_removephone" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice($event)"><a id="contact_remove_phone" href="javascript:">Remove</a></div>-->
+                                                
                                             </div>
                                         </div>
 
@@ -209,7 +209,7 @@
                                             <div id="email-wrap" class="clearfix">
                                                 <div id="email-no" class="form-bx form-bx2">
                                                     <md-input-container class="md-block">
-                                                        <label class="contact-label">Primary Email Address</label>
+                                                        <label class="contact-label">Primary Email Address<span class="validationStarRed">*</span></label>
                                                         <input name="Primary_email" id="contactadd_email"
                                                                data-ng-model="params.primary_email"
                                                                input-focus
@@ -221,7 +221,7 @@
                                                     </md-input-container>
 
                                                 </div>
-                                                <!--<div id="contact_removeemail" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_email" href="javascript:">Remove</a></div>-->
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-2">
                                         <md-input-container class="md-block">
-                                            <label for="" class="contact-label">SELECT LEAD TYPE</label>
+                                            <label for="" class="contact-label">SELECT LEAD TYPE<span class="validationStarRed">*</span></label>
                                             <md-select placeholder="Assign to user" name="type" id="contactadd_type" ng-change="selecttype()" class="dropdown" ng-model="people_type">
                                                 <md-option value="" selected>Select Type</md-option>
                                                 <md-option value="Client">Client</md-option>
@@ -240,7 +240,7 @@
                                                 <md-option value="Contact">Contact</md-option>
                                             </md-select>
                                         </md-input-container>
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
                                     <div class="col-md-2">
                                         <div class="form-group"
                                              data-ng-class="{
@@ -249,7 +249,7 @@
                                              }">
 
                                             <md-input-container class="md-block">
-                                                <label for="" class="contact-label">ASSIGN TO</label>
+                                                <label for="" class="contact-label">ASSIGN TO<span class="validationStarRed">*</span></label>
                                                 <md-select ng-model="user1" name="user" ng-change="selectuser()" id="contactadd_user" class="dropdown">
                                                     <md-option selected>Select User</md-option>
                                                     <md-option ng-repeat="User in users"
@@ -265,7 +265,7 @@
 
                                         </div>
 
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
 
                                     <div class="col-md-2">
                                         <div class="form-group"
@@ -275,7 +275,7 @@
                                                                      }">
 
                                             <md-input-container class="md-block">
-                                                <label for="" class="contact-label">Add To Project</label>
+                                                <label for="" class="contact-label">Add To Project<span class="validationStarRed">*</span></label>
                                                 <md-select ng-model="project1" name="project" ng-change="selectproject()" id="contactadd_projectname" class="dropdown">
                                                     <md-option selected>Select Project</md-option>
                                                     <md-option ng-repeat="project in projects"
@@ -291,7 +291,7 @@
 
                                         </div> <!--add project-->
 
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
 
                                 </div>
                             </div>
@@ -336,7 +336,7 @@
                                     <!--<input kendo-auto-complete ng-model="params.company" id="contactadd_Designation" k-data-source="companyList" class="form-control" />-->
                                     <md-input-container class="md-block">
                                         <label for="" class="contact-label">Apartment Configuration</label>
-                                        <textarea id="contactadd_Configuration" ng-model="params.interested_appartment"></textarea>
+                                        <textarea id="contactadd_Configuration" ng-model="params.interested_appartments"></textarea>
 
                                     </md-input-container>
                                 </div>
@@ -753,7 +753,7 @@
 
 
                                         </div>
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
                                     <div class="col-md-3 contact_spacer_inrest">
                                         <div class="form-bx">
                                             <div class="form-group"
@@ -778,7 +778,7 @@
                                             </div>
                                         </div>
 
-                                    </div><span class="field-mdl field-req">*</span>
+                                    </div>
                                 </div>
 
 
@@ -817,8 +817,6 @@
                                                ng-model="params.Anniversary_Date"
                                                k-ng-model="k_due_date1"
                                                k-format="'dd/MM/yyyy'" />
-
-
                                     </div>
                                 </div>
                             </div>

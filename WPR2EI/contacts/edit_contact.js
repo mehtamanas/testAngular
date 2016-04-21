@@ -5,9 +5,8 @@
     $scope.project_name = [];
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
     $scope.emailRegex = PATTERNREGEXS.email;
-    //$scope.choices1 = {};
-
     var orgID = $cookieStore.get('orgID');
+
     $scope.date = new Date();
     $scope.myOptions = {
         max: $scope.date
@@ -97,17 +96,9 @@
     }
 
 
-
-   
-
     contactUrl = "Contact/GetContactSummary/?Id=" + $scope.seletedCustomerId;//f2294ca0-0fee-4c16-86af-0483a5718991";
     apiService.getWithoutCaching(contactUrl).then(function (response) {
         $scope.params = response.data;
-
-        //$scope.choices1[0].Contact_Email = response.data.Contact_Email;
-        //$scope.choices[0].Contact_Phone = response.data.Contact_Phone;
-
-       // $scope.choices2[0].Street_1 = response.data.street1;
 
         if (response.data.street2 != undefined)
         { $scope.choices2.push({ 'Street_1': response.data.street2 }); }
@@ -128,13 +119,14 @@
         $scope.family_type = response.data.Family_Type;
         $scope.occupation = response.data.occupation
         $scope.params.income = response.data.income;
+        $scope.params.interested_appartments = response.data.interested_appartments;
         $scope.params.Date_Of_Birth = moment(response.data.Date_Of_Birth).format('DD/MM/YYYY');
         $scope.params.Anniversary_Date = moment(response.data.Anniversary_Date).format('DD/MM/YYYY');
-    },
-    function (error) {
+        },
+        function (error) {
        
-    }
-  );
+        }
+      );
 
     Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Person";
 
@@ -226,7 +218,8 @@
            mappinguser_id: $scope.user1,
            company: $scope.params.company,
            designation: $scope.params.designation,
-           interested_appartments: $scope.params.interested_appartment,
+           interested_appartments: $scope.params.interested_appartments,
+           occupation:$scope.occupation,
            street_1: $scope.params.street1,
            street_2: $scope.params.street2,
            area: $scope.params.area,
@@ -251,13 +244,7 @@
            contact_element_info_email: $scope.params.primary_email,
            contact_element_info_phone: $scope.params.primary_contact,
            ProjectList: GetSelectedProject()
-           
-          
-           
-           
-          
-           //mappinguser_id: $scope.params.mappinguser_id,
-          
+        
            
        };
 
@@ -273,31 +260,8 @@
             $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: editedContact, action: 'edit' });
             $scope.loadingDemo = false;
 
-            
-
             var media = [];
-            for (var i in $scope.choices1) {
-                var postData_email =
-                    {
-                        id: $scope.choices1[i].class_id,
-                        class_id: window.sessionStorage.selectedCustomerID,
-                        class_type: "Person",
-                        element_type: "email_contact",
-                        element_info1: $scope.choices1[i].Contact_Email,
-                    }
-                media.push(postData_email);
-            }
 
-            var postData_budget =
-            {           
-                class_id: window.sessionStorage.selectedCustomerID,
-                class_type: "Person",
-                element_type: "Budget",
-                element_info1: $scope.budget,
-            }
-            media.push(postData_budget);
-
-          
             media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "primary_contact", element_info1: $scope.params.primary_contact, });
             media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "mobile_contact", element_info1: $scope.params.mobile_number, });
             media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "home_contact", element_info1: $scope.params.home_number, });
@@ -305,12 +269,11 @@
             media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "primary_email", element_info1: $scope.params.primary_email, });
             media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "email1_contact", element_info1: $scope.params.secondaryEmail1, });
             media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "email2_contact", element_info1: $scope.params.secondaryEmail2, });
+            media.push({ class_id: loginSession.contact_id, class_type: "Person", element_type: "Budget", element_info1: $scope.params.budget, });
            
-
             apiService.post("ElementInfo/Create", media).then(function (response) {
                 var loginSession = response.data;
-                called = true;
-                
+                called = true;              
                 $rootScope.$broadcast('REFRESH1', 'elemeninfo');
                 $rootScope.$broadcast('REFRESH', 'contactcount');
                 $state.go('app.contactdetail', { id: editedContact.contact_id });
@@ -360,7 +323,6 @@
     {        
         user_id: $cookieStore.get('userId'),
         organization_id: $cookieStore.get('orgID'),
-        //class_type: "Person",
         media_url: $scope.Contact_Image,
         salutation: $scope.salutation1,
         first_name: $scope.Contact_First_Name,
@@ -381,11 +343,9 @@
         city_id: $scope.city1,
         zip_code: $scope.zip_code,
         sources: $scope.sources,
-       // Date_Of_Birth: new Date(dDate).toISOString(),
         gender: $scope.gender1,
         income: $scope.income,
         spouse_name: $scope.Spouse_Name,
-       // anniversary_date: new Date($scope.anvDate).toISOString(),
         age_group: $scope.age_group,
         family_type: $scope.family_type,
         no_of_family_members: $scope.No_Of_Family_Members,
@@ -393,11 +353,6 @@
         interests: $scope.Interests,
         channel_type_details: $scope.Channel_Partner_Details,
         Remarks: $scope.Remarks,
-       // contact_element_info_email: $scope.choices1[0].Contact_Email,
-        //contact_element_info_phone: $scope.choices[0].Contact_Phone,
-
-
-
     };
 
 
@@ -472,7 +427,7 @@
     Url = "project/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.projects = response.data;
-        apiService.get('Contact/GetContactProjectList/' + $scope.seletedCustomerId).then(function (res) {
+        apiService.getWithoutCaching('Contact/GetContactProjectList/' + $scope.seletedCustomerId).then(function (res) {
             selectedProjects = _.pluck(res.data, 'project_id');
             for (i = 0; i < selectedProjects.length; i++) {
                 if (_.find($scope.projects, function (o) { return o.id == selectedProjects[i] })) {
@@ -580,34 +535,14 @@
         $scope.buy = $scope.buy1;
     };
 
-
-
-    $scope.EditContact = function (isValid)
-    {
-       
-
-        if (isValid) {
-            $scope.loadingDemo = true;
-          
-
-            if (uploader.queue.length != 0)
-                uploader.uploadAll();
-            if (uploader.queue.length == 0)
-                $scope.finalpost();
-
-            $scope.showValid = false;
-
-        }
-}
-
     Url = "Company/GetAllCompanies/" + orgID;
     apiService.get(Url).then(function (response) {
         $scope.companyList = response.data;
         $scope.companyList = _.pluck($scope.companyList, 'company_name');
     },
-function (error) {
-    alert("Error " + error.state);
-});
+    function (error) {
+        alert("Error " + error.state);
+    });
 
 
     Url = "Company/GetAllDesignation/" + orgID;
@@ -615,9 +550,21 @@ function (error) {
         $scope.titleList = response.data;
         $scope.titleList = _.pluck($scope.titleList, 'title');
     },
-function (error) {
-    alert("Error " + error.state);
-});
+    function (error) {
+        alert("Error " + error.state);
+    });
+
+    $scope.EditContact = function (isValid) {
+        if (isValid) {
+            $scope.loadingDemo = true;
+            if (uploader.queue.length != 0)
+                uploader.uploadAll();
+            if (uploader.queue.length == 0)
+                $scope.finalpost();
+
+            $scope.showValid = false;
+        }
+    }
 
 });
 
