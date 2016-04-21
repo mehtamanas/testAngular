@@ -76,7 +76,8 @@
                   }
             }, {
                 field: "name",
-                template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
+                //template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="" class="contact_name">#=name#</a>',
+                template: '#if (status!="Completed") {# <a ui-sref="app.edit_task({id:dataItem.task_id})" href="" class="contact_name">#=name#</a> #} else {#<a ng-click="taskComplete()" href="">#=name#</a>#}#',
                 title: "Task Name",
                 width: "120px",
                 attributes:
@@ -212,6 +213,10 @@
            }, ]
         };
 
+
+        $scope.taskComplete = function () {
+            alert("Task is Complete..You Can't Edit")
+        }
 
         $scope.openPostpone = function (d) {
             $scope.taskID = d.task_id;
@@ -1178,18 +1183,17 @@
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
+                            //else if (expsplitIsBefore[1].trim().toUpperCase() == "THIS WEEK") {
 
-                            else if (expsplitIsBefore[1].trim().toUpperCase() == "THIS WEEK") {
+                            //    abc = { logic: "and", filters: [] };
 
-                                abc = { logic: "and", filters: [] };
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
 
-                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
-                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
-
-                                filter.filters.push(abc);
-                                ValidFilter = true;
-                                spiltOK = false;
-                            }
+                            //    filter.filters.push(abc);
+                            //    ValidFilter = true;
+                            //    spiltOK = false;
+                            //}
                             else {
 
                                 filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });

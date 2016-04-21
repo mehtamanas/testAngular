@@ -422,7 +422,7 @@ angular.module('contacts')
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
-             }, 
+             },
              {
                  field: "Tags",
                  template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
@@ -442,20 +442,55 @@ angular.module('contacts')
                       "class": "UseHand",
                       "style": "text-align:center"
                   }
-              }, {
-            field: "Formatted_last_contacted_date",
-            title: "Last Contacted Date",
-            filterable: {
-                ui: "datepicker"
-            },
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-        },
+              },
+               {
+                   field: "last_contacted",
+                   title: "Last Contacted Date",
+                   hidden: true,
+                   type: 'date',
+                   filterable: {
+                       ui: "datepicker"
+                   },
+                   format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                   attributes: {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
+               },
+
+           {
+               field: "last_updated",
+               hidden: true,
+               title: "Updated Date",
+               type: 'date',
+               filterable: {
+                   ui: "datepicker"
+               },
+               format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+               //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
+               attributes: {
+                   "class": "UseHand",
+                   "style": "text-align:center"
+               }
+
+
+           },
+              {
+                  field: "Formatted_last_contacted_date",
+                  title: "Last Contacted Date",
+                 
+                  filterable: {
+                      ui: "datepicker"
+                  },
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              },
         {
             field: "Formatted_last_updated_date",
             title: "Updated Date",
+           
             filterable: {
                 ui: "datepicker"
             },
@@ -497,11 +532,11 @@ angular.module('contacts')
 
         $scope.DoWork = function () {
             var txtdata = $scope.textareaText.toLowerCase();
-            if (txtdata.text != '')
+            if (txtdata != '')
                 $scope.callFilter();
         };
 
-     
+
         $scope.callFilter = function () {
 
             var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
@@ -515,7 +550,7 @@ angular.module('contacts')
             var filter = [];
             var abc = [];
             var logsplit = "";
-            
+
             if (txtdata.length > 0) {
 
                 if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
@@ -527,38 +562,149 @@ angular.module('contacts')
                     filter = { logic: "or", filters: [] };
                     logsplit = txtdata.split(" or ");
                 }
+                var spiltOK = false;
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
                     for (var j = 0; j < logsplit.length; j++) {
                         // alert("value for j is " + j);
 
-                        //FOR DATES 
-                        var expsplitIsBefore = logsplit[j].split(" isbefore ");
-                        var expsplitIsAfter = logsplit[j].split(" isafter ");
-                        var expsplitBetween = logsplit[j].split(" between ");
+                        var expsplitIsBefore = [];
+                        var expsplitIsAfter = [];
+                        var expsplitBetween = [];
 
-                        var expEQ = logsplit[j].split(" = ");
-                        var expIS = logsplit[j].split(" is ");
+                        var expsplitCONTAINS = [];
+                        var expsplitIN = [];
+                        var expSplitGTE = [];
+                        var expSplitLTE = [];
+                        var expSplitGT = [];
+                        var expSplitLT = [];
+                        var expsplit = [];
 
-                        var expsplit = "";
-                        if (expEQ.length > 1)
-                            expsplit = expEQ;
+                        if (spiltOK == false) {
 
-                        if (expIS.length > 1)
-                            expsplit = expIS;
+                            var oplen = (" is before ").length;
+                            var startpos = logsplit[j].indexOf(" is before ");
+                            if (startpos >= 0) {
+                                expsplitIsBefore[0] = logsplit[j].substr(0, startpos);
+                                expsplitIsBefore[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
 
-                        var expsplitCONTAINS = logsplit[j].split(" contains ");
-                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
+                            //expsplitIsBefore = logsplit[j].split(" is before ");
+                            //if (expsplitIsBefore.length > 2)
+                        }
 
-                        var expsplitIN = logsplit[j].split(" in ");
+                        if (spiltOK == false) {
 
-                        var expSplitGTE = logsplit[j].split(" >= ");
+                            var oplen = (" is after ").length;
+                            var startpos = logsplit[j].indexOf(" is after ");
+                            if (startpos >= 0) {
+                                expsplitIsAfter[0] = logsplit[j].substr(0, startpos);
+                                expsplitIsAfter[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
 
-                        var expSplitLTE = logsplit[j].split(" <= ");
+                        if (spiltOK == false) {
 
-                        var expSplitGT = logsplit[j].split(" > ");
+                            var oplen = (" between ").length;
+                            var startpos = logsplit[j].indexOf(" between ");
+                            if (startpos >= 0) {
+                                expsplitBetween[0] = logsplit[j].substr(0, startpos);
+                                expsplitBetween[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
 
-                        var expSplitLT = logsplit[j].split(" < ");
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" = ").length;
+                            var startpos = logsplit[j].indexOf(" = ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" is ").length;
+                            var startpos = logsplit[j].indexOf(" is ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" contains ").length;
+                            var startpos = logsplit[j].indexOf(" contains ");
+                            if (startpos >= 0) {
+                                expsplitCONTAINS[0] = logsplit[j].substr(0, startpos);
+                                expsplitCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+                            var oplen = (" in ").length;
+                            var startpos = logsplit[j].indexOf(" in ");
+                            if (startpos >= 0) {
+                                expsplitIN[0] = logsplit[j].substr(0, startpos);
+                                expsplitIN[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" >= ").length;
+                            var startpos = logsplit[j].indexOf(" >= ");
+                            if (startpos >= 0) {
+                                expSplitGTE[0] = logsplit[j].substr(0, startpos);
+                                expSplitGTE[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" <= ").length;
+                            var startpos = logsplit[j].indexOf(" <= ");
+                            if (startpos >= 0) {
+                                expSplitLTE[0] = logsplit[j].substr(0, startpos);
+                                expSplitLTE[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" > ").length;
+                            var startpos = logsplit[j].indexOf(" > ");
+                            if (startpos >= 0) {
+                                expSplitGT[0] = logsplit[j].substr(0, startpos);
+                                expSplitGT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" < ").length;
+                            var startpos = logsplit[j].indexOf(" < ");
+                            if (startpos >= 0) {
+                                expSplitLT[0] = logsplit[j].substr(0, startpos);
+                                expSplitLT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
 
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
@@ -604,6 +750,7 @@ angular.module('contacts')
 
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
                         // IN CHECK
@@ -654,13 +801,20 @@ angular.module('contacts')
                             // alert(mystring);
 
                             var newString = mystring.split(',');
+                            abc = { logic: "or", filters: [] };
+
                             if (newString.length >= 1) {
                                 for (var k = 0; k < newString.length; k++) {
-                                    // newString
-                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
-                                    ValidFilter = true;
+                                    if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        newString[k] = newString[k].replace(/\s/g, '');
+                                    }
+                                    abc.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
                                 }
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
                             }
+
                         }
 
 
@@ -724,6 +878,7 @@ angular.module('contacts')
                             if (Firstname == "follow_up_count") {
                                 filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
                                 ValidFilter = true;
+                                spiltOK = false;
                             }
                             else {
                                 //"last_updated":"2016-04-07T04:20:42.953+00:00"
@@ -908,7 +1063,7 @@ angular.module('contacts')
                                         abc.filters.push({ field: Firstname.trim(), operator: "gt", value: cfyFirstDay });
                                         abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                         filter.filters.push(abc);
-                                    }   
+                                    }
 
                                     else if (expsplit[1].trim().toUpperCase() == "LAST FINANCIAL YEAR") {
 
@@ -943,14 +1098,14 @@ angular.module('contacts')
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
-                                       
+
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
                                 }
                             }
 
                             ValidFilter = true;
-
+                            spiltOK = false;
                         }
 
 
@@ -959,7 +1114,7 @@ angular.module('contacts')
 
                             if (expSplitGTE[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
-                            
+
                             // by saroj on 18-04-2016
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -969,6 +1124,7 @@ angular.module('contacts')
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
                         // LESSER THAN EQUAL TO CHECK
@@ -986,6 +1142,7 @@ angular.module('contacts')
 
                             filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
 
@@ -994,7 +1151,7 @@ angular.module('contacts')
 
                             if (expSplitGT[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
-                            
+
                             // by saroj on 19-04-2016
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -1004,6 +1161,7 @@ angular.module('contacts')
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGTE[1].trim()) });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
                         // LESSER THAN TO CHECK
@@ -1020,6 +1178,7 @@ angular.module('contacts')
                             }
                             filter.filters.push({ field: Firstname.trim(), operator: "lt", value: parseFloat(expSplitLT[1].trim()) });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
 
@@ -1044,8 +1203,84 @@ angular.module('contacts')
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
+                            ////moment().startOf('day')._d;
+                            //var CurrentDate = moment().startOf('day');
+                            //CurrentDate = CurrentDate.subtract(1, 'd')._d;
+
+                            ////moment().startOf('day').add(+1, 'days')._d;
+                            //var TommDate = moment().startOf('day').add(+1, 'days')
+                            //TommDate = TommDate.subtract(1, 'd')._d;
+
+                            ////moment().endOf('day').add(+1, 'days')._d;
+                            //var TommEndDate = moment().endOf('day').add(+1, 'days');
+                            //TommEndDate = TommEndDate.subtract(1, 'd')._d;
+
+                            ////alert(CurrentDate);
+                            ////alert(TommDate);
+                            ////alert(TommEndDate);
+
+                            //var next7Day = moment().endOf('day').add(-8, 'days')._d;
+
+                            //// alert("next7Day" + next7Day);
+
+                            //var YesterDayDate = moment().startOf('day').add(-1, 'days');
+                            //YesterDayDate = YesterDayDate.subtract(1, 'd')._d;
+
+                            //// alert("YesterDayDate" + YesterDayDate);
+
+                            //var mondayOfCurrentWeek = moment().startOf('isoweek');
+
+                            //mondayOfCurrentWeek = mondayOfCurrentWeek.subtract(1, 'week')._d;
+
+                            ////  alert("mondayOfCurrentWeek" + mondayOfCurrentWeek);
+
+                            //var d = new Date();
+                            //// set to Monday of this week
+                            //d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+                            //// set to previous Monday
+                            //d.setDate(d.getDate() - 7);
+
+                            ////last week
+                            //var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+                            //var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
+
+
+                            //if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
+
+                            //    abc = { logic: "and", filters: [] };
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                            //    filter.filters.push(abc);
+                            //    ValidFilter = true;
+                            //    spiltOK = false;
+                            //}
+
+                            //else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
+
+                            //    abc = { logic: "and", filters: [] };
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentEndDate });
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                            //    filter.filters.push(abc);
+                            //    ValidFilter = true;
+                            //    spiltOK = false;
+                            //}
+
+                            //else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
+
+                            //    abc = { logic: "and", filters: [] };
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                            //    filter.filters.push(abc);
+                            //    ValidFilter = true;
+                            //    spiltOK = false;
+                            //}
+                                                       
+                            //else {
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            //}
                         }
 
                         // IS AFTER CHECK
@@ -1071,6 +1306,7 @@ angular.module('contacts')
 
                             filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
 
                         // 
@@ -1105,6 +1341,7 @@ angular.module('contacts')
                                 abc.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
                                 filter.filters.push(abc);
                                 ValidFilter = true;
+                                spiltOK = false;
                             }
                         }
 
@@ -1449,7 +1686,7 @@ angular.module('contacts')
 
             $scope.gridView = 'default';
         }
-       
+
     }
 );
 
