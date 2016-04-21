@@ -65,10 +65,10 @@
        
         apiService.post(projectUrl, param).then(function (response) {
             var loginSession = response.data;
-            alert("Your Task Code is " + loginSession.task_code);
-            $modalInstance.dismiss();
+            alert("Your Task Code is " + loginSession.task_code);            
             $scope.openSucessfullPopup();
-            $rootScope.$broadcast('REFRESH', { name: 'outTaskGrid',data:null,action:'add' });
+            $rootScope.$broadcast('REFRESH', { name: 'outTaskGrid', data: null, action: 'add' });
+            $state.go('app.tasks');
         },
     function (error) {
         if (error.status === 400)
@@ -205,7 +205,7 @@ function (error) {
     }
 
     $scope.addNew = function (isValid) {
-        $scope.isDisabled = true;
+       
         $scope.showValid = true;
         if (isValid) {
             $scope.loadingDemo = true;

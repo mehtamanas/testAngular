@@ -384,6 +384,12 @@
                     outTaskGridRefresh();
                     $('.k-i-refresh').trigger("click");
                 }
+                else if(args.action==='complete')
+                {
+                    $localStorage.common_taskDataSource = [];
+                    outTaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                }
               
             }
             
