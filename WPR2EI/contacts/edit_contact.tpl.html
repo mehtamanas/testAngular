@@ -214,7 +214,7 @@
                                                         <input name="Primary_email" id="contactadd_email"
                                                                data-ng-model="params.primary_email"
                                                                input-focus
-                                                               ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"  />
+                                                               ng-pattern="emailRegex"  />
                                                         <div class="text-danger"
                                                              data-ng-if="newForm.Primary_email.$invalid && (!newForm.Primary_email.$pristine || showValid) && !newForm.Primary_email.$focus">
                                                             {{ 'Enter valid email address' | translate }}
@@ -473,7 +473,7 @@
                                                     <input name="Primary_email1" id="contactadd_email"
                                                            data-ng-model="params.secondaryEmail1"
                                                            input-focus
-                                                           ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
+                                                           ng-pattern="emailRegex" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Primary_email1.$invalid && (!newForm.Primary_email1.$pristine || showValid) && !newForm.Primary_email1.$focus">
                                                         {{ 'Enter valid email address' | translate }}
@@ -505,7 +505,7 @@
                                                     <input name="Primary_email2" id="contactadd_email"
                                                            data-ng-model="params.secondaryEmail2"
                                                            input-focus
-                                                           ng-pattern="^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$" />
+                                                           ng-pattern="emailRegex" />
                                                     <div class="text-danger"
                                                          data-ng-if="newForm.Primary_email2.$invalid && (!newForm.Primary_email2.$pristine || showValid) && !newForm.Primary_email2.$focus">
                                                         {{ 'Enter valid email address' | translate }}

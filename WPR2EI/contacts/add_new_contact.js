@@ -1,7 +1,8 @@
 
 angular.module('contacts')     
-.controller ('ContactPopUpController' , function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope) {
+.controller('ContactPopUpController', function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope, PATTERNREGEXS) {
     console.log('ContactPopUpController');
+    $scope.emailregex = PATTERNREGEXS.email;
     $scope.loadingDemo = false;
     $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
     var orgID = $cookieStore.get('orgID');
