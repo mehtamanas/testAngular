@@ -195,6 +195,10 @@ var EditNotesContactController = function ($scope, $state, $cookieStore, apiServ
             $scope.loadingDemo = false;
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'NotesGrid');
+            $rootScope.$broadcast('REFRESH', 'NotesGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: null, action: 'notesEdit' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: null, action: 'notesEdit' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: null, action: 'notesEdit' });
 
         },
         function (error) {

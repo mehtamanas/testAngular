@@ -171,6 +171,9 @@ var AddNewNotesController = function ($scope, $state, $cookieStore, apiService, 
             $modalInstance.dismiss();
 
             $rootScope.$broadcast('REFRESH', 'NotesGrid');
+            $rootScope.$broadcast('REFRESH1', { name: 'contactGrid', data: null, action: 'notesAdd' });
+            $rootScope.$broadcast('REFRESH2', { name: 'LeadGrid', data: null, action: 'notesAdd' });
+            $rootScope.$broadcast('REFRESH3', { name: 'ClientContactGrid', data: null, action: 'notesAdd' });
         },
 function (error) {
     if (error.status === 400)
