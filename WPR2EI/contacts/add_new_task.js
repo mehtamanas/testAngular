@@ -207,7 +207,7 @@ function (error) {
     }
 
     $scope.addNew = function (isValid) {
-        $scope.isDisabled = true;
+       
         $scope.showValid = true;
         if (isValid) {
             $scope.loadingDemo = true;
