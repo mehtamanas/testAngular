@@ -422,7 +422,7 @@ angular.module('contacts')
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
-             },
+             }, 
              {
                  field: "Tags",
                  template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
@@ -443,43 +443,11 @@ angular.module('contacts')
                       "style": "text-align:center"
                   }
               }, {
-                  field: "Formatted_last_contacted_date",
-                  title: "Last Contacted Date",
-                  hidden: true,
-                  //type: 'date',
-                  filterable: {
-                      ui: "datepicker"
-                  },
-                  // format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-                  attributes: {
-                      "class": "UseHand",
-                      "style": "text-align:center"
-                  }
-              },
-        {
-            field: "Formatted_last_updated_date",
-            hidden: true,
-            title: "Updated Date",
-            // type: 'date',
-            filterable: {
-                ui: "datepicker"
-            },
-            //format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-            //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
-            attributes: {
-                "class": "UseHand",
-                "style": "text-align:center"
-            }
-
-
-        }, {
             field: "Formatted_last_contacted_date",
             title: "Last Contacted Date",
-            // type: 'date',
             filterable: {
                 ui: "datepicker"
             },
-            // format: '{0:dd/MM/yyyy hh:mm:ss tt}',
             attributes: {
                 "class": "UseHand",
                 "style": "text-align:center"
@@ -488,12 +456,9 @@ angular.module('contacts')
         {
             field: "Formatted_last_updated_date",
             title: "Updated Date",
-            //type: 'date',
             filterable: {
                 ui: "datepicker"
             },
-            //format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-            //template: "#= kendo.toString(kendo.parseDate(Contact_Created_Date, 'yyyy-MM-dd hh:mmtt'), 'MM/dd/yyyy') #",
             attributes: {
                 "class": "UseHand",
                 "style": "text-align:center"
@@ -1342,6 +1307,9 @@ angular.module('contacts')
                     contactAddEditRefresh();
                 }
                 else if (args.action == 'assignTo') {
+                    contactAddEditRefresh();
+                }
+                else if (args.action == 'notesAdd' || args.action == 'notesEdit') {
                     contactAddEditRefresh();
                 }
 
