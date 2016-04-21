@@ -130,8 +130,10 @@
             apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
                 var loginSession = response.data;
                 //$modalInstance.dismiss();
+                $scope.openSucessfullyPopup();
                 $state.go('app.tasks');
-                $rootScope.$broadcast('REFRESH', 'TaskGrid');
+                $rootScope.$broadcast('REFRESH', { name: 'outTaskGrid', data: null, action: 'complete' });
+               
             },
         function (error) {
             if (error.status === 400)
@@ -201,6 +203,18 @@
        function (error) {
           
        });
+
+
+        $scope.openSucessfullyPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'login/successfully.html',
+                backdrop: 'static',
+                controller: sucessfullyController,
+                size: 'sm',
+                resolve: { items: { title: "Task Completed" } }
+            });
+        }
 
         $scope.selectuser = function () {
             $scope.params.assign_user_id = $scope.user1;
