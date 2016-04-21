@@ -124,7 +124,9 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
                 var loginSession = response.data;
                 $modalInstance.dismiss();
-                $rootScope.$broadcast('REFRESH', 'TaskGrid');
+                $scope.openSucessfullyPopup();
+                $rootScope.$broadcast('REFRESH', { name: 'TaskGrid', action: 'complete', id: $scope.seletedCustomerId, });
+                
             },
         function (error) {
             if (error.status === 400)
@@ -228,13 +230,25 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                alert("Network issue");
        });
 
+
+        $scope.openSucessfullyPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'login/successfully.html',
+                backdrop: 'static',
+                controller: sucessfullyController,
+                size: 'sm',
+                resolve: { items: { title: "Task Completed" } }
+            });
+        }
+
         $scope.selectuser = function () {
             $scope.params.assign_user_id = $scope.user1;
         };
 
 
         $scope.addNew = function (isValid) {
-            $scope.isDisabled = true;
+            
             $scope.showValid = true;
             if (isValid) {
                 $scope.loadingDemo = true;

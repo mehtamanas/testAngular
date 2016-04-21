@@ -1688,6 +1688,26 @@ angular.module('contacts')
             }
         });
 
+        var TaskGridRefresh = function () {
+            apiService.getWithoutCaching("ToDoItem/GetMultipleTaskByContactId/" + $scope.seletedCustomerId).then(function (response) {
+                data = response.data;
+                $localStorage.taskDataSource = data;
+                $('.k-i-refresh').trigger("click");
+            })
+        }
+
+        $rootScope.$on('REFRESH', function (event, args) {
+
+            if (args.name == 'TaskGrid') {
+                if (args.action === 'complete') {
+                    $localStorage.taskDataSource = [];
+                    TaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                }                             
+            }
+
+        });
+
         $scope.$on('REFRESH', function (event, args) {
             if (args.name == 'TaskGrid') {
                 _.remove($localStorage.taskDataSource, function (o) {
