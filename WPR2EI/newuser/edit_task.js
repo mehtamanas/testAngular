@@ -147,6 +147,7 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
         apiService.post("ToDoItem/EditStatus", postData1).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
+            $scope.openSucessfullyPopup();
             $rootScope.$broadcast('REFRESH', 'TaskGrid');
         },
     function (error) {
@@ -168,11 +169,11 @@ var EditTaskUser = function ($scope, $state, $cookieStore, apiService, $modalIns
            alert("Network issue");
    });
 
-    $scope.selectReminderTime = function () {
-        $scope.params.reminder_time = $scope.reminder_time1;
-        $scope.reminderTime = (_.findWhere($scope.reminders, { id: $scope.reminder_time1 })).time_in_minutes;
+    //$scope.selectReminderTime = function () {
+    //    $scope.params.reminder_time = $scope.reminder_time1;
+    //    $scope.reminderTime = (_.findWhere($scope.reminders, { id: $scope.reminder_time1 })).time_in_minutes;
 
-    };
+    //};
 
     Url = "ToDoItem/GetPriority";
     apiService.get(Url).then(function (response) {
@@ -253,6 +254,17 @@ function (error) {
         $scope.params.task_type_id = $scope.event1;
     };
 
+    $scope.openSucessfullyPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'login/successfully.html',
+            backdrop: 'static',
+            controller: sucessfullyController,
+            size: 'sm',
+            resolve: { items: { title: "Task Completed" } }
+        });
+    }
+
 
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
@@ -273,17 +285,18 @@ function (error) {
                 //$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
                 //$scope.params.reminder_datetime = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss').subtract($scope.params.reminder_datetime, 'minutes')._d;
                 //$scope.due_date = moment($scope.due_date, 'DD/MM/YYYY HH:mm:ss')._d;
-		         // $scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
-                $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.reminderTime, 'minutes')._d;
-                    var dDate = moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
+
+                //$scope.params.reminder_datetime = (($scope.reminder_time).replace('min', '')).trim();
+                $scope.params.reminder_datetime = moment($scope.due_date, "DD/MM/YYYY hh:mm A").subtract($scope.params.reminder_datetime, 'minutes')._d;
+                var dDate = moment($scope.due_date, "DD/MM/YYYY hh:mm A")._d;
             }
             else remind_me = "0";
             $scope.showValid = false;
             $scope.params = {
                 name: $scope.params.name,
-               // assigned_to_id: $scope.contact1,
-                class_type: "User",
-                contact_id: $scope.contact1,
+                assigned_to_id: $scope.contact1,
+                class_type: "Contact",
+                //due_date: $scope.due_date,
                 priority: $scope.priority1,
                 project_id: $scope.project1,
                 organization_id: $cookieStore.get('orgID'),
@@ -292,13 +305,13 @@ function (error) {
                 task_type_id: $scope.event1,
                 text: $scope.params.text,
                 remind_me: remind_me,
-                reminder_timespan_id: $scope.reminder_time1,
-		       due_date: new Date(dDate).toISOString(),
- 	           reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
- 	           id: $scope.selectedTaskID,
+                //reminder_time: $scope.params.reminder_datetime,
+                due_date: new Date(dDate).toISOString(),
+                reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
+                id: $scope.selectedTaskID,
             };
 
-            $scope.save();
+            $scope.save($scope.params);
 
         }
 
