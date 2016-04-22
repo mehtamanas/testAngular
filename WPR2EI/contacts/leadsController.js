@@ -649,7 +649,7 @@ angular.module('contacts')
                             feild1 = "Action";
                     }
                 }
-                
+
                 if (aryClause[0].split(" and ").length > aryClause[0].split(" or ").length) {
 
                     filter = { logic: "and", filters: [] };
@@ -683,12 +683,15 @@ angular.module('contacts')
                         var expsplitBetween = [];
 
                         var expsplitCONTAINS = [];
+                        var expsplitDOESNOTCONTAINS = [];
                         var expsplitIN = [];
+                        var expsplitNOTIN = [];
                         var expSplitGTE = [];
                         var expSplitLTE = [];
                         var expSplitGT = [];
                         var expSplitLT = [];
                         var expsplit = [];
+                        var expsplitNOT = [];
 
                         if (spiltOK == false) {
 
@@ -729,33 +732,33 @@ angular.module('contacts')
 
                         if (spiltOK == false) {
 
-                            var oplen = (" = ").length;
-                            var startpos = logsplit[j].indexOf(" = ");
-                            if (startpos >= 0) {
-                                expsplit[0] = logsplit[j].substr(0, startpos);
-                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
-                                spiltOK = true;
-                            }
-                        }
-
-                        if (spiltOK == false) {
-
-                            var oplen = (" is ").length;
-                            var startpos = logsplit[j].indexOf(" is ");
-                            if (startpos >= 0) {
-                                expsplit[0] = logsplit[j].substr(0, startpos);
-                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
-                                spiltOK = true;
-                            }
-                        }
-
-                        if (spiltOK == false) {
-
                             var oplen = (" contains ").length;
                             var startpos = logsplit[j].indexOf(" contains ");
                             if (startpos >= 0) {
                                 expsplitCONTAINS[0] = logsplit[j].substr(0, startpos);
                                 expsplitCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" does not contain ").length;
+                            var startpos = logsplit[j].indexOf(" does not contain ");
+                            if (startpos >= 0) {
+                                expsplitDOESNOTCONTAINS[0] = logsplit[j].substr(0, startpos);
+                                expsplitDOESNOTCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+                            var oplen = (" not in ").length;
+                            var startpos = logsplit[j].indexOf(" not in ");
+                            if (startpos >= 0) {
+                                expsplitNOTIN[0] = logsplit[j].substr(0, startpos);
+                                expsplitNOTIN[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
                                 spiltOK = true;
                             }
                         }
@@ -769,6 +772,7 @@ angular.module('contacts')
                                 spiltOK = true;
                             }
                         }
+
 
                         if (spiltOK == false) {
 
@@ -815,6 +819,39 @@ angular.module('contacts')
                             }
                         }
 
+                        if (spiltOK == false) {
+
+                            var oplen = (" != ").length;
+                            var startpos = logsplit[j].indexOf(" != ");
+                            if (startpos >= 0) {
+                                expsplitNOT[0] = logsplit[j].substr(0, startpos);
+                                expsplitNOT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" = ").length;
+                            var startpos = logsplit[j].indexOf(" = ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" is ").length;
+                            var startpos = logsplit[j].indexOf(" is ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
 
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
@@ -857,13 +894,65 @@ angular.module('contacts')
                                 alert("Invalid Query.");
                                 return;
                             }
-                           
+
+                            //removing inverted commas
                             expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/"/g, "");
-                           
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
                             spiltOK = false;
                         }
+
+                        // DOES NOT CONTAINS  CHECK   
+                        if (expsplitDOESNOTCONTAINS.length > 1) {
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                                // for notes still need to confirm with sir
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TEXT" || expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "ASSIGNED TO")
+                                Firstname = "Assigned_To";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            //removing inverted commas
+                            expsplitDOESNOTCONTAINS[1] = expsplitDOESNOTCONTAINS[1].replace(/"/g, "");
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "doesnotcontain", value: expsplitDOESNOTCONTAINS[1].trim() });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
 
                         // IN CHECK
 
@@ -920,7 +1009,76 @@ angular.module('contacts')
                                     if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
                                         newString[k] = newString[k].replace(/\s/g, '');
                                     }
+                                    //removing inverted commas
+                                    newString[k] = newString[k].replace(/"/g, "");
+
                                     abc.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
+                                }
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                        }
+
+
+                        // NOT IN CHECK
+
+                        if (expsplitNOTIN.length > 1) {
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "PHONE" || expsplitNOTIN[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                                // for notes still need to confirm with sir
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "TEXT" || expsplitNOTIN[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "ASSIGNED TO")
+                                Firstname = "Assigned_To";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            var mystring = expsplitNOTIN[1].trim().replace(/["'\(\)]/g, "");
+                            // alert(mystring);
+
+                            var newString = mystring.split(',');
+                            abc = { logic: "and", filters: [] };
+
+                            if (newString.length >= 1) {
+                                for (var k = 0; k < newString.length; k++) {
+                                    if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        newString[k] = newString[k].replace(/\s/g, '');
+                                    }
+                                    //removing inverted commas
+                                    newString[k] = newString[k].replace(/"/g, "");
+                                    abc.filters.push({ field: Firstname.trim(), operator: "doesnotcontain", value: newString[k].trim() });
                                 }
                                 filter.filters.push(abc);
                                 ValidFilter = true;
@@ -1210,6 +1368,8 @@ angular.module('contacts')
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                     }
                                     else {
+                                        //removing inverted commas
+                                        expsplit[1] = expsplit[1].replace(/"/g, "");
 
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
@@ -1220,6 +1380,84 @@ angular.module('contacts')
                             spiltOK = false;
                         }
 
+                        // NOT EQUAL TO CHECK 
+                        if (expsplitNOT.length > 1) {
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "FIRSTNAME")
+                                Firstname = "Contact_First_Name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "LASTNAME")
+                                Firstname = "Contact_Last_Name";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "EMAIL")
+                                Firstname = "Contact_Email";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "PHONE" || expsplitNOT[0].toUpperCase().trim() == "NUMBER")
+                                Firstname = "Contact_Phone";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "TAGS")
+                                Firstname = "tag1";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "TEXT" || expsplitNOT[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "ASSIGNED TO")
+                                Firstname = "Assigned_To";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "NAME")
+                                Firstname = "Name";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "LEAD SOURCE")
+                                Firstname = "leadsource";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "FOLLOW UP COUNT")
+                                Firstname = "follow_up_count";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                                Firstname = "last_contacted";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "UPDATED DATE")
+                                Firstname = "last_updated";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_at";
+
+                            if (Firstname == "") {
+                                // 18-04-2016
+                                //saroj
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            if (Firstname == "follow_up_count") {
+                                filter.filters.push({ field: Firstname.trim(), operator: "neq", value: parseFloat(expsplitNOT[1].trim()) });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+                            else {
+
+                                if (expsplitNOT[1].toUpperCase().trim() == "BLANK") {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "neq", value: undefined });
+                                }
+                                else {
+                                    //removing inverted commas
+                                    expsplitNOT[1] = expsplitNOT[1].replace(/"/g, "");
+
+                                    filter.filters.push({ field: Firstname.trim(), operator: "neq", value: expsplitNOT[1].trim() });
+                                }
+
+                            }
+
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
 
                         // GREATER THAN EQUAL TO CHECK
                         if (expSplitGTE.length > 1) {
@@ -1297,7 +1535,6 @@ angular.module('contacts')
                         // IS BEFORE CHECK
                         if (expsplitIsBefore.length > 1) {
 
-
                             if (expsplitIsBefore[0].toUpperCase().trim() == "LAST CONTACTED DATE")
                                 Firstname = "last_contacted";
 
@@ -1315,85 +1552,52 @@ angular.module('contacts')
                                 return;
                             }
 
-                            ////moment().startOf('day')._d;
-                            //var CurrentDate = moment().startOf('day');
-                            //CurrentDate = CurrentDate.subtract(1, 'd')._d;
 
-                            ////moment().startOf('day').add(+1, 'days')._d;
-                            //var TommDate = moment().startOf('day').add(+1, 'days')
-                            //TommDate = TommDate.subtract(1, 'd')._d;
-
-                            ////moment().endOf('day').add(+1, 'days')._d;
-                            //var TommEndDate = moment().endOf('day').add(+1, 'days');
-                            //TommEndDate = TommEndDate.subtract(1, 'd')._d;
-
-                            ////alert(CurrentDate);
-                            ////alert(TommDate);
-                            ////alert(TommEndDate);
-
-                            //var next7Day = moment().endOf('day').add(-8, 'days')._d;
-
-                            //// alert("next7Day" + next7Day);
-
-                            //var YesterDayDate = moment().startOf('day').add(-1, 'days');
-                            //YesterDayDate = YesterDayDate.subtract(1, 'd')._d;
-
-                            //// alert("YesterDayDate" + YesterDayDate);
-
-                            //var mondayOfCurrentWeek = moment().startOf('isoweek');
-
-                            //mondayOfCurrentWeek = mondayOfCurrentWeek.subtract(1, 'week')._d;
-
-                            ////  alert("mondayOfCurrentWeek" + mondayOfCurrentWeek);
-
-                            //var d = new Date();
-                            //// set to Monday of this week
-                            //d.setDate(d.getDate() - (d.getDay() + 6) % 7);
-                            //// set to previous Monday
-                            //d.setDate(d.getDate() - 7);
-
-                            ////last week
-                            //var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-                            //var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var beforeYesterDayDate = moment().endOf('day').add(-2, 'days')._d;
 
 
-                            //if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
+                            if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
 
-                            //    abc = { logic: "and", filters: [] };
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
-                            //    filter.filters.push(abc);
-                            //    ValidFilter = true;
-                            //    spiltOK = false;
-                            //}
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
 
-                            //else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
 
-                            //    abc = { logic: "and", filters: [] };
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentEndDate });
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
-                            //    filter.filters.push(abc);
-                            //    ValidFilter = true;
-                            //    spiltOK = false;
-                            //}
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
 
-                            //else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
 
-                            //    abc = { logic: "and", filters: [] };
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
-                            //    filter.filters.push(abc);
-                            //    ValidFilter = true;
-                            //    spiltOK = false;
-                            //}
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: beforeYesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
 
-                            //else {
+                            else {
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
-                            spiltOK = false;
-                            //}
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+
                         }
+
 
                         // IS AFTER CHECK
 
@@ -1416,9 +1620,46 @@ angular.module('contacts')
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
-                            spiltOK = false;
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var TommDate = moment().endOf('day').add(+1, 'days')._d;
+
+
+                            if (expsplitIsAfter[1].trim().toUpperCase() == "TODAY") {
+
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "TOMORROW") {
+
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: TommDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
                         }
 
                         // 
@@ -1493,7 +1734,7 @@ angular.module('contacts')
                 alert("Please Check Query.");
             }
 
-         
+
 
 
         }
