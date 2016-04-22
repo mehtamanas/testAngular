@@ -146,7 +146,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
     $scope.selectTemplate = function () {
         if ($scope.params.template !== "") {
             $scope.params.subject = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).subject;
-            $scope.params.bodyText = $sanitize((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description);
+            $scope.params.bodyText = $sce.trustAsHtml((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description); //removed sanitize and expilcitly trusting content
         }
         else
             $scope.params.bodyText = "";

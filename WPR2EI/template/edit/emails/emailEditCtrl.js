@@ -108,7 +108,7 @@
 
     $scope.saveTemplate = function (isvalid) {
         if (isvalid) {
-            $scope.params.htmlcontent = $sanitize($scope.params.htmlcontent);
+            $scope.params.htmlcontent = $sce.trustAsHtml($scope.params.htmlcontent); //removed sanitize and expilcitly trusting content
             var postdata = {
                 template_name: $scope.params.templateName,
                 subject: $scope.params.subject,
