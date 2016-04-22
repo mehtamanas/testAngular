@@ -25,6 +25,7 @@ angular.module('MainApp', [
     'eventcampaign',
     'flow',
    'ngAnimate',
+   'toaster',
    'angularSpinner',
     'newuser',
    'organization',
@@ -57,7 +58,9 @@ angular.module('MainApp', [
      'testresult',
   'emailtransactions',
     'angular-ladda',
-    'Bookings'
+    'Bookings',
+    'unsubscribe'
+    
     
 ]).
     config(['$urlRouterProvider', function ($urlRouterProvider) {
