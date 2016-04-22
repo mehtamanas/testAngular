@@ -1,4 +1,4 @@
-﻿emailCreateCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, FileUploader) {
+﻿emailCreateCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $sce,$modal, FileUploader) {
 
     $scope.showTemplate = true;
     $scope.showPreview = false;
@@ -110,7 +110,7 @@
 
     $scope.saveTemplate = function (isvalid) {
         if (isvalid) { 
-            $scope.params.htmlcontent = $sce.trustAsHtml($scope.params.htmlcontent); ////removed sanitize and expilcitly trusting content
+            $scope.params.htmlcontent = ($scope.params.htmlcontent); ////removed sanitize and expilcitly trusting content
         var postdata = {
             template_name: $scope.params.templateName,
             subject: $scope.params.subject,

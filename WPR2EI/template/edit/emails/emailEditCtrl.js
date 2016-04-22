@@ -1,4 +1,4 @@
-﻿emailEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize, $modal, emailData, FileUploader) {
+﻿emailEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, $sanitize,$sce, $modal, emailData, FileUploader) {
     $scope.showTemplate = true;
     $scope.showPreview = false;
     $scope.params = {}
