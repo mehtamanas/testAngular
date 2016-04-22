@@ -12198,7 +12198,7 @@ md-input-container label:not(.md-container-ignore) {
     white-space: nowrap;
 }
 
-.div_lead_email {
+.div_log_email {
     border: 2px solid #23bada;
     width: 120px;
     height: 35px;
@@ -12208,7 +12208,17 @@ md-input-container label:not(.md-container-ignore) {
     cursor: pointer;
     border-radius: 5px;
 }
-.div_lead_call {
+.div_log_email_selected {
+    border: 2px solid #23bada;
+    width: 120px;
+    height: 35px;
+    background: #23bada;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.div_log_call {
     border: 2px solid #49b86b;
     width: 120px;
     height: 35px;
@@ -12218,7 +12228,17 @@ md-input-container label:not(.md-container-ignore) {
     cursor: pointer;
     border-radius: 5px;
 }
-.div_lead_meeting {
+.div_log_call_selected {
+    border: 2px solid #49b86b;
+    width: 120px;
+    height: 35px;
+    background: #49b86b;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.div_log_meeting {
     border: 2px solid #605ca8;
     width: 120px;
     height: 35px;
@@ -12228,12 +12248,32 @@ md-input-container label:not(.md-container-ignore) {
     cursor: pointer;
     border-radius: 5px;
 }
-.div_lead_other {
+.div_log_meeting_selected {
+    border: 2px solid #605ca8;
+    width: 120px;
+    height: 35px;
+    background: #605ca8;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.div_log_other {
     border: 2px solid #f68e56;
     width: 120px;
     height: 35px;
     background: #fff;
     color: #f68e56;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.div_log_other_selected {
+    border: 2px solid #f68e56;
+    width: 120px;
+    height: 35px;
+    background: #f68e56;
+    color: #fff;
     font-weight: 600;
     cursor: pointer;
     border-radius: 5px;
