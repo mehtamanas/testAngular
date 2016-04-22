@@ -169,10 +169,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <div class="pull-left f-half-3">
                     <div class="clearfix">
 
@@ -200,6 +196,75 @@
                     </div>
                 </div>
 
+                <div class="pull-left f-half-3">
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
+                                                        'has-error' : addNewForm.usablearea.$invalid && (!addNewForm.usablearea.$pristine || showValid),
+                                                        'has-success': addNewForm.usablearea.$valid && !addNewForm.usablearea.$pristine
+                                                         }">
+                            <div class="form-group form-bx">
+                                <label for="">Usable Area</label>
+                                <div class="area-f">
+                                    <input type="text" autofocus name="usablearea" class="form-control" id="addNewUnitUsableArea"
+                                           placeholder="Usable Area"
+                                           data-ng-model="usable_area"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^[0-9]+$/"
+                                           input-focus
+                                            />
+                                    <span class="area-txt">sq.ft</span>
+                                    <div ng-messages="addNewForm.usablearea.$error" style="color:maroon" role="alert">
+                                        <div ng-message="required" data-ng-if="addNewForm.usablearea.$invalid && (!addNewForm.usablearea.$pristine || showValid) && !addNewForm.usablearea.$focus">This field should not be empty </div>
+                                        <div ng-message="pattern" id="err_addNewUnitUsableArea">Enter valid value for saleable area</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="field-md2 field-req"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pull-left f-half-3">
+                        <div class="clearfix">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                        'has-error' : addNewForm.boxprice.$invalid && (!addNewForm.boxprice.$pristine || showValid),
+                                                        'has-success': addNewForm.boxprice.$valid && !addNewForm.boxprice.$pristine
+                                                         }">
+                                <div class="form-group form-bx">
+                                    <label for="">Box Price</label>
+                                    <div class="area-f">
+                                        <input type="text" autofocus name="boxprice" ng-blur="change()" class="form-control" id="addNewUnitBoxPrice"
+                                               placeholder="Box Price"
+                                               data-ng-model="box_price" 
+                                               minlength="1"
+                                               maxlength="10"
+                                               ng-pattern="/^[0-9]+$/"
+                                               input-focus />
+                                        <span class="area-txt">sq.ft</span>
+                                        <div ng-messages="addNewForm.boxprice.$error" style="color:maroon" role="alert">
+                                            <div ng-message="required" data-ng-if="addNewForm.boxprice.$invalid && (!addNewForm.boxprice.$pristine || showValid) && !addNewForm.boxprice.$focus">This field should not be empty </div>
+                                            <div ng-message="pattern" id="err_addNewUnitBoxPrice">Enter valid value for box price</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="field-md2 field-req"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="form-group" style="MARGIN-TOP: 4%;">
+                    <div style="float:left;margin-bottom:-13px">
+                        <label>
+                            <input type="checkbox" id="chk_addNewUnitBoxPriceApplicable" name="chk_addNewUnitBoxPriceApplicable" ng-click="emptyText()" value="1" ng-model="box_price_applicable" />
+                            Box Price Applicable
+                        </label>
+                    </div>
+                </div>
 
             </div>
 
@@ -234,7 +299,6 @@
                     </label>
                 </div>
 
-
                 <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
                     <div class="image-upload-title">Upload 3D Zip</div>
 
@@ -265,11 +329,41 @@
                     </label>
                 </div>
 
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader2" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Mini Map Image</div>
+
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader2" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader2.queue.length">
+                                        <img ng-src={{media3}} class="img-responsive" />
+                                    </div>
+                                    <div class="row" ng-show="uploader2.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader2.queue">
+                                            <div ng-show="uploader2.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="media3.isHTML5">
+                                        <div ng-thumb="{file:media3, height :200}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader2.queue[0]._file.name}}</p></div>
+
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="addNewUnitUploade2" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                    </label>
+                </div>
+
             </div>
 
-            <div class="progress" ng-show="((uploader.progress+uploader1.progress)/2)>0">
+            <div class="progress" ng-show="((uploader.progress+uploader1.progress + uploader2.progress)/3)>0">
                 <div class="progress-bar" role="progressbar"
-                     ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
+                     ng-style="{ 'width': (uploader.progress+uploader1.progress + uploader2.progress)/3 + '%' }"></div>
             </div>
 
 
@@ -286,3 +380,5 @@
 
 
 </div><!-- modal ended -->
+
+
