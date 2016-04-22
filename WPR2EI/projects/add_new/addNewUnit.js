@@ -28,6 +28,11 @@
 
     });
 
+    uploader2 = $scope.uploader2 = new FileUploader({
+        url: apiService.uploadURL,
+
+    });
+
     $scope.showProgress = false;
 
     // FILTERS
@@ -58,8 +63,24 @@
             return '||x-zip-compressed|'.indexOf(type) !== -1;
         }
     });
+
+    uploader2.filters.push({
+        name: 'imageFilter2',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected inavalid file type');
+            }
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+
+    });
+
     var upload1 = 0;
     var upload2 = 0;
+    var upload3 = 0;
     // CALLBACKS
 
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
@@ -73,13 +94,18 @@
         }
     }
 
+    uploader2.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader2.queue.length > 1) {
+            uploader2.removeFromQueue(0);
+        }
+    }
 
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         //var   uploadResult = response[0];
         // post image upload call the below api to update the database
         upload1 = 1;
         $scope.media1 = response[0].Location;
-        if (upload1 == 1 && upload2 == 1) {
+        if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
             $scope.showProgress = false;
             $scope.finalpost()
         }
@@ -90,10 +116,6 @@
     };
 
 
-
-
-
-
     // CALLBACKS
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
@@ -101,11 +123,28 @@
         $scope.media2 = response[0].Location;
         // TODO: Need to get these values dynamically
         upload2 = 1;
-        if (upload1 == 1 && upload2 == 1) {
+        if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
             $scope.showProgress = false;
             $scope.finalpost()
         }
         else if (upload2 == 1 && uploader.queue.length == 0) { // For the second uploader not uploading
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+    };
+
+    // CALLBACKS
+    uploader2.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        //var  uploadResult1 = response[0];
+        $scope.media3 = response[0].Location;
+        // TODO: Need to get these values dynamically
+        upload3 = 1;
+        if (upload1 == 1 && upload2 == 1 && upload3 == 1) {
+            $scope.showProgress = false;
+            $scope.finalpost()
+        }
+        else if (upload3 == 1 && uploader.queue.length == 0) { // For the second uploader not uploading
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -118,6 +157,7 @@
     $scope.finalpost = function () {
         upload1 = 0;
         upload2 = 0;
+        upload3 = 0;
 
         if (items.unit_id == undefined) {//add
             var postData = {
@@ -128,6 +168,7 @@
                 media_url: $scope.media1,
                 // media_name: uploadResult1.Name,
                 Media_3d_zip: $scope.media2,
+                Minimap:$scope.media3,
                 class_type: "Project",
                 //street_2: $scope.params.street_2,
                 unit_id: items.unit_id,
@@ -139,7 +180,10 @@
                 super_built_up_area: $scope.super_built_up_area,
                 cark_park: $scope.cark_park,
                 num_bedrooms: $scope.num_bedrooms,
-                num_bathrooms: $scope.num_bathrooms
+                num_bathrooms: $scope.num_bathrooms,
+                usable_area: $scope.usable_area,
+                box_price: $scope.box_price,
+                box_price_applicable: $scope.box_price_applicable,
 
             };
             if (parseInt($scope.super_built_up_area) > parseInt($scope.carpet_area)) {
@@ -329,6 +373,9 @@
     //    User_ID: $cookieStore.get('userId')
     //};
 
+    $scope.emptyText = function () {
+        $scope.box_price = null;
+    }
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -349,7 +396,9 @@
                 uploader.uploadAll();
             if (uploader1.queue.length != 0)
                 uploader1.uploadAll();
-            if (uploader.queue.length == 0 && uploader1.queue.length == 0)
+            if (uploader2.queue.length != 0)
+                uploader2.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0)
                 $scope.finalpost();
 
             $scope.showValid = false;
@@ -357,4 +406,5 @@
         }
 
     }
+
 };
