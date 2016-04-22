@@ -1410,7 +1410,6 @@ angular.module('contacts')
                                     else {
                                         //removing inverted commas
                                         expsplit[1] = expsplit[1].replace(/"/g, "");
-
                                         filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                     }
                                 }
@@ -1773,8 +1772,6 @@ angular.module('contacts')
             else {
                 alert("Please Check Query.");
             }
-
-
 
 
         }
