@@ -220,12 +220,49 @@
          //$scope.cancel = function () {
          //    $modalInstance.dismiss();
          //}
+         $scope.totalContact = $cookieStore.get('checkedIds');
 
-         $scope.SelectDemandTemplate = function () {
+         $scope.SelectUnsubscribeList = function () {
+
              $scope.chooseAction();
-             $state.go('app.demandLetterTemplate');
-         }
-     }
+             $scope.length = parseInt($scope.totalContact.length);
+             var postData = {
+                 client_id: $scope.totalContact,                
+                 user_id: $cookieStore.get('userId'),
+                 organization_id: $cookieStore.get('orgID')
+             }
+             apiService.post('Template/ClientDemandLetterMapping', postData).then(function (response) {
+                 var SessionData = response.data;
+                 $scope.openSucessfullPopup();
+             },
 
-    );
+             function (error) {
+             });
+
+
+         }
+
+         $scope.addNew = function (isValid) {
+             $scope.showValid = true;
+             if (isValid) {
+                 $scope.SelectUnsubscribeList();
+                 $scope.showValid = false;
+             }
+         }
+
+
+         $scope.openSucessfullPopup = function () {
+             var modalInstance = $modal.open({
+                 animation: true,
+                 templateUrl: 'newuser/sucessfull.tpl.html',
+                 backdrop: 'static',
+                 controller: sucessfullController,
+                 size: 'sm',
+                 resolve: { items: { title: "Unsubscribe" } }
+             });
+         }
+
+
+
+     });
 
