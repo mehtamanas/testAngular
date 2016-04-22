@@ -1,4 +1,4 @@
-﻿var sendEmailCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize, emailData) {
+﻿var sendEmailCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize, $sce, emailData) {
     console.log('sendEmailController');
     $scope.params = {};
     var nullCheck = function () {
@@ -108,7 +108,7 @@
     $scope.selectTemplate = function () {
         if ($scope.params.template !== "") {
             $scope.params.subject = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).subject;
-            $scope.params.bodyText = $sce.trustAsHtml((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description); //removed sanitize and expilcitly trusting content
+            $scope.params.bodyText = ((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description); //removed sanitize and expilcitly trusting content
             for (var k in custom_fields) {
                 while (($scope.params.bodyText).search(k) > -1) {
                     $scope.params.bodyText = ($scope.params.bodyText).replace(k, custom_fields[k]);

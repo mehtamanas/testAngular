@@ -1,7 +1,7 @@
 ﻿angular.module('campaigns')
 
 .controller('emailAddTemplate',
-function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize) {
+function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize,$sce) {
     var orgID = $cookieStore.get('orgID');
 
     $scope.loadingDemo = false;
@@ -146,7 +146,7 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
     $scope.selectTemplate = function () {
         if ($scope.params.template !== "") {
             $scope.params.subject = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).subject;
-            $scope.params.bodyText = $sce.trustAsHtml((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description); //removed sanitize and expilcitly trusting content
+            $scope.params.bodyText = ((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description); //removed sanitize and expilcitly trusting content
         }
         else
             $scope.params.bodyText = "";
