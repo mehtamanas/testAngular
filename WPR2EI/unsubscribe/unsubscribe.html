@@ -25,16 +25,16 @@
                     <div class="clearfix " style="margin-top:5%">
 
                         <div id="record-content" class="properties-content">
-                            <div id="payment_contactList" kendo-grid k-options="SelectUnsubscribe" selectable="true" k-on-change="myGridChange(dataItem)">
+                            <div id="selectUnsubscribeList" kendo-grid k-options="SelectUnsubscribe" selectable="true" k-on-change="myGridChange(dataItem)">
                             </div>
                         </div><!-- record-content ended -->
                     </div>
 
                     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;margin-left: 16%;">
-                        <button class="btn organization-btn" id="payment_contactList_Save" type="button" ng-click="SelectDemandTemplate()">
+                        <button class="btn organization-btn" id="SelectUnsubscribeList_Save" type="submit" >
                             SAVE
                         </button>
-                        <button class="btn campaign-container-btn" id="payment_contactList_cancel" type="button" ng-click="cancel()">
+                        <button class="btn campaign-container-btn" id="SelectUnsubscribeList_cancel" type="button" ng-click="cancel()">
                             CANCEL
                         </button>
                     </div>
