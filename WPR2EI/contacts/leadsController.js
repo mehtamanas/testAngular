@@ -521,8 +521,13 @@ angular.module('contacts')
            },
         {
             title: "Action",
-            template: "<a id='followUp'class='btn btn-primary' ng-click='openFollowUp(dataItem)' data-toggle='modal'>Follow up </a> </div>",
+            template: '<div class="dropdown drop_lead" dropdown ><button class="btn drop_lead_btn dropdown-toggle" dropdown-toggle type="button" data-toggle="dropdown"><span class="caret caret_lead"></span></button><ul class="dropdown-menu dropdown_lead" dropdown-menu ><li>' +
+               '<a   class="follow_lead" ng-click="openFollowUp(dataItem)" data-toggle="modal">Follow up </a>' +
+               '</li><li><a href="" ng-click="openLog(dataItem)">Log Contact</a></li></ul></div>',
+            // template: '<select class="drop_select fa fa-inr"><option value="volvo">Volvo</option><option value="saab">Saab</option><option value="mercedes">Mercedes</option><option value="audi">Audi</option></select>',
+
             field: 'Action',
+            width: '120px',
             attributes:
               {
                   "class": "UseHand",
@@ -530,7 +535,15 @@ angular.module('contacts')
               }
         }, ]
         };
-
+        $scope.openLog = function (dataItem) {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'contacts/log/logContact.tpl.html',
+                backdrop: 'static',
+                controller: logContactCtrl,
+                size: 'lg'
+            });
+        }
 
 
         $scope.DoWork = function () {
