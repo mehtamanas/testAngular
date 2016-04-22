@@ -859,16 +859,16 @@ angular.module('contacts')
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "NAME")
                                 Firstname = "Name";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitCONTAINS[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "TAGS")
@@ -886,6 +886,16 @@ angular.module('contacts')
 
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
+
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "CITY")
+                                Firstname = "City";
+
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "TYPE")
+                                Firstname = "Type";
+
+                           
+
+
 
                             // by saroj on 18-04-2016
 
@@ -909,16 +919,16 @@ angular.module('contacts')
                             if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NAME")
                                 Firstname = "Name";
 
-                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "LASTNAME")
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NUMBER")
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "PHONE" || expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TAGS")
@@ -936,6 +946,14 @@ angular.module('contacts')
 
                             else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "CITY")
+                                Firstname = "City";
+
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TYPE")
+                                Firstname = "Type";
+
+                            
 
                             // by saroj on 18-04-2016
 
@@ -962,16 +980,16 @@ angular.module('contacts')
                             if (expsplitIN[0].toUpperCase().trim() == "NAME")
                                 Firstname = "Name";
 
-                            if (expsplitIN[0].toUpperCase().trim() == "FIRSTNAME")
+                            else if (expsplitIN[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                            if (expsplitIN[0].toUpperCase().trim() == "LASTNAME")
+                            else if (expsplitIN[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplitIN[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                            if (expsplitIN[0].toUpperCase().trim() == "PHONE" || expsplitIN[0].toUpperCase().trim() == "NUMBER")
+                            else if (expsplitIN[0].toUpperCase().trim() == "PHONE" || expsplitIN[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplitIN[0].toUpperCase().trim() == "TAGS")
@@ -989,6 +1007,15 @@ angular.module('contacts')
 
                             else if (expsplitIN[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "CITY")
+                                Firstname = "City";
+
+                            else if (expsplitIN[0].toUpperCase().trim() == "TYPE")
+                                Firstname = "Type";
+
+                           
+
 
                             // by saroj on 18-04-2016
 
@@ -1029,16 +1056,16 @@ angular.module('contacts')
                             if (expsplitNOTIN[0].toUpperCase().trim() == "NAME")
                                 Firstname = "Name";
 
-                            if (expsplitNOTIN[0].toUpperCase().trim() == "FIRSTNAME")
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                            if (expsplitNOTIN[0].toUpperCase().trim() == "LASTNAME")
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplitNOTIN[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                            if (expsplitNOTIN[0].toUpperCase().trim() == "PHONE" || expsplitNOTIN[0].toUpperCase().trim() == "NUMBER")
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "PHONE" || expsplitNOTIN[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplitNOTIN[0].toUpperCase().trim() == "TAGS")
@@ -1056,6 +1083,14 @@ angular.module('contacts')
 
                             else if (expsplitNOTIN[0].toUpperCase().trim() == "ASSIGNED TO")
                                 Firstname = "Assigned_To";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "CITY")
+                                Firstname = "City";
+
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "TYPE")
+                                Firstname = "Type";
+
+                         
 
                             // by saroj on 18-04-2016
 
@@ -1094,13 +1129,13 @@ angular.module('contacts')
                             if (expsplit[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                            if (expsplit[0].toUpperCase().trim() == "LASTNAME")
+                            else if (expsplit[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplit[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                            if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
+                            else if (expsplit[0].toUpperCase().trim() == "PHONE" || expsplit[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplit[0].toUpperCase().trim() == "TAGS")
@@ -1122,19 +1157,24 @@ angular.module('contacts')
                             else if (expsplit[0].toUpperCase().trim() == "NAME")
                                 Firstname = "Name";
 
-                            else if (expsplit[0].toUpperCase().trim() == "LEAD SOURCE")
-                                Firstname = "leadsource";
+                            else if (expsplit[0].toUpperCase().trim() == "CITY")
+                                Firstname = "City";
+
+                            else if (expsplit[0].toUpperCase().trim() == "TYPE")
+                                Firstname = "Type";
+
+                           
 
                             else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
 
-                            if (expsplit[0].toUpperCase().trim() == "LAST CONTACTED DATE")
+                            else if (expsplit[0].toUpperCase().trim() == "LAST CONTACTED DATE")
                                 Firstname = "last_contacted";
 
-                            if (expsplit[0].toUpperCase().trim() == "UPDATED DATE")
+                            else if (expsplit[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
+                            else if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
                             if (Firstname == "") {
@@ -1386,13 +1426,13 @@ angular.module('contacts')
                             if (expsplitNOT[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                            if (expsplitNOT[0].toUpperCase().trim() == "LASTNAME")
+                           else if (expsplitNOT[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplitNOT[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                            if (expsplitNOT[0].toUpperCase().trim() == "PHONE" || expsplitNOT[0].toUpperCase().trim() == "NUMBER")
+                           else if (expsplitNOT[0].toUpperCase().trim() == "PHONE" || expsplitNOT[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplitNOT[0].toUpperCase().trim() == "TAGS")
@@ -1684,7 +1724,7 @@ angular.module('contacts')
                                 return;
                             }
 
-                            var InnerBetweenSplit = expsplitBetween[1].split("||");
+                            var InnerBetweenSplit = expsplitBetween[1].split("&&");
 
                             if (InnerBetweenSplit.length > 1) {
 

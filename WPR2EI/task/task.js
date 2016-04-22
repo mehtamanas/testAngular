@@ -948,7 +948,7 @@
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
                                 expsplit[1] = expsplit[1].replace(/"/g, "");
-                                alert(expsplit[1]);
+                               // alert(expsplit[1]);
 
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
@@ -1254,7 +1254,7 @@
                                 return;
                             }
 
-                            var InnerBetweenSplit = expsplitBetween[1].split("||");
+                            var InnerBetweenSplit = expsplitBetween[1].split("&&");
 
                             if (InnerBetweenSplit.length > 1) {
 
