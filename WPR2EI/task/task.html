@@ -6,7 +6,7 @@
 
 <div id="main-content" class="col-xs-12">
 
-    
+
 
     <div class="content-inner">
         <div class="pg-inner-header">
@@ -39,7 +39,7 @@
             <div class="col-md-9 col-sm-9">
                 <div class="form-inline">
 
-                    <textarea id="text" class="form-control serach_bar_filter custom_class" style="width: 71%;" placeholder="Query" cols="40" rows="2" my-maxlength="5" ng-model="textareaText" ng-enter="DoWork()"></textarea>
+                    <input type="text" id="text" class="form-control serach_bar_filter custom_class" style="width: 71%;" placeholder="Query" ng-model="textareaText" ng-enter="DoWork()" />
                     <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
                     <a href="" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-check"></i></a>
 
@@ -56,7 +56,7 @@
 
 
     </div>
-    
+
 
 
     <div class="pg-inner-content">
