@@ -23,7 +23,7 @@
                             apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (res) {
                                 data = res.data;
                                 $localStorage.common_taskDataSource = [];
-                                $localStorage.common_taskDataSource=data;
+                                $localStorage.common_taskDataSource = data;
                                 options.success(data);
                             }, function (err) {
                                 options.error();
@@ -178,7 +178,7 @@
                },
                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                attributes: {
-                  
+
                    "style": "text-align:center;cursor:pointer"
                }
            },
@@ -201,8 +201,21 @@
              {
                  "style": "text-align:center;cursor:pointer"
              }
+           }
 
-           }, {
+           ,
+            {
+                field: "task_code",
+                title: "TASK CODE",
+                hidden:true,
+                width: "120px",
+                attributes:
+               {
+                  "style": "text-align:center;cursor:pointer"
+               }
+            }
+
+           , {
                title: "postpone",
                template: '#if (status!="Completed") {# <a class="btn btn-primary" id="postpone_now" ng-click="openPostpone(dataItem)">Postpone</a> #}#',
                attributes:
@@ -300,7 +313,7 @@
                 }
                 else {
                     window.sessionStorage.selectedTaskID = dataItem.task_id;
-                   // $state.go('app.edit_task', { id: dataItem.task_id });
+                    // $state.go('app.edit_task', { id: dataItem.task_id });
                     //$scope.openEditTask();
                 };
             },
@@ -364,7 +377,7 @@
 
         var outTaskGridRefresh = function () {
             apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (response) {
-                data = response.data;               
+                data = response.data;
                 $localStorage.common_taskDataSource = data;
                 $('.k-i-refresh').trigger("click");
             })
@@ -383,21 +396,20 @@
                     $localStorage.common_taskDataSource = [];
                     outTaskGridRefresh();
                     $('.k-i-refresh').trigger("click");
-                }              
+                }
                 else if (args.action == 'postpone') {
                     $localStorage.common_taskDataSource = [];
                     outTaskGridRefresh();
                     $('.k-i-refresh').trigger("click");
                 }
-                else if(args.action==='complete')
-                {
+                else if (args.action === 'complete') {
                     $localStorage.common_taskDataSource = [];
                     outTaskGridRefresh();
                     $('.k-i-refresh').trigger("click");
                 }
-              
+
             }
-            
+
         });
 
         function clearFilters() {
@@ -511,7 +523,7 @@
             }
 
         }
-        
+
         $scope.saveView = function () {
             var grid = $('#project-record-list').getKendoGrid();
 
@@ -616,26 +628,116 @@
 
         $scope.callFilter = function () {
 
+
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
             var Firstname = "";
             var ValidFilter = false;
-
+            var ValidClause = false;
             var filter = [];
             var abc = [];
             var logsplit = "";
 
             if (txtdata.length > 0) {
 
-                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+                var pos = txtdata.indexOf("order by");
+                var aryClause = txtdata.split(" order by ");
+                var feild1 = "";
+                var dir1 = "";
+                var fValue = "";
+
+                if (pos >= 0) {
+                    var arydir = "";
+                    if (pos == 0) {
+                        if (aryClause[0].split(" asc").length > aryClause[0].split(" desc").length) {
+                            arydir = aryClause[0].split(" asc");
+                            dir1 = "asc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[0].split(" desc").length >= 2) {
+                            arydir = aryClause[0].split(" desc");
+                            dir1 = "desc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                        }
+                    }
+                    else {
+                        if (aryClause[1].split(" asc").length > aryClause[1].split(" desc").length) {
+                            arydir = aryClause[1].split(" asc");
+                            dir1 = "asc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[1].split(" desc").length >= 2) {
+                            arydir = aryClause[1].split(" desc");
+                            dir1 = "desc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                        }
+                    }
+
+                    if (ValidClause == true) {
+                        if (fValue == "TASK NAME")
+                            feild1 = "name";
+                        else if (fValue == "TASK TYPE")
+                            feild1 = "task_type";
+                        else if (fValue == "PROJECT")
+                            feild1 = "Project_Name";
+                        else if (fValue == "CONTACT")
+                            feild1 = "Contact_Name";
+                        else if (fValue == "ASSIGN TO")
+                            feild1 = "user_name";
+                        else if (fValue == "COMPANY")
+                            feild1 = "company";
+                        else if (fValue == "PRIORITY")
+                            feild1 = "priority";
+                        else if (fValue == "START DATE")
+                            feild1 = "start_date_time";
+                        else if (fValue == "Due Date")
+                            feild1 = "due_date";
+                        else if (fValue == "CREATED DATE")
+                            feild1 = "created_date";
+                        else if (fValue == "NOTES")
+                            feild1 = "text";
+                        else if (fValue == "STATUS")
+                            feild1 = "status";
+                        else if (fValue == "TASK CODE")
+                            feild1 = "task_code";
+
+                    }
+
+                }
+
+                if (aryClause[0].split(" and ").length > aryClause[0].split(" or ").length) {
 
                     filter = { logic: "and", filters: [] };
-                    logsplit = txtdata.split(" and ");
+                    logsplit = aryClause[0].split(" and ");
                 }
                 else {
                     filter = { logic: "or", filters: [] };
-                    logsplit = txtdata.split(" or ");
+                    logsplit = aryClause[0].split(" or ");
                 }
+
+
+                //if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+
+                //    filter = { logic: "and", filters: [] };
+                //    logsplit = txtdata.split(" and ");
+                //}
+                //else {
+                //    filter = { logic: "or", filters: [] };
+                //    logsplit = txtdata.split(" or ");
+                //}
+
 
                 var spiltOK = false;
                 // alert("or split value =  " + logsplit.length);
@@ -648,12 +750,15 @@
                         var expsplitBetween = [];
 
                         var expsplitCONTAINS = [];
+                        var expsplitDOESNOTCONTAINS = [];
                         var expsplitIN = [];
+                        var expsplitNOTIN = [];
                         var expSplitGTE = [];
                         var expSplitLTE = [];
                         var expSplitGT = [];
                         var expSplitLT = [];
                         var expsplit = [];
+                        var expsplitNOT = [];
 
                         if (spiltOK == false) {
 
@@ -694,39 +799,32 @@
 
                         if (spiltOK == false) {
 
-                            var oplen = (" = ").length;
-                            var startpos = logsplit[j].indexOf(" = ");
-                            if (startpos >= 0) {
-                                expsplit[0] = logsplit[j].substr(0, startpos);
-                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
-                                spiltOK = true;
-                            }
-
-                            //expEQ = logsplit[j].split(" = ");
-                            //if (expEQ.length > 2) {
-                            //    expsplit = expEQ;
-                            //    spiltOK = true;
-                            //}
-                        }
-
-                        if (spiltOK == false) {
-
-                            var oplen = (" is ").length;
-                            var startpos = logsplit[j].indexOf(" is ");
-                            if (startpos >= 0) {
-                                expsplit[0] = logsplit[j].substr(0, startpos);
-                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
-                                spiltOK = true;
-                            }
-                        }
-
-                        if (spiltOK == false) {
-
                             var oplen = (" contains ").length;
                             var startpos = logsplit[j].indexOf(" contains ");
                             if (startpos >= 0) {
                                 expsplitCONTAINS[0] = logsplit[j].substr(0, startpos);
                                 expsplitCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" does not contain ").length;
+                            var startpos = logsplit[j].indexOf(" does not contain ");
+                            if (startpos >= 0) {
+                                expsplitDOESNOTCONTAINS[0] = logsplit[j].substr(0, startpos);
+                                expsplitDOESNOTCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+                            var oplen = (" not in ").length;
+                            var startpos = logsplit[j].indexOf(" not in ");
+                            if (startpos >= 0) {
+                                expsplitNOTIN[0] = logsplit[j].substr(0, startpos);
+                                expsplitNOTIN[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
                                 spiltOK = true;
                             }
                         }
@@ -774,7 +872,6 @@
                             }
                         }
 
-
                         if (spiltOK == false) {
 
                             var oplen = (" < ").length;
@@ -786,20 +883,74 @@
                             }
                         }
 
+                        if (spiltOK == false) {
+
+                            var oplen = (" != ").length;
+                            var startpos = logsplit[j].indexOf(" != ");
+                            if (startpos >= 0) {
+                                expsplitNOT[0] = logsplit[j].substr(0, startpos);
+                                expsplitNOT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" = ").length;
+                            var startpos = logsplit[j].indexOf(" = ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" is ").length;
+                            var startpos = logsplit[j].indexOf(" is ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "TASK")
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK NAME")
                                 Firstname = "name";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGNEE" || expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK TYPE")
+                                Firstname = "task_type";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "CONTACT")
+                                Firstname = "Contact_Name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PRIORITY")
+                                Firstname = "priority";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
 
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "PROJECT")
-                                Firstname = "Project_Name";
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK CODE")
+                                Firstname = "task_code";
+                            
+
 
                             // by saroj on 18-04-2016
 
@@ -819,22 +970,97 @@
                             spiltOK = false;
                         }
 
+
+                        // DOES NOT CONTAINS  CHECK   
+                        if (expsplitDOESNOTCONTAINS.length > 1) {
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TASK NAME")
+                                Firstname = "name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TASK TYPE")
+                                Firstname = "task_type";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "CONTACT")
+                                Firstname = "Contact_Name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "ASSIGN TO")
+                                Firstname = "user_name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "PRIORITY")
+                                Firstname = "priority";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TASK CODE")
+                                Firstname = "task_code";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            if (Firstname == "status" && expsplitDOESNOTCONTAINS[1].trim().toUpperCase() == "IN PROGRESS") {
+                                //removing space between in progress
+                                expsplitDOESNOTCONTAINS[1] = expsplitDOESNOTCONTAINS[1].replace(/\s/g, '');
+                            }
+
+                            //removing inverted commas
+                            expsplitDOESNOTCONTAINS[1] = expsplitDOESNOTCONTAINS[1].replace(/"/g, "");
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "doesnotcontain", value: expsplitDOESNOTCONTAINS[1].trim() });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
+
+
                         // IN CHECK
 
                         if (expsplitIN.length > 1) {
 
 
-                            if (expsplitIN[0].toUpperCase().trim() == "TASK NAME" || expsplitIN[0].toUpperCase().trim() == "TASK")
+                            if (expsplitIN[0].toUpperCase().trim() == "TASK NAME")
                                 Firstname = "name";
 
-                            if (expsplitIN[0].toUpperCase().trim() == "ASSIGNEE" || expsplitIN[0].toUpperCase().trim() == "ASSIGN TO")
+                            if (expsplitIN[0].toUpperCase().trim() == "TASK TYPE")
+                                Firstname = "task_type";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "CONTACT")
+                                Firstname = "Contact_Name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "PRIORITY")
+                                Firstname = "priority";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
 
                             if (expsplitIN[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
 
-                            if (expsplitIN[0].toUpperCase().trim() == "PROJECT")
-                                Firstname = "Project_Name";
+                            if (expsplitIN[0].toUpperCase().trim() == "TASK CODE")
+                                Firstname = "task_code";
 
                             // by saroj on 18-04-2016
 
@@ -854,8 +1080,12 @@
                             if (newString.length >= 1) {
                                 for (var k = 0; k < newString.length; k++) {
                                     if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        //removing space between in progress
                                         newString[k] = newString[k].replace(/\s/g, '');
                                     }
+                                    //removing inverted commas
+                                    newString[k] = newString[k].replace(/"/g, "");
+
                                     abc.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
                                 }
                                 filter.filters.push(abc);
@@ -864,14 +1094,99 @@
                             }
                         }
 
+
+                        // NOT IN CHECK
+
+                        if (expsplitNOTIN.length > 1) {
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "TASK NAME")
+                                Firstname = "name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "TASK TYPE")
+                                Firstname = "task_type";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "CONTACT")
+                                Firstname = "Contact_Name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "ASSIGN TO")
+                                Firstname = "user_name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "PRIORITY")
+                                Firstname = "priority";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "TASK CODE")
+                                Firstname = "task_code";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            var mystring = expsplitNOTIN[1].trim().replace(/["'\(\)]/g, "");
+                            // alert(mystring);
+
+                            var newString = mystring.split(',');
+                            abc = { logic: "and", filters: [] };
+
+                            if (newString.length >= 1) {
+                                for (var k = 0; k < newString.length; k++) {
+                                    if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        // removing space between in progress
+                                        newString[k] = newString[k].replace(/\s/g, '');
+                                    }
+                                    //removing inverted commas
+                                    newString[k] = newString[k].replace(/"/g, "");
+                                    abc.filters.push({ field: Firstname.trim(), operator: "doesnotcontain", value: newString[k].trim() });
+                                }
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                        }
+
+
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
 
-                            if (expsplit[0].toUpperCase().trim() == "TASK NAME" || expsplit[0].toUpperCase().trim() == "TASK")
+                            if (expsplit[0].toUpperCase().trim() == "TASK NAME")
                                 Firstname = "name";
 
-                            if (expsplit[0].toUpperCase().trim() == "ASSIGNEE" || expsplit[0].toUpperCase().trim() == "ASSIGN TO")
+                            if (expsplit[0].toUpperCase().trim() == "TASK TYPE")
+                                Firstname = "task_type";
+
+                            if (expsplit[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
+                            if (expsplit[0].toUpperCase().trim() == "CONTACT")
+                                Firstname = "Contact_Name";
+
+                            if (expsplit[0].toUpperCase().trim() == "ASSIGN TO")
                                 Firstname = "user_name";
+
+                            if (expsplit[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            if (expsplit[0].toUpperCase().trim() == "PRIORITY")
+                                Firstname = "priority";
+
+                            if (expsplit[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
 
                             if (expsplit[0].toUpperCase().trim() == "STATUS")
                                 Firstname = "status";
@@ -882,8 +1197,8 @@
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
-                            if (expsplit[0].toUpperCase().trim() == "PROJECT")
-                                Firstname = "Project_Name";
+                            if (expsplit[0].toUpperCase().trim() == "TASK CODE")
+                                Firstname = "task_code";
 
                             // by saroj on 18-04-2016
 
@@ -947,8 +1262,9 @@
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
+
                                 expsplit[1] = expsplit[1].replace(/"/g, "");
-                               // alert(expsplit[1]);
+                                // alert(expsplit[1]);
 
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
@@ -1089,6 +1405,7 @@
                                     if (Firstname == "status" && expsplit[1].trim().toUpperCase() == "IN PROGRESS") {
                                         expsplit[1] = expsplit[1].replace(/\s/g, '');
                                     }
+                                    //removing inverted commas
                                     expsplit[1] = expsplit[1].replace(/"/g, "");
                                     filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                 }
@@ -1098,6 +1415,68 @@
                             ValidFilter = true;
                             spiltOK = false;
                         }
+
+                        // NOT EQUAL TO CHECK 
+                        if (expsplitNOT.length > 1) {
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "TASK NAME")
+                                Firstname = "name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "TASK TYPE")
+                                Firstname = "task_type";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "PROJECT")
+                                Firstname = "Project_Name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CONTACT")
+                                Firstname = "Contact_Name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "ASSIGN TO")
+                                Firstname = "user_name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "COMPANY")
+                                Firstname = "company";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "PRIORITY")
+                                Firstname = "priority";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "NOTES")
+                                Firstname = "text";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "STATUS")
+                                Firstname = "status";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "DUE DATE")
+                                Firstname = "due_date";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_date";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "TASK CODE")
+                                Firstname = "task_code";
+
+                            if (Firstname == "") {
+                                // 18-04-2016
+                                //saroj
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            if (expsplitNOT[1].toUpperCase().trim() == "BLANK") {
+                                filter.filters.push({ field: Firstname.trim(), operator: "neq", value: undefined });
+                            }
+                            else {
+                                //removing inverted commas
+                                expsplitNOT[1] = expsplitNOT[1].replace(/"/g, "");
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "neq", value: expsplitNOT[1].trim() });
+                            }
+
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
 
                         // IS BEFORE CHECK
 
@@ -1117,93 +1496,41 @@
                                 return;
                             }
 
-                            startdate = moment();
-                            startdate.subtract(1, 'd');
-
-                            //  alert(startdate.subtract(1, 'd'));
-
-                            //moment().startOf('day')._d;
-                            var CurrentDate = moment().startOf('day');
-                            CurrentDate = CurrentDate.subtract(1, 'd')._d;
-
-                            //moment().startOf('day').add(+1, 'days')._d;
-                            var TommDate = moment().startOf('day').add(+1, 'days')
-                            TommDate = TommDate.subtract(1, 'd')._d;
-
-                            //moment().endOf('day').add(+1, 'days')._d;
-                            var TommEndDate = moment().endOf('day').add(+1, 'days');
-                            TommEndDate = TommEndDate.subtract(1, 'd')._d;
-
-                            //alert(CurrentDate);
-                            //alert(TommDate);
-                            //alert(TommEndDate);
-
-                            var next7Day = moment().endOf('day').add(-8, 'days')._d;
-
-                            // alert("next7Day" + next7Day);
-
-                            var YesterDayDate = moment().startOf('day').add(-1, 'days');
-                            YesterDayDate = YesterDayDate.subtract(1, 'd')._d;
-
-                            // alert("YesterDayDate" + YesterDayDate);
-
-                            var mondayOfCurrentWeek = moment().startOf('isoweek');
-
-                            mondayOfCurrentWeek = mondayOfCurrentWeek.subtract(1, 'week')._d;
-
-                            //  alert("mondayOfCurrentWeek" + mondayOfCurrentWeek);
-
-                            var d = new Date();
-                            // set to Monday of this week
-                            d.setDate(d.getDate() - (d.getDay() + 6) % 7);
-                            // set to previous Monday
-                            d.setDate(d.getDate() - 7);
-
-                            //last week
-                            var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-                            var lastweeksunday = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 6);
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var beforeYesterDayDate = moment().endOf('day').add(-2, 'days')._d;
 
 
                             if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
 
-                                abc = { logic: "and", filters: [] };
-                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
-                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
-                                filter.filters.push(abc);
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
 
                             else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
 
-                                abc = { logic: "and", filters: [] };
-                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentEndDate });
-                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
-                                filter.filters.push(abc);
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
 
                             else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
 
-                                abc = { logic: "and", filters: [] };
-                                abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
-                                abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
-                                filter.filters.push(abc);
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: beforeYesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
-                            //else if (expsplitIsBefore[1].trim().toUpperCase() == "THIS WEEK") {
 
-                            //    abc = { logic: "and", filters: [] };
-
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: mondayOfCurrentWeek });
-                            //    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
-
-                            //    filter.filters.push(abc);
-                            //    ValidFilter = true;
-                            //    spiltOK = false;
-                            //}
                             else {
 
                                 filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
@@ -1232,9 +1559,46 @@
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
-                            spiltOK = false;
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var TommDate = moment().endOf('day').add(+1, 'days')._d;
+
+
+                            if (expsplitIsAfter[1].trim().toUpperCase() == "TODAY") {
+
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "TOMORROW") {
+
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: TommDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
                         }
 
                         // BETWEEN OR CHECK 
@@ -1275,18 +1639,36 @@
 
             // final code to get execute....
 
-            if (Firstname == "") {
+          
+            if (Firstname == "" && ValidClause == false) {
                 alert("Invalid Query.");
                 return;
             }
 
-            if (ValidFilter == true) {
+            if (ValidFilter == true && ValidClause == false) {
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
+                // alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == false && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.sort(dsSort);
+                //  alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == true && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.filter(filter);
+                ds.sort(dsSort);
+                // alert('Query Executed Successfully.');
             }
             else {
                 alert("Please Check Query.");
             }
+                       
         }
 
 
