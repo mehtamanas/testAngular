@@ -627,11 +627,11 @@ angular.module('contacts')
             },
             columns: [
                     {
-                        //template: " <input type='checkbox' , class='checkbox', data-id='#= task_id #', ng-click='check()'/>",
-                        //title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(TaskGrid)'/>",
+                        template: " <input type='checkbox' , class='checkbox', data-id='#= task_id #', ng-click='check()'/>",
+                        title: "<input id='checkAll', type='checkbox', class='check-box' ng-click='checkALL(TaskGrid)'/>",
 
-                        template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= task_id #',  ng-click='check()' style=''><span class='fa fa-check'></span></label></div>",
-                        title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required'   ng-click='checkALL(TaskGrid)' style=''><span class='fa fa-check'></span></label></div>",
+                        //template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' data-id='#= task_id #',  ng-click='check()' style=''><span class='fa fa-check'></span></label></div>",
+                        //title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required'   ng-click='checkALL(TaskGrid)' style=''><span class='fa fa-check'></span></label></div>",
                         width: "50px",
                         attributes:
                        {
