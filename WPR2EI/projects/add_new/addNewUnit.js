@@ -14,6 +14,11 @@
     $rootScope.title = 'Dwellar./projects';
     $scope.media1 = items.Image_Url;
     $scope.media2 = items.Image_Url_Unit2;
+    $scope.media3 = items.Image_Url_Minimap;
+    $scope.usable_area = items.usable_area;
+    $scope.box_price = items.box_price;
+    $scope.box_price_applicable = items.box_price_applicable,
+    $scope.area1 = items.price_decided_on
 
     if (items.unit_id == undefined) $scope.title = "Add New Unit Type";
     else $scope.title = "Edit Unit Type";
@@ -34,6 +39,11 @@
     });
 
     $scope.showProgress = false;
+
+    $scope.selectArea = function () {
+
+        $scope.price_decided_on = $scope.area1;
+    };
 
     // FILTERS
     uploader.filters.push({
@@ -184,6 +194,7 @@
                 usable_area: $scope.usable_area,
                 box_price: $scope.box_price,
                 box_price_applicable: $scope.box_price_applicable,
+                price_decided_on: $scope.area1,
 
             };
             if (parseInt($scope.super_built_up_area) > parseInt($scope.carpet_area)) {
@@ -199,7 +210,7 @@
                             templateUrl: 'newuser/sucessfull.tpl.html',
                             backdrop: 'static',
                             controller: sucessfullController,
-                            size: 'lg',
+                            size: 'sm',
                             resolve: { items: { title: "Unit" } }
 
                         });
@@ -235,12 +246,18 @@
                 //media_type: "image",
                 //project_type: $scope.params.project_type,
                 //id: window.sessionStorage.selectedCustomerID,
+                Image_Url_Minimap: $scope.media3,
                 unit_type_desc: $scope.unit_type_desc,
                 carpet_area: $scope.carpet_area,
                 super_built_up_area: $scope.super_built_up_area,
                 cark_park: $scope.cark_park,
                 num_bedrooms: $scope.num_bedrooms,
-                num_bathrooms: $scope.num_bathrooms
+                num_bathrooms: $scope.num_bathrooms,
+                box_price: $scope.box_price,
+                box_price_applicable: $scope.box_price_applicable,
+                usable_area: $scope.usable_area,
+                price_decided_on: $scope.area1
+                
 
             };
             if (parseInt($scope.super_built_up_area) > parseInt($scope.carpet_area)) {
@@ -254,7 +271,7 @@
                             templateUrl: 'newuser/Edited.tpl.html',
                             backdrop: 'static',
                             controller: EditsucessfullController,
-                            size: 'lg',
+                            size: 'sm',
                             resolve: { items: { title: "Unit" } }
                         });
                         $rootScope.$broadcast('REFRESH', 'unit');
@@ -404,7 +421,5 @@
             $scope.showValid = false;
 
         }
-
     }
-
 };
