@@ -1,7 +1,7 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window, contactData) {
+var EditTaskController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window, contactData, FileUploader) {
     console.log(' EditTaskController');
     $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -10,6 +10,91 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
 
 
     $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
+
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiService.uploadURL,
+    });
+
+    uploader.filters.push({
+        name: 'attchementFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected invalid file type');
+            }
+            if (item.size > 10485760) {
+
+                alert('File size should be less than 10mb');
+            }
+            return '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type) !== -1 && item.size <= 10485760;
+        }
+    });
+
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        loc = response[0].Location;
+        var edit = $('#contact_editTask_description').data("kendoEditor");
+        var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
+        if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
+            edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
+        else {
+            edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
+        }
+
+    };
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        uploader.uploadAll();
+    }
+
+    $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
+        tools: ["bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "justifyLeft",
+                "justifyCenter",
+                "justifyRight",
+                "justifyFull",
+                "insertUnorderedList",
+                "insertOrderedList",
+                "indent",
+                "outdent",
+                "createLink",
+                'pdf',
+                "unlink",
+                "fontName",
+                "fontSize",
+                "foreColor",
+                "backColor",
+                "print",
+                'createTable',
+                {
+                    name: "myTool",
+                    tooltip: "Insert Image",
+                    exec: function (e) {
+                        $('#imageBrowser').trigger("click");
+                    }
+                },
+                  {
+                      name: "insertHtml",
+                      items: [
+                          { text: "Last Name", value: "{{last_name}}" },
+                          { text: "First Name", value: "{{first_name}}" },
+                          { text: "My First Name", value: "{{my_first_name}}" },
+                          { text: "My Last Name", value: "{{my_last_name}}" },
+                          { text: "Salutation", value: "{{salutation}}" },
+                           { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
+
+                      ]
+                  },
+                  "viewHtml",
+        ],
+    }
 
 
     contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
@@ -29,6 +114,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
         $scope.selectedContact_id = response.data[0].contact_id;
         $scope.event1 = response.data[0].task_type_id;
         $scope.user1 = response.data[0].assign_user_id;
+        $scope.params.htmlcontent = response.data[0].text;
         // $scope.reminder_time = response.data[0].reminder_time
     },
     function (error) {
@@ -84,7 +170,8 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
             project_id: $scope.project1,
             priority: $scope.priority1,
             name: $scope.params.name,
-            text: $scope.params.text,
+            //text: $scope.params.text,
+            text: $scope.params.htmlcontent,
             due_date: $scope.params.due_date,
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
@@ -267,6 +354,7 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                 $scope.params = {
                     name: $scope.params.name,
                     assigned_to_id: $scope.selectedContact_id,
+                    contact_id: $scope.selectedContact_id,
                     class_type: "Contact",
                     //due_date: $scope.due_date,
                     priority: $scope.priority1,
@@ -275,7 +363,8 @@ var EditTaskController = function ($scope, $state, $cookieStore, apiService, $mo
                     user_id: $cookieStore.get('userId'),
                     assign_user_id: $scope.user1,
                     task_type_id: $scope.event1,
-                    text: $scope.params.text,
+                    //text: $scope.params.text,
+                    text: $scope.params.htmlcontent,
                     remind_me: remind_me,
                     reminder_timespan_id: $scope.reminder_time1,
  		            due_date: new Date(dDate).toISOString(),

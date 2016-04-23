@@ -6,7 +6,5 @@
                 url: '/unsubscribe',
                 templateUrl: 'unsubscribe/unsubscribe.html',
                 controller: 'unsubscribeController',
-
             })
-
     }]);

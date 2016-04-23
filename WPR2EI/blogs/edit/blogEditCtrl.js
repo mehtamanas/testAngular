@@ -10,6 +10,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
     $scope.isContentApprover = (_.find(authRights, function (o) { return o == 'Content Approver'; })) == 'Content Approver' ? true : false
     $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
+    $scope.isContentModerator = (_.find(authRights, function (o) { return o == 'Content Moderator'; })) == 'Content Moderator' ? true : false
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
  
    
@@ -365,6 +366,46 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         }
     }
 
+
+    $scope.Failed = function () {
+        var postdataFailed = {
+            organization_id: $cookieStore.get('orgID'),
+            user_id: $cookieStore.get('userId'),
+            //comment: $scope.params.comment,
+            blog_id: window.sessionStorage.selectedBlogID,
+            status: "Failed",
+
+        };
+        apiService.post("Blogs/ChangeModerator_Status/" + window.sessionStorage.selectedBlogID + "/Failed", postdataFailed).then(function (response) {
+            data = response.data[0];
+            $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+            $modalInstance.dismiss();
+        },
+              function (error) {
+                  if (error.status === 400)
+                      alert(error.data.Message);
+              });
+    }
+
+    $scope.passed = function () {
+        var postdataPassed = {
+            organization_id: $cookieStore.get('orgID'),
+            user_id: $cookieStore.get('userId'),
+            //comment: $scope.params.comment,
+            blog_id: window.sessionStorage.selectedBlogID,
+            status: "Passed",
+
+        };
+        apiService.post("Blogs/ChangeModerator_Status/" + window.sessionStorage.selectedBlogID + "/Passed", postdataPassed).then(function (response) {
+            data = response.data[0];
+            $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+            $modalInstance.dismiss();
+        },
+              function (error) {
+                  if (error.status === 400)
+                      alert(error.data.Message);
+              });
+    }
 
     $scope.openConfirmationBlog = function () {
         var modalInstance = $modal.open({
