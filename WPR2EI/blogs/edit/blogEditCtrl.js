@@ -373,10 +373,10 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             user_id: $cookieStore.get('userId'),
             //comment: $scope.params.comment,
             blog_id: window.sessionStorage.selectedBlogID,
-            status: "Failed",
+            moderator_status: "Failed",
 
         };
-        apiService.post("Blogs/ChangeModerator_Status/" + window.sessionStorage.selectedBlogID + "/Failed", postdataFailed).then(function (response) {
+        apiService.post("Blogs/ChangeModerator_Status", postdataFailed).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
             $modalInstance.dismiss();
@@ -393,10 +393,10 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             user_id: $cookieStore.get('userId'),
             //comment: $scope.params.comment,
             blog_id: window.sessionStorage.selectedBlogID,
-            status: "Passed",
+            moderator_status: "Passed",
 
         };
-        apiService.post("Blogs/ChangeModerator_Status/" + window.sessionStorage.selectedBlogID + "/Passed", postdataPassed).then(function (response) {
+        apiService.post("Blogs/ChangeModerator_Status", postdataPassed).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
             $modalInstance.dismiss();
