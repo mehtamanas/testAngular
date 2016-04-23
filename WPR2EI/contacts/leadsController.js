@@ -1804,7 +1804,7 @@ angular.module('contacts')
             else {
                 alert("Please Check Query.");
             }
-            
+
         }
 
         $scope.clearFilter = function () {
