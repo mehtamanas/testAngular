@@ -240,64 +240,305 @@
             var txtdata = txtdata;
             var Firstname = "";
             var ValidFilter = false;
-
+            var ValidClause = false;
             var filter = [];
             var abc = [];
             var logsplit = "";
 
             if (txtdata.length > 0) {
 
-                if (txtdata.split(" and ").length > txtdata.split(" or ").length) {
+                var pos = txtdata.indexOf("order by");
+                var aryClause = txtdata.split(" order by ");
+                var feild1 = "";
+                var dir1 = "";
+                var fValue = "";
+
+                if (pos >= 0) {
+                    var arydir = "";
+                    if (pos == 0) {
+
+                        if (aryClause[0].split(" asc").length > aryClause[0].split(" desc").length) {
+                            arydir = aryClause[0].split(" asc");
+                            dir1 = "asc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[0].split(" desc").length >= 2) {
+                            arydir = aryClause[0].split(" desc");
+                            dir1 = "desc";
+                            var arynewClause = arydir[0].split("order by ");
+                            fValue = arynewClause[1].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                            alert("Invalid Query.");
+                            return;
+                        }
+                    }
+                    else {
+                        if (aryClause[1].split(" asc").length > aryClause[1].split(" desc").length) {
+                            arydir = aryClause[1].split(" asc");
+                            dir1 = "asc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else if (aryClause[1].split(" desc").length >= 2) {
+                            arydir = aryClause[1].split(" desc");
+                            dir1 = "desc";
+                            fValue = arydir[0].toUpperCase().trim();
+                            ValidClause = true;
+                        }
+                        else {
+                            ValidClause = false;
+                            alert("Invalid Query.");
+                            return;
+                        }
+                    }
+
+                    if (ValidClause == true) {
+
+                        if (fValue == "CALLER NAME")
+                            feild1 = "caller_name";
+
+                        else if (fValue == "CALLER NUMBER")
+                            feild1 = "callfrom";
+
+                        else if (fValue == "LEAD NAME")
+                            feild1 = "lead_name";
+
+                        else if (fValue == "LEAD NUMBER")
+                            feild1 = "callto";
+
+                        else if (fValue == "CALL TYPE")
+                            feild1 = "calltype";
+
+                        else if (fValue == "DATE & TIME")
+                            feild1 = "starttime";
+
+                        else if (fValue == "DIRECTION")
+                            feild1 = "direction";
+                    }
+                }
+
+                if (aryClause[0].split(" and ").length > aryClause[0].split(" or ").length) {
 
                     filter = { logic: "and", filters: [] };
-                    logsplit = txtdata.split(" and ");
+                    logsplit = aryClause[0].split(" and ");
                 }
                 else {
                     filter = { logic: "or", filters: [] };
-                    logsplit = txtdata.split(" or ");
+                    logsplit = aryClause[0].split(" or ");
                 }
 
+
+                var spiltOK = false;
                 // alert("or split value =  " + logsplit.length);
                 if (logsplit.length > 0) {
                     for (var j = 0; j < logsplit.length; j++) {
                         // alert("value for j is " + j);
 
-                        //FOR DATES 
-                        var expsplitIsBefore = logsplit[j].split(" isbefore ");
-                        var expsplitIsAfter = logsplit[j].split(" isafter ");
-                        var expsplitBetween = logsplit[j].split(" between ");
+                        var expsplitIsBefore = [];
+                        var expsplitIsAfter = [];
+                        var expsplitBetween = [];
 
-                        var expEQ = logsplit[j].split(" = ");
-                        var expIS = logsplit[j].split(" is ");
+                        var expsplitCONTAINS = [];
+                        var expsplitDOESNOTCONTAINS = [];
+                        var expsplitIN = [];
+                        var expsplitNOTIN = [];
+                        var expSplitGTE = [];
+                        var expSplitLTE = [];
+                        var expSplitGT = [];
+                        var expSplitLT = [];
+                        var expsplit = [];
+                        var expsplitNOT = [];
 
-                        var expsplit = "";
-                        if (expEQ.length > 1)
-                            expsplit = expEQ;
+                        if (spiltOK == false) {
 
-                        if (expIS.length > 1)
-                            expsplit = expIS;
+                            var oplen = (" is before ").length;
+                            var startpos = logsplit[j].indexOf(" is before ");
+                            if (startpos >= 0) {
+                                expsplitIsBefore[0] = logsplit[j].substr(0, startpos);
+                                expsplitIsBefore[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
 
-                        var expsplitCONTAINS = logsplit[j].split(" contains ");
-                        // var expsplitIN = logsplit[j].split(/in(.*)?/);
+                            //expsplitIsBefore = logsplit[j].split(" is before ");
+                            //if (expsplitIsBefore.length > 2)
+                        }
 
-                        var expsplitIN = logsplit[j].split(" in ");
+                        if (spiltOK == false) {
 
-                        var expSplitGTE = logsplit[j].split(" >= ");
+                            var oplen = (" is after ").length;
+                            var startpos = logsplit[j].indexOf(" is after ");
+                            if (startpos >= 0) {
+                                expsplitIsAfter[0] = logsplit[j].substr(0, startpos);
+                                expsplitIsAfter[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
 
-                        var expSplitLTE = logsplit[j].split(" <= ");
+                        if (spiltOK == false) {
 
-                        var expSplitGT = logsplit[j].split(" > ");
+                            var oplen = (" between ").length;
+                            var startpos = logsplit[j].indexOf(" between ");
+                            if (startpos >= 0) {
+                                expsplitBetween[0] = logsplit[j].substr(0, startpos);
+                                expsplitBetween[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
 
-                        var expSplitLT = logsplit[j].split(" < ");
+                        }
 
+                        if (spiltOK == false) {
+
+                            var oplen = (" contains ").length;
+                            var startpos = logsplit[j].indexOf(" contains ");
+                            if (startpos >= 0) {
+                                expsplitCONTAINS[0] = logsplit[j].substr(0, startpos);
+                                expsplitCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" does not contain ").length;
+                            var startpos = logsplit[j].indexOf(" does not contain ");
+                            if (startpos >= 0) {
+                                expsplitDOESNOTCONTAINS[0] = logsplit[j].substr(0, startpos);
+                                expsplitDOESNOTCONTAINS[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+                            var oplen = (" not in ").length;
+                            var startpos = logsplit[j].indexOf(" not in ");
+                            if (startpos >= 0) {
+                                expsplitNOTIN[0] = logsplit[j].substr(0, startpos);
+                                expsplitNOTIN[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+                            var oplen = (" in ").length;
+                            var startpos = logsplit[j].indexOf(" in ");
+                            if (startpos >= 0) {
+                                expsplitIN[0] = logsplit[j].substr(0, startpos);
+                                expsplitIN[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" >= ").length;
+                            var startpos = logsplit[j].indexOf(" >= ");
+                            if (startpos >= 0) {
+                                expSplitGTE[0] = logsplit[j].substr(0, startpos);
+                                expSplitGTE[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" <= ").length;
+                            var startpos = logsplit[j].indexOf(" <= ");
+                            if (startpos >= 0) {
+                                expSplitLTE[0] = logsplit[j].substr(0, startpos);
+                                expSplitLTE[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" > ").length;
+                            var startpos = logsplit[j].indexOf(" > ");
+                            if (startpos >= 0) {
+                                expSplitGT[0] = logsplit[j].substr(0, startpos);
+                                expSplitGT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" < ").length;
+                            var startpos = logsplit[j].indexOf(" < ");
+                            if (startpos >= 0) {
+                                expSplitLT[0] = logsplit[j].substr(0, startpos);
+                                expSplitLT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" != ").length;
+                            var startpos = logsplit[j].indexOf(" != ");
+                            if (startpos >= 0) {
+                                expsplitNOT[0] = logsplit[j].substr(0, startpos);
+                                expsplitNOT[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" = ").length;
+                            var startpos = logsplit[j].indexOf(" = ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
+
+                        if (spiltOK == false) {
+
+                            var oplen = (" is ").length;
+                            var startpos = logsplit[j].indexOf(" is ");
+                            if (startpos >= 0) {
+                                expsplit[0] = logsplit[j].substr(0, startpos);
+                                expsplit[1] = logsplit[j].substr(startpos + oplen, logsplit[j].length).trim();
+                                spiltOK = true;
+                            }
+                        }
 
 
 
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
 
-                            if (expsplitCONTAINS[0].toUpperCase().trim() == "CALLER NAME" || expsplitCONTAINS[0].toUpperCase().trim() == "CALLER")
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "CALLER NAME")
                                 Firstname = "caller_name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "CALLER NUMBER")
+                                Firstname = "callfrom";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "LEAD NAME")
+                                Firstname = "lead_name";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "LEAD NUMBER")
+                                Firstname = "callto";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "CALL TYPE")
+                                Firstname = "calltype";
+
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "DIRECTION")
+                                Firstname = "direction";
+
+
+                            // by saroj on 18-04-2016
 
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -305,16 +546,78 @@
                                 return;
                             }
 
+                            //removing inverted commas
+                            expsplitCONTAINS[1] = expsplitCONTAINS[1].replace(/"/g, "");
+
                             filter.filters.push({ field: Firstname.trim(), operator: "contains", value: expsplitCONTAINS[1].trim() });
                             ValidFilter = true;
+                            spiltOK = false;
                         }
+
+
+                        // DOES NOT CONTAINS  CHECK   
+                        if (expsplitDOESNOTCONTAINS.length > 1) {
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "CALLER NAME")
+                                Firstname = "caller_name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "CALLER NUMBER")
+                                Firstname = "callfrom";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "LEAD NAME")
+                                Firstname = "lead_name";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "LEAD NUMBER")
+                                Firstname = "callto";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "CALL TYPE")
+                                Firstname = "calltype";
+
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "DIRECTION")
+                                Firstname = "direction";
+
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            //removing inverted commas
+                            expsplitDOESNOTCONTAINS[1] = expsplitDOESNOTCONTAINS[1].replace(/"/g, "");
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "doesnotcontain", value: expsplitDOESNOTCONTAINS[1].trim() });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
 
                         // IN CHECK
 
                         if (expsplitIN.length > 1) {
 
-                            if (expsplitIN[0].toUpperCase().trim() == "CALLER NAME" || expsplitIN[0].toUpperCase().trim() == "CALLER")
+                            if (expsplitIN[0].toUpperCase().trim() == "CALLER NAME")
                                 Firstname = "caller_name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "CALLER NUMBER")
+                                Firstname = "callfrom";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "LEAD NAME")
+                                Firstname = "lead_name";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "LEAD NUMBER")
+                                Firstname = "callto";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "CALL TYPE")
+                                Firstname = "calltype";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "DIRECTION")
+                                Firstname = "direction";
+
+                            // by saroj on 18-04-2016
 
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -326,25 +629,51 @@
                             // alert(mystring);
 
                             var newString = mystring.split(',');
+                            abc = { logic: "or", filters: [] };
+
                             if (newString.length >= 1) {
                                 for (var k = 0; k < newString.length; k++) {
-                                    // newString
-                                    filter.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
-                                    ValidFilter = true;
+                                    if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        newString[k] = newString[k].replace(/\s/g, '');
+                                    }
+                                    //removing inverted commas
+                                    newString[k] = newString[k].replace(/"/g, "");
+
+                                    abc.filters.push({ field: Firstname.trim(), operator: "contains", value: newString[k].trim() });
                                 }
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
                             }
+
+
                         }
 
 
-                        // EQUAL TO CHECK 
-                        if (expsplit.length > 1) {
+                        // NOT IN CHECK
 
+                        if (expsplitNOTIN.length > 1) {
 
-                            if (expsplit[0].toUpperCase().trim() == "CALLER NAME" || expsplit[0].toUpperCase().trim() == "CALLER")
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "CALLER NAME")
                                 Firstname = "caller_name";
 
-                            if (expsplit[0].toUpperCase().trim() == "CALLDATE")
-                                Firstname = "starttime";
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "CALLER NUMBER")
+                                Firstname = "callfrom";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "LEAD NAME")
+                                Firstname = "lead_name";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "LEAD NUMBER")
+                                Firstname = "callto";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "CALL TYPE")
+                                Firstname = "calltype";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "DIRECTION")
+                                Firstname = "direction";
+
+
+                            // by saroj on 18-04-2016
 
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -352,12 +681,78 @@
                                 return;
                             }
 
+                            var mystring = expsplitNOTIN[1].trim().replace(/["'\(\)]/g, "");
+                            // alert(mystring);
+
+                            var newString = mystring.split(',');
+                            abc = { logic: "and", filters: [] };
+
+                            if (newString.length >= 1) {
+                                for (var k = 0; k < newString.length; k++) {
+                                    if (Firstname == "status" && newString[k].trim().toUpperCase() == "IN PROGRESS") {
+                                        newString[k] = newString[k].replace(/\s/g, '');
+                                    }
+                                    //removing inverted commas
+                                    newString[k] = newString[k].replace(/"/g, "");
+                                    abc.filters.push({ field: Firstname.trim(), operator: "doesnotcontain", value: newString[k].trim() });
+                                }
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                        }
+
+
+                        // EQUAL TO CHECK 
+                        if (expsplit.length > 1) {
+
+                            if (expsplit[0].toUpperCase().trim() == "CALLER NAME")
+                                Firstname = "caller_name";
+
+                            if (expsplit[0].toUpperCase().trim() == "CALLER NUMBER")
+                                Firstname = "callfrom";
+
+                            if (expsplit[0].toUpperCase().trim() == "LEAD NAME")
+                                Firstname = "lead_name";
+
+                            if (expsplit[0].toUpperCase().trim() == "LEAD NUMBER")
+                                Firstname = "callto";
+
+                            if (expsplit[0].toUpperCase().trim() == "CALL TYPE")
+                                Firstname = "calltype";
+
+                            if (expsplit[0].toUpperCase().trim() == "DIRECTION")
+                                Firstname = "direction";
+
+                            if (expsplit[0].toUpperCase().trim() == "CALLDATE")
+                                Firstname = "starttime";
+
+                            if (Firstname == "") {
+                                // 18-04-2016
+                                //saroj
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            //"last_updated":"2016-04-07T04:20:42.953+00:00"
+
                             if (Firstname == "starttime") {
 
                                 var CurrentDate = moment().startOf('day')._d;
                                 var CurrentEndDate = moment().endOf('day')._d;
                                 // alert(CurrentEndDate);
+
                                 var TommDate = moment().startOf('day').add(+1, 'days')._d;
+                                var TommEndDate = moment().endOf('day').add(+1, 'days')._d;
+
+                                var next7Day = moment().endOf('day').add(+7, 'days')._d;
+                                // alert(next7Day);
+
+                                // alert(TommDate);
+                                //  alert(TommEndDate);
+
                                 var YesterDayDate = moment().startOf('day').add(-1, 'days')._d;
 
                                 // For This week 
@@ -397,13 +792,18 @@
                                 // Dates for Current Quarter
                                 var dd = new Date();
                                 var currQuarter = (dd.getMonth() - 1) / 3 + 1;
-
+                                //   alert("currQuarter"+ currQuarter);
                                 var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
                                 var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
                                 lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
                                 // Dates for Current Quarter
                                 var ddlast = new Date();
+
+                                //moment().subtract(1, 'quarter').startOf('quarter')._d
+                                //moment().subtract(1, 'quarter').endOf('quarter')._d
+
                                 var lastQuarter = (dd.getMonth() - 1) / 3 + 4;
+                                //  alert("lastQuarter" + currQuarter);
                                 var firstdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter - 2, 1);
                                 var lastdayOflastQuarter = new Date(ddlast.getFullYear(), 3 * lastQuarter + 1, 1);
                                 lastdayOflastQuarter.setDate(lastdayOflastQuarter.getDate() - 1);
@@ -417,11 +817,6 @@
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
-
-                                var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
-                                var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
-
-
                                 if (expsplit[1].trim().toUpperCase() == "TODAY") {
 
                                     abc = { logic: "and", filters: [] };
@@ -434,9 +829,17 @@
 
                                     abc = { logic: "and", filters: [] };
                                     abc.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
-                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
                                     filter.filters.push(abc);
-                                    // filter.filters.push({ field: Firstname.trim(), operator: "eq", value: YesterDayDate.toDateString() });
+
+                                }
+
+                                else if (expsplit[1].trim().toUpperCase() == "TOMORROW") {
+
+                                    abc = { logic: "and", filters: [] };
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentEndDate });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                    filter.filters.push(abc);
                                 }
 
                                 else if (expsplit[1].trim().toUpperCase() == "THIS WEEK") {
@@ -452,7 +855,6 @@
                                         abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentEndDate });
                                     }
                                     filter.filters.push(abc);
-
                                 }
 
                                 else if (expsplit[1].trim().toUpperCase() == "LAST WEEK") {
@@ -540,7 +942,7 @@
                                     var Datex = moment(expsplit[1].trim(), 'D/M/YYYY');
                                     var Date2 = Datex.add('days', 1);
 
-                                    abc.push({ field: Firstname.trim(), operator: "gt", value: Date1 });
+                                    abc.filters.push({ field: Firstname.trim(), operator: "gt", value: Date1 });
                                     abc.filters.push({ field: Firstname.trim(), operator: "lt", value: Date2 });
                                     filter.filters.push(abc);
                                 }
@@ -551,12 +953,65 @@
                                     filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
                                 }
                                 else {
+                                    //removing inverted commas
+                                    expsplit[1] = expsplit[1].replace(/"/g, "");
                                     filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
                                 }
                             }
-                            ValidFilter = true;
 
+                            ValidFilter = true;
+                            spiltOK = false;
                         }
+
+
+                        // NOT EQUAL TO CHECK 
+                        if (expsplitNOT.length > 1) {
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CALLER NAME")
+                                Firstname = "caller_name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CALLER NUMBER")
+                                Firstname = "callfrom";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "LEAD NAME")
+                                Firstname = "lead_name";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "LEAD NUMBER")
+                                Firstname = "callto";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CALL TYPE")
+                                Firstname = "calltype";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "DIRECTION")
+                                Firstname = "direction";
+
+                            if (expsplitNOT[0].toUpperCase().trim() == "CALLDATE")
+                                Firstname = "starttime";
+
+                            if (Firstname == "") {
+                                // 18-04-2016
+                                //saroj
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            if (expsplitNOT[1].toUpperCase().trim() == "BLANK") {
+                                filter.filters.push({ field: Firstname.trim(), operator: "neq", value: undefined });
+                            }
+                            else {
+                                //removing inverted commas
+                                expsplitNOT[1] = expsplitNOT[1].replace(/"/g, "");
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "neq", value: expsplitNOT[1].trim() });
+                            }
+
+
+
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
 
 
                         // IS BEFORE CHECK
@@ -566,14 +1021,58 @@
                             if (expsplitIsBefore[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
 
+
+                            // by saroj on 18-04-2016
+
                             if (Firstname == "") {
                                 ValidFilter = false;
                                 alert("Invalid Query.");
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
+
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var beforeYesterDayDate = moment().endOf('day').add(-2, 'days')._d;
+
+
+                            if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
+
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
+
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: beforeYesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else {
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
                         }
 
                         // IS AFTER CHECK
@@ -582,31 +1081,76 @@
 
                             if (expsplitIsAfter[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-                            
+
+
+                            // by saroj on 18-04-2016
+
                             if (Firstname == "") {
                                 ValidFilter = false;
                                 alert("Invalid Query.");
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
-                            ValidFilter = true;
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var TommDate = moment().endOf('day').add(+1, 'days')._d;
+
+
+                            if (expsplitIsAfter[1].trim().toUpperCase() == "TODAY") {
+
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "TOMORROW") {
+
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: TommDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+
+
                         }
 
-                   
+
                         // BETWEEN OR CHECK 
                         if (expsplitBetween.length > 1) {
 
                             if (expsplitBetween[0].toUpperCase().trim() == "CALLDATE")
                                 Firstname = "starttime";
-                            
+
+                            // by saroj on 18-04-2016
+
                             if (Firstname == "") {
                                 ValidFilter = false;
                                 alert("Invalid Query.");
                                 return;
                             }
 
-                            var InnerBetweenSplit = expsplitBetween[1].split("||");
+                            var InnerBetweenSplit = expsplitBetween[1].split("&&");
 
                             if (InnerBetweenSplit.length > 1) {
 
@@ -615,8 +1159,8 @@
                                 abc.filters.push({ field: Firstname.trim(), operator: "gte", value: moment(InnerBetweenSplit[0].trim().toString(), 'DD-MM-YYYY').startOf('day')._d });
                                 abc.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
                                 filter.filters.push(abc);
-
                                 ValidFilter = true;
+                                spiltOK = false;
                             }
                         }
 
@@ -626,20 +1170,37 @@
 
 
             // final code to get execute....
-            // 11-04-2016
 
-            if (Firstname == "") {
+            if (Firstname == "" && ValidClause == false) {
                 alert("Invalid Query.");
                 return;
             }
 
-            if (ValidFilter == true) {
+            if (ValidFilter == true && ValidClause == false) {
                 var ds = $('#project-record-list').getKendoGrid().dataSource;
                 ds.filter(filter);
+
+                // alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == false && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.sort(dsSort);
+                //  alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == true && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.filter(filter);
+                ds.sort(dsSort);
+                // alert('Query Executed Successfully.');
             }
             else {
                 alert("Please Check Query.");
             }
+
         }
 
         $scope.clearFilter = function () {
