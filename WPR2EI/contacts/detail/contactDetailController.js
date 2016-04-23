@@ -959,7 +959,7 @@ angular.module('contacts')
                     }
                  },
             {
-                field: "date",
+                field: "date_Formatted",
                 title: "Date",
                 width: "200px",
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',

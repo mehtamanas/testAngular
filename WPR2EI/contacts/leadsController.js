@@ -548,7 +548,9 @@ angular.module('contacts')
               }
         }, ]
         };
-        $scope.openLog = function (dataItem) {
+        $scope.openLog = function (d) {
+            var id = d.Contact_Id;
+            window.sessionStorage.selectedCustomerID = id;
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'contacts/log/logContact.tpl.html',
