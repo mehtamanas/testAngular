@@ -117,7 +117,9 @@
             <button type="button" class=" f-btn" id="editBlog_btn_sendforapproval" ng-click="sendForApproval()" ng-show='isContentWriter && status === "Draft"'>SEND FOR APPROVAL </button>
             <button type="button" class=" f-btn f-btn-19" id="editBlog_btn_decline"  ng-click="decline()" ng-show='(isContentApprover || isContentPublisher) && (status === "Sent For Approval"||status === "Approved"||status === "Partially Approved" )'> DECLINE </button>
             <button type="button" class=" f-btn" id="editBlog_btn_publish" ng-click="publish()" ng-show='isContentPublisher && status === "Approved"'> PUBLISH </button>
-            <button type="submit" id="editBlog_btn_save" class="f-btn" ng-show='isContentWriter && (status === "Draft"||status === "Not Approved")'> SAVE DRAFT </button>           
+            <button type="submit" id="editBlog_btn_save" class="f-btn" ng-show='isContentWriter && (status === "Draft"||status === "Not Approved")'> SAVE DRAFT </button>
+            <button type="button" class=" f-btn f-btn-19" id="editBlog_btn_failed" ng-click="Failed()" ng-show='isContentModerator && (status === "Published")'> FAILED </button>
+            <button type="button" class=" f-btn" id="editBlog_btn_passed" ng-click="passed()" ng-show='isContentModerator && (status === "Published")'> PASSED </button>           
         </div>
 </form>
 <!-- for image fetch -->

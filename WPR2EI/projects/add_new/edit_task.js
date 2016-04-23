@@ -1,14 +1,140 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window) {
+var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modalInstance, $modal, $rootScope, $window, FileUploader) {
     console.log('EditTaskProject');
     var userId = $cookieStore.get('userId');
     // var assigned_to_id = $cookieStore.get('assigned_to_id');
 
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiService.uploadURL,
+    });
+
+    uploader.filters.push({
+        name: 'attchementFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected invalid file type');
+            }
+            if (item.size > 10485760) {
+
+                alert('File size should be less than 10mb');
+            }
+            return '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type) !== -1 && item.size <= 10485760;
+        }
+    });
+
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        loc = response[0].Location;
+        var edit = $('#txt_editTaskAddNotes').data("kendoEditor");
+        var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
+        if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
+            edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
+        else {
+            edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
+        }
+
+    };
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        uploader.uploadAll();
+    }
+
+    $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
+        tools: ["bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "justifyLeft",
+                "justifyCenter",
+                "justifyRight",
+                "justifyFull",
+                "insertUnorderedList",
+                "insertOrderedList",
+                "indent",
+                "outdent",
+                "createLink",
+                'pdf',
+                "unlink",
+                "fontName",
+                "fontSize",
+                "foreColor",
+                "backColor",
+                "print",
+                'createTable',
+                {
+                    name: "myTool",
+                    tooltip: "Insert Image",
+                    exec: function (e) {
+                        $('#imageBrowser').trigger("click");
+                    }
+                },
+                  {
+                      name: "insertHtml",
+                      items: [
+                          { text: "Last Name", value: "{{last_name}}" },
+                          { text: "First Name", value: "{{first_name}}" },
+                          { text: "My First Name", value: "{{my_first_name}}" },
+                          { text: "My Last Name", value: "{{my_last_name}}" },
+                          { text: "Salutation", value: "{{salutation}}" },
+                           { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
+
+                      ]
+                  },
+                  "viewHtml",
+        ],
+    }
+
 
     $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
     $scope.project1 = $scope.seletedCustomerId;
+
+    $scope.contactsDataSource = new kendo.data.DataSource({
+        type: "odata",
+        serverFiltering: true,
+        transport: {
+            read: function (options) {
+                $scope.getAllContacts(options.data.filter != null && options.data.filter.filters != null ? options.data.filter.filters[0].value : null, options);
+            }
+        },
+        schema: {
+            data: function (data) {
+                return data;
+            },
+            total: function (data) {
+                return data['odata.count'];
+            },
+            model: {
+                fields: {
+                    Contact_Name: { type: "string" },
+                    Contact_id: { type: "string" }
+                }
+            }
+        }
+    });
+
+    function isStringNullOrEmpty(value) {
+        return value == null || value == "";
+    }
+
+    $scope.getAllContacts = function (searchString, options) {
+
+        Url = "Contact/GetFilteredContactsByOrg/";
+        searchString = isStringNullOrEmpty(searchString) ? "a" : searchString;
+        apiService.get(Url, { orgId: $cookieStore.get('orgID'), searchString: searchString, contactId: $scope.contactId }).then(function (response) {
+            options.success(response.data);
+           
+        },
+        function (error) {
+            options.error(error.state);
+        });
+    }
 
 
     contactUrl = "ToDoItem/EditGet/" + $scope.selectedTaskID;
@@ -27,9 +153,12 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
         $scope.priority1 = response.data[0].priority_id;
         $scope.project1 = response.data[0].project_id;
         $scope.contact1 = response.data[0].contact_id;
+        $scope.contact1Name = response.data[0].Contact_name;
         $scope.event1 = response.data[0].task_type_id;
         $scope.user1 = response.data[0].assign_user_id;
-       // $scope.reminder_time = response.data[0].reminder_time
+        $scope.params.htmlcontent=response.data[0].text;
+        // $scope.reminder_time = response.data[0].reminder_time
+        $("#editTaskPerson").data("kendoComboBox").value($scope.contact1Name);
     },
     function (error) {
         if (error.status === 400)
@@ -79,7 +208,8 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
         project_id: $scope.project1,
         priority: $scope.priority1,
         name: $scope.name,
-        text: $scope.text,
+        //text: $scope.text,
+        text: $scope.htmlcontent,
         due_date: $scope.due_date,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
@@ -225,16 +355,16 @@ var EditTaskProject = function ($scope, $state, $cookieStore, apiService, $modal
     };
 
 
-    Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
-    apiService.get(Url).then(function (response) {
-        $scope.contacts = response.data;
-    },
-   function (error) {
-       if (error.status === 400)
-           alert(error.data.Message);
-       else
-           alert("Network issue");
-   });
+   // Url = "Contact/GetContactByOrg/" + $cookieStore.get('orgID');
+   // apiService.get(Url).then(function (response) {
+   //     $scope.contacts = response.data;
+   // },
+   //function (error) {
+   //    if (error.status === 400)
+   //        alert(error.data.Message);
+   //    else
+   //        alert("Network issue");
+   //});
 
     $scope.selectcontact = function () {
         $scope.params.assigned_to_id = $scope.contact1;
@@ -302,6 +432,7 @@ function (error) {
             $scope.params = {
                 name: $scope.params.name,
                 assigned_to_id: $scope.contact1,
+                contact_id: $scope.contact1,
                 class_type: "Contact",
                 //due_date: $scope.due_date,
                 priority: $scope.priority1,
@@ -310,7 +441,8 @@ function (error) {
                 user_id: $cookieStore.get('userId'),
                 assign_user_id: $scope.user1,
                 task_type_id: $scope.event1,
-                text: $scope.params.text,
+                //text: $scope.params.text,
+                text: $scope.params.htmlcontent,
                 remind_me: remind_me,
                 reminder_timespan_id: $scope.reminder_time1,
   		        due_date: new Date(dDate).toISOString(),

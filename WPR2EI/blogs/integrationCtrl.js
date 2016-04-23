@@ -65,7 +65,7 @@
                 schema: {
                     model: {
                         fields: {
-                            due_date: { type: "date" },
+                            blog_created_date: { type: "date" },
                             start_date_time: { type: "date" },
                         }
                     }
@@ -137,7 +137,16 @@
              {
                  "style": "text-align:center"
              }
-            }, {
+             }, {
+                 field: "blog_created_date",
+                 title: "Created Date",
+                 format: '{0:dd/MM/yyyy}',
+                 width: "120px",
+                 attributes: {
+                     "class": "UseHand",
+                     "style": "text-align:center"
+                 }
+             }, {
                 field: "status",
                 //template: '<span id="#= status #"></span>',
                title: "Status",
@@ -147,7 +156,7 @@
                  "style": "text-align:center"
              }
 
-           }]
+            },]
         };
 
 

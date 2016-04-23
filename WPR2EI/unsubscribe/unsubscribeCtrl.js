@@ -261,8 +261,5 @@
                  resolve: { items: { title: "Unsubscribe" } }
              });
          }
-
-
-
      });
 
