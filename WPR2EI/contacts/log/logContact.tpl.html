@@ -8,23 +8,28 @@
 </div>
 
 <div class="main-content project add-new">
-    <form name="loginForm" novalidate data-ng-submit="addNew()" autocomplete="off" class="form-horizontal">
+    <form name="loginForm" novalidate data-ng-submit="addNew(loginForm.$valid)" autocomplete="off" class="form-horizontal">
         <div class="modal-body">
             <!--<label>Option</label>-->
             <div class="col-md-12">
                 <div class="form-group ">
                     <div class="pull-left" style="margin-bottom: 1%;">
-                        <input type="button" class="div_lead_email"  value="EMAIL" id="btn_FollowUpLeadEmail" />
-                        <input type="button" class="div_lead_call"  value="CALL" style="margin-left: 40px;" id="btn_FollowUpLeadCall" />
-                        <input type="button" class="div_lead_meeting"  value="MEETING" style="margin-left: 40px;"  id="btn_FollowUpLeadMeeting" />
-                        <input type="button" class="div_lead_other"  value="OTHER" style="margin-left: 40px;" id="btn_FollowUpLeadOther" />
+
+                        <input type="button" ng-class="{'div_log_call_selected' : callChecked,'div_log_call':!callChecked}" ng-click="callSelected()"  value="CALL" id="btn_LogCall" />
+                        <input type="button" ng-class="{'div_log_email_selected' : emailChecked,'div_log_email':!emailChecked}" ng-click="emailSelected()" style="margin-left: 40px;" value="EMAIL" id="btn_LogEmail" />                        
+                        <input type="button" ng-class="{'div_log_meeting_selected' : meetingChecked,'div_log_meeting':!meetingChecked}" style="margin-left: 40px;" ng-click="meetingSelected()" value="MEETING" id="btn_LogMeeting" />
+                        <input type="button" ng-class="{'div_log_other_selected' : otherChecked,'div_log_other':!otherChecked}" ng-click="otherSelected()" value="OTHER" style="margin-left: 40px;" id="btn_LogOther" />
+                        <!--<input type="button" class="div_log_email"  value="EMAIL" id="btn_FollowUplogEmail" />
+                        <input type="button" class="div_log_call"  value="CALL" style="margin-left: 40px;" id="btn_FollowUplogCall" />
+                        <input type="button" class="div_log_meeting"  value="MEETING" style="margin-left: 40px;"  id="btn_FollowUplogMeeting" />
+                        <input type="button" class="div_log_other"  value="OTHER" style="margin-left: 40px;" id="btn_FollowUplogOther" />-->
                     </div>
                 </div>
                 </div>
             <div class="clearfix">
                 <div class="form-group col-md-7" style="margin-top:23px">
                     <label for="" style="font-size: 14px;">Select Date / Time</label>
-                    <span class="k-widget k-datetimepicker k-header  ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched"><span class="k-picker-wrap k-state-default"><input kendo-date-time-picker="" class="form-control ng-pristine k-input ng-empty ng-invalid ng-invalid-required ng-touched" id="logContact" data-ng-model="params.start_date1" k-ng-model="dateObject" k-format="'MMMM d, yyyy h:mm tt'" required="" data-role="datetimepicker" type="text" role="combobox" aria-expanded="false" aria-disabled="false" aria-readonly="false" aria-invalid="true" style="width: 100%;"><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar" role="button" aria-controls="addEmailCampaign_startDate_dateview">select</span><span unselectable="on" class="k-icon k-i-clock" role="button" aria-controls="addEmailCampaign_startDate_timeview">select</span></span></span></span>
+                    <span class="k-widget k-datetimepicker k-header  ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched"><span class="k-picker-wrap k-state-default"><input kendo-date-time-picker="" class="form-control ng-pristine k-input ng-empty ng-invalid ng-invalid-required ng-touched" id="logContact" data-ng-model="params.date_time" k-ng-model="dateObject" k-format="'MMMM d, yyyy h:mm tt'" required="" data-role="datetimepicker" type="text" role="combobox" aria-expanded="false" aria-disabled="false" aria-readonly="false" aria-invalid="true" style="width: 100%;"><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar" role="button" aria-controls="addEmailCampaign_startDate_dateview">select</span><span unselectable="on" class="k-icon k-i-clock" role="button" aria-controls="addEmailCampaign_startDate_timeview">select</span></span></span></span>
 
                     <!--<md-datepicker ng-model="myDate" datetime-picker date-format="yyyy-MM-dd HH:mm:ss"  md-placeholder="Enter date" class="md-block"  md-date-filter="onlyWeekendsPredicate">
 
@@ -35,7 +40,7 @@
             <div class="clearfix">
                 <div class="">
                     <label for="">Add Note</label>
-                    <textarea id="logContactEditor" rows="10" cols="30" style="width:100%;" kendo-editor k-options="editorOption" k-ng-model="params.description" resizable="true"></textarea>
+                    <textarea id="logContactEditor" rows="10" cols="30" style="width:100%;" kendo-editor k-ng-model="params.text" k-options="editorOption" resizable="true"></textarea>
                 </div>
             </div>
        
@@ -52,12 +57,6 @@
     </form>
 
 </div>
-<script>
 
-    var notePopupHeight = window.innerHeight - 400;
-    document.getElementById("logContactEditor").style.height = notePopupHeight + "px";
-
-
-</script>
 
 
