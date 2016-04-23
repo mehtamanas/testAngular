@@ -25,7 +25,6 @@ angular.module('MainApp', [
     'eventcampaign',
     'flow',
    'ngAnimate',
-   'toaster',
    'angularSpinner',
     'newuser',
    'organization',

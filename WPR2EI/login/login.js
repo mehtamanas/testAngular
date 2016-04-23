@@ -41,6 +41,27 @@ angular.module('app.guest.login')
                 if ($rootScope.rememberMeOn) { $localStorage.alive.user = $scope.params}
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
+                   //welcome notification
+                    $.notify({
+                        message: 'Welcome To Dwellar'
+                    }, {
+                        // settings
+                        element: 'body',
+                        position: null,
+                        type: "success",
+                        allow_dismiss: false,
+                        placement: {
+                            from: "top",
+                            align: "center"
+                        },
+                        mouse_over: null,
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        }
+                    });
+                    //end welcome notification
+                  
                      $cookieStore.put('loggedUserInfo', response);
                      $localStorage.alive ? $localStorage.alive.loggedUserInfo = response:null;//keep me logged IN
 
