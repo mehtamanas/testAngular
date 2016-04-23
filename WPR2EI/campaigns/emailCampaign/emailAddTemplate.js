@@ -4,6 +4,8 @@
 function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploadService, $modal, $rootScope, $sanitize,$sce) {
     var orgID = $cookieStore.get('orgID');
 
+    $scope.fromEmail = $cookieStore.get('currentUser');
+    $scope.fromEmail= $scope.fromEmail.account_email;
     $scope.loadingDemo = false;
     //Audit log start               
     AuditCreate = function () {
@@ -183,9 +185,12 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
             var postData = {
                 template: $scope.params.bodyText,
                 template_id: $scope.params.template,
-                subject: $scope.params.subject,
+                subject: $scope.params.subject,               
                 document_type_id: "6978399d-7ee7-42a6-85dd-6fec5b7312c2"
+
+
             }
+            sweetAlert("", "Your Email Campaign Send From this Email-Id: " + $scope.fromEmail);
             window.localStorage.setItem("emailAddTemplate", JSON.stringify(postData));
             AuditCreate();
             $state.go('app.summaryEmail');
@@ -195,9 +200,6 @@ function ($scope, $state, $cookieStore, apiService, FileUploader, $window, uploa
             swal("Error!", "Pleas Enter Description And Subject", 'info')
             $state.go('app.addTemplate');
         }
-
-
-
 
     }
 

@@ -12,7 +12,8 @@
         
         $scope.params = {};
         
-
+        $scope.fromEmail = $cookieStore.get('currentUser');
+        $scope.fromEmail = $scope.fromEmail.account_email;
         //Audit log start               
         AuditCreate = function () {
             var postdata =
@@ -76,6 +77,7 @@
                     template_id: emailTemplate.template_id,
                     description:emailTemplate.template,
                     document_type_id: emailTemplate.document_type_id,
+                    fromEmail: $scope.fromEmail,
                     organization_id: $cookieStore.get('orgID'),
                      user_id: $cookieStore.get('userId'),
                 }
