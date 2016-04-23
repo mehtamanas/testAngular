@@ -417,7 +417,18 @@ angular.module('contacts')
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
-             }, {
+             },
+             //new feilds by vaibhav
+              {
+                  field: "contact_designation",
+                  title: "Designation",
+
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              },
+             {
                  field: "text",
                  title: "Notes",
                  template: "<span  ng-bind-html='dataItem.text | limitTo:200'></span>",
@@ -506,7 +517,7 @@ angular.module('contacts')
            {
                field: "created_at",
                hidden: true,
-               title: "Created Date",
+               title: "Created By",
                type: 'date',
                filterable: {
                    ui: "datepicker"
@@ -519,6 +530,8 @@ angular.module('contacts')
                    "style": "text-align:center"
                }
            },
+
+          
         {
             title: "Action",
             template: '<div class="dropdown drop_lead" dropdown ><button class="btn drop_lead_btn dropdown-toggle" dropdown-toggle type="button" data-toggle="dropdown"><span class="caret caret_lead"></span></button><ul class="dropdown-menu dropdown_lead" dropdown-menu ><li>' +
@@ -578,6 +591,7 @@ angular.module('contacts')
                 if (pos >= 0) {
                     var arydir = "";
                     if (pos == 0) {
+
                         if (aryClause[0].split(" asc").length > aryClause[0].split(" desc").length) {
                             arydir = aryClause[0].split(" asc");
                             dir1 = "asc";
@@ -594,6 +608,8 @@ angular.module('contacts')
                         }
                         else {
                             ValidClause = false;
+                            alert("Invalid Query.");
+                            return;
                         }
                     }
                     else {
@@ -611,6 +627,8 @@ angular.module('contacts')
                         }
                         else {
                             ValidClause = false;
+                            alert("Invalid Query.");
+                            return;
                         }
                     }
 
@@ -643,10 +661,12 @@ angular.module('contacts')
                             feild1 = "Formatted_last_contacted_date";
                         else if (fValue == "UPDATED DATE")
                             feild1 = "Formatted_last_updated_date";
-                        else if (fValue == "CREATED DATE")
+                        else if (fValue == "CREATED BY")
                             feild1 = "created_at";
                         else if (fValue == "ACTION")
                             feild1 = "Action";
+                        else if (fValue == "DESIGNATION")
+                            feild1 = "contact_designation";
                     }
                 }
 
@@ -893,7 +913,9 @@ angular.module('contacts')
                             else if (expsplitCONTAINS[0].toUpperCase().trim() == "TYPE")
                                 Firstname = "Type";
 
-                           
+                            else if (expsplitCONTAINS[0].toUpperCase().trim() == "DESIGNATION")
+                                Firstname = "contact_designation";
+
 
 
 
@@ -953,7 +975,8 @@ angular.module('contacts')
                             else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TYPE")
                                 Firstname = "Type";
 
-                            
+                            else if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "DESIGNATION")
+                                Firstname = "contact_designation";
 
                             // by saroj on 18-04-2016
 
@@ -1014,7 +1037,8 @@ angular.module('contacts')
                             else if (expsplitIN[0].toUpperCase().trim() == "TYPE")
                                 Firstname = "Type";
 
-                           
+                            else if (expsplitIN[0].toUpperCase().trim() == "DESIGNATION")
+                                Firstname = "contact_designation";
 
 
                             // by saroj on 18-04-2016
@@ -1090,7 +1114,8 @@ angular.module('contacts')
                             else if (expsplitNOTIN[0].toUpperCase().trim() == "TYPE")
                                 Firstname = "Type";
 
-                         
+                            else if (expsplitNOTIN[0].toUpperCase().trim() == "DESIGNATION")
+                                Firstname = "contact_designation";
 
                             // by saroj on 18-04-2016
 
@@ -1163,8 +1188,6 @@ angular.module('contacts')
                             else if (expsplit[0].toUpperCase().trim() == "TYPE")
                                 Firstname = "Type";
 
-                           
-
                             else if (expsplit[0].toUpperCase().trim() == "FOLLOW UP COUNT")
                                 Firstname = "follow_up_count";
 
@@ -1176,6 +1199,9 @@ angular.module('contacts')
 
                             else if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
+
+                            else if (expsplit[0].toUpperCase().trim() == "DESIGNATION")
+                                Firstname = "contact_designation";
 
                             if (Firstname == "") {
                                 // 18-04-2016
@@ -1425,13 +1451,13 @@ angular.module('contacts')
                             if (expsplitNOT[0].toUpperCase().trim() == "FIRSTNAME")
                                 Firstname = "Contact_First_Name";
 
-                           else if (expsplitNOT[0].toUpperCase().trim() == "LASTNAME")
+                            else if (expsplitNOT[0].toUpperCase().trim() == "LASTNAME")
                                 Firstname = "Contact_Last_Name";
 
                             else if (expsplitNOT[0].toUpperCase().trim() == "EMAIL")
                                 Firstname = "Contact_Email";
 
-                           else if (expsplitNOT[0].toUpperCase().trim() == "PHONE" || expsplitNOT[0].toUpperCase().trim() == "NUMBER")
+                            else if (expsplitNOT[0].toUpperCase().trim() == "PHONE" || expsplitNOT[0].toUpperCase().trim() == "NUMBER")
                                 Firstname = "Contact_Phone";
 
                             else if (expsplitNOT[0].toUpperCase().trim() == "TAGS")
@@ -1466,6 +1492,9 @@ angular.module('contacts')
 
                             if (expsplitNOT[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
+
+                            else if (expsplitNOT[0].toUpperCase().trim() == "DESIGNATION")
+                                Firstname = "contact_designation";
 
                             if (Firstname == "") {
                                 // 18-04-2016
@@ -1580,7 +1609,7 @@ angular.module('contacts')
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED BY")
                                 Firstname = "created_at";
 
                             // by saroj on 18-04-2016
@@ -1648,7 +1677,7 @@ angular.module('contacts')
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED BY")
                                 Firstname = "created_at";
 
                             // by saroj on 18-04-2016
@@ -1712,7 +1741,7 @@ angular.module('contacts')
                             else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
+                            else if (expsplitBetween[0].toUpperCase().trim() == "CREATED BY")
                                 Firstname = "created_at";
 
                             // by saroj on 18-04-2016
@@ -1752,6 +1781,7 @@ angular.module('contacts')
             if (ValidFilter == true && ValidClause == false) {
                 var ds = $('#contact_kenomain').getKendoGrid().dataSource;
                 ds.filter(filter);
+
                 // alert('Query Executed Successfully.');
             }
             else if (ValidFilter == false && ValidClause == true) {
@@ -1772,8 +1802,7 @@ angular.module('contacts')
             else {
                 alert("Please Check Query.");
             }
-
-
+            
         }
 
         $scope.clearFilter = function () {
@@ -1833,7 +1862,7 @@ angular.module('contacts')
                         duration: 100
                     }
                 },
-                filter: "td:nth-child(11)", //this filter selects the  column cells
+                filter: "td:nth-child(12)", //this filter selects the  column cells
                 position: "top",
                 beforeShow: function (e) {
                     console.log(e);

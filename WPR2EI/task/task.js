@@ -207,11 +207,11 @@
             {
                 field: "task_code",
                 title: "TASK CODE",
-                hidden:true,
+                hidden: true,
                 width: "120px",
                 attributes:
                {
-                  "style": "text-align:center;cursor:pointer"
+                   "style": "text-align:center;cursor:pointer"
                }
             }
 
@@ -665,6 +665,8 @@
                         }
                         else {
                             ValidClause = false;
+                            alert("Invalid Query.");
+                            return;
                         }
                     }
                     else {
@@ -682,6 +684,8 @@
                         }
                         else {
                             ValidClause = false;
+                            alert("Invalid Query.");
+                            return;
                         }
                     }
 
@@ -949,7 +953,7 @@
 
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
-                            
+
 
 
                             // by saroj on 18-04-2016
@@ -1639,7 +1643,7 @@
 
             // final code to get execute....
 
-          
+
             if (Firstname == "" && ValidClause == false) {
                 alert("Invalid Query.");
                 return;
@@ -1668,7 +1672,7 @@
             else {
                 alert("Please Check Query.");
             }
-                       
+
         }
 
 
