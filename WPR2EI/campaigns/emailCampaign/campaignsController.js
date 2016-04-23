@@ -872,8 +872,6 @@ angular.module('campaigns')
                         }
 
 
-
-
                         // CONTAINS  CHECK   
                         if (expsplitCONTAINS.length > 1) {
 
@@ -935,7 +933,7 @@ angular.module('campaigns')
                             spiltOK = false;
                         }
 
-
+                        // IN CHECK
 
                         if (expsplitIN.length > 1) {
 
@@ -1020,9 +1018,7 @@ angular.module('campaigns')
                             }
 
                         }
-
-
-
+                        
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
 
@@ -1068,10 +1064,16 @@ angular.module('campaigns')
                                 alert("Invalid Query.");
                                 return;
                             }
+
                             if (Firstname == "status" || Firstname == "name") {
                                 //removing inverted commas
-                                expsplit[1] = expsplit[1].replace(/"/g, "");
-                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                if (expsplit[1].toUpperCase().trim() == "BLANK") {
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
+                                }
+                                else {
+                                    expsplit[1] = expsplit[1].replace(/"/g, "");
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: expsplit[1].trim() });
+                                }
                             }
                             else if (Firstname == "created_date" || Firstname == "start_date1") {
 
@@ -1230,7 +1232,6 @@ angular.module('campaigns')
                                     filter.filters.push(abc);
                                 }
 
-
                                 else if (expsplit[1].trim().toUpperCase() == "LAST QUARTER") {
 
                                     abc = { logic: "and", filters: [] };
@@ -1281,207 +1282,370 @@ angular.module('campaigns')
                                     abc.filters.push({ field: Firstname.trim(), operator: "lt", value: Date2 });
                                     filter.filters.push(abc);
                                 }
+
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim()) });
+                            }
+
+                            ValidFilter = true;
+                            spiltOK = false;
+
+                        }
+
+
+
+                        // GREATER THAN EQUAL TO CHECK
+                        if (expSplitGTE.length > 1) {
+
+                            if (expSplitGTE[0].toUpperCase().trim() == "OPEN RATE")
+                                Firstname = "open_rate";
+
+                            if (expSplitGTE[0].toUpperCase().trim() == "OPENS")
+                                Firstname = "opens";
+
+                            if (expSplitGTE[0].toUpperCase().trim() == "BOUNCES")
+                                Firstname = "bounces";
+
+                            else if (expSplitGTE[0].toUpperCase().trim() == "UNSUBSCRIBES")
+                                Firstname = "unsubscribes";
+
+                            if (expSplitGTE[0].toUpperCase().trim() == "BUDGET")
+                                Firstname = "budget";
+
+                            else if (expSplitGTE[0].toUpperCase().trim() == "REVENUE")
+                                Firstname = "revenue";
+
+                            else if (expSplitGTE[0].toUpperCase().trim() == "CONVERSIONS")
+                                Firstname = "conversion_rate";
+
+                            else if (expSplitGTE[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
+                        // LESSER THAN EQUAL TO CHECK
+                        if (expSplitLTE.length > 1) {
+
+                            if (expSplitLTE[0].toUpperCase().trim() == "OPEN RATE")
+                                Firstname = "open_rate";
+
+                            if (expSplitLTE[0].toUpperCase().trim() == "OPENS")
+                                Firstname = "opens";
+
+                            if (expSplitLTE[0].toUpperCase().trim() == "BOUNCES")
+                                Firstname = "bounces";
+
+                            else if (expSplitLTE[0].toUpperCase().trim() == "UNSUBSCRIBES")
+                                Firstname = "unsubscribes";
+
+                            if (expSplitLTE[0].toUpperCase().trim() == "BUDGET")
+                                Firstname = "budget";
+
+                            else if (expSplitLTE[0].toUpperCase().trim() == "REVENUE")
+                                Firstname = "revenue";
+
+                            else if (expSplitLTE[0].toUpperCase().trim() == "CONVERSIONS")
+                                Firstname = "conversion_rate";
+
+                            else if (expSplitLTE[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
+                        // GREATER THAN  TO CHECK
+                        if (expSplitGT.length > 1) {
+
+                            if (expSplitGT[0].toUpperCase().trim() == "OPEN RATE")
+                                Firstname = "open_rate";
+
+                            if (expSplitGT[0].toUpperCase().trim() == "OPENS")
+                                Firstname = "opens";
+
+                            if (expSplitGT[0].toUpperCase().trim() == "BOUNCES")
+                                Firstname = "bounces";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "UNSUBSCRIBES")
+                                Firstname = "unsubscribes";
+
+                            if (expSplitGT[0].toUpperCase().trim() == "BUDGET")
+                                Firstname = "budget";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "REVENUE")
+                                Firstname = "revenue";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "CONVERSIONS")
+                                Firstname = "conversion_rate";
+
+                            else if (expSplitGT[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGT[1].trim()) });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
+                        // LESSER THAN CHECK
+                        if (expSplitLT.length > 1) {
+
+                            if (expSplitLT[0].toUpperCase().trim() == "OPEN RATE")
+                                Firstname = "open_rate";
+
+                            if (expSplitLT[0].toUpperCase().trim() == "OPENS")
+                                Firstname = "opens";
+
+                            if (expSplitLT[0].toUpperCase().trim() == "BOUNCES")
+                                Firstname = "bounces";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "UNSUBSCRIBES")
+                                Firstname = "unsubscribes";
+
+                            if (expSplitLT[0].toUpperCase().trim() == "BUDGET")
+                                Firstname = "budget";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "REVENUE")
+                                Firstname = "revenue";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "CONVERSIONS")
+                                Firstname = "conversion_rate";
+
+                            else if (expSplitLT[0].toUpperCase().trim() == "CLICKS")
+                                Firstname = "clicks";
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            filter.filters.push({ field: Firstname.trim(), operator: "lt", value: parseFloat(expSplitLT[1].trim()) });
+                            ValidFilter = true;
+                            spiltOK = false;
+                        }
+
+
+                        // IS BEFORE CHECK
+                        if (expsplitIsBefore.length > 1) {
+
+                            if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_date";
+
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date1";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var beforeYesterDayDate = moment().endOf('day').add(-2, 'days')._d;
+
+
+                            if (expsplitIsBefore[1].trim().toUpperCase() == "TODAY") {
+
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "TOMORROW") {
+
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsBefore[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: beforeYesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
                             }
 
                             else {
-                                if (expsplit[1].toUpperCase().trim() == "BLANK") {
-                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
-                                }
-                                else {
-                                    //removing inverted commas
-                                    expsplit[1] = expsplit[1].replace(/"/g, "");
-                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: parseFloat(expsplit[1].trim() });
-                                }
+
+                                filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+
+                        }
+
+
+                        // IS AFTER CHECK
+
+                        if (expsplitIsAfter.length > 1) {
+
+                            if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_date";
+
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date1";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            var CurrentDate = moment().endOf('day')._d;;
+                            var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
+                            var TommDate = moment().endOf('day').add(+1, 'days')._d;
+
+
+                            if (expsplitIsAfter[1].trim().toUpperCase() == "TODAY") {
+
+                                //abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: CurrentDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "TOMORROW") {
+
+                                // abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: TommDate });
+                                // abc.filters.push({ field: Firstname.trim(), operator: "lt", value: TommEndDate });
+                                // filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                            else if (expsplitIsAfter[1].trim().toUpperCase() == "YESTERDAY") {
+
+                                //   abc = { logic: "and", filters: [] };
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: YesterDayDate });
+                                //abc.filters.push({ field: Firstname.trim(), operator: "lt", value: CurrentDate });
+                                //filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+                            else {
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                ValidFilter = true;
+                                spiltOK = false;
+                            }
+
+                        }
+
+                        // 
+
+                        // BETWEEN OR CHECK 
+                        if (expsplitBetween.length > 1) {
+
+                            if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
+                                Firstname = "created_date";
+
+                            else if (expsplitBetween[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date1";
+
+                            // by saroj on 18-04-2016
+
+                            if (Firstname == "") {
+                                ValidFilter = false;
+                                alert("Invalid Query.");
+                                return;
+                            }
+
+                            var InnerBetweenSplit = expsplitBetween[1].split("&&");
+
+                            if (InnerBetweenSplit.length > 1) {
+
+                                abc = { logic: "and", filters: [] };
+
+                                abc.filters.push({ field: Firstname.trim(), operator: "gte", value: moment(InnerBetweenSplit[0].trim().toString(), 'DD-MM-YYYY').startOf('day')._d });
+                                abc.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
+                                filter.filters.push(abc);
+                                ValidFilter = true;
+                                spiltOK = false;
                             }
                         }
 
-                    }
-
-                    // GREATER THAN EQUAL TO CHECK
-                    if (expSplitGTE.length > 1) {
-
-                        if (expSplitGTE[0].toUpperCase().trim() == "OPEN RATE")
-                            Firstname = "open_rate";
-
-                        if (expSplitGTE[0].toUpperCase().trim() == "OPENS")
-                            Firstname = "opens";
-
-                        if (expSplitGTE[0].toUpperCase().trim() == "BOUNCES")
-                            Firstname = "bounces";
-
-                        else if (expSplitGTE[0].toUpperCase().trim() == "UNSUBSCRIBES")
-                            Firstname = "unsubscribes";
-
-                        if (expSplitGTE[0].toUpperCase().trim() == "BUDGET")
-                            Firstname = "budget";
-
-                        else if (expSplitGTE[0].toUpperCase().trim() == "REVENUE")
-                            Firstname = "revenue";
-
-                        else if (expSplitGTE[0].toUpperCase().trim() == "CONVERSIONS")
-                            Firstname = "conversion_rate";
-
-                        else if (expSplitGTE[0].toUpperCase().trim() == "CLICKS")
-                            Firstname = "clicks";
-
-                        if (Firstname == "") {
-                            ValidFilter = false;
-                            alert("Invalid Query.");
-                            return;
-                        }
-
-                        filter.filters.push({ field: Firstname.trim(), operator: "gte", value: parseFloat(expSplitGTE[1].trim()) });
-                        ValidFilter = true;
-                    }
-
-                    // LESSER THAN EQUAL TO CHECK
-                    if (expSplitLTE.length > 1) {
-
-                        if (expSplitLTE[0].toUpperCase().trim() == "OPEN RATE")
-                            Firstname = "open_rate";
-
-                        if (expSplitLTE[0].toUpperCase().trim() == "OPENS")
-                            Firstname = "opens";
-
-                        if (expSplitLTE[0].toUpperCase().trim() == "BOUNCES")
-                            Firstname = "bounces";
-
-                        else if (expSplitLTE[0].toUpperCase().trim() == "UNSUBSCRIBES")
-                            Firstname = "unsubscribes";
-
-                        if (expSplitLTE[0].toUpperCase().trim() == "BUDGET")
-                            Firstname = "budget";
-
-                        else if (expSplitLTE[0].toUpperCase().trim() == "REVENUE")
-                            Firstname = "revenue";
-
-                        else if (expSplitLTE[0].toUpperCase().trim() == "CONVERSIONS")
-                            Firstname = "conversion_rate";
-
-                        else if (expSplitLTE[0].toUpperCase().trim() == "CLICKS")
-                            Firstname = "clicks";
-
-                        if (Firstname == "") {
-                            ValidFilter = false;
-                            alert("Invalid Query.");
-                            return;
-                        }
-
-                        filter.filters.push({ field: Firstname.trim(), operator: "lte", value: parseFloat(expSplitLTE[1].trim()) });
-                        ValidFilter = true;
-                    }
-
-                    // GREATER THAN  TO CHECK
-                    if (expSplitGT.length > 1) {
-
-                        if (expSplitGT[0].toUpperCase().trim() == "OPEN RATE")
-                            Firstname = "open_rate";
-
-                        if (expSplitGT[0].toUpperCase().trim() == "OPENS")
-                            Firstname = "opens";
-
-                        if (expSplitGT[0].toUpperCase().trim() == "BOUNCES")
-                            Firstname = "bounces";
-
-                        else if (expSplitGT[0].toUpperCase().trim() == "UNSUBSCRIBES")
-                            Firstname = "unsubscribes";
-
-                        if (expSplitGT[0].toUpperCase().trim() == "BUDGET")
-                            Firstname = "budget";
-
-                        else if (expSplitGT[0].toUpperCase().trim() == "REVENUE")
-                            Firstname = "revenue";
-
-                        else if (expSplitGT[0].toUpperCase().trim() == "CONVERSIONS")
-                            Firstname = "conversion_rate";
-
-                        else if (expSplitGT[0].toUpperCase().trim() == "CLICKS")
-                            Firstname = "clicks";
-
-                        if (Firstname == "") {
-                            ValidFilter = false;
-                            alert("Invalid Query.");
-                            return;
-                        }
-
-                        filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGT[1].trim()) });
-                        ValidFilter = true;
-                    }
-
-                    // LESSER THAN CHECK
-                    if (expSplitLT.length > 1) {
-
-                        if (expSplitLT[0].toUpperCase().trim() == "OPEN RATE")
-                            Firstname = "open_rate";
-
-                        if (expSplitLT[0].toUpperCase().trim() == "OPENS")
-                            Firstname = "opens";
-
-                        if (expSplitLT[0].toUpperCase().trim() == "BOUNCES")
-                            Firstname = "bounces";
-
-                        else if (expSplitLT[0].toUpperCase().trim() == "UNSUBSCRIBES")
-                            Firstname = "unsubscribes";
-
-                        if (expSplitLT[0].toUpperCase().trim() == "BUDGET")
-                            Firstname = "budget";
-
-                        else if (expSplitLT[0].toUpperCase().trim() == "REVENUE")
-                            Firstname = "revenue";
-
-                        else if (expSplitLT[0].toUpperCase().trim() == "CONVERSIONS")
-                            Firstname = "conversion_rate";
-
-                        else if (expSplitLT[0].toUpperCase().trim() == "CLICKS")
-                            Firstname = "clicks";
-
-                        if (Firstname == "") {
-                            ValidFilter = false;
-                            alert("Invalid Query.");
-                            return;
-                        }
-
-                        filter.filters.push({ field: Firstname.trim(), operator: "lt", value: parseFloat(expSplitLT[1].trim()) });
-                        ValidFilter = true;
-                    }
 
 
-                } //for loop 
-            } // if loop
-        } //if loop MAIN
+                    } //for loop 
+                } // if loop
+                //if loop MAIN
+            }
 
+            // final code to get execute....
 
-        // final code to get execute....
+            if (Firstname == "" && ValidClause == false) {
+                alert("Invalid Query.");
+                return;
+            }
 
-        if (Firstname == "" && ValidClause == false) {
-            alert("Invalid Query.");
-            return;
+            if (ValidFilter == true && ValidClause == false) {
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.filter(filter);
+                // alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == false && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.sort(dsSort);
+                //  alert('Query Executed Successfully.');
+            }
+            else if (ValidFilter == true && ValidClause == true) {
+                var dsSort = [];
+                dsSort.push({ field: feild1, dir: dir1 });
+                var ds = $('#project-record-list').getKendoGrid().dataSource;
+                ds.filter(filter);
+                ds.sort(dsSort);
+                // alert('Query Executed Successfully.');
+            }
+            else {
+                alert("Please Check Query.");
+            }
         }
 
-        if (ValidFilter == true && ValidClause == false) {
-            var ds = $('#project-record-list').getKendoGrid().dataSource;
-            ds.filter(filter);
-            // alert('Query Executed Successfully.');
-        }
-        else if (ValidFilter == false && ValidClause == true) {
-            var dsSort = [];
-            dsSort.push({ field: feild1, dir: dir1 });
-            var ds = $('#project-record-list').getKendoGrid().dataSource;
-            ds.sort(dsSort);
-            //  alert('Query Executed Successfully.');
-        }
-        else if (ValidFilter == true && ValidClause == true) {
-            var dsSort = [];
-            dsSort.push({ field: feild1, dir: dir1 });
-            var ds = $('#project-record-list').getKendoGrid().dataSource;
-            ds.filter(filter);
-            ds.sort(dsSort);
-            // alert('Query Executed Successfully.');
-        }
-        else {
-            alert("Please Check Query.");
-        }
-    }
+
+
 
         $scope.clearFilter = function () {
             $('#project-record-list').getKendoGrid().dataSource.filter({});
@@ -1491,6 +1655,6 @@ angular.module('campaigns')
         }
 
 
-// end
-});
+        // end
+    });
 
