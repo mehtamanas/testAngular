@@ -207,7 +207,7 @@
             {
                 field: "task_code",
                 title: "TASK CODE",
-                hidden: true,
+                hidden: false,
                 width: "120px",
                 attributes:
                {
