@@ -18,6 +18,9 @@ angular.module('project')
               $('#btnSave').hide();
               $('#iconEdit').hide();
               $('#btnAdd').hide();
+              $('#btnAdd').hide();
+
+
           }
            
 

@@ -30,7 +30,7 @@
                         <div  class="project-detail-txt">
                            
 
-                            <div class="project-name">Project Name:  {{image.name}} &nbsp; &nbsp; <a id="iconEdit"  ng-click="openEditProjectPopup()" data-toggle="modal"class="edit-icon" style="cursor:pointer"></a> </div>
+                            <div class="project-name">Project Name:  {{image.name}} &nbsp; &nbsp; <a ng-show="projects.write"  id="iconEdit"  ng-click="openEditProjectPopup()" data-toggle="modal"class="edit-icon" style="cursor:pointer"></a> </div>
                             <div class="project-d02">Project Code: {{image.project_code}}</div>
                             <div class="project-d02">Street:{{image.Street_1}} {{image.Street_2}}</div>
                             <div class="project-d02">Area: {{image.area}}</div>

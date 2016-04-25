@@ -7,11 +7,11 @@
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         var orgID = $cookieStore.get('orgID');
 
-        if (!$rootScope.projects.write) {
-            $('#btnSave').hide();
-            $('#iconEdit').hide();
-            $('#btnAdd').hide();
-        }
+        //if (!$rootScope.projects.write) {
+        //    $('#btnSave').hide();
+        //    $('#iconEdit').hide();
+        //    $('#btnAdd').hide();
+        //}
         
         $scope.chargeAction = 'no_action';
         $scope.serviceAction = 'no_action';
@@ -44,48 +44,48 @@
          $scope.serviceAction = 'no_action';
        
         $rootScope.title = 'Dwellar-ProjectDetails';
-        $('#btnSave').hide();
-        $('#iconEdit').hide();
-        $('#btnAdd').hide();
+        //$('#btnSave').hide();
+        //$('#iconEdit').hide();
+        //$('#btnAdd').hide();
 
-        security.isAuthorized().then(function (response) {
-            nav = response;
-            console.log(nav);
-            if (nav.length > 0) {
+        //security.isAuthorized().then(function (response) {
+        //    nav = response;
+        //    console.log(nav);
+        //    if (nav.length > 0) {
 
-                for (i = 0; i < nav.length; i++) {
-                    if (nav[i].resource === "Projects") {
-                        $rootScope.projects = nav[i];
+        //        for (i = 0; i < nav.length; i++) {
+        //            if (nav[i].resource === "Projects") {
+        //                $rootScope.projects = nav[i];
 
-                    }
-                    if (nav[i].resource === "Users") $rootScope.users = nav[i];
-                    if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
+        //            }
+        //            if (nav[i].resource === "Users") $rootScope.users = nav[i];
+        //            if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
 
-                    if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
-                    if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
-                    if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
-                    if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
-                    if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
-                    if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
-                    if (nav[i].resource === "Builders") $rootScope.support = nav[i];
-                    if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
-                    if (nav[i].resource === "Support") $rootScope.support = nav[i];
-                    if (nav[i].resource === "Property") $rootScope.property = nav[i];
-                    if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
-                    if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
-                    if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
+        //            if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
+        //            if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
+        //            if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
+        //            if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
+        //            if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
+        //            if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
+        //            if (nav[i].resource === "Builders") $rootScope.support = nav[i];
+        //            if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
+        //            if (nav[i].resource === "Support") $rootScope.support = nav[i];
+        //            if (nav[i].resource === "Property") $rootScope.property = nav[i];
+        //            if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
+        //            if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
+        //            if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
 
-                }
-            }
+        //        }
+        //    }
 
-            if ($rootScope.projects.write) {
-                event.preventDefault();
-                $('#btnSave').show();
-                $('#iconEdit').show();
-                $('#btnAdd').show();
-            }
+        //    if ($rootScope.projects.write) {
+        //        event.preventDefault();
+        //        $('#btnSave').show();
+        //        $('#iconEdit').show();
+        //        $('#btnAdd').show();
+        //    }
 
-        });
+        //});
       
         $scope.openNewPaymentSchemePopup = function () {
             var modalInstance = $modal.open({

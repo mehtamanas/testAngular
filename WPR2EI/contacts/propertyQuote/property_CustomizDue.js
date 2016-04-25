@@ -6,7 +6,7 @@
     var org_id =$cookieStore.get("organizationId");
 
     var UserId = $cookieStore.get("user_id");
-
+   
     var project_id = $cookieStore.get("projectId");
     var customer_id = $cookieStore.get("customerId");
     var typeOfOffer = $cookieStore.get("OfferType");
@@ -312,6 +312,8 @@
         });
 
         alert("PropertyQuoteCreated");
+        $state.go('app.contactdetail', { id: customer_id });
+
     };
 
 
