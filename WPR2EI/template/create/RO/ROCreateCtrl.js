@@ -3,6 +3,7 @@
     $scope.showTemplate = true;
     $scope.showPreview = false;
     $scope.params = {}
+    $scope.roModel = { approver_name: [] };
 
     $scope.params.orgId = $cookieStore.get('orgID');
     $scope.params.userid = $cookieStore.get('userId')
@@ -11,6 +12,29 @@
     $scope.params.projectSelected;
     //$scope.params.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
     //$scope.params.htmlcontent = $scope.params.orightml;
+
+    $scope.selectOptions = {
+        valuePrimitive: true,
+        placeholder: "Select Roles...",
+        dataTextField: "approver_name",
+        dataValueField: "approver_id",
+        autoBind: false,
+        dataSource: {
+            type: "json",
+            serverFiltering: true,
+            transport: {
+                read: function (options) {
+                    apiService.getWithoutCaching("Blogs/GetAllApprover/" + $cookieStore.get('orgID')).then(function (res) {
+                        $scope.roles = res.data;
+                        options.success($scope.roles);
+                    }, function (err) {
+                        options.error([]);
+                    })
+                }
+            }
+        }
+    };
+    //console.log($scope.approver_name + 'after load');
 
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
@@ -109,11 +133,26 @@
     callApi();
 
     $scope.saveTemplate = function (isvalid) {
+
+
         if (isvalid) {
+
+            // $scope.approver_name = [];
+            var usersToBeAddedOnServer = [];
+            for (i = 0 ; i < $scope.roModel.approver_name.length; i++) {
+               
+
+                usersToBeAddedOnServer.push(
+                    {
+                        Approver_id: $scope.roModel.approver_name[i]
+                    });
+            }
+
             $scope.params.htmlcontent = $sanitize($scope.params.htmlcontent);
             var postdata = {
                 template_name: $scope.params.templateName,
                 subject: $scope.params.subject,
+                ApproverList: usersToBeAddedOnServer,
                 description: $scope.params.htmlcontent,
                 organization_id: $cookieStore.get('orgID'),
                 user_id: $cookieStore.get('userId'),
@@ -122,7 +161,7 @@
             };
 
             console.log($scope.params.htmlcontent);
-            apiService.post("Template/Create", postdata).then(function (response) {
+            apiService.post("Blogs/CreateTemplateApproval", postdata).then(function (response) {
                 data = response.data[0];
                 $scope.openSucessfullPopup();
                 $scope.cancel();
@@ -135,6 +174,13 @@
         }
     }
 
+
+    $scope.selectrole = function () {
+        $scope.params.approver_name = $scope.roModel.approver_name;
+    };
+
+  
+   
 
     Url = "project/Get/" + $cookieStore.get('orgID');;
     apiService.get(Url).then(function (response) {

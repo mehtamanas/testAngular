@@ -42,6 +42,7 @@ angular.module('common')
         $rootScope.campaigns = { 'read': true, 'write': true, 'delete': true };
         $rootScope.tasks = { 'read': true, 'write': true, 'delete': true };
         $rootScope.billing = { 'read': true, 'write': true, 'delete': true };
+        //$rootScope.Release_Orders = { 'read': true, 'write': true, 'delete': true };
         $rootScope.contacts = { 'read': true, 'write': true, 'delete': true };
         $rootScope.Properties = { 'read': true, 'write': true, 'delete': true };
         $rootScope.customTags = { 'read': true, 'write': true, 'delete': true };
@@ -79,6 +80,7 @@ angular.module('common')
                 $rootScope.campaigns = _.findWhere(nav, { resource: 'Campaigns' });
                 $rootScope.tasks = _.findWhere(nav, { resource: 'Tasks' });
                 $rootScope.customTags = _.findWhere(nav, { resource: 'Tags' });
+                //$rootScope.Release_Orders = _.findWhere(nav, { resource: 'integration' });
             }
         });
 
