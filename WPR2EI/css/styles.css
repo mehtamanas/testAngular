@@ -3425,8 +3425,8 @@ form.callback {
 .header2 {
     background: #f4f4f4;
     padding: 14px 10px;
-    margin-left: -15px;
-    margin-right: -15px;
+    /*margin-left: -15px;
+    margin-right: -15px;*/
     border-bottom: 1px solid #e9e9e9;
 }
 
@@ -3443,7 +3443,7 @@ form.callback {
 #content2.login-wrap {
     background-color: #f0f0f0;
     margin: 0;
-    padding: 60px 0 65px;
+    /*padding: 60px 0 65px;*/
 }
 
 #content2.signup-wrap {
