@@ -347,9 +347,10 @@ function (error) {
             apiService.post("Quotation/CreateQuoteTax", quote).then(function (response) {
                 var loginSession = response.data;
                 alert("Quote generated...");
-                $rootScope.$broadcast('REFRESH', 'QuotesGrid');
-                called = true;
                 $modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH', 'QuotesServiceGrid');
+                called = true;
+       
                 //$scope.openSucessfullPopup();
 
             },

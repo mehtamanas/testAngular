@@ -8,6 +8,10 @@ angular.module('contacts')
         $('#iconEdit').hide();
         $('#btnAdd').hide();
     }
+
+    //var tabToActivate = $("contact_Quotes");
+    //$("#contact_Quotes").kendoTabStrip().data("contact_Quotes").activateTab(tabToActivate);
+
     var userId = $cookieStore.get('userId');
     var orgID = $cookieStore.get('orgID');
 
@@ -979,12 +983,12 @@ angular.module('contacts')
             }]
         };
 
-        $scope.QuotesGrid = {
+        $scope.QuotesPropertyGrid = {
             dataSource: {
                 type: "json",
                 transport: {
 
-                    read: apiService.baseUrl + "Quotation/GetQuoteGridWithAttachement/" + organization_id
+                    read: apiService.baseUrl + "Quotation/GetQuoteGridWithAttachement/" + $scope.seletedCustomerId
                 },
                 pageSize: 5,
 
@@ -1048,7 +1052,7 @@ angular.module('contacts')
 
 
             }, {
-                field: "careted_date",
+                field: "Created_date",
                 title: "Date",
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                 attributes:
@@ -1070,6 +1074,105 @@ angular.module('contacts')
             ]
         };
 
+
+        $scope.QuotesServiceGrid = {
+            dataSource: {
+                type: "json",
+                transport: {
+
+                    read: apiService.baseUrl + "Quotation/GetQuoteGrid/" + $scope.seletedCustomerId
+                },
+                pageSize: 5,
+
+                schema: {
+                    model: {
+                        fields: {
+
+                            expiry_date: { type: "date" },
+
+
+
+                        }
+                    }
+                }
+
+                //group: {
+                //    field: 'sport'
+                //}
+            },
+            groupable: true,
+            sortable: true,
+            selectable: "multiple",
+            reorderable: true,
+            resizable: true,
+            filterable: true,
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [{
+                field: "service_name",
+                title: "Service Name",
+
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
+            }, {
+                field: "description",
+                title: "Description",
+
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
+            }, {
+                field: "final_amount",
+                title: "Price",
+
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
+
+            }, {
+                field: "tax_value",
+                title: "Tax",
+
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
+            }, {
+                field: "expiry_date",
+                title: "Date",
+
+                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
+            }]
+        };
         $scope.AssignmentToGrid = {
             dataSource: {
                 type: "json",
@@ -1382,6 +1485,7 @@ angular.module('contacts')
         }
 
 
+       
 
         $scope.openQuote = function () {
 

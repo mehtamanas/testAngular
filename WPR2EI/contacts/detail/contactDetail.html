@@ -412,7 +412,9 @@
 
             <div class="leads_group" id="quoteGrid">
                 <div class="tab-content-title">Quotation<a id="contact_openNewQuotation" class="add-btn" data-toggle="modal" ng-click="openQuote()" href="" style="cursor:pointer">+</a></div>
-                <div kendo-grid k-options="QuotesGrid" selectable="true"></div>
+                
+                <div kendo-grid k-options="QuotesServiceGrid" ng-show={{WHO_AM_I=="Broker"}} selectable="true"></div>
+                <div kendo-grid k-options="QuotesPropertyGrid" ng-show={{WHO_AM_I!=="Broker"}} selectable="true"></div>
             </div> <!--QUOTE-->
 
             <div class="leads_group" id="record-content">

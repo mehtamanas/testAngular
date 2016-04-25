@@ -6,14 +6,19 @@ angular.module('newuser')
           $scope.userAction = 'no_action';
           var userID = $cookieStore.get('userId');
 
-          //alert($cookieStore.get('userId'));
+          alert($cookieStore.get('userId'));
 
           if (!$rootScope.users.write) {
               $('#btnSave').hide();
               $('#iconEdit').hide();
               $('#addNewUser').hide();
           }
-
+          else {
+              $('#addNewUser').hide();
+              $('#Useraction').hide();
+              $('#userRefresh').hide();
+           
+          }
          
 
 
