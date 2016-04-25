@@ -1,6 +1,6 @@
 ﻿angular.module('task')
 
-.controller ('AddTaskController' , function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope) {
+.controller('AddTaskController', function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope) {
     console.log('AddTaskController');
     $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -8,6 +8,92 @@
     var userId = $cookieStore.get('userId');
     //$scope.reminder_time = "15";
     $scope.due_date = moment().add(1, 'days').format('DD/MM/YYYY hh:mm A');
+
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiService.uploadURL,
+    });
+
+    uploader.filters.push({
+        name: 'attchementFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type);
+            if (im === -1) {
+
+                alert('You have selected invalid file type');
+            }
+            if (item.size > 10485760) {
+
+                alert('File size should be less than 10mb');
+            }
+            return '|jpg|png|jpeg|bmp|gif|xls|xlsx|pdf|csv|zip|txt|doc|docx|ppt|pptx|'.indexOf(type) !== -1 && item.size <= 10485760;
+        }
+    });
+
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        loc = response[0].Location;
+        var edit = $('#txt_addNewTask').data("kendoEditor");
+        var fileType = response[0].ContentType.slice(response[0].ContentType.lastIndexOf('/') + 1);
+        if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'bmp' || fileType === 'gif')
+            edit.exec('inserthtml', { value: "<img alt=''  src='" + loc + "' />" });
+        else {
+            edit.exec('inserthtml', { value: "<a href='" + loc + "' >" + loc + "</a>" });
+        }
+
+    };
+
+    uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
+        uploader.uploadAll();
+    }
+
+    $scope.editorOption = {
+        messages: {
+            insertHtml: "Insert Variable"
+        },
+        tools: ["bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "justifyLeft",
+                "justifyCenter",
+                "justifyRight",
+                "justifyFull",
+                "insertUnorderedList",
+                "insertOrderedList",
+                "indent",
+                "outdent",
+                "createLink",
+                'pdf',
+                "unlink",
+                "fontName",
+                "fontSize",
+                "foreColor",
+                "backColor",
+                "print",
+                'createTable',
+                {
+                    name: "myTool",
+                    tooltip: "Insert Image",
+                    exec: function (e) {
+                        $('#imageBrowser').trigger("click");
+                    }
+                },
+                  {
+                      name: "insertHtml",
+                      items: [
+                          { text: "Last Name", value: "{{last_name}}" },
+                          { text: "First Name", value: "{{first_name}}" },
+                          { text: "My First Name", value: "{{my_first_name}}" },
+                          { text: "My Last Name", value: "{{my_last_name}}" },
+                          { text: "Salutation", value: "{{salutation}}" },
+                           { text: "Brochure Url", value: "<a href='{{brochure_url}}'>{{brochure_url}}</a>" },
+
+                      ]
+                  },
+                  "viewHtml",
+        ],
+    }
+
     //Audit log start
     $scope.params = {
 
@@ -53,7 +139,8 @@
         assign_user_id: $scope.user1,
         end_date_time: $scope.end_date_time,
         task_type_id: $scope.event1,
-        text: $scope.text,
+        //text: $scope.text,
+        text: $scope.htmlcontent,
         remind_me: $scope.remind_me,
         reminder_time: $scope.reminder_time,
     };
@@ -230,7 +317,8 @@ function (error) {
                 user_id: $cookieStore.get('userId'),
                 assign_user_id: $scope.user1,
                 task_type_id: $scope.event1,
-                text: $scope.text,
+                //text: $scope.text,
+                text: $scope.params.htmlcontent,
                 remind_me: remind_me,
                 reminder_timespan_id: $scope.reminder_time1,
                 reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
