@@ -17,9 +17,10 @@
          })
 
           .state('app.add_new_task', {
-              url: '/taskpage',
+              url: '/taskpage/:activityName',
               templateUrl: 'task/add_new_task.tpl.html',
               controller: 'AddTaskController',
+              params: { activityName: null },
               title: 'form'
           })
     }]);
