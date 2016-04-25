@@ -585,7 +585,7 @@ angular.module('campaigns')
 
         $scope.DoWork = function () {
             var txtdata = $scope.textareaText.toLowerCase();
-            if (txtdata.text != '')
+            if (txtdata != '')
                 $scope.callFilter();
         };
 
@@ -1018,7 +1018,7 @@ angular.module('campaigns')
                             }
 
                         }
-                        
+
                         // EQUAL TO CHECK 
                         if (expsplit.length > 1) {
 
