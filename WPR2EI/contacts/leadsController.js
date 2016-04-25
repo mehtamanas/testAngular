@@ -326,7 +326,7 @@ angular.module('contacts')
             reorderable: true,
             height: window.innerHeight - 210,
             resizable: true,
-            filterable: true,
+            filterable: false,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -573,25 +573,25 @@ angular.module('contacts')
 
             var txtSearch = $scope.textareaText;
 
-            //Get the datasource here
-            var data = $('#contact_kenomain').getKendoGrid().dataSource;
+            ////Get the datasource here
+            //var data = $('#contact_kenomain').getKendoGrid().dataSource;
 
-            for (var x = 0; x < data.length; x++) {
-                //Get the currently active item
-                var dataItem = data[x];
-                //Access table row basedon uid
-                var tr = $("#grid").find("[data-uid='" + dataItem.uid + "']");
-                //Access cell object
-                var cell = $("td:nth-child(1)", tr);
-                //Get the cell content here
-                //Check if the column values are 
-                if (cell[0].textContent == txtSearch) {
-                    //Assign the css style to cell
-                    //You can hide the cell content using css here
-                    cell.addClass("color");
+            //for (var x = 0; x < data.length; x++) {
+            //    //Get the currently active item
+            //    var dataItem = data[x];
+            //    //Access table row basedon uid
+            //    var tr = $("#grid").find("[data-uid='" + dataItem.uid + "']");
+            //    //Access cell object
+            //    var cell = $("td:nth-child(1)", tr);
+            //    //Get the cell content here
+            //    //Check if the column values are 
+            //    if (cell[0].textContent == txtSearch) {
+            //        //Assign the css style to cell
+            //        //You can hide the cell content using css here
+            //        cell.addClass("color");
 
-                }
-            }
+            //    }
+            //}
 
 
            
