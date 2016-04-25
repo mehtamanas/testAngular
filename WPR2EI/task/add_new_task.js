@@ -8,7 +8,30 @@
     var userId = $cookieStore.get('userId');
     //$scope.reminder_time = "15";
     $scope.due_date = moment().add(1, 'days').format('DD/MM/YYYY hh:mm A');
-
+    $scope.activityName = $state.params.activityName == null ? null : $state.params.activityName;
+    if ($scope.activityName != null) {
+        $scope.task = $cookieStore.get('task');
+        $scope.Name = $cookieStore.get('advncActivityName');
+        if ($scope.Name != undefined)
+        { $scope.name = $scope.Name; }
+        else
+        {
+            $scope.name = $scope.task.name;
+        }
+        $scope.contact_id = $scope.task.contact_id;
+        $scope.class_type = $scope.task.class_type;
+        $scope.due_date = $scope.task.due_date;
+        $scope.priority1 = $scope.task.priority;
+        $scope.project1 = $scope.task.project_id;
+        $scope.organization_id = $scope.task.organization_id;
+        $scope.user1 = $scope.task.user_id;
+        $scope.assign_user_id = $scope.task.assign_user_id;
+        $scope.end_date_time = $scope.task.end_date_time;
+        $scope.event1 = $scope.task.task_type_id;
+        $scope.text = $scope.task.text;
+        $scope.remind_me = $scope.task.remind_me;
+        $scope.reminder_time = $scope.task.reminder_time;
+    }
     var uploader = $scope.uploader = new FileUploader({
         url: apiService.uploadURL,
     });
@@ -318,7 +341,7 @@ function (error) {
                 assign_user_id: $scope.user1,
                 task_type_id: $scope.event1,
                 //text: $scope.text,
-                text: $scope.params.htmlcontent,
+                text: $scope.htmlcontent,
                 remind_me: remind_me,
                 reminder_timespan_id: $scope.reminder_time1,
                 reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
