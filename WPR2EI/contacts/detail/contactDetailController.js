@@ -820,8 +820,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-
-                    read: apiService.baseUrl + "Contact/GetAuditTrail/f5985168-6307-4881-aa64-959f8546ae60" //+ $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Contact/GetAuditTrail/1e230a69-d735-4219-8bae-555d55d0a03e" //+ $scope.seletedCustomerId
                 },
                 schema: {
                     model: {
@@ -833,10 +832,10 @@ angular.module('contacts')
                     }
                 },
                 pageSize: 5,
-                group: {
-                    field: "field_name"
+                //group: {
+                //    field: "field_name"
 
-                },
+                //},
             },
             sortable: true,
             selectable: "multiple",
@@ -856,35 +855,37 @@ angular.module('contacts')
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [
-                 {
-                     field: "field_name",
-                     title: "Field",
+            columns: [{
+                template: '<div> <table> <tr><i class="fa fa-user" aria-hidden="true"></i><a href=" "> pradip patil</a> created issues Today- on 10:18AM</tr><br>' +
+                         '<thead> <th>field</br><span>#=field_name#</span><th><th>Original Value</br><span>#=original_value#</span><th><th>New Value</br><span>#=new_value#</span><th></thead></table></div>',
+               },{
+                //field: "field_name",
+                //title: "Field", 
+                attributes:
+               {
+                   "style": "text-align:center"
+               }
 
-                     attributes:
-                    {
-                        "style": "text-align:center"
-                    }
+                //  }, {
+                //    field: "original_value",
+                //    //title: "Original Value",
 
-                 }, {
-                     field: "original_value",
-                     title: "Original Value",
+                //    attributes:
+                //   {
+                //       "style": "text-align:center"
+                //   }
 
-                     attributes:
-                    {
-                        "style": "text-align:center"
-                    }
+                //}, {
+                //    field: "new_value",
+                //    //title: "New Value",
 
-                 }, {
-                     field: "new_value",
-                     title: "New Value",
+                //    attributes:
+                //   {
+                //       "style": "text-align:center"
+                //   }
 
-                     attributes:
-                    {
-                        "style": "text-align:center"
-                    }
-
-                 }]
+            }
+            ]
         };
 
         $scope.NotesGrid = {
