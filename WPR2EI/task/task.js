@@ -11,6 +11,75 @@
 
         $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
 
+        $scope.getTaskFromDb = function () {
+            apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (res) {
+                data = res.data;
+                delete $localStorage.common_taskDataSource;
+                $localStorage.common_taskDataSource = data;
+                $('.k-i-refresh').trigger("click");
+            }, function (err) {
+            })
+        }
+
+        $scope.addActivityTask = function () {
+
+            if ($scope.task == undefined) {
+                alert("You must first create a task");
+            }
+            else {
+                $scope.postData =
+           {
+               name: $scope.name,
+               contact_id: $scope.task.contact_id,
+               class_type: $scope.task.class_type,
+               due_date: $scope.task.due_date,
+               priority: $scope.task.priority,
+               project_id: $scope.task.project_id,
+               organization_id: $scope.task.organization_id,
+               user_id: $scope.task.user_id,
+               assign_user_id: $scope.task.assign_user_id,
+               end_date_time: $scope.task.end_date_time,
+               task_type_id: $scope.task.task_type_id,
+               text: $scope.task.text,
+               remind_me: $scope.task.remind_me,
+               reminder_time: $scope.task.reminder_time,
+           }
+                projectUrl = "ToDoItem/CreateTask";
+                apiService.post(projectUrl, $scope.postData).then(function (response) {
+                    var loginSession = response.data;
+                    alert("Your Task Code is " + loginSession.task_code);
+                    $scope.openSucessfullPopup();
+                    $rootScope.$broadcast('REFRESH', { name: 'outTaskGrid', data: null, action: 'add' });
+                    $state.go('app.tasks');
+                },
+
+               function (error) {
+                   if (error.status === 400)
+                       alert(error.data.Message);
+                   else
+                       alert("Network issue");
+               })
+            }
+
+        }
+
+        $scope.advanceAcvtivityTask = function () {
+            $cookieStore.put('advncActivityName', $scope.name);
+            $scope.openAddtaskPopup();
+        }
+
+        $scope.openSucessfullPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'newuser/sucessfull.tpl.html',
+                backdrop: 'static',
+                controller: sucessfullController,
+                size: 'sm',
+                resolve: { items: { title: "Task" } }
+            });
+        }
+
+
         $scope.TaskGrid = {
             dataSource: {
                 type: "json",
@@ -231,6 +300,18 @@
             alert("Task is Complete..You Can't Edit")
         }
 
+        $scope.openAssignTo = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'task/Activity_assignto.html',
+                backdrop: 'static',
+                controller: ActivityBulkController,
+                size: 'lg'
+
+            });
+        };
+
+
         $scope.openPostpone = function (d) {
             $scope.taskID = d.task_id;
             window.sessionStorage.selectedCustomerID = $scope.taskID;
@@ -263,7 +344,7 @@
         //};
 
         $scope.openAddtaskPopup = function () {
-            $state.go('app.add_new_task');
+            $state.go('app.add_new_task', { activityName: $scope.name });
         };// add new contact page
 
 
