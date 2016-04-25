@@ -341,12 +341,12 @@ function (error) {
                 assign_user_id: $scope.user1,
                 task_type_id: $scope.event1,
                 //text: $scope.text,
-                text: $scope.htmlcontent,
+                text: $scope.params.htmlcontent,
                 remind_me: remind_me,
                 reminder_timespan_id: $scope.reminder_time1,
                 reminder_time: new Date($scope.params.reminder_datetime).toISOString(),
             };
-
+            $cookieStore.put('task', $scope.params);
             new ProjectCreate($scope.params).then(function (response) {
                 console.log(response);
                 $scope.showValid = false;
