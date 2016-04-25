@@ -77,6 +77,47 @@ angular.module('campaigns', [])
                     controller: 'emailAddTemplate',
                     data: { pageTitle: 'Add Template' }
 
-                })
+         })
 
+         .state('app.directCampaignsMail', {
+             url: '/directCampaignsMail',
+             templateUrl: 'campaigns/directCampaignEmail/directEmailController.html',
+             controller: 'directEmailCampaignController',
+             title: 'campaigns'
+         })
+
+        .state('app.addDirectMailCampaign', {
+            url: '/addDirectMailCampaign',
+            templateUrl: 'campaigns/directCampaignEmail/addDirectMailCampaign.html',
+            controller: 'addDirectEmailCampaignController',
+            title: 'campaigns'
+        })
+
+         .state('app.budgetDirectMailCampaign', {
+             url: '/budgetDirectMailCampaign',
+             templateUrl: 'campaigns/directCampaignEmail/directEmailBudget.html',
+             controller: 'budgetDirectEmailCampaignController',
+             title: 'campaigns'
+         })
+
+         .state('app.contactDirectMailCampaign', {
+             url: '/contactDirectMailCampaign',
+             templateUrl: 'campaigns/directCampaignEmail/contactlist.html',
+             controller: 'contactDirectEmailCampaignController',
+             title: 'campaigns'
+         })
+
+         .state('app.directMailType', {
+             url: '/directMailType',
+             templateUrl: 'campaigns/directCampaignEmail/selectDirectMailType.html',
+             controller: 'directMailTypeCtrl',
+             title: 'campaigns'
+         })
+
+          .state('app.summaryMailType', {
+              url: '/summaryMailType',
+              templateUrl: 'campaigns/directCampaignEmail/summaryMailType.html',
+              controller: 'summaryMailTypeCtrl',
+              title: 'campaigns'
+          })
     }]);
