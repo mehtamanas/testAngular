@@ -589,7 +589,12 @@ angular.module('campaigns')
                 $scope.callFilter();
         };
 
+        
+
         $scope.callFilter = function () {
+            
+          
+
 
             var txtdata = $scope.textareaText.toLowerCase();
             var txtdata = txtdata;
@@ -1641,7 +1646,9 @@ angular.module('campaigns')
             }
             else {
                 alert("Please Check Query.");
-            }
+            } 
+
+           
         }
 
 

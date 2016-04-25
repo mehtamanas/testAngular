@@ -1280,6 +1280,9 @@
                     if (isConfirm) {
                         postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
+                            $('#contact_kenomain').getKendoGrid().dataSource.filter({});
+                            $('#contact_kenomain').getKendoGrid().dataSource.sort({});
+                            $scope.textareaText = ''
                             swal(
                           'Deleted!',
                           'Your file has been deleted.',
