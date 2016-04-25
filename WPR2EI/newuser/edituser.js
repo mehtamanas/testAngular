@@ -330,6 +330,8 @@ var EditUserPopUpController = function ($scope, $state, $modalInstance, $cookieS
                 zip_code: $scope.params.zip_code,
                 state: $scope.params.state,
                 city: $scope.params.city
+
+
             };
         if ($scope.params.first_name != undefined && $scope.params.last_name != undefined && $scope.params.role_name != undefined) {
             apiService.post("User/Edit", postData).then(function (response) {

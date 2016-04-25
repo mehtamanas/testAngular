@@ -121,7 +121,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
 
 
 
-    apiService.get('Template/GetAllTemplates?orgId=' + orgID).then(function (response) {
+    apiService.get('Template/GetTemplatesByType/' + orgID + '/ReleaseOrder').then(function (response) {
         $scope.params.templateList = response.data;
     });
 

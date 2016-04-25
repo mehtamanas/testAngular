@@ -21,7 +21,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
     //$scope.params = {}
  //   $scope.params.template;
 
-    apiService.get('Template/GetAllTemplates?orgId=' + orgID).then(function (response) {
+    apiService.get('Template/GetTemplatesByType/' + orgID + '/ReleaseOrder').then(function (response) {
         $scope.templateList = response.data;
     });
 

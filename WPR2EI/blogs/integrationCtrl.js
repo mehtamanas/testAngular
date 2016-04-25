@@ -156,7 +156,16 @@
                  "style": "text-align:center"
              }
 
-            },]
+             },{
+                 field: "moderator_status",                
+                 title: "Moderator Status",
+                 width: "120px",
+                 attributes:
+               {
+                   "style": "text-align:center"
+               }
+
+             }, ]
         };
 
 

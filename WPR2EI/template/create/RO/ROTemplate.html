@@ -31,7 +31,7 @@
             </div>
         </div>
         
-                <div class="clearfix">               
+        <div class="clearfix">               
                             <label for="" class="hidden-xs" id="document_projectType">Select Project</label>
                             <select ng-model="params.projectSelected" ng-change="selectproject()" class="dropdown form-control text-bold">
                                 <option value="" selected>--Select Project--</option>
@@ -39,7 +39,18 @@
                                         value="{{project.id}}">
                                     {{project.name}}
                             </select>                                    
-                </div>
+           </div>
+        <div class="clearfix">
+            <label for="">Select Approval</label>
+            <div class="form-bx form-bx2" style="border: 1px solid #e7e7e7;border-radius: 2px;">
+
+                <select kendo-multi-select k-options="selectOptions" name="role" id="addRO_approval" ng-model="roModel.approver_name" k-on-change="selectrole()" class="dropdown form-control" required></select>
+            </div><div class="field-mdl field-req" style="margin-top: -12px;">*</div>
+
+            <div ng-messages="newForm.role.$error" style="color:maroon" role="alert">
+                <div ng-message="required" data-ng-if="newForm.role.$invalid && (!newForm.role.$pristine || showValid)">This field should not be empty </div>
+            </div>
+        </div>
 
         <div class="clearfix">
             <p>Type or Paste your text into the text editor below.You can also insert images.Use the drop list to add placeholders for customer's data.</p>
