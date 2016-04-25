@@ -8,7 +8,7 @@
         $rootScope.title = 'Dwellar./Task';
         $scope.gridView = 'default';
         var userId = $cookieStore.get('userId');
-
+        $scope.task = $cookieStore.get('task');
         $scope.selectedTaskID = window.sessionStorage.selectedTaskID;
 
         $scope.getTaskFromDb = function () {
@@ -133,10 +133,10 @@
                 buttonCount: 5
             },
             columns: [{
-                //template: "<input type='checkbox', class='checkbox',  ng-click='check($event,dataItem)' />",
-                //title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
-                template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
-                title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                template: "<input type='checkbox', class='checkbox' data-id='#= task_id #',  ng-click='check($event,dataItem)' />",
+                title: "<input id='checkAll', type='checkbox', class='check-box' data-id='#= task_id #', ng-click='checkALL(dataItem)' />",
+               // template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                //title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                 width: "60px",
                 attributes:
                   {
@@ -294,6 +294,43 @@
 
            }, ]
         };
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
+
+        $scope.chooseAction = function () {
+            var allGridElements = $(".checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.activityAction === "no_action") {
+
+                }
+                else if ($scope.activityAction === "bulk_assign") {
+                    $state.go($scope.openAssignTo());
+                }
+                else if ($scope.activityAction === "delete") {
+                    var contactDelete = [];
+                    for (var i in allCheckedIds) {
+                        var contact = {};
+                        contact.id = allCheckedIds[i];
+                        contact.organization_id = $cookieStore.get('orgID');
+                        contactDelete.push(contact);
+                    }
+                    $cookieStore.put('contactDelete', contactDelete);
+                    $scope.openConfirmation();
+                }
+            }
+        }
 
 
         $scope.taskComplete = function () {
@@ -484,6 +521,11 @@
                     $('.k-i-refresh').trigger("click");
                 }
                 else if (args.action === 'complete') {
+                    $localStorage.common_taskDataSource = [];
+                    outTaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                }
+                else if (args.action === 'assign_to') {
                     $localStorage.common_taskDataSource = [];
                     outTaskGridRefresh();
                     $('.k-i-refresh').trigger("click");
