@@ -1205,6 +1205,7 @@
 
         $scope.clearFilter = function () {
             $('#project-record-list').getKendoGrid().dataSource.filter([]);
+            $('#project-record-list').getKendoGrid().dataSource.sort({});
             $scope.textareaText = ''
         }
 

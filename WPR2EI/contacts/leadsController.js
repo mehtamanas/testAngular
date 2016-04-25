@@ -208,6 +208,7 @@ angular.module('contacts')
                         postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
+                            $('#contact_kenomain').getKendoGrid().dataSource.sort({});
                             $scope.textareaText = ''
                             // $scope.gridView = 'default';
                             callViewApi();
@@ -517,7 +518,7 @@ angular.module('contacts')
            {
                field: "created_at",
                hidden: true,
-               title: "Created By",
+               title: "Created Date",
                type: 'date',
                filterable: {
                    ui: "datepicker"
@@ -663,7 +664,7 @@ angular.module('contacts')
                             feild1 = "Formatted_last_contacted_date";
                         else if (fValue == "UPDATED DATE")
                             feild1 = "Formatted_last_updated_date";
-                        else if (fValue == "CREATED BY")
+                        else if (fValue == "CREATED DATE")
                             feild1 = "created_at";
                         else if (fValue == "ACTION")
                             feild1 = "Action";
@@ -1611,7 +1612,7 @@ angular.module('contacts')
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED BY")
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
                             // by saroj on 18-04-2016
@@ -1679,7 +1680,7 @@ angular.module('contacts')
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED BY")
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
                             // by saroj on 18-04-2016
@@ -1725,7 +1726,14 @@ angular.module('contacts')
                                 spiltOK = false;
                             }
                             else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                 filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim().endOf, 'DD-MM-YYYY')._d });
+                                //commented above line becoz in morning time is after takes value of current date also.
+
+                                //var date = new Date(expsplitIsAfter[1].trim());
+                                //var formatted = moment(date).format('DD MM YYYY');
+                                //alert(formatted);
+                              //  filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY').endOf(expsplitIsAfter[1].trim())._d });
+                                
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
@@ -1743,7 +1751,7 @@ angular.module('contacts')
                             else if (expsplitBetween[0].toUpperCase().trim() == "UPDATED DATE")
                                 Firstname = "last_updated";
 
-                            else if (expsplitBetween[0].toUpperCase().trim() == "CREATED BY")
+                            else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_at";
 
                             // by saroj on 18-04-2016
@@ -1809,6 +1817,7 @@ angular.module('contacts')
 
         $scope.clearFilter = function () {
             $('#contact_kenomain').getKendoGrid().dataSource.filter({});
+            $('#contact_kenomain').getKendoGrid().dataSource.sort({});
             $scope.textareaText = ''
             $scope.gridView = 'default';
         }
