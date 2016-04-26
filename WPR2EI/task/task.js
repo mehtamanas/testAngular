@@ -737,6 +737,7 @@
                         postData = { id: $scope.gridView, organization_id: $cookieStore.get('orgID') };
                         apiService.post('Notes/DeleteGridView', postData).then(function (res) {
                             $('#project-record-list').getKendoGrid().dataSource.filter({});
+                            $('#project-record-list').getKendoGrid().dataSource.sort({});
                             $scope.textareaText = ''
                             $scope.gridView = 'default';
 
@@ -1853,6 +1854,7 @@
 
         $scope.clearFilter = function () {
             $('#project-record-list').getKendoGrid().dataSource.filter({});
+            $('#project-record-list').getKendoGrid().dataSource.sort({});
             $scope.textareaText = ''
             $scope.gridView = 'default';
         }
