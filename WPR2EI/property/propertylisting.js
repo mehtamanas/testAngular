@@ -11,11 +11,22 @@
 
         var userId = $cookieStore.get('userId');
        
+        var authRights = ($cookieStore.get('UserRole'));
 
-        $('#btnSave').hide();
-        $('#iconEdit').hide();
-        $('#btnAdd').hide();
+        $scope.isEnterpriseUser = (_.find(authRights, function (o) { return o == 'Enterprise User'; }))
 
+        if ($scope.isEnterpriseUser == 'Enterprise User') {
+            $('#property_action').hide();
+            $('#property_refresh').hide();
+        }
+
+
+        if (!$rootScope.Properties.write) {
+            $('#property_action').hide();
+         //   $('#iconEdit').hide();
+          //  $('#addNewUser').hide();
+        }
+      
 
 
         security.isAuthorized().then(function (response) {

@@ -8,6 +8,16 @@
         $rootScope.title = 'Dwellar./TeamDetails';
         var orgID = $cookieStore.get('orgID');
 
+
+        var authRights = ($cookieStore.get('UserRole'));
+
+        $scope.isEnterpriseUser = (_.find(authRights, function (o) { return o == 'Enterprise User'; }))
+
+        if ($scope.isEnterpriseUser == 'Enterprise User') {
+            $('#teamEdit').hide();
+            
+        }
+
         // //Audit log start
         // $scope.params = {
         //     device_os: "windows10",
