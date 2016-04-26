@@ -1,0 +1,61 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                
+            </div>
+        </div>
+    </div>
+    <div class="pg-inner-content" style="padding: 20px 1px 1px 1px;">
+
+        <!--step wizard-->
+        <div class="col-md-12 tab_head">
+            <div class="row " style="padding: 35px 42px 1px 100px;">
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
+                <div class="col-md-2 email_tabs4_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
+                <div class="col-md-2 email_tabs4_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Contact</span></div>
+                <div class="col-md-2 email_tabs4_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text">Select Mail Type</span></div>
+                <div class="col-md-2 email_tabs4_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text">Summary</span></div>
+                <div class="col-md-2 email_tabs4_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text">View Contact</span></div>
+            </div>
+        </div>
+        <!--end step wizard-->
+
+        <div class="row">
+            <div class="container" >
+                <div class="col-md-12" style="margin-top:8%">
+
+
+                    <div class="col-md-4" ng-repeat="contact in Contacts" >
+                        <div class="well" style="margin-right: 20px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>Name :</td>
+                                        <td>{{contact.first_name}}  {{contact.last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address :</td>
+                                        <td>{{street_1}}  {{street_2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone No :</td>
+                                        <td>{{phone}}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+        
+</div>

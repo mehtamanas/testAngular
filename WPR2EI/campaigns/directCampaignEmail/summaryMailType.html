@@ -18,14 +18,16 @@
         <div class="col-md-12 tab_head">
             <div class="row " style="padding: 35px 42px 1px 100px;">
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-2 email_tabs4_active"></div>
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-2 email_tabs4_active"></div>
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Contact</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
-                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Add template</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-2 email_tabs4_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Mail Type</span></div>
+                <div class="col-md-2 email_tabs4_active"></div>
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Summary</span></div>
+                <div class="col-md-2 email_tabs4"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text_active">View Contact</span></div>
             </div>
         </div>
         <!--end step wizard-->
@@ -49,7 +51,6 @@
                                             Event Name
                                             <span id="summaryEmail_EventName" ng-bind="params.name">{{params.name}}</span>
                                         </div>
-
                                     </div>
 
                                     <div class="company-profile-row clearfix">
@@ -108,16 +109,12 @@
                                         </div>
 
                                     </div>
-                                    <!--<div class="company-profile-row clearfix" ng-repeat="contact in Contacts">
-                                        <div class="pull-left profile-row1 summary_value">
-                                            Email
-                                            <label>{{contact.email}}</label>
-                                        </div>
-
-                                    </div>-->
+                                   
                                 </div>
                             </div>
-                        </div>
+
+                            
+                            </div>
                     </div>
                     <div class="col-md-12">
                         <button class="btn odd_btn" id="btn_summaryEmail_back" type="button" ng-click="back()">Back</button>
