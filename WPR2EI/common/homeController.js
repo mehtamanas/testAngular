@@ -25,6 +25,9 @@ angular.module('common')
             }
         });
 
+       
+
+
         $scope.WHO_AM_I = $cookieStore.get('Who_Am_i');
 
         $scope.activeBar = 0;
@@ -61,6 +64,10 @@ angular.module('common')
         }
 
         security.isAuthorized().then(function (response) {
+            var authRights = ($cookieStore.get('UserRole'));
+
+            $scope.isEnterpriseUser = (_.find(authRights, function (o) { return o == 'Enterprise User'; }));
+
             nav = response;
             if (nav.length > 0) {
                 $rootScope.projects = _.findWhere(nav, { resource: 'Projects' });
@@ -82,6 +89,10 @@ angular.module('common')
                 $rootScope.customTags = _.findWhere(nav, { resource: 'Tags' });
                 //$rootScope.Release_Orders = _.findWhere(nav, { resource: 'integration' });
             }
+
+           
+
+
         });
 
         $scope.logout = function () {

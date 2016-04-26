@@ -13,11 +13,16 @@ angular.module('newuser')
               $('#iconEdit').hide();
               $('#addNewUser').hide();
           }
-          else {
+          var authRights = ($cookieStore.get('UserRole'));
+
+          $scope.isEnterpriseUser = (_.find(authRights, function (o) { return o == 'Enterprise User'; }))
+
+          if ($scope.isEnterpriseUser == 'Enterprise User') {
               $('#addNewUser').hide();
-              $('#Useraction').hide();
+              $('#user_action').hide();
               $('#userRefresh').hide();
-           
+              
+             
           }
          
 
