@@ -820,7 +820,7 @@ angular.module('contacts')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Contact/GetAuditTrail/1e230a69-d735-4219-8bae-555d55d0a03e" //+ $scope.seletedCustomerId
+                    read: apiService.baseUrl + "Contact/GetAuditTrail/" + $scope.seletedCustomerId //1e230a69-d735-4219-8bae-555d55d0a03e
                 },
                 schema: {
                     model: {
@@ -831,7 +831,7 @@ angular.module('contacts')
                         }
                     }
                 },
-                pageSize: 5,
+                pageSize: 20,
                 //group: {
                 //    field: "field_name"
 
@@ -856,7 +856,7 @@ angular.module('contacts')
                 buttonCount: 5
             },
             columns: [{
-                template: '<div> <table> <tr><i class="fa fa-user" aria-hidden="true"></i><a href=" "> pradip patil</a> created issues Today- on 10:18AM</tr><br>' +
+                template: '<div> <table> <tr><a href=" "></a></tr><br>' +
                          '<thead> <th>field</br><span>#=field_name#</span><th><th>Original Value</br><span>#=original_value#</span><th><th>New Value</br><span>#=new_value#</span><th></thead></table></div>',
                },{
                 //field: "field_name",
@@ -865,25 +865,6 @@ angular.module('contacts')
                {
                    "style": "text-align:center"
                }
-
-                //  }, {
-                //    field: "original_value",
-                //    //title: "Original Value",
-
-                //    attributes:
-                //   {
-                //       "style": "text-align:center"
-                //   }
-
-                //}, {
-                //    field: "new_value",
-                //    //title: "New Value",
-
-                //    attributes:
-                //   {
-                //       "style": "text-align:center"
-                //   }
-
             }
             ]
         };
@@ -1075,7 +1056,6 @@ angular.module('contacts')
             ]
         };
 
-
         $scope.QuotesServiceGrid = {
             dataSource: {
                 type: "json",
@@ -1174,6 +1154,7 @@ angular.module('contacts')
 
             }]
         };
+
         $scope.AssignmentToGrid = {
             dataSource: {
                 type: "json",
