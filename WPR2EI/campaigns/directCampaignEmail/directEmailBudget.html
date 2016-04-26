@@ -1,0 +1,183 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Direct Event Campaign</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content pg-inner-content-camp">
+        <!--step wizard-->
+        <div class="col-md-12 tab_head">
+            <div class="row " style="padding: 35px 42px 1px 100px;">
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
+                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Select Contact</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Select Mail Type</span></div>
+                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Summary</span></div>
+            </div>
+        </div>
+        <!--end step wizard-->
+        <!--<div class="col-md-12 tab_head">
+            <div class="row " style="padding: 1px 0px 1px 16px;">
+                <div class="col-md-2 email_tabs2">Campaign info</div>
+                <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs2" style="margin-left: 21px;">Set Budget</div>
+                <div class="col-md-1 tabarrow"><img src="images/gray_blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs_active">Select contact</div>
+                <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs_active">Add template</div>
+                <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-2 email_tabs_active">Summary</div>
+            </div>-->
+    </div>
+
+    <div class="project-detail inner_page_inside">
+        <!--<div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+            <div class="col-lg-12 pull-left">
+                <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                    <h2 class="pg-inner-title">Set Budget</h2>
+                </div>
+            </div>
+
+        </div>-->
+
+        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                <div class="clearfix tab-head-inner-2">
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5"
+                             data-ng-class="{
+                                                  'has-error' : addNewForm.Budget.$invalid && (!addNewForm.Budget.$pristine || showValid),
+                                                  'has-success': addNewForm.Budget.$valid && !addNewForm.Budget.$pristine
+                                                }">
+                            <!--<label for="">Budget</label>
+                            <input type="text" format class="form-control rupee text-bold" autofocus name="Budget" id="budgetEmail_budget"
+                                   placeholder="Budget"
+                                   data-ng-model="params.budget"
+                                   ng-pattern="/^([1-9][0-9,./]*)$/"
+                                   input-focus
+                                   required />-->
+                            <md-input-container class="md-block">
+                                <md-icon class="rupee" md-font-icon="fa fa-inr" md-fab-top-right></md-icon>
+                                <label class="contact-label md-custom-label">Budget</label>
+                                <input name="Budget" format id="budgetEmail_budget"
+                                       style="margin-left: 6px;"
+                                       data-ng-model="params.budget"
+                                       ng-pattern="/^([1-9][0-9,./]*)$" />
+                                <div ng-messages="projectForm.clientName.$error"></div>
+                                <div ng-messages="addNewForm.Budget.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.Budget.$invalid && (!addNewForm.Budget.$pristine || showValid) && !addNewForm.Budget.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern" id="err_budgetEmail_budget">Enter valid value for Budget</div>
+                                </div>
+
+                            </md-input-container>
+
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+
+                        <span class="goals_btn">Goals</span>
+
+                    </div>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5" style="margin-bottom: 0px;"
+                             data-ng-class="{
+                                                  'has-error' : addNewForm.Leads.$invalid && (!addNewForm.Leads.$pristine || showValid),
+                                                  'has-success': addNewForm.Leads.$valid && !addNewForm.Leads.$pristine
+                                                }">
+                            <md-input-container class="md-block" style="margin-top:4%;">
+                                <md-icon md-font-icon="fa fa-users" md-fab-top-right></md-icon>
+                                <label class="contact-label md-custom-label">Leads</label>
+                                <input name="Leads" id="budgetEmail_leads"
+                                       data-ng-model="params.no_of_leads"
+                                       ng-pattern="/^([1-9][0-9,./]*)$"
+                                       style="margin-left: 6px;" />
+                                <div ng-messages="addNewForm.Leads.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.Leads.$invalid && (!addNewForm.Leads.$pristine || showValid) && !addNewForm.Leads.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern" id="err_budgetEmail_lead">Enter valid value for Lead</div>
+                                </div>
+
+                            </md-input-container>
+
+                            <!--<label for="">Leads</label>
+                            <input type="text" format class="form-control " name="Leads"  id="budgetEmail_leads"
+                                   placeholder="Leads"
+                                   data-ng-model="params.no_of_leads"
+                                   ng-pattern="/^([1-9][0-9,./]*)$/"
+                                   input-focus
+                                   required />
+                            <div ng-messages="addNewForm.Leads.$error" style="color:maroon" role="alert">
+                                <div ng-message="required" data-ng-if="addNewForm.Leads.$invalid && (!addNewForm.Leads.$pristine || showValid) && !addNewForm.Leads.$focus">This field should not be empty </div>
+                                <div ng-message="pattern" id="err_budgetEmail_lead">Enter valid value for Lead</div>
+                            </div>-->
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5"
+                             data-ng-class="{
+                                                  'has-error' : addNewForm.sales.$invalid && (!addNewForm.sales.$pristine || showValid),
+                                                  'has-success': addNewForm.sales.$valid && !addNewForm.sales.$pristine
+                                               }">
+                            <md-input-container class="md-block" style="margin-top:4%;">
+                                <md-icon class="rupee" md-fab-top-right md-font-icon="fa fa-inr"></md-icon>
+                                <label class="contact-label md-custom-label">Sales</label>
+                                <input name="sales" format id="budgetEmailsales"
+                                       data-ng-model="params.sales"
+                                       ng-pattern="/^([1-9][0-9,./]*)$"
+                                       style="margin-left: 6px;" />
+                                <div ng-messages="addNewForm.sales.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.sales.$invalid && (!addNewForm.sales.$pristine || showValid) && !addNewForm.sales.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern" id="err_budgetEmail_sales">Enter valid value for Sales</div>
+                                </div>
+
+                            </md-input-container>
+
+                            <!--<label for="">Sales</label>
+                            <input type="text" format class="form-control rupee" name="sales" id="budgetEmailsales"
+                                   placeholder="sales"
+                                   data-ng-model="params.sales"
+                                   ng-pattern="/^([1-9][0-9,./]*)$/"
+                                   input-focus
+                                   required />
+                            <div ng-messages="addNewForm.sales.$error" style="color:maroon" role="alert">
+                                <div ng-message="required" data-ng-if="addNewForm.sales.$invalid && (!addNewForm.sales.$pristine || showValid) && !addNewForm.sales.$focus">This field should not be empty </div>
+                                <div ng-message="pattern" id="err_budgetEmail_sales">Enter valid value for Sales</div>
+                            </div>-->
+                        </div>
+                    </div>
+
+
+                    <div class="modal-btn-wrap5 modal-btn-wrap6" style="text-align:left;">
+                        <button type="submit" class="btn btn-primary" id="btn_budgetEmail_next"><b> Next</b></button>
+                        <button class="btn  odd_btn" id="btn_budgetEmail_back" type="button" ng-click="backdirect()">
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!--</div>--><!-- project-detail ended -->
+
+    </div><!-- pg-inner-content ended -->
+
+</div><!-- main-content ended -->
+</div>
