@@ -58,44 +58,40 @@
 
     }
 
-    //var subscriptionTable = function () {
-    //    var subProduct = [];
-    //    var productTable = {};
-    //    subProduct.push([{ text: 'No', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Products', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Description', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Qty', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Rate', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, ]);
-    //    for (j = 0; j < $scope.subscription.length; j++) {
-    //        subProduct.push([{ text: (j + 1).toString(), style: 'tableData' }, { text: $scope.subscription[j].name, style: 'tableData', }, { text: $scope.subscription[j].desc, style: 'tableData', }, { text: ($scope.subscription[j].quantity).toString(), style: 'tableData', }, { text: 'Rs.' + ($scope.subscription[j].price).toString(), style: 'tableData', }, { text: 'Rs.' + ($scope.subscription[j].total).toString(), style: 'tableData', }]);
-    //    }
-    //    productTable = {
-    //        headerRows: 1,
-    //        widths: [20, 110, 67, 67, 67, 67, ],
-    //        body: subProduct
-    //    }
-    //    return productTable
-    //}
-
    
-    var chargesDetails = function () {
-        //var othercharges = []
-        //othercharges.push([{ text: 'Other Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ]);
-        //for (i = 0; i < $scope.otherChargesAfterCalculation.length; i++) {
-        //    othercharges.push([{ text: $scope.otherChargesAfterCalculation[i].name, style: 'tableHeader' }, { text: $scope.otherChargesAfterCalculation[i].value, style: 'tableHeader' }])
-
-        //}
-      
+    var chargesDetails = function ()
+    {
         var govcharges = []
         govcharges.push([{ text: 'Goverment Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ]);
         for (i = 0; i <$scope.govermentChargesAfterCalculation.length; i++) {
-            govcharges.push([{ text: $scope.govermentChargesAfterCalculation[i].name, style: 'tableHeader' }, { text: $scope.govermentChargesAfterCalculation[i].value,style:'table Header'}])
+            govcharges.push([{ text: $scope.govermentChargesAfterCalculation[i].name, style: 'tableData' }, { text: ($scope.govermentChargesAfterCalculation[i].value).toString(), style: 'tableData' }])
 
         }
 
         govcharges = {
             headerRows: 1,
-            widths: [410, 67, ],
+            widths: [410, 67,],
             body: govcharges
         }
-      
+        return govcharges
     }
+
+    var otherChargeDetails = function ()
+    {
+        var othercharges = []
+        othercharges.push([{ text: 'Other Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }]);
+        for (i = 0; i < $scope.otherChargesAfterCalculation.length; i++) {
+            othercharges.push([{ text: $scope.otherChargesAfterCalculation[i].name, style: 'tableData' }, { text: ($scope.otherChargesAfterCalculation[i].value).toString(), style: 'tableData' }])
+
+        }
+        othercharges = {
+            headerRows: 1,
+            widths: [410, 67, ],
+            body: othercharges
+        }
+        return othercharges
+    }
+
 
 
 
@@ -375,19 +371,8 @@
          //Goverment chares
 
          {
-             margin: [0, 0, 0, 20],
-             table:{
-                 headerRows: 1,
-                 widths: [410, 67, ],
-                 body: [
-                        [{ text: 'Goverment Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ],
-                        [{ text: 'Stamp Duty 5%', style: 'tableData', }, { text: '55,06,361', style: 'tableData', }, ],
-                        [{ text: 'Registration Fee', style: 'tableData', }, { text: '30,000', style: 'tableData', }, ],
-                        [{ text: 'Vat 1%', style: 'tableData', }, { text: '22,65,32', style: 'tableData', }, ],
-                        [{ text: 'Service Tax 4.35%', style: 'tableData', }, { text: '98,54,142', style: 'tableData', }, ],
-
-                 ]
-             },
+             margin: [0, 20, 0, 20],
+             table: chargesDetails(),
              layout: {
 
 
@@ -419,22 +404,8 @@
          // other charges
 
          {
-             margin: [0, 0, 0, 20],
-             table: {
-                 headerRows: 1,
-                 widths: [410, 67, ],
-                 body: [
-                        [{ text: 'Other Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ],
-                        [{ text: 'Corpus Fund', style: 'tableData', }, { text: '21,15,000', style: 'tableData', }, ],
-                        [{ text: 'Condomonium Formation', style: 'tableData', }, { text: '25,000', style: 'tableData', }, ],
-                        [{ text: 'Vat 1% (Gas, Water, Electric)', style: 'tableData', }, { text: '1,50,00', style: 'tableData', }, ],
-                        [{ text: 'Advanced Maintainance for 24 Months', style: 'tableData', }, { text: '20,30,400', style: 'tableData', }, ],
-                        [{ text: 'Legal', style: 'tableData', }, { text: '23,000', style: 'tableData', }, ],
-                        [{ text: 'Club House', style: 'tableData', }, { text: '15,00,000', style: 'tableData', }, ],
-                        [{ text: 'Infrastructure Charges', style: 'tableData', }, { text: '23,50,000', style: 'tableData', }, ],
-
-                 ]
-             },
+             margin: [0, 10, 0, 10],
+             table: otherChargeDetails(),
              layout: {
 
 
@@ -471,7 +442,7 @@
                     [{ text: 'TOTAL', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ],
                        [{ text: 'Offer Discount', style: 'tableHeader', }, { text: '15%', style: 'tableHeader', }, ],
                        [{ text: 'Additional Charges', style: 'tableHeader', }, { text: $scope.additionalDiscount, style: 'tableHeader', }, ],
-                        [{ text: 'TOTAL', style: 'tableHeader', }, { text: $scope.gTotal, style: 'tableHeader', }, ],
+                        [{ text: 'TOTAL', style: 'tableHeader', }, { text: ($scope.gTotal).toString(), style: 'tableHeader', }, ],
 
 
                 ]
@@ -500,66 +471,6 @@
             },
 
         },
-
-
-         { text: '', style: 'BuilderAddress' },
-
-                {
-                    margin: [0, 30, 0, 30],
-                    table: {
-                        headerRows: 1,
-                        widths: [150, 67, 67, 67, 67, ],
-                        body: [
-                               [{ text: 'Payment Scheme For 20:40:40', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Percentage', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Due On', style: 'tableHeader', fillColor: '#efefef' }, ],
-                               [{ text: 'Current Due', style: 'tableData', }, { text: '20%', style: 'tableData', }, { text: '4,53,06,400', style: 'tableData', }, { text: '19,70,828.4', style: 'tableData', }, { text: '10/05/2016', style: 'tableData', }, ],
-                               [{ text: 'Due on Completion of Super Structure', style: 'tableData', }, { text: '20%', style: 'tableData', }, { text: '4,53,06,400', style: 'tableData', }, { text: '19,70,828.4', style: 'tableData', }, { text: '10/05/2016', style: 'tableData', }, ],
-                               [{ text: 'Due on Possession', style: 'tableData', }, { text: '20%', style: 'tableData', }, { text: '4,53,06,400', style: 'tableData', }, { text: '19,70,828.4', style: 'tableData', }, { text: '10/05/2016', style: 'tableData', }, ],
-                               [{ text: 'Total', style: 'tableHeader', }, { text: '100%', style: 'tableHeader', }, { text: '22,65,32,000', style: 'tableHeader', }, { text: '98,54,142', style: 'tableHeader', }, { text: '10/05/2016', style: 'tableHeader', }, ],
-                        ]
-                    },
-                    layout: {
-
-
-                        hLineWidth: function (i, node) {
-                            return (i === 0 || i === node.table.body.length) ? .5 : .5;
-                        },
-                        vLineWidth: function (i, node) {
-                            return (i === 0 || i === node.table.widths.length) ? 0 : 0;
-                        },
-                        hLineColor: function (i, node) {
-                            return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
-                        },
-                        vLineColor: function (i, node) {
-                            return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
-                        },
-
-                        paddingLeft: function (i, node) { return 10; },
-                        paddingRight: function (i, node) { return 10; },
-                        paddingTop: function (i, node) { return 10; },
-                        paddingBottom: function (i, node) { return 10; }
-
-                    },
-
-                },
-
-
-               { text: 'Terms and Condition', style: 'panNo', margin: [0, 0, 0, 10], },
-
-		{
-		    ul:
-
-                [
-				'This quotation is to be read along with other standard Terms and conditions of the Company',
-				'Service Tax of 4.35% is applicable with every payment',
-				'Government taxes will be extra and to be paid at actuals',
-                'Maintenance, Society charges, Club House charges etc are applicable at the time of Possession',
-                'Stamp duty, Registration and VAT is paid at the time of registration',
-                ]
-		},
-
-
-
-
             ],
 
 
