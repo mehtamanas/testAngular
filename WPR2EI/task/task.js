@@ -135,7 +135,7 @@
             columns: [{
                 template: "<input type='checkbox', class='checkbox' data-id='#= task_id #',  ng-click='check($event,dataItem)' />",
                 title: "<input id='checkAll', type='checkbox', class='check-box' data-id='#= task_id #', ng-click='checkALL(dataItem)' />",
-               // template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
+                // template: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input type='checkbox' required='' name='checkbox' ng-model='checkbox' class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='check($event,dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                 //title: "<div class='checkbox c-checkbox needsclick'><label class='needsclick'><input id='checkAll' type='checkbox' required='' name='checkbox' ng-model='checkbox' class='check-box needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required',  ng-click='checkALL(dataItem)' style=''><span class='fa fa-check'></span></label></div>",
                 width: "60px",
                 attributes:
@@ -205,11 +205,13 @@
               {
                   "style": "text-align:center;cursor:pointer"
               }
-            }, {
-                field: "start_date_time",
+            },
+
+            {
+                field: "start_date_timeFormatted",
                 title: "Start Date",
                 width: "120px",
-                type: 'date',
+                type: 'string',
                 filterable: {
                     ui: "datepicker"
                 },
@@ -218,6 +220,22 @@
               {
                   "style": "text-align:center;cursor:pointer"
               }
+
+            },
+            {
+                field: "start_date_time",
+                title: "Start Date",
+                width: "120px",
+                hidden: true,
+                type: 'date',
+                filterable: {
+                    ui: "datepicker"
+                },
+                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                attributes:
+                {
+                    "style": "text-align:center;cursor:pointer"
+                }
 
             }, {
                 field: "due_date",
@@ -386,34 +404,34 @@
 
 
         //Audit log start															
-       // $scope.params =
-       //     {
-       //         device_os: $cookieStore.get('Device_os'),
-       //         device_type: $cookieStore.get('Device'),
-       //         device_mac_id: "34:#$::43:434:34:45",
-       //         module_id: "Contact",
-       //         action_id: "Contact View",
-       //         details: "PropertyView",
-       //         application: "angular",
-       //         browser: $cookieStore.get('browser'),
-       //         ip_address: $cookieStore.get('IP_Address'),
-       //         location: $cookieStore.get('Location'),
-       //         organization_id: $cookieStore.get('orgID'),
-       //         User_ID: $cookieStore.get('userId')
-       //     };
+        // $scope.params =
+        //     {
+        //         device_os: $cookieStore.get('Device_os'),
+        //         device_type: $cookieStore.get('Device'),
+        //         device_mac_id: "34:#$::43:434:34:45",
+        //         module_id: "Contact",
+        //         action_id: "Contact View",
+        //         details: "PropertyView",
+        //         application: "angular",
+        //         browser: $cookieStore.get('browser'),
+        //         ip_address: $cookieStore.get('IP_Address'),
+        //         location: $cookieStore.get('Location'),
+        //         organization_id: $cookieStore.get('orgID'),
+        //         User_ID: $cookieStore.get('userId')
+        //     };
 
-       // AuditCreate = function (param) {
-       //     apiService.post("AuditLog/Create", param).then(function (response) {
-       //         var loginSession = response.data;
-       //     },
-       //function (error) {
-       //    if (error.status === 400)
-       //        alert(error.data.Message);
-       //    else
-       //        alert("Network issue");
-       //});
-       // };
-       // AuditCreate($scope.params);
+        // AuditCreate = function (param) {
+        //     apiService.post("AuditLog/Create", param).then(function (response) {
+        //         var loginSession = response.data;
+        //     },
+        //function (error) {
+        //    if (error.status === 400)
+        //        alert(error.data.Message);
+        //    else
+        //        alert("Network issue");
+        //});
+        // };
+        // AuditCreate($scope.params);
 
         //end
 
@@ -1324,8 +1342,12 @@
                             if (expsplit[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
+                            if (expsplit[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date_time";
+
                             if (expsplit[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
+                            
 
                             // by saroj on 18-04-2016
 
@@ -1335,7 +1357,7 @@
                                 return;
                             }
 
-                            if (Firstname == "due_date" || Firstname == "created_date") {
+                            if (Firstname == "due_date" || Firstname == "created_date" || Firstname == "start_date_time") {
 
                                 var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
                                 var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
@@ -1389,7 +1411,7 @@
                                 lastDayPrevMonth.setDate(1); // going to 1st of the month
                                 lastDayPrevMonth.setHours(-1); // going to last hour before this date even started.
 
-
+                                //removing inverted commas
                                 expsplit[1] = expsplit[1].replace(/"/g, "");
                                 // alert(expsplit[1]);
 
@@ -1579,6 +1601,10 @@
                             if (expsplitNOT[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
+                            if (expsplitNOT[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date_time";
+
+
                             if (expsplitNOT[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
 
@@ -1615,7 +1641,11 @@
                             else if (expsplitIsBefore[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
+                            else if (expsplitIsBefore[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date_time";
+
                             // by saroj on 18-04-2016
+                           
 
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -1660,6 +1690,9 @@
 
                             else {
 
+                                //removing inverted commas
+                                expsplitIsBefore[1] = expsplitIsBefore[1].replace(/"/g, "");
+
                                 filter.filters.push({ field: Firstname.trim(), operator: "lt", value: moment(expsplitIsBefore[1].trim(), 'DD-MM-YYYY')._d });
                                 ValidFilter = true;
                                 spiltOK = false;
@@ -1678,6 +1711,9 @@
                             else if (expsplitIsAfter[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
+                            else if (expsplitIsAfter[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date_time";
+
                             // by saroj on 18-04-2016
 
                             if (Firstname == "") {
@@ -1685,6 +1721,8 @@
                                 alert("Invalid Query.");
                                 return;
                             }
+
+                           
 
                             var CurrentDate = moment().endOf('day')._d;;
                             var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
@@ -1721,6 +1759,9 @@
                                 spiltOK = false;
                             }
                             else {
+                                //removing inverted commas
+                                expsplitIsAfter[1] = expsplitIsBefore[1].replace(/"/g, "");
+
                                 filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
                                 ValidFilter = true;
                                 spiltOK = false;
@@ -1737,6 +1778,9 @@
                             else if (expsplitBetween[0].toUpperCase().trim() == "CREATED DATE")
                                 Firstname = "created_date";
 
+                            else if (expsplitBetween[0].toUpperCase().trim() == "START DATE")
+                                Firstname = "start_date_time";
+
                             // by saroj on 18-04-2016
 
                             if (Firstname == "") {
@@ -1750,6 +1794,12 @@
                             if (InnerBetweenSplit.length > 1) {
 
                                 abc = { logic: "and", filters: [] };
+
+                                //removing inverted commas
+                                InnerBetweenSplit[0] = InnerBetweenSplit[0].replace(/"/g, "");
+
+                                //removing inverted commas
+                                InnerBetweenSplit[1] = InnerBetweenSplit[1].replace(/"/g, "");
 
                                 abc.filters.push({ field: Firstname.trim(), operator: "gte", value: moment(InnerBetweenSplit[0].trim().toString(), 'DD-MM-YYYY').startOf('day')._d });
                                 abc.filters.push({ field: Firstname.trim(), operator: "lte", value: moment(InnerBetweenSplit[1].trim().toString(), 'DD-MM-YYYY').endOf('day')._d });
