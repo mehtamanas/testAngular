@@ -1,5 +1,6 @@
 ﻿var ActivityBulkController = function ($scope, $state, $cookieStore, apiService, $rootScope, $modalInstance, $modal) {
     console.log('ActivityBulkController');
+    var userId = $cookieStore.get('userId');
 
     Url = "user/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
@@ -25,23 +26,25 @@
         $scope.checkedIds = $cookieStore.get('checkedIds');
         var usersToBeAddedOnServer = [];
 
-        var Url;
+        
 
         for (var i in $scope.checkedIds) {
             var newMember = {};
-            newMember.contact_id = $scope.checkedIds[i];
+            newMember.assignto_user_id = $scope.params.mappinguser_id;
+            newMember.task_id = $scope.checkedIds[i];
             newMember.organization_id = $cookieStore.get('orgID');
-            newMember.user_id = $scope.user1;
+            newMember.user_id = userId;
 
             usersToBeAddedOnServer.push(newMember);
         }
+        var Url;
 
-        Url = "Mapping/ContactToUser";
+        Url = "ToDoItem/MultipleAssignTaskToUser";
 
 
         apiService.post(Url, usersToBeAddedOnServer).then(function (response) {
             var loginSession = response.data;
-            AuditCreate();
+   
             $modalInstance.dismiss();
             $state.go('app.tasks');
             $rootScope.$broadcast('REFRESH', { name: 'outTaskGrid', data: null, action: 'assign_to' });
@@ -50,9 +53,10 @@
         },
        function (error) {
            if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
+           { alert(error.data.Message); }
+             
+         
+             //  alert("Network issue");
        });
     }
 

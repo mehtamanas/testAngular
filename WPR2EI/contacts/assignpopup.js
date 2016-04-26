@@ -9,12 +9,8 @@
         $scope.params = {};
     }
 
-    AuditCreate($scope.params);
+
 
     //end
-    $scope.user = function () {
-        $modalInstance.dismiss();
-        $state.go('newuser');
-
-    }
+   
 };
