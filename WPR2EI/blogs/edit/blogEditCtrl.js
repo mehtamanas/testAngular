@@ -1,16 +1,17 @@
 ﻿
-var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize,$window) {
+var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize, $window) {
     console.log('BlogPostEditCtrl');
 
     var orgID = $cookieStore.get('orgID');
     var userID = $cookieStore.get('userId');
-   
+    $scope.templateId = $cookieStore.get('id');
     var authRights = ($cookieStore.get('UserRole'));
 
     $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
     $scope.isContentApprover = (_.find(authRights, function (o) { return o == 'Content Approver'; })) == 'Content Approver' ? true : false
     $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
     $scope.isContentModerator = (_.find(authRights, function (o) { return o == 'Content Moderator'; })) == 'Content Moderator' ? true : false
+    $scope.isContentTemplateApprover = (_.find(authRights, function (o) { return o == 'Content Template Approver'; })) == 'Content Template Approver' ? true : false
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
  
    
@@ -23,11 +24,16 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
 
     apiService.get('Template/GetTemplatesByType/' + orgID + '/ReleaseOrder').then(function (response) {
         $scope.templateList = response.data;
+        
     });
 
 
     $scope.selectTemplate = function () {
         $scope.params.template_name = $scope.params.template;
+        $scope.id = $scope.params.template;
+        $cookieStore.put('id', $scope.id);
+        $scope.templateId = $cookieStore.get('id');
+        //$scope.id=$cookieStore.put('id', id);
         if ($scope.params.template !== "") {
             $scope.params.bodyText = $sanitize((_.findWhere($scope.templateList, { id: $scope.params.template })).description);
         }
@@ -42,7 +48,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         $scope.params.tag_name = response.data[0].tag_name;
         $scope.status = response.data[0].status;
         $scope.params.template = response.data[0].template_id;
-       // $cookieStore.put('Flag',$scope.flag);
+        $cookieStore.put('Status', $scope.status);
     },
     function (error) {
 
@@ -167,7 +173,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             tag_name: $scope.params.tag_name,
             template_id: $scope.params.template,
             id:null,
-
+            status: $cookieStore.get('Status'),
+            copy:true,
         };
         apiService.post("Blogs/CreateBlogTag", postdata).then(function (response) {
             data = response.data;         
@@ -313,6 +320,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             user_id: $cookieStore.get('userId'),
             // comment: $scope.params.comment,
             blog_id: window.sessionStorage.selectedBlogID,
+            template_id:$scope.templateId,
             status: "Sent For Approval",
 
 
@@ -334,6 +342,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             user_id: $cookieStore.get('userId'),
             approval_user_id: $cookieStore.get('userId'),
             blog_id: window.sessionStorage.selectedBlogID,
+            template_id: $scope.templateId,
             status: "Approved",
 
         };
@@ -354,7 +363,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
             comment: $scope.params.comment,
-            blog_id:window.sessionStorage.selectedBlogID,
+            blog_id: window.sessionStorage.selectedBlogID,
+            template_id: $scope.templateId,
             status: "Not Approved",
 
         };
@@ -377,6 +387,7 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                 user_id: $cookieStore.get('userId'),
                 publication_date: new Date(date).toISOString(),
                 blog_id: window.sessionStorage.selectedBlogID,
+                template_id: $scope.templateId,
                 //publication_date: date,
                 status: "Published",
 
