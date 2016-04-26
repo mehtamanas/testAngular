@@ -1347,7 +1347,7 @@
 
                             if (expsplit[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
-                            
+
 
                             // by saroj on 18-04-2016
 
@@ -1645,7 +1645,7 @@
                                 Firstname = "start_date_time";
 
                             // by saroj on 18-04-2016
-                           
+
 
                             if (Firstname == "") {
                                 ValidFilter = false;
@@ -1722,7 +1722,7 @@
                                 return;
                             }
 
-                           
+
 
                             var CurrentDate = moment().endOf('day')._d;;
                             var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
@@ -1759,10 +1759,11 @@
                                 spiltOK = false;
                             }
                             else {
+                                
                                 //removing inverted commas
-                                expsplitIsAfter[1] = expsplitIsBefore[1].replace(/"/g, "");
 
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                expsplitIsAfter[1] = expsplitIsAfter[1].replace(/"/g, "");
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1], "DD-MM-YYYY").add('day', 1)._d });
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
