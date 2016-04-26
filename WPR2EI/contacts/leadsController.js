@@ -570,10 +570,9 @@ angular.module('contacts')
 
 
         $scope.highlightFilteredWords = function () {
-
             $("#contact_kenomain").highlight($scope.textareaText);
-            
         }
+
 
         $scope.callFilter = function () {
 
@@ -1733,7 +1732,10 @@ angular.module('contacts')
                                 spiltOK = false;
                             }
                             else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim().endOf, 'DD-MM-YYYY')._d });
+
+                                expsplitIsAfter[1] = expsplitIsAfter[1].replace(/"/g, "");
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1], "DD-MM-YYYY").add('day', 1)._d });
+                                
                                 //commented above line becoz in morning time is after takes value of current date also.
 
                                 //var date = new Date(expsplitIsAfter[1].trim());
@@ -1819,7 +1821,60 @@ angular.module('contacts')
             else {
                 alert("Please Check Query.");
             }
+        }
 
+        $scope.callWordFilter = function () {
+
+           
+
+            var txtSearch = $scope.textareaText;
+            var filter = { logic: "or", filters: [] };
+            var grid = $('#contact_kenomain').data('kendoGrid');
+            var columns = grid.columns;
+            var title = columns[0].Name;
+            for (var i = 0; i < grid.columns.length; i++) {
+
+                if (columns[i].title.trim().toUpperCase().trim() == "NAME")
+                    filter.filters.push({ field: "Name", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "PHONE")
+                    filter.filters.push({ field: "Contact_Phone", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "EMAIL")
+                    filter.filters.push({ field: "Contact_Email", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "ASSIGNED TO")
+                    filter.filters.push({ field: "Assigned_To", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "TYPE")
+                    filter.filters.push({ field: "Type", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "COMPANY")
+                    filter.filters.push({ field: "company", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "NOTES")
+                    filter.filters.push({ field: "text", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "TAGS")
+                    filter.filters.push({ field: "Tag1", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "LEAD SOURCE")
+                    filter.filters.push({ field: "leadsource", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "DESIGNATION")
+                    filter.filters.push({ field: "contact_designation", operator: "contains", value: txtSearch });
+
+
+            }
+
+            var ds = $('#contact_kenomain').getKendoGrid().dataSource;
+            ds.filter(filter);
+
+            $(".k-grid-content").highlight($scope.textareaText);
         }
 
         $scope.clearFilter = function () {
