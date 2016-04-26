@@ -532,7 +532,7 @@ angular.module('contacts')
                }
            },
 
-          
+
         {
             title: "Action",
             template: '<div class="dropdown drop_lead" dropdown ><button class="btn drop_lead_btn dropdown-toggle" dropdown-toggle type="button" data-toggle="dropdown"><span class="caret caret_lead"></span></button><ul class="dropdown-menu dropdown_lead" dropdown-menu ><li>' +
@@ -569,7 +569,107 @@ angular.module('contacts')
         };
 
 
+        $scope.callWordFilter = function () {
+
+            var txtSearch = $scope.textareaText;
+
+            ////Get the datasource here
+            //var data = $('#contact_kenomain').getKendoGrid().dataSource;
+
+            //for (var x = 0; x < data.length; x++) {
+            //    //Get the currently active item
+            //    var dataItem = data[x];
+            //    //Access table row basedon uid
+            //    var tr = $("#grid").find("[data-uid='" + dataItem.uid + "']");
+            //    //Access cell object
+            //    var cell = $("td:nth-child(1)", tr);
+            //    //Get the cell content here
+            //    //Check if the column values are 
+            //    if (cell[0].textContent == txtSearch) {
+            //        //Assign the css style to cell
+            //        //You can hide the cell content using css here
+            //        cell.addClass("color");
+
+            //    }
+            //}
+
+
+           
+            //var grid = $("#contact_kenomain").data('kendoGrid');
+            //var value = txtSearch;
+            //var regex = new RegExp(value, "gi");
+            //var colIndex = grid.thead.find("th[data-field='Name']").index();
+            //grid.tbody.find('tr[data-uid]').each(function () {
+            //    var td = $(this).find('td:eq(' + colIndex + ')');
+            //    var item = grid.dataItem(this);
+            //    td.html(item.Name.replace(regex, '<span style="background-color:yellow">' + value + '</span>'));
+            //});
+
+
+
+            var filter = { logic: "or", filters: [] };
+            var grid = $('#contact_kenomain').data('kendoGrid');
+            var columns = grid.columns;
+            var title = columns[0].Name;
+
+            ////   alert(columns[2].title);
+            //alert(grid.columns.length);
+
+
+            //var dataitem = datasourcedata[i].(columnName);
+
+
+            // alert($('#contact_kenomain').data('kendoGrid').dataSource.options.schema.model.fields);
+
+            for (var i = 0; i < grid.columns.length; i++) {
+                // alert(columns[i].size.type);
+                //  alert(grid.dataSource.options.schema.model.fields.size.type);
+                //if (columns[i].size.type == String)
+                // alert(String(columns[i].title));
+
+                if (columns[i].title.trim().toUpperCase().trim() == "NAME")
+                    filter.filters.push({ field: "Name", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "PHONE")
+                    filter.filters.push({ field: "Contact_Phone", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "EMAIL")
+                    filter.filters.push({ field: "Contact_Email", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "ASSIGNED TO")
+                    filter.filters.push({ field: "Assigned_To", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "TYPE")
+                    filter.filters.push({ field: "Type", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "COMPANY")
+                    filter.filters.push({ field: "company", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "NOTES")
+                    filter.filters.push({ field: "text", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "TAGS")
+                    filter.filters.push({ field: "Tag1", operator: "contains", value: txtSearch });
+
+                if (columns[i].title.trim().toUpperCase().trim() == "LEAD SOURCE")
+                    filter.filters.push({ field: "leadsource", operator: "contains", value: txtSearch });
+
+
+                if (columns[i].title.trim().toUpperCase().trim() == "DESIGNATION")
+                    filter.filters.push({ field: "contact_designation", operator: "contains", value: txtSearch });
+
+
+            }
+
+            var ds = $('#contact_kenomain').getKendoGrid().dataSource;
+            ds.filter(filter);
+        }
+
         $scope.callFilter = function () {
+
 
             var prevQuarterStartDay = moment(moment().startOf('quarter')).add('quarter', -1)._d;
             var prevQuarterEndDay = moment(moment().endOf('quarter')).add('quarter', -1)._d;
@@ -653,7 +753,7 @@ angular.module('contacts')
                         else if (fValue == "NOTES")
                             feild1 = "text";
                         else if (fValue == "TAGS")
-                            feild1 = "Tags";
+                            feild1 = "Tag1";
                         else if (fValue == "LEAD SOURCE")
                             feild1 = "leadsource";
                         else if (fValue == "LAST CONTACTED DATE")
@@ -1726,14 +1826,14 @@ angular.module('contacts')
                                 spiltOK = false;
                             }
                             else {
-                                 filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim().endOf, 'DD-MM-YYYY')._d });
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim().endOf, 'DD-MM-YYYY')._d });
                                 //commented above line becoz in morning time is after takes value of current date also.
 
                                 //var date = new Date(expsplitIsAfter[1].trim());
                                 //var formatted = moment(date).format('DD MM YYYY');
                                 //alert(formatted);
-                              //  filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY').endOf(expsplitIsAfter[1].trim())._d });
-                                
+                                //  filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY').endOf(expsplitIsAfter[1].trim())._d });
+
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
