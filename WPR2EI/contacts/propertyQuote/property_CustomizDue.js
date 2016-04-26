@@ -53,57 +53,23 @@
         }
     }
 
-    //var subscriptionTable = function () {
-    //    var subProduct = [];
-    //    var productTable = {};
-    //    subProduct.push([{ text: 'No', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Products', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Description', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Qty', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Rate', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, ]);
-    //    for (j = 0; j < $scope.subscription.length; j++) {
-    //        subProduct.push([{ text: (j + 1).toString(), style: 'tableData' }, { text: $scope.subscription[j].name, style: 'tableData', }, { text: $scope.subscription[j].desc, style: 'tableData', }, { text: ($scope.subscription[j].quantity).toString(), style: 'tableData', }, { text: 'Rs.' + ($scope.subscription[j].price).toString(), style: 'tableData', }, { text: 'Rs.' + ($scope.subscription[j].total).toString(), style: 'tableData', }]);
-    //    }
-    //    productTable = {
-    //        headerRows: 1,
-    //        widths: [20, 110, 67, 67, 67, 67, ],
-    //        body: subProduct
-    //    }
-    //    return productTable
-    //}
-
     var totalCinsideration = function (){
 
         var propertyConsidaration = [];
-        var propertyConsidarationTable = {};
+        //var propertyConsidarationTable = {};
         propertyConsidaration.push([{ text: 'Payment Scheme For 20:40:40', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Percentage', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }, ]);
         for (i = 0; i < $scope.amountCalculationValue.length; i++) {
-            propertyConsidaration.push({ text: $scope.amountCalculationValue[i].description, style: 'tableHeader', fillColor: '#efefef' }, { text: $scope.amountCalculationValue[i].percentage, style: 'tableHeader', fillColor: '#efefef' }, { text: $scope.amountCalculationValue[i].amountTotal, style: 'tableHeader', fillColor: '#efefef' })
+            propertyConsidaration.push({ text: $scope.amountCalculationValue[i].description, style: 'tableData' }, { text: $scope.amountCalculationValue[i].percentage, style: 'tableData' }, { text: ($scope.amountCalculationValue[i].amountTotal).toString(), style: 'tableData' }, { text: ($scope.amountCalculationValue[i].serviceTax).toString(), style: 'tableData' })
 
         }
-        propertyConsidarationTable = {
+        propertyConsidaration = {
             headerRows: 1,
             widths: [150, 67, 67, 67, 67, ],
             body: propertyConsidaration,
-            //layout:{
-            //    hLineWidth: function (i, node) {
-            //        return (i === 0 || i === node.table.body.length) ? .5 : .5;
-            //    },
-            //    vLineWidth: function (i, node) {
-            //        return (i === 0 || i === node.table.widths.length) ? 0 : 0;
-            //    },
-            //    hLineColor: function (i, node) {
-            //        return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
-            //    },
-            //    vLineColor: function (i, node) {
-            //        return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
-            //    },
-
-            //    paddingLeft: function (i, node) { return 10; },
-            //    paddingRight: function (i, node) { return 10; },
-            //    paddingTop: function (i, node) { return 10; },
-            //    paddingBottom: function (i, node) { return 10; }
-            //}
         }
         
 
-        return propertyConsidarationTable;
+        return propertyConsidaration;
 
     }
 
@@ -112,23 +78,9 @@
        // totalCinsideration()
         var docDefinition = {
             content: [
-
-
-         { text: '', style: 'BuilderAddress' },
-
                 {
                     margin: [0, 30, 0, 30],
                     table: totalCinsideration(),
-                    //    headerRows: 1,
-                    //    widths: [150, 67, 67, 67, 67, ],
-                    //    body: [
-                    //           [{ text: 'Payment Scheme For 20:40:40', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Percentage', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Due On', style: 'tableHeader', fillColor: '#efefef' }, ],
-                    //           [{ text: 'Current Due', style: 'tableData', }, { text: '20%', style: 'tableData', }, { text: '4,53,06,400', style: 'tableData', }, { text: '19,70,828.4', style: 'tableData', }, { text: '10/05/2016', style: 'tableData', }, ],
-                    //           [{ text: 'Due on Completion of Super Structure', style: 'tableData', }, { text: '20%', style: 'tableData', }, { text: '4,53,06,400', style: 'tableData', }, { text: '19,70,828.4', style: 'tableData', }, { text: '10/05/2016', style: 'tableData', }, ],
-                    //           [{ text: 'Due on Possession', style: 'tableData', }, { text: '20%', style: 'tableData', }, { text: '4,53,06,400', style: 'tableData', }, { text: '19,70,828.4', style: 'tableData', }, { text: '10/05/2016', style: 'tableData', }, ],
-                    //           [{ text: 'Total', style: 'tableHeader', }, { text: '100%', style: 'tableHeader', }, { text: '22,65,32,000', style: 'tableHeader', }, { text: '98,54,142', style: 'tableHeader', }, { text: '10/05/2016', style: 'tableHeader', }, ],
-                    //    ]
-                    //},
                     layout: {
 
 
@@ -168,10 +120,6 @@
                 'Stamp duty, Registration and VAT is paid at the time of registration',
                 ]
 		},
-
-
-
-
             ],
 
 
@@ -181,30 +129,12 @@
                     bold: true,
 
                 },
-
-                BuilderName: {
-
-                    fontSize: 13,
-                    color: 'black',
-                    bold: true,
-                },
-
-
-
-                BuilderAddress: {
-
-                    fontSize: 9,
-                    color: 'black',
-                    bold: false,
-                },
-
                 panNo:
-            {
-                fontSize: 9,
-                color: 'black',
-                bold: true,
-            },
-
+          {
+              fontSize: 9,
+              color: 'black',
+              bold: true,
+          },
                 tableHeader:
             {
                 fontSize: 9,
@@ -218,29 +148,8 @@
                color: '#717171',
                bold: false,
            },
-
-
-
-                configurationDetail:
-                {
-                    alignment: 'center',
-                    fontSize: 11,
-                    bold: true,
-                    color: '#626262',
-                },
-
-                configurationDetail2:
-                {
-                    alignment: 'center',
-                    fontSize: 8,
-                    bold: false,
-                    color: '#626262',
-                },
-
-
-
-            },
-            defaultStyle: {
+             },
+                defaultStyle: {
                 fontSize: 8,
                 color: '#717171',
                 bold: false,
