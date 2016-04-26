@@ -127,14 +127,14 @@
         columns: [{
                   template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
                   title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
-                  width: "60px",
+                  width: "50px",
                   attributes:
                      {
                          "style": "text-align:center"
                      }
                 }, {
                     field: "template_name",
-                    title: "Name",
+                    title: "Template Name",
                     width: "120px",
                     attributes:
                      {
@@ -143,21 +143,44 @@
                 }, {
                     field: "subject",
                     title: "Subject",
+                    template: "<span ng-bind='dataItem.subject | limitTo:200'></span>",
                     width: "120px",
                     attributes:
                      {
                          "style": "text-align:center"
                      }
 
-                }, {
-                    field: "description",
-                    title: "Html",
+                },
+                {
+                    field: "created_date",
+                    title: "Created At",
+                    template: "#= kendo.toString(kendo.parseDate(created_date, 'yyyy-MM-dd'), 'dd/MM/yyyy h:mm tt') #",
                     width: "120px",
                     attributes:
                      {
                          "style": "text-align:center"
                      }
-                } ]
+                },
+                    {
+                    field: "C__updatedAt",
+                    title: "Updated At",
+                    template: "#= kendo.toString(kendo.parseDate(C__updatedAt, 'yyyy-MM-dd'), 'dd/MM/yyyy h:mm tt') #",
+                    width: "120px",
+                    attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+                } 
+                    //{
+                //    field: "description",
+                //    title: "Html",
+                //    width: "120px",
+                //    attributes:
+                //     {
+                //         "style": "text-align:center"
+                //     }
+                //} 
+        ]
 
     };
 
