@@ -1,5 +1,5 @@
 ﻿angular.module('campaigns')
-.controller('summaryMailTypeCtrl',
+.controller('contactDetailCtrl',
     function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $q, emailService, $localStorage) {
 
         var userId = $cookieStore.get('userId');
@@ -16,8 +16,7 @@
         $scope.fromEmail = $scope.fromEmail.account_email;
 
         $scope.Contacts = $localStorage.contactDetails;
-     
-        //Audit log start               
+      
         AuditCreate = function () {
             var postdata =
            {
@@ -58,14 +57,12 @@
             budget: $cookieStore.get('Budget'),
             no_of_leads: $cookieStore.get('No_of_leads'),
             sales: $cookieStore.get('Sales'),
-            channel_type_id: "ACD2A25F-D8D0-4554-8DA4-9D2FB5200E61",
+            channel_type_id: $rootScope.selectedEvent,
             campaign_ID: $cookieStore.get('campaign_id'),
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
             tag_id: $cookieStore.get('usersToBeAddedOnServer1'),
-            project_id: $cookieStore.get('project_id'),
-            description: emailTemplate.description,
-            campaign_subtype: emailTemplate.campaign_subtype
+            project_id: $cookieStore.get('project_id')
         }
 
 
@@ -89,8 +86,8 @@
                     emailUrl = "CampaignEmailTemplate/Create";
                     apiService.post(emailUrl, $scope.postData).then(function (response) {
                         var SessionData = response.data;
-                       // $scope.RemoveCookies();
-                        $state.go('app.contactDetails');
+                        $scope.RemoveCookies();
+
                     },
                     function (error) {
                         if (error.status === 400)
@@ -125,7 +122,7 @@
                         alert("Network issue");
                 });
                 $scope.openSucessfullPopup();
-                $state.go('app.contactDetails');
+                $state.go('app.addDirectMailCampaign');
                 $rootScope.$broadcast('REFRESH', 'projectGrid');
 
             },
@@ -160,20 +157,20 @@
         }
 
 
-        //$scope.RemoveCookies = function () {
-        //    $cookieStore.remove('Name');
-        //    $cookieStore.remove('End_Date');
-        //    $cookieStore.remove('Address');
-        //    $cookieStore.remove('Start_Date');
-        //    $cookieStore.remove('Budget');
-        //    $cookieStore.remove('No_of_leads');
-        //    $cookieStore.remove('project_id');
-        //    $cookieStore.remove('Sales');
-        //    $cookieStore.remove('channel_type_id');
-        //    $cookieStore.remove('campaign_ID');
-        //    $cookieStore.remove('usersToBeAddedOnServer1');
-        //    $state.go('app.addDirectMailCampaign');
-        //}
+        $scope.RemoveCookies = function () {
+            $cookieStore.remove('Name');
+            $cookieStore.remove('End_Date');
+            $cookieStore.remove('Address');
+            $cookieStore.remove('Start_Date');
+            $cookieStore.remove('Budget');
+            $cookieStore.remove('No_of_leads');
+            $cookieStore.remove('project_id');
+            $cookieStore.remove('Sales');
+            $cookieStore.remove('channel_type_id');
+            $cookieStore.remove('campaign_ID');
+            $cookieStore.remove('usersToBeAddedOnServer1');
+            $state.go('app.addDirectMailCampaign');
+        }
 
         $scope.cancel = function () {
             $cookieStore.remove('Name');

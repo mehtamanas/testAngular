@@ -49,7 +49,7 @@ angular.module('campaigns')
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "CampaignEvent/GetCampaignGrid?id=" + orgID + "&type=Email"
+                    read: apiService.baseUrl + "CampaignEvent/GetCampaignGrid?id=" + orgID + "&type=Direct Mail"
 
                 },
                 pageSize: 20,

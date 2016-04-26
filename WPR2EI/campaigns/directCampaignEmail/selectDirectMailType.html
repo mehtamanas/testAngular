@@ -14,14 +14,16 @@
         <div class="col-md-12 tab_head">
             <div class="row " style="padding: 35px 42px 1px 100px;">
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-2 email_tabs4_active"></div>
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-2 email_tabs4_active"></div>
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Contact</span></div>
-                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-2 email_tabs4_active"></div>
                 <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Select Mail Type</span></div>
-                <div class="col-md-2 email_tabs3"></div>
+                <div class="col-md-2 email_tabs4"></div>
                 <div class="col-md-1 tabdot"><span class="email_tab_text">Summary</span></div>
+                <div class="col-md-2 email_tabs4"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">View Contact</span></div>
             </div>
         </div>
         <!--end step wizard-->
@@ -41,10 +43,10 @@
                            
                             <md-input-container class="md-block">
 
-                                <md-select name="salutation" ng-change="selectTemplate()" ng-model="params.template" class="dropdown" id="emailAddTemplate_Select Template">
+                                <md-select name="salutation" ng-model="params.campaign_subtype" class="dropdown" id="emailAddTemplate_Select Template">
                                     <md-option value="" selected>SELECT GIFT TYPE</md-option>
                                     <md-option value="gift">GIFT</md-option>
-                                    <md-option value="">MAIL</md-option>
+                                    <md-option value="mail">MAIL</md-option>
                                 </md-select>
                             </md-input-container>                           
                         </div>
@@ -60,9 +62,9 @@
                         <div class="clearfix">
                             <div class="form-group form-bx form-bx8">
                                 <md-input-container class="md-block">
-                                    <label class="contact-label">Campaign Name</label>
-                                    <input name="Campaign_name" id="addEmailCampaign_Campaign_name"
-                                           data-ng-model="params.name"
+                                    <label class="contact-label">Description</label>
+                                    <input name="description" id="addEmailCampaign_Campaign_name"
+                                           data-ng-model="params.description"
                                            minlength="1"
                                            maxlength="60"
                                            ng-pattern="/^[a-z 0-9\s]+$/i"
@@ -79,10 +81,7 @@
                         <button class="btn odd_btn" id="btn_emailAddTemplate_back" type="button" ng-click="back()">
                             Back
                         </button>
-
-                        <button class="btn btn-primary" style="margin-right: 4px;" id="btn_emailAddTemplate_preview" type="button" ng-click="preview()">
-                            <b>Preview</b>
-                        </button>
+                        
                         <button type="submit" class="btn btn-primary" id="btn_emailAddTemplate_next" ng-click="next()"><b>Next</b></button>
 
                     </div>

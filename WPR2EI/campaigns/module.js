@@ -120,4 +120,11 @@ angular.module('campaigns', [])
               controller: 'summaryMailTypeCtrl',
               title: 'campaigns'
           })
+
+        .state('app.contactDetails', {
+            url: '/contactDetails',
+            templateUrl: 'campaigns/directCampaignEmail/viewContactDetails.html',
+            controller: 'contactDetailCtrl',
+            title: 'campaigns'
+        })
     }]);
