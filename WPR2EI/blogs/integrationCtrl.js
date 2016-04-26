@@ -147,8 +147,9 @@
                      "style": "text-align:center"
                  }
              }, {
-                field: "status",
-                //template: '<span id="#= status #"></span>',
+                 field: "status",
+                 //template: '<a href="" ng-click="openEditBlogPopup(dataItem.blog_id>#=status#</a>',
+                //template: '<a class="contact_name" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">#=status#</a>',
                title: "Status",
                width: "120px",
                attributes:
@@ -165,7 +166,15 @@
                    "style": "text-align:center"
                }
 
-             }, ]
+             },{
+                 template: '<button class="btn btn-primary" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">COPY</button>',               
+                 width: "120px",
+                 attributes:
+               {
+                   "style": "text-align:center"
+               }
+
+             },]
         };
 
 
@@ -253,7 +262,9 @@
             });
         };
 
-        $scope.openEditBlogPopup = function () {
+        $scope.openEditBlogPopup = function (blog_id) {
+          
+            window.sessionStorage.selectedBlogID = blog_id;
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'blogs/edit/blogEdit.html',

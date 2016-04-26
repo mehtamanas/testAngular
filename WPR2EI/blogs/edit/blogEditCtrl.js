@@ -154,6 +154,35 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
 
  
     //start
+    $scope.copyTemplate = function () {
+        $scope.params.bodyText = $sanitize($scope.params.bodyText);
+        var postdata = {
+            name: $scope.params.name,
+            media_type: "image",
+            //media_name: uploadResult.Name,
+            media_url: $scope.media_url,
+            description: $scope.params.bodyText,
+            organization_id: $cookieStore.get('orgID'),
+            user_id: $cookieStore.get('userId'),
+            tag_name: $scope.params.tag_name,
+            template_id: $scope.params.template,
+            id:null,
+
+        };
+        apiService.post("Blogs/CreateBlogTag", postdata).then(function (response) {
+            data = response.data;         
+            $scope.openSucessfullPopup();
+            $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+            $modalInstance.dismiss();
+            
+        },
+        function (error) {
+           
+            if (error.status === 400)
+                //sweetAlert("Oops...", error.data.Message, "error");
+                alert(error.data.Message);
+        });
+    }
     // CALLBACKS
     var uploadResult;
     uploader1.onSuccessItem = function (fileItem, response, status, headers) {
