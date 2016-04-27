@@ -43,11 +43,13 @@
             media_name: uploadResult.Name,
             class_type: "Unit",
             media_type: "Unit_NWES_Full_2D",
-            notes: $scope.dir1
+            notes: $scope.dir1,
+            box_price: $scope.box_price,
+            box_price_applicable: $scope.box_price_applicable,
 
         };
 
-        apiService.post("MediaElement/Create", postData).then(function (response) {
+        apiService.post("Floors/UpdateInventory", postData).then(function (response) {
             var loginSession = response.data;
             //   alert("Image upload Done");
             $modalInstance.dismiss();
