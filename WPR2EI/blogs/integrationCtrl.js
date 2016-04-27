@@ -103,7 +103,7 @@
                 }
              }, {
                 field: "name",
-               // template: '<a ui-sref="app.edit_task({id:dataItem.task_id})" href="">#=name#</a>',
+                template: '<a ui-sref="app.editBlog({id:dataItem.blog_id})" href="">#=name#</a>',
                 title: "Blog Title",
                 width: "120px",
                 attributes:
@@ -242,11 +242,11 @@
 
         // Kendo Grid on change
 
-        $scope.myBlogGridChange = function (dataItem) {
-            window.sessionStorage.selectedBlogID = dataItem.blog_id;
-            $scope.openEditBlogPopup(dataItem.blog_id);
-            //$scope.openEditBlogPopup();
-        };
+        //$scope.myBlogGridChange = function (dataItem) {
+        //    window.sessionStorage.selectedBlogID = dataItem.blog_id;
+        //    $scope.openEditBlogPopup(dataItem.blog_id);
+        //    //$scope.openEditBlogPopup();
+        //};
        
 
         $scope.$on('REFRESH', function (event, args) {
@@ -255,30 +255,19 @@
             }
         });
 
-        $scope.openAddBlogPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'blogs/create/blogCrate.html',
-                backdrop: 'static',
-                controller: BlogPostPopUpCtrl,
-                size: 'lg'
-            });
-        };
+        //$scope.openAddBlogPopup = function () {
+        //    var modalInstance = $modal.open({
+        //        animation: true,
+        //        templateUrl: 'blogs/create/blogCrate.html',
+        //        backdrop: 'static',
+        //        controller: BlogPostPopUpCtrl,
+        //        size: 'lg'
+        //    });
+        //};
 
-        $scope.openEditBlogPopup = function (blog_id) {
+        //$scope.openEditBlogPopup = function (blog_id) {
           
-            window.sessionStorage.selectedBlogID = blog_id;
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'blogs/edit/blogEdit.html',
-                backdrop: 'static',
-                controller: BlogPostEditCtrl,
-                size: 'lg'
-            });
-        };
-        //$scope.openEditBlogPopup = function () {
-
-        //    //window.sessionStorage.selectedBlogID = blog_id;
+        //    window.sessionStorage.selectedBlogID = blog_id;
         //    var modalInstance = $modal.open({
         //        animation: true,
         //        templateUrl: 'blogs/edit/blogEdit.html',
@@ -287,5 +276,15 @@
         //        size: 'lg'
         //    });
         //};
+
+        
+        $scope.openAddBlogPopup = function () {
+            $state.go('app.addBlog');
+        };
+
+       
+        $scope.openEditBlogPopup = function () {
+            $state.go('app.editBlog');
+        };
     });
 

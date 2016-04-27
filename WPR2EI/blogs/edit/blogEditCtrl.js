@@ -1,17 +1,19 @@
-﻿
-var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, $modal, $rootScope, $sanitize, $window) {
-    console.log('BlogPostEditCtrl');
+﻿angular.module('blogs')
+.controller('EditBlogCtrl', function ($scope, $state, $cookieStore, apiService, FileUploader, $modal, $rootScope, $sanitize, $window, $stateParams) {
+    console.log('EditBlogCtrl');
 
     var orgID = $cookieStore.get('orgID');
     var userID = $cookieStore.get('userId');
     var authRights = ($cookieStore.get('UserRole'));
+    $scope.selectedBlogID = $stateParams.id;
+    window.sessionStorage.selectedBlogID = $scope.selectedBlogID;
 
     $scope.isContentWriter = (_.find(authRights, function (o) { return o == 'Content Writer'; })) == 'Content Writer' ? true : false
     $scope.isContentApprover = (_.find(authRights, function (o) { return o == 'Content Approver'; })) == 'Content Approver' ? true : false
     $scope.isContentPublisher = (_.find(authRights, function (o) { return o == 'Content Publisher'; })) == 'Content Publisher' ? true : false
     $scope.isContentModerator = (_.find(authRights, function (o) { return o == 'Content Moderator'; })) == 'Content Moderator' ? true : false
     $scope.isContentTemplateApprover = (_.find(authRights, function (o) { return o == 'Content Template Approver'; })) == 'Content Template Approver' ? true : false
-    $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
+  
  
    
 
@@ -181,7 +183,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             data = response.data;         
             $scope.openSucessfullPopup();
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
+            //$modalInstance.dismiss();
+            $state.go('app.integration');
             
         },
         function (error) {
@@ -239,7 +242,9 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
                     }
                    
                     $scope.cancel();
+               
                     $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
+                    $state.go('app.integration');
                 },
                 function (error)
                 {
@@ -329,7 +334,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         apiService.post("Blogs/BlogCommentCreate", postdataSendForApproval).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
+            //$modalInstance.dismiss();
+            $state.go('app.integration');
         },
               function (error) {
                   if (error.status === 400)
@@ -350,7 +356,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         apiService.post("Blogs/BlogCommentCreate", postdataApproval).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
+            //$modalInstance.dismiss();
+            $state.go('app.integration');
         },
               function (error) {
                   if (error.status === 400)
@@ -372,7 +379,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         apiService.post("Blogs/BlogCommentCreate", postdataDecline).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
+            //$modalInstance.dismiss();
+            $state.go('app.integration');
         },
               function (error) {
                   if (error.status === 400)
@@ -397,7 +405,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
             apiService.post("Blogs/BlogCommentCreate", postdataPublished).then(function (response) {
                 data = response.data[0];
                 $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-                $modalInstance.dismiss();
+                //$modalInstance.dismiss();
+                $state.go('app.integration');
             });
 
         }
@@ -420,7 +429,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         apiService.post("Blogs/ChangeModerator_Status", postdataFailed).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
+            //$modalInstance.dismiss();
+            $state.go('app.integration');
         },
               function (error) {
                   if (error.status === 400)
@@ -440,7 +450,8 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         apiService.post("Blogs/ChangeModerator_Status", postdataPassed).then(function (response) {
             data = response.data[0];
             $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-            $modalInstance.dismiss();
+            //$modalInstance.dismiss();
+            $state.go('app.integration');
         },
               function (error) {
                   if (error.status === 400)
@@ -486,6 +497,6 @@ var BlogPostEditCtrl = function ($scope, $state, $cookieStore, apiService, $moda
         }
     }
 
-};
+});
 
 
