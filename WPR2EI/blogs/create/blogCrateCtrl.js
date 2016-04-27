@@ -123,9 +123,13 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
 
     apiService.get('Template/GetTemplatesByType/' + orgID + '/ReleaseOrder').then(function (response) {
         $scope.params.templateList = response.data;
+        //$cookieStore.put('',)
     });
 
     $scope.selectTemplate = function () {
+        $scope.id = $scope.params.template;
+        $cookieStore.put('id', $scope.id);
+        $scope.templateId = $cookieStore.get('id');
         if ($scope.params.template !== "") {
             //$scope.params.subject = (_.findWhere($scope.params.templateList, { id: $scope.params.template })).subject;
             $scope.params.bodyText = $sanitize((_.findWhere($scope.params.templateList, { id: $scope.params.template })).description);
@@ -134,7 +138,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
             $scope.params.bodyText = "";
     }
 
-
+   
     //start
     // CALLBACKS
     var uploadResult;
@@ -188,6 +192,7 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                 // comment: $scope.params.comment,
                 blog_id: $scope.blog_id,
                 status: "Sent For Approval",
+                template_id: $scope.templateId,
 
             };
             apiService.post("Blogs/BlogCommentCreate", postdataSendForApproval).then(function (response) {

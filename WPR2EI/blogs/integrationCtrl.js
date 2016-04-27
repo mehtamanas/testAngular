@@ -167,14 +167,15 @@
                }
 
              },{
-                 template: '<button class="btn btn-primary" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">COPY</button>',               
+                 template: '<button class="btn btn-primary" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">COPY</button>',
                  width: "120px",
                  attributes:
                {
                    "style": "text-align:center"
                }
 
-             },]
+                 },
+             ]
         };
 
 
@@ -242,7 +243,8 @@
 
         $scope.myBlogGridChange = function (dataItem) {
             window.sessionStorage.selectedBlogID = dataItem.blog_id;
-            $scope.openEditBlogPopup();
+            $scope.openEditBlogPopup(dataItem.blog_id);
+            //$scope.openEditBlogPopup();
         };
        
 
@@ -273,5 +275,16 @@
                 size: 'lg'
             });
         };
+        //$scope.openEditBlogPopup = function () {
+
+        //    //window.sessionStorage.selectedBlogID = blog_id;
+        //    var modalInstance = $modal.open({
+        //        animation: true,
+        //        templateUrl: 'blogs/edit/blogEdit.html',
+        //        backdrop: 'static',
+        //        controller: BlogPostEditCtrl,
+        //        size: 'lg'
+        //    });
+        //};
     });
 
