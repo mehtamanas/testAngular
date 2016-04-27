@@ -1,113 +1,133 @@
-﻿
-<div class="modal-header">
+﻿<!--<div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="exampleModalLabel">Create New Blog Post</h4>
-</div>
+</div>-->
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
 
-<form class="form-content form-content2 edit-organization-setting" name="emailForm" style="text-align:left;" novalidate data-ng-submit="addNewContact(emailForm.$valid)" autocomplete="off">
-    <div class="clearfix image-upload-container">
-        <div class="modal-body  image-upload-wrap">
-            <div class="image-upload-title">Upload Image</div>
-            <div class="dropzone dropzone-bx image-upload-bx">
-                <div class="fallback">
-                    <div class="panel panel-success" uploader="uploader1" nv-file-over="">
-                        <div class="image-upload-panel">
-                            <div class="row" ng-hide="uploader1.queue.length">
-                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
-                                <!--<div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                    <span class="page-center">Drag And Drop</span>
-                                </div>-->
-                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                <div class="col-md-3">
+                    <h2 class="pg-inner-title">Blog / <span class="selectedPageBreadcrumb"> Create New Blog Post</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pg-inner-content" style="">
+        <div class="project-detail">
+            <div class="top-row" style="width:100%; background:#fff; padding:40px;">
+
+
+                <form class="form-content form-content2 edit-organization-setting" name="emailForm" style="text-align:left;" novalidate data-ng-submit="addNewContact(emailForm.$valid)" autocomplete="off">
+                    <div class="clearfix image-upload-container">
+                        <div class="modal-body  image-upload-wrap">
+                            <div class="image-upload-title">Upload Image</div>
+                            <div class="dropzone dropzone-bx image-upload-bx">
+                                <div class="fallback">
+                                    <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                                        <div class="image-upload-panel">
+                                            <div class="row" ng-hide="uploader1.queue.length">
+                                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                                <!--<div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
+                                                    <span class="page-center">Drag And Drop</span>
+                                                </div>-->
+                                                <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                            </div>
+                                            <div class="" ng-show="uploader1.queue.length">
+                                                <div class="user-photo_2" ng-repeat="item in uploader1.queue">
+                                                    <img id="fetch" src="#" class="image1" alt="your image" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="" ng-show="uploader1.queue.length">
-                                <div class="user-photo_2" ng-repeat="item in uploader1.queue">
-                                    <img id="fetch" src="#" class="image1" alt="your image" />
+                            <div class="uploadFileName">
+                                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
+                            </div>
+                            <label class="custom-file-input">
+                                <input type="file" class="image-upload-f" id="blog_Create_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-bx form-bx8">
+                        <label for="">Blog Name</label>
+                        <input type="text" class="form-control text-bold" id="addnewBlog_name" autofocus name="Blog_name"
+                               placeholder="Blog Name"
+                               data-ng-model="params.name"
+                               input-focus
+                               required />
+                        <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
+                            <div ng-message="required">Please enter name</div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label> Tag</label>
+                                <div class="form-bx13" style="padding-bottom: 29px;">
+                                    <input id="Blog_tag" kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx8">
+                            <label for="">Select Template</label>
+                            <select ng-model="params.template" name="templateSelect" ng-change="selectTemplate()" class="dropdown form-control text-bold" id="emailAddTemplate_Select Template" required>
+                                <option value="" selected>--Select Template--</option>
+                                <option ng-repeat="template in params.templateList"
+                                        value="{{template.id}}">
+                                    {{template.template_name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx14">
+                            <label for="">Description</label>
+                            <textarea id="Blog_editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.bodyText" resizable="true"></textarea>
+                        </div>
+                    </div>
+
+                    <input ng-show="false" id="BlogimageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                    <div class="progress" ng-show="uploader.progress>0 && uploader.progress<100">
+                        <div class="progress-bar" role="progressbar"
+                             ng-style="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                    <div class="progress" ng-show="uploader1.progress>0 && uploader1.progress<100">
+                        <div class="progress-bar" role="progressbar"
+                             ng-style="{ 'width': uploader1.progress + '%' }"></div>
+                    </div>
+
+                    <div class="modal-btn-wrap-1 clearfix">
+                        <button type="submit" id="add_blog_saveDraft" class="f-btn" ng-disabled="showValid"> Save Draft</button>
+                        <button type="submit" id="add_blog_approval" class=" f-btn" style="margin:1px" ng-click="saveAndSend()" ng-disabled="showValid && sendApproval">Send For Approval </button>
+                        <!--<button type="button" class=" f-btn" style="margin:1px"> Publish </button>-->
+                    </div>
+                </form>
+
+
             </div>
-            <div class="uploadFileName">
-                <p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p>
-            </div>
-            <label class="custom-file-input">
-                <input type="file" class="image-upload-f" id="blog_Create_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader1" />
-            </label>
         </div>
     </div>
-
-    <div class="form-group form-bx form-bx8">
-        <label for="">Blog Name</label>
-        <input type="text" class="form-control text-bold" id="addnewBlog_name" autofocus name="Blog_name"
-               placeholder="Blog Name"
-               data-ng-model="params.name"
-               input-focus
-               required />
-        <div ng-messages="emailForm.Blog_name.$error" data-ng-if="emailForm.Blog_name.$invalid && (!emailForm.Blog_name.$pristine || showValid) && !emailForm.Blog_name.$focus" style="color:maroon" role="alert">
-            <div ng-message="required">Please enter name</div>
-        </div>
     </div>
-
-    <div class="clearfix">
-        <div class="form-group">
-            <div class="col-xs-12">
-                <label> Tag</label>
-                <div class="form-bx13" style="padding-bottom: 29px;">
-                    <input id="Blog_tag" kendo-auto-complete k-data-source="tagList" class="form-control" ng-model="params.tag_name" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="clearfix">
-        <div class="form-group form-bx form-bx8">
-            <label for="">Select Template</label>
-            <select ng-model="params.template" name="templateSelect" ng-change="selectTemplate()" class="dropdown form-control text-bold" id="emailAddTemplate_Select Template" required>
-                <option value="" selected>--Select Template--</option>
-                <option ng-repeat="template in params.templateList"
-                        value="{{template.id}}">
-                    {{template.template_name}}
-                </option>
-            </select>
-        </div>
-    </div>
-   
-    <div class="clearfix">
-        <div class="form-group form-bx form-bx14">
-            <label for="">Description</label>
-            <textarea id="Blog_editor" rows="10" cols="30" style="width:100%;height:400px" kendo-editor k-options="editorOption" k-ng-model="params.bodyText" resizable="true"></textarea>
-        </div>
-    </div>
-
-    <input ng-show="false" id="BlogimageBrowser" type="file" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-    <div class="progress" ng-show="uploader.progress>0 && uploader.progress<100">
-        <div class="progress-bar" role="progressbar"
-             ng-style="{ 'width': uploader.progress + '%' }"></div>
-    </div>
-    <div class="progress" ng-show="uploader1.progress>0 && uploader1.progress<100">
-        <div class="progress-bar" role="progressbar"
-             ng-style="{ 'width': uploader1.progress + '%' }"></div>
-    </div>
-
-    <div class="modal-btn-wrap-1 clearfix">    
-        <button type="submit" id="add_blog_saveDraft"  class="f-btn" ng-disabled="showValid"> Save Draft</button>
-        <button type="submit" id="add_blog_approval" class=" f-btn" style="margin:1px" ng-click="saveAndSend()" ng-disabled="showValid && sendApproval">Send For Approval </button>
-        <!--<button type="button" class=" f-btn" style="margin:1px"> Publish </button>-->
-    </div>
-</form>
-<!-- for image fetch -->
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#fetch').attr('src', e.target.result);
+    <!-- for image fetch -->
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#fetch').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-    $("#blog_Create_uploader1").change(function () {
-        readURL(this);
-    });
-</script>
+        $("#blog_Create_uploader1").change(function () {
+            readURL(this);
+        });
+    </script>

@@ -1,7 +1,7 @@
-﻿
-var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope, $sanitize) {
+﻿angular.module('blogs')
+.controller('CreateBlogCtrl', function ($scope, $state, $cookieStore, apiService, FileUploader, uploadService, $modal, $rootScope, $sanitize) {
     $scope.selectedBlogID = window.sessionStorage.selectedBlogID;
-    console.log('BlogPostPopUpCtrl');
+    console.log('CreateBlogCtrl');
     $scope.showBlog = true;
     $scope.showPreview = false;
     $scope.params = {}
@@ -170,7 +170,8 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
                     $scope.blog_id = data.blog_id;
                     $scope.openSucessfullPopup();
                     $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
-                    $modalInstance.dismiss();
+                    //$modalInstance.dismiss();
+                    $state.go('app.integration');
                     if ($scope.sendApproval) {
                         $scope.sendForApproval();
                     }
@@ -197,7 +198,8 @@ var BlogPostPopUpCtrl = function ($scope, $state, $cookieStore, apiService, $mod
             };
             apiService.post("Blogs/BlogCommentCreate", postdataSendForApproval).then(function (response) {
                 data = response.data[0];
-                $modalInstance.dismiss();
+                //$modalInstance.dismiss();
+                $state.go('app.integration');
             },
                   function (error) {
                       $scope.showValid = false;
@@ -282,6 +284,6 @@ function (error) {
         }
     }
 
-};
+});
 
 
