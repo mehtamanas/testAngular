@@ -118,7 +118,7 @@
             reorderable: true,
             resizable: true,
             filterable: false,
-            height: window.innerHeight - 180,
+            height: window.innerHeight - 220,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
