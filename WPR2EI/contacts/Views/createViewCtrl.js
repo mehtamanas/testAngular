@@ -27,7 +27,7 @@
             apiService.post('Notes/CreateGridView', postData).then(function (response) {
                 view = response.data;
                 $scope.openSucessfullPopup();
-                $scope.cancel();
+                $scope.cancel(view.id);
                 if (view.grid_name == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: view });
                 if (view.grid_name == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: view });
                 if (view.grid_name == 'client') $rootScope.$broadcast('REFRESH3', { name: 'ViewCreated', data: view });
@@ -41,8 +41,8 @@
         }
     }
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss();
+    $scope.cancel = function (gridViewId) {
+        $modalInstance.close({id: gridViewId});
     }
 
     $scope.openSucessfullPopup = function () {
