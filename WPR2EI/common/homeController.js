@@ -67,6 +67,7 @@ angular.module('common')
             var authRights = ($cookieStore.get('UserRole'));
 
             $scope.isEnterpriseUser = (_.find(authRights, function (o) { return o == 'Enterprise User'; }));
+            $scope.isTeamLead = (_.find(authRights, function (o) { return o == 'Team Lead'; }));
 
             nav = response;
             if (nav.length > 0) {

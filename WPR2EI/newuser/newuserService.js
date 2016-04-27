@@ -28,6 +28,10 @@ angular.module('newuser')
             };
 
             this.getOrgProjects = function (userID) {
+
+                 var getOrgProjects = function (teamId) {
+                    
+                }
                
               //  alert("userID" + userID);
 

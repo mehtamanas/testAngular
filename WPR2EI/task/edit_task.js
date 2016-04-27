@@ -181,7 +181,7 @@
             organization_id: $cookieStore.get('orgID'),
             user_id: $cookieStore.get('userId'),
             assigned_to_id: $scope.contact1,
-            class_type: "Contact",
+            class_type: "Person",
             reminder_time: $scope.params.reminder_time,
             task_type_id_: $scope.event1,
             time: $scope.params.time,
