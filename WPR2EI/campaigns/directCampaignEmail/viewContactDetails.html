@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div id="printData" >
-                        <div class="col-md-4" ng-repeat="contact in Contacts"  pageBreak: 'after'>
+                        <div class="col-md-4" ng-repeat="contact in Contacts">
                             <div class="well" style="margin-right: 20px;">
                                 <table class="table">
                                     <thead>
@@ -48,11 +48,11 @@
                                         </tr>
                                         <tr>
                                             <td>Address :</td>
-                                            <td>{{street_1}}  {{street_2}}</td>
+                                            <td>{{contact.street_1}}  {{contact.street_2}}</td>
                                         </tr>
                                         <tr>
                                             <td>Phone No :</td>
-                                            <td>{{phone}}</td>
+                                            <td>{{contact.phone}}</td>
                                         </tr>
                                     </thead>
                                 </table>
