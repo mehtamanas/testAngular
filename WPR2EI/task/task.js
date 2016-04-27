@@ -1549,7 +1549,7 @@
 
                             else {
                                 if (expsplit[1].toUpperCase().trim() == "BLANK") {
-                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: undefined });
+                                    filter.filters.push({ field: Firstname.trim(), operator: "eq", value: "" });
                                 }
                                 else {
                                     if (Firstname == "status" && expsplit[1].trim().toUpperCase() == "IN PROGRESS") {

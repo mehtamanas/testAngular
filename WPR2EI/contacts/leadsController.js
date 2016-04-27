@@ -566,8 +566,33 @@ angular.module('contacts')
             var txtdata = $scope.textareaText.toLowerCase();
             if (txtdata != '')
                 $scope.callFilter();
+             //  $scope.Notification();
         };
-
+       
+        $scope.Notification = function () {
+            //welcome notification
+            $.notify({
+                message: 'Query Executed Successfully'
+            }, {
+                // settings
+                element: 'body',
+                position: null,
+                type: "success",
+                allow_dismiss: false,
+                placement: {
+                    from: "top",
+                    align: "center"
+                },
+                mouse_over: null,
+                delay: 100,
+               
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                }
+            }, 1000);
+            //end welcome notification
+        }
 
         $scope.highlightFilteredWords = function () {
             $("#contact_kenomain").highlight($scope.textareaText);
@@ -1586,7 +1611,7 @@ angular.module('contacts')
                                 return;
                             }
 
-                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGTE[1].trim()) });
+                            filter.filters.push({ field: Firstname.trim(), operator: "gt", value: parseFloat(expSplitGT[1].trim()) });
                             ValidFilter = true;
                             spiltOK = false;
                         }
@@ -1735,7 +1760,7 @@ angular.module('contacts')
 
                                 expsplitIsAfter[1] = expsplitIsAfter[1].replace(/"/g, "");
                                 filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1], "DD-MM-YYYY").add('day', 1)._d });
-                                
+
                                 //commented above line becoz in morning time is after takes value of current date also.
 
                                 //var date = new Date(expsplitIsAfter[1].trim());
@@ -1825,7 +1850,7 @@ angular.module('contacts')
 
         $scope.callWordFilter = function () {
 
-           
+
             $(".k-grid-content *").unhighlight($scope.textareaText);
             var txtSearch = $scope.textareaText;
 
@@ -1896,15 +1921,15 @@ angular.module('contacts')
             //}
 
 
-           // $(".k-grid-content *").highlight($scope.textareaText);
-            
+            // $(".k-grid-content *").highlight($scope.textareaText);
 
 
-          //  ds.highlight($scope.textareaText);
-          
-          //  $("#contact_kenomain").highlight($scope.textareaText);
-            
-            
+
+            //  ds.highlight($scope.textareaText);
+
+            //  $("#contact_kenomain").highlight($scope.textareaText);
+
+
 
         }
 
