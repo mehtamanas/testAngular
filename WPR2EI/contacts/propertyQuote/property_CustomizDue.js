@@ -29,6 +29,22 @@
 
     $scope.totalValue = $cookieStore.get("total");
 
+    // Government and Other Charges Details//
+
+    $scope.governmentCharges = [];
+    $scope.otherCharges = [];
+
+    $scope.propertyOrganization = $cookieStore.get('PropertyOrgDetails');
+
+    $scope.propertyContactDetail = $cookieStore.get('PropertyContactDetails');
+
+    $scope.governmentCharges = $cookieStore.get('govermentCharges');
+
+    $scope.otherCharges = $cookieStore.get('otherCharges');
+
+    // Ends Government and Other Charges Details//
+
+
     $scope.amountCalculation = function () {
         $scope.amountCalculationValue = [];
 
@@ -53,18 +69,52 @@
         }
     }
 
+    // For Government Charges Calculation
+    var chargesDetails = function () {
+        var govcharges = []
+        govcharges.push([{ text: 'Goverment Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ]);
+        for (i = 0; i < $scope.governmentCharges.length; i++) {
+            govcharges.push([{ text: $scope.governmentCharges[i].name, style: 'tableData' }, { text: ($scope.governmentCharges[i].value).toString(), style: 'tableData' }])
+
+        }
+
+        govcharges = {
+            headerRows: 1,
+            widths: [410, 67, ],
+            body: govcharges
+        }
+        return govcharges
+    }
+
+    // For Other Charges Calculation
+    var otherChargeDetails = function () {
+        var othercharges = []
+        othercharges.push([{ text: 'Other Charges', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }]);
+        for (i = 0; i < $scope.otherCharges.length; i++) {
+            othercharges.push([{ text: $scope.otherCharges[i].name, style: 'tableData' }, { text: ($scope.otherCharges[i].value).toString(), style: 'tableData' }])
+
+        }
+        othercharges = {
+            headerRows: 1,
+            widths: [410, 67, ],
+            body: othercharges
+        }
+        return othercharges
+    }
+
+    // For Payment Scheme
     var totalCinsideration = function (){
 
         var propertyConsidaration = [];
         //var propertyConsidarationTable = {};
         propertyConsidaration.push([{ text: 'Payment Scheme For 20:40:40', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Percentage', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }, ]);
         for (i = 0; i < $scope.amountCalculationValue.length; i++) {
-            propertyConsidaration.push({ text: $scope.amountCalculationValue[i].description, style: 'tableData' }, { text: $scope.amountCalculationValue[i].percentage, style: 'tableData' }, { text: ($scope.amountCalculationValue[i].amountTotal).toString(), style: 'tableData' }, { text: ($scope.amountCalculationValue[i].serviceTax).toString(), style: 'tableData' })
+            propertyConsidaration.push([{ text: $scope.amountCalculationValue[i].description, style: 'tableData' }, { text: $scope.amountCalculationValue[i].percentage, style: 'tableData' }, { text: ($scope.amountCalculationValue[i].amountTotal).toString(), style: 'tableData' }, { text: ($scope.amountCalculationValue[i].serviceTax).toString(), style: 'tableData' }])
 
         }
         propertyConsidaration = {
             headerRows: 1,
-            widths: [150, 67, 67, 67, 67, ],
+            widths: [150, 67, 67, 67,67, ],
             body: propertyConsidaration,
         }
         
@@ -73,13 +123,410 @@
 
     }
 
+    // Checking for any data for pdf being null
+    var prePDFCheck = function () {
 
+        if ($scope.propertyOrganization.name == null) $scope.propertyOrganization.name = "";
+        if ($scope.propertyOrganization.street_1 == null) $scope.propertyOrganization.street_1 = "";
+        if ($scope.propertyOrganization.street_2 == null) $scope.propertyOrganization.street_2 = "";
+        if ($scope.propertyOrganization.city == null) $scope.propertyOrganization.city = "";
+        if ($scope.propertyOrganization.state == null) $scope.propertyOrganization.state = "";
+        if ($scope.propertyOrganization.zip_code == null) $scope.propertyOrganization.zip_code = "";
+        //if ($scope.organization.account_phone == null) $scope.organization.account_phone = "";
+        //if ($scope.organization.account_email == null) $scope.organization.account_email = "";
+
+
+        if ($scope.propertyContactDetail.Name == null) $scope.propertyContactDetail.Name = "";
+        if ($scope.propertyContactDetail.area == null) $scope.propertyContactDetail.area = "";
+        if ($scope.propertyContactDetail.street1 == null) $scope.propertyContactDetail.street1 = "";
+        if ($scope.propertyContactDetail.street2 == null) $scope.propertyContactDetail.street2 = "";
+        if ($scope.propertyContactDetail.City == null) $scope.propertyContactDetail.City = "";
+        if ($scope.propertyContactDetail.state_name == null) $scope.propertyContactDetail.state_name = "";
+        if ($scope.propertyContactDetail.zip_code == null) $scope.propertyContactDetail.zip_code = "";
+
+
+    }
     $scope.preview = function () {
-       // totalCinsideration()
+        prePDFCheck();
         var docDefinition = {
             content: [
+
+
+               { text: $scope.propertyOrganization.name, style: 'BuilderName' },
+               { text: $scope.propertyOrganization.street_1 + $scope.propertyOrganization.street_2, style: 'BuilderAddress', margin: [0, 5, 0, 0], },
+               { text: $scope.propertyOrganization.city, style: 'BuilderAddress' },
+               { text: $scope.propertyOrganization.state, style: 'BuilderAddress' },
+               { text: $scope.propertyOrganization.zip_code, style: 'BuilderAddress' },
+
+
+               {
+                   style: 'panNo',
+                   margin: [0, 30, 0, 30],
+                   table: {
+
+                       widths: [150, 150, 150, ],
+                       body: [
+
+
+                           ['ST NO: AAECD6943NSD001', 'PAN NO: AAECD6943N', 'PAYMENT TERMS: 100% Advance'],
+                       ]
+                   },
+
+                   layout: 'noBorders'
+               },
+
+
+
+
+
+                   {
+                       table: {
+                           headerRows: 1,
+                           widths: [300, 220, ],
+                           body: [
+                                 [{ text: '', style: 'tableHeader' }],
+
+                                 [{ text: $scope.propertyContactDetail.Name, style: 'BuilderName', }, ],
+                                 [{ text: $scope.propertyContactDetail.area, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.propertyContactDetail.street1, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.propertyContactDetail.street2, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.propertyContactDetail.City, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.propertyContactDetail.state_name, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.propertyContactDetail.zip_code, style: 'BuilderAddress' }, ],
+                           ]
+                       },
+                       layout: {
+
+
+                           hLineWidth: function (i, node) {
+                               return (i === 0 || i === node.table.body.length) ? .5 : 0;
+                           },
+                           vLineWidth: function (i, node) {
+                               return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+                           },
+                           hLineColor: function (i, node) {
+                               return (i === 0 || i === node.table.body.length) ? '#cfcfcf' : '#cfcfcf';
+                           },
+                           vLineColor: function (i, node) {
+                               return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
+                           },
+
+                           paddingLeft: function (i, node) { return 0; },
+                           paddingRight: function (i, node) { return 0; },
+                           paddingTop: function (i, node) { return 2; },
+                           paddingBottom: function (i, node) { return 2; }
+
+                       },
+                   },
+
+                { text: 'Project: DB Crwon', style: 'BuilderName', margin: [0, 30, 0, 10], },
+
+
+
+
+
+         {
+
+
+             table: {
+                 headerRows: 1,
+
+
+                 body: [
+                        [{
+                            table: {
+
+                                widths: [40, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.towerName, style: 'configurationDetail', }],
+                                    [{ text: 'Tower', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // tower a
+
+
+                        {
+                            table: {
+                                widths: [40, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.floorNo, style: 'configurationDetail', }],
+                                    [{ text: 'Floor', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // Floor
+
+                        {
+                            table: {
+                                widths: [40, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.unitNo, style: 'configurationDetail', }],
+                                    [{ text: 'Unit No.', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // unit no
+                        {
+                            table: {
+                                widths: [40, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.unitName, style: 'configurationDetail', }],
+                                    [{ text: 'BHK', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // bhk
+
+                        {
+                            table: {
+                                widths: [80, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.salableArea, style: 'configurationDetail', }],
+                                    [{ text: 'Saleable Area', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // saleable area
+
+                        {
+                            table: {
+                                widths: [80, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.CarpatArea, style: 'configurationDetail', }],
+                                    [{ text: 'Carpet Area', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // carpet area
+
+                        {
+                            table: {
+                                widths: [40, ],
+                                body: [
+                                    [{ text: $scope.proprty_Details.CarePark, style: 'configurationDetail', }],
+                                    [{ text: 'Car Park', style: 'configurationDetail2', }],
+                                ]
+                            },
+
+                            layout: 'noBorders'
+
+                        },
+
+                        // car parking
+
+
+                        ],
+
+
+
+
+
+                 ]
+             },
+             layout: {
+
+
+                 hLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? .5 : .5;
+                 },
+                 vLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? .5 : .5;
+                 },
+                 hLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? '#cccccc' : '#cccccc';
+                 },
+                 vLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? '#cccccc' : '#cccccc';
+                 },
+
+                 //paddingLeft: function (i, node) { return 5; },
+                 // paddingRight: function (i, node) { return 5; },
+                 // paddingTop: function (i, node) { return 5; },
+                 // paddingBottom: function (i, node) { return 5; }
+
+             },
+
+
+
+         },
+
+
+        //         //total consideration start
+
+
+         {
+             margin: [0, 20, 0, 20],
+             table: {
+                 headerRows: 1,
+                 widths: [410, 67, ],
+                 body: [
+                        [{ text: 'Total Consideration', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ],
+                        [{ text: 'Rate per sq.ft', style: 'tableData', }, { text: $scope.proprty_Details.Rps, style: 'tableData', }, ],
+                        [{ text: 'Floor Rise Applicable', style: 'tableData', }, { text: $scope.proprty_Details.Fra, style: 'tableData', }, ],
+
+                 ]
+             },
+             layout: {
+
+
+                 hLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? .5 : .5;
+                 },
+                 vLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+                 },
+                 hLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
+                 },
+                 vLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
+                 },
+
+                 paddingLeft: function (i, node) { return 10; },
+                 paddingRight: function (i, node) { return 10; },
+                 paddingTop: function (i, node) { return 10; },
+                 paddingBottom: function (i, node) { return 10; }
+
+             },
+
+         },
+
+
+
+         //Goverment chares
+
+         {
+             margin: [0, 20, 0, 20],
+             table:chargesDetails(),
+             layout: {
+
+
+                 hLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? .5 : .5;
+                 },
+                 vLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+                 },
+                 hLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
+                 },
+                 vLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
+                 },
+
+                 paddingLeft: function (i, node) { return 10; },
+                 paddingRight: function (i, node) { return 10; },
+                 paddingTop: function (i, node) { return 10; },
+                 paddingBottom: function (i, node) { return 10; }
+
+             },
+             pageBreak: 'after'
+         },
+
+
+
+
+         // other charges
+
+         {
+             margin: [0, 10, 0, 10],
+             table: otherChargeDetails(),
+             layout: {
+
+
+                 hLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? .5 : .5;
+                 },
+                 vLineWidth: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+                 },
+                 hLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
+                 },
+                 vLineColor: function (i, node) {
+                     return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
+                 },
+
+                 paddingLeft: function (i, node) { return 10; },
+                 paddingRight: function (i, node) { return 10; },
+                 paddingTop: function (i, node) { return 10; },
+                 paddingBottom: function (i, node) { return 10; }
+
+             },
+
+         },
+
+        /// total
+
+        {
+            margin: [0, 0, 0, 35],
+            table: {
+                headerRows: 1,
+                widths: [410, 67, ],
+                body: [
+                    [{ text: 'TOTAL', style: 'tableHeader', fillColor: '#efefef' }, { text: '', style: 'tableHeader', fillColor: '#efefef' }, ],
+                       [{ text: 'Offer Discount', style: 'tableHeader', }, { text: '15%', style: 'tableHeader', }, ],
+                       [{ text: 'Additional Charges', style: 'tableData', }, { text: additionalDiscountValue, style: 'tableData', }, ],
+                        [{ text: 'TOTAL', style: 'tableData', }, { text: ($scope.totalValue).toString(), style: 'tableData', }, ],
+
+
+                ]
+            },
+            layout: {
+
+
+                hLineWidth: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? .5 : .5;
+                },
+                vLineWidth: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+                },
+                hLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
+                },
+                vLineColor: function (i, node) {
+                    return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
+                },
+
+                paddingLeft: function (i, node) { return 10; },
+                paddingRight: function (i, node) { return 10; },
+                paddingTop: function (i, node) { return 10; },
+                paddingBottom: function (i, node) { return 10; }
+
+            },
+
+        },
+
+
+         { text: '', style: 'BuilderAddress' },
+
                 {
-                    margin: [0, 30, 0, 30],
+                    margin: [0, 50, 0, 30],
                     table: totalCinsideration(),
                     layout: {
 
@@ -120,6 +567,10 @@
                 'Stamp duty, Registration and VAT is paid at the time of registration',
                 ]
 		},
+
+
+
+
             ],
 
 
@@ -129,12 +580,30 @@
                     bold: true,
 
                 },
+
+                BuilderName: {
+
+                    fontSize: 13,
+                    color: 'black',
+                    bold: true,
+                },
+
+
+
+                BuilderAddress: {
+
+                    fontSize: 9,
+                    color: 'black',
+                    bold: false,
+                },
+
                 panNo:
-          {
-              fontSize: 9,
-              color: 'black',
-              bold: true,
-          },
+            {
+                fontSize: 9,
+                color: 'black',
+                bold: true,
+            },
+
                 tableHeader:
             {
                 fontSize: 9,
@@ -148,8 +617,29 @@
                color: '#717171',
                bold: false,
            },
-             },
-                defaultStyle: {
+
+
+
+                configurationDetail:
+                {
+                    alignment: 'center',
+                    fontSize: 11,
+                    bold: true,
+                    color: '#626262',
+                },
+
+                configurationDetail2:
+                {
+                    alignment: 'center',
+                    fontSize: 8,
+                    bold: false,
+                    color: '#626262',
+                },
+
+
+
+            },
+            defaultStyle: {
                 fontSize: 8,
                 color: '#717171',
                 bold: false,

@@ -13,6 +13,7 @@
     Url = "Organization/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.organization = response.data[0];
+        $cookieStore.put('PropertyOrgDetails', $scope.organization);
     },
    function (error) {
        if (error.status === 400)
@@ -24,7 +25,7 @@
     Url = "Contact/GetContactSummary/?Id=" + customer_id;
     apiService.get(Url).then(function (response) {
         $scope.contactDetail = response.data;
-
+        $cookieStore.put('PropertyContactDetails', $scope.contactDetail);
     },
    function (error) {
        if (error.status === 400)
@@ -693,7 +694,7 @@
                 otherChargeIntermediateTotal = parseFloat(otherChargeIntermediateTotal) + parseFloat(perSqr_basic);
                 $scope.otherChargesAfterCalculation.push({ name: $scope.otherchargeList[0].chargeList[i].charge_name_type, value: parseFloat(perSqr_basic) });
             }
-           
+            $cookieStore.put('otherCharges', $scope.otherChargesAfterCalculation);
         }
 
 
@@ -739,7 +740,7 @@
                 govermentChargeIntermediateValue = parseFloat(govermentChargeIntermediateValue) + parseFloat(perSqr_basic_gov);
                 $scope.govermentChargesAfterCalculation.push({ name: $scope.govchargeList[0].chargeList[i].charge_name_type, value: parseFloat(perSqr_basic_gov) });
             }
-
+            $cookieStore.put('govermentCharges', $scope.govermentChargesAfterCalculation);
         }
        
 
