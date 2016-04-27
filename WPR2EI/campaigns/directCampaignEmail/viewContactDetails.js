@@ -134,6 +134,15 @@
         })
         };
 
+        $scope.print = function (printData) {
+            var innerContents = document.getElementById("printData").innerHTML;
+            var popupWinindow = window.open('', '_blank', 'width=10000,height=10000,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+            popupWinindow.document.open();
+            var csslink = '<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />' + '<link rel="stylesheet" type="text/css" href="../../css/styles.css" />';
+            popupWinindow.document.write('<html><head> '+ csslink +' </head><body onload="window.print()">' + innerContents + '</html>');
+            popupWinindow.document.close();
+        }
+
         $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
