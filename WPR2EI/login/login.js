@@ -38,6 +38,7 @@ angular.module('app.guest.login')
             if (isValid) {
                 $scope.loadingDemo = true;
                 $scope.params.email = $filter('lowercase')($scope.params.email);
+                $cookieStore.put('Email', $scope.params.email);
                 if ($rootScope.rememberMeOn) { $localStorage.alive.user = $scope.params}
                 security.login($scope.params.email, $scope.params.password).then(function (response) {
                     console.log(response);
@@ -144,6 +145,7 @@ angular.module('app.guest.login')
 
         if ($localStorage.alive) {
             $scope.params.email = $localStorage.alive.user.email;
+          
             $scope.params.password = $localStorage.alive.user.password;
             $scope.remember = $localStorage.alive.rememberMeOn;
             $scope.login(true);

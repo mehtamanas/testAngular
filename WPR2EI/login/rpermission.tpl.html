@@ -65,18 +65,18 @@
                 <li ng-repeat="resource in resources ">
                     <div class="amenities-bg clearfix">
 
+                        <div style="overflow-y:scroll">
+                            <div ng-class="{'amenities-selected': isChecked[$index]}" data-id={{resource.id}} ng-click='onClick($event);toggleClass($index)'>
+                                <h4 ng-if={{}}></h4>
+                            </div>
 
-                        <div ng-class="{'amenities-selected': isChecked[$index]}" data-id={{resource.id}} ng-click='onClick($event);toggleClass($index)'>
-                            <h4 ng-if={{}}></h4>
+
+                            {{resource.resource_feature}} &nbsp;  &nbsp;  &nbsp;
+
+                            <input type="checkbox" ng-model="resource.read">Read &nbsp;
+                            <input type="checkbox" ng-model="resource.write">Write &nbsp;
+                            <input type="checkbox" ng-model="resource.delete">Delete &nbsp;
                         </div>
-
-                     
-                        {{resource.resource_feature}} &nbsp;  &nbsp;  &nbsp;
-
-                        <input type="checkbox" ng-model="resource.read">Read &nbsp;
-                        <input type="checkbox" ng-model="resource.write">Write &nbsp;
-                        <input type="checkbox" ng-model="resource.delete">Delete &nbsp;
-                        
                         <!--<input type='checkbox' data-id={{amenity.id}} class='checkbox' ng-click='onClick($event)' />
                     <h4 ng-if={{}}></h4>-->
 

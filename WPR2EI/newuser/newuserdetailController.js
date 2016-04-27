@@ -7,10 +7,17 @@
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         //alert($cookieStore.get('userId'));
 
-        $('#btnSave').hide();
-        $('#iconEdit').hide();
-        $('#btnAdd').hide();
+        // ROLE PERMISSION CHECKING
+        var authRights = ($cookieStore.get('UserRole'));
 
+        $scope.isEnterpriseUser = (_.find(authRights, function (o) { return o == 'Enterprise User'; }))
+        $scope.isTeamLead = (_.find(authRights, function (o) { return o == 'Team Lead'; }));
+
+        //END
+      
+       
+
+        var logUserEmail = $cookieStore.get('Email');
 
 
         security.isAuthorized().then(function (response) {
@@ -126,7 +133,17 @@
                 if ($scope.data.contact_email !== '') {
                     $scope.email = $scope.data.contact_Email;
                 }
+
+                // for team lead rol permission check.
+
+                if (logUserEmail != $scope.account_email && $scope.isTeamLead == 'Team Lead') {
+                    $('#userEdit').hide();
+                }
+
+                //End
             },
+
+
                         function (error) {
                             if (error.status === 400)
                                 alert(error.data.Message);
@@ -167,6 +184,7 @@
        });
 
 
+      
 
         $scope.choices = [{ id: 'choice1' }];
 
