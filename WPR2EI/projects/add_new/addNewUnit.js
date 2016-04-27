@@ -18,7 +18,7 @@
     $scope.usable_area = items.usable_area;
     $scope.box_price = items.box_price;
     $scope.box_price_applicable = items.box_price_applicable,
-    $scope.area1 = items.price_decided_on
+    $scope.area1 = items.calculation_based_on
 
     if (items.unit_id == undefined) $scope.title = "Add New Unit Type";
     else $scope.title = "Edit Unit Type";
@@ -194,7 +194,7 @@
                 usable_area: $scope.usable_area,
                 box_price: $scope.box_price,
                 box_price_applicable: $scope.box_price_applicable,
-                price_decided_on: $scope.area1,
+                calculation_based_on: $scope.area1,
 
             };
             if (parseInt($scope.super_built_up_area) > parseInt($scope.carpet_area)) {
@@ -256,7 +256,7 @@
                 box_price: $scope.box_price,
                 box_price_applicable: $scope.box_price_applicable,
                 usable_area: $scope.usable_area,
-                price_decided_on: $scope.area1
+                calculation_based_on: $scope.area1
                 
 
             };
