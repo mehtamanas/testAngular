@@ -166,15 +166,16 @@
                    "style": "text-align:center"
                }
 
-             },{
-                 template: '<button class="btn btn-primary" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">COPY</button>',
-                 width: "120px",
-                 attributes:
-               {
-                   "style": "text-align:center"
-               }
+             },
+             //{
+             //    template: '<button class="btn btn-primary" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">COPY</button>',
+             //    width: "120px",
+             //    attributes:
+             //  {
+             //      "style": "text-align:center"
+             //  }
 
-                 },
+             //    },
              ]
         };
 
