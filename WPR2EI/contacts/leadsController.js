@@ -535,8 +535,8 @@ angular.module('contacts')
 
         {
             title: "Action",
-            template: '<div class="dropdown drop_lead" dropdown ><button class="btn drop_lead_btn dropdown-toggle" dropdown-toggle type="button" data-toggle="dropdown"><span class="caret caret_lead"></span></button><ul class="dropdown-menu dropdown_lead" dropdown-menu ><li>' +
-               '<a   class="follow_lead" ng-click="openFollowUp(dataItem)" data-toggle="modal">Follow up </a>' +
+            template: '<div class="uib-dropdown drop_lead" uib-dropdown ><button class="btn drop_lead_btn uib-dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="uib-dropdown"><span class="caret caret_lead"></span></button><ul class="uib-dropdown-menu dropdown_lead" uib-dropdown-menu ><li>' +
+               '<a  class="follow_lead" ng-click="openFollowUp(dataItem)" data-toggle="modal">Follow up </a>' +
                '</li><li><a href="" ng-click="openLog(dataItem)">Log Contact</a></li></ul></div>',
             // template: '<select class="drop_select fa fa-inr"><option value="volvo">Volvo</option><option value="saab">Saab</option><option value="mercedes">Mercedes</option><option value="audi">Audi</option></select>',
 
