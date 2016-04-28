@@ -225,43 +225,6 @@
                 </div>
 
                 <div class="pull-left f-half-3">
-                        <div class="clearfix">
-                            <div class="form-group"
-                                 data-ng-class="{
-                                                        'has-error' : addNewForm.boxprice.$invalid && (!addNewForm.boxprice.$pristine || showValid),
-                                                        'has-success': addNewForm.boxprice.$valid && !addNewForm.boxprice.$pristine
-                                                         }">
-                                <div class="form-group form-bx">
-                                    <label for="">Box Price</label>
-                                    <div class="area-f">
-                                        <input type="text" autofocus name="boxprice" class="form-control" id="addNewUnitBoxPrice" ng-focus="box_price_applicable=true;" 
-                                               placeholder="Box Price"
-                                               data-ng-model="box_price" 
-                                               minlength="1"
-                                               maxlength="10"
-                                               ng-pattern="/^([1-9][0-9+./]*)$/"
-                                               input-focus />
-                                        <div ng-messages="addNewForm.boxprice.$error" style="color:maroon" role="alert">
-                                            <div ng-message="required" data-ng-if="addNewForm.boxprice.$invalid && (!addNewForm.boxprice.$pristine || showValid) && !addNewForm.boxprice.$focus">This field should not be empty </div>
-                                            <div ng-message="pattern" id="err_addNewUnitBoxPrice">Enter valid value for box price</div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="field-md2 field-req"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" style="MARGIN-TOP: 4%;">
-                        <div style="float:left;margin-bottom:-13px;margin-top: 9%;margin-left: -39%;">
-                            <label>
-                                <input type="checkbox" id="chk_addNewUnitBoxPriceApplicable" name="chk_addNewUnitBoxPriceApplicable" ng-click="emptyText()" ng-model="box_price_applicable" />
-                                Box Price Applicable
-                            </label>
-                        </div>
-                    </div>
-               
-                <div class="pull-left f-half-3">
                     <div class="form-group form-bx form-bx3-1">
                         <label for="">Price Decided On</label>
                         <select ng-model="area1" ng-change="selectArea()" id="opt_addTaskAssign" class="dropdown form-control">

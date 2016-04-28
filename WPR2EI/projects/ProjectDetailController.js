@@ -554,7 +554,25 @@
                      "style": "text-align:center"
                  }
 
+            },{
+                field: "updated_date",
+                title: "Updated Date",
+                width: "120px",
+                format: '{0:dd/MM/yyyy hh:mm:ss}',
+                attributes:
+                {
+                    "style": "text-align:center"
+                }
             },
+                {
+                        field: "created_by",
+                        title: "Created By",
+                        attributes:
+                    {
+                        "style": "text-align:center"
+                    }
+
+                },
             {
                 field: "task_code",
                 title: "Task Code",
@@ -975,17 +993,16 @@
                     }
                 },
 
-                //{
-                //template: "<img height='40px' width='40px' src='#= Image_Url_Unit1 #'/>" +
-                //"<span style='padding-left:10px' class='property-photo'> </span>",
-                //title: "Photo",
-               
-                //attributes: {
-                //    "class": "UseHand",
-                //    "style": "text-align:center"
+                {
+                    template: "<img height='40px' width='40px' src='#= Image_Url_NSEW #'/>" +
+                   "<span style='padding-left:10px' class='property-photo'> </span>",
+                    title: "Photo", 
+                    attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
 
-                //}
-                //},
+                }
+                },
             {
                   field: "tower_name",
                   title: "Name",
@@ -1079,6 +1096,15 @@
                       field: "carpark",
                       title: "Car Park",
                  
+                      attributes:
+                {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+                  }, {
+                      field: "box_price",
+                      title: "Box Price",
+
                       attributes:
                 {
                     "class": "UseHand",
@@ -1438,17 +1464,30 @@
             // Kendo Grid on change
         $scope.myGridChangePanam = function (dataItem) {          
             window.sessionStorage.selectedCustomerID = dataItem.tower_id;        
-            $scope.openNewPanoramicPopup();
+            $scope.openNewPanoramicPopup(dataItem);
         };
 
-        $scope.openNewPanoramicPopup = function () {
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'projects/panoramic.tpl.html',
-                backdrop: 'static',
-                controller: AddNewPanoramicController,
-                size: 'lg'
-            });
+        $scope.openNewPanoramicPopup = function (dataItem) {
+            if (dataItem.tower_id == undefined) {
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'projects/panoramic.tpl.html',
+                    backdrop: 'static',
+                    controller: AddNewPanoramicController,
+                    size: 'lg',
+                    resolve: { items: { title: "Add New Panaromic View" } }
+                });
+            }
+            else {
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: 'projects/panoramic.tpl.html',
+                    backdrop: 'static',
+                    controller: AddNewPanoramicController,
+                    size: 'lg',
+                    resolve: { items: dataItem }
+                });
+            }
         };
 
         $scope.openEditFloorPopup = function (id) {           
