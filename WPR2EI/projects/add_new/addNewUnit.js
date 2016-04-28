@@ -16,8 +16,6 @@
     $scope.media2 = items.Image_Url_Unit2;
     $scope.media3 = items.Image_Url_Minimap;
     $scope.usable_area = items.usable_area;
-    $scope.box_price = items.box_price;
-    $scope.box_price_applicable = items.box_price_applicable,
     $scope.area1 = items.calculation_based_on
 
     if (items.unit_id == undefined) $scope.title = "Add New Unit Type";
@@ -192,8 +190,6 @@
                 num_bedrooms: $scope.num_bedrooms,
                 num_bathrooms: $scope.num_bathrooms,
                 usable_area: $scope.usable_area,
-                box_price: $scope.box_price,
-                box_price_applicable: $scope.box_price_applicable,
                 calculation_based_on: $scope.area1,
 
             };
@@ -253,8 +249,6 @@
                 cark_park: $scope.cark_park,
                 num_bedrooms: $scope.num_bedrooms,
                 num_bathrooms: $scope.num_bathrooms,
-                box_price: $scope.box_price,
-                box_price_applicable: $scope.box_price_applicable,
                 usable_area: $scope.usable_area,
                 calculation_based_on: $scope.area1
                 

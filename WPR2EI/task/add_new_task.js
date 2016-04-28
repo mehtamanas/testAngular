@@ -28,7 +28,7 @@
         $scope.assign_user_id = $scope.task.assign_user_id;
         $scope.end_date_time = $scope.task.end_date_time;
         $scope.event1 = $scope.task.task_type_id;
-        $scope.text = $scope.task.text;
+        $scope.htmlcontent = $scope.task.htmlcontent;
         $scope.remind_me = $scope.task.remind_me;
         $scope.reminder_time = $scope.task.reminder_time;
     }

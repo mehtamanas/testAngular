@@ -1,7 +1,16 @@
-﻿var AddNewPanoramicController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, FileUploader, uploadService, $window, $modal) {
+﻿var AddNewPanoramicController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $rootScope, FileUploader, uploadService, $window, $modal,items) {
     console.log('AddNewPanoramicController');
 
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
+
+    $scope.items = items;
+    $scope.box_price = items.box_price;
+    $scope.box_price_applicable = items.box_price_applicable;
+    $scope.media1 = items.Image_Url_NSEW;
+    $scope.dir1 = items.notes;
+    $scope.organization_id = $cookieStore.get('orgID');
+    $scope.User_ID = $cookieStore.get('userId'); 
+   
 
     $rootScope.title = 'Dwellar./projects';
     var uploader = $scope.uploader = new FileUploader({
@@ -30,18 +39,18 @@
 
     uploader.onSuccessItem = function (files, response, status, headers) {
         // post image upload call the below api to update the database
-        var uploadResult = response[0];
+        $scope.media1 = response[0].Location;
 
       
 
         var postData = {
 
-            media_url: uploadResult.Location,
+            media_url: $scope.media1,
             user_id: $cookieStore.get('userId'),
             organization_id: $cookieStore.get('orgID'),
             class_id: window.sessionStorage.selectedCustomerID,
-            media_name: uploadResult.Name,
-            class_type: "Unit",
+            //media_name: uploadResult.Name,
+            class_type: "Unit_Type",
             media_type: "Unit_NWES_Full_2D",
             notes: $scope.dir1,
             box_price: $scope.box_price,
