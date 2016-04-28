@@ -1,5 +1,6 @@
 /*final clean CSS*/
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,600,600italic,700,700italic,400italic);
+@import url(https://fonts.googleapis.com/css?family=Lato);
 
 body {
     color: #727272;
@@ -12492,6 +12493,22 @@ md-input-container label:not(.md-container-ignore) {
 input[placeholder], [placeholder], *[placeholder] {
    font-family:'Lato', sans-serif;
 
+}
+.breadecrums{
+    color:#289ff1;
+}
+.span-user {
+    font-size: 12px;
+    color: #289ff1;
+}
+.spacer-user {
+    padding: 0px 1px 3px 1px;
+}
+.user_title {
+    /* border-bottom: 1px solid #f2f2f2; */
+    font-size: 13px;
+    color: #999999;
+    padding-bottom: 5px;
 }
 
   /*.select-style {

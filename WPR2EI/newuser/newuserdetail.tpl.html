@@ -1,235 +1,366 @@
 ﻿<!-- main-content ended -->
 
 
-<div id="main-content" class="col-xs-12">
+<div id="main-content" class="col-md-12">
 
     <div class="content-inner">
         <div class="pg-inner-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pg-inner-title">User Details</h2>
+                    <h2 class="pg-inner-title"><span class="breadecrums"><a href=""> Organization </a>/ <a href="">Users </a> / </span> User Details</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="pg-inner-content">
-        <div class="project-detail-info" style="margin-bottom: 0px;" >
-
-            <div class="project-detail-info" style="margin-bottom: 0px;">
-
-                <div class="project-detail-photo">
-
-                    <img src={{media_url}} alt="" class="image1" />
+    <div class="row container-fluid" style="background:#fff;">
+        <div class="clearfix project-detail-info-1 pg-inner-content_1 contact_header">
+            <div class="col-md-12">
+                <div class="col-md-1 col-sm-1 contact_image">
+                    <div class="contact-detail-photo"><img src={{media_url}} alt="" class="image1 img-rounded" /></div>
                 </div>
+                <div class="col-md-5 col-sm-5 contact-detail-txt">
+                    <div class="project-name capt" style="line-height:15px;">
+                        <span class="conatct_name-2"> {{first_name}} {{last_name}}</span>
+                        <span style="margin: 0px 20px 0px 17px;" class=" upper" ng-class="{'user_status_active': status=='Active', 'user_status_pending': status=='PendingInvitationAcceptance','user_status_inactive': status=='Inactive','user_pending_invitation':status=='PendingInvitation' }"></span><br>
+                        <span class="span-user" id="emailUser">{{account_email}}</span>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="clearfix pull-right">
+                        <span><a herf="" class="btn  serach_bar_btn-1 button_save_del" id="userEdit" ng-click="openUserPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a></span>
+                        <span><a herf="" class="btn  serach_bar_btn-1 button_save_del" id="btn_delete_user" ng-click="openEditContactPopup()" data-toggle="modal" style="cursor:pointer;width: 43px;"><i class="fa fa-trash fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="project-detail-info" style="margin-bottom: 0px;">
 
-                <div class="project-detail-txt">
+        <!--<div class="project-detail-info" style="margin-bottom: 0px;">
+
+            <div class="project-detail-photo">
+
+                <img src={{media_url}} alt="" class="image1" />
+            </div>
+
+            <div class="project-detail-txt">
 
 
-                    <div class="project-name">{{first_name}} {{last_name}} 
-                    <a id="userEdit" ng-click="openUserPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
-                    <!--<div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.ZipCode}}</div>-->
-                    <div class="project-d02">Role: {{role_name}}</div>
+                <div class="project-name">{{first_name}} {{last_name}}
+                <a id="userEdit" ng-click="openUserPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
+                <div class="project-d01">City: {{image.city}},State: {{image.state}},Pin Code: {{image.ZipCode}}</div>
+                <div class="project-d02">Role: {{role_name}}</div>
 
-                    <div class="project-d02" >Phone No: {{account_phone}} </div>
-                    <div class="project-d02" >Email: {{account_email}}</div>
-                    <div class="project-d02">Area: {{area}}</div>
-                    <div class="" ng-class="{'user_status_active': status=='Active', 'user_status_pending': status=='PendingInvitationAcceptance','user_status_inactive': status=='Inactive','user_pending_invitation':status=='PendingInvitation' }"></div>
-                    <!--<!--<div class="project-d03">Company Website:{{builder_website}}</div>-->
+                <div class="project-d02" >Phone No: {{account_phone}} </div>
+                <div class="project-d02" >Email: {{account_email}}</div>
+                <div class="project-d02">Area: {{area}}</div>
+                <div class="" ng-class="{'user_status_active': status=='Active', 'user_status_pending': status=='PendingInvitationAcceptance','user_status_inactive': status=='Inactive','user_pending_invitation':status=='PendingInvitation' }"></div>
+                <div class="project-d03">Company Website:{{builder_website}}</div>
+
+            </div>
+        </div>-->
+        <!--<div class="project-detail-photo">
+            <img src="{{media_url}}" alt="" width="218" height="160" class="img-responsive" />
+        </div>
+        <div class="clearfix">
+            <div class="pull-right profile-side-txt">
+                <button class="btn btn-default login-btn" ng-click="openUserPopup()">Edit User</button>
+            </div>
+        </div>-->
+
+        <div class="project-detail-tabs pg-tabs" kendo-tab-strip style="box-shadow: none;">
+            <ul class="responsive-tagJS" role="tablist">
+                <!--<li> <a aria-controls="summary" role="tab" data-toggle="tab" class="k-state-active">ESSENTIAL</a></li>
+                <!--<li class="k-state-active"><a aria-controls="summary" role="tab" data-toggle="tab"> ESSENTIAL</a></li>-->
+                <!--<li id="newuser_summary"><a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>-->
+                <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
+                <li id="newuser_role"><a aria-controls="summary" role="tab" data-toggle="tab">ROLES</a></li>
+                <li id="newuser_device"><a aria-controls="summary" role="tab" data-toggle="tab">DEVICES</a></li>
+                <li id="newuser_project"><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
+                <li id="newuser_team"><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                <li id="newuser_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTY LISTINGS</a></li>
+                <li id="newuser_contact"><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
+                <li id="newuser_contact"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                <!-- <li id="newuser_audit"><a aria-controls="summary" role="tab" data-toggle="tab">ENGAGEMENT</a></li>-->
+                <li id="newuser_audit"><a aria-controls="summary" role="tab" data-toggle="tab">AUDIT HISTORY</a></li>
+            </ul>
+
+            <div class="content-inner-bx" style="border:none !important;">
+
+                <div class="clearfix">
+                    <div class="row content-inner-bx-1">
+
+                        <div class="col-md-6">
+                            <div class="seperator_contact" style="margin-right:10px; margin-bottom:10px; padding-top:-1px;">
+                                <div class="bx-h1-content clearfix" style="min-height: 554px;">
+                                    
+                                    <div class="cxo-wrap1">
+                                        <div class="col-md-12">
+                                                <div class="col-md-6 ">
+                                                <div class="cxo-bx1">
+                                                    <div class="contact_title">Address</div>
+                                                    <div class="clearfix spacer-user" style="margin-top:15px;">
+                                                        <div class="pull-left user_title profile-row1">Address :</div>
+                                                        <div class="pull-right profile-row2">
+                                                            <label class="label-group">
+                                                                <span ng-bind="street_1" id="userAddress" class="contact_value"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix spacer-user">
+                                                        <div class="pull-left user_title profile-row1">Area :</div>
+                                                        <div class="pull-right profile-row2">
+                                                            <label class="label-group">
+                                                                <span id="userArea" class="contact_value">{{area}}</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix spacer-user">
+                                                        <div class="pull-left user_title profile-row1">City :</div>
+                                                        <div class="pull-right profile-row2">
+                                                            <label class="label-group">
+                                                                <span id="userCity" ng-bind="city" class="contact_value"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix spacer-user">
+                                                        <div class="pull-left user_title profile-row1">State :</div>
+                                                        <div class="pull-right profile-row2">
+                                                            <label class="label-group">
+                                                                <span id="userState" ng-bind="state" class="contact_value"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix spacer-user">
+                                                        <div class="pull-left user_title profile-row1">Pincode :</div>
+                                                        <div class="pull-right profile-row2">
+                                                            <label class="label-group">
+                                                                <span id="userZip" ng-bind="zip_code" class="contact_value"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="cxo-wrap1">
+                                        <div class="cxo-bx1">
+                                            <div class="col-md-12">
+                                                    <div class="col-md-6" style="margin-top: 15px;">
+                                                        <div class="contact_title">Phone No.</div>
+                                                        <div class="clearfix spacer-user" style="margin-top:15px;">
+                                                            <div class="clearfix spacer-user" ng-repeat="choice in choices">
+                                                                <div class="pull-left user_title profile-row1">Mobile No. {{$index + 1}} :</div>
+                                                                <div class="pull-right profile-row2">
+                                                                    <label class="label-group">
+                                                                        <span id="userContact" class="contact_value">{{choice.account_phone}}</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cxo-wrap1" style="margin-top: 15px;">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6" style="margin-top: 15px;">
+                                                <div class="cxo-bx1">
+                                                    <div class="contact_title" >Roles</div>
+                                                    <div class="clearfix spacer-user" style="margin-top:15px;">
+                                                        <div class="clearfix spacer-user" ng-repeat="role in roles">
+                                                            <div class="pull-left  profile-row1">- {{role}}</div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        </div>
+                                    </div>
+                        </div><!-- bx-h1 ended -->
+
+
+                        <div class="col-md-6 custom">
+                            <div class="seperator_contact">
+                                <div class="bx-h1-content clearfix" style="min-height: 554px;">
+
+                                    <div class="cxo-wrap1">
+                                        <div class="cxo-bx1">
+                                            <div class="contact_project_selected">Recent Activity</div>
+                                            <div class="contact_value">
+                                                <i class="alt_text">There is no recent activity for this user</i>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div><!-- bx-h1 ended -->
+                        </div>
+                    </div>
+
+                    <!--<div class="pull-left company-profile-half">
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">First Name:</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="first_name"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="company-profile-row clearfix">
+                            <div class="company-profile-row clearfix" ng-repeat="choice in choices">
+                                <div class="pull-left profile-row1">Phone No {{$index + 1}}:</div>
+                                <div class="pull-right profile-row2">
+                                    <label class="label-group">
+                                        <span>{{choice.account_phone}}</span> &nbsp;
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">Role</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="role_name"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">City</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="city"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">Area</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="area"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="pull-left company-profile-half company-profile-half-2">
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">Last Name</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="last_name"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="company-profile-row clearfix" ng-repeat="choice1 in choices1">
+                            <div class="pull-left profile-row1">Email Id {{$index + 1}}:</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span>{{choice1.account_email}}</span> &nbsp;
+                                </label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">Address</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="street_1"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="company-profile-row clearfix">
+                            <div class="pull-left profile-row1">State</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span ng-bind="state"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>-->
+                </div>
+            </div>
+
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="RoleGrid" selectable="true">
 
                 </div>
             </div>
 
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="DeviceGrid" selectable="true">
 
-            <!--<div class="project-detail-photo">
-                <img src="{{media_url}}" alt="" width="218" height="160" class="img-responsive" />
+                </div>
             </div>
-            <div class="clearfix">
-                <div class="pull-right profile-side-txt">
-                    <button class="btn btn-default login-btn" ng-click="openUserPopup()">Edit User</button>
+
+            <div class="leads_group" id="record-content">
+                <div class="tab-content-title">Projects<a id="team_user" class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
+                <div kendo-grid k-options="ProjectsGrid" selectable="true">
+
+                </div>
+            </div>
+
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="TeamGrid" selectable="true">
+
+                </div>
+            </div><!--Team ended-->
+
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="TowerListGrid" selectable="true">
+
+                </div>
+            </div><!--towerlist ended-->
+
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="ContactsGrid" selectable="true">
+
+                </div>
+            </div><!--contact ended-->
+
+            <div class="leads_group" id="record-content">
+
+                <div class="tab-content-title">Task <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
+                <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
+
+                </div>
+            </div>
+
+            <div class="leads_group" id="record-content">
+                <div kendo-grid k-options="EngagementGrid" selectable="true">
+
+                </div>
+            </div>
+
+            <!--<div class="leads_group" id="record-content">
+                <div kendo-grid k-options="AuditGrid" selectable="true">
                 </div>
             </div>-->
 
 
 
-
-            <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
-                <ul class="responsive-tagJS" role="tablist">
-                    <!--<li> <a aria-controls="summary" role="tab" data-toggle="tab" class="k-state-active">ESSENTIAL</a></li>-->
-                    <!--<li class="k-state-active"><a aria-controls="summary" role="tab" data-toggle="tab"> ESSENTIAL</a></li>-->
-                    <!--<li id="newuser_summary"><a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>-->
-                    <li class="k-state-active"> <a aria-controls="summary" role="tab" data-toggle="tab">SUMMARY</a></li>
-                    <li id="newuser_role"><a aria-controls="summary" role="tab" data-toggle="tab">ROLES</a></li>
-                    <li id="newuser_device"><a aria-controls="summary" role="tab" data-toggle="tab">DEVICES</a></li>             
-                    <li id="newuser_project"><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
-                    <li id="newuser_team"><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
-                    <li id="newuser_propertylist"><a aria-controls="summary" role="tab" data-toggle="tab">PROPERTY LISTINGS</a></li>
-                    <li id="newuser_contact"><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
-                    <li id="newuser_contact"><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
-                  <!-- <li id="newuser_audit"><a aria-controls="summary" role="tab" data-toggle="tab">ENGAGEMENT</a></li>-->
-                    <li id="newuser_audit"><a aria-controls="summary" role="tab" data-toggle="tab">AUDIT HISTORY</a></li>
-                </ul>
-
-                <div class="content-inner-bx">
-
-                    <div class="clearfix">
-
-                        <div class="pull-left company-profile-half">
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">First Name:</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="first_name"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="company-profile-row clearfix">
-                                <div class="company-profile-row clearfix" ng-repeat="choice in choices">
-                                    <div class="pull-left profile-row1">Phone No {{$index + 1}}:</div>
-                                    <div class="pull-right profile-row2">
-                                        <label class="label-group">
-                                            <span>{{choice.account_phone}}</span> &nbsp;
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Role</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="role_name"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">City</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="city"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Area</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="area"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="pull-left company-profile-half company-profile-half-2">
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Last Name</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="last_name"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="company-profile-row clearfix" ng-repeat="choice1 in choices1">
-                                <div class="pull-left profile-row1">Email Id {{$index + 1}}:</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span>{{choice1.account_email}}</span> &nbsp;
-                                    </label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">Address</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="street_1"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="company-profile-row clearfix">
-                                <div class="pull-left profile-row1">State</div>
-                                <div class="pull-right profile-row2">
-                                    <label class="label-group">
-                                        <span ng-bind="state"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="RoleGrid" selectable="true">
-
-                    </div>
-                </div>
-
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="DeviceGrid" selectable="true">
-
-                    </div>
-                </div>
-
-                <div class="leads_group" id="record-content">
-                    <div class="tab-content-title">Projects<a id="team_user" class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
-                    <div kendo-grid k-options="ProjectsGrid" selectable="true">
-
-                    </div>
-                </div>
-
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="TeamGrid" selectable="true">
-
-                    </div>
-                </div><!--Team ended-->
-
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="TowerListGrid" selectable="true">
-
-                    </div>
-                </div><!--towerlist ended-->
-
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="ContactsGrid" selectable="true">
-
-                    </div>
-                </div><!--contact ended-->
-
-                <div class="leads_group" id="record-content">
-
-                    <div class="tab-content-title">Task <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
-                    <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
-
-                    </div>
-                </div>
-
-                <div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="EngagementGrid" selectable="true">
-
-                    </div>
-                </div>
-
-                <!--<div class="leads_group" id="record-content">
-                    <div kendo-grid k-options="AuditGrid" selectable="true">
-                    </div>
-                </div>-->
-
-
-
-            </div>
         </div>
-
-
     </div>
+
+
 
 </div>

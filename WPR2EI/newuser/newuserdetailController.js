@@ -126,6 +126,10 @@
                 $scope.city = $scope.data[0].city;
                 $scope.media_url = $scope.data[0].media_url;
                 // alert($scope.media_url);
+                 if ($scope.role_name != null) {
+                 $scope.roles = $scope.role_name.split(',');
+                 }
+
 
                 if ($scope.data.contact_mobile !== '') {
                     $scope.mobile = $scope.data.contact_mobile;
