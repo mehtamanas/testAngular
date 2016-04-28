@@ -2,6 +2,9 @@
 var uploader1_done = false;
 var uploader2_done = false;
 var uploader3_done = false;
+var uploader4_done = false;
+var uploader5_done = false;
+
 
 
 var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,apiService, $modalInstance, FileUploader, uploadService, $modal, $rootScope) {
@@ -23,6 +26,15 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
 
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
+        url: apiService.uploadURL,
+
+    });
+    var uploader4 = $scope.uploader4 = new FileUploader({
+        url: apiService.uploadURL,
+
+    });
+
+    var uploader5 = $scope.uploader5 = new FileUploader({
         url: apiService.uploadURL,
 
     });
@@ -93,6 +105,32 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         }
     });
 
+    uploader4.filters.push({
+        name: 'imageFilter&videoFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|'.indexOf(type);
+            if (im === -1) {
+                sweetAlert("Oops...", "You have selected inavalid file type!", "error");
+                //alert('You have selected inavalid file type');
+            }
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+    });
+
+    uploader5.filters.push({
+        name: 'imageFilter&videoFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|mp4|'.indexOf(type);
+            if (im === -1) {
+                sweetAlert("Oops...", "You have selected inavalid file type!", "error");
+                //alert('You have selected inavalid file type');
+            }
+            return '|mp4|'.indexOf(type) !== -1;
+        }
+    });
+
     //single select of image
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         if (uploader.queue.length > 1) {
@@ -114,6 +152,17 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             uploader3.removeFromQueue(0);
         }
     }
+    uploader4.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader4.queue.length > 1) {
+            uploader4.removeFromQueue(0);
+        }
+    }
+
+    uploader5.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader5.queue.length > 1) {
+            uploader5.removeFromQueue(0);
+        }
+    }
     // end of select of image
 
 
@@ -123,7 +172,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         $scope.media_url1 = response[0].Location;
         uploader_done = true;
 
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -138,7 +187,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         console.log("uploader1 called");
         $scope.media_url2 = response[0].Location;
         uploader1_done = true;
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -150,7 +199,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         console.log("uploader2 called");
         $scope.media_url3 = response[0].Location;
         uploader2_done = true;
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -164,12 +213,32 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         console.log("uploader3 called");
         $scope.media_url4 = response[0].Location;
         uploader3_done = true;
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+    };
+    uploader4.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader4 called");
+        $scope.media_url_home_page_background = response[0].Location;
+        uploader4_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
     };
 
+    uploader5.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader5 called");
+        $scope.media_url_video = response[0].Location;
+        uploader5_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+    };
 
     var called = false;
 
@@ -212,6 +281,8 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             media_url3: $scope.media_url3,
             // media_name: uploadResult.Name,
             media_url4: $scope.media_url4,
+            media_url_video: $scope.media_url_video,
+            media_url_home_page_background: $scope.media_url_home_page_background,
             possession_date: $scope.params.month,
             total_area: $scope.params.totalProjectArea,
             year: $scope.params.project_year,
@@ -251,6 +322,8 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             uploader1_done = false;
             uploader2_done = false;
             uploader3_done = false;
+            uploader4_done = false;
+            uploader5_done = false;
 
             var media = [];
 
@@ -356,6 +429,13 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         console.log('Unable to upload file.');
     };
 
+    uploader4.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
+    };
+    uploader5.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
+    };
+
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
         //$scope.showProgress = false;
     };
@@ -366,6 +446,12 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         //$scope.showProgress = false;
     };
     uploader3.onCompleteItem = function (fileItem, response, status, headers) {
+        //$scope.showProgress = false;
+    };
+    uploader4.onCompleteItem = function (fileItem, response, status, headers) {
+        //$scope.showProgress = false;
+    };
+    uploader5.onCompleteItem = function (fileItem, response, status, headers) {
         //$scope.showProgress = false;
     };
 
@@ -521,6 +607,8 @@ function (error) {
         uploader1.cancelAll();
         uploader2.cancelAll();
         uploader3.cancelAll();
+        uploader4.cancelAll();
+        uploader5.cancelAll();
         console.log("UploadCancelled");
     }
 
@@ -593,7 +681,11 @@ function (error) {
                 uploader2.uploadAll();
             if (uploader3.queue.length != 0)
                 uploader3.uploadAll();
-            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0)
+            if (uploader4.queue.length != 0)
+                uploader4.uploadAll();
+            if (uploader5.queue.length != 0)
+                uploader5.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0 && uploader4.queue.length == 0 && uploader5.queue.length == 0)
                 $scope.finalpost();
 
 

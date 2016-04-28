@@ -90,7 +90,7 @@
                                     </ul>
                                 </li><!--Organization-->
 
-                                <li class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==3}" name="Templates">
+                                <li ng-show="template.read"class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==3}" name="Templates">
                                     <a ui-sref="app.template" href="" ng-click="activeBar=3"><span class="nav-icon nav-21"></span>Templates</a>
                                     <ul class="nav-sub-bx sub-menu" id="sub-menu4">
                                         <!--<li data-toggle="collapse" data-target=".navbar-collapse.in"><a ui-sref="app.forms" href="">Forms</a></li>-->
@@ -125,8 +125,8 @@
                                         <li data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item17" name="Clients"><a href="" ui-sref="app.client">Clients <span class="nav-no">{{client}}</span> </a></li>
                                         <li ng-hide='{{WHO_AM_I === "Broker"}}' data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item18" name="By_Company"><a href="" ui-sref="app.company">By Company </a></li>
                                         <li ng-hide='{{WHO_AM_I === "Broker"}}' data-toggle="collapse" data-target=".navbar-collapse.in" id="sub-menu-item19" name="By_Tag"><a href="" ui-sref="app.tags">By Tag </a></li>
-                                        <li data-toggle="collapse" data-target=".navbar-collapse.in" name="List"><a href="" ui-sref="app.list">List</a></li>
-                                        <li data-toggle="collapse" data-target=".navbar-collapse.in" name="agent"><a href="" ui-sref="app.agent">Agent</a></li>
+                                        <li ng-show="list.read" data-toggle="collapse" data-target=".navbar-collapse.in" name="List"><a href="" ui-sref="app.list">List</a></li>
+                                        <li ng-show="agent.read"data-toggle="collapse" data-target=".navbar-collapse.in" name="agent"><a href="" ui-sref="app.agent">Agent</a></li>
                                     </ul>
                                 </li><!--People -->
 
@@ -146,7 +146,7 @@
                                     </ul>
                                 </li><!--Activities -->
 
-                                <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==14}">
+                                <li ng-show ="setting.read"data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown menu-item" ng-class="{'active':activeBar==14}">
                                     <a href="" ui-sref="app.setting" ng-click="activeBar=14"><span class="nav-icon nav-16"></span> Settings</a>
                                     <ul class="nav-sub-bx sub-menu" id="sub-menu10">
                                         <li data-toggle="collapse" data-target=".navbar-collapse.in" class="nav-sub-dropdown" ui-sref="app.integration"><a href="">Integration</a></li>

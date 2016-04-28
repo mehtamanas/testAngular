@@ -382,6 +382,57 @@
                         <input type="file" class="image-upload-f" id="editProjectPodium_uploader3" value="Browse" accept="image/*" nv-file-select="" uploader="uploader3" />
                     </label>
                 </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader4" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Background Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader3" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader3.queue.length">
+                                        <img ng-src={{params.media_url_home_page_background}} class="img-responsive" />
+                                    </div>
+                                    <div class="row" ng-show="uploader4.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader4.queue">
+                                            <div ng-show="uploader4.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader4.queue.length"> {{uploader4.queue[0]._file.name}}</p></div>
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editProjectBackground_uploader4" value="Browse" accept="image/*" nv-file-select="" uploader="uploader4" />
+                    </label>
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader5" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Video</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader5" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader5.queue.length">
+                                        <img ng-src={{media_url_video}} class="img-responsive" />
+                                    </div>
+                                    <div class="row" ng-show="uploader5.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader5.queue">
+                                            <div ng-show="uploader5.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader5.queue.length"> {{uploader5.queue[0]._file.name}}</p></div>
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editProjectBackground_uploader5" value="Browse" accept="video/*" nv-file-select="" uploader="uploader5" />
+                    </label>
+                </div>
+
             </div><!--images end-->
 
             <div ng-repeat="choice in choices2">
