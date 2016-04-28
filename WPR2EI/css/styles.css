@@ -12180,10 +12180,19 @@ md-input-container label:not(.md-container-ignore) {
         position: absolute;
             margin: -16px 55px;
 }
+.drop_user {
+    position: absolute;
+    margin: -17px 69px;
+}
 .dropdown_lead{
     min-width: 100px;
     margin-left: -70px;
         font-size: 13px;
+}
+.dropdown_lead > li > a:focus, .dropdown_lead > li > a:hover {
+    color: #289ff1 !important ;
+    text-decoration: none;
+    background-color: #f5f5f5 !important;
 }
 .drop_lead_btn{
     color: #289ff1;

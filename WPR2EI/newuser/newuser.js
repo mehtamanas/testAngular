@@ -237,7 +237,7 @@ angular.module('newuser')
               reorderable: true,
               resizable: true,
               filterable: true,
-              height: screen.height - 370,
+              height: window.innerHeight - 180,
               columnMenu: {
                   messages: {
                     columns: "Choose columns",
@@ -338,6 +338,17 @@ angular.module('newuser')
               }, {
                   field: "People_Count",
                   title: "People",
+                  width: "100px",
+                  attributes: {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+              },{
+                  field: "Action",
+                  title: "Action",
+                  template: '<div class="uib-dropdown drop_user" uib-dropdown ><button class="btn drop_lead_btn uib-dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="dropdown"><span class="caret caret_lead"></span></button><ul class="uib-dropdown-menu dropdown_lead" uib-dropdown-menu ><li>' +
+                              '<a   class=" "  data-toggle="">Assign Role </a>' +
+                              '</li><li><a href="" >Edit</a></li>' + '<li><a href="" >Delete</a></li> </ul></div>',
                   width: "100px",
                   attributes: {
                       "class": "UseHand",
