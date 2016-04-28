@@ -2,6 +2,8 @@
 var uploader1_done = false;
 var uploader2_done = false;
 var uploader3_done = false;
+var uploader4_done = false;
+var uploader5_done = false;
 
 
 var EditProjectController = function ($scope, $state, $cookieStore, apiService, $modalInstance, $window, FileUploader, $window, uploadService, $modal, $rootScope) {
@@ -21,6 +23,12 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
     });
     var uploader3 = $scope.uploader3 = new FileUploader({
        url: apiService.uploadURL
+    });
+    var uploader4 = $scope.uploader4= new FileUploader({
+        url: apiService.uploadURL
+    });
+    var uploader5 = $scope.uploader5 = new FileUploader({
+        url: apiService.uploadURL
     });
 
     $scope.showProgress = false;
@@ -90,6 +98,33 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         }
     });
 
+    uploader4.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|jpg|png|jpeg|bmp|gif|mp4|'.indexOf(type);
+            if (im === -1) {
+                sweetAlert("Oops...", "You have selected inavalid file type!", "error");
+                //alert('You have selected inavalid file type');
+            }
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+    });
+
+    uploader5.filters.push({
+        name: 'imageFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            var im = '|mp4|'.indexOf(type);
+            if (im === -1) {
+                sweetAlert("Oops...", "You have selected inavalid file type!", "error");
+                //alert('You have selected inavalid file type');
+            }
+            return '|mp4|'.indexOf(type) !== -1;
+        }
+    });
+
+
 
 
 
@@ -115,12 +150,23 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             uploader3.removeFromQueue(0);
         }
     }
+    uploader4.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader4.queue.length > 1) {
+            uploader4.removeFromQueue(0);
+        }
+    }
+
+    uploader5.onAfterAddingFile = function (fileItem, response, status, headers) {
+        if (uploader5.queue.length > 1) {
+            uploader5.removeFromQueue(0);
+        }
+    }
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // alert("uploader called");
         $scope.params.media_url1 = response[0].Location;
         uploader_done = true;
 
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -135,7 +181,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         console.log("uploader1 called");
         $scope.params.media_url2 = response[0].Location;
         uploader1_done = true;
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -147,7 +193,7 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         console.log("uploader2 called");
         $scope.params.media_url3 = response[0].Location;
         uploader2_done = true;
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -161,7 +207,30 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         console.log("uploader3 called");
         $scope.params.media_url4 = response[0].Location;
         uploader3_done = true;
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true) {
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+
+            $scope.finalpost();
+        }
+    };
+
+    uploader4.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader4 called");
+        $scope.params.media_url_home_page_background = response[0].Location;
+        uploader4_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+
+            $scope.finalpost();
+        }
+    };
+    uploader5.onSuccessItem = function (fileItem, response, status, headers) {
+        // post image upload call the below api to update the database
+        console.log("uploader5 called");
+        $scope.params.media_url_video = response[0].Location;
+        uploader5_done = true;
+        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
             $scope.showProgress = false;
 
             $scope.finalpost();
@@ -212,6 +281,8 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
             media_url3: $scope.params.media_url3,
             // media_name: uploadResult.Name,
             media_url4: $scope.params.media_url4,
+            media_url_video: $scope.params.media_url_video,
+            media_url_home_page_background: $scope.params.media_url_home_page_background,
             possasion_month: $scope.params.monthid,
             year: $scope.params.project_year,
             project_website: $scope.params.project_website,
@@ -357,6 +428,16 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         console.log('Unable to upload file.');
     };
 
+    uploader4.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
+    };
+
+    uploader5.onErrorItem = function (fileItem, response, status, headers) {
+        console.log('Unable to upload file.');
+    };
+
+
+
     uploader.onCompleteItem = function (fileItem, response, status, headers) {
         //$scope.showProgress = false;
     };
@@ -367,6 +448,12 @@ var EditProjectController = function ($scope, $state, $cookieStore, apiService, 
         //$scope.showProgress = false;
     };
     uploader3.onCompleteItem = function (fileItem, response, status, headers) {
+        //$scope.showProgress = false;
+    };
+    uploader4.onCompleteItem = function (fileItem, response, status, headers) {
+        //$scope.showProgress = false;
+    };
+    uploader5.onCompleteItem = function (fileItem, response, status, headers) {
         //$scope.showProgress = false;
     };
 
@@ -512,6 +599,8 @@ function (error)
         uploader1.cancelAll();
         uploader2.cancelAll();
         uploader3.cancelAll();
+        uploader4.cancelAll();
+        uploader5.cancelAll();
         console.log("UploadCancelled");
     }
 
@@ -644,7 +733,11 @@ function (error)
                 uploader2.uploadAll();
             if (uploader3.queue.length != 0)
                 uploader3.uploadAll();
-            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0)
+            if (uploader4.queue.length != 0)
+                uploader4.uploadAll();
+            if (uploader5.queue.length != 0)
+                uploader5.uploadAll();
+            if (uploader.queue.length == 0 && uploader1.queue.length == 0 && uploader2.queue.length == 0 && uploader3.queue.length == 0 && uploader4.queue.length == 0 && uploader5.queue.length == 0)
                 $scope.finalpost();
 
             $scope.showValid = false;

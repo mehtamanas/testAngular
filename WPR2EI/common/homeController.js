@@ -49,6 +49,10 @@ angular.module('common')
         $rootScope.contacts = { 'read': true, 'write': true, 'delete': true };
         $rootScope.Properties = { 'read': true, 'write': true, 'delete': true };
         $rootScope.customTags = { 'read': true, 'write': true, 'delete': true };
+        $rootScope.template = { 'read': true, 'write': true, 'delete': true };
+        $rootScope.list = { 'read': true, 'write': true, 'delete': true };
+        $rootScope.agent = { 'read': true, 'write': true, 'delete': true };
+        $rootScope.setting = { 'read': true, 'write': true, 'delete': true };
 
         if ($scope.WHO_AM_I == "Broker") {
 
@@ -88,6 +92,13 @@ angular.module('common')
                 $rootScope.campaigns = _.findWhere(nav, { resource: 'Campaigns' });
                 $rootScope.tasks = _.findWhere(nav, { resource: 'Tasks' });
                 $rootScope.customTags = _.findWhere(nav, { resource: 'Tags' });
+                $rootScope.template = _.findWhere(nav, { resource: 'Templates' });
+                $rootScope.list = _.findWhere(nav, { resource: 'List' });
+                $rootScope.agent = _.findWhere(nav, { resource: ' Agent' });
+                $rootScope.settings = _.findWhere(nav, { resource: ' Settings' });
+              
+
+               
                 //$rootScope.Release_Orders = _.findWhere(nav, { resource: 'integration' });
             }
 
