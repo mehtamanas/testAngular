@@ -34,11 +34,9 @@
                
                apiService.post(projectUrl, param).then(function (response) {
                    var loginSession = response.data;
-                   swal("Success","Password Recovered By Your Email..!!",'success')
+                   swal('Check Your Email', "We have  just sent mail to with a link you will  need to click to reset your password ", 'success')
                    //alert("Password Recovered By Your Email..!!");
-                   
-
-
+ 
                },
           function (error) {
               swal("Failure", "Entered email address belongs to inactive user and/or invalid user !!", 'error')
