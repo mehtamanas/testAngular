@@ -4,7 +4,7 @@
     function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage) {
 
         var orgID = $cookieStore.get('orgID');
-
+        $scope.activityAction = 'no_action';
         $rootScope.title = 'Dwellar./Task';
         $scope.gridView = 'default';
         var userId = $cookieStore.get('userId');
@@ -197,7 +197,7 @@
              {
                  "style": "text-align:center;cursor:pointer"
              }
-            }, {
+            },  {
                 field: "priority",
                 title: "Priority",
                 width: "120px",
@@ -252,6 +252,7 @@
               }
 
             },
+          
 
              //saroj on 15-04-2016
            {
@@ -336,6 +337,10 @@
                 else if ($scope.activityAction === "bulk_assign") {
                     $state.go($scope.openAssignTo());
                 }
+                else if ($scope.activityAction === "add_tag")
+                {
+                    $state.go($scope.openActivityTaskTag());
+                }
                 else if ($scope.activityAction === "delete") {
                     var contactDelete = [];
                     for (var i in allCheckedIds) {
@@ -365,7 +370,17 @@
 
             });
         };
+        // Add Tag to task pop up code //
+        $scope.openActivityTaskTag = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'task/Activity_addtag.html',
+                backdrop: 'static',
+                controller: ActivityTagPopUpController,
+                size: 'lg'
 
+            });
+        };
 
         $scope.openPostpone = function (d) {
             $scope.taskID = d.task_id;
@@ -547,6 +562,14 @@
                     $localStorage.common_taskDataSource = [];
                     outTaskGridRefresh();
                     $('.k-i-refresh').trigger("click");
+                    $scope.activityAction = 'no_action';
+                    $('#checkAll').prop('checked', false);
+                }
+                else if (args.action === 'assign_tag') {
+                    $localStorage.common_taskDataSource = [];
+                    outTaskGridRefresh();
+                    $('.k-i-refresh').trigger("click");
+                    $('#checkAll').prop('checked', false);
                 }
 
             }

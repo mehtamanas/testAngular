@@ -690,6 +690,15 @@ angular.module('contacts')
 
                     },
                     {
+                        field: "created_by",
+                        title: "Created By",
+                        attributes:
+                         {
+                             "style": "text-align:center"
+                         }
+
+                    },
+                    {
                         field: "task_code",
                         title: "Task Code",
                         attributes:
@@ -728,7 +737,7 @@ angular.module('contacts')
                       }
 
                     },
-
+   
            {
                field: "reminder_date_timeFormatted",
                title: "Reminder Date",

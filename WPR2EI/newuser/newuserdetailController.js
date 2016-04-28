@@ -816,6 +816,16 @@ columnMenu: {
             },{
                 field: "company_name",
                 title: "Company",
+                width: "120px",
+                attributes:
+                 {
+                     "style": "text-align:center"
+                 }
+
+            }, {
+                field: "created_by",
+                title: "Created By",
+                width: "120px",
                 attributes:
                  {
                      "style": "text-align:center"
@@ -824,6 +834,7 @@ columnMenu: {
             }, {
                 field: "task_code",
                 title: "Task Code",
+                width: "120px",
                 attributes:
                  {
                      "style": "text-align:center"
@@ -865,6 +876,18 @@ columnMenu: {
              {
                  field: "reminder_time",
                  title: "Reminder Date",
+                 width: "120px",
+                 format: '{0:dd/MM/yyyy hh:mm:ss}',
+                 attributes:
+               {
+                   "style": "text-align:center"
+               }
+
+             },
+
+             {
+                 field: "updated_date",
+                 title: "Updated Date",
                  width: "120px",
                  format: '{0:dd/MM/yyyy hh:mm:ss}',
                  attributes:
