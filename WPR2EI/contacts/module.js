@@ -137,7 +137,13 @@ angular.module('contacts', [])
          templateUrl: 'contacts/propertyQuote/property_CustomizDue.html',
          controller: 'propertyCustomizDue',
          data: { pageTitle: 'peopertyQuote' }
-     });
+     })
 
+        .state('app.bookingPreview', {
+            url: '/bookingPreview',
+            templateUrl: 'booking/bookingPreview.html',
+            controller: 'bookingPreviewController',
+            title: 'Bookings'
+        });
 
     }]);
