@@ -1126,7 +1126,7 @@
                                 spiltOK = false;
                             }
                             else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1], "DD-MM-YYYY").add('day', 1)._d });
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
