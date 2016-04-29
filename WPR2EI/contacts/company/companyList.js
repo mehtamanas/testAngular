@@ -173,16 +173,16 @@ angular.module('contacts')
                         apiService.getWithoutCaching("Company/GetCompanyList/" + orgID).then(function (response) {
                             data = response.data;
 
-                            //for (i = 0; i < data.length; i++) {
-                            //    var tag = (data[i].Tags);
-                            //    if (tag !== null) {
-                            //        tag = JSON.parse(tag);
-                            //        data[i].Tags = [];
-                            //        data[i].Tags = tag;
-                            //    }
-                            //    else
-                            //        data[i].Tags = [];
-                            //}
+                            for (i = 0; i < data.length; i++) {
+                                var tag = (data[i].Tags);
+                                if (tag !== null) {
+                                    tag = JSON.parse(tag);
+                                    data[i].Tags = [];
+                                    data[i].Tags = tag;
+                                }
+                                else
+                                    data[i].Tags = [];
+                            }
                             options.success(data);
                         }, function (error) {
                             options.error(error);
