@@ -10561,6 +10561,7 @@ input[type=text].search {
 .contact_value {
     padding-top: 5px;
     color: #3c3c3c;
+   text-transform: capitalize;
 }
 /* start shital*/
 .DivActivityIcon {
@@ -12510,32 +12511,58 @@ input[placeholder], [placeholder], *[placeholder] {
     color: #999999;
     padding-bottom: 5px;
 }
-
-  /*.select-style {
-    padding: 0;
-    margin: 0;
-    border: 1px solid #ccc;
-    width: 120px;
-    border-radius: 3px;
-    overflow: hidden;
-    background-color: #fff;
-
-    background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
+.stick-right{
+    text-align: right;
+    right: 14px;
+    float:right;
+}
+.inner-div{
+  margin-right: 5px;
+   margin-left: 5px;
+   background:#fff;
+   border: none;
+   padding: 10px 10px 10px 10px;
+  border-radius: 1px;
+ }
+.count-head{
+    color: #bcbcbc;
+    font-size:15px;
+}
+.total-unit{
+    font-size: 20px;
+    font-weight: 800;
+    color: #289ff1;
+}
+.alable{
+    font-size: 20px;
+    font-weight: 800;
+    color: #5cb85c;
+}
+.sold{
+    font-size: 20px;
+    font-weight: 800;
+    color: #3E3E3E;
+}
+.project-data{
+    color: #848484;
+    font-size: 13px;
+    font-weight: 600;
+}
+.data-value {
+    font-size: 14px;
+    font-weight: bold;
+     color: #535353; 
+}
+.project-title {
+    font-size: 13px;
+    color: #8A8989;
+    padding-bottom: 5px;
+}
+.project-value {
+    padding-top: 5px;
+    color: #6B6868;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
-.select-style select {
-    padding: 5px 8px;
-    width: 250%;
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-    background-image: none;
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-}
 
-.select-style select:focus {
-    outline: none;
-}*/
-/*end sidebar*/
