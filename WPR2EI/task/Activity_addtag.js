@@ -41,6 +41,7 @@ var ActivityTagPopUpController = function ($scope, $state, $cookieStore, apiServ
     apiService.get(Url).then(function (response) {
         $scope.tagList = response.data;
         $scope.tagList = _.sortBy($scope.tagList, function (o) { return o.tag_name; });
+  
         //$scope.tagList = _.pluck($scope.tagList, 'tag_name');
     },
 function (error) {
@@ -49,18 +50,19 @@ function (error) {
     $scope.checkedIds = null;
     $scope.checkedIds = $cookieStore.get('checkedIds');
 
-    projectUrl = "Tags/ContactTagMappingGrid";
+    projectUrl = "Mapping/TaskToTag";
     ProjectCreate = function (param) {
-        var usersToBeAddedOnServer = [];
+        var tagAssignToTask = [];
+
         for (var i in $scope.checkedIds) {
-            var newMember = {};
-            newMember.contact_id = $scope.checkedIds[i];
-            newMember.tag_name = $scope.params.tag_name;
-            newMember.user_id = $cookieStore.get('userId');
-            newMember.organization_id = $cookieStore.get('orgID');
-            usersToBeAddedOnServer.push(newMember);
+            var newTag = {};
+            newTag.task_id = $scope.checkedIds[i];
+            newTag.tag_name = $scope.params.tag_name;
+            newTag.user_id = $cookieStore.get('userId');
+            newTag.organization_id = $cookieStore.get('orgID');
+            tagAssignToTask.push(newTag);
         }
-        apiService.post(projectUrl, usersToBeAddedOnServer).then(function (response) {
+        apiService.post(projectUrl, tagAssignToTask).then(function (response) {
             var loginSession = response.data;
             $modalInstance.dismiss();
             $state.go('app.tasks');
@@ -100,9 +102,9 @@ function (error) {
     $scope.openSucessfullPopup = function () {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'newuser/sucessfull.tpl.html',
+            templateUrl: 'contacts/assignpopup.tpl.html',
             backdrop: 'static',
-            controller: sucessfullController,
+            controller: assigntopopup,
             size: 'sm',
             resolve: { items: { title: "Tag" } }
         });

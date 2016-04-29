@@ -80,24 +80,96 @@
         }
 
 
+        //for tags tooltip
+        $(document).ready(function () {
+            kendo.ui.Tooltip.fn._show = function (show) {
+                return function (target) {
+                    var e = {
+                        sender: this,
+                        target: target,
+                        preventDefault: function () {
+                            this.isDefaultPrevented = true;
+                        }
+                    };
+
+                    if (typeof this.options.beforeShow === "function") {
+                        this.options.beforeShow.call(this, e);
+                    }
+                    if (!e.isDefaultPrevented) {
+                        // only show the tooltip if preventDefault() wasn't called..
+                        show.call(this, target);
+                    }
+                };
+            }(kendo.ui.Tooltip.fn._show);
+            $("#project-record-list").kendoTooltip({
+                animation: {
+                    close: {
+                        effects: "fadeOut zoom:out",
+                        duration: 600
+                    },
+                    open: {
+                        effects: "fadeIn zoom:in",
+                        duration: 100
+                    }
+                },
+                filter: "td:nth-child(09)", //this filter selects the  column cells
+                position: "top",
+                beforeShow: function (e) {
+                    console.log(e);
+                    if ($(e.target).data("tagName") === null) {
+
+                        // don't show the tooltip if the name attribute contains null
+                        e.preventDefault();
+                    }
+                },
+                content: function (e) {
+
+                    var dataItem = $("#project-record-list").data("kendoGrid").dataItem(e.target.closest("tr"));
+                    var data = dataItem.Tags;
+                    var content = '';
+                    for (i = 0; i < data.length; i++) {
+                        content = content + "<span style='background-color:" + data[i].background_color + ";display:block; margin-bottom: 5px;' class='properties-close upper tag-name'>" + data[i].name + "</span>"
+                    }
+
+                    return content;
+
+
+                }
+
+            }).data("kendoTooltip");
+
+        });
+        //end tooltip
+
+
         $scope.TaskGrid = {
             dataSource: {
                 type: "json",
                 transport: {
                     //read: apiService.baseUrl + "ToDoItem/GetTaskByRole?id=" + userId
                     read: function (options) {
-                        if ($localStorage.common_taskDataSource) {
-                            options.success($localStorage.common_taskDataSource);
-                        } else {
+                        //if ($localStorage.common_taskDataSource) {
+                        //    options.success($localStorage.common_taskDataSource);
+                        //} else {
                             apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (res) {
                                 data = res.data;
+                                for (i = 0; i < data.length; i++) {
+                                    var tag = (data[i].Tags);
+                                    if (tag !== null) {
+                                        tag = JSON.parse(tag);
+                                        data[i].Tags = [];
+                                        data[i].Tags = tag;
+                                    }
+                                    else
+                                        data[i].Tags = [];
+                                }
                                 $localStorage.common_taskDataSource = [];
                                 $localStorage.common_taskDataSource = data;
                                 options.success(data);
                             }, function (err) {
                                 options.error();
                             })
-                        }
+                      
                     }
                 },
                 pageSize: 20,
@@ -205,6 +277,17 @@
               {
                   "style": "text-align:center;cursor:pointer"
               }
+            },
+            {
+                field: "Tags",
+                template: "<span ng-repeat='tag in dataItem.Tags' style='background-color:{{tag.background_color}}; margin-bottom: 5px;line-height:1.2em;' class='properties-close  upper tag-name' ng-hide='{{$index>1}}'>{{tag.name}}</span><br><span  ng-hide='{{dataItem.Tags.length<3}}'><small>Show More..</small></span>",
+                title: "TAGS",
+                width: "220px",
+
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
             },
 
             {
