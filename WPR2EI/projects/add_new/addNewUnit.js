@@ -180,7 +180,7 @@
                 class_type: "Project",
                 //street_2: $scope.params.street_2,
                 unit_id: items.unit_id,
-                media_type: "image",
+                media_type: "UNIT_MINI_MAP",
                 //project_type: $scope.params.project_type,
                 id: window.sessionStorage.selectedCustomerID,
                 unit_type_desc: $scope.unit_type_desc,
@@ -367,22 +367,6 @@
    });
     };
 
-
-    //end
-
-
-    //end
-
-    //$scope.params = {
-    //    unit_type_desc: $scope.unit_type_desc,
-    //    carpet_area: $scope.carpet_area,
-    //    super_built_up_area: $scope.super_built_up_area,
-    //    cark_park: $scope.cark_park,
-    //    num_bedrooms: $scope.num_bedrooms,
-    //    num_bathrooms: $scope.num_bathrooms,
-    //    organization_id: $cookieStore.get('orgID'),
-    //    User_ID: $cookieStore.get('userId')
-    //};
 
     $scope.emptyText = function () {
         $scope.box_price = null;
