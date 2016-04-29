@@ -154,17 +154,25 @@ angular.module('contacts')
             data = response.data;
             a = 0, b = 0, c = 0;
             for (i = 0; i < data.length; i++) {
-                if (data[i].element_type == "email_contact") {
-                    if (a > 0) { $scope.choices1.push({ 'id': 'choice' + (a + 1) }); }
-                    $scope.choices1[a].Contact_Email = data[i].element_info1;
-                    $scope.choices1[a].class_id = data[i].class_id;
-                    a++;
+                if (data[i].element_type == "email1_contact") {
+                    $scope.secondaryEmail1 = data[i].element_info1;
+                    $scope.class_id = data[i].class_id;
                 }
-                if (data[i].element_type == "phone_contact") {
-                    if (b > 0) { $scope.choices.push({ 'id': 'choice' + (b + 1) }); }
-                    $scope.choices[b].Contact_Phone = data[i].element_info1;
-                    $scope.choices[b].class_id = data[i].class_id;
-                    b++;
+                if (data[i].element_type == "email2_contact") {
+                    $scope.secondaryEmail2 = data[i].element_info1;
+                    $scope.class_id = data[i].class_id;
+                }
+                if (data[i].element_type == "mobile_contact") {
+                    $scope.mobile_number = data[i].element_info1;
+                    $scope.class_id = data[i].class_id;
+                }
+                if (data[i].element_type == "home_contact") {
+                    $scope.home_number = data[i].element_info1;
+                    $scope.class_id = data[i].class_id;
+                }
+                if (data[i].element_type == "office_contact") {
+                    $scope.office_number = data[i].element_info1;
+                    $scope.class_id = data[i].class_id;
                 }
                 if (data[i].element_type == "Budget") {
 
@@ -188,9 +196,9 @@ angular.module('contacts')
                 }
             }
         },
-        function (error) {
-           
-        });
+         function (error) {
+
+         });
 
         $scope.choices = [{ id: 'choice1' }];
         $scope.addNewChoice = function (e) {
@@ -1060,6 +1068,15 @@ angular.module('contacts')
                            "style": "text-align:center"
                        }
 
+            }, {
+                title: "Action",
+                template: '<a class="btn btn-primary" id="book_now">Book Now</a>',
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
             }
             ]
         };
@@ -1154,6 +1171,15 @@ angular.module('contacts')
                 title: "Date",
 
                 format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                attributes:
+                       {
+                           "class": "UseHand",
+                           "style": "text-align:center"
+                       }
+
+            }, {
+                title: "Action",
+                template: '<a class="btn btn-primary" id="book_now">Book Now</a>',
                 attributes:
                        {
                            "class": "UseHand",
