@@ -241,8 +241,8 @@
            interests: $scope.params.Interests,
            channel_type_details: $scope.params.Channel_Partner_Details,
            Remarks: $scope.params.Remarks,       
-           contact_element_info_email: $scope.params.primary_email,
-           contact_element_info_phone: $scope.params.primary_contact,
+           email: $scope.params.primary_email,
+           phone: $scope.params.primary_contact,
            ProjectList: GetSelectedProject()
         
            
