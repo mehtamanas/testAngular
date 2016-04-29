@@ -2,12 +2,9 @@
 .controller('BookController',
     function ($scope, $state, security, $cookieStore, apiService, $rootScope) {
         $rootScope.title = 'Dwellar-Bookings';
-                
+
         var userID = $cookieStore.get('userId');
 
-
-
-       
 
         //grid fuctionality start
         $scope.bookingGrid = {
@@ -49,6 +46,15 @@
                           "class": "UseHand",
                           "style": "text-align:center"
                       }
+                }, {
+                    field: "name",
+                    title: "BOOKING ID",
+
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
                 },
 
                {
@@ -139,11 +145,25 @@
                    },
 
 
+               }, {
+                   field: "Action",
+                   template: '<div class="uib-dropdown drop_lead" uib-dropdown ><button class="btn drop_lead_btn uib-dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="uib-dropdown"><span class="caret caret_lead"></span></button><ul class="uib-dropdown-menu dropdown_lead" uib-dropdown-menu ><li>' +
+                   '<a  class="follow_lead" ng-click="openFollowUp(dataItem)" data-toggle="modal">Approved </a>' +
+                   '</li><li><a href="" ng-click="openLog(dataItem)">Postpone</a></li></ul></div>',
+                   title: "Action",
+
+                   attributes: {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+
+                   },
+
+
                }]
         };
 
         // Kendo Grid on change
-        
+
     }
 );
 
