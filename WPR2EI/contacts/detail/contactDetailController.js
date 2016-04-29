@@ -865,11 +865,10 @@ angular.module('contacts')
                 buttonCount: 5
             },
             columns: [{
-                template: '<div> <table> <tr><a href=" "></a></tr><br>' +
-                         '<thead> <th>field</br><span>#=field_name#</span><th><th>Original Value</br><span>#=original_value#</span><th><th>New Value</br><span>#=new_value#</span><th></thead></table></div>',
-               },{
-                //field: "field_name",
-                //title: "Field", 
+                template: '<div><table><tr><a href=" "><span>#=edited_by# made changes on </span></a><span>#=Changes_made_date#</span></tr><br>' +
+                     '<thead> <th>field</br><span>#=field_name#</span><th><th>Original Value</br><span>#=original_value#</span><th><th>New Value</br><span>#=new_value#</span><th></thead></table></div>',
+            }, {
+
                 attributes:
                {
                    "style": "text-align:center"
