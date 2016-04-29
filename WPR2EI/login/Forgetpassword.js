@@ -10,7 +10,7 @@
              });
      })
 .controller('ForgetpasswordController',
-    function ($scope, apiService, $state, security, $rootScope) {
+    function ($scope, apiService, $state, security, $rootScope, $cookieStore, $modal) {
 
         $rootScope.title = 'Dwellar./RecoverPassword';
 
@@ -34,7 +34,9 @@
                
                apiService.post(projectUrl, param).then(function (response) {
                    var loginSession = response.data;
-                   swal('Check Your Email', "We have  just sent mail to with a link you will  need to click to reset your password ", 'success')
+                   $cookieStore.put('AccountEmail', loginSession.account_email);
+                   $state.go($scope.openComfirmResetPassword());
+                   //swal('Check Your Email', "We have  just sent mail to with a link you will  need to click to reset your password ", 'success')
                    //alert("Password Recovered By Your Email..!!");
  
                },
@@ -44,7 +46,16 @@
           });
            };
 
-
+           $scope.openComfirmResetPassword = function () {
+               var modalInstance = $modal.open({
+                   animation: true,
+                   templateUrl: 'login/confirmForgotPassword.html',
+                   backdrop: 'static',
+                   controller: confirmResetPassword,
+                   size: 'lg',
+               
+               });
+           }
 
            $scope.loginemail = function (isValid) {
                $scope.showValid = true;
