@@ -1070,7 +1070,7 @@ angular.module('contacts')
 
             }, {
                 title: "Action",
-                template: '<a class="btn btn-primary" id="book_now">Book Now</a>',
+                template: '<a class="btn btn-primary" ng-click="openBookNow(dataItem)" id="book_now">Book Now</a>',
                 attributes:
                        {
                            "class": "UseHand",
@@ -1517,6 +1517,12 @@ angular.module('contacts')
 
             }
         }
+
+        $scope.openBookNow = function (dataItem) {
+           
+            $state.go('app.bookingPreview');
+        }
+
 
         $scope.generateNewQuote = function () {
             var modalInstance = $modal.open({
