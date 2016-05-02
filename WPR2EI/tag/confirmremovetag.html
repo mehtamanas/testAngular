@@ -1,0 +1,17 @@
+﻿
+<div class="modal-header custom_head_warning">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_addSuccessfulClose">&times;</button>
+    <h4 class="modal-title custom_head-h4"><i class="fa fa-trash"></i> Warning</h4>
+</div>
+<div class="main-content add-new project sucessful-popup" style="padding: 2%;">
+    <h4 style="text-align:center" ng-hide="length">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Tag</h4>
+    <h4 style="text-align:center" ng-show="length<=1">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Tag</h4>
+    <h4 style="text-align:center" ng-show="length>1">Are you sure you want to delete these &nbsp;{{length}}&nbsp;Tags</h4>
+
+    <div class="modal-btn-wrap5  clearfix">
+        <div style="padding: 2% 0% 3% 0%;">
+            <button type="submit" class="btn btn-warning" id="btn_confirmremovetag_save" ng-click="gotoDelete()">YES</button>
+            <button type="button" class="f-btnTag btn" id="btn_confirmremovetag_cancle" ng-click="$dismiss('cancel')">NO</button>
+        </div>
+    </div>
+</div>

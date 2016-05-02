@@ -1,0 +1,48 @@
+﻿<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+            <h4 class="form-title">Add New Role</h4>
+
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">Role Name</label>
+                    <input type="text" class="form-control text-bold" autofocus name="name" id="role_name"
+                           placeholder="Role Name"
+                           data-ng-model="params.name"
+                           minlength="1"
+                           maxlength="50"
+                           input-focus
+                           required
+                           ng-pattern="/^[a-zA-Z\s]*$/" />
+                </div>
+            </div>
+
+
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx8">
+                    <label for="">Role Description</label>
+                    <input type="text" class="form-control text-bold" autofocus name="name" id="role_desc"
+                           placeholder="Description"
+                           data-ng-model="params.description"
+                           minlength="1"
+                           maxlength="50"
+                           input-focus
+                           required
+                           ng-pattern="/^[a-zA-Z\s]*$/" />
+                </div>
+            </div>
+
+
+            <div class="modal-btn-wrap clearfix">
+
+                <button type="submit" id="btn_role_save" class="f-btn">Save</button>
+
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

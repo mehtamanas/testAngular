@@ -1,0 +1,66 @@
+<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+       
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-2">
+                    <h2 class="pg-inner-title">Clients</h2>
+                </div>
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right">
+                        <a id="btn_ClientUploadNotes" href="" class="btn-lk-1-1" ng-click="openUploadNotesPopup()" style="cursor:pointer"><img src="./images/upload_notes.png" /> Upload Notes</a>
+                        <a id="btn_ClientUploadContact" href="" class="btn-lk-1-1" ng-click="openUploadContactPopup()" style="cursor:pointer"><img src="./images/upload_contact.png" /> Upload Contact</a>
+                        <a id="btn_ClientAddNewContact" href="" class="btn-lk-1-1" ng-click="openContactPopup()" style="cursor:pointer"><img src="./images/add_contact.png" /> Add New Contact</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="pg-inner-content">
+
+        <form action="">
+
+            <div class="clearfix">
+                <div class="pull-left actions-wrap">
+                    <select ng-model="clientAction" class="form-control actions-wrap" ng-change="chooseAction()" id="Client_Action">
+                        <option value='no_action' selected>ACTIONS</option>
+                        <option value='add_tag'>ADD TAG</option>
+                        <option value='assign_to'>ASSIGN TO</option>
+                        <option value='delete'>DELETE</option>
+                    </select>
+                </div>
+                <div class="pull-left actions-wrap">
+                    <select ng-model="gridView" class="form-control actions-wrap" ng-change="changeView()" id="contacaction">
+                        <option value='default' selected>Default View</option>
+                        <option ng-repeat="view in views" value={{view.view_name}}>{{view.view_name}}</option>
+                    </select>
+                </div>
+                <a class="pull-left" style="margin:1%;font-weight:bold" href="" ng-click="saveView()"><u>SAVE VIEW</u></a>
+
+
+                <div class="pull-right btn-wrap-right">
+                    
+                </div>
+            </div>
+
+            <div id="record-content" class="properties-content">
+
+                <div id="contact_kenomain" kendo-grid k-options="ClientContactGrid" selectable="true" k-on-change="myGridChange(dataItem )">
+                </div>
+
+            </div><!-- record-content ended -->
+
+        </form>
+
+    </div><!-- pg-inner-content ended -->
+
+</div>

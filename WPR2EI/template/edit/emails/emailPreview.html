@@ -1,0 +1,18 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_emailPreviewClose" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+
+    <h4 class="modal-title" id="exampleModalLabel">Preview</h4>
+</div>
+   <div class="modal-body">
+    <span ng-bind-html="params.htmlcontent"></span>
+</div>
+<div>
+    <button type="button" ng-click="goTOTemplate()" class="btn btn-default btn-sm" id="btn_EditEmailBack">
+        <span class="glyphicon glyphicon-arrow-left"></span> Back
+    </button>
+    <button type="button" class="btn btn-default btn-sm" id="btn_EditEmailPdf" ng-click="generatePdf()" data-toggle="tooltip" title="Generate PDF"><i class="fa fa-file-pdf-o"></i></button>
+    </div>
+
+
+
+   

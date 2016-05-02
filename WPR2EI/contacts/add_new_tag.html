@@ -1,0 +1,39 @@
+﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<button type="button" id="btn_AddTagClose" class="close" ng-click="$dismiss('cancel')">&times;</button>
+
+<form class="form-content form-content2 edit-organization-setting" name="addNewForm" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
+    <div class="main-content project add-new">
+        <h3>Add Tag</h3>
+        <div class="col-sm-8">
+            <!--<label>Add Tag</label>-->
+            <div class="form-group">
+                <div class="col-xs-12">
+
+                    <div class="form-bx13" style="padding-bottom: 29px;">
+                        <select kendo-combo-box
+                                k-placeholder="'Select Tag'"
+                                k-data-text-field="'tag_name'"
+                                k-data-value-field="'tag_name'"
+                                k-filter="'contains'"
+                                k-auto-bind="false"
+                                k-min-length="3"
+                                k-data-source="tagList"
+                                style="width: 100%"
+                                ng-model="params.tag_name"
+                                id="option_tagName"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+
+            </div>
+            <button class="btn btn-default  login-btn" id="btn_AddTagSubmit" type="submit">Submit</button>
+        </div>
+
+        <!--<button class="btn organization-btn" type="submit">Submit</button>-->
+
+    </div>
+</form>
+

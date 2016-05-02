@@ -1,0 +1,139 @@
+﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<div id="add_payment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  
+            <div class="modal-header">
+                <button type="button" class="close" id="editnewpayement_close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Edit Payment Scheme</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-content form-content2 edit-organization-setting" name="newForm" novalidate data-ng-submit="addNew(newForm.$valid)" autocomplete="off">
+
+                    <div class="payment-modal-wrap">
+
+                        <div class="clearfix form-bx-ht">
+
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                    'has-error' : newForm.schemename.$invalid && (!newForm.schemename.$pristine || showValid) && !newForm.schemename.$focus,
+                                                    'has-success': newForm.schemename.$valid && !newForm.schemename.$pristine && !newForm.schemename.$focus
+                                                                    }">
+                                <div class="form-group form-bx form-bx11 form-bx11-1">
+                                    <label for="">Payment Scheme Name:</label>
+                                    <input class="form-control" autofocus name="schemename" id="editnewpayement_Pay_Scheme_name"
+                                           placeholder="Payment Scheme name"
+                                           data-ng-model="params.type_of_payment"
+                                           minlength="1"
+                                           maxlength="40"
+                                           ng-pattern="/^[\w -]*$/"
+                                           input-focus
+                                           required />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.schemename.$invalid && (!newForm.schemename.$pristine || showValid) && !newForm.schemename.$focus">
+                                        {{ 'Please enter Payment Scheme name ' | translate }}
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                 'has-error' : newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus,
+                                                 'has-success': newForm.baserate.$valid && !newForm.baserate.$pristine && !newForm.baserate.$focus
+                                                                   }">
+                                <div class="form-group form-bx form-bx-2">
+                                    <label for="">Base Rate For Scheme</label>
+                                    <div class="area-f">
+                                        <input class="form-control" name="baserate" id="editnewpayement_base_rate"
+                                               placeholder="Base Rate"
+                                               data-ng-model="params.base_rate"
+                                               minlength="1"
+                                               maxlength="10"
+                                               ng-pattern="/^[0-9_\-,;]*$/"
+                                               input-focus
+                                               required />
+                                        <span class="area-txt">/sq.ft</span>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.baserate.$invalid && (!newForm.baserate.$pristine || showValid) && !newForm.baserate.$focus">
+                                            {{ 'Please enter Base Rate' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+
+                        </div>
+                        <!--<div>
+                        </div>-->
+                        <!--<div class="form-b-b"></div>-->
+
+                        <div class="clearfix form-bx-ht" ng-repeat="choice in choices2">
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                         'has-error' : newForm.Milestone.$invalid && (!newForm.Milestone.$pristine || showValid) && !newForm.Milestone.$focus,
+                                                         'has-success': newForm.Milestone.$valid && !newForm.Milestone.$pristine && !newForm.Milestone.$focus
+                                                                    }">
+                                <div class="form-group form-bx form-bx11 form-bx11-1">
+                                    <label for=""><b>Milestone</b></label>
+                                    <input class="form-control"
+                                           placeholder="Milestone" name="Milestone" id="editnewpayement_milestone"
+                                           data-ng-model="choice.description"
+                                           minlength="1"
+                                           maxlength="40"
+                                           ng-pattern="/^[\w -]*$/"
+                                           input-focus
+                                           required />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.Milestone.$invalid && (!newForm.Milestone.$pristine || showValid) && !newForm.Milestone.$focus">
+                                        {{ 'Please enter Valid Milestone' | translate }}
+                                    </div>
+                                </div>
+                              
+                            </div>
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                                 'has-error' : newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus,
+                                                  'has-success': newForm.Percentage.$valid && !newForm.Percentage.$pristine && !newForm.Percentage.$focus
+                                                                    }">
+                                <div class="form-group form-bx form-bx-2">
+                                    <label for=""><b>Percent</b></label>
+                                    <div class="area-f">
+                                        <input class="form-control"
+                                               placeholder="Percentage" name="Percentage" id="editnewpayement_percentage"
+                                               data-ng-model="choice.percentage"
+                                               minlength="1"
+                                               maxlength="3"
+                                               ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                               input-focus
+                                               required />
+                                        <span class="area-txt">%</span>
+                                        <div class="text-danger"
+                                             data-ng-if="newForm.Percentage.$invalid && (!newForm.Percentage.$pristine || showValid) && !newForm.Percentage.$focus">
+                                            {{ 'Please enter valid percentage' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+
+                            <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a href="javascript:">remove</a></div>
+
+                        </div>
+                    </div><!-- payment-modal-wrap ended -->
+
+                    <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                        <div class="btn-f-c"><button class="f-btn" id="editnewpayement_save"type="submit">UPDATE</button></div>
+                        <div class="btn-f-c"><button class="f-btn f-btn2"id="editnewpayement_cancel" type="submit" ng-click="$dismiss('cancel')">CANCEL</button></div>
+                    </div>
+
+                </form>
+
+            </div><!-- modal-body ended -->
+
+      
+</div>

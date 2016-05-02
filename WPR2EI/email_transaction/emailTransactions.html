@@ -1,0 +1,91 @@
+﻿<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+    
+</style>
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Email Transactions</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content">
+
+        <!--<form action="">
+
+            <div id="record-content" class="properties-content">
+
+                <div id="project-record-list" kendo-grid k-options="emailTransGrid" selectable="true">
+                </div>
+
+            </div>
+
+        </form>-->
+        <div class="clearfix" style="background: #fff;" id="emailContent">
+            <div class="col-lg-12 col-md-12 col-sm-12" >
+                <div class="vdivide">
+                    <div class="col-lg-3 col-md-3 col-sm-3 left_email active "  style="overflow: auto;height: 770px; outline: none!important;">
+                        <div class="inner-mail" ng-click="showDetail(email)" ng-repeat="email in emailData | orderBy:'-email_send_date_time' " style="min-height:104px">
+                            <span class="email_name capt"><a ui-sref="app.contactdetail({id:email.contact_id})" target="_blank"><strong>{{email.contact_name}}</strong></a></span>  <span class=" pull-right  email_date ">{{email.email_send_date_time | date:'dd/MM/yyyy hh:mm a'}} </span>
+                            <div  style=" outline: none;">
+                                <!--<p class="email_subject" style="font-size: 15px;text-transform:capitalize;">{{email.subject | limitTo:20}}</p>-->
+                                <p class="email_name1" ng-bind-html="email.template | limitTo:80">
+                                </p>
+                                <div class="col-md-12"><span style="float:right;margin-bottom:0px;" class="badge custom-badge">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9" ng-hide="showEmailDetail">
+                        <div class="email_body center">
+                           <span>Select an item to view</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9  main_body" style="overflow: auto;height: 770px; outline: none!important;" ng-show="showEmailDetail">
+                        
+                        <div class="email_body inner-attach-border " >
+                            <div class=""><span style="font-size: 11px;color: #a0a0a0;float:left"><i class="fa fa-clock-o"></i> {{emailDetail.email_send_date_time | date:' EEEE dd/MM/yyyy  hh:mm a '}}</span><span style="float:right"><a href="" style="color:#e0e0e0"><i class="fa fa-trash"></i></a></span></div>
+                            <!--subject-->
+                            <br/>
+                            <span class="email_subject">{{emailDetail.subject }}</span>
+                            <!--content-->
+                            <div class="email_content" ng-bind-html="emailDetail.template"> 
+                            </div><br /><br />
+                        <!--attachment-->
+                        <!--<div class="attachment_section">
+                            <i class="fa fa-paperclip"></i> <span>2</span> <span>attachment</span> <span style="color:#289ff1"><a href="">- Download all</a></span>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+   <script>
+  $('.left_email').mCustomScrollbar({
+        theme: "minimal-dark",
+        scrollbarPosition: "outside",
+        scrollInertia: 200,
+        advanced: { autoExpandHorizontalScroll: true }
+  });
+  $(document).ready(function () {
+      $('.inner-mail').on('click', function () {
+          $(this).toggleClass('beenclicked');
+      });
+  });
+  jQuery('.left_email').click(function () {
+      jQuery('.left_email').removeClass('active');
+      jQuery(this).addClass('active');
+  });
+  
+    </script>

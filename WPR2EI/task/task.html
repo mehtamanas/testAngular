@@ -1,0 +1,114 @@
+﻿<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <h2 class="pg-inner-title">Activities / <span style="color:#289ff1">Task</span></h2>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right">
+
+                        <a id="contact_openAddNewContactpopup" href="" class="btn-blk-create" ng-click="openAddtaskPopup()" style="cursor:pointer">+ Add New Task</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix head_filter" style="margin-top: 0px;">
+        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 13px;">
+
+            <div class="col-lg-2 col-md-2 col-sm-2 " style="margin-left: 45px;">
+                <select ng-model="gridView" class="form-control serach_bar_btn" style="font-size:14px;" ng-change="changeView()" id="contacaction">
+                    <option value='default' selected>Default View</option>
+                    <option ng-repeat="view in views" value={{view.id}}>{{view.view_name}}</option>
+                </select>
+            </div>
+            
+            <div class="col-md-9 col-sm-9">
+                <div class="form-inline">
+                   
+                    <input type="text" id="text" class="form-control serach_bar_filter custom_class" style="width: 71%;" placeholder="Query" ng-model="textareaText" ng-enter="DoWork()" />
+                      
+                    <a herf="" class="btn search_btn_cancel" ng-click="clearFilter()"><i class="fa fa-times"></i></a>
+                    <a href="" class="btn serch_btn_custom" ng-click="callFilter()"><i class="fa fa-search" aria-hidden="true"></i></a>
+
+                    <a herf="" class="btn btn-primary serach_bar_btn-2" data-toggle="tooltip" title="Save View" ng-click="saveView()">SAVE VIEW</i></a>
+                    <a herf="" class="btn  serach_bar_btn-1 button_save_del" data-toggle="tooltip" title="Edit" ng-click="editView()"><i class="fa fa-pencil-square-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
+
+                    <a herf="" class="btn  serach_bar_btn-1 button_save_del" ng-click="deleteView()"><i class="fa fa-trash-o fa-2x" style="color: #BFBCBC;" aria-hidden="true"></i></a>
+                    <a href="" ng-click="helpjqlpopup()"><img src="./images/jql-help-icon.png" style="margin-left:2%" /></a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="pg-inner-content">
+
+        <form action="">
+
+            <div class="clearfix action-spacer">
+                <div class="col-lg-12 head_action">
+                        <div class="col-lg-1 col-md-1 col-sm-1 ">
+                           <select ng-model="activityAction" style="height: 34px !important;"  class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="Project_Action">
+                   
+                                <option value='no_action'>Action</option>
+                                <option value='delete'>Delete</option>
+                                <option value='bulk_assign'>Assign To</option>
+                               <option value='add_tag'>Add Tag</option>
+                            </select>
+                           
+                        </div>
+                       
+                          
+                 
+                       
+                        <div class="col-md-11 col-sm-11">
+
+                            <div class="form-inline">
+                                    <button type="button" class="btn btn_refresh_2" ng-click="getTaskFromDb()"><img src="./images/refresh2.png" /></button>                               
+                                    <input type="text" id="addactivityname" class="form-control serach_bar_filter custom_class_1 quick-box-left" placeholder="add quick task" data-ng-model="name" style="width: 87%;" />
+                                    <a href="" class="btn serch_btn_custom search quick-box-right" ng-click="addActivityTask()" id="btn_addActivityTask"><img src="./images/check2.png"></a>
+                                    <a id="activity_Advance"  href="" ng-click="advanceAcvtivityTask()" style="cursor:pointer;margin-left:17px;">Advanced</a>
+
+                                </div>
+                        </div>
+                       
+                 
+                  
+                    
+
+
+
+                </div>
+            </div>
+
+
+
+            <div id="record-content" class="properties-content">
+
+                <div id="project-record-list" kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
+                </div>
+
+            </div><!-- record-content ended -->
+
+        </form>
+
+    </div><!-- pg-inner-content ended -->
+
+</div>

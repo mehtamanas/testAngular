@@ -1,0 +1,40 @@
+﻿<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<div class="modal-header">
+    <h4 class="modal-title">Assign Roles</h4>
+    <div class="close-btn-wrap" style="height:0px">
+        <button type="button" class="close" id="btn_option_close" style="margin-top:-6%;" ng-click="$dismiss('cancel')" data-toggle="tooltip" title="Close Tab">&times;</button>
+    </div>
+</div>
+<div class="main-content project add-new">
+    <form name="roleForm" novalidate data-ng-submit="addNew(roleForm.$valid)" autocomplete="off" class="form-horizontal">
+        <div class="main-content project add-new" style="padding:3%">
+            <div class="form-group form-bx ">
+                
+                    <!--<label>Option</label>-->
+                    <div class="form-group col-md-8">
+                        <div class="">
+                                <select ng-change="selectRole()" ng-model="role" name="roleName" id="useroption_project" class="dropdown form-control" style="margin-left: 26%;" required>
+                                    <option value="" selected>-- Select --</option>
+                                    <option ng-repeat="role in roles"
+                                            value="{{role.id}}">
+                                        {{role.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        <div ng-messages="roleForm.roleName.$error" data-ng-if="roleForm.roleName.$invalid && (!roleForm.roleName.$pristine || showValid) && !roleForm.roleName.$focus" style="color:maroon" role="alert">
+                            <div ng-message="required" id="err_emailTemplateName">This field should not be empty</div>
+                        </div>
+                    </div>
+               
+                </div>
+
+                <div style="text-align:center">
+                    <button class="btn btn-primary login-btn" ladda="loadingDemo"  data-style="expand-right" id="useroption_sub" type="submit" ng-click="showValid=true">Assign</button>
+                </div>
+
+                <!--<button class="btn organization-btn" type="submit">Submit</button>-->
+
+            </div>
+    </form>
+    </div>
+

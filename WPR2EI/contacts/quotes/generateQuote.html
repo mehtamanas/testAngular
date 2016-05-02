@@ -1,0 +1,206 @@
+﻿<div class="modal-header">
+    <button type="button" id="btn_generateClose" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <h4 class="form-title" style="text-align:left">Create New Quote</h4>
+</div>
+
+<div class="modal-body">
+    <div class="quote-container">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="capt quote-title">{{contactData.Contact_First_Name}} {{contactData.Contact_Last_Name}}</h5>
+                    <span class="capt quote-value">{{contactData.street1}}</span><br />
+                    <span class="capt quote-value">{{contactData.street2}}</span>
+                    <span class="capt quote-value">{{contactData.City}}</span><br />
+                    <span class="capt quote-value">{{contactData.State}} - {{contactData.zipcode}}</span><br /><br />
+                    <span class="quote-value">Phone: {{contactData.Contact_Phone}}</span><br />
+                    <span class="quote-value">Email: {{contactData.Contact_Email}}</span>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="capt quote-title">Quote No.</h4>
+                    <span class="label-group" type="text">
+                        <!--<h5 ng-bind="name"></h5>-->{{params.random_id}}
+                    </span>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="clearfix " style="margin-left: 3%;">
+        <div class="col-md-12" style="margin-top: 1%;margin-bottom: 1%;">
+            <div class="row" style="margin-top: 4%;">
+                <div class="col-md-4">
+                    <label>Select Project</label>
+                    <select ng-model="project1" name="projectSelect" ng-change="selectproject()" id="opt_generateSelectProject" class="form-control text-bold charge_label">
+                        <option value="" selected>--Select Project--</option>
+                        <option ng-repeat="project in projects"
+                                value="{{project.id}}">
+                            {{project.name}}
+                        </option>
+                    </select>
+                </div>
+                        <div class="col-md-4  service_add" style="margin-left:24px">
+                            <label>Select Offer</label>
+                            <select ng-model="offer1" name="projectSelect" ng-change="selectoffer()" id="opt_generateSelectOffer" class="form-control text-bold charge_label">
+                                <option value="" selected>--Select Offer--</option>
+                                <option ng-repeat="offer in offers"
+                                        value={{offer}}>
+                                    {{offer.offer_name}}
+                                </option>
+                            </select>
+                        </div>
+                            <div class="col-md-3 pull-right" style="margin-right: 30px">
+                                <label>Expiry Date</label>
+                                <input kendo-date-time-picker class="form-control charge_label"
+                                       ng-model="params.expiry_datetime"
+                                       k-ng-model="k_due_date"
+                                       id="generateExpiryDate"
+                                       k-format="'dd/MM/yyyy hh:mm tt'"
+                                       style="margin-top: 3%;height:27px;" />
+                                <!--<input kendo-date-picker class="form-control "
+                                       ng-model="params.expiry_datetime"
+                                       k-ng-model="k_due_date"
+                                       k-format="'dd/MM/yyyy'" />-->
+                            </div>
+
+                      
+                    </div>
+            </div>
+        </div>
+    </div><!-- modal ended -->
+
+<table class="table table-hover table-responsive">
+    <thead class="quote-tbl-head">
+        <tr>
+            <th style="padding-left: 18px;">Subscriptions</th>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Tax</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody style="background: #f8f8f8;;">
+        
+            <tr ng-repeat="quotes in quotes2">
+
+                <td style="width: 20%; padding-left:18px;" class="custom_tbl_padding">
+                    <select ng-model="subscription[$index].id" name="serviceSelect" id="selectSubscription" ng-change="selectservice($index)" class="form-control text-bold">
+                        <option value="" selected>--Select Service--</option>
+                        <option ng-repeat="service in services"
+                                value="{{service.project_services_id}}">
+                            {{service.service_name}}
+                        </option>
+                    </select>
+                </td><!-- Subscription -->
+
+                <td style="width: 20%;" class="custom_tbl_padding">
+                    <textarea type="text" disabled class="form-control text-bold" autofocus name="Description"
+                           data-ng-model="subscription[$index].desc"
+                           placeholder="Description"
+                           id="txtDescription"
+                           minlength="1"
+                           maxlength="50"
+                           style="height:45px;"
+                           input-focus />
+
+                </td><!-- Description -->
+
+                <td style="width: 8%" class="custom_tbl_padding">
+                    <input type="text" class="form-control text-bold" autofocus name="Description" ng-change="change($index)" id="generateQty"
+                           data-ng-model="subscription[$index].quantity"
+                           placeholder="Qty"
+                           minlength="1"
+                           maxlength="50"
+                           input-focus />
+                </td><!-- Qty -->
+
+                <td style="width: 18%;" class="custom_tbl_padding">
+                    <input type="text" format class="form-control text-bold" autofocus name="Description" ng-change="change($index)" id="generatePrice"
+                           data-ng-model="subscription[$index].price"
+                           placeholder="Price"
+                           minlength="1"
+                           input-focus />
+                </td><!-- Price -->
+               
+                <td style="width:14%" class="custom_tbl_padding">
+                    <label class="form-inline">
+                        <input type="text" class="form-control text-bold" style="width: 81%" ng-change="change($index)" id="generateTax"
+                               data-ng-model="subscription[$index].tax"
+                               placeholder="Tax"
+                               minlength="1"
+                               input-focus
+                               ng-disabled="!subscription[$index].taxDisabled" />
+                        <input type="checkbox"  ng-change="taxEnabled($index)" id="chk_generate" ng-model="subscription[$index].taxDisabled" />
+                    </label>
+                </td><!-- Tax -->
+
+                <td style="padding-right: 18px;" class="custom_tbl_padding">
+                    <input type="text" format disabled class="form-control text-bold" ng-change="subtotal_cal($index)" id="generateTotal"
+                           data-ng-model="subscription[$index].total"
+                           placeholder="Total"
+                           minlength="1"
+                           input-focus />
+                </td><!-- Total -->
+            </tr>
+        <tr id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field': $index>0}"> <a href="javascript:"></a></tr>
+
+    </tbody>
+
+
+    
+</table>
+
+
+
+<div class="clearfix " style="margin-left: 3%;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6" style="text-align:left">
+                <button type="submit" id="generateAdd" class="btn btn-primary quote_add_btn" value="ADD NEW" ng-click="addNewquote2($event)">ADD NEW</button>
+                <button type="button" id="generateClear" class="btn btn-f-c" style="background: #646464;" ng-click="removeQuotes($event)">CLEAR</button>
+                <div style="margin: 22% 0% 0% 63%;">
+                    <label class="radio-inline"><input type="radio" ng-model="radiovalue" value="Flat Charge" name="optradio">Flat Charge</label>
+                    <label class="radio-inline"><input type="radio" ng-model="radiovalue" value="Percent" name="optradio">Percent</label>
+                </div>
+            </div>
+            <div class="col-md-4 quote_total">
+                <table class="table table-responsive">
+                    <tbody style="text-align: right;">
+                        <tr><td class="quote_table"><label class="form-inline quote-subtotal">Sub total</label> </td><td class="quote_table" style="width: 49%;padding-right: 18px;"><input type="text" format disabled class="form-control" data-ng-model="params.subTotal" id="generateSubTotal" placeholder="Sub Total"/></td></tr>
+                        <tr><td class="quote_table"><label class="form-inline quote-subtotal">Offer Discount</label> </td><td class="quote_table" style="padding-right: 18px;"> <input type="text" disabled class="form-control" ng-change="finalTotal($index)" id="generateOfferDiscount" data-ng-model="params.offerDiscount" placeholder="Offer Discount" /></td></tr>
+                        <tr><td class="quote_table"><label class="form-inline quote-subtotal">Additional Discount</label></td><td class="quote_table" style="padding-right: 18px;"> <input type="text" format class="form-control" ng-blur="discountTotal()" id="generateAdditionalDisc" data-ng-model="params.additionalDiscount" placeholder="Additional Discount" /></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 pull-left" style="text-align: left;padding-top: 3%;font-weight:bold">
+                <span class="label-group" style="font-size:11px" type="text">
+                    <!--<h5 ng-bind="name"></h5>-->{{offersvalue}}
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal-footer">
+    <div class="modal-btn-wrap-1 clearfix">
+        <div class="col-md-4 quote_total">
+            <table class="table table-responsive">
+                <tbody style="text-align: right;">
+                    <tr><td class="quote_table"><label class="form-inline">TOTAL:</label> </td><td format class="quote_table" style="width: 49%;"> {{params.grandTotal |currency:"&#8377;"}}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+    <div class="modal-btn-wrap-1 clearfix" style="text-align:left">
+        <button type="button" class="btn btn-primary quote_btn" id="btn_generateSend" style="margin:1px;background: #646464;" ng-click="preview()"> Send </button>
+        <button type="submit" class="btn btn-primary quote_btn" id="btn_generateSave" style="margin:1px" ng-click="ServicePost()"> SAVE </button>
+        <button type="button" class="btn btn-primary quote_btn" id="btn_generatePre" style="margin:1px;background: #498FA6;" ng-click="openquotePreview()"> PREVIEW </button>
+    </div>
+</div>

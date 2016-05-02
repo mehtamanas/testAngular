@@ -1,0 +1,217 @@
+﻿
+
+<div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-header">
+        <button id="btn_editServiceClose" type="button" class="close"  data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        <h4 class="form-title modal-top">edit Service</h4>
+    </div>  
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+        <form class="form-content" name="newForm" novalidate data-ng-submit="addNewContact(newForm.$valid)" autocomplete="off">
+            <div class="clearfix">
+                <div class="form-bx">
+                    <label for=""> Name</label>
+                    <div class="form-group"
+                         data-ng-class="{
+                               'has-error' : newForm.Name.$invalid && (!newForm.Name.$pristine || showValid) && !newForm.Name.$focus,
+                                 'has-success': newForm.Name.$valid && !newForm.Name.$pristine && !newForm.Name.$focus
+                            }">
+                        <input type="text" autofocus name="Name" class="form-control charge_label" id="editServiceName"
+                               data-ng-model="params.name"
+                               minlength="1"
+                               maxlength="100"
+                               alphabets-only
+                               input-focus
+                               required
+                            />
+                        <div ng-messages="newForm.Name.$error" style="color:maroon" role="alert">
+                            <div ng-message="required" data-ng-if="newForm.Name.$invalid && (!newForm.Name.$pristine || showValid) && !newForm.firstName.$focus">This field should not be empty </div>
+                            <div ng-message="pattern" id="err_editServiceName">Enter valid first name</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="organization_desc_wrap clearfix">
+                <div class="form-group form-bx form-bx5">
+                    <div class="form-group"
+                         data-ng-class="{
+                                        'has-error' : newForm.Description.$invalid && (!newForm.Description.$pristine || showValid) && !newForm.Description.$focus,
+                                        'has-success': newForm.Description.$valid && !newForm.Description.$pristine && !newForm.Description.$focus
+                                    }">
+                        <div class="col-md-7">
+                            <div style="margin-bottom: 2%;"> <label for="">Description</label></div>
+                            <textarea id="txt_editServiceDesc" autofocus kendo-editor k-ng-model="description"></textarea>
+                            <div class="text-danger"
+                                 data-ng-if="newForm.Description.$invalid && (!newForm.Description.$pristine || showValid) && !newForm.Description.$focus" id="err_txt_editServiceDesc">
+                                {{ 'invalid Description' | translate }}
+                            </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+
+                <div class="form-bx">
+                    <label for="">Unit Price</label>
+                    <div class="form-group"
+                         data-ng-class="{
+                               'has-error' : newForm.price.$invalid && (!newForm.price.$pristine || showValid) && !newForm.price.$focus,
+                                 'has-success': newForm.price.$valid && !newForm.price.$pristine && !newForm.price.$focus
+                            }">
+                        <input type="text"  format autofocus name="price" class="form-control charge_label" id="editServiceUnit"
+                               data-ng-model="params.price"
+                               minlength="1"
+                               maxlength="40"
+                               alphabets-only
+                               input-focus
+                               required
+                                ng-pattern="/^([1-9][0-9,./]*)$/" />
+                        <div ng-messages="newForm.price.$error" style="color:maroon" role="alert">
+                            <div ng-message="required" data-ng-if="newForm.price.$invalid && (!newForm.price.$pristine || showValid) && !newForm.price.$focus">This field should not be empty </div>
+                            <div ng-message="pattern" id="err_editServiceUnit">Enter valid price</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" ng-repeat="quotes in quotes2">
+                <div class="form-group">
+                    <div class="col-md-2 ">
+                        <div class="form-group"
+                             data-ng-class="{
+                                       'has-error' : newForm.tax.$invalid && (!newForm.tax.$pristine || showValid) && !newForm.tax.$focus,
+                                        'has-success': newForm.tax.$valid && !newForm.Milestone.$pristine && !newForm.tax.$focus
+                                         }">
+
+                            <label for=""><b>Add Tax</b></label>
+                            <select name="project_year" id="editServiceAddTax" ng-change="selectService($index)" ng-model='serviceType[$index].id' class="dropdown form-control charge_label">
+                                <option value="" selected>--Select Tax--</option>
+                                <option ng-repeat="tax in taxes"
+                                        value={{tax.id}}>
+                                    {{tax.charge_type}}
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 service_add">
+                        <div class="form-group"
+                             data-ng-class="{
+                       'has-error' : newForm.charges_amt.$invalid && (!newForm.charges_amt.$pristine || showValid) && !newForm.charges_amt.$focus,
+                       'has-success': newForm.charges_amt.$valid && !newForm.charges_amt.$pristine && !newForm.charges_amt.$focus
+                         }">
+
+
+                            <div class="area-f">
+
+                                <label >charge</label>
+                                <input disabled class="form-control charge_label"
+                                       placeholder="Charges" name="charges_amt" id="editServiceCharge"
+                                       data-ng-model="serviceType[$index].charge"
+                                       minlength="1"
+                                       maxlength="3"
+                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                       input-focus
+                                       required />
+
+                                <div class="text-danger"
+                                     data-ng-if="newForm.charges_amt.$invalid && (!newForm.charges_amt.$pristine || showValid) && !newForm.charges_amt.$focus" id="err_editServiceCharge">
+                                    {{ 'Please enter valid percentage' | translate }}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 service_add">
+                        <div class="form-group"
+                             data-ng-class="{
+                       'has-error' : newForm.charges_amt.$invalid && (!newForm.charges_amt.$pristine || showValid) && !newForm.charges_amt.$focus,
+                       'has-success': newForm.charges_amt.$valid && !newForm.charges_amt.$pristine && !newForm.charges_amt.$focus
+                         }">
+
+
+                            <div class="area-f">
+                                <label>Tax Amount</label>
+                                <input disabled class="form-control charge_label"
+                                       placeholder="Charges" name="TaxAmount" id="editServiceTaxAmount"
+                                       data-ng-model="serviceType[$index].tax"
+                                       minlength="1"
+                                       maxlength="3"
+                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                       input-focus
+                                       required />
+
+                                <div class="text-danger"
+                                     data-ng-if="newForm.charges_amt.$invalid && (!newForm.charges_amt.$pristine || showValid) && !newForm.charges_amt.$focus" id="err_editServiceTaxAmount">
+                                    {{ 'Please enter valid percentage' | translate }}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 service_add">
+                        <div class="form-group"
+                             data-ng-class="{
+                       'has-error' : newForm.charges_amt.$invalid && (!newForm.charges_amt.$pristine || showValid) && !newForm.charges_amt.$focus,
+                       'has-success': newForm.charges_amt.$valid && !newForm.charges_amt.$pristine && !newForm.charges_amt.$focus
+                         }">
+
+
+                            <div class="area-f">
+                                <label>Total Amount</label>
+                                <input  disabled class="form-control charge_label"
+                                       placeholder="Charges" name="totalAmt" id="editServiceTotalAmt"
+                                       data-ng-model="serviceType[$index].totalAmt"
+                                       minlength="1"
+                                       maxlength="3"
+                                       ng-pattern="/^(0|[1-9][0-9]*)$/"
+                                       input-focus
+                                       required />
+
+                                <div class="text-danger"
+                                     data-ng-if="newForm.charges_amt.$invalid && (!newForm.charges_amt.$pristine || showValid) && !newForm.charges_amt.$focus" id="err_editServiceTotalAmt">
+                                    {{ 'Please enter valid percentage' | translate }}
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <!--<div id="add-address" ng-class="{'add-input add-input2': $index==0,'.remove-field2': $index>0}" ng-click="addNewquote2($event)"><a href="javascript:">remove</a></div>-->
+                   
+                </div>
+                
+            </div>
+            <div class="col-md-6" style="text-align:left">
+                <button type="submit" class="btn btn-primary quote_add_btn" id="btn_editServiceAdd" value="ADD NEW" ng-click="addNewquote2($event)">ADD NEW</button>
+                <button type="button" class="btn btn-primary quote_clear_btn" id="btn_editServiceClear" value="CLEAR" ng-click="quotes2.pop()">CLEAR</button>
+            </div>
+            <div id="add-address" ng-class="{'add-input add-input2': $index==0,'remove-field0': $index>0}"><a href="javascript:"></a></div>
+
+            </br>
+            </br>
+
+
+
+            <div class="modal-btn-wrap clearfix">
+                <button id="btn_editServiceSave" ng-click="ServicePost()" class="f-btn">SAVE</button>
+
+                <button id="btn_editServiceCancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+            </div>
+        </form>
+
+
+    </div><!-- modal-body ended -->
+
+</div><!-- modal ended -->

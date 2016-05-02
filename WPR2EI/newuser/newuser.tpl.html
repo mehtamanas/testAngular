@@ -1,0 +1,60 @@
+
+<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="pg-inner-title">Organization / <span style="color:#289ff1">Users</span></h2>
+                </div>
+                <div class="col-md-8">
+                    <div class="pull-right btn-wrap-right">
+                        <a href="" class="btn-blk-create" ng-click="openUserPopup()" id="addNewUser">+ ADD NEW USER </a>
+             
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+    
+    <div class="pg-inner-content">
+
+        <form action="">
+            <div class="clearfix action-spacer">
+                <div class="col-lg-12 head_action">
+                    <div class="">
+                        <div  id="user_action"class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
+                            <select ng-model="userAction" class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="Useraction">
+                                <option value='no_action' selected>Action</option>
+                                <option value='Inactive'>Inactive</option>
+                                <option value='assign_roles'>Assign Roles</option>
+                                <option value='delete'>Delete</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <button type="button" id="userRefresh" class="btn btn_refresh"><img src="./images/refresh2.png" /></button>
+                </div>
+            </div>
+        
+
+            <div id="record-content" class="properties-content">
+
+                <div id="project-record-list" kendo-grid="peopleGrid" k-options="mainGridOptions" selectable="true" k-on-change="myGridChange( dataItem )">
+                </div>
+               
+
+            </div><!-- record-content ended -->
+            <br />
+            <!--<a href="#" class="btn-lk" addUser()">Show checked</a>-->
+
+        </form>
+
+    </div>
+</div>

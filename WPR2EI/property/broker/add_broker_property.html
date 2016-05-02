@@ -1,0 +1,996 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <h2 class="pg-inner-title">Broker-Add Property</h2>
+                </div>
+            </div>
+      </div>
+</div>
+    <div class="pg-inner-content" style="">
+
+        <div class="project-detail">
+
+            <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                <div class="col-lg-12 pull-left">
+                    <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                        <h2 class="pg-inner-title"> Add Property Detail</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                <form class="form-content " name="addNewForm" novalidate data-ng-submit="addNewBroker(addNewForm.$valid)" autocomplete="off">
+
+                    <div class="clearfix">
+
+                        <div style="margin-bottom:2px">
+                            <label><input type="radio" id="broker_sales" name="broker_optn" ng-model="radioValue" value="sale" ng-checked="true"/>Sales</label>
+                            <label><input type="radio" id="broker_Rent" name="broker_optn" ng-model="radioValue" value="rent" /> &nbsp; Rent</label><br />
+                            <label><input type="radio" id="broker_Residential" name="test" ng-model="radio1" value="Residential" /> &nbsp; Residential</label>
+                            <label><input type="radio" id="broker_Commercial" name="test" ng-model="radio1" value="Commercial" /> &nbsp; Commercial</label>
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Serial No.</label>
+                                <input type="text" class="form-control text-bold" id="broker_serialno"
+                                       data-ng-model="params.random_id"
+                                       minlength="1"
+                                       maxlength="60"
+                                       input-focus />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.Bedroom.$invalid && (!addNewForm.Bedroom.$pristine || showValid) && !addNewForm.Bedroom.$focus,
+                                            'has-success': addNewForm.Bedroom.$valid && !addNewForm.Bedroom.$pristine && !addNewForm.Bedroom.$focus
+                                     }">
+                                    <label for="">Bedroom</label>
+                                    <input type="text" class="form-control text-bold" id="broker_bedroom" name="Bedroom"
+                                           data-ng-model="params.num_bedrooms"
+                                           minlength="1"
+                                           maxlength="1"
+                                           ng-pattern="/^[0-9]+$/"
+                                           input-focus />
+                                    <div ng-messages="addNewForm.Bedroom.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid No.Of Bedroom</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col-md-1" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.Bathroom.$invalid && (!addNewForm.Bathroom.$pristine || showValid) && !addNewForm.Bathroom.$focus,
+                                            'has-success': addNewForm.Bathroom.$valid && !addNewForm.Bathroom.$pristine && !addNewForm.Bathroom.$focus
+                                     }">
+                                    <label for="">Bathroom</label>
+                                    <input type="text" class="form-control text-bold" id="broker_bathroom" name="Bathroom"
+                                           data-ng-model="params.num_bathrooms"
+                                           minlength="1"
+                                           maxlength="1"
+                                           ng-pattern="/^[0-9]+$/"
+                                           input-focus />
+                                    <div ng-messages="addNewForm.Bathroom.$error" style="color:maroon" role="alert">
+
+                                        <div ng-message="pattern">Enter valid No.Of Bathroom</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.Agreement_area.$invalid && (!addNewForm.Agreement_area.$pristine || showValid) && !addNewForm.Agreement_area.$focus,
+                                            'has-success': addNewForm.Agreement_area.$valid && !addNewForm.Agreement_area.$pristine && !addNewForm.Agreement_area.$focus
+                                     }">
+                                    <label for="">Agreement Area</label>
+                                    <div class="area-f">
+                                        <input type="text" class="form-control text-bold" id="broker_agreement_area" name="Agreement_area"
+                                               data-ng-model="params.Agreement_area"
+                                               minlength="1"
+                                               maxlength="10"
+                                               ng-pattern="/^([1-9][0-9+./]*)$/"
+                                               input-focus 
+                                               />
+                                        <span class="area-txt">sq.ft</span>
+                                        <div ng-messages="addNewForm.Agreement_area.$error" style="color:maroon" role="alert">
+                                            <!--<div ng-message="required" data-ng-if="addNewForm.Agreement_area.$invalid && (!addNewForm.Agreement_area.$pristine || showValid) && !addNewForm.Agreement_area.$focus">This field should not be empty </div>-->
+                                            <div ng-message="pattern">Enter valid Agreement Area</div>
+                                        </div>
+                                    </div>
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.Buildup_area.$invalid && (!addNewForm.Buildup_area.$pristine || showValid) && !addNewForm.Buildup_area.$focus,
+                                            'has-success': addNewForm.Buildup_area.$valid && !addNewForm.Buildup_area.$pristine && !addNewForm.Buildup_area.$focus
+                                     }">
+                                    <label for="">Build-up Area</label>
+                                    <div class="area-f">
+                                        <input type="text" class="form-control text-bold" id="broker_BuildUp_area" name="Buildup_area"
+                                               data-ng-model="params.Build_up_area"
+                                               minlength="1"
+                                               maxlength="10"
+                                               ng-pattern="/^([1-9][0-9+./]*)$/"
+                                               input-focus
+                                               required />
+                                        <span class="area-txt">sq.ft</span>
+                                        <div ng-messages="addNewForm.Buildup_area.$error" style="color:maroon" role="alert">
+                                            <div ng-message="pattern">Enter valid Build-up Area</div>
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.carpark.$invalid && (!addNewForm.carpark.$pristine || showValid) && !addNewForm.carpark.$focus,
+                                            'has-success': addNewForm.carpark.$valid && !addNewForm.carpark.$pristine && !addNewForm.carpark.$focus
+                                     }">
+                                    <label for="">Carpark/Garage</label>
+                                    <div class="area-f">
+                                        <input type="text" class="form-control text-bold" id="broker_carpark" name="carpark"
+                                               data-ng-model="params.car_park_id"
+                                               minlength="1"
+                                               maxlength="2"
+                                               ng-pattern="/^[0-9]+$/" />
+                                        <div ng-messages="addNewForm.carpark.$error" style="color:maroon" role="alert">
+                                            <div ng-message="pattern">Enter valid Carpark</div>
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                        </div>
+
+                        <div class="pull-left f-half-6" style="margin-left:1%">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Furnishing</label>
+                                <select ng-model="furnish1" ng-change="selectfurnish()" class="dropdown form-control text-bold"  id="broker_Furnish">
+                                    <option value="" selected>Select Furnishing</option>
+                                    <option ng-repeat="fur in furnish"
+                                            value="{{fur.id}}">
+                                        {{fur.type}}
+                                    </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.floor.$invalid && (!addNewForm.floor.$pristine || showValid) && !addNewForm.floor.$focus,
+                                            'has-success': addNewForm.floor.$valid && !addNewForm.floor.$pristine && !addNewForm.floor.$focus
+                                     }">
+                                    <label for="">Floor</label>
+                                    <input type="text" class="form-control text-bold" id="broker_Floor" name="floor"
+                                           data-ng-model="params.floor_num"
+                                           minlength="1"
+                                           maxlength="2"
+                                           ng-pattern="/^[0-9]+$/"
+                                           input-focus
+                                           />
+                                    <div ng-messages="addNewForm.floor.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Floor</div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                 </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">View</label>
+                                <select ng-model="view1" ng-change="selectView()" class="dropdown form-control text-bold"  id="broker_View">
+                                    <option value="" selected>Select View</option>
+                                    <option ng-repeat="view in views"
+                                            value="{{view.id}}">
+                                        {{view.view_type}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 1%;">
+                                <div class="col-md-3" ng-repeat="Amenity in orgAmenities"><input type="checkbox" id="broker_amenity" ng-model="Amenity.checkedd" name="test"/> &nbsp;{{Amenity.amenity_type_code}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row for_rent" style="display: none">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Availabilty</label>
+                                <select ng-model="available1" ng-change="selectAvailabilty()" class="dropdown form-control text-bold" id="broker_Availabilty">
+                                    <option value="" selected>Select Availabilty</option>
+                                    <option ng-repeat="available in availability"
+                                            value="{{available.id}}">
+                                        {{available.type}}
+                                 </select>
+                            </div>
+                        </div>
+
+                       
+
+                        <div ng-show="showLeased" class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Lease Period</label>
+                                <select ng-model="leasePeriod1" ng-change="selectLeasePeriod()" class="dropdown form-control text-bold" id="broker_lease_period">
+                                    <option value="" selected>Select Lease Period</option>
+                                    <option value="12 Months">12 Months</option>
+                                    <option value="24 Months">24 Months</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div ng-show="showRenewalDate" class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Date:</label>
+                                <input kendo-date-picker class="form-control" id="broker_date"
+                                       ng-model="params.renewal_of_lease"
+                                       k-format="'dd/MM/yyyy'" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Possession Date:</label>
+                                <input kendo-date-picker class="form-control" id="broker_possession_date"
+                                       ng-model="params.possassion_date"
+                                       k-format="'dd/MM/yyyy'" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Property Condition</label>
+                                <select ng-model="properyCondition1" ng-change="selectPropertyCondition()" class="dropdown form-control text-bold" id="broker_property_condition">
+                                    <option value="" selected>Select Property Condition</option>
+                                    <option ng-repeat="property in properties"
+                                            value="{{property.id}}">
+                                        {{property.type}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Listing Source</label>
+                                <select ng-model="listSource1" ng-change="selectListingSource()" class="dropdown form-control text-bold"  id="broker_listing_source">
+                                    <option value="" selected>Select Listing Source</option>
+                                    <option ng-repeat="source in sources"
+                                            value="{{source.id}}">
+                                        {{source.type}}
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Type Of Agreement</label>
+                                <select ng-model="agreement1" ng-change="selectAgreement()" class="dropdown form-control text-bold"  id="broker_agreement">
+                                    <option value="" selected>Select Agreement</option>
+                                    <option value="Leave & Licence">Leave & Licence</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Location / Address Details</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.Building_name.$invalid && (!addNewForm.Building_name.$pristine || showValid) && !addNewForm.Building_name.$focus,
+                                            'has-success': addNewForm.Building_name.$valid && !addNewForm.Building_name.$pristine && !addNewForm.Building_name.$focus
+                                     }">
+                                    <label for="">Building Name</label>
+                                    <input type="text" class="form-control text-bold" id="broker_buildingname" name="Building_name"
+                                           data-ng-model="params.building"
+                                           minlength="1"
+                                           maxlength="50"
+                                           ng-pattern="/^[\w -]*$/"/>
+                                    <div ng-messages="addNewForm.Building_name.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Building Name</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div ng-repeat="choice in choices1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                           'has-error' : addNewForm.address.$invalid && (!addNewForm.address.$pristine || showValid) && !addNewForm.address.$focus,
+                                            'has-success': addNewForm.address.$valid && !addNewForm.address.$pristine && !addNewForm.address.$focus
+                                     }">
+                                        <label for="">Address Line{{$index + 1}}</label>
+                                        <input type="text" class="form-control text-bold" id="broker_address" name="address"
+                                               data-ng-model="choice.Street_1"
+                                               minlength="1"
+                                               maxlength="255" />
+                                          <div ng-messages="addNewForm.address.$error" style="color:maroon" role="alert">
+                                            <div ng-message="pattern">Enter valid Address</div>
+                                        </div>
+                                    </div>
+                               </div>
+                            </div>
+                           <div id="broker_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice1($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">State</label>
+                                <select ng-model="state1" ng-change="selectstate()" class="dropdown form-control text-bold" id="broker_state">
+                                    <option value="" selected>State</option>
+                                    <option ng-repeat="state in states"
+                                            value="{{state.state_id}}">
+                                        {{state.state_name}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">City</label>
+                                <select ng-model="city1" ng-change="selectcity()" class="dropdown form-control text-bold"  id="broker_city">
+                                    <option value="" selected>City</option>
+                                    <option ng-repeat="city in cities"
+                                            value="{{city.city_id}}">
+                                        {{city.city_name}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.pin.$invalid && (!addNewForm.pin.$pristine || showValid) && !addNewForm.pin.$focus,
+                                            'has-success': addNewForm.pin.$valid && !addNewForm.pin.$pristine && !addNewForm.pin.$focus
+                                     }">
+                                    <label for="">Pin</label>
+                                    <input type="text" class="form-control text-bold" id="broker_pin" name="pin"
+                                           data-ng-model="params.zip_code"
+                                           minlength="1"
+                                           maxlength="7"
+                                           ng-pattern="/^[0-9]{1,7}$/" />
+                                    <div ng-messages="addNewForm.pin.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Zip Code</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.locality.$invalid && (!addNewForm.locality.$pristine || showValid) && !addNewForm.locality.$focus,
+                                            'has-success': addNewForm.locality.$valid && !addNewForm.locality.$pristine && !addNewForm.locality.$focus
+                                     }">
+                                    <label for="">Locality</label>
+                                    <input type="text" class="form-control text-bold" id="broker_locality" name="locality"
+                                           data-ng-model="params.locality"
+                                           minlength="1"
+                                           maxlength="50"
+                                           ng-pattern="/^[\w -]*$/" />
+                                    <div ng-messages="addNewForm.locality.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Locality</div>
+                                    </div>
+                             </div>
+                        </div>
+                     </div>
+                  </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Payment</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div  class="row for_rent" style="display: none">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.base_rent.$invalid && (!addNewForm.base_rent.$pristine || showValid) && !addNewForm.base_rent.$focus,
+                                            'has-success': addNewForm.base_rent.$valid && !addNewForm.base_rent.$pristine && !addNewForm.base_rent.$focus
+                                     }">
+                                    <label for="">Base Rent</label>
+                                    <input type="text" class="form-control text-bold" id="broker_baseRent" name="base_rent"
+                                           data-ng-model="params.base_rent"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/"
+                                           input-focus />
+                                    <div ng-messages="addNewForm.base_rent.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Base Rent</div>
+                                    </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.advanced_rent.$invalid && (!addNewForm.advanced_rent.$pristine || showValid) && !addNewForm.advanced_rent.$focus,
+                                            'has-success': addNewForm.advanced_rent.$valid && !addNewForm.advanced_rent.$pristine && !addNewForm.advanced_rent.$focus
+                                     }">
+                                    <label for="">Advanced Rent</label>
+                                    <input type="text" class="form-control text-bold" id="broker_advancedRent" name="advanced_rent"
+                                           data-ng-model="params.advanced_rent"
+                                           minlength="1"
+                                           maxlength="60"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/"
+                                           input-focus />
+                                    <div ng-messages="addNewForm.advanced_rent.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Advanced Rent</div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.monthly_rent.$invalid && (!addNewForm.monthly_rent.$pristine || showValid) && !addNewForm.monthly_rent.$focus,
+                                            'has-success': addNewForm.monthly_rent.$valid && !addNewForm.monthly_rent.$pristine && !addNewForm.monthly_rent.$focus
+                                     }">
+                                    <label for="">Monthly Rent</label>
+                                    <input type="text" class="form-control text-bold" id="broker_monthlyRent" name="monthly_rent"
+                                           data-ng-model="params.monthly_rent"
+                                           minlength="1"
+                                           maxlength="60"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/"
+                                           input-focus />
+                                    <div ng-messages="addNewForm.monthly_rent.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Monthly Rent</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Deposit Required</label>
+                                <select ng-model="deposit1" ng-change="selectdeposit()" class="dropdown form-control text-bold"  id="broker_deposit">
+                                    <option value="" selected>Select Deposit</option>
+                                    <option value=Yes>Yes</option>
+                                    <option value=No>No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Deposit Type</label>
+                                <select ng-model="depositType1" ng-change="selectdepodit_type()" class="dropdown form-control text-bold"  id="broker_depositType">
+                                    <option value="" selected>Select Type</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Percent">Percent</option>
+                                    <option value="Rent Multiple">Rent Multiple</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.deposit_amt.$invalid && (!addNewForm.deposit_amt.$pristine || showValid) && !addNewForm.deposit_amt.$focus,
+                                            'has-success': addNewForm.deposit_amt.$valid && !addNewForm.deposit_amt.$pristine && !addNewForm.deposit_amt.$focus
+                                     }">
+                                    <label for="">Deposit Amount</label>
+                                    <input type="text" class="form-control text-bold" id="broker_depositAmount" name="deposit_amt"
+                                           data-ng-model="params.deposit_amount"
+                                           minlength="1"
+                                           maxlength="10" 
+                                           ng-pattern="/^([1-9][0-9+./]*)$/"/>
+                                    <div ng-messages="addNewForm.deposit_amt.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Deposit Amount</div>
+                                    </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Mode Of Payment</label>
+                                <select ng-model="payment1" ng-change="selectModePayment()" class="dropdown form-control text-bold"  id="broker_paymentMode">
+                                    <option value="" selected>Select Payment Mode</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Cheque">Cheque</option>  
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-6 for_sale" style="display:none">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.sale_price.$invalid && (!addNewForm.sale_price.$pristine || showValid) && !addNewForm.sale_price.$focus,
+                                            'has-success': addNewForm.sale_price.$valid && !addNewForm.sale_price.$pristine && !addNewForm.sale_price.$focus
+                                     }">
+                                    <label for="">Sale Price per sqft</label>
+                                    <input type="text" class="form-control text-bold" id="broker_salePriceSqft" name="sale_price"
+                                           data-ng-model="params.sale_price_per_sqft"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/"
+                                           input-focus />
+                                    <div ng-messages="addNewForm.sale_price.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Sale Price per Sqft</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.car_park_rate.$invalid && (!addNewForm.car_park_rate.$pristine || showValid) && !addNewForm.car_park_rate.$focus,
+                                            'has-success': addNewForm.car_park_rate.$valid && !addNewForm.car_park_rate.$pristine && !addNewForm.car_park_rate.$focus
+                                     }">
+                                    <label for="">Car Park Rate</label>
+                                    <input type="text" class="form-control text-bold" id="broker_carPark" name="car_park_rate"
+                                           data-ng-model="params.car_park_rate"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^[0-9]+$/" />
+                                    <div ng-messages="addNewForm.car_park_rate.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Car Park Rate</div>
+                                    </div>
+                                 </div>
+                             </div>
+                        </div>
+
+                        <div class="col-md-2 for_sale"  style="display:none;margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.sale_car_park.$invalid && (!addNewForm.sale_car_park.$pristine || showValid) && !addNewForm.sale_car_park.$focus,
+                                            'has-success': addNewForm.sale_car_park.$valid && !addNewForm.sale_car_park.$pristine && !addNewForm.sale_car_park.$focus
+                                     }">
+                                    <label for="">Sale Price for Carpark</label>
+                                    <input type="text" class="form-control text-bold" id="broker_salePriceCarpark" name="sale_car_park"
+                                           data-ng-model="params.sale_price_for_car_park"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/" />
+                                    <div ng-messages="addNewForm.sale_car_park.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Sale Price For Carpark</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Liscensee Brokerage Type</label>
+                                <select ng-model="brokerage1" ng-change="selectBrokerage()" class="dropdown form-control text-bold"  id="broker_brokerageType">
+                                    <option value="" selected>select Brokerage Type</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Percent">Percent</option>
+                                    <option value="Rent Multiple">Rent Multiple</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.liscensee_brokerage.$invalid && (!addNewForm.liscensee_brokerage.$pristine || showValid) && !addNewForm.liscensee_brokerage.$focus,
+                                            'has-success': addNewForm.liscensee_brokerage.$valid && !addNewForm.liscensee_brokerage.$pristine && !addNewForm.liscensee_brokerage.$focus
+                                     }">
+                                    <label for="">Liscensee Brokerage </label>
+                                    <input type="text" class="form-control text-bold" id="broker_brokerage" name="liscensee_brokerage"
+                                           data-ng-model="params.licensee_brokerage"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/" />
+                                    <div ng-messages="addNewForm.liscensee_brokerage.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Liscensee Brokerage</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row for_rent" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;display:none">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Rent Escalation</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row for_rent" style="display:none">
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Period</label>
+                                <select ng-model="rentEscperiod1" ng-change="selectRentEscPeriod()" class="dropdown form-control text-bold"  id="broker_rentEscPeriod">
+                                    <option value="" selected>Select Period</option>
+                                    <option value="12 Months">12 Months</option>
+                                    <option value="24 Months">24 Months</option>
+                                    <option value="36 Months">36 Months</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Type</label>
+                                <select ng-model="rentEscType1" ng-change="selectRentEscType()" class="dropdown form-control text-bold"  id="broker_rentEscType">
+                                    <option value="" selected>Select Type</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Percent">Percent</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.rent_esc_amount.$invalid && (!addNewForm.rent_esc_amount.$pristine || showValid) && !addNewForm.rent_esc_amount.$focus,
+                                            'has-success': addNewForm.rent_esc_amount.$valid && !addNewForm.rent_esc_amount.$pristine && !addNewForm.rent_esc_amount.$focus
+                                     }">
+                                    <label for="">Amount</label>
+                                    <input type="text" class="form-control text-bold" id="broker_amount" name="rent_esc_amount"
+                                           data-ng-model="params.rent_escalation_amount"
+                                           minlength="1"
+                                           maxlength="10"
+                                           ng-pattern="/^([1-9][0-9+./]*)$/" />
+                                </div>
+                                <div ng-messages="addNewForm.rent_esc_amount.$error" style="color:maroon" role="alert">
+                                    <div ng-message="pattern">Enter valid Amount</div>
+                           </div>
+                        </div>
+                     </div>
+                    </div>
+
+                    <!--<div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Taxes and Charges</h2>
+                            </div>
+                        </div>
+
+                    </div>-->
+
+                    <!--<div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs" id="addnewproject_state">Liscensee Brokerage Type</label>
+                                <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold">
+                                    <option value="" selected></option>
+                                    <option ng-repeat="event in events"
+                                            value="{{event.id}}">
+                                        {{event.type}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" style="margin-left:1%">
+                            <div class="form-group">
+                                <label for="">Liscensee Brokerage </label>
+                                <input type="text" class="form-control text-bold"
+                                       data-ng-model=""
+                                       minlength="1"
+                                       maxlength="60"
+                                       ng-pattern="/^[a-z 0-9\s]+$/i"
+                                       input-focus
+                                       required />
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Agent Details</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label for="">Agent Name</label>
+                            <input kendo-auto-complete ng-model="params.name" id="broker_agentName" k-data-source="agentList" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row" ng-repeat="choice in choices2">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.agent_phone.$invalid && (!addNewForm.agent_phone.$pristine || showValid) && !addNewForm.agent_phone.$focus,
+                                            'has-success': addNewForm.agent_phone.$valid && !addNewForm.agent_phone.$pristine && !addNewForm.agent_phone.$focus
+                                     }">
+                                    <label for="">Phone{{$index + 1}}</label>
+                                    <input type="text" class="form-control text-bold" id="broker_agentPhone" name="agent_phone"
+                                           data-ng-model="choice.agent_phone_no"
+                                           ng-pattern="/^[0-9\-]{8,12}$/" />
+                                    <div ng-messages="addNewForm.agent_phone.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter valid Phone No.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="broker_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice2($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
+                    </div>
+
+                    <div class="row" ng-repeat="choice in choices3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <div data-ng-class="{
+                                'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
+                                'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
+                                }">
+                                <label for="">Email{{$index + 1}}</label>
+                                <input type="text" class="form-control text-bold" id="broker_agentPhone" name="email"
+                                       data-ng-model="choice.email"
+                                       ng-pattern="emailRegex" />
+                                   <div ng-messages="addNewForm.email.$error" style="color:maroon" role="alert">
+                                       <div ng-message="pattern">Enter valid Email</div>
+                                 </div>
+                               </div>
+                            </div>
+                        </div>
+                        <div id="broker_removeaddress" ng-class="{'add-input add_btn_address': $index==0,'remove-field': $index>0}" ng-click="addNewChoice3($event)"><a id="contact_remove_address" href="javascript:">Remove</a></div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Contacts For Premises</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div data-ng-class="{
+                                      'has-error' : newForm.fname.$invalid && (!newForm.fname.$pristine || showValid) && !newForm.fname.$focus,
+                                      'has-success': newForm.fname.$valid && !newForm.fname.$pristine && !newForm.fname.$focus
+                                      }">
+                                        <label for="">First Name</label>
+                                        <input type="text" class="form-control text-bold" id="broker_bedroom" name="fname"
+                                               data-ng-model="params.first_name"
+                                               minlength="1"
+                                               maxlength="40"
+                                               alphabets-only
+                                               input-focus
+                                               ng-pattern="/^[a-zA-Z\s]*$/" />
+                                        <div ng-messages="addNewForm.fname.$error" style="color:maroon" role="alert">
+                                            <div ng-message="pattern">Enter Valid First Name</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-2" style="margin-left:1%">
+                               <div class="form-group">
+                                    <div class="form-group">
+                                        <div data-ng-class="{
+                                                         'has-error' : newForm.last_name.$invalid && (!newForm.last_name.$pristine || showValid) && !newForm.last_name.$focus,
+                                                          'has-success': newForm.last_name.$valid && !newForm.last_name.$pristine && !newForm.last_name.$focus
+                                                           }">
+                                                <label for="">Last Name</label>
+                                                <input type="text" class="form-control text-bold" id="broker_bathroom" name="last_name"
+                                                       data-ng-model="params.last_name"
+                                                       minlength="1"
+                                                       maxlength="50"
+                                                       alphabets-only
+                                                       input-focus
+                                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                                <div ng-messages="addNewForm.last_name.$error" style="color:maroon" role="alert">
+                                                    <div ng-message="pattern">Enter Valid Last Name</div>
+                                                </div>
+                                           </div>
+                                       </div>
+                                  </div>
+                            </div>
+                   </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="" class="hidden-xs">Contact Type</label>
+                                <select ng-model="contactType1" ng-change="selectContactType()" class="dropdown form-control text-bold"  id="broker_contactType">
+                                    <option value="" selected>Select contact Type</option>
+                                    <option ng-repeat="contact in contacts"
+                                            value="{{contact.id}}">
+                                        {{contact.type}}
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                           'has-error' : addNewForm.phone.$invalid && (!addNewForm.phone.$pristine || showValid) && !addNewForm.agent_phone.$focus,
+                                            'has-success': addNewForm.phone.$valid && !addNewForm.phone.$pristine && !addNewForm.agent_phone.$focus
+                                     }">
+                                    <label for="">Phone</label>
+                                    <input type="text" class="form-control text-bold" id="broker_contactPhone" name="phone"
+                                           data-ng-model="params.phone_no"
+                                           input-focus
+                                           ng-pattern="/^[0-9\-]{8,12}$/" />
+                                    <div ng-messages="addNewForm.phone.$error" style="color:maroon" role="alert">
+                                        <div ng-message="pattern">Enter Valid Phone No.</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pull-left f-half-6">
+                            <div class="form-group form-bx form-bx3-1">
+                                <label for="">Selet Date/Time</label>
+                                <input kendo-date-time-picker class="form-control" id="broker_contactDate"
+                                       ng-model="params.created_date"
+                                       k-format="'dd/MM/yyyy hh:mm tt'" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                        <div class="col-lg-12 pull-left">
+                            <div class="right-inner-addon" style="padding-top: 12px;border-bottom: 1px solid #e7e7e7;">
+                                <h2 class="pg-inner-title">Comments</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-row" style="width:100%; background:#fff; padding:60px"></div>
+
+                    <strong class="duration_time form-content form-bx8">Candid Comments</strong>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                           'has-error' : addNewForm.candid_comment.$invalid && (!addNewForm.candid_comment.$pristine || showValid) && !addNewForm.candid_comment.$focus,
+                                            'has-success': addNewForm.candid_comment.$valid && !addNewForm.candid_comment.$pristine && !addNewForm.candid_comment.$focus
+                                     }">
+                                <textarea cols="110" rows="05" name="candid_comment" id="broker_candidComment"
+                                          data-ng-model="params.candid_comments"
+                                          minlength="1"
+                                          maxlength="500"
+                                          input-focus
+                                          style="float:left" />
+                                <div ng-messages="addNewForm.candid_comment.$error" style="color:maroon" role="alert">
+                                    <div ng-message="pattern">Enter Valid Candid Comment</div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+
+                    <strong class="duration_time form-content form-bx8">Client Comments</strong>
+                    <div class="clearfix">
+                        <div class="form-group form-bx form-bx5">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                           'has-error' : addNewForm.client_comment.$invalid && (!addNewForm.client_comment.$pristine || showValid) && !addNewForm.client_comment.$focus,
+                                            'has-success': addNewForm.client_comment.$valid && !addNewForm.client_comment.$pristine && !addNewForm.client_comment.$focus
+                                     }">
+                                <textarea cols="110" rows="05" name="client_comment" id="broker_clientComment"
+                                          data-ng-model="params.client_comments"
+                                          minlength="1"
+                                          maxlength="500"
+                                          input-focus
+                                          style="float:left" />
+                                <div ng-messages="addNewForm.client_comment.$error" style="color:maroon" role="alert">
+                                    <div ng-message="pattern">Enter Valid Client Comment</div>
+                                </div>
+                             </div>
+                         </div>
+                    </div>
+                  
+                    <div class="modal-btn-wrap clearfix">
+                        <button id="btn_broker_save" type="submit" class="f-btn ladda-button" ladda="loadingDemo" data-style="expand-right">SAVE</button>
+                        <button id="btn_broker_cancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    </div>
+                </form>
+            </div>
+            <!--</div>--><!-- project-detail ended -->
+
+        </div><!-- pg-inner-content ended -->
+
+    </div>
+</div>
+<script>
+    $(function () {
+        $("input[name='broker_optn']").click(function () {
+            if ($("#broker_Rent").is(":checked")) {
+                $(".for_rent").show();
+            } else {
+                $(".for_rent").hide();
+            }
+            if ($("#broker_sales").is(":checked")) {
+                $(".for_sale").show();
+            } else {
+                $(".for_sale").hide();
+            }
+        });
+    });
+</script>
+<!-- main-content ended -->

@@ -1,0 +1,108 @@
+﻿
+<div id="add_payment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>-->
+                <h4 class="modal-title" id="exampleModalLabel">Cheque Payment </h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+                    <div class="payment-modal-wrap">
+
+                        <div class="clearfix">
+                            <div class="form-group form-bx form-bx11 form-bx11-1">
+
+
+                                <label for="">Bank Name:</label>
+                                <input class="form-control" name="schemename" id="chequepay_bnkname"
+                                       placeholder="Bank Name"
+                                       data-ng-model="params.bank_name"
+                                       minlength="1"
+                                       maxlength="20"
+                                       ng-pattern="/^[\w -]*$/"
+                                       input-focus
+                                       required />
+                            </div>
+                            <div class="form-group form-bx form-bx11 form-bx11-1 ">
+                                <label for="">Subscription Type</label>
+                                <select ng-model="sub1" ng-change="selectsub()" id="chequepay_subtype"
+                                        class="dropdown form-control" required>
+                                    <option value="" selected>Select Subscription</option>
+                                    <option ng-repeat="sub in subscription"
+                                            value="{{sub.subscription_id}}">
+                                        {{sub.Subscription_Name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group form-bx form-bx11 form-bx11-1 ">
+                                <label for="">Payment Type</label>
+                                <select ng-model="pay1" ng-change="selectpay()" id="chequepay_paytype"
+                                        class="dropdown form-control" required>
+                                    <option value="" selected>Select Payment</option>
+                                    <option ng-repeat="pay in payment"
+                                            value="{{pay.id}}">
+                                        {{pay.payment_type1}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group form-bx form-bx11 form-bx11-1 ">
+                                <label for="">Organization Type</label>
+                                <select ng-model="org1" ng-change="selectorg()" id="chequepay_orgtype"
+                                        class="dropdown form-control" required>
+                                    <option value="" selected>Select Organization</option>
+                                    <option ng-repeat="or in organization"
+                                            value="{{or.organization_id}}">
+                                        {{or.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group form-bx form-bx11 form-bx11-1">
+
+                                <label for="">Amount:</label>
+                                <input class="form-control" name="schemename" id="chequepay_amt"
+                                       placeholder="Amount"
+                                       data-ng-model="params.amount"
+                                       minlength="1"
+                                       maxlength="20"
+                                       ng-pattern="/^[\w -]*$/"
+                                       input-focus
+                                       required />
+                            </div>
+
+                           
+
+                            <div class="form-group form-bx form-bx11 form-bx11-1">
+
+                                <label for="">Due Required</label>
+                                <input class="form-control" name="schemename" id="chequepay_date"
+                                       placeholder="DD-MM-YYYY"
+                                       data-ng-model="params.cheque_date"
+                                       minlength="1"
+                                       maxlength="20"
+                                       ng-pattern="/^[\w -]*$/"
+                                       input-focus
+                                       required />
+                            </div>
+
+                        </div>
+                    </div><!-- payment-modal-wrap ended -->
+                    <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                        <div class="btn-f-c"><button class="f-btn" id="btn_chequepay_sub" type="submit" ng-click="finalpost()">SAVE</button></div>
+                        <!--<div class="btn-f-c"><button class="f-btn f-btn2" type="submit" ng-click="$dismiss('cancel')">CANCEL</button></div>-->
+                    </div>
+
+                </form>
+
+            </div><!-- modal-body ended -->
+
+        </div>
+    </div>
+</div>

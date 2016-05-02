@@ -1,0 +1,95 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-2">
+                    <h2 class="pg-inner-title">Events</h2>
+                </div>
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right">
+                        <a id="campaignsEventDetail_opencontactpopup" href="" class="btn-blk-create" ng-click="openCampaignsPopUp()" style="cursor:pointer">+ Create New Event</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="pg-inner-hside-1 pg-inner-hside2">                
+                    <input type="text" id="select-dates2" placeholder="Start Date" class="form-control cxo-f1">
+                    <input type="text" id="select-dates2" placeholder="End Date" class="form-control cxo-f1">
+                    <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.start_date1" k-ng-model="dateObject" placeholder="Start Date" />            
+                    <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.start_date1" k-ng-model="dateObject" placeholder="End Date" />
+                    <select ng-model="event1" ng-change="selectevent()" style="margin-top: 1%;" class="form-control cxo-f1" required>
+                        <option value="" selected>--Channel--</option>
+                        <option ng-repeat="event in events"
+                                value="{{event.id}}">
+                            {{event.type}}
+                    </select>
+                    <select ng-model="project1" ng-change="selectproject()" id="contact_project" style="margin-top: 1%;" class="form-control cxo-f1" required>
+                        <option value="" selected>--Status--</option>
+                        <option ng-repeat="project in projects"
+                                value="{{project.id}}">
+                            {{project.name}}
+                        </option>
+                    </select>
+
+                    <button type="submit" class="f-btn  cxo-f3">VIEW</button>
+
+                </div>
+
+            </div>
+        </div> pg-inner-header ended 
+
+    </div>--><!-- content-inner ended -->
+
+
+
+       
+        
+ 
+
+        <div class="pg-inner-content">
+            <div class="clearfix action-spacer">
+                <div class="col-lg-12 head_action">
+                    <div class="">
+                        <div class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
+                            <select id="campaignsEventDetail_actions-option" class="form-control serach_bar_btn sel_action">
+                                <option>Action</option>
+                                <option>Edit</option>
+                                <option>Delete</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn_refresh"><img src="./images/refresh2.png" /></button>
+                </div>
+            </div>
+            <div class="project-detail">
+                <div class="top-row" style="padding:60px; background:#ffffff; padding-top:0px; padding-bottom:0px;">
+                    <div class="row">
+
+                        <div class="builder-listing-wrap">
+                            <form action="">
+                                <div id="record-content" class="properties-content">
+
+                                    <div id="project-record-list" kendo-grid k-options="projectGrid" selectable="true" k-on-change="changeGridChange(dataItem)">
+                                    </div>
+
+                                </div><!-- record-content ended -->
+
+                            </form>
+
+
+                        </div><!-- builder-content ended -->
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- project-detail ended -->
+
+
+
+   
+    </div><!-- main-content ended -->

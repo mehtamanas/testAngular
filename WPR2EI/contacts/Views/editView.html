@@ -1,0 +1,27 @@
+﻿<div class="modal-header">
+    <button type="button" id="btn_createViewClose" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <h4 class="form-title" style="text-align:left">Edit New View</h4>
+</div>
+
+<div class="modal-body">
+    <form name="viewForm" style="padding: 3%;" data-ng-submit="editView(viewForm.$valid)" autocomplete="off">
+        <h4 style="margin-left:40%">View Name</h4>
+        <input type="text" autofocus name="viewName" class="form-control" id="createView_txtViewName"
+               data-ng-model="params.viewName"
+               style="width: 65%;margin-left: 18%;"
+               input-focus
+               required /><br />
+        <md-checkbox id="emailLaunch_check" style="margin-left:34%" ng-model="setDefault" value=true>
+            Set as default view
+        </md-checkbox>
+        <div ng-messages="viewForm.viewName.$error" data-ng-if="viewForm.viewName.$invalid && (!viewForm.viewName.$pristine || showValid) && !viewForm.viewName.$focus" style="color:maroon" role="alert">
+            <div ng-message="required" id="err_createView" style="width: 65%;margin-left: 18%">You did not enter a field</div>
+        </div>
+
+        <div class="modal-btn-wrap-1 clearfix" style=" margin-left: 44%;margin-top: 3%;">
+            <button type="submit" class=" btn btn-primary ladda-button" ladda="loadingDemo" data-style="expand-right" id="btn_createViewSave" style="margin:1px" ng-disabled="disabled" ng-click="showValid=true"> SAVE </button>
+        </div>
+    </form>
+</div>
+
+

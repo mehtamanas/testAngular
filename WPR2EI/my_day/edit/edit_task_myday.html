@@ -1,0 +1,181 @@
+﻿
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" id="btn_editTaskMydayClose" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Edit Task</h4>
+        </div>
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" style="text-align:left" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
+
+            <div class="clearfix">
+                <div class="form-group"
+                     data-ng-class="{
+                                  'has-error' : addNewForm.TaskName.$invalid && (!addNewForm.TaskName.$pristine || showValid) && !addNewForm.TaskName.$focus,
+                                  'has-success': addNewForm.TaskName.$valid && !addNewForm.TaskName.$pristine && !addNewForm.TaskName.$focus
+                                                     }">
+                    <div class="form-group form-bx form-bx8">
+                        <label for="">Task Name</label>
+                        <input type="text" class="form-control text-bold" autofocus name="TaskName"
+                               data-ng-model="params.name"
+                               input-focus
+                               id="editTaskMydayName"
+                               required />
+                        <div class="text-danger"
+                             data-ng-if="addNewForm.TaskName.$invalid && (!addNewForm.TaskName.$pristine || showValid) && !addNewForm.TaskName.$focus" id="err_editTaskMydayName">
+                            {{ 'Please enter Task Name' | translate }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="" class="hidden-xs" id="addnewproject_state">Task  Type</label>
+                        <select ng-model="event1" ng-change="selectevent()" class="dropdown form-control text-bold" id="editTaskMydayTaskType">
+                            <option value="" selected>Choose Task Type</option>
+                            <option ng-repeat="event in events"
+                                    value="{{event.id}}">
+                                {{event.type}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="">Project:</label>
+                        <select ng-model="project1" ng-change="selectproject()" id="editTaskMydayProject"
+                                class="dropdown form-control">
+                            <option value="" selected>Select Project</option>
+                            <option ng-repeat="project in projects"
+                                    value="{{project.id}}">
+                                <!--ng-disabled="project.id !== project1">-->
+                                {{project.name}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="">Person:</label>
+                        <select ng-model="contact1" ng-change="selectcontact()"
+                                class="dropdown form-control" id="editTaskMydayPerson">
+                            <option value="" selected>Select Contact</option>
+                            <option ng-repeat="contact in contacts"
+                                    value="{{contact.Contact_id}}">
+                                {{contact.Contact_Name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="">Assign To:</label>
+                        <select ng-model="user1" ng-change="selectuser()"
+                                class="dropdown form-control" id="editTaskMydayAssignTo">
+                            <option value="" selected>Select User</option>
+                            <option ng-repeat="user in users"
+                                    value="{{user.assign_user_id}}">
+                                {{user.user_name}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="">Set Priority</label>
+                        <select ng-model="priority1" ng-change="selectpriority()"
+                                class="dropdown form-control" id="editTaskMydayPriority">
+                            <option value="" selected>Select Priority</option>
+                            <option ng-repeat="prio in priority"
+                                    value="{{prio.id}}">
+                                {{prio.type}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <strong class="duration_time form-content form-bx8"> Due Date And Time</strong>
+                <div class="clearfix">
+
+                    <div class="pull-left f-half-6">
+                        <div class="form-group form-bx form-bx3-1">
+
+                            <input kendo-date-time-picker class="form-control"
+                                   ng-model="due_date"
+                                   id="editTaskMydayDueDate"
+                                   k-ng-model="k_due_date"
+                                   k-format="'dd/MM/yyyy hh:mm tt'" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="MARGIN-TOP: 2%;">
+                        <div style="float:left;margin-bottom:-13px">
+                            <label>
+                                <input type="checkbox" name="test3" id="editTaskMydayRemindMe" value="1" ng-model="remind_me" ng-init="remind_me=true">
+                                Remind Me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="pull-left f-half-6">
+                    <div class="form-group form-bx form-bx3-1">
+                        <label for="">Select Time</label>
+                        <select data-ng-model="reminder_time" class="dropdown form-control" id="editTaskMydaySelectTime">
+                            <option value="" selected>Select Time</option>
+                            <option value="15">15 min</option>
+                            <option value="30">30 min</option>
+                            <option value="45">45 min</option>
+                            <option value="60">60 min</option>
+                            <option value="0">no reminder</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <strong class="duration_time form-content form-bx8">Add Notes</strong>
+            <div class="clearfix">
+                <div class="form-group form-bx form-bx5">
+
+                    <textarea cols="110" rows="5" name="description"
+                              data-ng-model="params.text"
+                              minlength="1"
+                              id="txt_editTaskMydayAddNotes"
+                              maxlength="500"
+                              input-focus />
+                </div>
+            </div>
+
+
+
+            <div class="modal-btn-wrap-1 clearfix">
+                <button type="submit" id="btn_editTaskMydaySave" class="f-btn"> SAVE</button>
+                <button type="button" id="btn_editTaskMydayCancel" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                <button type="button" id="btn_editTaskMydayComplete" class="f-btn f-btn2" ng-click="completeFun()">COMPLETE  </button>
+            </div>
+
+
+
+
+        </form>
+
+    </div>
+    </div>

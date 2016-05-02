@@ -1,0 +1,57 @@
+<div class="modal-header">
+<div class="close-btn-wrap">
+    <button id="btn_contact_cancel" type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Add New User</h4>
+</div>
+    </div>
+<div id="add_new_contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+   
+            <!-- modal-header ended -->
+
+            <div class="modal-body">
+             
+                <form class="form-content" name="newForm" autocomplete="off" novalidate
+                      data-ng-submit="addNewUser(newForm.$valid)">
+
+                   
+
+                
+                    <div class="clearfix">
+                        <div class="form-group"
+                             data-ng-class="{
+                            'has-error' : newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus,
+                            'has-success': newForm.email.$valid && !newForm.email.$pristine && !newForm.email.$focus
+                            }">
+
+                            <div id="email-wrap">
+                                <div id="email-no" class="form-bx form-bx13">
+                                    <p>To enter multiple addresses, add comma after each address</p>
+                                    <input autofocus name="email" class="form-control" id="newuseradd_email" type="text"
+                                           placeholder="Enter the Email Address"
+                                           data-ng-model="params.account_email"
+                                          ng-pattern="emailRegex"
+                                           required />
+                                  
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.email.$invalid && (!newForm.email.$pristine || showValid) && !newForm.email.$focus">
+                                        {{ 'Enter Valid Email Address ' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="f-btn" ng-click=" newuse()" style="width:114px; height:50px; margin-top: 28px;" id="btn_newuser_invite"> INVITE </button>
+                        </div>
+
+                    </div>
+                        <!--<div class="modal-btn-wrap clearfix">
+             <button class="f-btn" type="submit">Save and Send Invitation</button>
+
+
+        </div>-->
+
+</form>
+            </div><!-- modal-body ended -->
+
+      
+</div><!-- modal ended -->

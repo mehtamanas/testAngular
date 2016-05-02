@@ -1,0 +1,134 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Email Campaign</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content">
+        <!--step wizard-->
+        <div class="col-md-12 tab_head">
+            <div class="row " style="padding: 35px 42px 1px 100px;">
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Campaign info</span></div>
+                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Set Budget</span></div>
+                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Select Contact</span></div>
+                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> Add template</span></div>
+                <div class="col-md-2 email_tabs3_active"></div>
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active">Summary</span></div>
+            </div>
+        </div>
+        <!--end step wizard-->
+
+        <div class="project-detail">
+            <div class="top-row" style="width:100%; background:#fff; padding:60px">
+                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                    <div class="project-detail">
+                        <div class="content-inner-bx">
+                            <div class="clearfix tab-inner">
+                                <div class="pull-left summary_half">
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Campaign ID
+                                            <span id="summaryEmail_Campaign ID" ng-bind="params.campaign_ID">{{params.campaign_ID}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Event Name
+                                            <span id="summaryEmail_EventName" ng-bind="params.name">{{params.name}}</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Project
+                                            <span ng-bind="params.project_id" id="summaryEmail_project">{{params.project_id}}</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Start Date
+                                            <span ng-bind="start_date" id="summaryEmail_startDate">{{start_date}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Total People 
+                                            <span ng-bind="totalperson" id="summaryEmail_Total_People">{{totalperson}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="pull-left summary_half company-profile-half-2">
+
+                                    <!--<div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1"> End Date:</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <h4 ng-bind="params.end_date">{{params.end_date}}</h4>
+                                            </label>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Budget
+                                            <span ng-bind="params.budget" id="summaryEmail_budget">{{params.budget}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix" style="margin-bottom: 15px;">
+                                        <span class="goals_btn">Goals</span>
+                                    </div>
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Lead
+                                            <span ng-bind="params.no_of_leads" id="summaryEmail_lead">{{params.no_of_leads}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="company-profile-row clearfix">
+                                        <div class="pull-left profile-row1 summary_value">
+                                            Sales
+                                            <span ng-bind="params.sales" id="summaryEmail_sales">{{params.sales}}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button class="btn odd_btn" id="btn_summaryEmail_back" type="button" ng-click="back()">Back</button>
+                        <button class="btn cancel_btn" id="btn_summaryEmail_cancel" style="margin-right: 7px;" type="button" ng-click="cancel()"> Cancel</button>
+                        <button class="btn btn-primary" type="submit" id="btn_summaryEmail_save"><b>Save</b></button>
+                    </div>
+
+                    <a href="" class=""></a>
+
+
+
+                </form>
+            </div>
+            <!--</div>--><!-- project-detail ended -->
+
+        </div><!-- pg-inner-content ended -->
+
+    </div><!-- main-content ended -->
+
+
+</div>

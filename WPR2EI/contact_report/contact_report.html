@@ -1,0 +1,188 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Lead Reports</h2>
+                </div>
+            </div>
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" style="text-align:left;" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
+
+                <div class="pg-inner-content">
+
+                    <div class="project-detail">
+                        <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                            <ul class="responsive-tagJS" role="tablist">
+                                <li class="k-state-active">
+                                    <a aria-controls="summary" role="tab" data-toggle="tab">NEW LEADS</a>
+                                </li>
+                                <li><a aria-controls="summary" role="tab" data-toggle="tab">LEAD FOLLOWUP</a></li>
+                                <!--<li><a aria-controls="summary" role="tab" data-toggle="tab">NEW LEAD FOLLOWUP TODAY</a></li>-->
+                                <li><a aria-controls="summary" role="tab" data-toggle="tab">AGED LEADS</a></li>
+
+                            </ul>
+
+                            <div class="tab-content" id="Report_By_Sales">
+                                <div class="tab-pane fade in active" id="marketings">
+                                    <div class="tab-content-title">New Leads</div>
+                                    <div class="pg-inner-hside2">
+
+                                        <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.fromdate" placeholder="Start Date" />
+                                        <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.endDate" placeholder="End Date" />
+
+                                        <a id="contact_opencontactpopup" href="" class="btn-lk" style="cursor:pointer" ng-click="filterLead()">APPLY</a>
+                                    </div>
+                                    <div class="marketing-insights">
+                                        <div class="marketing-row">
+                                            <div class="row">
+                                                <div class="col-lg-3  col-sm-6">
+                                                    <div class="bx-h2-2">
+                                                        <div class="marketing-bx marketing-bx01">
+                                                            <div class="marketing-bx-title">{{totalLeadAdded || 0}}</div>
+                                                            <div ng-hide="totalLeadAdded" class="marketing-bx-sub">NEW LEAD</div>
+                                                            <div ng-show="totalLeadAdded <=1" class="marketing-bx-sub">NEW LEAD</div>
+                                                            <div ng-show="totalLeadAdded >1" class="marketing-bx-sub">NEW LEADS</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="record-content" class="properties-content">
+
+                                    <div id="contact_kenomain" kendo-grid k-options="newLeadAddedGrid" selectable="true">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="tab-content" id="Report_By_Sales">
+                                <div class="tab-pane fade in active" id="marketings">
+                                    <div class="tab-content-title">Lead Followup</div>
+                                    <div class="pg-inner-hside2">
+
+                                        <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.fromdate" placeholder="Start Date" />
+                                        <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.endDate" placeholder="End Date" />
+                                        <a id="contact_opencontactpopup" href="" class="btn-lk" style="cursor:pointer" ng-click="filterLead()">APPLY</a>
+                                    </div>
+                                    <div class="marketing-insights">
+                                        <div class="marketing-row">
+                                            <div class="row">
+                                                <div class="col-lg-3  col-sm-6">
+                                                    <div class="bx-h2-2">
+                                                        <div class="marketing-bx marketing-bx01">
+                                                            <div class="marketing-bx-title">{{totalLeadFollowUp || 0}}</div>
+                                                            <div class="marketing-bx-sub">LEAD FOLLOWUP</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="record-content" class="properties-content">
+
+                                    <div id="NewleadFollowup" kendo-grid k-options="newLeadFollowUpGrid" selectable="true">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!--<div class="tab-content" id="Report_By_Sales">
+                        <div class="tab-pane fade in active" id="marketings">
+                            <div class="tab-content-title">New Lead Followup Today</div>
+                            <div class="pg-inner-hside2">
+
+                                <input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.start_date" placeholder="Start Date" />
+
+                                <a id="contact_opencontactpopup" href="#" class="btn-lk" style="cursor:pointer" ng-click="filterLead()">APPLY</a>
+                            </div>
+
+                            <div class="marketing-insights">
+                                <div class="marketing-row">
+                                    <div class="row">
+                                        <div class="col-lg-3  col-sm-6">
+                                            <div class="bx-h2-2">
+                                                <div class="marketing-bx marketing-bx01">
+                                                    <div class="marketing-bx-title">{{totalLeadFollowUpToday || 0}}</div>
+                                                    <div class="marketing-bx-sub">LEAD FOLLOWUP TODAY</div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="record-content" class="properties-content">
+
+                            <div id="contact_kenomain" kendo-grid k-options="newLeadFollowUpTodayGrid" selectable="true">
+                            </div>
+
+                        </div>
+                    </div>-->
+
+                            <div class="tab-content" id="Report_By_Sales">
+                                <div class="tab-pane fade in active" id="marketings">
+                                    <div class="tab-content-title">Aged Leads</div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-inline">
+                                            <div class="col-md-2 col-sm-2" style="width:auto">
+                                                <div class="form-group"
+                                                     data-ng-class="{
+                                              'has-error' : addNewForm.days.$invalid && (!addNewForm.days.$pristine || showValid) && !addNewForm.days.$focus,
+                                              'has-success': addNewForm.days.$valid && !addNewForm.days.$pristine && !addNewForm.days.$focus
+                                                                 }">
+
+                                                    <label for="" class="hidden-xs"></label>
+                                                    <input type="text" name="days" id="x-days" class="form-control"
+                                                           placeholder="Enter Days"
+                                                           data-ng-model="params.enterdays"
+                                                           style="height:22px"
+                                                           ng-pattern="/^(0|[1-9][0-9]*)$/" />
+                                                    <div class="text-danger"
+                                                         data-ng-if="addNewForm.days.$invalid && (!addNewForm.days.$pristine || showValid) && !addNewForm.days.$focus">
+                                                        {{ 'Please enter valid Days' | translate }}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-1 form-group" style="margin-left: 1%;">
+                                                <a id="contact_opencontactpopup" href="" class="btn-lk" style="cursor:pointer" ng-click="filterGrid()">APPLY</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="marketing-insights">
+                                        <div class="marketing-row">
+                                            <div class="row">
+                                                <div class="col-lg-3  col-sm-6">
+                                                    <div class="bx-h2-2">
+                                                        <div class="marketing-bx marketing-bx01">
+                                                            <div class="marketing-bx-title">{{totalLeadNotFollowUp || 0}}</div>
+                                                            <div ng-hide="params.enterdays" class="marketing-bx-sub">Lead have not been contacted for over {{params.enterdays}} day</div>
+                                                            <div ng-show="params.enterdays<1" class="marketing-bx-sub">Lead have not been contacted for over {{params.enterdays}} day</div>
+                                                            <div ng-show="params.enterdays==1" class="marketing-bx-sub">Lead has not been contacted for over {{params.enterdays}} day</div>
+                                                            <div ng-show="params.enterdays>1" class="marketing-bx-sub">Leads have not been contacted for over {{params.enterdays}} days</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="record-content" class="properties-content">
+                                    <div id="contact_kenomain" kendo-grid k-options="newLeadNotFollowUpGrid" selectable="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </form>
+        </div>
+    </div>
+</div>

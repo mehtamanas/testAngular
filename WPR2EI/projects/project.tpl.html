@@ -1,0 +1,65 @@
+﻿<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-2">
+                    <h2 class="pg-inner-title">Projects</h2>
+                </div>
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right">
+                        <a href="" id="btnAdd" class="btn-blk-create " ng-click="openProjectPopup()">+ Create New Project</a>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content">
+
+        <form action="">
+            <div class="clearfix action-spacer">
+                <div class="col-lg-12 head_action">
+                    <div class="">
+                        <div class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
+                            <select ng-model="projectAction" class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="Project_Action">
+                                <option value='no_action' selected>Action</option>
+                                <option value='delete'>Delete</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn_refresh"><img src="./images/refresh2.png" /></button>
+                </div>
+            </div>
+            <!--<div class="clearfix">
+                <div class="pull-left actions-wrap">
+
+                    <select ng-model="projectAction" class="form-control actions-wrap" ng-change="chooseAction()" id="Project_Action">
+                        <option value='no_action' selected>ACTIONS</option>                        
+                        <option value='delete'>DELETE</option>
+                    </select>
+                </div>
+
+               
+            </div>-->
+
+            <div id="record-content" class="properties-content">
+
+                <div id="project-record-list" kendo-grid k-options="projectGrid" selectable="true" k-on-change="myGridChange( dataItem )">
+                </div>
+
+            </div><!-- record-content ended -->
+
+        </form>
+
+    </div><!-- pg-inner-content ended -->
+
+</div><!-- main-content ended -->

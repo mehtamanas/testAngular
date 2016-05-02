@@ -1,0 +1,70 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2 class="pg-inner-title">Create New Contact List</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="pg-inner-content pg-inner-content-camp">
+        <!--step wizard-->
+        <div class="col-md-12 tab_head">
+            <div class="row " style="padding: 84px 42px 1px 100px;">
+                <div class="col-md-1 tabdot_active"><span class="email_tab_text_active"> List Name</span></div>
+                <div class="col-md-5 list_tab"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Select Member</span></div>
+                <div class="col-md-5 list_tab"></div>
+                <div class="col-md-1 tabdot"><span class="email_tab_text">Summaryt</span></div>
+            </div>
+        </div>
+        <!--end step wizard-->
+
+    </div>
+    <div class="project-detail inner_page_inside">
+        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+            <form class="form-content form-content2 edit-organization-setting" name="addNewForm" style="text-align:left" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
+
+                <div class="clearfix" style="margin-top: 9%;">
+                    <div class="col-lg-6">
+                        <md-input-container class="md-block">
+                            <label for="contact-label">List Name</label>
+                            <input name="name" id="addNewListName"
+                                   data-ng-model="params.name"
+                                   minlength="1"
+                                   maxlength="50"
+                                   input-focus />
+                        </md-input-container>
+                        </div>
+                    </div>
+
+                <div class="clearfix">
+                  
+                    <md-input-container class="md-block">
+                        <div class="col-lg-6">
+                            <label for="contact-label">Description</label>
+                            <textarea rows="10" id="txt_AddNewListDescription" name="description" maxlength="500"  minlength="1"  data-ng-model="params.description"></textarea>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div class="clearfix">
+                    <!--<button class="btn odd_btn" id="btn_AddListCancel" type="button" ng-click="cancel()">
+                        CANCEL
+                    </button>-->
+                    <button class="btn btn-primary" id="btn_AddListNext" type="submit"><b>Next</b></button>
+                </div>
+
+
+            </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+

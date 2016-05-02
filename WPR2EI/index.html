@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="MainApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="MainApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="MainApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="MainApp" class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="Dwellar icon" href="images/favicon.ico" /><!--edited by pradip-->
+    <title ng-bind="title">Dwellar</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/dropzone.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/fullcalendar.min.css" rel="stylesheet" />
+    <link href="css/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
+    <link href="css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <link href="css/kendo.common.min.css" rel="stylesheet" />
+    <link href="css/kendo.material.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/alert/sweetalert2.css" rel="stylesheet" />
+    <link href="css/alert/sweetalert2.min.css" rel="stylesheet" />
+    <link href="css/ladda-themeless.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="lib/angular-swipebox/css/swipebox.min.css" />
+    <link href="css/ng-tags-input.min.css" rel="stylesheet" />
+    <link href="css/angular-material.min.css" rel="stylesheet" />
+    <!--//pradip-->
+    <!-- <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />-->
+    <!--patil-->
+    <link rel='stylesheet' href='lib/angular-loading-bar/css/loading-bar.css' type='text/css' media='all' />
+
+
+    <!--<link rel="stylesheet" href="lib/kendo/css/kendo.common.min.css">-->
+    <!--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css">-->
+    <!--<link rel="stylesheet" href="lib/kendo/css/kendo.material.min.css">-->
+
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/jquery.min.js"></script>
+
+</head>
+<body>
+    <div ui-view id="content"></div>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+
+
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="assets/js/pdfmake.min.js"></script>
+    <script src="assets/js/vfs_fonts.js"></script>
+    
+    
+
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/fullcalendar.min.js"></script>
+    <script src="assets/js/dropzone.min.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="assets/js/alert/sweetalert2.min.js"></script>
+    <script src="assets/js/gauge.min.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="assets/js/jquery.mousewheel.min.js"></script>
+    <script src="assets/js/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="assets/js/jquery-jvectormap-in-mill.js"></script>
+    <script src="assets/js/jspdf.js"></script>
+
+    <script src="assets/js/readmore.min.js"></script>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-animate.min.js"></script>
+    <script src="assets/js/angular-aria.min.js"></script>
+    <script src="assets/js/angular-messages.min.js"></script>
+    <script src="assets/js/angular-material.min.js"></script>
+
+
+    <!--ladda-->
+    <script src="assets/js/ladda/spin.min.js"></script>
+    <script src="assets/js/ladda/ladda.min.js"></script>
+    <script src="assets/js/ladda/angular-ladda.min.js"></script>
+    <!--ladda-end-->
+
+    <script src="assets/js/ngStorage.min.js"></script>
+    <script src="assets/js/angular-ladda.min.js"></script>
+    
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/angular-idle.min.js"></script>
+    <script src="assets/js/spin.min.js"></script>
+    <script src="assets/js/spin.js"></script>
+    <script src="assets/js/angular-spinner.min.js"></script>
+    <script src="assets/js/ng-tags-input.js"></script>
+
+
+    <script src="lib/angular-ui-router/angular-ui-router.min.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+    <script src="lib/angular-translate/angular-translate.min.js"></script>
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="lib/kendo/jszip.min.js"></script>
+    <script src="assets/js/notify/bootstrap-notify.js"></script>
+    <script src="assets/js/notify/bootstrap-notify.min.js"></script>
+    <script src="lib/kendo/kendo.all.min.js"></script>
+    <script src="lib/angular-loading-bar/loading-bar.js"></script>
+    <script src="lib/ng-flow-standalone/ng-flow-standalone.min.js"></script>
+    <script src="lib/restangular/restangular.min.js"></script>
+    <script src="lib/lodash/lodash.min.js"></script>
+    <script src="assets/js/textAngular-sanitize.min.js"></script>
+    <!--<script src="lib/angular-animate/angular-animate.min.js"></script>-->
+    <!--<script src="lib/angular-material/angular-material.js"></script>-->
+    <!--<script src="lib/angular-animate/angular-animate.js"></script>-->
+   
+    <!--Jquery Highlight-->
+    <script src="assets/js/jquery.highlight.js"></script>
+    
+    <!--Jquery Highlight End-->
+    <script src="app.js"></script>
+    <script src="common/configs.js"></script>
+    <script src="common/commonModule.js"></script>
+    <script src="common/homeController.js"></script>
+    <script src="common/directives.js"></script>
+
+
+    <script src="login/api.js"></script>
+    <script src="login/loginModule.js"></script>
+    <script src="login/login.js"></script>
+    <script src="login/security.js"></script>
+    <script src="login/authorization.js"></script>
+    <script src="login/interceptor.js"></script>
+    <script src="login/retryQueue.js"></script>
+    <script src="login/signup_free_account.js"></script>
+    <script src="login/subscription.js"></script>
+    <script src="login/organization.js"></script>
+    <script src="login/bill.js"></script>
+    <script src="login/subscriptionLimit.js"></script>
+    <script src="login/sales_enquiries.js"></script>
+    <script src="login/thanks.js"></script>
+    <script src="login/builder_directory.js"></script>
+    <script src="login/builder_directory_detail.js"></script>
+    <script src="login/channelform.js"></script>
+    <script src="login/uploadService.js"></script>
+    <script src="login/Forgetpassword.js"></script>
+    <script src="login/Resources.js"></script>
+    <script src="login/role.js"></script>
+    <script src="login/rpermission.js"></script>
+    <script src="login/cheque_payment.js"></script>
+    <script src="login/error.js"></script>
+    <script src="login/successfully.js"></script>
+    <script src="login/confirmForgotPassword.js"></script>
+
+
+    <script src="assets/js/re-tree.min.js"></script>
+    <script src="assets/js/ng-device-detector.min.js"></script>
+
+    <script src="call/module.js"></script>
+
+
+    <script src="plot/module.js"></script>
+    <script src="plot/PlotDetail.js"></script>
+
+
+    <script src="setting/module.js"></script>
+    <script src="setting/setting.js"></script>
+    <script src="setting/save.js"></script>
+
+    <script src="property/module.js"></script>
+    <script src="property/propertyService.js"></script>
+    <script src="property/detail/propertyDetailController.js"></script>
+    <script src="property/propertylisting.js"></script>
+    <script src="property/add_new_property.js"></script>
+    <script src="property/sold.js"></script>
+    <script src="property/broker/add_broker_property.js"></script>
+    <script src="property/broker/broker_property_list.js"></script>
+
+
+
+    <script src="contacts/module.js"></script>
+    <script src="contacts/contactsController.js"></script>
+    <script src="contacts/quotes/generateQuoteCtrl.js"></script>
+    <script src="contacts/contactsService.js"></script>
+    <script src="contacts/clientController.js"></script>
+    <script src="contacts/leadsController.js"></script>
+    <script src="contacts/detail/contactDetailController.js"></script>
+    <script src="contacts/add_new_contact.js"></script>
+    <script src="contacts/uploadService.js"></script>
+    <script src="contacts/add_new_task.js"></script>
+    <script src="contacts/addpayment.js"></script>
+    <script src="contacts/edit_contact.js"></script>
+    <script src="contacts/add_new_doc.js"></script>
+    <script src="contacts/addNewCampaign.js"></script>
+    <script src="contacts/add_new_task.js"></script>
+    <script src="contacts/edit_task.js"></script>
+    <script src="contacts/edit_event.js"></script>
+    <script src="contacts/add_new_notes.js"></script>
+    <script src="contacts/edit_notes.js"></script>
+    <script src="contacts/sucessfullEmail.js"></script>
+    <script src="contacts/sendEmailCtrl.js"></script>
+    <script src="contacts/UploadContact.js"></script>
+    <script src="contacts/UploadNotes.js"></script>
+    <script src="contacts/company/companyList.js"></script>
+    <script src="contacts/company/companyDetail.js"></script>
+    <script src="contacts/company/followUp.js"></script>
+    <script src="contacts/company/editCompany.js"></script>
+    <script src="contacts/option.js"></script>
+    <script src="contacts/listController.js"></script>
+    <script src="contacts/AssignToContact.js"></script>
+    <script src="contacts/assignpopup.js"></script>
+    <script src="contacts/company/addTag.js"></script>
+    <script src="contacts/confirm.js"></script>
+    <script src="contacts/confirmnotes.js"></script>
+    <script src="contacts/confirmtask.js"></script>
+    <script src="contacts/add_new_tag.js"></script>
+    <script src="contacts/confirmremovetag.js"></script>
+    <script src="contacts/activityEmail.js"></script>
+    <script src="contacts/quotes/quotePreview.js"></script>
+    <script src="contacts/tag_people.js"></script>
+    <script src="contacts/company/companytagremove.js"></script>
+    <script src="contacts/uploadSuccess.js"></script>
+    <script src="contacts/generateAgreement/documentAgreementCtrl.js"></script>
+    <script src="contacts/Views/createViewCtrl.js"></script>
+
+    <script src="contacts/agent/agentCtrl.js"></script>
+    <script src="contacts/agent/addagent.js"></script>
+    <script src="contacts/list/addListCtrl.js"></script>
+    <script src="contacts/list/listCtrl.js"></script>
+    <script src="contacts/list/listService.js"></script>
+    <script src="contacts/list/listSummaryCtrl.js"></script>
+    <script src="contacts/list/tagListCtrl.js"></script>
+    <script src="contacts/propertyQuote/propertyQuote.js"></script>
+    <script src="contacts/propertyQuote/propertyCustomizQuote.js"></script>
+    <script src="contacts/propertyQuote/property_CustomizDue.js"></script>
+    <script src="contacts/propertyQuote/propertyPreview.js"></script>
+    <script src="contacts/Views/editViewCtrl.js"></script>
+    <script src="contacts/postponed/taskpostponed.js"></script>
+    <script src="contacts/Helpjql.js"></script>
+    <script src="contacts/log/logContactCtrl.js"></script>
+    
+    <script src="lib/angular-swipebox/angular-swipebox.min.js"></script>
+    <script src="lib/angular-swipebox/jquery.swipebox.min.js"></script>
+    <script src="lib/angular-file-upload/angular-file-upload.min.js"></script>
+    <link rel="stylesheet" href="lib/angular-swipebox/css/swipebox.min.css" />
+
+
+    <script src="projects/module.js"></script>
+    <script src="projects/projectController.js"></script>
+    <script src="projects/projectService.js"></script>
+    <script src="projects/ProjectDetailController.js"></script>
+    <script src="projects/add_new_project.js"></script>
+    <script src="projects/uploadService.js"></script>
+    <script src="projects/detail/contactDetailController.js"></script>
+    <script src="projects/add_new/addNewFloor.js"></script>
+    <script src="projects/add_new/addNewTower.js"></script>
+    <script src="projects/add_new/addNewUnit.js"></script>
+    <script src="projects/add_new/uploadService.js"></script>
+    <script src="projects/add_new/addNewWing.js"></script>
+    <script src="projects/add_new/amenities.js"></script>
+    <script src="projects/towerGrid.js"></script>
+    <script src="projects/add_new/gallery.js"></script>
+    <script src="projects/add_new/addNewPaymentScheme.js"></script>
+    <script src="projects/add_new/editWing.js"></script>
+    <script src="projects/add_new/edit_floor.js"></script>
+    <script src="projects/add_new/edit_tower.js"></script>
+    <script src="projects/edit_project.js"></script>
+    <script src="projects/add_new/editPaymentScheme.js"></script>
+    <script src="projects/add_new/brochure.js"></script>
+    <script src="projects/add_new/panoramicView.js"></script>
+    <script src="projects/add_new/videos.js"></script>
+    <script src="projects/add_new/addNewCampaign.js"></script>
+    <script src="projects/panoramic.js"></script>
+    <script src="projects/add_new/add_new_task.js"></script>
+    <script src="projects/add_new/edit_task.js"></script>
+    <script src="projects/add_new/edit_event.js"></script>
+    <script src="projects/add_new/budget.js"></script>
+    <script src="projects/addTeamControl.js"></script>
+    <script src="projects/add_new/edit_task.js"></script>
+    <script src="projects/addProject.js"></script>
+    <script src="projects/add_new/edit_event.js"></script>
+    <script src="projects/UpdateSuccessful.js"></script>
+    <script src="projects/add_new/budget.js"></script>
+    <script src="projects/Added.js"></script>
+    <script src="projects/add_new/uploadview.js"></script>
+    <script src="projects/addNewService.js"></script>
+    <script src="projects/add_new/offers.js"></script>
+    <script src="projects/editService.js"></script>
+    <script src="projects/add_new/addcharges.js"></script>
+    <script src="projects/editService.js"></script>
+    <script src="projects/add_new/editcharges.js"></script>
+    <script src="projects/confirmproject.js"></script>
+    <script src="projects/confirmService.js"></script>
+    <script src="projects/add_new/confirmCharges.js"></script>
+    <script src="projects/demand_letter/contactListCtrl.js"></script>
+    <script src="projects/demand_letter/demandLetterTemplateCtrl.js"></script>
+    <script src="projects/demand_letter/sendDemandLetterCtrl.js"></script>
+    <script src="projects/demand_letter/successfull/sendSuccessfulCtrl.js"></script>
+    <script src="projects/AssignTo.js"></script>
+    <!--<script src="projects/add_new/projectimageconfirm.js"></script>-->
+    
+    <script src="team/module.js"></script>
+    <script src="team/team.js"></script>
+    <script src="team/TeamDetailController.js"></script>
+    <script src="team/add_new_team.js"></script>
+    <script src="team/teamService.js"></script>
+    <script src="team/add_new_task.js"></script>
+    <script src="team/edit_task.js"></script>
+    <script src="team/users/addUsersControl.js"></script>
+    <script src="team/add_new_task.js"></script>
+    <!--<script src="team/teamService.js"></script>-->
+    <script src="team/assign.js"></script>
+    <script src="team/teamEdit.js"></script>
+    <script src="team/addProject.js"></script>
+    <script src="team/edit_team.js"></script>
+
+
+    <script src="newuser/module.js"></script>
+    <script src="newuser/newuser.js"></script>
+    <script src="newuser/newuserdetailController.js"></script>
+    <script src="newuser/add_new_user.js"></script>
+    <script src="newuser/sucessfull.js"></script>
+    <script src="newuser/import_users.js"></script>
+    <script src="newuser/uploadService.js"></script>
+    <script src="newuser/upload.js"></script>
+    <script src="newuser/map.js"></script>
+    <script src="newuser/review.js"></script>
+    <script src="newuser/summary.js"></script>
+    <script src="newuser/edituser.js"></script>
+    <script src="newuser/option.js"></script>
+    <script src="newuser/unsuccess.js"></script>
+    <script src="newuser/newuserService.js"></script>
+    <script src="newuser/Projects/addProject.js"></script>
+    <script src="newuser/Edited.js"></script>
+    <script src="newuser/invite.js"></script>
+    <script src="newuser/deleteuserconfirm.js"></script>
+    <script src="newuser/add_new_task.js"></script>
+    <script src="newuser/edit_task.js"></script>
+    <script src="newuser/delete.js"></script>
+    <script src="newuser/edit_task.js"></script>
+    <script src="newuser/role.js"></script>
+    <script src="newuser/inactive.js"></script>
+
+    <script src="dashboard/module.js"></script>
+    <script src="dashboard/dashboard.js"></script>
+
+    <script src="my_day/module.js"></script>
+    <script src="my_day/my_day.js"></script>
+    <script src="my_day/edit/edit_task_myday.js"></script>
+
+    <script src="organization/module.js"></script>
+    <script src="organization/organization.js"></script>
+    <script src="organization/organizationService.js"></script>
+    <script src="organization/EditOrganization.js"></script>
+
+    <script src="subscription_list/module.js"></script>
+    <script src="subscription_list/subscription_list.js"></script>
+    <script src="subscription_list/subscription_listService.js"></script>
+
+
+    <script src="billing/module.js"></script>
+    <script src="billing/billing.js"></script>
+    <script src="billing/billingService.js"></script>
+
+    <script src="campaigns/module.js"></script>
+    <!--<script src="campaigns/campaignsController.js"></script>-->
+    <script src="campaigns/campaigns.js"></script>
+    <script src="campaigns/addNewCampaign.js"></script>
+    <script src="campaigns/budget.js"></script>
+    <script src="campaigns/summaryEvent.js"></script>
+    <script src="campaigns/emailCampaign/addEmailCampaign.js"></script>
+    <script src="campaigns/delete/confirmCampiagnCtrl.js"></script>
+    <script src="campaigns/emailCampaign/budgetEmail.js"></script>
+    <script src="campaigns/emailCampaign/emailService.js"></script>
+    <script src="campaigns/emailCampaign/optionEmail.js"></script>
+    <script src="campaigns/emailCampaign/addEmailCampaign.js"></script>
+    <script src="campaigns/emailCampaign/summaryEmail.js"></script>
+    <script src="campaigns/emailCampaign/emailAddTemplate.js"></script>
+    <script src="campaigns/emailCampaign/sucessfullCampaign.js"></script>
+    <script src="campaigns/emailCampaign/emailAddPreviewCtrl.js"></script>
+    <script src="campaigns/campaignsEventController.js"></script>
+    <script src="campaigns/emailCampaign/campaignsController.js"></script>
+    <script src="campaigns/directCampaignEmail/directEmailController.js"></script>
+    <script src="campaigns/directCampaignEmail/addDirectMailCampaign.js"></script>
+    <script src="campaigns/directCampaignEmail/directEmailBudget.js"></script>
+    <script src="campaigns/directCampaignEmail/contactlist.js"></script>
+    <script src="campaigns/directCampaignEmail/selectDirectMailType.js"></script>
+    <script src="campaigns/directCampaignEmail/summaryMailType.js"></script>
+    <script src="campaigns/directCampaignEmail/viewContactDetails.js"></script>
+
+
+    <script src="campaign_stat/module.js"></script>
+    <script src="campaign_stat/campaign_stat.js"></script>
+
+    <script src="channel_partners/module.js"></script>
+    <script src="channel_partners/Channel_Partners.js"></script>
+    <script src="channel_partners/channerlpartnerService.js"></script>
+    <script src="channel_partners/channelform.js"></script>
+
+
+    <!--<script src="channelform/channelController.js"></script>
+    <script src="channelform/channelform.js"></script>
+    <script src="channelform/module.js"></script>
+    <script src="channelform/uploadService.js"></script>-->
+
+
+    <script src="audit/module.js"></script>
+    <script src="audit/audit.js"></script>
+    <script src="audit/auditService.js"></script>
+
+
+    <script src="report/module.js"></script>
+    <script src="report/report.js"></script>
+    <script src="report/reportService.js"></script>
+    <script src="report/customreport/customreport.js"></script>
+
+
+    <script src="application/module.js"></script>
+    <script src="application/applicationService.js"></script>
+    <script src="application/application.js"></script>
+    <script src="application/accept.js"></script>
+    <script src="application/channel_request.js"></script>
+    <script src="application/decline.js"></script>
+
+    <script src="current/module.js"></script>
+    <script src="current/currentService.js"></script>
+    <script src="current/current.js"></script>
+
+    <script src="template/module.js"></script>
+    <script src="template/templateCtrl.js"></script>
+    <script src="template/create/agreement/agreementCreateCtrl.js"></script>
+
+    <script src="template/create/emails/emailCreateCtrl.js"></script>
+    <script src="template/edit/agreement/agreementEditCtrl.js"></script>
+    <script src="template/edit/emails/emailEditCtrl.js"></script>
+    <script src="template/delete/confirmEmail.js"></script>
+    <script src="template/previewCtrl.js"></script>
+    <script src="template/create/demand_letter/demand_letter.js"></script>
+    <script src="template/create/RO/ROCreateCtrl.js"></script>
+
+    <script src="tag/module.js"></script>
+    <script src="tag/tag.js"></script>
+    <script src="tag/createTag.js"></script>
+    <script src="tag/confirmremovetag.js"></script>
+
+    <!--upload module-->
+    <script src="property/detail/upload/imageUpload/imageUploadCtrl.js"></script>
+    <script src="property/detail/upload/videoUpload/videoUploadCtrl.js"></script>
+    <script src="call/module.js"></script>
+    <script src="call/call.js"></script>
+    <script src="task/module.js"></script>
+    <script src="task/task.js"></script>
+    <script src="task/edit_task.js"></script>
+    <script src="task/add_new_task.js"></script>
+    <script src="task/Activity_assignto.js"></script>
+    <script src="task/Activity_addtag.js"></script>
+
+    <script src="form/module.js"></script>
+    <script src="form/form.js"></script>
+
+    <script src="eventcampaign/module.js"></script>
+    <script src="eventcampaign/eventcampaign.js"></script>
+    <script src="eventcampaign/eventcampaigngrid.js"></script>
+
+
+    <script src="contact_report/module.js"></script>
+    <script src="contact_report/contact_report.js"></script>
+
+    <script src="contact_update/module.js"></script>
+    <script src="contact_update/contact_update.js"></script>
+    <script src="contact_update/editContact.js"></script>
+
+    <script src="blogs/module.js"></script>
+    <script src="blogs/integrationCtrl.js"></script>
+    <script src="blogs/create/blogCrateCtrl.js"></script>
+    <script src="blogs/edit/blogEditCtrl.js"></script>
+    <script src="blogs/confirmation/confirmBlog.js"></script>
+    <script src="blogs/confirmation/confirmApproval.js"></script>
+
+
+    <script src="Unsubscribe/module.js"></script>
+    <script src="Unsubscribe/unsubscribeCtrl.js"></script>
+
+    <script src="testresult/module.js"></script>
+    <script src="testresult/testresult.js"></script>
+
+    <script src="email_transaction/module.js"></script>
+    <script src="email_transaction/emailTransactions.js"></script>
+
+    <script src="booking/module.js"></script>
+     <script src="booking/booking.js"></script>
+
+    <script src="campaigns/emailCampaign/emailLaunch.js"></script>
+    
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Quote</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content" style="">
+        <div class="col-md-12 tab_head-2">
+            <div class="row " style="padding: 1px 0px 1px 16px;">
+                <div class="col-md-3 email_tabs2">Select Unit & Payment Scheme</div>
+                <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs2" style="margin-left: 23px;">Customiz Quotes</div>
+                <div class="col-md-1 tabarrow"><img src="images/gray_blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs_active">Customiz Due Date</div>
+
+            </div>
+        </div>
+        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+            <div class="clearfix">
+                <div class="title"><h3 style="color: #d5d5d5;" class="seperate">Estimate</h3></div>
+                <div class="col-md-12 seperate">
+
+                    <div class="col-md-8 col-sm-8">
+                        <h5 class="capt"><b>{{organization.name}}</b></h5>
+                        <span class="capt">{{organization.street_1}}{{organization.street_2}}</span>
+                        <p class="capt "></p>{{organization.city}}{{organization.state}}{{organization.zip_code}}<br>
+                        
+                        <p class="capt line_sepration">{{organization.account_phone}}</p>
+                        <p>{{organization.account_email}}</p>
+                      
+
+                    </div>
+
+                </div>
+                <!--options dropdown-->
+                <div class="col-md-12  ">
+                    <div class="quote-bold">
+                        <div class="col-md-3 contact_quotes">
+                            <span>ST No:</span> <span class="upper">{{organization.service_tax_no}}</span>
+                        </div>
+                        <div class="col-md-3 contact_quotes">
+                            <span>PAN No:</span> <span class="upper">{{organization.pan_no}}</span>
+                        </div>
+                        <div class="col-md-4 contact_quotes">
+                            <span class="upper">payments terms :</span> &nbsp;&nbsp;&nbsp;<span class="upper per_box">100 % Payment</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12 seperate tbl_sprt">
+                    <div style="margin-top:2%">
+                        <div class="col-md-6 contact_quotes">
+                            <h5 class="capt"><b>{{contactDetail.Name}}</b></h5>
+                            <span class="capt">{{contactDetail.area}}{{contactDetail.street1}}{{contactDetail.street2}} </span><br>
+                            <p class="capt ">{{contactDetail.City}}{{contactDetail.state_name}}{{contactDetail.zip_code}}</p>
+                        </div>
+                        <div class="col-md-6 contact_quotes">
+                            <span>Estimate No.</span>
+                            <p class="quote-bold">a2346c75-9dd0-45de-b125-e7715eebc600</p>
+                            <span>Date :</span><span style="margin-left: 12%;"><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.fromdate" /></span><br>
+                            <div style="margin-top:3px; margin-bottom: 4%;">
+                                <span>Expiration Date :</span><span><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.endDate" /></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="seperate">Project :{{property_Details.project_name}} </h4>
+                <div class="col-md-10 ">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody class="c_td">
+                                <tr>
+                                    <td><span class="data_span">{{property_Details.towerName}}</span><p>Tower</p></td>
+                                    <td><span class="data_span">{{property_Details.floorNo}}</span><p>Floor</p></td>
+                                    <td><span class="data_span">{{property_Details.unitNo}}</span><p>Unit No.</p></td>
+                                    <td><span class="data_span">{{property_Details.unitName}}</span><p>BHK</p></td>
+                                    <td><span class="data_span">{{property_Details.salableArea}}</span><p>Salable Area</p></td>
+                                    <td><span class="data_span">{{property_Details.CarpatArea}}</span><p>Carpet Area</p></td>
+                                    <td><span class="data_span">{{property_Details.CarePark}}</span><p>Car Park</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-8 seperate">
+                    <textarea id="organization_desc" autofocus kendo-editor k-ng-model="description"></textarea>
+                </div>
+                <!--data end-->
+            </div>
+
+            <div class="clearfix">
+
+                <div class="col-md-10 seperate">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="tbl_head">
+                                    <th><span>Total Consideration</span></th>
+                                    <th class="per_txt_right"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="">Rate Per Sq. Ft</span></td>
+                                    <td class="per_txt_right"><span class="">{{property_Details.Rps| number:2}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="">Floor Rise Applicable</span></td>
+                                    <td class="per_txt_right"><span class="">{{property_Details.Fra| number:2}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-10 seperate">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="tbl_head">
+                                    <th><span>Goverment Charges</span></th>
+                                    <th class="per_txt_right"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="govermentCharge in govermentChargesAfterCalculation">
+                                    <td><span class="">{{govermentCharge.name}}</span></td>
+                                    <td class="per_txt_right"><span>{{govermentCharge.value| number:2}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-md-10 seperate">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="tbl_head">
+                                    <th><span>Other Charges</span></th>
+                                    <th class="per_txt_right"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="otherCharge in otherChargesAfterCalculation">
+                                    <td><span class="">{{otherCharge.name}}</span></td>
+                                    <td class="per_txt_right"><span>{{otherCharge.value| number:2}}</span></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-10 seperate">
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-3">
+                                            <label>Select Offer</label>
+                                            <select ng-model="offer1" name="projectOffr" ng-change="selectoffer()" class="form-control">
+                                                <option value="" selected>--Select Offer--</option>
+                                                <option ng-repeat="offer in offers"
+                                                        value={{offer}}>
+                                                    {{offer.offer_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="per_txt_right">
+                                        <div class="form-group per_txt_right">
+                                            <label style="color:#fff">Per</label>
+                                            <p><b>{{offerDiscount| number:2}}</b></p>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="width: 55%; border-top: none;"><span class=""><b>Additional Discount</b></span></td>
+                                    <td style=" border-top: none;">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="radioValue" value="flat" name="optradio"> Flat
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="radioValue" ng-click="applyAdditionalDiscount()" value="percent" name="optradio"> Percentage (%)
+                                        </label>
+
+                                    </td>
+                                    <td style=" border-top: none;"><input type="text" ng-model="additionalDiscount" ng-blur="applyAdditionalDiscount()" class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><span><b> FINAL TOTAL</b></span> </td>
+                                    <td class="per_txt_right"><span><b>{{gTotal| number:2}}</b></span></td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="border-top: none;"><i class="fa fa-tags " style="color: #FF8F00;"></i> <span>Offer applied(Gold Coin) - {{offersvalue}}</span></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="custom_hr">
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
+                    BACK
+                </button>
+                <button class="btn btn-success campaign-container-btn-pdf" id="campaign_cancel" type="button" ng-click="preview()">
+                    PDF PREVIEW
+                </button>
+
+                <button class="btn organization-btn" id="campaign_save" ng-click="addNew()">
+                    SAVE & NEXT
+                </button>
+
+            </div>
+                </div>
+              
+           
+              
+        </div>
+
+
+        <!-- pg-inner-content ended -->
+
+    </div><!-- main-content ended -->
+
+

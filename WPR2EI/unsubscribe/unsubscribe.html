@@ -1,0 +1,45 @@
+﻿<style type="text/css">
+    .UseHand {
+        cursor: pointer !important;
+    }
+</style>
+
+<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Unsubscribe</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="pg-inner-content">
+
+            <div class="top-row" style="width:100%; background:#fff;">
+                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+                    <div class="clearfix " style="margin-top:3%">
+
+                        <div id="record-content" class="properties-content">
+                            <div id="selectUnsubscribeList" kendo-grid k-options="SelectUnsubscribe" selectable="true" k-on-change="myGridChange(dataItem)">
+                            </div>
+                        </div><!-- record-content ended -->
+                    </div>
+
+                    <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;margin-left: 16%;">
+                        <button class="btn organization-btn" id="SelectUnsubscribeList_Save" type="submit" >
+                            SAVE
+                        </button>
+                        <button class="btn campaign-container-btn" id="SelectUnsubscribeList_cancel" type="button" ng-click="cancel()">
+                            CANCEL
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div><!-- pg-inner-content ended -->
+
+</div>

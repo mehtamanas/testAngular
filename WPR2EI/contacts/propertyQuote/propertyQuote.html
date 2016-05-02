@@ -1,0 +1,187 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Quote</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content" style="">
+        <div class="col-md-12 tab_head-2">
+            <div class="row " style="padding: 1px 0px 1px 16px;">
+                <div class="col-md-3 email_tabs2">Select Unit & Payment Scheme</div>
+                <div class="col-md-1 tabarrow"><img src="images/gray_blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs_active">Customiz Quotes</div>
+                <div class="col-md-1 tabarrow"><img src="images/gray_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs_active">Customiz Due Date</div>
+
+            </div>
+        </div>
+        <div class="top-row" style="width:100%; background:#fff; padding:60px">  
+            <div class="clearfix">
+                <div class="title"><h4 class="seperate">Select Unit</h4></div>
+                <div class="col-md-12 seperate">
+                    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                
+                                <select ng-model="projectList" name="projectSelect" ng-change="selectproject()"class="form-control" id="">
+                                    <option value="" selected>--Select Project--</option>
+                                    <option ng-repeat="project in projects"
+                                            value="{{project.project_id}}">
+                                        {{project.project_name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                   
+                </div>
+                <!--options dropdown-->
+                <div class="col-md-12 seperate">
+                    <div class="">
+                        <div class="col-md-2 contact_quotes">
+                            <div class="form-group">
+
+                                <select ng-model="towerList" name="towerSelect" ng-change="selectTower()" class="form-control" id="">
+                                    <option value="" selected>--Select Tower--</option>
+                                    <option ng-repeat="tower in towers"
+                                            value="{{tower}}">
+                                        {{tower.tower_name}}
+                                    </option>
+                                </select>
+                               
+                            </div>
+                        </div>
+                        <div class="col-md-2 contact_quotes">
+                            <div class="form-group">
+                               
+                                <select ng-model="wingList" name="wingSelect" ng-change="selectWing()" class="form-control" id="">
+                                    <option value="" selected>--Select Wing--</option>
+                                    <option ng-repeat="wing in wings"
+                                            value="{{wing}}">
+                                        {{wing.wing_name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 contact_quotes">
+                            <div class="form-group">
+                                
+                                <select ng-model="floorList" name="floorSelect" ng-change="selectFloor()" class="form-control" id="">
+                                    <option value="" selected>--Select Floor--</option>
+                                    <option ng-repeat="floor in floors"
+                                            value="{{floor}}">
+                                        {{floor.floor_no}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 contact_quotes">
+                            <div class="form-group">
+                             
+                                <select ng-model="unitList" name="unitSelect" ng-change="selectUnit()" class="form-control" id="">
+                                    <option value="" selected>--Select Unit--</option>
+                                    <option ng-repeat="unit in units"
+                                            value="{{unit}}">
+                                        {{unit.unit_no}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end of option-->
+                <h4 class="seperate">Project : {{propertyDetails.project_name}}</h4>
+                <div class="col-md-10 ">
+                   
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody class="c_td">
+                                <tr>
+                                    <td><span class="data_span">{{propertyDetail.towerName}}</span><p>Tower</p></td>
+                                    <td><span class="data_span">{{propertyDetail.floorNo}}</span><p>Floor</p></td>
+                                    <td><span class="data_span">{{propertyDetail.unitNo}}</span><p>Unit No.</p></td>
+                                    <td><span class="data_span">{{propertyDetail.unitName}}</span><p>BHK</p></td>
+                                    <td><span class="data_span">{{propertyDetail.salableArea}}</span><p>Salable Area</p></td>
+                                    <td><span class="data_span">{{propertyDetail.CarpatArea}} </span><p>Carpet Area</p></td>
+                                    <td><span class="data_span">{{propertyDetail.CarePark}}</span><p>Car Park</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                   </div>
+                </div>
+                <!--data end-->
+               
+            </div>
+            <hr class="custom_hr">
+               <h4 class="seperate">Select Payment Scheme</h4>
+            <div class="clearfix">
+                <div class="col-md-12 seperate">
+                    <div class="">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <select ng-model="paymentList" name="paymentSelect" ng-change="selectPayment()" class="form-control" id="">
+                                    <option value="" selected>--Select Payment--</option>
+                                    <option ng-repeat="pay in paymentType"
+                                            value="{{pay.id}}">
+                                        {{pay.type_of_payment}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="tbl_head">
+                                <th><span>Payment Scheme For</span><span></span> </th>
+                                <th><span></span>Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="scheme in schemeDetails">
+                                    <td><span class="" >{{scheme.description}}</span></td>
+                                    <td  class="per_txt_right"><span class="">{{scheme.percentage}}</span></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><span class=""><b style="color:#000">Total</b></span></td>
+                                    <td  class="per_txt_right"><span class="">100%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+             </div>
+            <hr>
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
+                   BACK
+                </button>
+
+                <button class="btn organization-btn" id="campaign_save" type="button" ng-click="addNew()">
+                    NEXT
+                </button>
+
+            </div>
+        </div>
+           
+
+<!-- pg-inner-content ended -->
+
+    </div><!-- main-content ended -->
+
+
+</div>

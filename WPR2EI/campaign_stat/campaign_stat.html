@@ -1,0 +1,240 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2 class="pg-inner-title">Email Campaign Statistics</h2>
+                </div>
+
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content">
+            <div>
+                <div class="col-md-5">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-head-1">
+                            <div class="email-stc-title">Summary</div>
+                        </div>
+                        <div class="bx-h1-content clearfix">
+                            <div class="cxo-wrap3-1">
+                                <div class="row">
+                                   <div class="marketing-bx-title stats-label2">Campaign Name:</div>
+                                   <div class="marketing-bx-txt stats-label3">{{summary.name}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Project:</div>
+                                    <div class="marketing-bx-txt stats-label3">{{}}</div>
+                                  </div>
+
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Budget:</div>
+                                    <div ng-show="summary.budget>0" class="marketing-bx-txt stats-label3">{{summary.budget | currency:'&#8377;'}}</div>
+                                    <div ng-hide="summary.budget>0" class="marketing-bx-txt stats-label3">Not Specified</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>  
+
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-head-1">
+                            <div class="email-stc-title">Goals</div>
+                        </div>
+                        <div class="bx-h1-content clearfix">
+                            <div class="cxo-wrap3-1">
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Leads:</div>
+                                    <div ng-show="goal.leads>0" class="marketing-bx-txt stats-label3">{{goal.leads | number}}</div>
+                                    <div ng-hide="goal.leads>0" class="marketing-bx-txt stats-label3">Not Specified</div>
+                                </div>
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Sales:</div>
+                                    <div ng-show="goal.sales>0" class="marketing-bx-txt stats-label3">{{goal.sales | currency:'&#8377;'}}</div>
+                                    <div ng-hide="goal.sales>0" class="marketing-bx-txt stats-label3">Not Specified</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div> 
+                 
+                <div class="col-md-4">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-head-1">
+                            <div class="email-stc-title">Results</div>
+                        </div>
+                        <div class="bx-h1-content clearfix">
+                            <div class="cxo-wrap3-1">
+                                <div class="row">
+                                     <div class="marketing-bx-sub stats-label2">Leads:</div>
+                                    <div ng-show="result.leads>0" class="marketing-bx-txt stats-label3">{{result.leads | number}}</div>
+                                    <div ng-hide="result.leads>0" class="marketing-bx-txt stats-label3">Not Specified</div>
+                                </div>
+                                <div class="row">
+                                    <div class="marketing-bx-sub stats-label2">Sales:</div>
+                                    <div ng-show="result.sales>0" class="marketing-bx-txt stats-label3">{{result.sales | currency:'&#8377;'}}</div>
+                                    <div ng-hide="result.sales>0" class="marketing-bx-txt stats-label3">Not Specified</div>
+                                </div>
+                                <div class="row">
+                                        <div class="marketing-bx-sub stats-label2">Conversion :</div>
+                                        <div class="marketing-bx-txt stats-label3">{{result.conversion_rate | currency:'&#8377;'}}</div>
+                                 </div>
+                                
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>     
+            </div>
+
+            <div style="text-align:center;">
+                
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.total || 100000}}  </div>
+                                <div class="marketing-bx-txt stats-label">Total</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+                
+                
+                <div class="col-md-3">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.opens || 2536}}  </div>
+                                <div class="marketing-bx-txt stats-label">Opened</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+
+                <div class="col-md-2">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats || 5468}}</div>
+                                <div class="marketing-bx-txt stats-label">Unopened</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+
+                <div class="col-md-2">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.clicks || 526}}</div>
+                                <div class="marketing-bx-txt stats-label">Clicked</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+
+                <div class="col-md-2">
+                    <div class="bx-h2-1">
+                        <div class="bx-h1-content-1 clearfix">
+                            <div class="cxo-wrap3-2">
+                                <div class="marketing-bx-title stats-label-1">{{emailStats.unsubscribes || 456}}</div>
+                                <div class="marketing-bx-txt stats-label">Unsubscribed</div>
+                            </div>
+                        </div>
+                    </div><!-- bx-h1 ended -->
+                </div>
+            </div>
+
+      
+            <div class="col-md-12">
+                <div style="margin-bottom:20px !important;">
+                    <div class="col-md-5"  style="float:left">
+                        <div id="chart" class="stats_tem_div"></div>
+                        </div>
+
+                    
+                    <div class="col-md-6" style="background:#fff;width: 58%;min-height:500px;">
+                        <div class="clearfix" style="margin-top: 130px;">
+                        <div class=" col-md-3">
+                        <div class="clearfix spacer-1">
+
+                            <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#29C2A4" aria-hidden="true"></i> Opened</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span class="stats_value"  id="contact_Date_Of_Birth">48%</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix spacer-1">
+                            <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#DF983C" aria-hidden="true"></i> Unopened</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span class="stats_value" id="contact_Date_Of_Birth">12%</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix spacer-1">
+                            <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#34A853" aria-hidden="true"></i> Clicks</div>
+                            <div class="pull-right profile-row2">
+                                <label class="label-group">
+                                    <span class="stats_value"  id="contact_Date_Of_Birth">8%</span>
+                                </label>
+                            </div>
+                        </div>
+                            <div class="clearfix spacer-1">
+                                <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#4D5DCE" aria-hidden="true"></i> Unique Clicks</div>
+                                <div class="pull-right profile-row2">
+                                    <label class="label-group">
+                                        <span class="stats_value" id="contact_Date_Of_Birth">8%</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            </div>
+                            
+                        <div class="col-md-3" style="margin-left: 30px;">
+                            <div class="clearfix spacer-1">
+                                <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#775A56" aria-hidden="true"></i> Unsubscribed</div>
+                                <div class="pull-right profile-row2">
+                                    <label class="label-group">
+                                        <span class="stats_value" id="contact_Date_Of_Birth">8%</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clearfix spacer-1">
+                                <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#4FA3AE" aria-hidden="true"></i> Bounces</div>
+                                <div class="pull-right profile-row2">
+                                    <label class="label-group">
+                                        <span class="stats_value" id="contact_Date_Of_Birth">8%</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clearfix spacer-1">
+                                <div class="pull-left  profile-row1-1"><i class="fa fa-square" style="color:#E3563A" aria-hidden="true"></i> Spam Report</div>
+                                <div class="pull-right profile-row2">
+                                    <label class="label-group">
+                                        <span class="stats_value" id="contact_Date_Of_Birth">8%</span>
+                                    </label>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+        
+           
+           
+           
+        
+
+            </div><!-- project-detail ended -->
+
+    </div><!-- pg-inner-content ended -->
+
+

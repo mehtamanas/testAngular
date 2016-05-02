@@ -1,0 +1,1098 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <h2 class="pg-inner-title">Edit Contact</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .form-content .form-control:hover, .form-content .form-control:focus {
+            border-color: #2799e7;
+            border: none;
+        }
+
+        .form-group.checkbox {
+            margin-top: 20px;
+        }
+    </style>
+    <div class="pg-inner-content" style="">
+        <div class="project-detail">
+
+            <div class="top-row" style="width:100%; background:#fff; padding: 0px 26px 15px 14px;">
+                <form class="form-content" name="newForm" novalidate  data-ng-submit="EditContact(newForm.$valid)" autocomplete="off" style="background:#ffffff;margin-left:1%">
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4 class="contact-header-label">ESSENTIALS</h4>
+                        </div>
+                        <div class="md-padding">
+                            <div class="clearfix image-upload-container">
+                                <div class="modal-body image-upload-wrap">
+                                    <div class="image-upload-title">Upload Contact Image</div>
+                                    <div class="dropzone dropzone-bx image-upload-bx">
+                                        <div class="fallback">
+                                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                                                <div class="image-upload-panel">
+                                                    <div class="user-photo_2" ng-hide="uploader.queue.length">
+                                                        <img ng-src={{params.Contact_Image}} class="image3" />
+                                                    </div>
+                                                    <div class="row" ng-show="uploader.queue.length">
+                                                        <div class="user-photo_4" ng-repeat="item in uploader.queue">
+                                                            <img id="fetch" src="#" class="image1" alt="your image" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uploadFileName">
+                                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                                    </div>
+                                    <label class="custom-file-input" id="editNewImage">
+
+                                        <input type="file" class="image-upload-f" id="contactedit_uploader1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-md-2">
+                                    <div class="row" style="margin-left:0px">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                           'has-error' : newForm.salutation.$invalid && (!newForm.salutation.$pristine || showValid) && !newForm.salutation.$focus,
+                                            'has-success': newForm.salutation.$valid && !newForm.salutation.$pristine && !newForm.salutation.$focus
+                                     }">
+                                            <md-input-container class="md-block">
+                                                <label class="contact-label">SALUTATION</label>
+                                                <md-select id="contactadd_salutation" name="salutation" ng-change="selectsalutation()" ng-model="salutation1" class="dropdown">
+                                                    <md-option value="" selected>SELECT SALUTATION</md-option>
+                                                    <md-option value="Mr.">Mr.</md-option>
+                                                    <md-option value="Ms.">Ms.</md-option>
+                                                    <md-option value="Mrs.">Mrs.</md-option>
+                                                </md-select>
+                                            </md-input-container>
+
+                                            <div ng-messages="newForm.salutation.$error" style="color:maroon" role="alert">
+
+                                                <div ng-message="pattern">Enter valid salutation</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix" style="margin-top:1%">
+                                <div class="col-md-12">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                          'has-error' : newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus,
+                                                                        'has-success': newForm.firstName.$valid && !newForm.firstName.$pristine && !newForm.firstName.$focus
+                                            }">
+
+                                            <md-input-container>
+                                                <label class="contact-label">First Name<span class="validationStarRed"><sup>*</sup></span></label>
+                                                <input name="firstName" id="contactadd_firstname"
+                                                       data-ng-model="params.Contact_First_Name"
+                                                       minlength="1"
+                                                       maxlength="40"
+                                                       alphabets-only
+                                                       required
+                                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                                <div ng-messages="newForm.firstName.$error" style="color:maroon" role="alert">
+                                                    <div ng-message="required" data-ng-if="newForm.firstName.$invalid && (!newForm.firstName.$pristine || showValid) && !newForm.firstName.$focus">This field should not be empty </div>
+                                                    <div ng-message="pattern">Enter valid first name</div>
+                                                </div>
+                                            </md-input-container>
+                                           
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm.middleName.$invalid && (!newForm.middleName.$pristine || showValid) && !newForm.middleName.$focus,
+                                                                        'has-success': newForm.middleName.$valid && !newForm.middleName.$pristine && !newForm.middleName.$focus
+                                                                     }">
+
+
+                                            <md-input-container>
+                                                <label class="contact-label">Middle Name</label>
+                                                <input name="middleName" id="contactadd_middlename"
+                                                       ng-model="params.Contact_Middle_Name"
+                                                       minlength="1"
+                                                       maxlength="50"
+                                                       alphabets-only
+                                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                                <div ng-messages="newForm.middleName.$error" style="color:maroon" role="alert">
+                                                    <div ng-message="required" data-ng-if="newForm.middleName.$invalid && (!newForm.middleName.$pristine || showValid) && !newForm.middleName.$focus">This field should not be empty </div>
+                                                    <div ng-message="pattern">Enter valid Middle Name</div>
+                                                </div>
+                                            </md-input-container>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus,
+                                                                        'has-success': newForm.lastName.$valid && !newForm.lastName.$pristine && !newForm.lastName.$focus
+                                                                     }">
+
+                                            <md-input-container>
+                                                <label class="contact-label">Last Name<span class="validationStarRed">*</span></label>
+                                                <input name="lastName" ng-model="params.Contact_Last_Name" id="contactadd_lastname"
+                                                       minlength="1"
+                                                       maxlength="50"
+                                                       alphabets-only
+                                                       required
+                                                       ng-pattern="/^[a-zA-Z\s]*$/" />
+                                                <div ng-messages="newForm.lastName.$error" style="color:maroon" role="alert">
+                                                    <div ng-message="required" data-ng-if="newForm.lastName.$invalid && (!newForm.lastName.$pristine || showValid) && !newForm.lastName.$focus">This field should not be empty </div>
+                                                    <div ng-message="pattern">Enter valid last name</div>
+                                                </div>
+                                            </md-input-container>
+                                           
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <div ng-repeat="choice in choices">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                           'has-error' : newForm.primary_phone_no.$invalid && (!newForm.primary_phone_no.$pristine || showValid) && !newForm.primary_phone_no.$focus,
+                            'has-success': newForm.primary_phone_no.$valid && !newForm.primary_phone_no.$pristine && !newForm.primary_phone_no.$focus
+                                               }">
+
+                                            <div id="phone-wrap" class="clearfix">
+                                                <div id="phone-no" class="form-bx form-bx2">
+                                                    <md-input-container class="md-block">
+                                                        <label class="contact-label">Phone Number</label>
+                                                        <input name="primary_phone_no" id="contactadd_phoneno"
+                                                               data-ng-model="params.primary_contact"
+                                                               input-focus
+                                                               ng-pattern="/^[0-9\-]{8,12}$/"  />
+                                                        <div ng-messages="newForm.primary_phone_no.$error" style="color:maroon" role="alert">
+                                                            <div ng-message="required" data-ng-if="newForm.primary_phone_no.$invalid && (!newForm.primary_phone_no.$pristine || showValid) && !newForm.primary_phone_no.$focus">This field should not be empty </div>
+                                                            <div ng-message="pattern">Enter valid  phone number</div>
+                                                        </div>
+
+                                                    </md-input-container>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <div ng-repeat="choice1 in choices1">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                               'has-error' : newForm.Primary_email.$invalid && (!newForm.Primary_email.$pristine || showValid) && !newForm.Primary_email.$focus,
+                                                               'has-success': newForm.Primary_email.$valid && !newForm.Primary_email.$pristine && !newForm.Primary_email.$focus
+                                                              }">
+                                            <div id="email-wrap" class="clearfix">
+                                                <div id="email-no" class="form-bx form-bx2">
+                                                    <md-input-container class="md-block">
+                                                        <label class="contact-label">Primary Email Address</label>
+                                                        <input name="Primary_email" id="contactadd_email"
+                                                               data-ng-model="params.primary_email"
+                                                               input-focus
+                                                               ng-pattern="emailRegex"  />
+                                                        <div class="text-danger"
+                                                             data-ng-if="newForm.Primary_email.$invalid && (!newForm.Primary_email.$pristine || showValid) && !newForm.Primary_email.$focus">
+                                                            {{ 'Enter valid email address' | translate }}
+                                                        </div>
+                                                    </md-input-container>
+
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
+                                        <md-input-container class="md-block">
+                                            <label for="" class="contact-label">SELECT PERSON TYPE<span class="validationStarRed"><sup>*</sup></span></label>
+                                            <md-select placeholder="Assign to user" name="type" id="contactadd_type" ng-change="selecttype()" class="dropdown" ng-model="people_type">
+                                                <md-option value="" selected>SELECT TYPE</md-option>
+                                                <md-option value="Client">Client</md-option>
+                                                <md-option value="Lead">Lead</md-option>
+                                                <md-option value="Contact">Contact</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                         'has-error' : newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus,
+                                        'has-success': newForm.user.$valid && !newForm.user.$pristine && !newForm.user.$focus
+                                             }">
+
+                                            <md-input-container class="md-block">
+                                                <label for="" class="contact-label">ASSIGN TO<span class="validationStarRed"><sup>*</sup></span></label>
+                                                <md-select ng-model="user1" name="user" ng-change="selectuser()" id="contactadd_user" class="dropdown">
+                                                    <md-option selected>SELECT USER</md-option>
+                                                    <md-option ng-repeat="User in users"
+                                                               value="{{User.id}}">
+                                                        {{User.name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <div ng-messages="newForm.user.$error" style="color:maroon" role="alert">
+                                                <div ng-message="required" data-ng-if="newForm.user.$invalid && (!newForm.user.$pristine || showValid) && !newForm.user.$focus">This field should not be empty </div>
+                                                <div ng-message="pattern">Enter valid user to be assigned</div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                                                        'has-error' : newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus,
+                                                                        'has-success': newForm.project.$valid && !newForm.project.$pristine && !newForm.project.$focus
+                                                                     }">
+
+                                            <md-input-container class="md-block">
+                                                <label for="" class="contact-label">Add To Project<span class="validationStarRed">*</span></label>
+                                                <md-select ng-model="project1" name="project" ng-change="selectproject()" id="contactadd_projectname" class="dropdown">
+                                                    <md-option selected>Select Project</md-option>
+                                                    <md-option ng-repeat="project in projects"
+                                                               value="{{project.id}}">
+                                                        {{project.name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <div ng-messages="newForm.project.$error" style="color:maroon" role="alert">
+                                                <div ng-message="required" data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">This field should not be empty </div>
+                                                <div ng-message="pattern">Enter valid project to be assigned</div>
+                                            </div>
+
+                                        </div> <!--add project-->
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <md-container class="md-padding">
+                                <div class="clearfix">
+                                    <div class="col-md-6" style="margin-top:1%;margin-bottom:2%">
+                                        <label for="" class="contact-label">Company</label>
+                                        <input kendo-auto-complete ng-model="params.company" id="contactadd_company" k-data-source="companyList" style="width:100%" />
+                                    </div>
+                                </div>
+
+                                <div class="clearfix">
+                                    <div class="col-md-6" style="margin-bottom:2%">
+                                        <label for="" class="contact-label">Designation</label>
+                                        <input kendo-auto-complete ng-model="params.designation" id="contactadd_Designation" k-data-source="titleList" style="width:100%"/>
+                                    </div>
+                                </div>
+                            </md-container>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4 class="contact-header-label">INTERESTED IN PROJECTS</h4>
+                        </div>
+                        <!-- add checkbox code here -->
+                        <div class="clearfix intrested_projects">
+                            <div class="col-md-9">
+                                <div class="md-padding" ng-repeat="project in projects">
+                                    <md-checkbox ng-model="project.checkedd">
+                                        &nbsp;{{project.name}}
+                                    </md-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-padding">
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block">
+                                        <label for="" class="contact-label">Apartment Configuration</label>
+                                        <textarea id="contactadd_Configuration" ng-model="params.interested_appartments"></textarea>
+
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4 class="contact-header-label">CONTACT DETAILS</h4>
+                        </div>
+                        <div class="md-padding">
+                            <div class="clearfix" style="margin-top:2%">
+                                <div class="col-md-6">
+                                    <!--<div ng-repeat="choice in choices">-->
+                                    <div class="form-group"
+                                         data-ng-class="{
+                           'has-error' : newForm.mobile_no.$invalid && (!newForm.mobile_no.$pristine || showValid) && !newForm.mobile_no.$focus,
+                            'has-success': newForm.mobile_no.$valid && !newForm.mobile_no.$pristine && !newForm.mobile_no.$focus
+                                               }">
+
+                                        <div id="phone-wrap" class="clearfix">
+                                            <div id="phone-no" class="form-bx form-bx2">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">Mobile </label>
+                                                    <input name="mobile_no" id="contactadd_phoneno"
+                                                           data-ng-model="params.mobile_number"
+                                                           input-focus
+                                                           ng-pattern="/^[0-9\-]{8,12}$/" />
+                                                    <div ng-messages="newForm.mobile_no.$error" style="color:maroon" role="alert">
+                                                        <div ng-message="required" data-ng-if="newForm.mobile_no.$invalid && (!newForm.mobile_no.$pristine || showValid) && !newForm.mobile_no.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid mobile number</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--</div>-->
+
+                                </div>
+                            </div><!--mobile no-->
+
+
+
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <!--<div ng-repeat="choice in choices">-->
+                                    <div class="form-group"
+                                         data-ng-class="{
+                           'has-error' : newForm.home_no.$invalid && (!newForm.home_no.$pristine || showValid) && !newForm.home_no.$focus,
+                            'has-success': newForm.home_no.$valid && !newForm.home_no.$pristine && !newForm.home_no.$focus
+                                               }">
+
+                                        <div id="phone-wrap" class="clearfix">
+                                            <div id="phone-no" class="form-bx form-bx2">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">Home </label>
+                                                    <input name="home_no" id="contactadd_phoneno"
+                                                           data-ng-model="params.home_number"
+                                                           input-focus
+                                                           ng-pattern="/^[0-9\-]{8,12}$/" />
+                                                    <div ng-messages="newForm.home_no.$error" style="color:maroon" role="alert">
+                                                        <div ng-message="required" data-ng-if="newForm.home_no.$invalid && (!newForm.home_no.$pristine || showValid) && !newForm.home_no.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid  home number</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>        
+                                        </div>
+                                    </div>
+
+                                    <!--</div>-->
+
+                                </div>
+                            </div><!--home no-->
+
+
+
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <!--<div ng-repeat="choice in choices">-->
+                                    <div class="form-group"
+                                         data-ng-class="{
+                           'has-error' : newForm.office_no.$invalid && (!newForm.office_no.$pristine || showValid) && !newForm.office_no.$focus,
+                            'has-success': newForm.office_no.$valid && !newForm.office_no.$pristine && !newForm.office_no.$focus
+                                               }">
+
+                                        <div id="phone-wrap" class="clearfix">
+                                            <div id="phone-no" class="form-bx form-bx2">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">Office</label>
+                                                    <input name="office_no" id="contactadd_phoneno"
+                                                           data-ng-model="params.office_number"
+                                                           input-focus
+                                                           ng-pattern="/^[0-9\-]{8,12}$/" />
+                                                    <div ng-messages="newForm.office_no.$error" style="color:maroon" role="alert">
+                                                        <div ng-message="required" data-ng-if="newForm.office_no.$invalid && (!newForm.office_no.$pristine || showValid) && !newForm.office_no.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid office  number</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>       
+                                        </div>
+                                    </div>
+                                    <!--</div>-->
+                                </div>
+                            </div><!--office no-->
+
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <!--<div ng-repeat="choice1 in choices1">-->
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                                               'has-error' : newForm.Primary_email1.$invalid && (!newForm.Primary_email1.$pristine || showValid) && !newForm.Primary_email1.$focus,
+                                                               'has-success': newForm.Primary_email1.$valid && !newForm.Primary_email1.$pristine && !newForm.Primary_email1.$focus
+                                                              }">
+                                        <div id="email-wrap" class="clearfix">
+                                            <div id="email-no" class="form-bx form-bx2">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">Email1 </label>
+                                                    <input name="Primary_email1" id="contactadd_email"
+                                                           data-ng-model="params.secondaryEmail1"
+                                                           input-focus
+                                                           ng-pattern="emailRegex" />
+                                                    <div ng-messages="newForm.Primary_email1.$error" role="alert">
+                                                        <div ng-message="required" data-ng-if="newForm.Primary_email1.$invalid && (!newForm.Primary_email1.$pristine || showValid) && !newForm.Primary_email1.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid email address</div>
+                                                    </div>
+
+                                                </md-input-container>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div><!--Email1-->
+
+
+
+                            <div class="clearfix">
+                                <div class="col-md-6">
+                                    <!--<div ng-repeat="choice1 in choices1">-->
+                                    <div class="form-group"
+                                         data-ng-class="{
+                                                               'has-error' : newForm.Primary_email2.$invalid && (!newForm.Primary_email2.$pristine || showValid) && !newForm.Primary_email2.$focus,
+                                                               'has-success': newForm.Primary_email2.$valid && !newForm.Primary_email2.$pristine && !newForm.Primary_email2.$focus
+                                                              }">
+                                        <div id="email-wrap" class="clearfix">
+                                            <div id="email-no" class="form-bx form-bx2">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">Email2 </label>
+                                                    <input name="Primary_email2" id="contactadd_email"
+                                                           data-ng-model="params.secondaryEmail2"
+                                                           input-focus
+                                                           ng-pattern="emailRegex" />
+                                                    <div ng-messages="newForm.Primary_email2.$error" role="alert">
+                                                        <div ng-message="required" data-ng-if="newForm.Primary_email2.$invalid && (!newForm.Primary_email2.$pristine || showValid) && !newForm.Primary_email2.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid email address</div>
+                                                    </div>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div><!--Email2-->
+
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4 class="contact-header-label">ADDRESS</h4>
+                        </div><!--Address-->
+                        <div class="clearfix" style=" margin-top: 1%;">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                                                  'has-error' : newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus,
+                                                                  'has-success': newForm.Address.$valid && !newForm.Address.$pristine && !newForm.Address.$focus
+                                                                 }">
+                                    <div id="address-wrap" class="clearfix">
+                                        <div id="address-no" class="form-bx form-bx2">
+                                            <md-input-container class="md-block" style="margin-top: 2%;">
+                                                <label class="contact-label">Address Line 1</label>
+                                                <input name="Address" id="contactadd_address"
+                                                       data-ng-model="params.street1"
+                                                       minlength="1"
+                                                       maxlength="255"
+                                                       input-focus />
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.Address.$invalid && (!newForm.Address.$pristine || showValid) && !newForm.Address.$focus">
+                                                    {{ 'Enter valid Address' | translate }}
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+
+                                    </div>
+                                </div><!--Address Line1-->
+
+                            </div>
+                        </div><!--addressline1-->
+
+                        <div class="clearfix">
+                            <div class="col-md-6" style="margin-top:-4%">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                                                  'has-error' : newForm.Address2.$invalid && (!newForm.Address2.$pristine || showValid) && !newForm.Address2.$focus,
+                                                                  'has-success': newForm.Address2.$valid && !newForm.Address2.$pristine && !newForm.Address2.$focus
+                                                                 }">
+                                    <div id="address-wrap" class="clearfix">
+                                        <div id="address-no" class="form-bx form-bx2">
+                                            <md-input-container class="md-block" style="margin-top: 4%;">
+                                                <label class="contact-label">Address Line2</label>
+                                                <input name="Address2" id="contactadd_address"
+                                                       data-ng-model="params.street2"
+                                                       minlength="1"
+                                                       maxlength="255"
+                                                       input-focus />
+                                                <div class="text-danger"
+                                                     data-ng-if="newForm.Address2.$invalid && (!newForm.Address2.$pristine || showValid) && !newForm.Address2.$focus">
+                                                    {{ 'Enter valid Address' | translate }}
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><!--AddressLine2-->
+
+                        <div class="clearfix">
+
+                            <div class="col-md-6" style="margin-top: -1%;">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                       'has-error' : newForm.Area.$invalid && (!newForm.Area.$pristine || showValid) && !newForm.Area.$focus,
+                                      'has-success': newForm.Area.$valid && !newForm.Area.$pristine && !newForm.Area.$focus
+                                       }">
+
+                                    <div class="form-group form-bx form-bx8">
+                                        <md-input-container class="md-block">
+                                            <label class="contact-label">Area</label>
+                                            <input id="contactadd_area" name="Area"
+                                                   data-ng-model="params.area"
+                                                   minlength="1"
+                                                   maxlength="255"
+                                                   input-focus />
+                                            <div class="text-danger"
+                                                 data-ng-if="newForm.Area.$invalid && (!newForm.Area.$pristine || showValid) && !newForm.Area.$focus">
+                                                {{ 'Enter valid Area' | translate }}
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div><!--Area-->
+
+                        <div class="clearfix">
+                            <div class="col-md-12">
+                                <div class="">
+                                    <div class="col-md-2">
+                                        <div class="form-bx form-bx3">
+
+                                            <md-input-container class="md-block">
+                                                <label for="" class="contact-label">State</label>
+                                                <md-select ng-model="state1" ng-change="selectstate()" class="dropdown" id="contactadd_state">
+                                                    <md-option value="" selected>
+                                                      STATE
+                                                    </md-option>
+                                                    <md-option ng-repeat="state in states"
+                                                               value="{{state.state_id}}">
+                                                        {{state.state_name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 contact_spacer">
+                                        <div class="form-bx form-bx3" style="margin-left: 10%;">
+                                            <md-input-container class="md-block">
+                                                <label for="" class="contact-label">City</label>
+                                                <md-select ng-change="selectcity()" ng-model="city1" class="dropdown " id="contactadd_city">
+                                                    <md-option value="" selected>CITY</md-option>
+                                                    <md-option ng-repeat="city in cities  | filter:filterExpression"
+                                                               value="{{city.city_id}}">
+                                                        {{city.city_name}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 contact_spacer">
+                                        <div class="form-bx form-bx3">
+                                            <div class="form-group"
+                                                 data-ng-class="{
+                                          'has-error' : newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus,
+                                          'has-success': newForm.Pin.$valid && !newForm.Pin.$pristine && !newForm.Pin.$focus
+                                                                         }">
+                                                <md-input-container style="margin: 4px 45px;">
+                                                    <label class="contact-label">Pin</label>
+                                                    <input name="Pin" id="contactadd_pin"
+                                                           data-ng-model="params.zip_code"
+                                                           minlength="1"
+                                                           maxlength="7"
+                                                           input-focus
+                                                           ng-pattern="/^[0-9]{1,6}$/" />                                                  
+                                                    <div ng-messages="newForm.Pin.$error" role="alert">
+                                                        <div ng-message="required" data-ng-if="newForm.Pin.$invalid && (!newForm.Pin.$pristine || showValid) && !newForm.Pin.$focus">This field should not be empty </div>
+                                                        <div ng-message="pattern">Enter valid email address</div>
+                                                    </div>
+
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div><!--state city pin-->
+                    </section>
+
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4 class="contact-header-label">OCCUPTION AND BUDGET</h4>
+                        </div><!--Address-->
+                        <div class="md-padding">
+                            <div class="clearfix">
+                                <div class="col-md-9">
+                                    <md-container>
+                                        <md-radio-group ng-model="occupation">
+                                            <md-radio-button value="Business"> Business</md-radio-button>
+                                            <md-radio-button value="Salaried"> Salaried </md-radio-button>
+                                            <md-radio-button value="Professional">Professional</md-radio-button>
+                                        </md-radio-group>
+                                    </md-container>
+                                </div>
+                            </div>
+                            <div class="clearfix" style="margin-top:1%;margin-bottom:2%">
+                                <div class="col-md-6">
+                                    <label for="" class="contact-label">Name Of Company/Organization</label>
+                                    <input kendo-auto-complete ng-model="params.company" id="contactadd_company" k-data-source="companyList" style="width:100%" />
+                                </div>
+                            </div><!--company name-->
+                            <div class="clearfix">
+                                <div class="col-md-6" style="margin-bottom:2%">
+                                    <label for="" class="contact-label">Designation</label>
+                                    <input kendo-auto-complete ng-model="params.designation" id="contactadd_Designation" k-data-source="titleList" style="width:100%" />
+                                </div>
+                            </div><!--designation-->
+
+                            <div class="clearfix">
+                                <div class="col-md-9">
+                                    <md-container>
+                                        <label class="contact-label">BUDGET</label><br />
+                                        <md-radio-group ng-model="params.budget" class="upper">
+                                            <md-radio-button value="Up to 1cr<" class="md-primary">Up to 1cr</md-radio-button>
+                                            <md-radio-button value=" 1cr-5cr "> 1cr-5cr </md-radio-button>
+                                            <md-radio-button value="6cr-10cr">6cr-10cr</md-radio-button>
+                                            <md-radio-button value="11+cr"> 11+cr</md-radio-button>
+                                        </md-radio-group>
+                                    </md-container>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-md-9">
+                                    <md-container>
+                                        <label class="contact-label">SOURCES</label><br />
+                                        <md-radio-group ng-model="sources">
+                                            <md-radio-button value="HomeLoan" class="md-primary">  HOME LOAN</md-radio-button>
+                                            <md-radio-button value="Self"> SELF </md-radio-button>
+                                            <md-radio-button value="Others"> OTHERS</md-radio-button>
+                                        </md-radio-group>
+                                    </md-container>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4 class="contact-header-label">PERSONAL AND FAMILY INFORMATION</h4>
+                        </div><!--Address-->
+                        <div class="md-padding">
+                            <div class="clearfix">
+                                <div class="col-md-12" style="margin-top:1%">
+                                    <div class="col-md-3">
+                                        <div class="form-bx">
+                                            <label for="" class="contact-label">Date Of Birth</label>
+                                            <input id="contactadd_datepicker" kendo-date-picker k-options="myOptions" style="width:100%"
+                                                   ng-model="params.Date_Of_Birth"
+                                                   k-ng-model="k_due_date"
+                                                   k-format="'dd/MM/yyyy'" />
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 contact_spacer_inrest">
+                                        <div class="form-bx">
+                                            <div class="form-group"
+                                                 data-ng-class="{
+                                           'has-error' : newForm.gender.$invalid && (!newForm.gender.$pristine || showValid) && !newForm.gender.$focus,
+                                            'has-success': newForm.gender.$valid && !newForm.gender.$pristine && !newForm.gender.$focus
+                                         }">
+
+                                                <md-input-container class="md-block" style="margin-top: 6%;margin-left:3%;">
+                                                    <label class="contact-label">Gender</label>
+                                                    <md-select id="contactadd_gender" name="gender" ng-change="selectgender()" ng-model="gender1" class="dropdown">
+                                                        <md-option value="" selected>SELECT GENDER</md-option>
+                                                        <md-option value="Male">Male</md-option>
+                                                        <md-option value="Female">Female</md-option>
+                                                    </md-select>
+                                                </md-input-container>
+
+                                                <div ng-messages="newForm.gender.$error" style="color:maroon" role="alert">
+
+                                                    <div ng-message="pattern">Enter valid gender</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="form-group"
+                                     data-ng-class="{
+                                       'has-error' : newForm.spouse.$invalid && (!newForm.spouse.$pristine || showValid) && !newForm.spouse.$focus,
+                                      'has-success': newForm.spouse.$valid && !newForm.spouse.$pristine && !newForm.spouse.$focus
+                                       }">
+
+                                    <div class="form-group form-bx form-bx8">
+
+                                        <md-input-container class="md-block">
+                                            <label class="contact-label">SPOUSE'S NAME</label>
+                                            <input id="contactadd_area" name="spouse"
+                                                   data-ng-model="params.Spouse_Name"
+                                                   minlength="1"
+                                                   maxlength="100"
+                                                   ng-pattern="/^[a-zA-Z\s]*$/"
+                                                   input-focus />
+                                        </md-input-container>
+                                    </div>
+                                    <div ng-messages="newForm.spouse.$error" style="color:maroon" role="alert">
+
+                                        <div ng-message="pattern">Enter valid spouse name</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-md-3">
+                                    <div class="form-bx">
+                                        <label for="" class="contact-label">ANNYVERSARY</label>
+                                        <input id="contactadd_datepicker" kendo-date-picker k-options="myOptions" style="width:100%"
+                                               ng-model="params.Anniversary_Date"
+                                               k-ng-model="k_due_date1"
+                                               k-format="'dd/MM/yyyy'" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="col-md-9">
+                                    <md-container>
+                                        <label class="contact-label">AGE GROUP</label><br />
+                                        <md-radio-group ng-model="age_group" class="upper">
+                                            <md-radio-button value=" 20-35 Yrs" class="md-primary"> 20-35 Yrs</md-radio-button>
+                                            <md-radio-button value=" 36-50 Yrs"> 36-50 Yrs </md-radio-button>
+                                            <md-radio-button value=" 50+Yrs"> 50 + Yrs</md-radio-button>
+
+                                        </md-radio-group>
+                                    </md-container>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-md-9">
+                                    <md-container>
+                                        <label class="contact-label">FAMILY</label><br />
+                                        <md-radio-group ng-model="family_type" class="upper">
+                                            <md-radio-button value=" Neclear Family" class="md-primary">  Neclear Family</md-radio-button>
+                                            <md-radio-button value=" Joint Family"> Joint Family </md-radio-button>
+                                        </md-radio-group>
+                                    </md-container>
+                                </div>
+                            </div>
+                            <div class="clearfix" style="margin-top:1%">
+
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                       'has-error' : newForm.family_member.$invalid && (!newForm.family_member.$pristine || showValid) && !newForm.family_member.$focus,
+                                      'has-success': newForm.family_member.$valid && !newForm.family_member.$pristine && !newForm.family_member.$focus
+                                       }">
+
+                                            <div class="form-group">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">NUMBER OF FAMILY MEMBERS</label>
+                                                    <input id="contactadd_family" name="family_member"
+                                                          
+                                                           data-ng-model="params.No_Of_Family_Members"
+                                                           ng-pattern="/^[0-9]{1,2}$/" />
+                                                </md-input-container>
+                                               
+
+                                                <div ng-messages="newForm.family_member.$error" role="alert">
+                                                    <div ng-message="required" data-ng-if="newForm.family_member.$invalid && (!newForm.family_member.$pristine || showValid) && !newForm.family_member.$focus">This field should not be empty </div>
+                                                    <div ng-message="pattern">Enter valid no of family members</div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="margin-left:2%">
+
+                                        <div class="form-group"
+                                             data-ng-class="{
+                                       'has-error' : newForm.family.$invalid && (!newForm.family.$pristine || showValid) && !newForm.family.$focus,
+                                      'has-success': newForm.family.$valid && !newForm.family.$pristine && !newForm.family.$focus
+                                       }">
+                                            <div class="form-group">
+                                                <md-input-container class="md-block">
+                                                    <label class="contact-label">NUMBER OF CAR OWNED</label>
+                                                    <input id="contactadd_carOwned" name="family"
+                                                          
+                                                           data-ng-model="params.No_Of_Cars_Owned"
+                                                           ng-pattern="/^[0-9]{1,9}$/" />
+                                                </md-input-container>
+
+                                                <div ng-messages="newForm.family.$error" role="alert">
+                                                    <div ng-message="required" data-ng-if="newForm.family.$invalid && (!newForm.family.$pristine || showValid) && !newForm.family.$focus">This field should not be empty </div>
+                                                    <div ng-message="pattern">Enter valid no of car owned</div>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-header contact_form_head" style="margin-left:-2%">
+                            <h4>OTHERS</h4>
+                        </div><!--Others-->
+                        <md-input-container class="md-block">
+                            <div class="col-lg-6" style="margin-top:1%">
+                                <label for="" class="contact-label">INTERESTS</label>
+                                <textarea id="comment1" data-ng-model="params.Interests"></textarea>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <div class="col-lg-6">
+                                <label for="" class="contact-label">CHANNEL PARTNER DETAILS</label>
+                                <textarea rows="3" id="comment2" data-ng-model="params.Channel_Partner_Details"></textarea>
+                            </div>
+                        </md-input-container>
+
+
+                        <md-input-container class="md-block">
+                            <div class="col-lg-6">
+                                <label for="" class="contact-label">REMARKS</label>
+                                <textarea rows="3" id="comment3" data-ng-model="params.Remarks"></textarea>
+                            </div>
+                        </md-input-container>
+
+
+                    </section>
+
+
+                    <div class="progress" ng-show="((uploader.progress)/1)>0">
+                        <div class="progress-bar" role="progressbar"
+                             ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+                    </div>
+                    <div class="modal-btn-wrap " style="margin-top:2%">
+                        <button id="btn_contactadd_save" type="submit" class="btn btn-primary text-bold ladda-button" ladda="loadingDemo" data-color="red" data-style="expand-right">Save</button>
+
+                        <button id="btn_contactadd_cancel" type="button" class="btn odd_btn1" style="float:none" ng-click="cancel()">Cancel</button>
+                    </div>
+
+
+
+                    <!-- add new contact -->
+                    <!--<div class="clearfix">
+                        <div class="form-bx" style="padding:5px">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                           'has-error' : newForm.budget.$invalid && (!newForm.budget.$pristine || showValid) && !newForm.budget.$focus,
+                                            'has-success': newForm.budget.$valid && !newForm.budget.$pristine && !newForm.budget.$focus
+                                     }" ng-hide='{{WHO_AM_I === "Service_industry"}}'>
+                                <select id="contactadd_budget" name="budget" ng-change="selectbudget()" ng-model="budget1" class="dropdown form-control">
+                                    <option value="" selected>Select Budget</option>
+                                    <option value="Less than 1Cr.">Less than 1Cr.</option>
+                                    <option value="1Cr. to 5Cr.">1Cr. to 5Cr.</option>
+                                    <option value="5Cr. to 10Cr.">5Cr. to 10Cr.</option>
+                                    <option value="10Cr. to 15Cr.">10Cr. to 15Cr.</option>
+                                    <option value="15Cr. and Above">15Cr. and Above</option>
+                                </select>
+                                <div class="text-danger"
+                                     data-ng-if="newForm.budget.$invalid && (!newForm.budget.$pristine || showValid) && !newForm.budget.$focus">
+                                    {{ 'Enter valid income' | translate }}
+                                </div>
+                            </div>
+
+                            <div class="form-group"
+                                 data-ng-class="{
+                                           'has-error' : newForm.budget.$invalid && (!newForm.budget.$pristine || showValid) && !newForm.budget.$focus,
+                                            'has-success': newForm.budget.$valid && !newForm.budget.$pristine && !newForm.budget.$focus
+                                     }" ng-show='{{WHO_AM_I === "Service_industry"}}'>
+                                <select id="contactadd_bud" name="budget" ng-change="selectbudget()" ng-model="budget1" class="dropdown form-control">
+                                    <option value="" selected>Select Budget</option>
+                                    <option value="Less than 1 Lakh">Less than 1 Lakh</option>
+                                    <option value="1 Lakh to 5 Lakh">1 Lakh to 5 Lakh</option>
+                                    <option value="5 Lakh to 10 Lakh">5 Lakh to 10 Lakh</option>
+                                    <option value="10 Lakh to 15 Lakh">10 Lakh to 15 Lakh</option>
+                                    <option value="10 Lakh to 15 Lakh">15 Lakh and Above</option>
+                                </select>
+                                <div class="text-danger"
+                                     data-ng-if="newForm.budget.$invalid && (!newForm.budget.$pristine || showValid) && !newForm.budget.$focus">
+                                    {{ 'Enter valid income' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-bx" style="padding:5px;margin-left:3%">
+                            <div class="form-group"
+                                 data-ng-class="{
+                                           'has-error' : newForm.duration.$invalid && (!newForm.duration.$pristine || showValid) && !newForm.duration.$focus,
+                                            'has-success': newForm.duration.$valid && !newForm.duration.$pristine && !newForm.duration.$focus
+                                     }">
+                                <select id="contactadd_duration" name="duration" ng-change="selectbuy()" ng-model="buy1" class="dropdown form-control">
+                                    <option value="" selected>Looking At Purchase In</option>
+                                    <option value="0-3 months">0-3 months</option>
+                                    <option value="3-6 months">3-6 months</option>
+                                    <option value="6-12 months">6-12 months</option>
+                                    <option value="1-2 years">1-2 years</option>
+                                    <option value="Not Sure">Not Sure</option>
+                                </select>
+                                <div class="text-danger"
+                                     data-ng-if="newForm.duration.$invalid && (!newForm.duration.$pristine || showValid) && !newForm.duration.$focus">
+                                    {{ 'Enter valid Purchase Duration' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix">
+                            <div class="form-group form-bx form-bx8" ng-hide='{{WHO_AM_I === "Service_industry"}}'>
+                                <div class="form-group"
+                                     data-ng-class="{
+                                         'has-error' : newForm.income.$invalid && (!newForm.income.$pristine || showValid) && !newForm.income.$focus,
+                                         'has-success': newForm.income.$valid && !newForm.income.$pristine && !newForm.income.$focus
+                                                                     }">
+                                    <label for="">Income</label>
+                                    <input type="text" class="form-control text-bold"   name="income" id="contactadd_income"
+                                           data-ng-model="params.income"
+                                           minlength="1"
+                                           maxlength="50"
+                                           ng-pattern="/^([1-9][0-9,./]*)$/"
+                                           input-focus />
+                                    <div class="text-danger"
+                                         data-ng-if="newForm.income.$invalid && (!newForm.income.$pristine || showValid) && !newForm.income.$focus">
+                                        {{ 'Enter valid income' | translate }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix">
+                            <div class="form-bx form-bx2" style="border: 1px solid #e7e7e7;border-radius: 2px;" ng-hide='{{WHO_AM_I === "Service_industry"}}'>
+
+                                <select kendo-multi-select k-options="selectOptions" name="project" id="contactadd_project" k-ng-model="project_name" k-on-change="selectProject()" class="dropdown form-control"></select>
+                            </div>
+
+                            <div class="text-danger"
+                                 data-ng-if="newForm.project.$invalid && (!newForm.project.$pristine || showValid) && !newForm.project.$focus">
+                                {{ 'Enter valid Project' | translate }}
+                            </div>
+                        </div>
+
+                        <div class="form-bx form-bx2" ng-show='{{WHO_AM_I === "Service_industry"}}'>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                         'has-error' : newForm.service.$invalid && (!newForm.service.$pristine || showValid) && !newForm.service.$focus,
+                                        'has-success': newForm.service.$valid && !newForm.service.$pristine && !newForm.service.$focus
+                                             }">
+                                <label for="">Select Services</label>
+                                <select ng-model="service1" name="service" ng-change="selectservices()" id="contactadd_service"
+                                        class="dropdown form-control">
+                                    <option value="" selected>Select Services</option>
+                                    <option ng-repeat="service in services"
+                                            value="{{service.id}}">
+                                        {{service.name}}
+                                    </option>
+                                </select>
+                                <div ng-messages="newForm.service.$error" style="color:maroon" role="alert">
+                                    <div ng-message="pattern">Enter valid Service</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-bx form-bx2" ng-show='{{WHO_AM_I === "Service_industry"}}'>
+                            <div class="form-group"
+                                 data-ng-class="{
+                                          'has-error' : newForm.ProjectNo.$invalid && (!newForm.ProjectNo.$pristine || showValid) && !newForm.ProjectNo.$focus,
+                                          'has-success': newForm.ProjectNo.$valid && !newForm.ProjectNo.$pristine && !newForm.ProjectNo.$focus
+                                           }">
+                                <label>No. of Projects</label>
+                                <input type="text"   name="ProjectNo" class="form-control" id="contactadd_projectno"
+                                       data-ng-model="params.no_of_project"
+                                       minlength="1"
+                                       maxlength="50"
+                                       input-focus
+                                       ng-pattern="/^([1-9][0-9]*)$/" />
+
+                                <div ng-messages="newForm.ProjectNo.$error" style="color:maroon" role="alert">
+                                    <div ng-message="pattern">Enter valid No. of Project</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>-->
+                    <!--<div class="progress" ng-show="((uploader.progress)/1)>0">
+                        <div class="progress-bar" role="progressbar"
+                             ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+                    </div>-->
+                    <!--<div class="modal-btn-wrap clearfix">
+                        <button id="btn_contactadd_save" type="submit" class="f-btn">SAVE</button>
+
+                        <button id="btn_contactadd_cancel" type="button" class="f-btn f-btn2" ng-click="cancel()">CANCEL</button>
+                    </div>-->
+                    <br>
+                    <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#contactedit_uploader1").change(function () {
+        readURL(this);
+    });
+</script>

@@ -1,0 +1,182 @@
+﻿
+
+
+<div id="main-content" class="col-xs-12">
+
+
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Settings</h2>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="pg-inner-content">
+
+        <div class="project-detail">
+            <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                <ul class="nav nav-tabs responsive-tagJS" role="tablist">
+
+                    <li><a aria-controls="summary" role="tab" data-toggle="tab">ORGANIZATION</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">PROJECTS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">BOOKINGS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">INVENTORY</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">CHANNEL PARTNERS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">USERS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">TEAMS</a></li>
+                    <li><a aria-controls="summary" role="tab" data-toggle="tab">TASKS</a></li>
+                    <li><a aria-controls="summary" role="tab" data-toggle="tab">NOTIFICATIONS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">BILLING</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">TAGS</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">SECURITY</a></li>
+                    <li ng-hide='{{WHO_AM_I === "Broker"}}'><a aria-controls="summary" role="tab" data-toggle="tab">KIOSK</a></li>
+
+                </ul>
+
+
+                <div class="tab-content">
+
+                    ORGANIZATION
+
+                </div>   <!--ORGANIZATION End-->
+
+
+                <div class="tab-content">
+
+                    PROJECTS
+
+                </div>    <!--PROJECTS End-->
+                <!--PEOPLE End-->
+
+
+                <div class="tab-content">
+
+                    BOOKINGS
+
+                </div>   <!--BOOKINGS End-->
+
+
+                <div class="tab-content">
+
+                    INVENTORY
+
+                </div>   <!--INVENTORY End-->
+
+
+                <div class="tab-content">
+
+                    CHANNEL PARTNERS
+
+                </div>   <!-- CHANNEL PARTNERS End-->
+
+
+                <div class="tab-content">
+
+                    USERS
+
+                </div>   <!--USERS End-->
+
+
+
+                <div class="tab-content">
+
+                    TEAMS
+
+                </div>   <!--TEAMS End-->
+
+
+                <div class="tab-content">
+
+                    TASKS
+
+                </div>   <!--TASKS End-->
+
+
+                <div class="tab-content">
+
+                    NOTIFICATIONS
+
+                </div>   <!--NOTIFICATIONS End-->
+
+
+                <div class="tab-content">
+
+                    BILLING
+
+                </div>   <!--BILLING End-->
+
+
+                <div class="tab-content">
+
+                    TAGS
+
+                </div>   <!--TAGS End-->
+
+
+                <div class="tab-content">
+
+                    SECURITY
+
+                </div>   <!--SECURITY End-->
+
+
+
+                <div class="tab-content">
+
+                    KIOSK
+
+                </div>   <!--SECURITY End-->
+                
+                <div class="tab-content">
+                    <div class="pg-inner-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="bx-h2">
+                                <div class="bx-h1-head">
+                                    <div class="title">Kiosk Settings</div>
+                                    
+                                </div>
+                                <div style="padding:20px">
+                                    <h5 style="font-weight:600"> Make Registration Mandatory</h5>
+                                    <label><input type="checkbox" id="registercontent" ng-model="showcontent" value="1"/> Show Content</label> &nbsp;&nbsp;&nbsp;
+                                    <label><input type="checkbox" id="registerprice" ng-model="showprice" value="1"/> Show Pricing</label>&nbsp;&nbsp;&nbsp;
+                                    <label><input type="checkbox" id="registeravail" ng-model="showavail" value="1" /> Show Availability</label>&nbsp;&nbsp;&nbsp;
+
+                                </div>
+                                <div class="modal-btn-wrap clearfix">
+                                    <button type="submit" ng-click="finalpost()" class="kiosk-f-btn1"> SAVE</button>
+                                </div>
+
+                            </div><!-- bx-h1 ended -->
+                        </div>
+                       
+                    </div>
+
+                    
+                    
+                
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

@@ -1,0 +1,52 @@
+﻿<div id="add_new_floor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+    <div class="modal-body" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+
+        <div class="close-btn-wrap">
+            <button type="button" class="close" id="btn_UploadNotesClose" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+        </div>
+
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+            <h4 class="form-title">Upload Notes</h4>
+
+
+            <div class="clearfix image-upload-container">
+                <div class="modal-body image-upload-wrap">
+
+
+                    <div>
+                        <h4>Upload your Notes CSV file</h4>
+
+                        <input type="file" class="image-upload-f" id="file_UploadNotes"  value="Browse" nv-file-select="" uploader="uploader" />
+                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                    </div>
+
+                    <!--<div class="image-upload-link">
+
+                        <input type="file" class="image-upload-f" id="editproject_uploader1" value="Browse"  nv-file-select="" uploader="uploader" />
+                        <p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p>
+                    </div>-->
+                </div>
+            </div>
+
+            <div class="progress" ng-show="showProgress">
+                <div class="progress-bar" role="progressbar"
+                     ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
+            </div>
+
+
+
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                <div class="btn-f-c">
+                    <button class="f-btn" id="btn_UploadNotesSave" type="submit"
+                            ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        SAVE
+                    </button>
+                </div>
+                <div class="btn-f-c"><button class="f-btn f-btn2" type="submit" id="btn_UploadNotesCancel" ng-click="$dismiss('cancel')">CANCEL</button></div>
+            </div>
+        </form>
+    </div><!-- modal-body ended -->
+
+</div>

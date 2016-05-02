@@ -1,0 +1,15 @@
+﻿
+<div class="modal-header custom_head_warning">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" data-toggle="tooltip" title="Close Tab">&times;</button>
+    <h4 class="modal-title custom_head-h4"><i class="fa fa-trash"></i> Warning</h4>
+</div>
+<div class="main-content add-new project sucessful-popup" style="padding: 2%;">
+    <h4 style="text-align:center">Are you sure you want to delete these &nbsp;{{length}}&nbsp;{{title}}</h4>
+
+    <div class="modal-btn-wrap5 clearfix">
+        <div style="padding: 2% 0% 3% 0%;">
+            <button type="submit" class="btn btn-warning " id="btn_contactconfirmNotes_save" ng-click="gotoDelete()">YES</button>
+            <button type="button" class="btn f-btnTag" id="btn_contactconfirmNotes_cancle" ng-click="$dismiss('cancel')">NO</button>
+        </div>
+    </div>
+</div>

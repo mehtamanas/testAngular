@@ -1,0 +1,176 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Company Details</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="pg-inner-content">
+
+        <div class="project-detail">
+
+            <div class="pg-inner-content_1">
+                <div class="clearfix project-detail-info-1 pg-inner-content_1">
+
+                    <div class="row" style="background:#fff;">
+                        <div class="col-md-3 col-sm-3" style="width:140px;">
+                            <div class="project-detail-photo_1"><img src={{company.media_url}} alt="" class="image1" /></div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 contact-detail-txt">
+                            <div class="project-name">Name: {{company.company_name}}  <a id="btn_edit_contact" ng-click="openEditCompanyPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
+                            <div class="project-d02 capt"> <b>{{company.description}}</b></div>
+                            <uib-rating id="companyDetails_rating" ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating" ng-click="saveRating()"></uib-rating>
+                            <span id="companyDetails_percent" class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="clearfix project-detail-info pg-inner-content_1">
+
+                    <div class="row equal" style="background:#fff;">
+                        <div class="col-md-2 tags" id="tagLeft" style="width:150px;"><span class="tag_center"> TAGS </span></div>
+                        <div class="col-md-10" style="padding: 3px 15px 10px 15px;" id="tagRight">
+                            <span ng-repeat="tag in tags" style="background-color:{{tag.background_color}}; cursor: pointer;" class="upper tag-name" id="posts">
+                                <a id="companyDetails_tags" style="color:#fff;margin-left: 5px;" ng-click="goToTagDetails(tag.tag_id)">{{tag.tag_name}}</a><span ng-click="removeImage($index)" class="fa fa-close" style="padding-left:5px;"></span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <!--<div class="project-detail-info">
+
+            <div class="project-detail-photo">
+
+                <img src={{company.media_url}} alt="" class="img-responsive" />
+
+            </div>
+
+            <div class="project-detail-txt">
+
+
+                <div class="project-name">Name: {{company.company_name}}  <a id="btn_edit_contact" ng-click="openEditCompanyPopup()" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
+                <div class="project-d02 capt"> <b>{{company.description}}</b></div>
+
+                <uib-rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating" ng-click="saveRating()"></uib-rating>
+                <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+
+            </div>
+            <div class="clearfix project-detail-info pg-inner-content_1">
+
+                <div class="row" style="background:#fff;">
+                    <div class="col-md-2 tags" id="tagLeft" style="width:150px;"><span class="tag_center"> TAGS </span></div
+                    <div class="col-md-10" style="padding: 3px 15px 10px 15px;" id="tagRight"><span ng-repeat="tag in tags" style="background-color:{{tag.background_color}}; cursor: pointer;" class="upper tag-name" id="posts"><a style="color:#fff;margin-left: 5px;" ng-click="goToTagDetails(tag.tag_id)">{{tag.tag_name}}</a><span ng-click="removeImage($index)" class="fa fa-close" style="padding-left:5px;"></span></span></div>
+
+                </div>
+
+
+            </div>
+        </div>-->
+                <!-- project-detail-info ended -->
+
+
+
+                <div class="project-detail-tabs pg-tabs" kendo-tab-strip>
+                    <ul class="responsive-tagJS" role="tablist">
+                        <li class="k-state-active" id="companyDetails_essentail"> <a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIAL</a></li>
+                        <li id="companyDetails_peoplegrid"><a aria-controls="summary" role="tab" data-toggle="tab">PEOPLE</a></li>
+
+                    </ul>
+
+                    <div class="content-inner-bx">
+
+                        <div class="clearfix">
+
+                            <div class="pull-left company-profile-half">
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Company Name:</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="company_name"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Area</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="area">{{area}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">City</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="city">{{city}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pull-left company-profile-half company-profile-half-2">
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Last Name</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="Contact_Last_Name"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Description </div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="description">{{description}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">Address</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="street_1">{{street_1}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="company-profile-row clearfix">
+                                    <div class="pull-left profile-row1">State</div>
+                                    <div class="pull-right profile-row2">
+                                        <label class="label-group">
+                                            <span ng-bind="state">{{state}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> <!--Essential-->
+
+                    <div class="leads_group" id="documentGridDiv">
+                        <!--<div class="tab-content-title">People<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" style="cursor:pointer">+</a></div>-->
+                        <div id="companyDetails_followup" kendo-grid k-options="companyGrid" selectable="true" k-on-change="myGridChangeFollowUp( dataItem )">
+
+                        </div>
+                    </div>  <!--Document-->
+
+
+
+                </div>
+            </div>
+    </div>
+</div>
+
+    </div>

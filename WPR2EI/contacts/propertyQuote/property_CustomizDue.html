@@ -1,0 +1,118 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="pg-inner-title">Create New Quote</h2>
+                </div>
+
+            </div>
+        </div><!-- pg-inner-header ended -->
+
+    </div><!-- content-inner ended -->
+
+    <div class="pg-inner-content" style="">
+        <div class="col-md-12 tab_head-2">
+            <div class="row " style="padding: 1px 0px 1px 16px;">
+                <div class="col-md-3 email_tabs2">Select Unit & Payment Scheme</div>
+                <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs2" style="margin-left: 23px;">Customiz Quotes</div>
+                <div class="col-md-1 tabarrow"><img src="images/blue_arrow.png" class="arrow-height" /></div>
+                <div class="col-md-3 email_tabs2" style="margin-left: 21px;">Customiz Due Date</div>
+
+            </div>
+        </div>
+        <div class="top-row" style="width:100%; background:#fff; padding:60px">
+            <div class="clearfix">
+
+                <h4 class="seperate">Project : {{propertyDetails.project_name}}</h4>
+                <div class="col-md-10 ">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody class="c_td">
+                                <tr>
+                                    <td><span class="data_span">{{proprty_Details.towerName}}</span><p>Tower</p></td>
+                                    <td><span class="data_span">{{proprty_Details.floorNo}}</span><p>Floor</p></td>
+                                    <td><span class="data_span">{{proprty_Details.unitNo}}</span><p>Unit No.</p></td>
+                                    <td><span class="data_span">{{proprty_Details.unitName}}</span><p>BHK</p></td>
+                                    <td><span class="data_span">{{proprty_Details.salableArea}}</span><p>Salable Area</p></td>
+                                    <td><span class="data_span">{{proprty_Details.CarpatArea}}</span><p>Carpet Area</p></td>
+                                    <td><span class="data_span">{{proprty_Details.CarePark}}</span><p>Car Park</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--data end-->
+
+            </div>
+
+            <h4 class="seperate">Customized Due Date</h4>
+            <div class="clearfix">
+
+                <div class="col-md-10">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="tbl_head" >
+                                    <th>Payment Scheme For<span>{{paymentSchemeName.type_of_payment}}</span> </th>
+                                    <th>Percentage</th>
+                                    <th>Amount</th>
+                                    <th>Service Tax</th>
+                                    <th>Due Date</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="amount in amountCalculationValue">
+                                    <td><span class="">{{amount.description}}</span></td>
+                                    <td><span class="">{{amount.percentage}}</span></td>
+                                    <td><span class="" >{{amount.amountTotal | number:2}}</span></td>
+                                    <td><span class="">{{amount.serviceTax | number:2}}</span></td>
+                                    <td><span class=""><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>
+                                </tr>
+
+                                <tr class="quote-bold">
+                                    <td><span class="">Total</span></td>
+                                    <td><span class="">100%</span></td>
+                                    <td><span class="">{{totalValue | number:2}}</span></td>
+                                    <td><span class="">{{finalServiceTax | number:2}}</span></td>
+                                    <td><span class=""><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" /></span></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
+                <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
+                    BACK
+                </button>
+                <button class="btn btn-success campaign-container-btn-pdf" id="campaign_cancel" ng-click="preview()" type="button">
+                    PDF PREVIEW
+                </button>
+
+                <button class="btn organization-btn" id="campaign_save" style="margin-right:5px" ng-click="propertyQuoteCreate()">
+                    SAVE
+                </button>
+                <button class="btn organization-btn" id="campaign_save" type="submit">
+                    SEND
+                </button>
+
+
+            </div>
+        </div>
+
+
+        <!-- pg-inner-content ended -->
+
+    </div><!-- main-content ended -->
+
+
+</div>

@@ -1,0 +1,54 @@
+﻿
+<style>
+    .modal-dialog {
+        /* new custom width */
+        width: 100% !important;
+        padding-top: 0px;
+        padding-left:30px;
+        padding-right:30px;
+
+        /* must be half of the width, minus scrollbar on the left (30px) */
+    }
+</style>
+<div class="modal-dialog modal-lg" ng-class="size ? 'modal-' + size : ''" style="width: 100%;padding: 0px">
+<div id="add_new_team" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
+   
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Edit Notes</h4>
+            </div>
+            <form class="form-content form-content2 edit-organization-setting" style="text-align:left" name="addNewForm" data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+
+                <div class="clearfix">
+
+                    <div class="col-md-12">
+                        <label for="">From</label>
+                        <tags-input ng-model="params.Name" input-focus name="from" placeholder="Contacts" id="contact_editNotes_From">
+                            <auto-complete source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+
+                    <div class="">
+                                     <label for="">Add Note</label>
+                        <textarea id="contact_editNotes_addNotes" rows="10" cols="30" style="width:100%; display:block;" kendo-editor k-options="editorOption" k-ng-model="params.text" resizable="true"></textarea>
+                    </div>
+                </div>
+                <div class="clearfix" style="margin-top:2%">
+                    <div class="modal-btn-wrap clearfix">
+                        <button type="submit" class="btn btn-primary ladda-button" ladda="loadingDemo" data-style="expand-right" id="btn_contact_editNotes_save"><b>Save</b></button>
+
+                        <button type="button" class="btn odd_btn" style="float:none" id="contact_editNotes_cancel" ng-click="cancel()">Cancel</button>
+                    </div>
+                    </div>
+               
+</form>
+
+        </div>
+    </div>
+<script>
+
+    var notePopupHeight = window.innerHeight - 285;
+    document.getElementById("contact_editNotes_addNotes").style.height = notePopupHeight + "px";
+
+
+</script>

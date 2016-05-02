@@ -1,0 +1,56 @@
+﻿<div id="main-content" class="col-xs-12">
+    <div class="content-inner">
+        <div class="pg-inner-header">
+            <div class="row">
+
+                <div class="col-md-2">
+                    <h2 class="pg-inner-title">Tags</h2>
+                    </div>
+
+                     <div class="col-md-10">
+                         <div class="pull-right btn-wrap-right">
+
+                             <a id="tag_openaddnewTagpopup" href="" class="btn-blk-create" ng-click="openTagPopup()" style="cursor:pointer">+ Add New Tag</a>
+                         </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pg-inner-content">
+
+        <form action="">
+            <div class="clearfix">
+                <div class="col-lg-12 head_action">
+
+                    <div class="">
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
+
+                            <select ng-model="TagAction" class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="tagaction">
+                                <option value='no_action' selected>ACTIONS</option>
+                                <option value='delete'>DELETE</option>
+                            </select>
+                        </div>
+
+                        </div>
+
+                    </div>
+
+
+                
+            </div>
+
+            <div id="record-content" class="properties-content">
+
+                                <div id="project-record-list" kendo-grid k-options="tagGrid" selectable="true">
+                                </div>
+
+                            </div><!-- record-content ended -->
+
+        </form>
+
+    </div><!-- project-detail ended -->
+
+
+
+</div><!-- main-content ended -->

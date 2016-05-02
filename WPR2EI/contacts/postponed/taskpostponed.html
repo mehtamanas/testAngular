@@ -1,0 +1,108 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title model-title1" id="exampleModalLabel">Postpone Task</h4>
+    </div>
+
+    <form class="form-content form-content2 edit-organization-setting" name="agrrementForm" novalidate data-ng-submit="addNew(agrrementForm.$valid)" autocomplete="off">
+        <div class="clearfix">
+            <div class="company-profile-row clearfix">
+                <div class="pull-left profile-row1">Lead Name:</div>
+                <div class="pull_left_day profile-row2">
+                    <div class="project-name">
+                        <p ng-bind="leadName" style="text-transform:capitalize">{{leadName}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="company-profile-row clearfix">
+                <div class="pull-left profile-row1">Company Name:</div>
+                <div class="pull_left_day profile-row2">
+                    <div class="project-name">
+                        <p ng-bind="companyName" style="text-transform:capitalize">{{companyName}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <strong class="duration_time form-content "> </strong>
+        <div class="container followup_inner">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="clearfix">
+
+                            <div class="pull_left_day">
+
+                                <div class="day-info-btn clearfix" ng-click="setFollowUp('hour')" id="dayInfo_hour" ng-class="{'div_calender_hour_selected':followSelect==1}">
+                                    <span class="pull-right-1">An Hour</span>
+                                    <span class="pull-right"></span>
+                                </div>
+
+                                <div class="tommmorow-info-btn clearfix" ng-click="setFollowUp('tomorrow')" id="dayInfo_tomorrow" ng-class="{'div_calender_tommorow_selected':followSelect==2}">
+                                    <span class="pull-right-1">Tomorrow</span>
+                                    <span class="pull-right"></span>
+                                </div>
+
+                                <div class="week-info-btn clearfix" ng-click="setFollowUp('week')" id="dayInfo_week" ng-class="{'div_calender_week_selected':followSelect==3}">
+                                    <span class="pull-right-1">In A Week</span>
+                                    <span class="pull-right"></span>
+                                </div>
+
+                                <div class="month-info-btn clearfix" ng-click="setFollowUp('month')" id="dayInfo_month" ng-class="{'div_calender_selected':followSelect==4}">
+                                    <span class="pull-right-1"> In A Month</span>
+                                    <span class="pull-right"></span>
+                                </div>
+                            </div><!-- profile-side-txt ended-->
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="form-group form-bx4 form-bx3-1">
+                            <label for="">Choose Date</label>
+                            <input kendo-date-time-picker class=""
+                                   ng-model="due_date"
+                                   id="companyDatetime"
+                                   k-on-change="dateChange()"
+                                   k-ng-model="k_start_date"
+                                   k-format="'MMMM d, yyyy h:mm tt'" />
+                        </div>
+
+
+
+                        <div class="form-group form-bx form-bx3-1">
+                            <label for="">Select Time</label>
+                            <select data-ng-model="reminder_time" class="dropdown form-control" style="height: 49px;width: 82%;" id="Opt_companySelectTime">
+                                <option value="" selected>Select Time</option>
+                                <option value="15 min">15 min</option>
+                                <option value="30 min">30 min</option>
+                                <option value="45 min">45 min</option>
+                                <option value="60 min">60 min</option>
+                                <option value="no reminder">no reminder</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="form-group form-bx13 ">
+                            <!--<label><input type="checkbox" name="test3" value="1" id="Chk_ContactRemind" ng-model="remind_me" ng-init="remind_me=true">Remind Me</label>-->
+
+                            <div class='checkbox c-checkbox needsclick'>
+                                <label class='needsclick'> 
+                                    <input type='checkbox' required=''  class='checkbox needsclick ng-dirty ng-valid-parse ng-touched ng-not-empty ng-valid ng-valid-required' name="test3" value="1" id="Chk_ContactRemind" ng-model="remind_me" ng-init="remind_me=true"style=''><span class='fa fa-check'></span>Remind me
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-btn-wrap clearfix">
+            <button type="submit" class="btn btn-primary bold_txt" ladda="loadingDemo" data-style="expand-right" id="btn_companyFollowUpSave">Save</button>
+            <button type="button" class="btn odd_btn1" id="btn_companyFollowUpCancel" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>
