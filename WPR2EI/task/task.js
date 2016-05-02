@@ -1829,8 +1829,6 @@
                                 return;
                             }
 
-
-
                             var CurrentDate = moment().endOf('day')._d;;
                             var YesterDayDate = moment().endOf('day').add(-1, 'days')._d;
                             var TommDate = moment().endOf('day').add(+1, 'days')._d;
@@ -1874,7 +1872,6 @@
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
-
                         }
 
                         // BETWEEN OR CHECK 
