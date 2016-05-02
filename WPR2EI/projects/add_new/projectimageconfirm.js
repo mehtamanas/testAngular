@@ -9,8 +9,8 @@
     $scope.gotoDelete = function () {
         apiService.post("MediaElement/Delete", imageDelete).then(function (response) {
             var loginSession = response.data;
-            //$modalInstance.dismiss();
             $scope.openSucessfullPopup();
+            $modalInstance.dismiss();
             $rootScope.$broadcast('REFRESH', 'images');
         },
 

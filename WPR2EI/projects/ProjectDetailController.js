@@ -1,4 +1,5 @@
-﻿angular.module('project')
+﻿
+angular.module('project')
 
 .controller('ProjectDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, projectService) {
@@ -13,6 +14,11 @@
         //    $('#btnAdd').hide();
         //}
         
+
+        //$scope.editnote = function () {
+        //    $scope.openNotesEditPopUp();
+        //}
+
         $scope.chargeAction = 'no_action';
         $scope.serviceAction = 'no_action';
 
@@ -86,6 +92,16 @@
         //    }
 
         //});
+
+        $scope.openNotesEditPopUp = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/gallery.html',
+                backdrop: 'static',
+                controller: AddNewGalleryController,
+                size: 'lg'
+            });
+        };
       
         $scope.openNewPaymentSchemePopup = function () {
             var modalInstance = $modal.open({
@@ -1676,7 +1692,8 @@
                 templateUrl: 'projects/add_new/removeimageconfirm.html',
                 backdrop: 'static',
                 controller: confirmProjectImageController,
-                size: 'lg'
+                size: 'lg',
+                resolve: { items: { title: "Image" } }
             });
         };
 
@@ -1786,6 +1803,10 @@
             });
         };
 
+        //var vid = document.getElementById("playVideo");
+        //vid.onplaying = function () {
+        //    alert("The video is now playing");
+        //};
             // Kendo Grid on change
         //$scope.myGridChange = function (dataItem) {        
         //    window.sessionStorage.selectedTaskID = dataItem.task_id;           
@@ -1950,6 +1971,13 @@
            function (error) {
           
            });
+            //Calling get video
+            projectUrl = "Project/GetVideoByProjectID/" + $scope.seletedCustomerId;
+            apiService.getWithoutCaching(projectUrl).then(function (response) {
+                $scope.Videos = response.data;
+            },
+       function (error) {
+       });
 
             Url = "ElementInfo/GetElementInfo?Id=" + $scope.seletedCustomerId + "&&type=Project";
             apiService.getWithoutCaching(Url).then(function (response) {
@@ -1986,6 +2014,8 @@
                      $scope.media_url2 = $scope.data[0].media_url2;
                      $scope.media_url3 = $scope.data[0].media_url3;
                      $scope.media_url4 = $scope.data[0].media_url4;
+                     $scope.media_url_video = $scope.data[0].media_url_video;
+                     $scope.media_url_home_page_background = $scope.data[0].media_url_home_page_background;
                      if ($scope.data[0].contact_mobile !== '') {
                          $scope.mobile = $scope.data[0].contact_mobile;
                      }
@@ -2238,4 +2268,12 @@
 
         });
 
+
+
     });
+
+angular.module('project').filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
