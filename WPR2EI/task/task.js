@@ -1,7 +1,7 @@
 ﻿angular.module('task')
 
 .controller('TaskGridController',
-    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage) {
+    function ($scope, $state, security, $cookieStore, apiService, $rootScope, $modal, $window, $localStorage, $filter) {
 
         var orgID = $cookieStore.get('orgID');
         $scope.activityAction = 'no_action';
@@ -694,11 +694,26 @@
         // JQL code on 15-04-2016 
         //saroj
 
-        var callViewApi = function () {
+        function getDefaultView(views, id) {
+            var result = id == null ? $filter('filter')(views, { default_view: true }, true)[0] : $filter('filter')(views, { id: id }, true)[0];
+            return result;
+        }
+
+
+        var callViewApi = function (id) {
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views = _.filter(res.data, function (o)
                 { return o.query_type === 'View' && o.grid_name === 'task' });
+
+                $scope.defaultView = id == null ? getDefaultView($scope.views) : getDefaultView($scope.views, id);
+                if ($scope.defaultView == null) {
+                    $scope.gridView = 'default';
+                }
+                else {
+                    $scope.gridView = $scope.defaultView.id;
+                    $scope.queryText = $scope.defaultView.query_string.replace(/"/g, "");
+                }
             }, function (err) {
 
             });
@@ -793,6 +808,15 @@
                 size: 'sm',
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'task', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
+            modalInstance.result.then(function (data) {
+                if (data != null) {
+                    callViewApi(data.id);
+                }
+            },
+             function (error) {
+             }
+           );
+
         }
 
         $scope.editView = function () {
@@ -821,6 +845,15 @@
                     size: 'sm',
                     resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'task', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
                 });
+
+                modalInstance.result.then(function (data) {
+                    if (data != null) {
+                        callViewApi(data.id);
+                    }
+                },
+                 function (error) {
+                 }
+                  );
             }
             else {
                 alert('Cannot edit this view');
