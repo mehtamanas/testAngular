@@ -1,6 +1,6 @@
 ﻿angular.module('contacts')
 
-.controller('propertyCustomizQuote', function ($scope, $state, $cookieStore, apiService, $rootScope, $modal) {
+.controller('propertyCustomizQuote', function ($scope, $state, $cookieStore, apiService, $rootScope, $modal, FileUploader) {
     console.log('propertyCustomizQuote');
     $rootScope.title = 'Dwellar-peopertyQuotes';
     var orgID = $cookieStore.get('orgID');
@@ -9,7 +9,7 @@
     var project_id = $cookieStore.get("projectId");
     var customer_id = $cookieStore.get("customerId");
     $scope.property_Details = $cookieStore.get("PropertyDetails");
-
+  
     Url = "Organization/Get/" + $cookieStore.get('orgID');
     apiService.get(Url).then(function (response) {
         $scope.organization = response.data[0];
@@ -99,6 +99,13 @@
 
     $scope.preview = function () {
         prePDFCheck();
+        var fromDate = moment($scope.fromdate, "DD/MM/YYYY")._d;
+        // $scope.property_fromDate = new Date(fromDate).toISOString();
+        $scope.property_fromDate = moment(fromDate).format('DD/MM/YYYY');
+        var endDate = moment($scope.endDate, "DD/MM/YYYY ")._d;
+        //$scope.property_endDate = new Date(endDate).toISOString();
+        $scope.property_endDate = moment(endDate).format('DD/MM/YYYY')
+     
         var docDefinition = {
             content: [
 
@@ -144,8 +151,11 @@
                                  [{ text: $scope.contactDetail.City, style: 'BuilderAddress' }, ],
                                  [{ text: $scope.contactDetail.state_name, style: 'BuilderAddress' }, ],
                                  [{ text: $scope.contactDetail.zip_code, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.property_fromDate, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.property_endDate, style: 'BuilderAddress' }, ],
                            ]
                        },
+
                        layout: {
 
 
@@ -789,6 +799,17 @@
     $scope.addNew = function () {
 
         $state.go('app.property_CustomizDue');
+        // Description and Date Code// 
+        var fromDate = moment($scope.fromdate, "DD/MM/YYYY")._d;
+        $scope.property_fromDate = moment(fromDate).format('DD/MM/YYYY');
+        var endDate = moment($scope.endDate, "DD/MM/YYYY ")._d;
+        $scope.property_endDate = moment(endDate).format('DD/MM/YYYY')
+        // $scope.property_fromDate = new Date(fromDate).toISOString();
+        //$scope.property_endDate = new Date(endDate).toISOString();
+        
+        $cookieStore.put('propertyDescription', $scope.description);
+        $cookieStore.put('propertyFromDate', $scope.property_fromDate);
+        $cookieStore.put('propertyEndDate', $scope.property_endDate);
     }
 
 

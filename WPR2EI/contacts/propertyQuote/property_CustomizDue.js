@@ -44,6 +44,11 @@
 
     // Ends Government and Other Charges Details//
 
+    //Description Get//
+    $scope.getDescriptionDetails = $cookieStore.get('propertyDescription');
+    // From Start and End Date Get//
+    $scope.getFromDateDetails = $cookieStore.get('propertyFromDate');
+    $scope.getEndDateDetails = $cookieStore.get('propertyEndDate');
 
     $scope.amountCalculation = function () {
         $scope.amountCalculationValue = [];
@@ -193,6 +198,8 @@
                                  [{ text: $scope.propertyContactDetail.City, style: 'BuilderAddress' }, ],
                                  [{ text: $scope.propertyContactDetail.state_name, style: 'BuilderAddress' }, ],
                                  [{ text: $scope.propertyContactDetail.zip_code, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.getFromDateDetails, style: 'BuilderAddress' }, ],
+                                 [{ text: $scope.getEndDateDetails, style: 'BuilderAddress' }, ],
                            ]
                        },
                        layout: {
@@ -550,22 +557,47 @@
                         paddingBottom: function (i, node) { return 10; }
 
                     },
-
+                    pageBreak: 'after'
                 },
 
 
-               { text: 'Terms and Condition', style: 'panNo', margin: [0, 0, 0, 10], },
+               //{ text: 'Terms and Condition', style: 'panNo', margin: [0, 0, 0, 10], },
 
 		{
-		    ul:
+		    margin: [0, 20, 0, 20],
+		    table: {
+		        headerRows: 1,
+		        widths: [410, ],
+		        body: [
+                       [{ text: 'Terms And Condition', style: 'tableHeader', fillColor: '#efefef' }, ],
+                       [{ text: $scope.getDescriptionDetails, style: 'tableData', }, ],
+             
 
-                [
-				'This quotation is to be read along with other standard Terms and conditions of the Company',
-				'Service Tax of 4.35% is applicable with every payment',
-				'Government taxes will be extra and to be paid at actuals',
-                'Maintenance, Society charges, Club House charges etc are applicable at the time of Possession',
-                'Stamp duty, Registration and VAT is paid at the time of registration',
-                ]
+		        ]
+		    },
+		    layout: {
+
+
+		        hLineWidth: function (i, node) {
+		            return (i === 0 || i === node.table.body.length) ? .5 : .5;
+		        },
+		        vLineWidth: function (i, node) {
+		            return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+		        },
+		        hLineColor: function (i, node) {
+		            return (i === 0 || i === node.table.body.length) ? '#ececec' : '#ececec';
+		        },
+		        vLineColor: function (i, node) {
+		            return (i === 0 || i === node.table.widths.length) ? 'red' : 'gray';
+		        },
+
+		        paddingLeft: function (i, node) { return 10; },
+		        paddingRight: function (i, node) { return 10; },
+		        paddingTop: function (i, node) { return 10; },
+		        paddingBottom: function (i, node) { return 10; }
+
+		    },
+
 		},
 
 

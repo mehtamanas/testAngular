@@ -66,9 +66,9 @@
                         <div class="col-md-6 contact_quotes">
                             <span>Estimate No.</span>
                             <p class="quote-bold">a2346c75-9dd0-45de-b125-e7715eebc600</p>
-                            <span>Date :</span><span style="margin-left: 12%;"><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.fromdate" /></span><br>
+                            <span>Date :</span><span style="margin-left: 12%;"><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="fromdate"  k-format="'dd/MM/yyyy '"/></span><br>
                             <div style="margin-top:3px; margin-bottom: 4%;">
-                                <span>Expiration Date :</span><span><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.endDate" /></span>
+                                <span>Expiration Date :</span><span><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="endDate"  k-format="'dd/MM/yyyy '"/></span>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,8 @@
                     </div>
                 </div>
                 <div class="col-md-8 seperate">
-                    <textarea id="organization_desc" autofocus kendo-editor k-ng-model="description"></textarea>
+      
+                    <textarea id="property_CustomizeQuotes_description" kendo-editor  k-ng-model="description"></textarea>
                 </div>
                 <!--data end-->
             </div>
