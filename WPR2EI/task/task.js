@@ -151,25 +151,25 @@
                         //if ($localStorage.common_taskDataSource) {
                         //    options.success($localStorage.common_taskDataSource);
                         //} else {
-                            apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (res) {
-                                data = res.data;
-                                for (i = 0; i < data.length; i++) {
-                                    var tag = (data[i].Tags);
-                                    if (tag !== null) {
-                                        tag = JSON.parse(tag);
-                                        data[i].Tags = [];
-                                        data[i].Tags = tag;
-                                    }
-                                    else
-                                        data[i].Tags = [];
+                        apiService.getWithoutCaching("ToDoItem/GetTaskByRole?id=" + userId).then(function (res) {
+                            data = res.data;
+                            for (i = 0; i < data.length; i++) {
+                                var tag = (data[i].Tags);
+                                if (tag !== null) {
+                                    tag = JSON.parse(tag);
+                                    data[i].Tags = [];
+                                    data[i].Tags = tag;
                                 }
-                                $localStorage.common_taskDataSource = [];
-                                $localStorage.common_taskDataSource = data;
-                                options.success(data);
-                            }, function (err) {
-                                options.error();
-                            })
-                      
+                                else
+                                    data[i].Tags = [];
+                            }
+                            $localStorage.common_taskDataSource = [];
+                            $localStorage.common_taskDataSource = data;
+                            options.success(data);
+                        }, function (err) {
+                            options.error();
+                        })
+
                     }
                 },
                 pageSize: 20,
@@ -269,7 +269,7 @@
              {
                  "style": "text-align:center;cursor:pointer"
              }
-            },  {
+            }, {
                 field: "priority",
                 title: "Priority",
                 width: "120px",
@@ -335,7 +335,7 @@
               }
 
             },
-          
+
 
              //saroj on 15-04-2016
            {
@@ -385,7 +385,18 @@
                    "style": "text-align:center;cursor:pointer"
                }
             }
-
+              ,
+              // NEW FEILD ON 2-5-2016
+              // saroj
+            {
+                field: "created_by",
+                title: "Created By",
+                width: "120px",
+                attributes:
+               {
+                   "style": "text-align:center;cursor:pointer"
+               }
+            }
            , {
                title: "postpone",
                template: '#if (status!="Completed") {# <a class="btn btn-primary" id="postpone_now" ng-click="openPostpone(dataItem)">Postpone</a> #}#',
@@ -420,8 +431,7 @@
                 else if ($scope.activityAction === "bulk_assign") {
                     $state.go($scope.openAssignTo());
                 }
-                else if ($scope.activityAction === "add_tag")
-                {
+                else if ($scope.activityAction === "add_tag") {
                     $state.go($scope.openActivityTaskTag());
                 }
                 else if ($scope.activityAction === "delete") {
@@ -997,6 +1007,8 @@
                             feild1 = "status";
                         else if (fValue == "TASK CODE")
                             feild1 = "task_code";
+                        else if (fValue == "CREATED BY")
+                            feild1 = "created_by";
 
                     }
 
@@ -1234,8 +1246,10 @@
 
                             if (expsplitCONTAINS[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
-
-
+                            
+                            if (expsplitCONTAINS[0].toUpperCase().trim() == "CREATED BY")
+                                Firstname = "created_by";
+                            
 
                             // by saroj on 18-04-2016
 
@@ -1288,6 +1302,9 @@
 
                             if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
+
+                            if (expsplitDOESNOTCONTAINS[0].toUpperCase().trim() == "CREATED BY")
+                                Firstname = "created_by";
 
                             // by saroj on 18-04-2016
 
@@ -1346,6 +1363,9 @@
 
                             if (expsplitIN[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
+
+                            if (expsplitIN[0].toUpperCase().trim() == "CREATED BY")
+                                Firstname = "created_by";
 
                             // by saroj on 18-04-2016
 
@@ -1413,6 +1433,9 @@
 
                             if (expsplitNOTIN[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
+
+                            if (expsplitNOTIN[0].toUpperCase().trim() == "CREATED BY")
+                                Firstname = "created_by";
 
                             // by saroj on 18-04-2016
 
@@ -1488,6 +1511,8 @@
                             if (expsplit[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
 
+                            if (expsplit[0].toUpperCase().trim() == "CREATED BY")
+                                Firstname = "created_by";
 
                             // by saroj on 18-04-2016
 
@@ -1748,6 +1773,10 @@
                             if (expsplitNOT[0].toUpperCase().trim() == "TASK CODE")
                                 Firstname = "task_code";
 
+                            if (expsplitNOT[0].toUpperCase().trim() == "CREATED BY")
+                                Firstname = "created_by";
+
+
                             if (Firstname == "") {
                                 // 18-04-2016
                                 //saroj
@@ -1897,7 +1926,7 @@
                                 spiltOK = false;
                             }
                             else {
-                                
+
                                 //removing inverted commas
 
                                 expsplitIsAfter[1] = expsplitIsAfter[1].replace(/"/g, "");
