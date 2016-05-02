@@ -129,15 +129,17 @@
                       "style": "text-align:center"
                   }
 
-             }, {
-                field: "description",
-                title: "Description",
-                width: "120px",
-                attributes:
+             },
+             //{
+             //   field: "description",
+             //   title: "Description",
+             //   width: "120px",
+             //   attributes:
+             //{
+             //    "style": "text-align:center"
+             //}
+             //},
              {
-                 "style": "text-align:center"
-             }
-             }, {
                  field: "blog_created_date",
                  title: "Created Date",
                  format: '{0:dd/MM/yyyy}',
