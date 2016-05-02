@@ -1,6 +1,6 @@
 ﻿angular.module('call')
 .controller('CallController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $filter) {
         console.log('CallController');
         $rootScope.title = 'Dwellar-Call Records';
         $scope.gridView = 'default';
@@ -128,11 +128,26 @@
                 clearFilters();
         };
 
-        var callViewApi = function () {
+        function getDefaultView(views, id) {
+            var result = id == null ? $filter('filter')(views, { default_view: true }, true)[0] : $filter('filter')(views, { id: id }, true)[0];
+            return result;
+        }
+
+        var callViewApi = function (id) {
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views = _.filter(res.data, function (o)
                 { return o.grid_name === 'call' });
+
+                $scope.defaultView = id == null ? getDefaultView($scope.views) : getDefaultView($scope.views, id);
+                if ($scope.defaultView == null) {
+                    $scope.gridView = 'default';
+                }
+                else {
+                    $scope.gridView = $scope.defaultView.id;
+                    $scope.queryText = $scope.defaultView.query_string.replace(/"/g, "");
+                }
+
             }, function (err) {
 
             });
@@ -1126,7 +1141,7 @@
                                 spiltOK = false;
                             }
                             else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1], "DD-MM-YYYY").add('day', 1)._d });
                                 ValidFilter = true;
                                 spiltOK = false;
                             }
@@ -1231,6 +1246,16 @@
                 size: 'sm',
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'call', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
+
+            modalInstance.result.then(function (data) {
+                if (data != null) {
+                    callViewApi(data.id);
+                }
+            },
+            function (error) {
+
+            }
+          );
         }
 
         $scope.editView = function () {
@@ -1259,6 +1284,15 @@
                     size: 'sm',
                     resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'call', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
                 });
+                modalInstance.result.then(function (data) {
+                    if (data != null) {
+                        callViewApi(data.id);
+                    }
+                },
+                 function (error) {
+
+                 }
+               );
             }
             else {
                 alert('Cannot edit this view');

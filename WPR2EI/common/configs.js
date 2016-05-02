@@ -9,7 +9,8 @@ angular.module('configs', [])
     baseURL: function () {
        return 'http://dw-webservices-dev1.azurewebsites.net/';
           //return 'http://dwellar-demo2.azurewebsites.net/';
-      //  return 'http://dw-webservices-uat.azurewebsites.net/';
+        //  return 'http://dw-webservices-uat.azurewebsites.net/';
+        //return 'http://localhost:3979/';
     },
     uploadURL: function () {
         return 'http://dw-webservices-dev1.azurewebsites.net/MediaElement/upload';

@@ -1,7 +1,7 @@
 ﻿
 angular.module('campaigns')
 .controller('campaignsDetailController',
-    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $window) {
+    function ($scope, $state, security, $cookieStore, apiService, $modal, $rootScope, $window, $filter) {
         $scope.gridView = 'default';
         console.log('campaignsDetailController');
         var orgID = $cookieStore.get('orgID');
@@ -409,11 +409,26 @@ angular.module('campaigns')
 
 
         // code by saroj on 18-04-2016 for view & JQL Query 
-        var callViewApi = function () {
+        function getDefaultView(views, id) {
+            var result = id == null ? $filter('filter')(views, { default_view: true }, true)[0] : $filter('filter')(views, { id: id }, true)[0];
+            return result;
+        }
+
+        var callViewApi = function (id) {
 
             apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views = _.filter(res.data, function (o)
                 { return o.query_type === 'View' && o.grid_name === 'email' });
+
+                $scope.defaultView = id == null ? getDefaultView($scope.views) : getDefaultView($scope.views, id);
+                if ($scope.defaultView == null) {
+                    $scope.gridView = 'default';
+                }
+                else {
+                    $scope.gridView = $scope.defaultView.id;
+                    $scope.queryText = $scope.defaultView.query_string.replace(/"/g, "");
+                }
+
             }, function (err) {
 
             });
@@ -509,6 +524,15 @@ angular.module('campaigns')
                 size: 'sm',
                 resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'email', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter } }
             });
+            modalInstance.result.then(function (data) {
+                if (data != null) {
+                    callViewApi(data.id);
+                }
+            },
+             function (error) {
+
+             }
+           );
         }
 
         $scope.editView = function () {
@@ -537,6 +561,15 @@ angular.module('campaigns')
                     size: 'sm',
                     resolve: { viewData: { sort: sortObject, col: grid.columns, grid: 'email', type: 'View', filterQuery: Querydata, filterObj: grid.dataSource._filter, viewName: viewName[0].view_name, viewId: $scope.gridView, isViewDefault: viewName[0].default_view } }
                 });
+                modalInstance.result.then(function (data) {
+                    if (data != null) {
+                        callViewApi(data.id);
+                    }
+                },
+                function (error) {
+
+                }
+              );
             }
             else {
                 alert('Cannot edit this view');
@@ -1570,7 +1603,7 @@ angular.module('campaigns')
                                 spiltOK = false;
                             }
                             else {
-                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1].trim(), 'DD-MM-YYYY')._d });
+                                filter.filters.push({ field: Firstname.trim(), operator: "gt", value: moment(expsplitIsAfter[1], "DD-MM-YYYY").add('day', 1)._d });
                                 ValidFilter = true;
                                 spiltOK = false;
                             }

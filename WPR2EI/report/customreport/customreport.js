@@ -68,7 +68,7 @@
 
         var callViewApi = function () {
 
-            apiService.getWithoutCaching('Notes/GetGrid_View' + $cookieStore.get('userId')).then(function (res) {
+            apiService.getWithoutCaching('Notes/GetByOrgid/' + $cookieStore.get('orgID')).then(function (res) {
                 $scope.views = _.filter(res.data, function (o)
                 { return o.query_type === 'View' && o.grid_name === 'lead' });
             }, function (err) {

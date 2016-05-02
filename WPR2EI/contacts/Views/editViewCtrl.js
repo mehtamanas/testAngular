@@ -28,7 +28,7 @@
             }
             apiService.post('Notes/EditGridView', postData).then(function (response) {
                 $scope.openSucessfullPopup();
-                $scope.cancel();
+                $scope.cancel(response.data.id);
                 if (viewData.grid == 'lead') $rootScope.$broadcast('REFRESH2', { name: 'ViewCreated', data: $scope.params.viewName });
                 if (viewData.grid == 'contact') $rootScope.$broadcast('REFRESH1', { name: 'ViewCreated', data: $scope.params.viewName });
                 if (viewData.grid == 'client') $rootScope.$broadcast('REFRESH3', { name: 'ViewCreated', data: $scope.params.viewName });
@@ -41,8 +41,8 @@
         }
     }
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss();
+    $scope.cancel = function (gridViewId) {
+        $modalInstance.close({ id: gridViewId });
     }
 
     $scope.openSucessfullPopup = function () {
