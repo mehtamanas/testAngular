@@ -1018,57 +1018,70 @@ angular.module('contacts')
                 pageSizes: true,
                 buttonCount: 5
             },
-            columns: [{
-                field: "created_by",
-                title: "Created By",
+            columns: [
+                {
+                    field: "quote_id",
+                    title: "Quote Id",
 
-                attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
+                    attributes:
+                           {
+                               "class": "UseHand",
+                               "style": "text-align:center"
+                           }
 
-            }, {
-                field: "total_consideration",
-                title: "Total Consideration",
+                }, {
+                    field: "Created_date",
+                    title: "Date",
+                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    attributes:
+                           {
+                               "class": "UseHand",
+                               "style": "text-align:center"
+                           }
 
-                attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
+                },
+            //    {
+            //    field: "created_by",
+            //    title: "Created By",
 
-            }, {
-                field: "final_total",
-                title: "Final Total",
+            //    attributes:
+            //           {
+            //               "class": "UseHand",
+            //               "style": "text-align:center"
+            //           }
 
-                attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
+            //}, {
+            //    field: "total_consideration",
+            //    title: "Total Consideration",
+
+            //    attributes:
+            //           {
+            //               "class": "UseHand",
+            //               "style": "text-align:center"
+            //           }
+
+            //}, {
+            //    field: "final_total",
+            //    title: "Final Total",
+
+            //    attributes:
+            //           {
+            //               "class": "UseHand",
+            //               "style": "text-align:center"
+            //           }
 
 
-            }, {
-                field: "Created_date",
-                title: "Date",
-                format: '{0:dd/MM/yyyy hh:mm:ss tt}',
-                attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
+            //}, {
+            //    field: "attachement",
+            //    title: "Attachment",
+            //    attributes:
+            //           {
+            //               "class": "UseHand",
+            //               "style": "text-align:center"
+            //           }
 
-            }, {
-                field: "attachement",
-                title: "Attachment",
-                attributes:
-                       {
-                           "class": "UseHand",
-                           "style": "text-align:center"
-                       }
-
-            }, {
+            //}, 
+            {
                 title: "Action",
                 template: '<a class="btn btn-primary" ng-click="openBookNow(dataItem)" id="book_now">Book Now</a>',
                 attributes:
