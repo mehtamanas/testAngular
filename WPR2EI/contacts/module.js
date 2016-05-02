@@ -143,7 +143,8 @@ angular.module('contacts', [])
             url: '/bookingPreview',
             templateUrl: 'booking/bookingPreview.html',
             controller: 'bookingPreviewController',
-            title: 'Bookings'
+            title: 'Bookings',
+
         });
 
     }]);
