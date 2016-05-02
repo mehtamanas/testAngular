@@ -221,7 +221,7 @@
             backdrop: 'static',
             controller: sucessfullController,
             size: 'sm',
-            resolve: { items: { title: "Email" } }
+            resolve: { items: { title: "Template" } }
         });
     }
 
