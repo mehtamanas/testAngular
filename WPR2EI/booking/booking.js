@@ -148,8 +148,8 @@
                }, {
                    field: "Action",
                    template: '<div class="uib-dropdown drop_lead" uib-dropdown ><button class="btn drop_lead_btn uib-dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="uib-dropdown"><span class="caret caret_lead"></span></button><ul class="uib-dropdown-menu dropdown_lead" uib-dropdown-menu ><li>' +
-                   '<a  class="follow_lead" ng-click="openFollowUp(dataItem)" data-toggle="modal">Approved </a>' +
-                   '</li><li><a href="" ng-click="openLog(dataItem)">Postpone</a></li></ul></div>',
+                   '<a  class="follow_lead" ng-click="openBookingPreview()" data-toggle="modal">Approved </a>' +
+                   '</li><li><a href="" ng-click="openBookingPreview()">Postpone</a></li></ul></div>',
                    title: "Action",
 
                    attributes: {
@@ -162,7 +162,10 @@
                }]
         };
 
-        // Kendo Grid on change
+        // Approve Booking Code//
+        $scope.openBookingPreview = function () {
+            $state.go('app.bookingPreview');
+        };
 
     }
 );
