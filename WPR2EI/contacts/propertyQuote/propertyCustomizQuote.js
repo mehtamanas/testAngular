@@ -1,6 +1,6 @@
 ﻿angular.module('contacts')
 
-.controller('propertyCustomizQuote', function ($scope, $state, $cookieStore, apiService, $rootScope, $modal, FileUploader) {
+.controller('propertyCustomizQuote', function ($scope, $state, $cookieStore, apiService, $rootScope, $modal) {
     console.log('propertyCustomizQuote');
     $rootScope.title = 'Dwellar-peopertyQuotes';
     var orgID = $cookieStore.get('orgID');
