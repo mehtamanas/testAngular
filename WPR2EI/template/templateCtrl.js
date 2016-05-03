@@ -288,6 +288,14 @@
             pageSizes: true,
             buttonCount: 5
         },
+        columnMenu: {
+            messages: {
+                columns: "Choose columns",
+                filter: "Apply filter",
+                sortAscending: "Sort (asc)",
+                sortDescending: "Sort (desc)"
+            }
+        },
         columns: [{
             field: "template_name",
             title: "Name",
