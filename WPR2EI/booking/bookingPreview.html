@@ -293,11 +293,17 @@
             </div>
             <hr class="custom_hr">
             <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
-                <button class="btn organization-btn" style="float:left" id="campaign_save" ng-click="addNew()">
-                    Confirm Booking
+                <button class="btn organization-btn" style="float:left" ng-show="bookingId==null" id="campaign_save" ng-click="bookNow()">
+                  Book Now
                 </button>
-                <button class="btn campaign-container-btn" id="campaign_cancel" type="button" ng-click="cancel()">
-                    Decline
+                <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="bookingId==null" type="button" ng-click="cancel()">
+                  Cancel
+                </button>
+                <button class="btn organization-btn" style="float:left" id="campaign_save" ng-show="quoteId==null">
+                 Confirm Booking
+                </button>
+                <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="quoteId==null" type="button">
+                 Decline
                 </button>
             </div>
         </div>

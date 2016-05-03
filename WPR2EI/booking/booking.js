@@ -4,14 +4,14 @@
         $rootScope.title = 'Dwellar-Bookings';
 
         var userID = $cookieStore.get('userId');
-
+        var orgID = $cookieStore.get('orgID');
 
         //grid fuctionality start
         $scope.bookingGrid = {
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Organization/GetProjectDetails?id=" + userID
+                    read: apiService.baseUrl + "Booking/Get/d84f1c5b-2d4c-4427-acb2-1cb639b28bd5" // + orgID
 
                 },
                 pageSize: 20
@@ -38,7 +38,7 @@
             },
             columns: [
                 {
-                    template: "<input type='checkbox', class='checkbox', data-id='#= id #',  ng-click='check($event,dataItem)' />",
+                    template: "<input type='checkbox', class='checkbox', ng-click='check($event,dataItem)' />",
                     title: "<input id='checkAll', type='checkbox', class='check-box', ng-click='checkALL(dataItem)' />",
                     width: "60px",
                     attributes:
@@ -47,7 +47,7 @@
                           "style": "text-align:center"
                       }
                 }, {
-                    field: "name",
+                    field: "booking_id",
                     title: "BOOKING ID",
 
                     attributes:
@@ -56,27 +56,8 @@
                          "style": "text-align:center"
                      }
                 },
-
                {
-                   field: "name",
-                   title: "UNIT NO",
-
-                   attributes:
-                    {
-                        "class": "UseHand",
-                        "style": "text-align:center"
-                    }
-               }, {
-                   field: "address",
-                   title: "UNIT TYPE",
-
-                   attributes:
-                     {
-                         "class": "UseHand",
-                         "style": "text-align:center"
-                     }
-               }, {
-                   field: "unitTypes",
+                   field: "floor_num",
                    title: "FLOOR NO",
 
                    attributes:
@@ -86,7 +67,7 @@
                      }
                },
                 {
-                    field: "unitCount",
+                    field: "project_name",
                     title: "PROJECT",
 
                     attributes:
@@ -95,7 +76,7 @@
                          "style": "text-align:center"
                      }
                 }, {
-                    field: "available",
+                    field: "Agreement_cost",
                     title: "AGGREMENT COST",
 
                     attributes:
@@ -104,7 +85,7 @@
                           "style": "text-align:center"
                       }
                 }, {
-                    field: "area",
+                    field: "booking_amount",
                     title: "BOOKING AMOUNT",
 
                     attributes:
@@ -113,9 +94,8 @@
                           "style": "text-align:center"
                       }
                 },
-
                {
-                   field: "possession_date",
+                   field: "Payment_plan",
                    title: "PAYMENT PLAN",
 
                    attributes: {
@@ -123,33 +103,11 @@
                        "style": "text-align:center"
                    }
                },
-
                {
-                   field: "price",
-                   title: "PAYMENT",
-
-                   attributes: {
-                       "class": "UseHand",
-                       "style": "text-align:center"
-
-                   }
-               },
-               {
-                   field: "status",
-                   title: "Status",
-
-                   attributes: {
-                       "class": "UseHand",
-                       "style": "text-align:center"
-
-                   },
-
-
-               }, {
                    field: "Action",
                    template: '<div class="uib-dropdown drop_lead" uib-dropdown ><button class="btn drop_lead_btn uib-dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="uib-dropdown"><span class="caret caret_lead"></span></button><ul class="uib-dropdown-menu dropdown_lead" uib-dropdown-menu ><li>' +
-                   '<a  class="follow_lead" ng-click="openBookingPreview()" data-toggle="modal">Approved </a>' +
-                   '</li><li><a href="" ng-click="openBookingPreview()">Postpone</a></li></ul></div>',
+                   '<a  class="follow_lead" ng-click="openBookingPreview(dataItem)" data-toggle="modal">Approved </a>' +
+                   '</li><li><a href="" ng-click="openBookingPreview(dataItem)">Postpone</a></li></ul></div>',
                    title: "Action",
 
                    attributes: {
@@ -157,14 +115,13 @@
                        "style": "text-align:center"
 
                    },
-
-
                }]
         };
 
         // Approve Booking Code//
-        $scope.openBookingPreview = function () {
-            $state.go('app.bookingPreview');
+        $scope.openBookingPreview = function (d) {
+            $state.go('app.bookingPreview', { bookingId: d.booking_id });
+            $cookieStore.put('bookid', d.booking_id);
         };
 
     }
