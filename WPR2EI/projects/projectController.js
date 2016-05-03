@@ -138,7 +138,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
-            height:screen.height - 370,
+            height:screen.height - 270,
             filterable: true,
             columnMenu: {
                 messages: {

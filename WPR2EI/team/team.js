@@ -128,7 +128,7 @@ angular.module('team')
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 250,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",

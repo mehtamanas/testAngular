@@ -193,8 +193,8 @@
                                                         <div class="cxo-bx1">
 
                                                             <div class="contact_title" style="margin-top:15px;">Others</div>
-                                                            <div class="clearfix spacer-user">
-                                                                <div class="col-md-4">
+                                                            <div class="clearfix spacer-user" style="margin-top:15px;">
+                                                                <div class="col-md-4" >
                                                                     <div class="pull-left project-title profile-row1">Latitude :</div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -287,28 +287,32 @@
                             <div class="tab_style">
                                 <div class="div_pad">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 3%;">
+                                        <div class="" style="padding: 3%;">
 
                                             <div class="row">
 
-                                                <div class="pull-left tb-box-img essential-tab" style="margin-left:18px">
+                                                <div class="pull-left tb-box-img essential-tab" style="margin-left:18px;margin-top: 12px;">
                                                     <h4>Project Logo</h4>
                                                     <img src="{{media_url1}}" alt="" width="218" height="160" />
                                                 </div>
                                                 <div class="col-sm-1"></div>
-                                                <div class="pull-left tb-box-img essential-tab">
+                                                <div class="pull-left tb-box-img essential-tab" style="margin-top: 12px;">
                                                     <h4>Project Home Page Image</h4>
                                                     <img src="{{media_url2}}" alt="" width="218" height="160" />
                                                 </div>
                                                 <div class="col-sm-1"></div>
-                                                <div class="pull-left tb-box-img essential-tab">
+                                                <div class="pull-left tb-box-img essential-tab" style="margin-top: 12px;">
                                                     <h4>Project Thumb 2D Image</h4>
                                                     <img src="{{media_url3}}" width="218" height="160" />
                                                 </div>
                                                 <div class="col-sm-1"></div>
-                                                <div class="pull-left tb-box-img essential-tab">
+                                                <div class="pull-left tb-box-img essential-tab" style="margin-top: 12px;">
                                                     <h4>Project Podium image</h4>
                                                     <img src="{{media_url4}}" alt="" width="218" height="160" />
+                                                </div>
+                                                <div class="pull-left tb-box-img essential-tab" style="margin-top: 12px;">
+                                                    <h4>Home Page Background</h4>
+                                                    <img src="{{media_url_home_page_background}}" alt="" width="218" height="160" />
                                                 </div>
                                             </div>
 
@@ -597,14 +601,14 @@
                                 <div class="properties-bx-wrap clearfix">
                                     <div class="properties-bx" ng-repeat="image in Gallery">
                                         <div class="properties-bx-inner">
-                                            <div class="properties-img">
-                                                <img src={{image.media_url}} alt="" width="218" height="160" />
+                                            <div class="properties-img gallery_photo">
+                                                <img src={{image.media_url}} alt="" class="image1" />
                                             </div>
                                             <a class="properties-close"><i ng-click="removeImage($index)" class="fa fa-close"></i></a>
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
 
                                         </div>
-                                        <span style="width:239px;word-wrap:break-word"><a class="properties-name">{{image.notes}}</a></span>
+                                        <span style="width:239px;word-wrap:break-word"><a ng-click="editnote(image)" class="properties-name">{{image.notes}}</a></span>
 
                                     </div>
 
@@ -612,15 +616,16 @@
                             </div><!-- properties-bx-wrap ended -->
 
                                 <div class="tab-content-title tab-content-title-b"><b>Videos</b> <a id="projectDetailImages" data-toggle="modal" class="add-btn" ng-click="openNewVideoPopup()">+</a></div>
-                                <div class="properties-bx-wrap clearfix">
-                                    <div class="properties-bx" ng-repeat="video in Videos">
+                                
+                        <div class="properties-bx-wrap clearfix" >
+                                    <div class="properties-bx" style="float: left;margin: 0px 20px 0px 15px;" ng-repeat="video in Videos">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
-                                                <video id="playVideo" alt="" width="218" height="160" controls>
+                                                <video id="playVideo" alt="" width="300" height="200" controls>
                                                     <source ng-src="{{video.media_url | trusted}}" type="video/mp4" />
                                                 </video>
                                             </div>
-                                            <a class="properties-close"><i class="fa fa-close"></i></a>
+                                            <!--<a class="properties-close"><i class="fa fa-close"></i></a>-->
                                             <!--<a class="properties-name">{{::image.media_name}}</a>-->
                                             <!--<a class="properties-name">{{image.notes}}</a>-->
                                         </div>

@@ -1,7 +1,8 @@
-﻿
-<button type="button" class="close" id="btn_addProjectClose" ng-click="$dismiss('cancel')">&times;</button>
+﻿<div class="modal-header" style="padding: 15px 30px !important;">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_addProjectClose">&times;</button>
+    <h4 class="modal-title" style="text-align: left;"> Select User</h4>
+</div>
 <div class="contain">
-    <div class="add_project_header" align="center">Select User</div>
     <!--<div class="row left-inner-addon">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
@@ -11,8 +12,8 @@
         <div class="col-lg-1"></div>
     </div>-->
     <div class="project-detail1">
-        <div class="project_details">
-            <div class="row row_content" ng-repeat="user in orgProjects">
+        <div class="useradd_details">
+            <div class="row row_content-user" ng-repeat="user in orgProjects">
                 <div class="col-lg-1 col-md-2 col-sm-3">
                     <div class='user-photo pull_left'><img src="{{user.media_url}}" /></div>
                 </div>
