@@ -344,6 +344,13 @@ a {
     height: 108px;
     position: relative;
 }
+.user-photo_5 {
+    background: #e9e9e9;
+    text-align: center;
+    /* width: 140px; */
+    height: 108px;
+    position: relative;
+}
 
 .user-photo img {
     max-width: 100%;
@@ -11827,9 +11834,8 @@ input[type=checkbox]:focus, input[type=file]:focus, input[type=radio]:focus {
 }
 .odd_btn1{
     background: #646464;
-   
     color: #fff;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .odd_btn1:hover

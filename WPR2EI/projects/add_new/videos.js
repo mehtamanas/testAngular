@@ -71,7 +71,7 @@
                     templateUrl: 'projects/Added.tpl.html',
                     backdrop: 'static',
                     controller: AddController,
-                    size: 'lg',
+                    size: 'sm',
                     resolve: { items: { title: "Video" } }
                 });
                 $rootScope.$broadcast('REFRESH', 'videos');
