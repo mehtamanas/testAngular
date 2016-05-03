@@ -192,7 +192,7 @@
             </div>
 
             <div class="leads_group" id="record-content">
-                <div class="tab-content-title">Projects<a id="team_user" class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
+                <div class="tab-content-title tab-content-title-b"><a id="team_user" class="btn btn-primary" data-toggle="modal" ng-click="openAddPopup()"><i class="fa fa-plus" aria-hidden="true"></i> Projects</a></div>
                 <div kendo-grid k-options="ProjectsGrid" selectable="true">
 
                 </div>
@@ -218,10 +218,9 @@
 
             <div class="leads_group" id="record-content">
 
-                <div class="tab-content-title">Task <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>
-                <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
-
-                </div>
+                <div class="tab-content-title tab-content-title-b"><a id="contact_openNewPaymentPopup" class="btn btn-primary" data-toggle="modal" ng-click="openAddNewTask()"><i class="fa fa-plus" aria-hidden="true"></i> Task</a></div>
+                
+                <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)"></div>
             </div>
 
             <div class="leads_group" id="record-content">
