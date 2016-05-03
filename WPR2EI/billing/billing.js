@@ -76,6 +76,14 @@ angular.module('billing')
                 pageSizes: true,
                 buttonCount: 5
             },
+            columnMenu: {
+                messages: {
+                    columns: "Choose columns",
+                    filter: "Apply filter",
+                    sortAscending: "Sort (asc)",
+                    sortDescending: "Sort (desc)"
+                }
+            },
             columns: [{
                 field: "bill_date",
                 title: "Bill Date",

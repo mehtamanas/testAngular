@@ -3,34 +3,30 @@
         <div class="pg-inner-header">
             <div class="row">
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h2 class="pg-inner-title">Agent</h2>
                 </div>
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right" style=" margin-right: 3%;">
+                        <a id="tag_openaddnewTagpopup" href="" class="btn-lk" ng-click="openAgentPopUp()" style="cursor:pointer">+ Add New Agent</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
     <div class="pg-inner-content">
-
         <form action="">
-            <div class="clearfix">
-
-                <div class="pull-right btn-wrap-right" style="margin-bottom:1%">
-
-                    <a id="tag_openaddnewTagpopup" href="" class="btn-lk" ng-click="openAgentPopUp()" style="cursor:pointer">+ Add New Agent</a>
-                </div>
-            </div>
-
             <div id="record-content" class="properties-content">
 
                 <div id="project-record-list" kendo-grid k-options="agentGrid" selectable="true">
                 </div>
 
-            </div><!-- record-content ended -->
+            </div> <!--record-content ended--> 
 
         </form>
 
     </div><!-- project-detail ended -->
-
 
 
 </div><!-- main-content ended -->
