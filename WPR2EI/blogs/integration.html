@@ -10,8 +10,14 @@
         <div class="pg-inner-header">
             <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-2">
                     <h2 class="pg-inner-title">Blogs</h2>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="pull-right btn-wrap-right" style=" margin-right: 3%;">
+                        <a id="contact_opencontactpopup" href="" class="btn-lk" ng-click="openAddBlogPopup()" ng-show="isContentWriter" style="cursor:pointer">+ Website Blogs</a>
+                    </div>
                 </div>
 
             </div>
@@ -21,13 +27,6 @@
     <div class="pg-inner-content">
 
         <form action="">
-
-            <div class="clearfix">           
-                <div class="pull-right btn-wrap-right" style="margin-bottom:1%">                   
-                    <a id="contact_opencontactpopup" href="" class="btn-lk" ng-click="openAddBlogPopup()" ng-show="isContentWriter" style="cursor:pointer">+ Website Blogs</a>
-                </div>
-            </div>
-
             <div id="record-content" class="properties-content">
 
                 <div id="contact_kenomain" kendo-grid k-options="BlogsPostGrid" selectable="true" k-on-change="myBlogGridChange(dataItem )">
