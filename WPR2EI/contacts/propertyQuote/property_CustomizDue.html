@@ -73,7 +73,7 @@
                                     <td><span class="">{{amount.percentage}}</span></td>
                                     <td><span class="" >{{amount.amountTotal | number:2}}</span></td>
                                     <td><span class="">{{amount.serviceTax | number:2}}</span></td>
-                                    <td><span class=""><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>
+                                    <td><span class=""><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" k-format="'dd/MM/yyyy '" /></span></td>
                                 </tr>
 
                                 <tr class="quote-bold">
@@ -81,7 +81,7 @@
                                     <td><span class="">100%</span></td>
                                     <td><span class="">{{totalValue | number:2}}</span></td>
                                     <td><span class="">{{finalServiceTax | number:2}}</span></td>
-                                    <td><span class=""><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" /></span></td>
+                                    <td><span class=""><input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="params.due_date" k-format="'dd/MM/yyyy '"  /></span></td>
 
                                 </tr>
                             </tbody>

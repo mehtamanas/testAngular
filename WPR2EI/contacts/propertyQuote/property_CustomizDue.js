@@ -112,14 +112,16 @@
 
         var propertyConsidaration = [];
         //var propertyConsidarationTable = {};
-        propertyConsidaration.push([{ text: 'Payment Scheme For 20:40:40', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Percentage', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }, ]);
-        for (i = 0; i < $scope.amountCalculationValue.length; i++) {
-            propertyConsidaration.push([{ text: $scope.amountCalculationValue[i].description, style: 'tableData' }, { text: $scope.amountCalculationValue[i].percentage, style: 'tableData' }, { text: ($scope.amountCalculationValue[i].amountTotal).toString(), style: 'tableData' }, { text: ($scope.amountCalculationValue[i].serviceTax).toString(), style: 'tableData' }])
+        propertyConsidaration.push([{ text: 'Payment Scheme For 20:40:40', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Percentage', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Amount', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }, { text: 'Service Tax', style: 'tableHeader', fillColor: '#efefef' }]);
+        for (i = 0; i < $scope.amountCalculationValue.length; i++)
+        {
+           
+            propertyConsidaration.push([{ text: $scope.amountCalculationValue[i].description, style: 'tableData' }, { text: $scope.amountCalculationValue[i].percentage, style: 'tableData' }, { text: ($scope.amountCalculationValue[i].amountTotal).toString(), style: 'tableData' }, { text: ($scope.amountCalculationValue[i].serviceTax).toString(), style: 'tableData' }, { text: $scope.amountCalculationValue[i].due_date, style: 'tableData' }])
 
         }
         propertyConsidaration = {
             headerRows: 1,
-            widths: [150, 67, 67, 67,67, ],
+            widths: [100, 67,67,67,67, ],
             body: propertyConsidaration,
         }
         
@@ -148,6 +150,9 @@
         if ($scope.propertyContactDetail.City == null) $scope.propertyContactDetail.City = "";
         if ($scope.propertyContactDetail.state_name == null) $scope.propertyContactDetail.state_name = "";
         if ($scope.propertyContactDetail.zip_code == null) $scope.propertyContactDetail.zip_code = "";
+        if ($scope.getFromDateDetails == null) $scope.getFromDateDetails = "";
+        if ($scope.getEndDateDetails == null) $scope.getEndDateDetails = "";
+        if ($scope.getDescriptionDetails == null) $scope.getDescriptionDetails = "";
 
 
     }
@@ -734,8 +739,9 @@
         var quatationDetails = [];
 
         for (var i in $scope.paymentschemeDetails) {
+            var duedate = moment($scope.amountCalculationValue[i].due_date, "DD/MM/YYYY")._d;
 
-            quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': $scope.amountCalculationValue[i].due_date, 'charge_project_mapping_id': "", 'charge_id':""});
+            quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': duedate, 'charge_project_mapping_id': "", 'charge_id': "" });
 
         }
         apiService.post("PropertyQuotes/UnitPaymentScheme", quatationDetails).then(function (response) {
