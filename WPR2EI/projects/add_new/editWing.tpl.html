@@ -2,175 +2,196 @@
     <div class="modal-header">
         <h4 class="form-title" style="text-align:left">Edit Wing Type</h4>
         <div class="close-btn-wrap" style="height:0px!important">
-            <button type="button" id="btn_editWingClose" style="margin-top:-4%" class="close" data-dismiss="modal"  data-toggle="tooltip" title="Close Tab" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
+            <button type="button" id="btn_editWingClose" style="margin-top:-4%" class="close" data-dismiss="modal" data-toggle="tooltip" title="Close Tab" aria-label="Close" ng-click="$dismiss('cancel')" &times;><span aria-hidden="true">&times;</span></button>
         </div>
     </div>
-        <div class="modal-body">
-                <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
-                    <div class="clearfix">
-                        <div class="form-group"
-                             data-ng-class="{
+    <div class="modal-body">
+        <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
+            <div class="clearfix">
+                <div class="form-group"
+                     data-ng-class="{
                                                     'has-error' : addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid),
                                                     'has-success': addNewForm.wingname.$valid && !addNewForm.wingname.$pristine
                                                  }">
-                            <div class="form-group form-bx form-bx2">
-                                <label for="">Enter Wing Name:</label>
-                                <input type="text" autofocus name="wingname" class="form-control"  id="editWingName"
-                                       placeholder="Wing Name"
-                                       data-ng-model="params.wing_name"
-                                       minlength="1"
-                                       maxlength="20"
-                                       ng-pattern="/^[\w -]*$/"
-                                       required />
-                                <div ng-messages="addNewForm.wingname.$error" style="color:maroon" role="alert">
-                                    <div ng-message="required" data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern" id="err_editWingName">Enter valid value for wing name</div>
-                                </div>
-                            </div>
-                            <div class="field-md2 field-req">*</div>
-
+                    <div class="form-group form-bx form-bx2">
+                        <label for="">Enter Wing Name:</label>
+                        <input type="text" autofocus name="wingname" class="form-control" id="editWingName"
+                               placeholder="Wing Name"
+                               data-ng-model="params.wing_name"
+                               minlength="1"
+                               maxlength="20"
+                               ng-pattern="/^[\w -]*$/"
+                               required />
+                        <div ng-messages="addNewForm.wingname.$error" style="color:maroon" role="alert">
+                            <div ng-message="required" data-ng-if="addNewForm.wingname.$invalid && (!addNewForm.wingname.$pristine || showValid) && !addNewForm.wingname.$focus">This field should not be empty </div>
+                            <div ng-message="pattern" id="err_editWingName">Enter valid value for wing name</div>
                         </div>
                     </div>
-                    <div class="clearfix">
-                        <div class="form-group"
-                             data-ng-class="{
+                    <div class="field-md2 field-req">*</div>
+
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="form-group"
+                     data-ng-class="{
                                                     'has-error' : addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid),
                                                     'has-success': addNewForm.totalfloors.$valid && !addNewForm.totalfloors.$pristine
                                                  }">
-                            <div class="form-group form-bx form-bx2">
-                                <label for="">How many floors are there in this wing?</label>
-                                <input type="text" autofocus name="totalfloors" class="form-control" id="editWingNo"
-                                       placeholder="How many floors are there"
-                                       data-ng-model="params.total_no_of_floors"
-                                       minlength="1"
-                                       maxlength="2"
-                                       ng-pattern="/^([1-9][0-9]*)$/"
-                                       input-focus
-                                       required />
-                                <div ng-messages="addNewForm.totalfloors.$error" style="color:maroon" role="alert">
-                                    <div ng-message="required" data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern" id="err_editWingNo">Enter valid value for Number of Floors </div>
-                                </div>
-                            </div>
-                            <div class="field-md2 field-req">*</div>
+                    <div class="form-group form-bx form-bx2">
+                        <label for="">How many floors are there in this wing?</label>
+                        <input type="text" autofocus name="totalfloors" class="form-control" id="editWingNo"
+                               placeholder="How many floors are there"
+                               data-ng-model="params.total_no_of_floors"
+                               minlength="1"
+                               maxlength="2"
+                               ng-pattern="/^([1-9][0-9]*)$/"
+                               input-focus
+                               required />
+                        <div ng-messages="addNewForm.totalfloors.$error" style="color:maroon" role="alert">
+                            <div ng-message="required" data-ng-if="addNewForm.totalfloors.$invalid && (!addNewForm.totalfloors.$pristine || showValid) && !addNewForm.totalfloors.$focus">This field should not be empty </div>
+                            <div ng-message="pattern" id="err_editWingNo">Enter valid value for Number of Floors </div>
                         </div>
                     </div>
+                    <div class="field-md2 field-req">*</div>
+                </div>
+            </div>
 
-                    <div class="clearfix image-upload-container">
-                        <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
-                            <div class="image-upload-title">Upload Wing Image</div>
-                            <div class="dropzone dropzone-bx image-upload-bx">
-                                <div class="fallback">
-                                    <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                        <div class=" image-upload-panel">
-                                            <div class="row" ng-hide="uploader.queue.length">
-                                                <img ng-src={{params.Image_Url_wing1}}  class="upload-image" />
-                                            </div>
-                                            <div class="row" ng-show="uploader.queue.length">
-                                                <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
-                                                    <div ng-show="uploader.isHTML5"
-                                                         ng-thumb="{ file: item._file, height: 200 }"></div>
-                                                </div>
-                                            </div>
+            <div class="clearfix image-upload-container">
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload Wing Image</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
+                                <div class="image-upload-panel">
+                                    <div class="row" ng-hide="uploader.queue.length">
+                                        <img ng-src={{params.Image_Url_Wing1}} class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="user-photo_5" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!--<div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader.queue.length">
+                                        <img ng-src={{params.Image_Url_wing1}}  class="upload-image" />
+                                    </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader.queue">
+                                            <div ng-show="uploader.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
+
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editWingUpload1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                    </label>
+                </div>
+
+                <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
+                    <div class="image-upload-title">Upload 3D Zip</div>
+                    <div class="dropzone dropzone-bx image-upload-bx">
+                        <div class="fallback">
+                            <div class="panel panel-success" uploader="uploader1" nv-file-over="">
+                                <div class=" image-upload-panel">
+                                    <div class="row" ng-hide="uploader1.queue.length">
+                                        <img ng-src={{params.Image_Url_wing2}} class="img-responsive" />
+                                    </div>
+                                    <div class="row" ng-show="uploader1.queue.length">
+                                        <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
+                                            <div ng-show="uploader1.isHTML5"
+                                                 ng-thumb="{ file: item._file, height: 200 }"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
-                               
-                            <label class="custom-file-input">
-                                <input type="file" class="image-upload-f" id="editWingUpload1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
-                            </label>
+                        </div>
+                    </div>
+                    <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
+
+                    <label class="custom-file-input">
+                        <input type="file" class="image-upload-f" id="editWingUpload2" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
+                    </label>
+                </div>
+            </div>
+
+            <h4 class="form-title form-title2">Assign Floor Type</h4>
+            <div class="row" data-ng-repeat="floor in floors ">
+
+                <div class="clearfix" style="margin-left:2%">
+
+                    <div class="pull-left f-half-3">
+                        <div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Floor Type</label>
+                                <input type="text" disabled autofocus name="floortype" class="form-control" id="editWingFloorType"
+                                       placeholder="Floor Type"
+                                       data-ng-model="floor.floor_type_name"
+                                       input-focus />
                             </div>
+                        </div>
 
-                        <div class="modal-body image-upload-wrap" nv-file-drop="" uploader="uploader1" filters="queueLimit, customFilter">
-                                <div class="image-upload-title">Upload 3D Zip</div>
-                                <div class="dropzone dropzone-bx image-upload-bx">
-                                    <div class="fallback">
-                                        <div class="panel panel-success" uploader="uploader1" nv-file-over="">
-                                            <div class=" image-upload-panel">
-                                                <div class="row" ng-hide="uploader1.queue.length">
-                                                    <img ng-src={{params.Image_Url_wing2}}  class="img-responsive" /> 
-                                                </div>
-                                                <div class="row" ng-show="uploader1.queue.length">
-                                                    <div class="col-sm-6 last" ng-repeat="item in uploader1.queue">
-                                                        <div ng-show="uploader1.isHTML5"
-                                                             ng-thumb="{ file: item._file, height: 200 }"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="uploadFileName"><p ng-show="uploader1.queue.length"> {{uploader1.queue[0]._file.name}}</p></div>
-                               
-                            <label class="custom-file-input">
-                                <input type="file" class="image-upload-f" id="editWingUpload2" value="Browse" accept="application/zip" nv-file-select="" uploader="uploader1" />
-                            </label>
-                            </div>
-                   </div>
-
-                            <h4 class="form-title form-title2">Assign Floor Type</h4>
-                            <div class="row" data-ng-repeat="floor in floors ">
-
-                                <div class="clearfix" style="margin-left:2%">
-
-                                    <div class="pull-left f-half-3">
-                                        <div class="clearfix">
-                                            <div class="form-group form-bx">
-                                                <label for="">Floor Type</label>
-                                                <input type="text" disabled autofocus name="floortype" class="form-control" id="editWingFloorType"
-                                                       placeholder="Floor Type"
-                                                       data-ng-model="floor.floor_type_name"
-                                                       input-focus
-                                                        />
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="pull-left f-half-4">
-                                        <div class="clearfix">
-                                            <div class="form-group form-bx">
-                                                <label for="">Floor No.</label>
-                                                <input type="text" autofocus name="floortype" class="form-control" id="editWingFloorNo"
-                                                       placeholder="Floor No"
-                                                       data-ng-model="floor.no_of_units"
-                                                       input-focus
-                                                      />
-                                            </div>
-                                        </div>
-                                        <div class="clearfix">
-                                            <div class="form-group">
-                                                <div class="form-group form-bx">
-                                                    <input type="hidden" disabled autofocus name="floortype" class="form-control" id="editWingFloorId"
-                                                           placeholder="Floor Type"
-                                                           data-ng-model="floor.floor_id"
-                                                           input-focus
-                                                           />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                    <div class="progress" ng-show="((uploader.progress+uploader1.progress)/2)>0">
-                        <div class="progress-bar" role="progressbar"
-                             ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
                     </div>
 
-
-                     <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
-                            <div class="modal-btn-wrap3 clearfix">
-                                <button type="submit" class="f-btn" id="btn_editWing">
-                                    <!--<span class="glyphicon glyphicon-upload"></span>--> Save
-                                </button>
+                    <div class="pull-left f-half-4">
+                        <div class="clearfix">
+                            <div class="form-group form-bx">
+                                <label for="">Floor No.</label>
+                                <input type="text" autofocus name="floortype" class="form-control" id="editWingFloorNo"
+                                       placeholder="Floor No"
+                                       data-ng-model="floor.no_of_units"
+                                       input-focus />
                             </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="form-group">
+                                <div class="form-group form-bx">
+                                    <input type="hidden" disabled autofocus name="floortype" class="form-control" id="editWingFloorId"
+                                           placeholder="Floor Type"
+                                           data-ng-model="floor.floor_id"
+                                           input-focus />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-</form>
-            </div><!-- modal-body ended -->
+            <div class="progress" ng-show="((uploader.progress+uploader1.progress)/2)>0">
+                <div class="progress-bar" role="progressbar"
+                     ng-style="{ 'width': (uploader.progress+uploader1.progress)/2 + '%' }"></div>
+            </div>
 
-       
-    
+
+            <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
+            <div class="modal-btn-wrap3 clearfix">
+                <button type="submit" class="btn btn-primary" id="btn_editWing">
+                    <!--<span class="glyphicon glyphicon-upload"></span>--> Save
+                </button>
+            </div>
+
+        </form>
+    </div><!-- modal-body ended -->
 </div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fetch').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#editWingUpload1").change(function () {
+        readURL(this);
+    });
+</script>

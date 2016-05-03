@@ -187,7 +187,18 @@
                         <div class="dropzone dropzone-bx image-upload-bx">
                             <div class="fallback">
                                 <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                    <div class="panel-body image-upload-panel">
+                                    <div class="image-upload-panel">
+                                        <div class="row" ng-hide="uploader.queue.length">
+                                            <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                            <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                        </div>
+                                        <div class="row" ng-show="uploader.queue.length">
+                                            <div class="user-photo_5" ng-repeat="item in uploader.queue">
+                                                <img id="fetch" src="#" class="image1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class=" image-upload-panel">
                                         <div class="row" ng-hide="uploader.queue.length">
                                             <div class="col-lg-2 col-md-2 col-sm-12"></div>
                                             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
@@ -201,7 +212,7 @@
                                                      ng-thumb="{ file: item._file, height: 200 }"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -331,8 +342,8 @@
             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
 
             <div class="modal-btn-wrap3 clearfix">
-                <button type="submit" id="btn_addNewTower" class="f-btn">
-                    SAVE
+                <button type="submit" id="btn_addNewTower" class="btn btn-primary">
+                    Save
                 </button>
             </div>
 
@@ -341,3 +352,17 @@
 
 
 </div><!-- modal ended -->
+<script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#fetch').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#addNewTowerUpload").change(function () {
+            readURL(this);
+        });
+</script>

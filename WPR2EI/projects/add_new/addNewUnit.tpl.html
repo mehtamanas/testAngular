@@ -246,6 +246,18 @@
                             <div class="panel panel-success" uploader="uploader" nv-file-over="">
                                 <div class="image-upload-panel">
                                     <div class="row" ng-hide="uploader.queue.length">
+                                        <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                            <img ng-src={{media1}} class="img-responsive" />
+                                        <div class="col-lg-2 col-md-8 col-sm-12"></div>
+                                    </div>
+                                    <div class="row" ng-show="uploader.queue.length">
+                                        <div class="user-photo_5" ng-repeat="item in uploader.queue">
+                                            <img id="fetch" src="#" class="image1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="image-upload-panel">
+                                    <div class="row" ng-hide="uploader.queue.length">
                                         <img ng-src={{media1}} class="img-responsive" />
                                     </div>
                                     <div class="row" ng-show="uploader.queue.length">
@@ -257,14 +269,14 @@
                                             <div ng-thumb="{file:media1, height :200}"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
                     <div class="uploadFileName"><p ng-show="uploader.queue.length"> {{uploader.queue[0]._file.name}}</p></div>
 
                     <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="addNewUnitUploade1" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
+                        <input type="file" class="image-upload-f" id="unit_uploader" value="Browse" accept="image/*" nv-file-select="" uploader="uploader" />
                     </label>
                 </div>
 
@@ -337,7 +349,7 @@
 
             <div class="modal-btn-wrap3 clearfix">
 
-                <button type="submit" class="f-btn" id="btn_addNewUnitSave">
+                <button type="submit" class="btn btn-primary" id="btn_addNewUnitSave">
                     Save
                 </button>
             </div>
@@ -347,12 +359,20 @@
 
 
 </div><!-- modal ended -->
-<!--<script>
-    $(document).ready(function () {
-        $('#addNewUnitBoxPrice').on('focus', function () {
-            $("#chk_addNewUnitBoxPriceApplicable").prop("checked", true);
-           // $scope.box_price_applicable = true;
+<script>
+ 
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#fetch').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#unit_uploader").change(function () {
+            readURL(this);
         });
-    });
+    
+    </script>
 
-</script>-->

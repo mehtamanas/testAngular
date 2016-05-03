@@ -51,6 +51,7 @@ angular.module('app.guest.login')
                         position: null,
                         type: "success",
                         allow_dismiss: false,
+                        delay:100,
                         placement: {
                             from: "top",
                             align: "center"
