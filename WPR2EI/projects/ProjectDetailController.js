@@ -15,9 +15,9 @@ angular.module('project')
         //}
         
 
-        //$scope.editnote = function () {
-        //    $scope.openNotesEditPopUp();
-        //}
+        $scope.editnote = function (image) {
+            $scope.openNotesEditPopUp(image);
+        }
 
         $scope.chargeAction = 'no_action';
         $scope.serviceAction = 'no_action';
@@ -93,13 +93,19 @@ angular.module('project')
 
         //});
 
-        $scope.openNotesEditPopUp = function () {
+        $scope.openNotesEditPopUp = function (image) {
+            //alert(editnotes);
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'projects/add_new/gallery.html',
+                templateUrl: 'projects/add_new/editGallery.html',
                 backdrop: 'static',
-                controller: AddNewGalleryController,
-                size: 'lg'
+                controller: EditGallery,
+                size: 'lg',
+                resolve: {
+                    imageData: {
+                        data: image
+                    }
+                }
             });
         };
       
@@ -215,7 +221,7 @@ angular.module('project')
             reorderable: true,
             resizable: true,
             filterable: true,
-      	    height: screen.height - 370,
+      	    height: screen.height - 490,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -296,7 +302,7 @@ angular.module('project')
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 490,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -348,7 +354,7 @@ angular.module('project')
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 490,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -428,7 +434,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
-            height: screen.height - 370,
+            height: screen.height - 420,
             filterable: true,
             columnMenu: {
                 messages: {
@@ -519,7 +525,7 @@ angular.module('project')
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 490,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -692,6 +698,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height: screen.height - 490,
             filterable: true,
             columnMenu: {
                 messages: {
@@ -800,6 +807,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height: screen.height - 490,
             filterable: true,
             columnMenu: {
                 messages: {
@@ -931,7 +939,7 @@ angular.module('project')
         $scope.$on('inventoryLoaded', function (event, args) {
             if (args == 0) {
                 $scope.width = 100;
-                //setTimeout(function () { $scope.width = 0 }, 3000);
+                //setTimeout(function () { $scope.width = 0 }, 4900);
                 $scope.width = 0;
             }
         });
@@ -981,6 +989,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height: screen.height - 490,
             filterable: true,
             columnMenu: {
                 messages: {
@@ -1145,6 +1154,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height: screen.height - 490,
             filterable: true,
             columnMenu: {
                 messages: {
@@ -1256,6 +1266,7 @@ angular.module('project')
             selectable: "multiple",
             reorderable: true,
             resizable: true,
+            height: screen.height - 490,
             filterable: true,
             columnMenu: {
                 messages: {
