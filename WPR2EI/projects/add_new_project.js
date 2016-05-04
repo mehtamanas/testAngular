@@ -267,6 +267,14 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
 
         }
 
+        //if ($scope.media_url1 && $scope.media_url2 && $scope.media_url3) {
+
+        //    var media_type = 'Logo';
+        //} if ($scope.media_url_video) {
+        //    var media_type = 'PROJECT_HOME_PAGE_BACKGROUND_VIDEO';
+        //} if ($scope.media_url_home_page_background) {
+        //    var media_type = 'PROJECT_HOME_PAGE_BACKGROUND_IMG';
+        //}
 
         // TODO: Need to get these values dynamically
         var postData = {
@@ -287,10 +295,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             total_area: $scope.params.totalProjectArea,
             year: $scope.params.project_year,
             class_type: "Project",
+            media_type: 'Logo',
             Street_1: newadd.Street_1,
             Street_2: newadd.Street_2,
             area: $scope.params.area,
-            media_type: "Logo",
+            media_type:media_type,
             city: $scope.params.city,
             state: $scope.params.state,
             Rangefrom: $scope.params.Rangefrom,
