@@ -141,7 +141,7 @@
             sortable: true,
             selectable: "multiple",
             reorderable: true,
-            height: screen.height - 350,
+            height: screen.height - 280,
             resizable: true,
             filterable: true,
             columnMenu: {
