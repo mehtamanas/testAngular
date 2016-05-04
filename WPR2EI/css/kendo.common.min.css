@@ -1643,13 +1643,13 @@ div.k-window-iframecontent {
     border-style: solid;
     border-width: 1px;
     margin: 3px 3px 3px;
-    padding: .3em .92em;
+    padding: .1em ;
     zoom: 1;
 }
 
 .k-tabstrip > .k-content {
     display: none;
-    //overflow: auto;
+    /*overflow: auto;*/
 }
 
     .k-tabstrip > .k-content.km-scroll-wrapper {
