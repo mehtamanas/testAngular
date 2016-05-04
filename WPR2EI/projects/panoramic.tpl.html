@@ -89,7 +89,7 @@
                         </div>
 
 
-                        <div class="progress" ng-show="showProgress">
+                        <div class="progress" ng-show="((uploader.progress)/1)>0">
                             <div class="progress-bar" role="progressbar"
                                  ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
                         </div>
@@ -102,8 +102,7 @@
                         </div>-->
                         <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
                             <div class="btn-f-c">
-                                <button class="f-btn" id="btn_PanaromicSave" type="submit"
-                                        ng-click="showProgress=true;uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                <button class="f-btn" id="btn_PanaromicSave" type="submit">
                                     SAVE
                                 </button>
                             </div>

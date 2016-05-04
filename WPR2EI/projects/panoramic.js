@@ -67,10 +67,10 @@
         },
       function (error)
       {
-          if (error.status === 400)
-              alert(error.data.Message);
-          else
-              alert("Network issue");
+          //if (error.status === 400)
+          //    alert(error.data.Message);
+          //else
+          //    alert("Network issue");
       });
 
     };
