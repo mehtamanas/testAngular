@@ -14,6 +14,10 @@
       $scope.loggedUserRole = $cookieStore.get('loggedUserRole');
         //loggedUserFlag = $cookieStore.get('loggedUserFlag');
        
+     // $scope.gridResult = [{ "approvels": [{ "approver_user_id": "7c8c37e1-a8ae-4b04-b155-780d7bf19e41", "status_a": "Approved", "status_na": null, "approvels": "Abhijeetc Rathod" }, { "approver_user_id": "e621ac4a-37ff-4652-a517-55563964181d", "status_a": null, "status_na": "Not Approved", "approvels": "Jyoti Deshpande" }], "name": "blog1", "description": "test all blogs ", "flag": null, "blog_url": "5d5db6dd-bcbc-45cd-be00-715bd3088e14/blog1", "status": "Not Approved", "approver_status": null, "publication_date": null, "blog_created_date": "2016-05-03T07:12:25.339+00:00", "approved_date": null, "activation_date": null, "user_id": "7c8c37e1-a8ae-4b04-b155-780d7bf19e41", "organization_id": "4eeba6a5-5482-4f51-958d-5e9f5fc149a2", "blog_id": "5d5db6dd-bcbc-45cd-be00-715bd3088e14", "tag_type": null, "comment": null, "Media_Element_id": "b7034bf5-7281-46ae-b23e-43b82a7860a3", "moderator_status": null, "tag_id": "827d4004-4c1c-4ed9-bc32-5b728e05edc0", "class_id": "5d5db6dd-bcbc-45cd-be00-715bd3088e14", "class_type": "Blog", "media_name": null, "media_url": null, "storage_sync_pending": false, "media_type": "Blog_Thumbnail_Image", "tag_name": "test", "background_color": "#3fcdf1", "border_color": null, "role_name": "Abhijeetc Rathod", "author": null, "approver": null, "publisher": null, "approval_user_id": null, "template_id": null, "template_name": "UAT RO", "copy": false },
+        //  { "approvels": [{ "approver_user_id": "7c8c37e1-a8ae-4b04-b155-780d7bf19e41", "status_a": "Approved", "status_na": null, "approvels": "Abhijeetc Rathod" }, { "approver_user_id": "e621ac4a-37ff-4652-a517-55563964181d", "status_a": null, "status_na": "Not Approved", "approvels": "Jyoti Deshpande" }], "name": "blog2", "description": "test all blogs ", "flag": null, "blog_url": "f0cf50d1-756d-4819-8cc8-e8b8ef889f7a/blog2", "status": "Partially Approved", "approver_status": null, "publication_date": null, "blog_created_date": "2016-05-03T10:37:24.862+00:00", "approved_date": null, "activation_date": null, "user_id": "7c8c37e1-a8ae-4b04-b155-780d7bf19e41", "organization_id": "4eeba6a5-5482-4f51-958d-5e9f5fc149a2", "blog_id": "f0cf50d1-756d-4819-8cc8-e8b8ef889f7a", "tag_type": null, "comment": null, "Media_Element_id": "86e3f32c-55df-4775-bced-d220307b1fe1", "moderator_status": null, "tag_id": "827d4004-4c1c-4ed9-bc32-5b728e05edc0", "class_id": "f0cf50d1-756d-4819-8cc8-e8b8ef889f7a", "class_type": "Blog", "media_name": null, "media_url": null, "storage_sync_pending": false, "media_type": "Blog_Thumbnail_Image", "tag_name": "test", "background_color": "#3fcdf1", "border_color": null, "role_name": "Abhijeetc Rathod", "author": null, "approver": null, "publisher": null, "approval_user_id": null, "template_id": null, "template_name": "UAT RO", "copy": false },
+         // { "approvels": [{ "approver_user_id": "7c8c37e1-a8ae-4b04-b155-780d7bf19e41", "status_a": "Approved", "status_na": null, "approvels": "Abhijeetc Rathod" }, { "approver_user_id": "e621ac4a-37ff-4652-a517-55563964181d", "status_a": "Approved", "status_na":  null, "approvels": "Jyoti Deshpande" }], "name": "blog3", "description": "test all blogs ", "flag": null, "blog_url": "5d133ff6-5dc6-45df-93c7-9283ceeedb9f/blog3", "status": "Not Approved", "approver_status": null, "publication_date": null, "blog_created_date": "2016-05-03T12:08:02.582+00:00", "approved_date": null, "activation_date": null, "user_id": "7c8c37e1-a8ae-4b04-b155-780d7bf19e41", "organization_id": "4eeba6a5-5482-4f51-958d-5e9f5fc149a2", "blog_id": "5d133ff6-5dc6-45df-93c7-9283ceeedb9f", "tag_type": null, "comment": null, "Media_Element_id": "45cf9cea-a7d3-4a2e-bb80-81b265003ede", "moderator_status": null, "tag_id": "827d4004-4c1c-4ed9-bc32-5b728e05edc0", "class_id": "5d133ff6-5dc6-45df-93c7-9283ceeedb9f", "class_type": "Blog", "media_name": null, "media_url": null, "storage_sync_pending": false, "media_type": "Blog_Thumbnail_Image", "tag_name": "test", "background_color": "#3fcdf1", "border_color": null, "role_name": "Abhijeetc Rathod", "author": null, "approver": null, "publisher": null, "approval_user_id": null, "template_id": null, "template_name": "UAT RO", "copy": false }];
+      
         //Audit log start															
         $scope.params =
             {
@@ -50,9 +54,10 @@
                 transport: {
                     read: function (options) {
                         apiService.getWithoutCaching ("Blogs/GetGrid/" + userID).then (function(response){
-                            data = response.data;
-                           // var loggedUserFlag = (_.findWhere(data, { user_id: $cookieStore.get('userId') })).flag
-                           // $cookieStore.put('loggedUserFlag', loggedUserFlag.trim());
+                        data = response.data;
+                        //data = $scope.gridResult;
+                        // var loggedUserFlag = (_.findWhere(data, { user_id: $cookieStore.get('userId') })).flag
+                        // $cookieStore.put('loggedUserFlag', loggedUserFlag.trim());
                             options.success(data);
                         },
                           function (error) {
@@ -131,6 +136,7 @@
 
              },{
                 field: "approvels",
+               //template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status_a==\'Approved\' ? \'cls_Approved\': approver.status_na==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status_a==\'Approved\'">{{approver.status_a}}</div><div ng-show="approver.status_a!=\'Approved\'">{{approver.status_na}}</div></span><br/></div>',
                 template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status_a==\'Approved\' ? \'cls_Approved\': approver.status_na==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status_a==\'Approved\'">{{approver.status_a}}</div><div ng-show="approver.status_a!=\'Approved\'">{{approver.status_na}}</div></span><br/></div>',
                 width: "120px",
                 attributes:
@@ -147,9 +153,7 @@
                      "style": "text-align:center"
                  }
              }, {
-                 field: "status",
-                 //template: '<a href="" ng-click="openEditBlogPopup(dataItem.blog_id>#=status#</a>',
-                //template: '<a class="contact_name" id="publishId" ng-click="openEditBlogPopup(dataItem.blog_id)">#=status#</a>',
+                 field: "status",               
                title: "Status",
                width: "120px",
                attributes:
