@@ -742,7 +742,7 @@
 
             for (var i in $scope.paymentschemeDetails) {
 
-                quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': $scope.amountCalculationValue[i].due_date, 'charge_project_mapping_id': "", 'charge_id': "", 'quote_id': quoteUnitCharge.quote_id });
+                quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': $scope.amountCalculationValue[i].due_date, 'charge_project_mapping_id': "", 'charge_id': "", 'quote_id': quoteUnitCharge.id });
             }
 
             apiService.post("PropertyQuotes/UnitPaymentScheme", quatationDetails).then(function (response) {
