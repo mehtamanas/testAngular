@@ -1,18 +1,14 @@
 ﻿
-<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>
+<!--<button type="button" class="close" ng-click="$dismiss('cancel')">&times;</button>-->
+<div class="modal-header ng-scope" style="padding: 15px 30px !important;">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_addTeamProClose">&times;</button>
+    <h4 class="modal-title" style="text-align: left;">Select Project</h4>
+</div>
 <div class="contain">
-    <div class="add_project_header" align="center">Select Project</div>
-    <div class="row left-inner-addon">
-        <!--<div class="col-lg-1"></div>
-        <div class="col-lg-10">
-            <i class="glyphicon glyphicon-search"></i>
-            <input type="search" class="form-control" placeholder="Search Projects" />
-        </div>
-        <div class="col-lg-1"></div>-->
-    </div>
+    
     <div class="project-detail1">
-        <div class="project_details">
-            <div class="row row_content" ng-repeat="user in orgProjects">
+        <div class="useradd_details">
+            <div class="row row_content-user" ng-repeat="user in orgProjects">
                 <div class="col-lg-1 col-md-2 col-sm-3">
                     <div class='user-photo pull_left'><img src="{{user.project_image}}" /></div>
                 </div>
