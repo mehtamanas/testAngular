@@ -12600,6 +12600,14 @@ input[placeholder], [placeholder], *[placeholder] {
     padding: 2px 10px 2px 10px;
     font-size: 10px;
     margin-left: 5px;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2%;
+    padding-bottom: 1px;
+    font-weight: 600;
+    padding-top: 1px;
+    display: inline-block;
 }
 .cls_NotApproved {
      /*background: #d9534f;*/
@@ -12607,17 +12615,33 @@ input[placeholder], [placeholder], *[placeholder] {
     border-radius: 10px;
     color: #ffffff;
     padding: 2px 10px 2px 10px;
-    font-size: 10px;
+     font-size: 10px;
+     display: block;
     margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2%;
+    padding-bottom: 1px;
+    font-weight: 600;
+    padding-top: 1px;
+    display: inline-block;
 }
 .cls_Approved {
    /*background: #40c66f;*/
     border-radius: 10px;
     border:1px solid #40c66f;
     color: #40c66f;
+    display: block;
     padding: 2px 10px 2px 10px;
     font-size: 10px;
     margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2%;
+    padding-bottom: 1px;
+    font-weight: 600;
+    padding-top: 1px;
+    display: inline-block;
 
 }
 

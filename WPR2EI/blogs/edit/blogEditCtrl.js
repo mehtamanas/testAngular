@@ -241,7 +241,7 @@
                         //$scope.openConfirmationApproval();
                     }
                    
-                    $scope.cancel();
+                   // $scope.cancel();
                
                     $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
                     $state.go('app.integration');

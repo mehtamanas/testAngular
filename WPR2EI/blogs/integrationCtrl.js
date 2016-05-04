@@ -129,17 +129,15 @@
                       "style": "text-align:center"
                   }
 
-             },
-             //{
-             //   field: "description",
-             //   title: "Description",
-             //   width: "120px",
-             //   attributes:
-             //{
-             //    "style": "text-align:center"
-             //}
-             //},
+             },{
+                field: "approvels",
+                template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status_a==\'Approved\' ? \'cls_Approved\': approver.status_na==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status_a==\'Approved\'">{{approver.status_a}}</div><div ng-show="approver.status_a!=\'Approved\'">{{approver.status_na}}</div></span><br/></div>',
+                width: "120px",
+                attributes:
              {
+                 "style": "text-align:center"
+             }
+            }, {
                  field: "blog_created_date",
                  title: "Created Date",
                  format: '{0:dd/MM/yyyy}',
