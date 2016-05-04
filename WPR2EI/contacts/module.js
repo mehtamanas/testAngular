@@ -139,12 +139,13 @@ angular.module('contacts', [])
          data: { pageTitle: 'peopertyQuote' }
      })
 
-        .state('app.bookingPreview', {
-            url: '/bookingPreview',
-            templateUrl: 'booking/bookingPreview.html',
-            controller: 'bookingPreviewController',
-            title: 'Bookings',
+      .state('app.bookingPreview', {
+          url: '/bookingPreview/:quoteId',
+          params: { quoteId: null },
+          templateUrl: 'booking/bookingPreview.html',
+          controller: 'bookingPreviewCtrl',
+          title: 'Bookings',
 
-        });
+      });
 
     }]);

@@ -1533,7 +1533,7 @@ angular.module('contacts')
 
         $scope.openBookNow = function (dataItem) {
            
-            $state.go('app.bookingPreview');
+            $state.go('app.bookingPreview', { quoteId: dataItem.quote_id });
         }
 
 
