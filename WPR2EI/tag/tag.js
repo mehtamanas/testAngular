@@ -27,7 +27,7 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 260,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
