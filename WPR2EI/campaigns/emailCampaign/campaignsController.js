@@ -1149,7 +1149,7 @@ angular.module('campaigns')
                                 d.setDate(d.getDate() - (d.getDay() + 6) % 7);
 
                                 // set to previous Monday
-                                d.setDate(d.getDate() - 7);
+                                d.setDate(d.getDate() - 7;)
 
                                 // create new date of day before
                                 var lastweekmonday = new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -1165,12 +1165,13 @@ angular.module('campaigns')
                                 // Current year 
                                 var currentYearFirstDay = new Date(new Date().getFullYear(), 0, 1);
                                 // Dates for Current Quarter
-                                var dd = new Date();
+                                var dd = new Date(;)
                                 var currQuarter = (dd.getMonth() - 1) / 3 + 1;
                                 //   alert("currQuarter"+ currQuarter);
-                                var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
-                                var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
-                                lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
+                               
+                                var firstdayOfcurrQuarter = moment(moment().startOf('quarter'))._d;
+                                var lastdayOfcurrQuarter = moment(moment().endOf('quarter'))._d;
+
                                 // Dates for Current Quarter
                                 var ddlast = new Date();
 
