@@ -1209,9 +1209,10 @@ angular.module('contacts')
                                     var dd = new Date();
                                     var currQuarter = (dd.getMonth() - 1) / 3 + 1;
                                     //   alert("currQuarter"+ currQuarter);
-                                    var firstdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter - 2, 1);
-                                    var lastdayOfcurrQuarter = new Date(dd.getFullYear(), 3 * currQuarter + 1, 1);
-                                    lastdayOfcurrQuarter.setDate(lastdayOfcurrQuarter.getDate() - 1);
+                                   
+                                    var firstdayOfcurrQuarter = moment(moment().startOf('quarter'))._d;
+                                    var lastdayOfcurrQuarter = moment(moment().endOf('quarter'))._d;
+
                                     // Dates for Current Quarter
                                     var ddlast = new Date();
 
