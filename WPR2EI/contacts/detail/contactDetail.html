@@ -440,9 +440,27 @@
                 </div>
             </div> <!--PropertyList-->
 
-            <div class="leads_group" id="record-content">
+            <div class="leads_group" id="record-content" style="background:#EFEFEF">
 
-                <div class="tab-content-title">Payments <a id="contact_openNewPaymentPopup" class="add-btn" data-toggle="modal" ng-click="openNewPaymentPopup()" href="" style="cursor:pointer">+</a></div>
+                <!--<div class="tab-content-title">
+                   <a id="contact_openNewPaymentPopup" class="btn btn-primary" data-toggle="modal" ng-click="openNewPaymentPopup()" href="" style="cursor:pointer"><b>Payment</b></a>
+                </div>-->
+
+                <div class="row" style="padding: 0px 0px 18px 0px;">
+                    <div class="col-md-2" style="width:120px;margin-left: 41px;">
+                        <select ng-model="TaskAction" style="height: 24px !important;" class="form-control serach_bar_btn sel_action" ng-change="taskAction()" id="taskaction">
+                            <option value='no_action' selected>Action</option>
+                            <option value='delete'>Delete</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="width: 44px;">
+                        <button type="button" class="btn btn_refresh" style="padding: 7px 11px 7px 12px;"><img src="./images/refresh2.png" /></button>
+                    </div>
+                    <div class="col-md-2 col-xs-offset-8" style="margin-left: 15px;">
+                        <a id="contact_openNewPaymentPopup" class="btn btn-primary" data-toggle="modal" ng-click="openNewPaymentPopup()" href="" style="cursor:pointer">Payment</a>
+                    </div>
+                </div>
+
                 <div kendo-grid k-options="PaymentGrid" selectable="true">
 
                 </div>

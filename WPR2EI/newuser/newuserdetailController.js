@@ -553,8 +553,8 @@ columnMenu: {
             columns: [
 
                  {
-		    template: "<img height='40px' width='40px' src='#= media_url #' style='margin-left:44%'/>" +
-                     "<span style='padding-left:10px' class='property-photo'> </span>",
+		    template: "<img height='40px' width='40px' src='#= media_url #' style='margin-left:44%'/>" ,
+                     //"<span style='padding-left:10px' class='property-photo'> </span>",
                      title: "PROJECT LOGO",
                      width: "120px",
                      attributes:
