@@ -199,6 +199,7 @@
             apiService.post("Blogs/BlogCommentCreate", postdataSendForApproval).then(function (response) {
                 data = response.data[0];
                 //$modalInstance.dismiss();
+                $rootScope.$broadcast('REFRESH', 'BlogsPostGrid');
                 $state.go('app.integration');
             },
                   function (error) {
