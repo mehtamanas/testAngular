@@ -50,6 +50,7 @@ function (error) {
 });
 
 
+
     // CALLBACKS
     uploader.onAfterAddingFile = function (fileItem, response, status, headers) {
         if (uploader.queue.length > 1) {
@@ -59,23 +60,51 @@ function (error) {
    
     uploader.onSuccessItem = function (fileItem, response, status, headers) {
         // alert("uploader called");
-        $scope.params.media_url1 = response[0].Location;
-        uploader_done = true;
-
-        if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
-            $scope.showProgress = false;
-            $scope.finalpost();
+        upload1 = 1;
+        $scope.media_url = response[0].Location;
+        if (upload1==1){
+            $scope.showProgress=false;
+            $scope.editGalleryPost();
+        }
+      
         }
 
+    
+
+
+
+    $scope.editGalleryPost = function () {
+        var postData = {
+            project_id: $scope.seletedCustomerId,
+            note: $scope.notes,
+            media_url: $scope.media_url,
+            class_type: "Project",
+            media_type: "Gallery_Type_Full_2D",
+            image_id: imageData.data.id,
+        };
+
+        apiService.post("Project/EditProjectGallary", postData).then(function (response) {
+            var loginSession = response.data;
+            $modalInstance.dismiss();
+            $scope.openSucessfullPopup();
+
+
+        });
+    }
+
+
+
+    $scope.openSucessfullPopup = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'newuser/Edited.tpl.html',
+            backdrop: 'static',
+            controller: EditsucessfullController,
+            size: 'lg',
+            resolve: { items: { title: "Image" } }
+        });
+        $rootScope.$broadcast('REFRESH', 'images');
     };
-
-
-
-   
-
-
-
-
    
 
 
@@ -150,11 +179,14 @@ function (error) {
     $scope.addNew = function (isValid) {
         $scope.showValid = true;
         $scope.loadingDemo = true;
+      
         if (isValid) {
             $scope.loadingDemo = true;
 
             if (uploader.queue.length != 0)
                 uploader.uploadAll();
+            if (uploader.queue.length == 0)
+                $scope.editGalleryPost();
 
             $scope.showValid = false;
 
