@@ -9,7 +9,6 @@
             </div>
           </div>
         </div>
-        <div class="pg-inner-content">
             <div class="clearfix project-detail-info-1 pg-inner-content_1 contact_header">
                 <div class="row" style="background:#fff;">
                     <div class="col-md-3 col-sm-3 contact-detail-txt">
@@ -79,12 +78,11 @@
 
                         <div class="clearfix">
 
-                            <div class="pull-left company-profile-half">
+                            <div class="pull-left company-profile-half custom-space">
                                 <div class="clearfix spacer-user" style="margin-top:15px;">
-                                    <div class="col-md-10">
+                                    <div class="col-md-12">
                                         <div class="pull-left project-title profile-row1">
-                                            <div class="contact_title" style="margin-bottom:10px">Team Name:</div>
-                                                
+                                            <div class="contact_title" style="margin-bottom:5px">Team Name:</div>
                                                 <label class="label-group">
                                                     <span class="" ng-bind="name" id="teamDetail_teamName"></span>
                                                 </label>
@@ -92,13 +90,13 @@
                                     </div>
                                 </div>
 
-                                <div class="clearfix spacer-user" >
+                                <div class="clearfix spacer-user" style="margin-top:15px;">
                                     <div class="col-md-12">
                                         <div class="pull-left project-title profile-row1">
-                                            <div class="contact_title" style="margin-bottom:10px">Description:</div>
+                                            <div class="contact_title" style="margin-bottom:5px">Description:</div>
                                             
                                             <label class="label-group">
-                                                <span class="" ng-bind="description" id="teamDetail_description"></span>
+                                                <span class="" ng-bind="description" id="teamDetail_description" style="line-height: 2em;"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -120,21 +118,21 @@
                         </div> <!--Summary-->
 
                         <div class="leads_group" id="documentGridDiv">
-                            <div class="tab-content-title">Users<a id="teamDetail_openNewUserPopup"class="add-btn" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title"><a id="teamDetail_openNewUserPopup"class="btn btn-primary custom-space" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer">+ Users</a></div>
                             <div kendo-grid k-options="UserGrid" selectable="true">
 
                             </div>
                         </div>  <!--UserGrid-->
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Projects<a id="teamDetail_openNewProjectPopup" class="add-btn" data-toggle="modal" ng-click="openProjectPopup()" style="cursor:pointer">+</a></div>
+                            <div class="tab-content-title"><a id="teamDetail_openNewProjectPopup" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openProjectPopup()" style="cursor:pointer">+ Projects</a></div>
                                 <div kendo-grid k-options="ProjectGrid" selectable="true">
 
                                 </div>
                             </div> <!--ProjectGrid--> 
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title">Task <a id="teamDetail_openNewTaskPopup" class="add-btn" data-toggle="modal" ng-click="openAddNewTask()">+</a></div>                  
+                            <div class="tab-content-title"> <a id="teamDetail_openNewTaskPopup" class="btn btn-primart custom-space" data-toggle="modal" ng-click="openAddNewTask()">+ Task</a></div>                  
                                 <div kendo-grid k-options="TaskGrid" selectable="true"></div>
                         </div>  <!--Task-->
 
@@ -145,8 +143,7 @@
                         </div>  <!--Notes-->
 
                         </div>
-                </div>
             </div>
- </div>
+
 
    

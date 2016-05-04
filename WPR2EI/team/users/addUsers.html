@@ -1,22 +1,12 @@
 
-<button type="button" class="close" style="padding: 10px;" ng-click="$dismiss('cancel')">&times;</button>
-
+<div class="modal-header ng-scope" style="padding: 15px 30px !important;">
+    <button type="button" class="close" ng-click="$dismiss('cancel')" id="btn_addProjectClose">&times;</button>
+    <h4 class="modal-title" style="text-align: left;">Add Users To Team</h4>
+</div>
 <div class="contain">
-    <div class="add_user_header" align="center">Add Users to Team</div>
-
-    <!--<div class="row left-inner-addon">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10">
-            <i class="glyphicon glyphicon-search"></i>
-            <input type="search" class="form-control" id="add_users_to_team" placeholder="Search users"/>
-        </div>
-        <div class="col-lg-1"></div>
-    </div>-->
-    <div class="user_details1">
-
-        <div class="user_details">
-
-            <div class="row row_content" ng-repeat="user in orgUsers">
+    <div class="project-detail1">
+        <div class="useradd_details">
+            <div class="row row_content-user" ng-repeat="user in orgUsers">
                 <div class="col-lg-1 col-md-2 col-sm-3">
                     <div class='user-photo pull_left'><img src="{{user.media_url}}" /></div>
                 </div>
@@ -24,8 +14,6 @@
                     <p class="user_name">
                         {{user.name}}
                     </p>
-
-
                 </div>
                 <div class="col-lg-8 col-md-6 col-sm-3">
                     <span class="pull-right" style="margin-top: 3%;" ng-click="addUser(user)">
@@ -37,7 +25,7 @@
     </div>
     <div class="user_list_content">
 
-        <div class="user_list_item">
+        <div class="project_list_item">
             <span class="user_items" ng-repeat="user in orgUsers">
                 <span class="btn btn-info1 btn_pad" ng-if="user.isTeamMember">
                     {{user.name}}
@@ -52,7 +40,7 @@
             </div>
         </div>
         <div class="add_btn_pad" align="center">
-            <a href="" id="btn_addUsertoTeam_add" class="btn btn-primary" ng-click="updateTeamUsers()">ADD</a>
+            <a href="" id="btn_addUsertoTeam_add" class="btn btn-primary" ng-click="updateTeamUsers()">Add</a>
         </div>
     </div>
 </div>

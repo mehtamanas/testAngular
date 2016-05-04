@@ -3,7 +3,7 @@
         <div class="pg-inner-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pg-inner-title"><span class="breadecrums">Projects / Current Project </span>/ Project Details</h2>
+                    <h2 class="pg-inner-title"><span class="breadecrums">Projects / Current Project </span>/ <span style="font-size: 14px;">Project Details</span></h2>
                 </div>
             </div>
             </div>
@@ -327,7 +327,7 @@
 
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailUsers" class="btn btn-primary" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Users</a></div>
+                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailUsers" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openAddPopup()" style="cursor:pointer"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Users</a></div>
                             <div kendo-grid k-options="UserGrid" selectable="true">
 
                             </div>
@@ -335,16 +335,16 @@
 
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailTeams" class="btn btn-primary" data-toggle="modal" ng-click="openTeamPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Add Teams</a></div>
+                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailTeams" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openTeamPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Add Teams</a></div>
                             <div kendo-grid k-options="TeamsGrid" selectable="true">
 
                             </div>
                         </div> <!--Teams-->
 
                         <div class="tab-pane" id="unit-type">
-                            <div class="tab-content-title tab-content-title-b"> <a id="projectDetailUnitType" class="btn btn-primary" ng-click="openNewUnitPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Unit Type</a></div>
+                            <div class="tab-content-title tab-content-title-b"> <a id="projectDetailUnitType" class="btn btn-primary custom-space" ng-click="openNewUnitPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Unit Type</a></div>
 
-                            <div class="unit-content-wrap">
+                            <div class="unit-content-wrap custom-space">
 
                                 <div class="unit-bx" ng-repeat="user in orgUsers">
                                     <div class="unit-title"> {{user.unit_type_desc}} &nbsp; &nbsp;<a id="iconEdit" ng-click="openNewUnitPopup(user)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
@@ -389,9 +389,9 @@
                         </div>           <!-- unit-type ended -->
 
                         <div class="tab-pane fade " id="floor-type">
-                            <div class="tab-content-title tab-content-title-b"> <a id="projectDetailFloorType" class="btn btn-primary" data-toggle="modal" ng-click="openNewFloorPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Floor Type</a></div>
+                            <div class="tab-content-title tab-content-title-b"> <a id="projectDetailFloorType" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openNewFloorPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Floor Type</a></div>
 
-                            <div class="unit-bx" ng-repeat="user in builddetail">
+                            <div class="unit-bx custom-space" ng-repeat="user in builddetail">
 
                                 <div class="unit-title"> <b>{{user.floor_type}}</b> &nbsp; &nbsp; <a id="iconEdit" ng-click="openEditFloorPopup(user.floor_id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a> </div>
 
@@ -427,9 +427,9 @@
 
                         <div class="tab-pane" id="wing-type">
 
-                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailWingType" class="btn btn-primary" ng-click="openNewWingPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Wing Type</a></div>
+                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailWingType" class="btn btn-primary custom-space" ng-click="openNewWingPopup()" data-toggle="modal" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Wing Type</a></div>
 
-                            <div class="unit-content-wrap">
+                            <div class="unit-content-wrap custom-space">
 
                                 <div class="unit-bx" ng-repeat="user in builder">
 
@@ -461,9 +461,9 @@
                         
                                 <div class="tab-pane"  id="tower-type">
 
-                                    <div class="tab-content-title tab-content-title-b"> <a id="projectDetailTowerType" class="btn btn-primary" data-toggle="modal" ng-click="openNewTowerPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Tower Type</a></div>
+                                    <div class="tab-content-title tab-content-title-b"> <a id="projectDetailTowerType" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openNewTowerPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Tower Type</a></div>
 
-                                    <div class="unit-content-wrap-1" ng-repeat="tower in built">
+                                    <div class="unit-content-wrap-1 custom-space" ng-repeat="tower in built">
 
                                         <div class="unit-title-1">{{tower.tower_name}}&nbsp;<a id="iconEdit" ng-click="openEditTowerPopup(tower.id)" data-toggle="modal" style="cursor:pointer"><span class="edit-icon"></span></a></div>
 
@@ -521,7 +521,7 @@
                         </div>  <!--People-->
 
                         <div class="leads_group" id="record-content">
-                            <div class="tab-content-title tab-content-title-b"> <a id="contact_openNewPaymentPopup" class="btn btn-primary" data-toggle="modal" ng-click="openAddNewTask()"><i class="fa fa-plus" aria-hidden="true"></i> Task</a></div>
+                            <div class="tab-content-title tab-content-title-b"> <a id="contact_openNewPaymentPopup" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openAddNewTask()"><i class="fa fa-plus" aria-hidden="true"></i> Task</a></div>
                             <div kendo-grid k-options="TaskGrid" selectable="true" k-on-change="myGridChange(dataItem)">
 
                             </div>
@@ -535,7 +535,7 @@
                                         <input type="hidden" name="Select Project" data-ng-model="params.country">
 
                                         <select ng-change="selectTower()" style="height: 21px;"
-                                                ng-model="tower1" class="dropdown form-control" id="projectDetailSelectTower" required>
+                                                ng-model="tower1" class="dropdown form-control custom-space" id="projectDetailSelectTower" required>
                                             <option value="" selected>-- Choose Tower--</option>
                                             <option ng-repeat="tower in towers"
                                                     value="{{tower.id}}">
@@ -546,7 +546,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-1"></div>
-                                <button class="btn btn-primary" id="btn_projectDetailInventory" ng-click="towerGrid()"> Generate Inventory</button>
+                                <button class="btn btn-primary custom-space" id="btn_projectDetailInventory" ng-click="towerGrid()"> Generate Inventory</button>
 
                                 <!--<btn class="btn btn-generate" ng-click="showTowergrid()">Show Inventory</btn>-->
                             </div>
@@ -565,7 +565,7 @@
 
                         <div class="tab-pane fade" id="payment">
 
-                            <div class="tab-content-title tab-content-title-b"> <a data-toggle="modal" ng-click="openNewPaymentSchemePopup()" id="projectDetailPayment" class="btn btn-primary" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Payment Schemes</a></div>
+                            <div class="tab-content-title tab-content-title-b"> <a data-toggle="modal" ng-click="openNewPaymentSchemePopup()" id="projectDetailPayment" class="btn btn-primary custom-space" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Payment Schemes</a></div>
                             <div class="payment-list-wrap toggle-on" ng-repeat="user in orgpayment track by $index">
                                 <div class="payment-list-head clearfix">
                                     <div class="pull-left payment-list-title">
@@ -596,11 +596,11 @@
                         <div class="tab-pane fade" id="gallery">
                             <div class="properties-list">
 
-                                <div class="tab-content-title tab-content-title-b"><b>Images</b> <a id="projectDetailImages" data-toggle="modal" class="add-btn" ng-click="openNewGalleryPopup()" style="cursor:pointer">+</a></div>
+                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailImages" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openNewGalleryPopup()" style="cursor:pointer"><i class="fa fa-picture-o" aria-hidden="true"></i> Add Images</a></div>
 
                                 <div class="properties-bx-wrap clearfix">
                                     <div class="properties-bx" ng-repeat="image in Gallery">
-                                        <div class="properties-bx-inner">
+                                        <div class="properties-bx-inner custom-space">
                                             <div class="properties-img gallery_photo">
                                                 <img src={{image.media_url}} alt="" class="image1" />
                                             </div>
@@ -615,7 +615,7 @@
                                 </div>
                             </div><!-- properties-bx-wrap ended -->
 
-                                <div class="tab-content-title tab-content-title-b"><b>Videos</b> <a id="projectDetailImages" data-toggle="modal" class="add-btn" ng-click="openNewVideoPopup()">+</a></div>
+                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailImages" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openNewVideoPopup()"><i class="fa fa-file-video-o" aria-hidden="true"></i> Add Videos</a></div>
                                 
                         <div class="properties-bx-wrap clearfix" >
                                     <div class="properties-bx" style="float: left;margin: 0px 20px 0px 15px;" ng-repeat="video in Videos">
@@ -634,7 +634,7 @@
                         </div><!-- gallery ended -->
                         <div class="tab-pane fade" id="amenities">
 
-                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailSociety" data-toggle="modal" class="btn btn-primary" ng-click="openNewAmenityPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Society Amenities</a></div>
+                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailSociety" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openNewAmenityPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Society Amenities</a></div>
                             <div class="society-amenities-wrap clearfix">
                                 <ul class="list-unstyled society-amenities-list">
                                     <li ng-repeat="amenity in orgAmenities">
@@ -649,8 +649,8 @@
                         </div><!-- amenities ended -->
                         <div class="tab-pane fade" id="brochure">
                             <div class="properties-list">
-                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailBrochure" data-toggle="modal" class="btn btn-primary" ng-click="openNewBrochurePopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i>  Brochure</a></div>
-                                <div class="properties-bx-wrap clearfix">
+                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailBrochure" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openNewBrochurePopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i>  Brochure</a></div>
+                                <div class="properties-bx-wrap clearfix custom-space">
                                     <div class="properties-bx" ng-repeat="image in Gallery2">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
@@ -662,7 +662,7 @@
                                         <a class="properties-name">{{image.notes}} Start</a>
                                     </div>
                                 </div><!-- properties-bx-wrap ended -->
-                                <div class="properties-bx-wrap clearfix">
+                                <div class="properties-bx-wrap clearfix custom-space">
                                     <div class="properties-bx" ng-repeat="image in Gallery1">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
@@ -678,11 +678,11 @@
                         </div><!-- brochure ended -->
 
                         <div class="tab-pane fade" id="Panoramic_view">
-                            <div class="properties-list">
+                            <div class="properties-list ">
 
-                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailPanaromicViwes" data-toggle="modal" class="btn btn-primary" ng-click="openNewPanoramicViewPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Panoramic Views</a></div>
+                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailPanaromicViwes" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openNewPanoramicViewPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Panoramic Views</a></div>
 
-                                <div class="properties-bx-wrap clearfix">
+                                <div class="properties-bx-wrap clearfix custom-space">
                                     <div class="properties-bx" ng-repeat="image in view">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
@@ -699,7 +699,7 @@
                         </div>  <!--panoramic ended -->
 
                         <div class="leads_group" id="EventGridDiv">
-                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailCreateNewEvent" class="btn btn-primary" data-toggle="modal" ng-click="openEventCampaignPopup()"><i class="fa fa-plus" aria-hidden="true"></i> Create New Event</a></div>
+                            <div class="tab-content-title tab-content-title-b"><a id="projectDetailCreateNewEvent" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openEventCampaignPopup()"><i class="fa fa-plus" aria-hidden="true"></i> Create New Event</a></div>
                             <div kendo-grid k-options="EventGrid" selectable="true" k-on-change="myGridChangeEvent(dataItem)"> </div>
                         </div>
 
@@ -712,9 +712,9 @@
                         <div class="tab-pane fade" id="gallery">
                             <div class="properties-list">
 
-                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailUploadView" data-toggle="modal" class="btn btn-primary" ng-click="openUploadViewPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Upload View</a></div>
+                                <div class="tab-content-title tab-content-title-b"> <a id="projectDetailUploadView" data-toggle="modal" class="btn btn-primary custom-space"  ng-click="openUploadViewPopup()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Upload View</a></div>
 
-                                <div class="properties-bx-wrap clearfix">
+                                <div class="properties-bx-wrap clearfix custom-space">
                                     <div class="properties-bx" ng-repeat="image in UploadView">
                                         <div class="properties-bx-inner">
                                             <div class="properties-img">
@@ -736,13 +736,13 @@
                         <div class="tab-content-title tab-content-title-b" style="padding-bottom: 0px !important;">
                         <div class="form-inline ">
                             <div class="form-group">
-                                <select ng-model="chargeAction" class="form-control actions-wrap" ng-change="chooseActionForCharge()" style="height: 21px !important;margin-top: 3px;" id="projectDetailChargeAction">
+                                <select ng-model="chargeAction" class="form-control actions-wrap custom-space" ng-change="chooseActionForCharge()" style="height: 21px !important;margin-top: 3px;" id="projectDetailChargeAction">
                                     <option value='no_action' selected>ACTIONS</option>
                                     <option value='delete'>DELETE</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <div class="tab-content-title "><a id="projectDetailUploadAddCharge" data-toggle="modal" class="btn btn-primary" ng-click="openCharges()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Add Charges</a></div>   
+                                <div class="tab-content-title "><a id="projectDetailUploadAddCharge" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openCharges()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Add Charges</a></div>   
                             </div>
                             
                             </div>
@@ -756,13 +756,13 @@
                             <div class="form-inline">
                                 <div class="tab-content-title tab-content-title-b" style="padding-bottom: 0px !important;">
                                     <div class="form-group">
-                                        <select ng-model="serviceAction" class="form-control actions-wrap" style="height: 21px !important;margin-top: 3px;" ng-change="chooseActionForService()" id="projectDetailsSelectAction">
+                                        <select ng-model="serviceAction" class="form-control actions-wrap custom-space" style="height: 21px !important;margin-top: 3px;" ng-change="chooseActionForService()" id="projectDetailsSelectAction">
                                             <option value='no_action' selected>ACTIONS</option>
                                             <option value='delete'>DELETE</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <div class="tab-content-title"> <a id="projectDetailService" class="btn btn-primary" data-toggle="modal" ng-click="openAddService()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Service</a></div>
+                                        <div class="tab-content-title"> <a id="projectDetailService" class="btn btn-primary custom-space" data-toggle="modal" ng-click="openAddService()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Service</a></div>
                                     </div>
                                 </div>
                                 </div>
@@ -775,7 +775,7 @@
                         <div class="tab-pane fade" id="offers">
                             <div class="properties-list">
 
-                                <div class="tab-content-title tab-content-title-b"><a id="projectDetailOffers" data-toggle="modal" class="btn btn-primary" ng-click="openOffers()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Offers</a></div>
+                                <div class="tab-content-title tab-content-title-b"><a id="projectDetailOffers" data-toggle="modal" class="btn btn-primary custom-space" ng-click="openOffers()" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> Offers</a></div>
 
                             </div>
                             <div kendo-grid k-options="OfferGrid" selectable="true">

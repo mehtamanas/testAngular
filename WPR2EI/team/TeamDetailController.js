@@ -103,7 +103,7 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 450,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -155,7 +155,7 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 450,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -178,8 +178,10 @@
                 }
             },
             columns: [{
-                template: "<img height='40px' style='margin-left:11%' width='40px' src='#= media_url #'/>" +
-                "<span style='padding-left:10px' class='property-photo'> </span>",
+                template: "<img height='40px' style='margin-left:11%' width='40px' src='#= media_url #'/>"
+                //    +
+                //"<span style='padding-left:10px' class='property-photo'> </span>"
+                ,
                 title: "Picture",
                 width: "120px",
                 attributes: {
@@ -253,7 +255,7 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 450,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
@@ -345,7 +347,7 @@
             reorderable: true,
             resizable: true,
             filterable: true,
-            height: screen.height - 370,
+            height: screen.height - 450,
             columnMenu: {
                 messages: {
                     columns: "Choose columns",
