@@ -718,42 +718,41 @@
 
             offer_id: typeOfOffer.offers_id,
             floor_id: floorDetails.floors_id,
-            contact_id:customer_id,
-            user_id:UserId,
+            contact_id: customer_id,
+            user_id: UserId,
             organization_id: org_id,
             project_id: project_id,
-            payment_schedule_id:paymentScheduled,
-            total_consideration:$scope.proprty_Details.total_considarationValue,
+            payment_schedule_id: paymentScheduled,
+            total_consideration: $scope.proprty_Details.total_considarationValue,
             discount: offerDiscount,
             additional_discount: additionalDiscountValue,
-            additional_discount_type:radio_value,
-            final_total:$scope.totalValue,
+            additional_discount_type: radio_value,
+            final_total: $scope.totalValue,
             unit_id: UnitDetail.unit_id,
-            price_per_sq_ft:$scope.proprty_Details.Rps,
+            price_per_sq_ft: $scope.proprty_Details.Rps,
+            estimate_no: null,
+            estimate_date: $cookieStore.get('propertyFromDate'),
+            expiration_date: $cookieStore.get('propertyEndDate'),
+            description: $scope.getDescriptionDetails
         }
+
         apiService.post("PropertyQuotes/CreateQuoteUnitCharge", postData).then(function (response) {
-            var loginSession = response.data;
+            var quoteUnitCharge = response.data;
+            var quatationDetails = [];
+
+            for (var i in $scope.paymentschemeDetails) {
+
+                quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': $scope.amountCalculationValue[i].due_date, 'charge_project_mapping_id': "", 'charge_id': "", 'quote_id': quoteUnitCharge.quote_id });
+            }
+
+            apiService.post("PropertyQuotes/UnitPaymentScheme", quatationDetails).then(function (response) {
+                var unitPaymentScheme = response.data;
+                alert("PropertyQuoteCreated");
+                $state.go('app.contactdetail', { id: customer_id });
+            });
+
+
         });
-
-
-        var quatationDetails = [];
-
-        for (var i in $scope.paymentschemeDetails) {
-            var duedate = moment($scope.amountCalculationValue[i].due_date, "DD/MM/YYYY")._d;
-
-            quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': duedate, 'charge_project_mapping_id': "", 'charge_id': "" });
-
-        }
-        apiService.post("PropertyQuotes/UnitPaymentScheme", quatationDetails).then(function (response) {
-            var loginSession = response.data;
-        });
-
-        alert("PropertyQuoteCreated");
-        $state.go('app.contactdetail', { id: customer_id });
-
-    };
-
-
-
+    }
    
 });
