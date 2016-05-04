@@ -9,4 +9,13 @@
                 title: 'Bookings'
             })
 
+          .state('app.confirmBooking', {
+              url: '/bookingPreview/:bookingId',
+              params: { bookingId: null },
+              templateUrl: 'booking/bookingPreview.html',
+              controller: 'bookingPreviewCtrl',
+              title: 'Bookings',
+
+          })
+
     }]);

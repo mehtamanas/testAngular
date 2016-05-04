@@ -21,10 +21,10 @@
                 <div class="col-md-12 seperate">
 
                     <div class="col-md-8 col-sm-8">
-                        <h5 class="capt"><b>Dwellar System Pvt Ltd</b></h5>
-                        <span class="capt">Union Building, 2nd Floor,52-54 Sleater Road,Grant Road West</span><br />
-                        <span class="capt "></span>Mubai,maharastra 400007 IN<br />
-                        <span class="capt ">022-23818996</span>
+                        <h5 class="capt"><b>{{organizationName}}</b></h5>
+                        <span class="capt">{{organizationAddress}}</span><br />
+                        <span class="capt">{{organizationEmail}}</span><br />
+                        <span class="capt">{{organizationPhone_no}}</span><br />
                         <p>http://www.dwellar.com</p>
 
 
@@ -35,10 +35,10 @@
                 <div class="col-md-12  ">
                     <div class="quote-bold">
                         <div class="col-md-3 contact_quotes">
-                            <span>ST No:</span> <span class="upper">{{organization.service_tax_no}}</span>
+                            <span>ST No:</span> <span class="upper">{{organizationService_tax_no}}</span>
                         </div>
                         <div class="col-md-3 contact_quotes">
-                            <span>PAN No:</span> <span class="upper">{{organization.pan_no}}</span>
+                            <span>PAN No:</span> <span class="upper">{{organizationPan_no}}</span>
                         </div>
                         <div class="col-md-4 contact_quotes">
                             <span class="upper">payments terms :</span> &nbsp;&nbsp;&nbsp;<span class="upper per_box">100 % Advance</span>
@@ -50,16 +50,16 @@
                     <div class="title"><h3 style="color: #d5d5d5;" class="seperate">Estimate</h3></div>
                     <div style="margin-top:2%">
                         <div class="col-md-6 contact_quotes">
-                            <h5 class="capt"><b>Himangshu Maity</b></h5>
-                            <span class="capt">naman Center,c-31,G-Block,bandra Kurla Complex,Bandra(E) </span><br>
-                            <p class="capt "> Mumbai,maharastra 400007 IN</p>
+                            <h5 class="capt"><b>{{contactName}}</b></h5>
+                            <span class="capt">{{contactStreet1}},{{contactStreet2}} </span><br>
+                            <p class="capt "> {{contactCity}},{{contactStateName}},{{contactZipcode}}</p>
                         </div>
                         <div class="col-md-6 contact_quotes">
                             <span>Estimate No.</span>
-                            <span class="quote-bold">a2346c75-9dd0-45de-b125-e7715eebc600</span><br />
-                            <span>Date :</span><span style="margin-left: 12%;"><input id="bookingDate" name="date1" type="date" style="border:none"></span><br>
+                            <span class="quote-bold">{{contactEstimate_no}}</span><br />
+                            <span>Date :</span><span style="margin-left: 12%;">{{contactEstimateDate}}</span><br>
                             <div style="margin-top:3px; margin-bottom: 4%;">
-                                <span>Expiration Date :</span><span><input id="bookingDate" name="date1" type="date" style="border:none;margin-left: 16px;"></span>
+                                <span>Expiration Date :</span><span>{{contactExpirationDate}}</span>
                             </div>
                         </div>
                     </div>
@@ -81,47 +81,47 @@
 
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr ng-repeat="amount in amountCalculationValue">
-                                        <td><span class="">{{amount.description}}</span></td>
-                                        <td><span class="">{{amount.percentage}}</span></td>
-                                        <td><span class="">{{amount.amountTotal | number:2}}</span></td>
-                                        <td><span class="">{{amount.serviceTax | number:2}}</span></td>
-                                        <td><span class=""><input id="bookingDate" name="date1" type="date" style="border:none"></span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>-->
+                                <tbody  >
+                                    <tr ng-repeat="payment in contactcServiceTax">
+                                        <td><span class=""></span></td>
+                                        <td><span class=""></span></td>
+                                        <td><span class="">{{payment.amount}}</span></td>
+                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
+                                        <td><span class="">{{payment.due_date}}</span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>-->
                                         
                                     </tr>
 
-                                    <tr class="quote-bold">
+                                    <!--<tr class="quote-bold">
                                         <td><span class="">Current Due</span></td>
                                         <td><span class="">20%</span></td>
-                                        <td><span class="">4,50,05,545</span></td>
-                                        <td><span class="">6,45,5665.00</span></td>
-                                        <td><span class=""><input id="bookingDate" name="date1" type="date" style="border:none"></span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" /></span></td>-->
+                                        <td><span class="">{{payment.amount}}</span></td>
+                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
+                                        <td><span class=""></span></td>
                                         
 
                                     </tr>
                                     <tr class="quote-bold">
                                         <td><span class="">Due on Completion Of Super Structure</span></td>
                                         <td><span class="">20%</span></td>
-                                        <td><span class="">4,50,05,545</span></td>
-                                        <td><span class="">6,45,5665.00</span></td>
-                                        <td><span class=""><input id="bookingDate" name="date1" type="date" style="border:none"></span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" /></span></td>-->
+                                        <td><span class="">{{payment.amount}}</span></td>
+                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
+                                        <td><span class=""></span></td>
 
                                     </tr>
                                     <tr class="quote-bold">
                                         <td><span class=""> Due On Possession</span></td>
                                         <td><span class="">20%</span></td>
-                                        <td><span class="">4,50,05,545</span></td>
-                                        <td><span class="">6,45,5665.00</span></td>
-                                        <td><span class=""><input id="bookingDate" name="date1" type="date" style="border:none"></span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" /></span></td>-->
+                                        <td><span class="">{{payment.amount}}</span></td>
+                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
+                                        <td><span class=""></span></td>
 
-                                    </tr>
+                                    </tr>-->
                                     <tr class="quote-bold">
                                         <td><span class="">Total</span></td>
                                         <td><span class="">100%</span></td>
-                                        <td><span class="">{{totalValue | number:2}}</span></td>
-                                        <td><span class="">{{finalServiceTax | number:2}}</span></td>
-                                        <td><span class=""><input id="bookingDate" name="date1" type="date" style="border:none"></span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount.due_date" /></span></td>-->
+                                        <td><span class="">{{sumamount}}</span></td>
+                                        <td><span class="">{{sumservice |number:2}}</span></td>
+                                        <td><span class=""></span></td>
                                        
                                     </tr>
                                 </tbody>
@@ -138,13 +138,13 @@
                         <table class="table table-bordered">
                             <tbody class="c_td">
                                 <tr>
-                                    <td><span class="data_span">A</span><p>Tower</p></td>
-                                    <td><span class="data_span">51</span><p>Floor</p></td>
-                                    <td><span class="data_span">32</span><p>Unit No.</p></td>
-                                    <td><span class="data_span">3</span><p>BHK</p></td>
-                                    <td><span class="data_span">4700 sq.ft</span><p>Salable Area</p></td>
-                                    <td><span class="data_span">2400 sq.ft</span><p>Carpet Area</p></td>
-                                    <td><span class="data_span">2</span><p>Car Park</p></td>
+                                    <td><span class="data_span">{{contactTowerName}}</span><p>Tower</p></td>
+                                    <td><span class="data_span">{{contactcFloorNo}}</span><p>Floor</p></td>
+                                    <td><span class="data_span">{{contactUnitNo}}</span><p>Unit No.</p></td>
+                                    <td><span class="data_span">{{contactUnitTypeDesc}}</span><p>BHK</p></td>
+                                    <td><span class="data_span">{{contactSaleable}} sq.ft</span><p>Salable Area</p></td>
+                                    <td><span class="data_span">{{contactCarpetArea}}sq.ft</span><p>Carpet Area</p></td>
+                                    <td><span class="data_span">{{contactcar_park_id}}</span><p>Car Park</p></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -160,7 +160,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr class="tbl_head">
-                                    <th><span>Total Consideration</span></th>
+                                    <th><span>Total Consideartion:{{contactcTotalConsideration}}</span></th>
                                     <th class="per_txt_right"></th>
                                 </tr>
                             </thead>
@@ -171,7 +171,7 @@
                                 </tr>
                                 <tr>
                                     <td><span class="">Floor Rise Applicable</span></td>
-                                    <td class="per_txt_right">7,222<span class=""></span></td>
+                                    <td class="per_txt_right">{{contactcFloorRiseApplicable}}<span class=""></span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -271,17 +271,17 @@
                                 <tr>
                                     <td style="width: 55%; border-top: none;"><span class=""><b>Offer Discount</b></span></td>
                                     <td style=" border-top: none;"></td>
-                                    <td style=" border-top: none;"><input type="text" ng-model="additionalDiscount" ng-blur="applyAdditionalDiscount()" class="form-control" style="float:right;width:20%" /></td>
+                                    <td style=" border-top: none;">{{contactDiscount}}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 55%; border-top: none;"><span class=""><b>Additional Discount</b></span></td>
                                     <td style=" border-top: none;"></td>
-                                    <td style=" border-top: none;"><input type="text" ng-model="additionalDiscount" ng-blur="applyAdditionalDiscount()" class="form-control" style="float:right;width:20%" /></td>
+                                    <td style=" border-top: none;">{{contactAdditionalDiscount}}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 55%; border-top: none;"><span class=""><b> FINAL TOTAL</b></span></td>
                                     <td style=" border-top: none;"></td>
-                                    <td style=" border-top: none;"><input type="text" ng-model="additionalDiscount" ng-blur="applyAdditionalDiscount()" class="form-control" style="float:right;width:35%" /></td>
+                                    <td style=" border-top: none;">{{contactFinalTotal}}</td>
                                 </tr>
                                 <tr>
                                     <td style="border-top: none;"><i class="fa fa-tags " style="color: #FF8F00;"></i> <span>Offer applied(Gold Coin) - {{offersvalue}}</span></td>

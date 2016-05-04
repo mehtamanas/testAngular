@@ -120,8 +120,8 @@
 
         // Approve Booking Code//
         $scope.openBookingPreview = function (d) {
-            $state.go('app.bookingPreview', { bookingId: d.booking_id });
-            $cookieStore.put('bookid', d.booking_id);
+            $state.go('app.confirmBooking', { bookingId: d.booking_id });
+        
         };
 
     }
