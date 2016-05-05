@@ -135,9 +135,10 @@
                   }
 
              },{
-                field: "approvels",
-               //template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status_a==\'Approved\' ? \'cls_Approved\': approver.status_na==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status_a==\'Approved\'">{{approver.status_a}}</div><div ng-show="approver.status_a!=\'Approved\'">{{approver.status_na}}</div></span><br/></div>',
-                template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status_a==\'Approved\' ? \'cls_Approved\': approver.status_na==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status_a==\'Approved\'">{{approver.status_a}}</div><div ng-show="approver.status_a!=\'Approved\'">{{approver.status_na}}</div></span><br/></div>',
+                 field: "approvels",
+                 template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status==\'Approved\' ? \'cls_Approved\': approver.status==\'Not Approved\' ? \'cls_NotApproved\':approver.status==\'Sent For Approval\'  ? \'cls_AnyStatus\' : \'cls_AnyStatus\'">{{approver.status}}</span><br/></div>',
+                //template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status==\'Approved\' ? \'cls_Approved\': approver.status==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status=\'Approved\'">{{approver.status}}</div><div ng-show="approver.status=\'Not Approved\'">{{approver.status}}</div></span><br/></div>',
+                //template: '<div ng-repeat="approver in dataItem.approvels"><span>{{approver.approvels}}</span><span ng-class="approver.status_a==\'Approved\' ? \'cls_Approved\': approver.status_na==\'Not Approved\' ? \'cls_NotApproved\': \'cls_AnyStatus\'"><div ng-show="approver.status_a==\'Approved\'">{{approver.status_a}}</div><div ng-show="approver.status_a!=\'Approved\'">{{approver.status_na}}</div></span><br/></div>',
                 width: "120px",
                 attributes:
              {
