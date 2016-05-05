@@ -59,7 +59,7 @@
                             <span class="quote-bold">{{contactEstimate_no}}</span><br />
                             <span>Date :</span><span style="margin-left: 12%;">{{contactEstimateDate}}</span><br>
                             <div style="margin-top:3px; margin-bottom: 4%;">
-                                <span>Expiration Date :</span><span>{{contactExpirationDate}}</span>
+                                <span>Expiration Date :</span><span>{{contactExpirationDate | date:'dd/MM/yyyy'}}</span>
                             </div>
                         </div>
                     </div>
@@ -299,10 +299,10 @@
                 <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="bookingId==null" type="button" ng-click="cancel()">
                   Cancel
                 </button>
-                <button class="btn organization-btn" style="float:left" id="campaign_save" ng-show="quoteId==null">
+                <button class="btn organization-btn" style="float:left" id="campaign_save" ng-show="quoteId!=null && bookingId!=null">
                  Confirm Booking
                 </button>
-                <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="quoteId==null" type="button">
+                <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="quoteId!=null && bookingId!=null" type="button">
                  Decline
                 </button>
             </div>

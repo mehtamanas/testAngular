@@ -11,7 +11,7 @@
             dataSource: {
                 type: "json",
                 transport: {
-                    read: apiService.baseUrl + "Booking/Get/d84f1c5b-2d4c-4427-acb2-1cb639b28bd5" // + orgID
+                    read: apiService.baseUrl + "Booking/Get/" + orgID //d84f1c5b-2d4c-4427-acb2-1cb639b28bd5
 
                 },
                 pageSize: 20
@@ -49,6 +49,15 @@
                 }, {
                     field: "booking_id",
                     title: "BOOKING ID",
+
+                    attributes:
+                     {
+                         "class": "UseHand",
+                         "style": "text-align:center"
+                     }
+                }, {
+                    field: "unit_type_desc",
+                    title: "UNIT TYPE",
 
                     attributes:
                      {
@@ -102,6 +111,32 @@
                        "class": "UseHand",
                        "style": "text-align:center"
                    }
+               }, 
+               //{
+               //    field: "",
+               //    title: "PAYMENT",
+
+               //    attributes: {
+               //        "class": "UseHand",
+               //        "style": "text-align:center"
+               //    }
+               //}, {
+               //    field: "",
+               //    title: "AGREEMENT",
+
+               //    attributes: {
+               //        "class": "UseHand",
+               //        "style": "text-align:center"
+               //    }
+                   //},
+                   {
+                   field: "Payment_status",
+                   title: "STATUS",
+
+                   attributes: {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
                },
                {
                    field: "Action",
@@ -120,7 +155,7 @@
 
         // Approve Booking Code//
         $scope.openBookingPreview = function (d) {
-            $state.go('app.confirmBooking', { bookingId: d.booking_id });
+            $state.go('app.confirmBooking', { bookingId: d.booking_id,quoteId:d.quote_id});
         
         };
 
