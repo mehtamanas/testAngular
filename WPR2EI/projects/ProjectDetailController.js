@@ -1444,7 +1444,7 @@ angular.module('project')
                 templateUrl: 'projects/addProject.tpl.html',
                 backdrop: 'static',
                 controller: AddUserProjectController,
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                     projectService: projectService,
                     projectData: {
@@ -1461,7 +1461,7 @@ angular.module('project')
                 templateUrl: 'projects/addTeam.html',
                 backdrop: 'static',
                 controller: AddTeamController,
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                     projectService: projectService,
                     projectData: {
