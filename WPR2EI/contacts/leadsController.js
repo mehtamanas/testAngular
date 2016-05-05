@@ -479,7 +479,18 @@ angular.module('contacts')
                      "class": "UseHand",
                      "style": "text-align:center"
                  }
-             },
+             }
+             ,
+             //{
+             //    field: "Tag1",
+             //    hidden:false,
+             //    title: "TAG1",
+             //    width: "220px",
+             //    attributes: {
+             //        "class": "UseHand",
+             //        "style": "text-align:center"
+             //    }
+             //},
               {
                   field: "leadsource",
                   title: "Lead Source",
@@ -1917,7 +1928,7 @@ angular.module('contacts')
                     filter.filters.push({ field: "text", operator: "contains", value: txtSearch });
 
                 if (columns[i].title.trim().toUpperCase().trim() == "TAGS")
-                    filter.filters.push({ field: "Tag1", operator: "contains", value: txtSearch });
+                    filter.filters.push({ field: "tag1", operator: "contains", value: txtSearch });
 
                 if (columns[i].title.trim().toUpperCase().trim() == "LEAD SOURCE")
                     filter.filters.push({ field: "leadsource", operator: "contains", value: txtSearch });
