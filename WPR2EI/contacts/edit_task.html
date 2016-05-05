@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <span class="field-mdl field-req">*</span>
+                    <!--<span class="field-mdl field-req">*</span>-->
                 </div>
 
                 <div class="clearfix">
@@ -54,10 +54,6 @@
                         </div>
                   </div>
              </div>
-
-
-               
-
                 <div class="clearfix">
                     <div class="form-group"
                          data-ng-class="{
@@ -81,15 +77,15 @@
                                     <div ng-message="required" data-ng-if="addNewForm.task_project.$invalid && (!addNewForm.task_project.$pristine || showValid) && !addNewForm.task_project.$focus">This field should not be empty </div>
                                 </div>
                             </div>
-                            <div class="field-md0 field-req">*</div>
+                            <!--<div class="field-md0 field-req">*</div>-->
                         </div>
                         </div>
 
 
-                        <div class="pull-left f-half-6">
+                        <div class="pull-left f-half-6" style="margin-top:-21px">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">Person:</label>
-                                <input type="text" class="form-control  text-bold" autofocus name="contactName"
+                                <input type="text" class="form-control  text-bold" autofocus name="contactName" style="background:none"
                                        data-ng-model="selectedContact_name"
                                        id="contact_editTask_Person"
                                        ng-disabled="true" />
@@ -144,14 +140,15 @@
                     <div class="clearfix">
 
                         <div class="pull-left f-half-6">
-                            <div class="form-group form-bx form-bx3-1">                              
-                                <input kendo-date-time-picker class="form-control" id="contact_editTask_DueDateAndTime"
+                            <div class="form-group form-bx form-bx3-1">    
+                                <label for="">Date:</label>                          
+                                <input kendo-date-time-picker class="form-control" id="contact_editTask_DueDateAndTime" style="background:none;height:31px"
                                        ng-model="due_date"
                                        k-ng-model="k_due_date"
                                        k-format="'dd/MM/yyyy hh:mm tt'" />
                             </div>
                         </div>
-                        <div class="form-group" style="MARGIN-TOP: 2%;">
+                        <div class="form-group" style="MARGIN-TOP: 5%;">
                             <div style="float:left;margin-bottom:-13px">
                                 <label>
                                     <input type="checkbox" name="test3" value="1" ng-model="remind_me" id="chk_remind-Me" ng-init="remind_me=true" >
@@ -202,14 +199,19 @@
 
                   
 
-                    <div class="modal-btn-wrap-1 clearfix">
+                    <!--<div class="modal-btn-wrap-1 clearfix">
                         <button type="submit" class="btn btn-primary bold_txt" ladda="loadingDemo"  data-style="expand-right" id="btn_contact_editTask_save"> SAVE</button>
                         <button type="button" class="btn btn_complete" ng-click="completeFun()" id="btn_contact_editTask_complete">COMPLETE  </button>
                         <button type="button" class="btn odd_btn1" ng-click="cancel()" id="btn_contact_editTask_cancel">CANCEL</button>
                        
-                    </div>
+                    </div>-->
 
+                <div class="modal-btn-wrap clearfix">
 
+                    <button type="submit" class="btn btn-primary bold_txt" ladda="loadingDemo" data-style="expand-right" id="btn_contact_editTask_save" >Save</button>
+                    <button type="button" class="btn btn_complete" ng-click="completeFun()" id="btn_contact_editTask_complete">Complete </button>
+                    <button type="button" class="btn odd_btn1" id="btn_contact_editTask_cancel" ng-click="cancel()">Cancel</button>
+                </div>
 
 
 </form>

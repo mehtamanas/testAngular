@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <span class="field-mdl field-req">*</span>
+                    <!--<span class="field-mdl field-req">*</span>-->
                 </div>
 
                 <div class="clearfix">
@@ -81,13 +81,13 @@
                                 <div ng-messages="addNewForm.project_task.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.project_task.$invalid && (!addNewForm.project_task.$pristine || showValid) && !addNewForm.project_task.$focus">This field should not be empty </div>                                  
                                 </div>
-                            </div><div class="field-md0 field-req">*</div>
+                            </div><!--<div class="field-md0 field-req">*</div>-->
                         </div>
                     </div>
-                        <div class="pull-left f-half-6">
+                        <div class="pull-left f-half-6" style="margin-top:-21px">
                             <div class="form-group form-bx form-bx3-1">
                                 <label for="">Person:</label>
-                                <select kendo-combo-box class="dropdown form-control"
+                                <select kendo-combo-box class="dropdown form-control" style="background:none;height:31px"
                                         id="editTaskPerson"
                                         k-placeholder="'Select Contact'"
                                         k-data-text-field="'Contact_Name'"
@@ -138,14 +138,14 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
 
-                            <input kendo-date-time-picker class="form-control"
+                            <input kendo-date-time-picker class="form-control" style="background:none;height:31px"
                                    ng-model="due_date"
                                    id="editTaskDueDateAndTime"
                                    k-ng-model="k_due_date"
                                    k-format="'dd/MM/yyyy hh:mm tt'" />
                         </div>
                     </div>
-                    <div class="form-group" style="MARGIN-TOP: 2%;">
+                    <div class="form-group" style="MARGIN-TOP: 3%;">
                         <div style="float:left;margin-bottom:-13px">
                             <label>
                                 <input type="checkbox" name="test3" value="1" id="editTaskRemindMe" ng-model="remind_me" ng-init="remind_me=true">
