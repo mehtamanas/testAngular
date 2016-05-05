@@ -373,6 +373,7 @@
             comment: $scope.params.comment,
             blog_id: window.sessionStorage.selectedBlogID,
             template_id: $scope.Template_ID,
+            approval_user_id: $cookieStore.get('userId'),
             status: "Not Approved",
 
         };
