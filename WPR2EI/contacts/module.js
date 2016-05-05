@@ -111,7 +111,7 @@ angular.module('contacts', [])
          title: 'Document Agreement Details'
      })
 
-      .state('app.agent', {
+      .state('app.agent', {    
           url: '/agent',
           templateUrl: 'contacts/agent/agent.html',
           controller: 'agentCtrl',
