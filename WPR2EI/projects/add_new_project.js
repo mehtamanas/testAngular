@@ -299,7 +299,7 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             Street_1: newadd.Street_1,
             Street_2: newadd.Street_2,
             area: $scope.params.area,
-            media_type:media_type,
+        
             city: $scope.params.city,
             state: $scope.params.state,
             Rangefrom: $scope.params.Rangefrom,
