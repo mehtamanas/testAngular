@@ -544,6 +544,24 @@ angular.module('contacts')
                 buttonCount: 5
             },
             columns: [{
+                field: "Milestone",
+                title: "Milestone",
+
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+            }, {
+                field: "payment_scheme",
+                title: "Payement Scheme",
+
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+            }, {
                 field: "amount",
                 title: "Amount",
               
@@ -553,24 +571,41 @@ angular.module('contacts')
                 }
 
             }, {
-                field: "payment_type_id",
-                title: "Type",
+                field: "duedate",
+                title: "Due Date",
+
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
                 }
 
             }, {
-                field: "duedate",
-                title: "Due Required",
-            
-                format: '{0:dd/MM/yyyy}',
+                field: "datepaid",
+                title: "Pay Date",
+
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
                 }
 
-            }]
+            }, {
+                field: "demandletter",
+                title: "Demand Letter",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+            }, {
+                title: "Action",            
+                field: 'Action',
+                width: '120px',
+                attributes:
+                  {
+                      "class": "UseHand",
+                      "style": "text-align:center"
+                  }
+            },]
         };
        
         $scope.TaskGrid = {

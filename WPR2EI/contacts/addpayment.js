@@ -109,9 +109,13 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
             organization_id: $cookieStore.get('orgID'),
             payment_schedule_id: $scope.params.payment_type1,
             Amount: $scope.params.Amount,
-            duedate: new Date(dDate).toISOString(),
-            contact_id: window.sessionStorage.selectedCustomerID,
-            ////user_id: $cookieStore.get('userId'),
+            name: $scope.params.name,
+            text: $scope.params.text,
+            datepaid: $scope.params.datepaid,
+            duedate:$scope.params.duedate,
+            booking_id:$scope.params.id,
+            //duedate: new Date(dDate).toISOString(),
+            contact_id: window.sessionStorage.selectedCustomerID,           
         };
 
         apiService.post("Payment/CreateAddNewPayment", postData).then(function (response) {
@@ -147,6 +151,10 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
         payment_schedule_id: $scope.payment_type1,
         Amount: $scope.Amount,
         duedate: $scope.duedate,
+        name: $scope.name,
+        datepaid:$scope.datepaid,
+        text:$scope.text,
+        booking_id:$scope.booking_id,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         //contact_id: window.sessionStorage.selectedCustomerID,
@@ -157,6 +165,10 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
         payment_schedule_id: $scope.payment_type1,
         Amount: $scope.Amount,
         duedate: $scope.duedate,
+        name: $scope.name,
+        datepaid: $scope.datepaid,
+        text: $scope.text,
+        booking_id: $scope.booking_id,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         contact_id: window.sessionStorage.selectedCustomerID,
@@ -177,6 +189,21 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
             //alert($scope.params.user_id);
         };
 
+
+        Url = "Booking/GetBooking?Contact_id=" + $scope.seletedCustomerId;
+        apiService.get(Url).then(function (response) {
+            $scope.booking = response.data;
+        },
+       function (error) {
+           if (error.status === 400)
+               alert(error.data.Message);
+           else
+               alert("Network issue");
+       });
+
+        $scope.selectBooking = function () {
+            $scope.params.id = $scope.book1;
+        };
 
 
 
