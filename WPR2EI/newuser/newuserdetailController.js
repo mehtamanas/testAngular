@@ -1530,7 +1530,7 @@ columnMenu: {
                 templateUrl: 'newuser/Projects/addProject.tpl.html',
                 backdrop: 'static',
                 controller: AddProjectController,
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                     newuserService: newuserService,
                     newuserData: {

@@ -6,7 +6,7 @@ body {
     color: #727272;
     font-family: "Open Sans", Arial, sans-serif;
     font-size: 14px;
-    background: #e7e7e7;
+    background: #EFEFEF;
 }
 
 html, body, .container-fluid, .row, .column {
@@ -2263,11 +2263,11 @@ h4.form-sub-title {
     text-align: center;
 }
 
-    .plan-sec .plan-header .plan-h01 {
-        font-weight: bold;
-        width: 238px;
-        line-height: 206px;
-    }
+.plan-sec .plan-header .plan-h01 {
+   font-weight: bold;
+   width: 238px;
+   line-height: 206px;
+}
 
     .plan-sec .plan-header .plan-h02 {
         color: #fff;
@@ -2351,11 +2351,12 @@ h4.form-sub-title {
     }
 
     .plan-sec .plan-content .plan-c02 {
-        width: 144px;
+        width: 197px;
+        text-align: center;
     }
 
     .plan-sec .plan-content .plan-c03 {
-        width: 245px;
+        width: 227px;
         text-align: center;
     }
 
@@ -4451,7 +4452,7 @@ form.callback {
     font-weight: 600;
     padding-left: 75px;		   
     font-size: 13px;
-    padding-left: 57px;
+    padding-left: 64px;
 }
 
 #sidebar .navbar-default .navbar-nav li.nav-sub-dropdown .nav-sub-bx .nav-no {
@@ -10443,13 +10444,18 @@ md-radio-button {
     color: #fff;
     font-weight: 600;
 }
+.odd_btn2 {
+    background: #498FA6;
+    color: #fff;
+    font-weight: 500;
+}
 .c-checkbox span, .c-radio span {
     position: relative;
     display: inline-block;
     vertical-align: top;
     margin-left: -20px;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 18px;
     background:#fff;
     border: 1px solid #ccc;
     margin-right: 5px;

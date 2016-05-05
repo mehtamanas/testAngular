@@ -599,7 +599,7 @@
                 animation: true,
                 templateUrl: 'team/users/addUsers.html',
                 backdrop: 'static',
-                size: 'lg',
+                size: 'sm',
                 controller: AddUsersController,
                 windowClass: 'addUser',
                 resolve: {
@@ -620,7 +620,7 @@
                 templateUrl: 'team/addProject.tpl.html',
                 backdrop: 'static',
                 controller: AddProjectTeamController,
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                     newuserService: teamService,
                     newuserData: {

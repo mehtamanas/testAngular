@@ -10,14 +10,14 @@
                 <div class="col-lg-1 col-md-2 col-sm-3">
                     <div class='user-photo pull_left'><img src="{{user.project_image}}" /></div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <p class="project-name">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <p class="project-name capt" style="text-align: left;padding-left: 15px;">
                         {{user.name }}
                     </p>
 
 
                 </div>
-                <div class="col-lg-8 col-md-6 col-sm-3">
+                <div class="col-lg-7 col-md-6 col-sm-3">
                     <span class="pull-right"  style="margin-top:3%"  ng-click="addUser(user)">
                         <img ng-src="assets/images/{{user.isUserMember ? 'ok': 'plus'}}_icon.png" />
                     </span>
