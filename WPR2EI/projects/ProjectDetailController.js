@@ -15,9 +15,9 @@ angular.module('project')
         //}
         
 
-        //$scope.editnote = function () {
-        //    $scope.openNotesEditPopUp();
-        //}
+        $scope.editnote = function (image) {
+            $scope.openNotesEditPopUp(image);
+        }
 
         $scope.chargeAction = 'no_action';
         $scope.serviceAction = 'no_action';
@@ -93,13 +93,19 @@ angular.module('project')
 
         //});
 
-        $scope.openNotesEditPopUp = function () {
+        $scope.openNotesEditPopUp = function (image) {
+            //alert(editnotes);
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'projects/add_new/gallery.html',
+                templateUrl: 'projects/add_new/editGallery.html',
                 backdrop: 'static',
-                controller: AddNewGalleryController,
-                size: 'lg'
+                controller: EditGallery,
+                size: 'lg',
+                resolve: {
+                    imageData: {
+                        data: image
+                    }
+                }
             });
         };
       

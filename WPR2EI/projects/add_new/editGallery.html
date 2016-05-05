@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="progress" ng-show="showProgress">
+            <div class="progress" ng-show="((uploader.progress)/1)>0">
                 <div class="progress-bar" role="progressbar"
                      ng-style="{ 'width': (uploader.progress)/1 + '%' }"></div>
             </div>
