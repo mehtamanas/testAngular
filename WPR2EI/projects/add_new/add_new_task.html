@@ -16,7 +16,7 @@
                                   'has-success': addNewForm.TaskName.$valid && !addNewForm.TaskName.$pristine && !addNewForm.TaskName.$focus
                                                      }">
                         <div class="form-group form-bx form-bx14">
-                            <label for="">Task Name<span class="validationStarRed">*</span></label></label>
+                            <label for="">Task Name<span class="validationStarRed">*</span></label>
                             <input type="text" class="form-control text-bold" autofocus name="TaskName"
                                    data-ng-model="name"
                                    minlength="1"
@@ -89,10 +89,10 @@
                         </div>
                     </div>-->
 
-                    <div class="pull-left f-half-6">
+                    <div class="pull-left f-half-6" style="margin-top:-21px">
                         <div class="form-group ">
                             <label for="">Person:</label>
-                            <select kendo-combo-box class="dropdown form-control"
+                            <select kendo-combo-box class="dropdown form-control" style="background:none;height:31px"
                                     id="addNewTaskPerson"
                                     k-placeholder="'Select Contact'"
                                     k-data-text-field="'Contact_Name'"
@@ -144,7 +144,7 @@
                     <div class="pull-left f-half-6">
                         <div class="form-group form-bx form-bx3-1">
                             <label for="">Date:</label>
-                            <input kendo-date-time-picker class="form-control"
+                            <input kendo-date-time-picker class="form-control" style="background:none;height:31px"
                                    ng-model="due_date"
                                    id="addNewTaskDate"
                                    k-ng-model="k_due_date"
@@ -152,7 +152,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="MARGIN-TOP: 4%;">
+                    <div class="form-group" style="MARGIN-TOP: 5%;">
                         <div style="float:left;margin-bottom:-13px">
                             <label>
                                 <input type="checkbox" id="addNewTaskRemindMe" name="test3" value="1" ng-model="remind_me" ng-init="remind_me=true">
