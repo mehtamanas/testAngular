@@ -1,6 +1,6 @@
 ﻿angular.module('contacts')
 
-.controller('propertyCustomizDue', function ($scope, $state, $cookieStore, apiService, $rootScope, $modal) {
+.controller('propertyCustomizDue', function ($scope, $state, $cookieStore, apiService, $rootScope, $modal, $filter) {
     console.log('propertyCustomizDue');
     $rootScope.title = 'Dwellar-peopertyQuotes';
     var org_id =$cookieStore.get("organizationId");
@@ -25,7 +25,9 @@
 
     $scope.paymentschemeDetails = $cookieStore.get("PaymentDetails");
 
-    $scope.govermentTaxDetails = $cookieStore.get("GovermentCharge");
+    $scope.govermentTaxDetails = $cookieStore.get("GovermentChargeList");
+
+    $scope.otherChargeDetailList = $cookieStore.get("OtherChargeList");
 
     $scope.totalValue = $cookieStore.get("total");
 
@@ -53,7 +55,7 @@
     $scope.amountCalculation = function () {
         $scope.amountCalculationValue = [];
 
-        var serviceTax = (_.findWhere($scope.govermentTaxDetails[0].chargeList, { charge_name_type: "Service Tax" })).charge_percentage;
+        var serviceTax = (_.findWhere($scope.govermentTaxDetails.chargeList, { charge_name_type: "Service Tax" })).charge_percentage;
         for (i = 0; i < $scope.paymentschemeDetails.length; i++) {
            
             $scope.amount = (parseFloat($scope.totalValue)) * (parseFloat($scope.paymentschemeDetails[i].percentage / 100));
@@ -733,7 +735,7 @@
             estimate_no: null,
             estimate_date: $cookieStore.get('propertyFromDate'),
             expiration_date: $cookieStore.get('propertyEndDate'),
-            description: $scope.getDescriptionDetails
+            terms_and_conditions: $scope.getDescriptionDetails
         }
 
         apiService.post("PropertyQuotes/CreateQuoteUnitCharge", postData).then(function (response) {
@@ -745,7 +747,24 @@
                 quatationDetails.push({ 'payment_scheme_id': $scope.paymentschemeDetails[i].payment_schedule_Detail_id, 'amount': $scope.amountCalculationValue[i].amountTotal, 'service_tax': $scope.amountCalculationValue[i].serviceTax, 'contact_id': customer_id, 'user_id': UserId, 'organization_id': org_id, 'offer_id': typeOfOffer.offers_id, 'unit_id': UnitDetail.unit_id, 'due_date': $scope.amountCalculationValue[i].due_date, 'charge_project_mapping_id': "", 'charge_id': "", 'quote_id': quoteUnitCharge.id });
             }
 
-            apiService.post("PropertyQuotes/UnitPaymentScheme", quatationDetails).then(function (response) {
+            var quoteUnitChargesModel = {};
+            quoteUnitChargesModel.QuotesUnitCharges = quatationDetails;
+            quoteUnitChargesModel.GovernmentCharges = [];
+            quoteUnitChargesModel.OtherCharges = [];
+            
+          //  $scope.govermentTaxDetails = $cookieStore.get("GovermentChargeList");
+            //$scope.otherChargeDetailList = $cookieStore.get("OtherChargeList");
+
+            angular.forEach($scope.govermentTaxDetails.chargeList, function (value) {
+                quoteUnitChargesModel.GovernmentCharges.push(getChargesInUnitQuote($scope.govermentTaxDetails, value, $scope.governmentCharges, quoteUnitCharge.id));
+            });
+
+            angular.forEach($scope.otherChargeDetailList.chargeList, function (value) {
+                quoteUnitChargesModel.OtherCharges.push(getChargesInUnitQuote($scope.otherChargeDetailList, value, $scope.otherCharges, quoteUnitCharge.id));
+            });
+
+
+            apiService.post("PropertyQuotes/UnitPaymentScheme", quoteUnitChargesModel).then(function (response) {
                 var unitPaymentScheme = response.data;
                 alert("PropertyQuoteCreated");
                 $state.go('app.contactdetail', { id: customer_id });
@@ -753,6 +772,23 @@
 
 
         });
+
+        function getChargesInUnitQuote(chargeDetail, charge, valueList, quoteId) {
+            var chargeAmount = $filter('filter')(valueList, { name: charge.charge_name_type }, true);
+            chargeAmount = chargeAmount == null ? 0 : chargeAmount[0].value;
+            return {
+                category_type_id: chargeDetail.category_type_id,
+                category_type_name: chargeDetail.category_type_name,
+                charge_type_id: charge.charge_type_id,
+                project_id: project_id,
+                user_id: UserId,
+                organization_id: org_id,
+                offer_id: typeOfOffer.offers_id,
+                unit_id: UnitDetail.unit_id,
+                quote_id: quoteId,
+                Charge_amount: chargeAmount
+            };
+        }
     }
    
 });
