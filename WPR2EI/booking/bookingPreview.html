@@ -40,9 +40,9 @@
                         <div class="col-md-3 contact_quotes">
                             <span>PAN No:</span> <span class="upper">{{organizationPan_no}}</span>
                         </div>
-                        <div class="col-md-4 contact_quotes">
+                        <!--<div class="col-md-4 contact_quotes">
                             <span class="upper">payments terms :</span> &nbsp;&nbsp;&nbsp;<span class="upper per_box">100 % Advance</span>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
@@ -83,11 +83,11 @@
                                 </thead>
                                 <tbody  >
                                     <tr ng-repeat="payment in contactcServiceTax">
-                                        <td><span class=""></span></td>
-                                        <td><span class=""></span></td>
+                                        <td><span class="">{{payment.paymentDescription}}</span></td>
+                                        <td><span class="">{{payment.percentage}}</span></td>
                                         <td><span class="">{{payment.amount}}</span></td>
                                         <td><span class="">{{payment.service_tax | number:2}}</span></td>
-                                        <td><span class="">{{payment.due_date}}</span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>-->
+                                        <td><span class="">{{payment.due_date | date:'dd/MM/yyyy'}}</span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>-->
                                         
                                     </tr>
 
@@ -139,7 +139,7 @@
                             <tbody class="c_td">
                                 <tr>
                                     <td><span class="data_span">{{contactTowerName}}</span><p>Tower</p></td>
-                                    <td><span class="data_span">{{contactcFloorNo}}</span><p>Floor</p></td>
+                                    <td><span class="data_span">{{contactFloorNo}}</span><p>Floor</p></td>
                                     <td><span class="data_span">{{contactUnitNo}}</span><p>Unit No.</p></td>
                                     <td><span class="data_span">{{contactUnitTypeDesc}}</span><p>BHK</p></td>
                                     <td><span class="data_span">{{contactSaleable}} sq.ft</span><p>Salable Area</p></td>
@@ -189,28 +189,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--<tr ng-repeat="govermentCharge in govermentChargesAfterCalculation">
-                                    <td><span class="">{{govermentCharge.name}}</span></td>
-                                    <td class="per_txt_right"><span>{{govermentCharge.value| number:2}}</span></td>
-                                </tr>-->
-
-                                <tr>
-                                    <td><span class="">d>Stamp Duty 5%pa</span></td>
-                                    <td class="per_txt_right">2,252,444<span class=""></span></td>
+                                <tr ng-repeat="govrncharge in quoteGovermentCharge">
+                                    <td><span class="">{{govrncharge.govchargeName}}</span></td>
+                                    <td class="per_txt_right">{{govrncharge.chargeAmount}}<span class=""></span></td>
                                 </tr>
-                                <tr>
-                                    <td><span class="">Registration</span></td>
-                                    <td class="per_txt_right">23,155,55<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class=""> Vat 1%</span></td>
-                                    <td class="per_txt_right">22,65,330<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="">Service Tax 4.5%</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -227,39 +209,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--<tr ng-repeat="otherCharge in otherChargesAfterCalculation">
-                                    <td><span class="">{{otherCharge.name}}</span></td>
-                                    <td class="per_txt_right"><span>{{otherCharge.value| number:2}}</span></td>
-                                </tr>-->
-
-                                <tr>
-                                    <td><span class="">paCorpus Fundn></span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
+                                <tr ng-repeat="othercharge in quoteOtherCharge">
+                                    <td><span class="">{{othercharge.otherchargeName}}</span></td>
+                                    <td class="per_txt_right">{{othercharge.otherchargeAmount}}<span class=""></span></td>
                                 </tr>
-                                <tr>
-                                    <td><span class="">Condomonium Formation</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="">utility(Gas,Water,Electric)</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="">Advance Maintenance For 24 Month</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="">legal</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="">Club House</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="">Infrastructure Charges</span></td>
-                                    <td class="per_txt_right">98,54,142<span class=""></span></td>
-                                </tr>
+                              
                             </tbody>
                         </table>
                     </div>
