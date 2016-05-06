@@ -101,10 +101,6 @@
 
         </div>
     </div>-->
-
-
-
-
     <div class="project-detail-tabs pg-tabs " kendo-tab-strip style="margin-top: -1px;border-top: 1px solid #f1f1f1;">
         <ul class="responsive-tagJS " role="tablist" style="margin-left: 0px !important; margin-right:0px !important;">
             <li class="k-state-active contact-nav" id="contact_essential"> <a aria-controls="summary" role="tab" data-toggle="tab">ESSENTIALS</a></li>
@@ -251,10 +247,7 @@
                                                 </label>
                                             </div>
                                         </div> <!--Office-->
-
                                     </div>
-
-
                                 </div>
                             </div>
                             <div class="cxo-wrap1">
@@ -509,15 +502,36 @@
 
         </div> <!--Essential-->
 
-        <div class="leads_group" id="documentGridDiv">
-            <div class="tab-content-title">Documents<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" href="" style="cursor:pointer">+</a></div>
-            <div kendo-grid k-options="DocumentGrid" selectable="true">
+        <div class="leads_group" id="documentGridDiv" style="background:#EFEFEF">
+            <!--<div class="tab-content-title">Documents<a id="contact_openNewDocument" class="add-btn" data-toggle="modal" ng-click="openNewDocument()" href="" style="cursor:pointer">+</a></div>-->
+           
 
+
+            <div class="row" style="padding: 0px 0px 18px 0px;">
+                <div class="col-md-2" style="width:120px;margin-left: 41px;">
+                    <select ng-model="TaskAction" style="height: 24px !important;" class="form-control serach_bar_btn sel_action" ng-change="taskAction()" id="taskaction">
+                        <option value='no_action' selected>Action</option>
+                        <option value='delete'>Delete</option>
+                    </select>
+                </div>
+                <div class="col-md-2" style="width: 44px;">
+                    <button type="button" class="btn btn_refresh" style="padding: 7px 11px 7px 12px;"><img src="./images/refresh2.png" /></button>
+                </div>
+                <div class="col-md-2 col-xs-offset-8" style="margin-left: 15px;">
+                  
+                    <a id="contact_openNewDocument" class="btn btn-primary" data-toggle="modal" ng-click="openNewDocument()" href="" style="cursor:pointer">Documents</a>
+                </div>
             </div>
+            <div kendo-grid k-options="DocumentGrid" selectable="true">
+            </div>
+
+          
         </div>  <!--Document-->
 
-        <div class="leads_group" id="quoteGrid">
-            <div class="col-lg-1 col-md-1 col-sm-1 " style="padding: 15px;">
+        <div class="leads_group" id="quoteGrid" style="background:#EFEFEF">
+            <div class="row" style="padding: 0px 0px 18px 0px;">
+
+            <div class="col-md-2" style="width:120px;margin-left: 41px;">
                 <select ng-model="quotesAction" style="height: 34px !important;padding: 2px;" class="form-control serach_bar_btn sel_action" ng-change="chooseAction()" id="Quotes_Action">
 
                     <option value='' selected>Action</option>
@@ -527,8 +541,14 @@
                 </select>
 
             </div>
-            <div class="tab-content-title"><a id="contact_openNewQuotation" class="btn btn-primary" data-toggle="modal" ng-click="openQuote()" href="" style="cursor:pointer">Add Quotation</a></div>
+            <div class="col-md-2" style="width: 44px;">
+                <button type="button" class="btn btn_refresh" style="padding: 7px 11px 7px 12px;"><img src="./images/refresh2.png" /></button>
+            </div>
+            <div class="col-md-2 col-xs-offset-8" style="margin-left: 15px;">
+                <a id="contact_openNewQuotation" class="btn btn-primary" data-toggle="modal" ng-click="openQuote()" href="" style="cursor:pointer">Add Quotation</a>
+            </div>
 
+        </div>
             <div kendo-grid k-options="QuotesServiceGrid" ng-show={{WHO_AM_I=="Broker"}} selectable="true"></div>
             <div kendo-grid k-options="QuotesPropertyGrid" ng-show={{WHO_AM_I!=="Broker"}} selectable="true"></div>
         </div> <!--QUOTE-->
