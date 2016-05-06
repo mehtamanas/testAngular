@@ -5,7 +5,7 @@
 </style>
 
 <div id="main-content" class="col-xs-12">
-    <div class="content-inner">        
+    <div class="content-inner">
         <div class="pg-inner-header">
             <div class="row">
 
@@ -36,14 +36,35 @@
                     </div>
                 </div>
             </div>
+            <div class="clearfix list_search" style="margin-top: 23px;">
+                <div class="right-inner-addon">
+                    <i class="fa fa-search"></i>
+                    <input type="text" ng-model="searchContact" class="form-control" id="searchList" placeholder="Search Contact" />
+                </div>
+            </div>
             <div class="top-row" style="width:100%; background:#fff; padding:60px">
                 <form class="form-content form-content2 edit-organization-setting" name="addNewForm" novalidate data-ng-submit="addNew(addNewForm.$valid)" autocomplete="off">
                     <div class="clearfix " style="margin-top:5%">
-                                       
-                        <div id="record-content" class="properties-content">
-                            <div id="payment_contactList" kendo-grid k-options="SelectClientGrid" selectable="true" k-on-change="myGridChange(dataItem)">
+                        <div id="record-content" class="row">
+                            <div class="col-md-5">
+                                <div class="user_details-2">
+                                    <div class="clearfix spacer-1 row_content-1" ng-repeat="contact in contactInPayScheme | filter: searchContact:strict">
+                                        <div class="pull-left  profile-row1">{{contact.first_name}} {{contact.last_name}}</div>
+                                        <div class="pull-right profile-row2">
+                                            <label class="label-group">
+                                                <span class="contact_value" ng-click="selectContact(contact)" id="userLead"><img ng-src="assets/images/{{contact.isSelected ? 'ok': 'plus'}}_icon.png" /> </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div><!-- record-content ended -->                                  
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                                <label>{{contactforDemandLetter.length}} Contact Added</label>
+                                <div  id="payment_contactList" kendo-grid k-options="SelectClientGrid" selectable="true" k-on-change="myGridChange(dataItem)">
+                                </div>
+                            </div>
+                        </div><!-- record-content ended -->
                     </div>
 
                     <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix" style="text-align:right;margin-left: 16%;">
@@ -51,7 +72,7 @@
                             CANCEL
                         </button>
 
-                        <button class="btn organization-btn" id="payment_contactList_Save" type="button" ng-click="SelectDemandTemplate()">
+                        <button class="btn organization-btn" id="payment_contactList_Save" type="button" ng-click="chooseTemplate()">
                             NEXT
                         </button>
 
@@ -64,6 +85,6 @@
 
     </div><!-- main-content ended -->
 
-   
+
 
 </div>

@@ -4,7 +4,7 @@ angular.module('project')
 .controller('ProjectDetailController',
     function ($scope, $state, security, $cookieStore, apiService, $window, $modal, $rootScope, projectService) {
        console.log('ProjectDetailController');
-
+       var selectedPayment = [];
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
         var orgID = $cookieStore.get('orgID');
 
@@ -50,48 +50,6 @@ angular.module('project')
          $scope.serviceAction = 'no_action';
        
         $rootScope.title = 'Dwellar-ProjectDetails';
-        //$('#btnSave').hide();
-        //$('#iconEdit').hide();
-        //$('#btnAdd').hide();
-
-        //security.isAuthorized().then(function (response) {
-        //    nav = response;
-        //    console.log(nav);
-        //    if (nav.length > 0) {
-
-        //        for (i = 0; i < nav.length; i++) {
-        //            if (nav[i].resource === "Projects") {
-        //                $rootScope.projects = nav[i];
-
-        //            }
-        //            if (nav[i].resource === "Users") $rootScope.users = nav[i];
-        //            if (nav[i].resource === "Teams") $rootScope.teams = nav[i];
-
-        //            if (nav[i].resource === "Billing") $rootScope.billing = nav[i];
-        //            if (nav[i].resource === "Contacts") $rootScope.contacts = nav[i];
-        //            if (nav[i].resource === "Organization") $rootScope.organization = nav[i];
-        //            if (nav[i].resource === "Channel Partners") $rootScope.channelPartners = nav[i];
-        //            if (nav[i].resource === "Audit Trail") $rootScope.auditTrail = nav[i];
-        //            if (nav[i].resource === "Reports") $rootScope.reports = nav[i];
-        //            if (nav[i].resource === "Builders") $rootScope.support = nav[i];
-        //            if (nav[i].resource === "Notifications") $rootScope.notifications = nav[i];
-        //            if (nav[i].resource === "Support") $rootScope.support = nav[i];
-        //            if (nav[i].resource === "Property") $rootScope.property = nav[i];
-        //            if (nav[i].resource === "Shared Listings") $rootScope.sharedListings = nav[i];
-        //            if (nav[i].resource === "Campaigns") $rootScope.campaigns = nav[i];
-        //            if (nav[i].resource === "Tasks") $rootScope.tasks = nav[i];
-
-        //        }
-        //    }
-
-        //    if ($rootScope.projects.write) {
-        //        event.preventDefault();
-        //        $('#btnSave').show();
-        //        $('#iconEdit').show();
-        //        $('#btnAdd').show();
-        //    }
-
-        //});
 
         $scope.openNotesEditPopUp = function (image) {
             //alert(editnotes);
@@ -941,6 +899,7 @@ angular.module('project')
                 $scope.width = 0;
             }
         });
+
         $scope.$on('inventoryLoading', function (event, args) {
             if (args == 1) {
                 $scope.width = 100;
@@ -1922,16 +1881,6 @@ angular.module('project')
         
            });
 
-            $scope.isVisible = [];
-            $scope.isVisible[0] = true;
-            $scope.toggleClass = function (id) {
-                for (i = 0; i < $scope.isVisible.length; i++) {
-                    $scope.isVisible[i] = false;
-                }
-                $scope.isVisible[id] = $scope.isVisible[id] == true ? false : true;
-                $scope.$apply();
-            };
-
             //calling Payment
             projectUrl = "Payment/GetPayment_Schedule_Mile?id=" + $scope.seletedCustomerId;//d028defd-319f-4b89-a51b-55ed9b327200 ";
             apiService.getWithoutCaching(projectUrl).then(function (response) {
@@ -2036,10 +1985,72 @@ angular.module('project')
              }
 
         }
-        $scope.demandletterFun = function (id) {
-            $scope.PaymentId = $cookieStore.put('payment_schedule_id', id);
-            $state.go('app.contactDemandList');
-        };
+
+        $scope.paymentGridOptions = {
+            dataSource: {
+                type: 'json',
+                transport: {
+                    read: function (options) {
+                        options.success(selectedPayment);
+                    }
+                },
+                pageSize: 20
+            },
+            reorderable: true,
+            height: window.innerHeight - 400,
+            resizable: true,
+            pageable: {
+                refresh: true,
+            },
+            columns: [{
+                title: 'PAYMENT TERMS',
+                template: '<span>#=description#</span><span> #=percentage#%</span>',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            }, {
+                title: 'STATUS',
+                template: '<span>Complete</span>',
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            }, {
+                title: 'Action',
+                template: '<div class="uib-dropdown drop_lead" uib-dropdown ><button class="btn drop_lead_btn uib-dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="uib-dropdown"><span class="caret caret_lead"></span></button><ul class="uib-dropdown-menu dropdown_lead" uib-dropdown-menu >' +
+               '<li><a  class="follow_lead" ng-click="deletePayment(dataItem.payment_schedule_id)" data-toggle="modal">Delete </a></li>' +
+               '<li><a href="" ng-click="sendDemandLetter(dataItem.payment_schedule_id)">Send Demand Letter</a></li>' +
+               '<li><a href="" ng-click="completePayment(dataItem.payment_schedule_id)">Complete</a></li>' +
+               '<li><a href="" ng-click="editPayment(dataItem.payment_schedule_id)">Edit</a></li>' +
+               '</ul></div>',
+                width: "120px",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+            }]
+        }
+
+        $scope.selectPaymentScheme = function (dataItem) {
+            selectedPayment = (_.find($scope.orgpayment, function (o) { return o.p_sch_id == $scope.paymentSchemeType })).PaymentScheduleDetailsList;
+            $('.k-i-refresh').trigger("click");
+        }
+
+        $scope.deletePayment = function (id) {
+
+        }
+
+        $scope.sendDemandLetter = function (id) {
+            $state.go('app.generateDemandLetter', { id: id });
+        }
+        $scope.completePayment = function (id) {
+
+        }
+        $scope.editPayment = function (id) {
+
+        }
+       
         $scope.$on('REFRESH', function (event, args) {
             if (args == 'UserGrid') {
                 $('.k-i-refresh').trigger("click");
