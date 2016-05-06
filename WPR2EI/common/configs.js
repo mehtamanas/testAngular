@@ -23,6 +23,7 @@ angular.module('configs', [])
 
 .constant('PATTERNREGEXS', {
     email: /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/,
+    multiple_email:/^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([,_](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$/,
     number: /[0-9]/,
     alphabet: /^[A-Za-z ][A-Za-z ]*$/,
     phone: /^[0-9]{10}$/,

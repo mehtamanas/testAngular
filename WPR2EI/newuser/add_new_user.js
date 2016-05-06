@@ -9,7 +9,7 @@ var UserPopUpController = function ($scope, $state, $modalInstance, COUNTRIES, $
     $scope.cityList = ['Kolkata'];
     $scope.stateList = ['West Bengal'];
     $scope.Organization = $cookieStore.get('orgID');
-    $scope.emailRegex = PATTERNREGEXS.email;
+    $scope.emailRegex = PATTERNREGEXS.multiple_email;
 
     $scope.params = {
         first_name: $scope.first_name,
