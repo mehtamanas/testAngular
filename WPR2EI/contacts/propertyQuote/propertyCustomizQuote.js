@@ -578,8 +578,9 @@
         $scope.taxes = response.data;
        
         $scope.govchargeList = _.filter($scope.taxes, { 'category_type_name': 'Government Charges' });
-        $cookieStore.put("GovermentCharge", $scope.govchargeList);
-            $scope.otherchargeList = _.filter($scope.taxes, { 'category_type_name': 'Other Charges' });
+        $cookieStore.put("GovermentChargeList", $scope.govchargeList[0]);
+        $scope.otherchargeList = _.filter($scope.taxes, { 'category_type_name': 'Other Charges' });
+        $cookieStore.put("OtherChargeList", $scope.otherchargeList[0]);
      
         
         $scope.otherChargesCalculations();
@@ -699,13 +700,15 @@
                 otherChargeIntermediateTotal = parseFloat(otherChargeIntermediateTotal) + parseFloat(per_prevttl);
                 $scope.otherChargesAfterCalculation.push({ name: $scope.otherchargeList[0].chargeList[i].charge_name_type, value: parseFloat(per_prevttl) });
             }
-            else if ($scope.otherchargeList[0].chargeList[i].charge_type == "Per Sq") {
+            else if ($scope.otherchargeList[0].chargeList[i].charge_type == "PSF") {
                 var perSqr_basic = $scope.property_Details.salableArea * (parseFloat($scope.otherchargeList[0].chargeList[i].charge_percentage));
                 otherChargeIntermediateTotal = parseFloat(otherChargeIntermediateTotal) + parseFloat(perSqr_basic);
                 $scope.otherChargesAfterCalculation.push({ name: $scope.otherchargeList[0].chargeList[i].charge_name_type, value: parseFloat(perSqr_basic) });
             }
-            $cookieStore.put('otherCharges', $scope.otherChargesAfterCalculation);
+           
         }
+
+        $cookieStore.put('otherCharges', $scope.otherChargesAfterCalculation);
 
 
         TotalValueOfOtherCharges = 0;
@@ -798,7 +801,7 @@
 
     $scope.addNew = function () {
 
-        $state.go('app.property_CustomizDue');
+        
         // Description and Date Code// 
         var fromDate = moment($scope.fromdate, "DD/MM/YYYY")._d;
         $scope.property_fromDate = moment(fromDate).format('DD/MM/YYYY');
@@ -810,6 +813,8 @@
         $cookieStore.put('propertyDescription', $scope.description);
         $cookieStore.put('propertyFromDate', $scope.property_fromDate);
         $cookieStore.put('propertyEndDate', $scope.property_endDate);
+
+        $state.go('app.property_CustomizDue');
     }
 
 
