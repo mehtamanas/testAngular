@@ -15,23 +15,23 @@ angular.module('project', [])
             controller: 'ProjectDetailController',
             title: 'Projects Details'
         })
-         .state('app.contactDemandList', {
-             url: '/project/contactDemandList',
-             templateUrl: 'projects/demand_letter/contactList.html',
-             controller: 'contactListCtrl',
-             title: 'Contact List'
+         .state('app.generateDemandLetter', {
+             url: '/project/DemandLetter?id',
+             templateUrl: 'projects/demand_letter/demandLetter.html',
+             controller: 'demandLetterCtrl',
+             title: 'Demand Letter'
          })
-        .state('app.demandLetterTemplate', {
+        .state('app.generateDemandLetterTemplate', {
             url: '/project/demandLetterTemplate',
             templateUrl: 'projects/demand_letter/demandLetterTemplate.html',
-            controller: 'demandLetterTemplateCtrl',
-            title: 'Demand Letter Template'
+            controller:'demandLetterCtrl',
+            title: 'Demand Letter'
         })
          .state('app.demandLetterSend', {
              url: '/project/demandLetterSend',
              templateUrl: 'projects/demand_letter/sendDemandLetter.html',
              controller: 'sendDemandLetterCtrl',
-             title: 'Demand Letter Send',
+             title: 'Demand Letter',
             
              })
 
