@@ -1,6 +1,7 @@
 ﻿angular.module('contacts')
 
-.controller('peopertyQuote', function ($scope, $state, $cookieStore,apiService, $rootScope, $modal) {
+.controller('peopertyQuote',
+function ($scope, $state, $cookieStore, apiService, $rootScope, $modal) {
     console.log('peopertyQuote');
     $rootScope.title = 'Dwellar-peopertyQuotes';
     var orgID = $cookieStore.get('orgID');
@@ -76,7 +77,6 @@
     }
 
 
-
     var floorSelect = function () {
 
         Url = "PropertyQuotes/GetFloor/" + wingDetails.wing_id  + "/"+ towerDetails.tower_id +"/"+ $scope.projectList;
@@ -133,13 +133,9 @@
     }
 
 
-
-
-  
-
     var paymentScheme = function () {
 
-        Url = "Payment/Get?id=" + orgID;
+        Url = "Payment/Get?id=" + $scope.projectList;
         apiService.get(Url).then(function (response) {
             $scope.paymentType = response.data;
 

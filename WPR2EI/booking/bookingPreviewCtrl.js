@@ -38,6 +38,7 @@
                 $scope.contactDiscount = $scope.data.Quote.discount;
 
                 $scope.contactTowerName = $scope.data.FloorDetails.tower_name;
+                $scope.contactFloorNo = $scope.data.FloorDetails.floor_num;
                 $scope.contactUnitNo = $scope.data.FloorDetails.unit_no;
                 $scope.contactCarpetArea = $scope.data.FloorDetails.carpet_area;
                 $scope.contactSaleable = $scope.data.FloorDetails.super_built_up_area;
@@ -46,12 +47,25 @@
                 $scope.contactcTotalConsideration = $scope.data.FloorDetails.total_consideration;
                 $scope.contactcFloorRiseApplicable = $scope.data.FloorDetails.floor_rise_applicable;
                 $scope.contactcServiceTax = [];
+                $scope.quoteGovermentCharge = [];
+                $scope.quoteOtherCharge = [];
                 $scope.sumamount = 0;
                 $scope.sumservice = 0.0;
-                for (i = 0; i < $scope.data.UnitPaymentSchemes.length; i++) {
-                    $scope.contactcServiceTax[i] = { service_tax: $scope.data.UnitPaymentSchemes[i].service_tax, amount: $scope.data.UnitPaymentSchemes[i].amount, due_date: $scope.data.UnitPaymentSchemes[i].due_date, };
+                for (i = 0; i < $scope.data.UnitPaymentSchemes.length; i++)
+                {
+                    $scope.contactcServiceTax[i] = { service_tax: $scope.data.UnitPaymentSchemes[i].service_tax, amount: $scope.data.UnitPaymentSchemes[i].amount, due_date: $scope.data.UnitPaymentSchemes[i].due_date, paymentDescription: $scope.data.UnitPaymentSchemes[i].payment_description, percentage: $scope.data.UnitPaymentSchemes[i].percentage};
                     $scope.sumamount = $scope.sumamount + $scope.data.UnitPaymentSchemes[i].amount;
                     $scope.sumservice = $scope.sumservice + parseFloat($scope.data.UnitPaymentSchemes[i].service_tax);
+                }
+
+                for (i = 0; i < $scope.data.GovernmentCharges.length; i++)
+                {
+                    $scope.quoteGovermentCharge[i] = { govchargeName: $scope.data.GovernmentCharges[i].charge_name, chargeAmount: $scope.data.GovernmentCharges[i].Charge_amount };
+                   
+                }
+                for (i = 0; i < $scope.data.OtherCharges.length; i++) {
+                    $scope.quoteOtherCharge[i] = { otherchargeName: $scope.data.OtherCharges[i].charge_name, otherchargeAmount: $scope.data.OtherCharges[i].Charge_amount };
+
                 }
 
             }, function (error) {
