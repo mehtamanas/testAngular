@@ -3,6 +3,7 @@
 .controller('demandLetterCtrl',
     function ($scope, $state, security, $cookieStore, $rootScope, $modal, $window, $stateParams,auditService, demandLetterService, templateListService) {
 
+        
         var orgID = $cookieStore.get('orgID');
         $rootScope.title = 'Dwellar./SelectClient';
         var loggedUser = $cookieStore.get('loggedUserInfo');
@@ -65,7 +66,7 @@
 
         })
 
-
+        $state.go('app.demandLetter.generateList');
         $scope.selectContact = function (contact) {
             if (!contact.isSelected) {
                 contact.isSelected = true;
@@ -82,11 +83,12 @@
 
         };
 
-
-        $scope.chooseTemplate = function () {
-            $state.go('app.generateDemandLetterTemplate');
+        $scope.goToTemplate = function () {
+            $state.go('app.demandLetter.generateTemplate');
         }
 
+        //Select Template
+        
         $scope.editorOption = {
             messages: {
                 insertHtml: "Insert Variable"
@@ -151,17 +153,9 @@
         }
 
 
-        $scope.next = function () {
+        $scope.goToSave = function () {
             if ($scope.params.bodyText != null) {
-                var postData = {
-                    template: $scope.params.bodyText,
-                    template_id: $scope.params.template,
-                    subject: $scope.params.subject,
-                    document_type_id: "6978399d-7ee7-42a6-85dd-6fec5b7312c2"
-                }
-                window.localStorage.setItem("emailAddTemplate", JSON.stringify(postData));
-                AuditCreate();
-                $state.go('app.demandLetterSend');
+                $state.go('app.demandLetter.save');
             }
             else {
                 alert("Enter Description");
@@ -170,10 +164,53 @@
 
         }
 
-        $scope.back = function () {
-            $state.go('app.generateDemandLetter');
+        $scope.goToList = function () {
+            $state.go('app.demandLetter.generateList');
         }
 
+
+        //save Demand letter
+
+        $scope.sendDemandLetter = function () {
+            var letterDetails = [];
+
+            for (var i in $scope.totalContact) {
+
+                letterDetails.push({ 'client_id': $scope.totalContact[i], 'template_id': demandLetterTemplate.template_id, 'template': demandLetterTemplate.template, 'subject': demandLetterTemplate.subject, 'project_id': $scope.project_id, 'user_id': $cookieStore.get('userId'), 'organization_id': $cookieStore.get('orgID'), 'payment_detail_scheme_id': $scope.PaymentId, })
+                apiService.post('Template/ClientDemandLetterMapping', letterDetails).then(function (response) {
+                    var SessionData = response.data;
+                    $scope.openSucessfullPopup();
+                },
+
+            function (error) {
+            });
+
+
+            }
+        }
+
+        $scope.addNew = function (isValid) {
+            $scope.showValid = true;
+            if (isValid) {
+                $scope.sendDemandLetter();
+                $scope.showValid = false;
+
+            }
+
+        }
+
+        $scope.openSucessfullPopup = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/demand_letter/successfull/sendSuccessful.html',
+                backdrop: 'static',
+                controller: sendSuccessfulCtrl,
+                size: 'lg',
+                resolve: { items: { title: "Demand Letter" } }
+
+            });
+            $rootScope.$broadcast('REFRESH1', 'EmailTemplateGrid');
+        }
 
 
         //Audit log start															

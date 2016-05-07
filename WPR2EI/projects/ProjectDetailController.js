@@ -2042,7 +2042,7 @@ angular.module('project')
         }
 
         $scope.sendDemandLetter = function (id) {
-            $state.go('app.generateDemandLetter', { id: id });
+            $state.go('app.demandLetter', { id: id });
         }
         $scope.completePayment = function (id) {
 
