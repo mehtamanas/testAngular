@@ -176,6 +176,11 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             $scope.showProgress = false;
             $scope.finalpost();
         }
+        else if(uploader_done == true && uploader1_done == false && uploader2_done == false && uploader3_done == false && uploader4_done == false && uploader5_done == false) 
+        {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
 
     };
 
@@ -191,6 +196,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             $scope.showProgress = false;
             $scope.finalpost();
         }
+        else if (uploader_done == false && uploader1_done == true && uploader2_done == false && uploader3_done == false && uploader4_done == false && uploader5_done == false) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
 
     // CALLBACKS
@@ -200,6 +209,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         $scope.media_url3 = response[0].Location;
         uploader2_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+        else if (uploader_done == false && uploader1_done == false && uploader2_done == true && uploader3_done == false && uploader4_done == false && uploader5_done == false) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -217,6 +230,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
             $scope.showProgress = false;
             $scope.finalpost();
         }
+        else if (uploader_done == false && uploader1_done == false && uploader2_done == false && uploader3_done == true && uploader4_done == false && uploader5_done == false) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
     };
     uploader4.onSuccessItem = function (fileItem, response, status, headers) {
         // post image upload call the below api to update the database
@@ -224,6 +241,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         $scope.media_url_home_page_background = response[0].Location;
         uploader4_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+        else if (uploader_done == false && uploader1_done == false && uploader2_done == false && uploader3_done == false && uploader4_done == true && uploader5_done == false) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
@@ -235,6 +256,10 @@ var ProjectPopUpController = function ($scope, $state, $cookieStore, $window,api
         $scope.media_url_video = response[0].Location;
         uploader5_done = true;
         if (uploader_done == true && uploader1_done == true && uploader2_done == true && uploader3_done == true && uploader4_done == true && uploader5_done == true) {
+            $scope.showProgress = false;
+            $scope.finalpost();
+        }
+        else if (uploader_done == false && uploader1_done == false && uploader2_done == false && uploader3_done == false && uploader4_done == false && uploader5_done == true) {
             $scope.showProgress = false;
             $scope.finalpost();
         }
