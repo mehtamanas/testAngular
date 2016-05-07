@@ -132,7 +132,7 @@
                    {
                    field: "Payment_status",
                    title: "STATUS",
-
+                   template: '<span id="#= Payment_status #"></span>',
                    attributes: {
                        "class": "UseHand",
                        "style": "text-align:center"
@@ -158,6 +158,8 @@
             $state.go('app.confirmBooking', { bookingId: d.booking_id,quoteId:d.quote_id});
         
         };
+
+       
 
     }
 );
