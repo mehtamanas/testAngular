@@ -25,20 +25,17 @@
                         <span class="capt">{{organizationAddress}}</span><br />
                         <span class="capt">{{organizationEmail}}</span><br />
                         <span class="capt">{{organizationPhone_no}}</span><br />
-                      
-
-
                     </div>
 
                 </div>
                 <!--options dropdown-->
                 <div class="col-md-12  ">
-                    <div class="quote-bold">
+                    <div >
                         <div class="col-md-3 contact_quotes">
-                            <span>ST No:</span> <span class="upper">{{organizationService_tax_no}}</span>
+                            <span class="quote-bold">ST No:</span> <span>{{organizationService_tax_no}}</span>
                         </div>
                         <div class="col-md-3 contact_quotes">
-                            <span>PAN No:</span> <span class="upper">{{organizationPan_no}}</span>
+                            <span class="quote-bold">PAN No:</span> <span>{{organizationPan_no}}</span>
                         </div>
                         <!--<div class="col-md-4 contact_quotes">
                             <span class="upper">payments terms :</span> &nbsp;&nbsp;&nbsp;<span class="upper per_box">100 % Advance</span>
@@ -51,8 +48,8 @@
                     <div style="margin-top:2%">
                         <div class="col-md-6 contact_quotes">
                             <h5 class="capt"><b>{{contactName}}</b></h5>
-                            <span class="capt">{{contactStreet1}},{{contactStreet2}} </span><br>
-                            <p class="capt "> {{contactCity}},{{contactStateName}},{{contactZipcode}}</p>
+                            <span class="capt">{{contactStreet1}} {{contactStreet2}} </span><br>
+                            <p class="capt "> {{contactCity}} {{contactStateName}} {{contactZipcode}}</p>
                         </div>
                         <div class="col-md-6 contact_quotes">
                             <span>Estimate No.</span>
@@ -90,32 +87,6 @@
                                         <td><span class="">{{payment.due_date | date:'dd/MM/yyyy'}}</span></td><!--<input kendo-date-picker class=" cstm_height cxo-f1" data-ng-model="amount[$index].due_date" /></span></td>-->
                                         
                                     </tr>
-
-                                    <!--<tr class="quote-bold">
-                                        <td><span class="">Current Due</span></td>
-                                        <td><span class="">20%</span></td>
-                                        <td><span class="">{{payment.amount}}</span></td>
-                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
-                                        <td><span class=""></span></td>
-                                        
-
-                                    </tr>
-                                    <tr class="quote-bold">
-                                        <td><span class="">Due on Completion Of Super Structure</span></td>
-                                        <td><span class="">20%</span></td>
-                                        <td><span class="">{{payment.amount}}</span></td>
-                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
-                                        <td><span class=""></span></td>
-
-                                    </tr>
-                                    <tr class="quote-bold">
-                                        <td><span class=""> Due On Possession</span></td>
-                                        <td><span class="">20%</span></td>
-                                        <td><span class="">{{payment.amount}}</span></td>
-                                        <td><span class="">{{payment.service_tax | number:2}}</span></td>
-                                        <td><span class=""></span></td>
-
-                                    </tr>-->
                                     <tr class="quote-bold">
                                         <td><span class="">Total</span></td>
                                         <td><span class="">100%</span></td>
@@ -246,17 +217,17 @@
                 </div>
             </div>
             <hr class="custom_hr">
-            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
-                <button class="btn organization-btn" style="float:left" ng-show="bookingId==null" id="campaign_save" ng-click="bookNow()">
+            <div class="modal-btn-wrap clearfix">
+                <button class="btn btn-primary" style="float:left" ng-show="bookingId==null" id="campaign_save" ng-click="bookNow()">
                   Book Now
                 </button>
-                <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="bookingId==null" type="button" ng-click="cancel()">
+                <button class="btn odd_btn1" style="margin-left:3px" id="campaign_cancel" ng-show="bookingId==null" type="button" ng-click="cancel()">
                   Cancel
                 </button>
-                <button class="btn organization-btn" style="float:left" id="campaign_save" ng-show="quoteId!=null && bookingId!=null">
+                <button class="btn btn-primary" style="float:left" id="campaign_save" ng-show="quoteId!=null && bookingId!=null">
                  Confirm Booking
                 </button>
-                <button class="btn campaign-container-btn" id="campaign_cancel" ng-show="quoteId!=null && bookingId!=null" type="button">
+                <button class="btn odd_btn1" style="margin-left:3px" id="campaign_cancel" ng-show="quoteId!=null && bookingId!=null" type="button" ng-click="decline()">
                  Decline
                 </button>
             </div>

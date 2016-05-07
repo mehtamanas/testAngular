@@ -1,0 +1,27 @@
+﻿<div class="modal-dialog modal-lg" ng-class="size ? 'modal-' + size : ''" style="width: 100%;padding:0px">
+    <div id="add_new_team" tabindex="-1" role="dialog" style="width:100% !important;" aria-labelledby="myLargeModalLabel">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$dismiss('cancel')"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="contact_addNewNotes">Create New Notes</h4>
+        </div>
+        <form class="form-content edit-organization-setting" name="addNewForm" style="text-align:left" autocomplete="off" novalidate data-ng-submit="addNew(addNewForm.$valid)">
+
+            <div class="clearfix">
+                <div class="">
+                    <label for="">Add Note</label>
+                    <textarea id="booking_decline" rows="10" cols="30" style="width:100%;" data-ng-model="params.description" resizable="true"></textarea>
+                </div>
+                <input ng-show="false" type="file" id="imageBrowser" value="Browse" nv-file-select="" uploader="uploader" />
+            </div>
+            <div class="clearfix" style="margin-top:2%">
+                <div class="modal-btn-wrap clearfix">
+
+                    <button type="submit" class="btn btn-primary ladda-button" ladda="loadingDemo" data-style="expand-right" id="contact_addNewNotes_save"><b>Save</b></button>
+
+                    <button type="button" style="float:none" class="btn odd_btn" ng-click="cancel()" id="contact_addNewNotes_cancel">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

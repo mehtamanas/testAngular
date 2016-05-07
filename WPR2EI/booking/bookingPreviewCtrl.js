@@ -90,7 +90,7 @@
         apiService.post("Booking/Create", postData).then(function (response) {
             var loginSession = response.data;
             $scope.openSucessfullPopup();
-            
+            $state.go('app.bookings');
 
         },
         function (error) {
@@ -100,7 +100,8 @@
                 alert("Network issue");
         });
     }
-    
+
+
     $scope.openSucessfullPopup = function () {
 
         var modalInstance = $modal.open({
@@ -115,4 +116,21 @@
 
 
     $scope.bookingPreviewInit();
+
+    //Decline Popup Code//
+    $scope.openDecline = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'booking/bookingdecline.html',
+            backdrop: 'static',
+            controller: bookingDeclineController,
+            size: 'lg'
+        });
+    };
+
+    $scope.decline = function ()
+    {
+        $scope.openDecline();
+    }
+
 }]);
