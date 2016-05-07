@@ -1058,7 +1058,7 @@ angular.module('contacts')
             columns: [
                 {
                     field: "quote_id",
-                    title: "Quote Id",
+                    title: "QUOTE ID",
 
                     attributes:
                            {
@@ -1068,8 +1068,9 @@ angular.module('contacts')
 
                 }, {
                     field: "Created_date",
-                    title: "Date",
-                    format: '{0:dd/MM/yyyy hh:mm:ss tt}',
+                    title: "DATE",
+                    template: '#= kendo.toString(new Date(Created_date), "dd/MM/yyyy hh:mm tt") #',
+                   // format: '{0:dd/MM/yyyy hh:mm:ss tt}',
                     attributes:
                            {
                                "class": "UseHand",
@@ -1119,7 +1120,7 @@ angular.module('contacts')
 
             //}, 
             {
-                title: "Action",
+                title: "ACTION",
                 template: '<a class="btn btn-primary" ng-click="openBookNow(dataItem)" id="book_now">Book Now</a>',
                 attributes:
                        {
