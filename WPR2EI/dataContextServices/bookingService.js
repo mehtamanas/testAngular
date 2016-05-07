@@ -6,6 +6,9 @@
             return apiService.getWithoutCaching("Booking/GetBookingByQuoteId", { quoteId: quoteId });
         }
 
+        service.getBookingsByContactId = function (contactId) {
+            return apiService.getWithoutCaching("Booking/GetBooking", { Contact_id: contactId })
+        }
         return service;
     }
 ]);

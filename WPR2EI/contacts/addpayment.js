@@ -1,7 +1,7 @@
 ﻿/**
  * Created by dwellarkaruna on 24/10/15.
  */
-var PaymentUpController = function ($scope, $state, $cookieStore, apiService,FileUploader, $modalInstance, $modal, $rootScope,$window) {
+var PaymentUpController = function ($scope, $state, $cookieStore, apiService,FileUploader, $modalInstance,bookingService, $modal, $rootScope,$window) {
     console.log('PaymentUpController');
     $scope.loadingDemo = false;
     $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
@@ -111,9 +111,11 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
             Amount: $scope.params.Amount,
             name: $scope.params.name,
             text: $scope.params.text,
+            payment_schedule_detail_id:$scope.payementScheme,
             datepaid: $scope.params.datepaid,
-            duedate:$scope.params.duedate,
-            booking_id:$scope.params.id,
+            duedate: $scope.params.duedate,
+            payment_term:$scope.params.payment_term,
+            booking_id: $scope.bookingID,
             //duedate: new Date(dDate).toISOString(),
             contact_id: window.sessionStorage.selectedCustomerID,           
         };
@@ -139,8 +141,6 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
                 size: 'sm',
                 resolve: { items: { title: "Payment" } }
             });
-
-
         }
 
        
@@ -152,9 +152,11 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
         Amount: $scope.Amount,
         duedate: $scope.duedate,
         name: $scope.name,
+        payment_term:$scope.payment_term,
         datepaid:$scope.datepaid,
         text:$scope.text,
-        booking_id:$scope.booking_id,
+        booking_id: $scope.booking_id,
+        payment_schedule_detail_id: $scope.payment_schedule_detail_id,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
         //contact_id: window.sessionStorage.selectedCustomerID,
@@ -166,8 +168,10 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
         Amount: $scope.Amount,
         duedate: $scope.duedate,
         name: $scope.name,
+        payment_term: $scope.params.payment_term,
         datepaid: $scope.datepaid,
         text: $scope.text,
+        payment_schedule_detail_id:$scope.payment_schedule_detail_id,
         booking_id: $scope.booking_id,
         organization_id: $cookieStore.get('orgID'),
         user_id: $cookieStore.get('userId'),
@@ -189,23 +193,37 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
             //alert($scope.params.user_id);
         };
 
-
-        Url = "Booking/GetBooking?Contact_id=" + $scope.seletedCustomerId;
-        apiService.get(Url).then(function (response) {
-            $scope.booking = response.data;
-        },
-       function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
-       });
+        $scope.selectPayTerms = function () {
+            $scope.params.payment_term = $scope.payTerms;
+        }
 
         $scope.selectBooking = function () {
-            $scope.params.id = $scope.book1;
+            bookingService.getBookingsByContactId($scope.seletedCustomerId).then(function (response) {
+                $scope.booking = response.data;
+            
+        })
         };
 
 
+        $scope.selectBookingScheme = function () {
+
+            Url = "Booking/GetSchemeTerms/" + $scope.bookingID;
+            apiService.get(Url).then(function (response) {
+                $scope.bookingScheme = response.data;
+            },
+           function (error) {
+               if (error.status === 400)
+                   alert(error.data.Message);
+               else
+                   alert("Network issue");
+           });
+        }
+
+        
+        $scope.selectPayementScheme = function () {
+            $scope.payementScheme = $scope.payementScheme;
+        }
+       
 
         $scope.addNewPayment = function (isValid)
         {
@@ -221,5 +239,5 @@ var PaymentUpController = function ($scope, $state, $cookieStore, apiService,Fil
             }
 
         }
-
+        $scope.selectBooking();
 };
