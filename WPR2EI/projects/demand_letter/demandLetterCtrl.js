@@ -2,8 +2,7 @@
 
 .controller('demandLetterCtrl',
     function ($scope, $state, security, $cookieStore, $rootScope, $modal, $window, $stateParams,auditService, demandLetterService, templateListService) {
-
-        
+               
         var orgID = $cookieStore.get('orgID');
         $rootScope.title = 'Dwellar./SelectClient';
         var loggedUser = $cookieStore.get('loggedUserInfo');
@@ -66,7 +65,8 @@
 
         })
 
-        $state.go('app.demandLetter.generateList');
+        $scope.goToList();//onload to go list
+        
         $scope.selectContact = function (contact) {
             if (!contact.isSelected) {
                 contact.isSelected = true;
@@ -85,6 +85,10 @@
 
         $scope.goToTemplate = function () {
             $state.go('app.demandLetter.generateTemplate');
+        }
+
+        $scope.cancel = function () {
+
         }
 
         //Select Template
@@ -228,19 +232,7 @@
                 User_ID: $cookieStore.get('userId')
             };
 
-        AuditCreate = function (param) {
-            auditService.saveAuditLog(param).then(function (response) {
-                var loginSession = response.data;
-            },
-       function (error) {
-           if (error.status === 400)
-               alert(error.data.Message);
-           else
-               alert("Network issue");
-       });
-        };
-
-        AuditCreate($scope.params);
+        auditService.saveAuditLog(params);
 
         //Audit log end
 
