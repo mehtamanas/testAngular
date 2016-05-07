@@ -55,7 +55,7 @@
 
    }
 
-        $scope.openSucessfullPopup = function () {
+   $scope.openSucessfullPopup = function () {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'projects/demand_letter/successfull/sendSuccessful.html',
