@@ -112,15 +112,15 @@
                        "style": "text-align:center"
                    }
                }, 
+               {
+                   field: "Payment_status",
+                   title: "PAYMENT",
+                   attributes: {
+                       "class": "UseHand",
+                       "style": "text-align:center"
+                   }
+               },
                //{
-               //    field: "",
-               //    title: "PAYMENT",
-
-               //    attributes: {
-               //        "class": "UseHand",
-               //        "style": "text-align:center"
-               //    }
-               //}, {
                //    field: "",
                //    title: "AGREEMENT",
 
@@ -130,7 +130,7 @@
                //    }
                    //},
                    {
-                   field: "Payment_status",
+                       field: "Booking_status",
                    title: "STATUS",
                    template: '<span id="#= Payment_status #"></span>',
                    attributes: {
