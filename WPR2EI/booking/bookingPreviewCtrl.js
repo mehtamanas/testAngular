@@ -132,5 +132,30 @@
     {
         $scope.openDecline();
     }
+    $scope.confrim = function ()
+    {
+        var postData = {
+            user_id: $cookieStore.get('userId'),
+            organization_id: $cookieStore.get('orgID'),
+            booking_id: $state.params.bookingId,
+            Booking_status: "confirm",
+           
+
+        };
+
+        apiService.post("Booking/Create", postData).then(function (response) {
+            var loginSession = response.data;
+            $scope.openSucessfullPopup();
+            $state.go('app.bookings');
+
+        },
+        function (error) {
+            if (error.status === 400)
+                alert(error.data.Message);
+            else
+                alert("Network issue");
+        });
+
+    }
 
 }]);
