@@ -515,10 +515,6 @@ angular.module('contacts')
                     model: {
                         fields: {
 
-                            duedate: { type: "date" },
-                            datepaid: { type: "date" }
-
-
                         }
                     }
                 }
@@ -544,6 +540,15 @@ angular.module('contacts')
                 buttonCount: 5
             },
             columns: [{
+                field: "name",
+                title: "Payement Name",
+
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+            }, {
                 field: "Milestone",
                 title: "Milestone",
 
@@ -581,13 +586,11 @@ angular.module('contacts')
 
             }, {
                 field: "datepaid",
-                title: "Pay Date",
-
+                title: "Pay Date",                
                 attributes: {
                     "class": "UseHand",
                     "style": "text-align:center"
                 }
-
             }, {
                 field: "demandletter",
                 title: "Demand Letter",
@@ -597,15 +600,14 @@ angular.module('contacts')
                 }
 
             }, {
-                title: "Action",            
-                field: 'Action',
-                width: '120px',
-                attributes:
-                  {
-                      "class": "UseHand",
-                      "style": "text-align:center"
-                  }
-            },]
+                field: "action",
+                title: "Action",
+                attributes: {
+                    "class": "UseHand",
+                    "style": "text-align:center"
+                }
+
+            }, ]
         };
        
         $scope.TaskGrid = {

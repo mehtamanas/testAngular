@@ -55,19 +55,24 @@
                             </div>
                         </div>
 
-                       
+                        <div class="form-group"
+                             data-ng-class="{ 'has-error' : addNewForm.paymentterms.$invalid && (!addNewForm.paymentterms.$pristine || showValid) && !addNewForm.paymentterms.$focus,
+                                                  'has-success': addNewForm.paymentterms.$valid && !addNewForm.paymentterms.$pristine && !addNewForm.paymentterms.$focus
+                                                 }">
                             <div class="form-group form-bx11-2 ">
                                 <label for="">Payment Terms</label>
-                                <select ng-model="pay1" ng-change="selectpay()" name="paymentterms"
+                                <select ng-model="payTerms" ng-change="selectPayTerms()" name="paymentterms"
                                         class="dropdown form-control" id="contactpayment_paymentType">
                                     <option value="" selected>Select Payment Terms</option>
-                                    <option ng-repeat="pay in payment"
-                                            value="{{pay.id}}">
-                                        {{pay.payment_type1}}
-                                    </option>
+                                    <option value="booking">Booking</option>
+                                    <option value="others">Others</option>
                                 </select>
-                               
+                                <div ng-messages="addNewForm.paymentterms.$error" style="color:maroon" role="alert">
+                                    <div ng-message="required" data-ng-if="addNewForm.paymentterms.$invalid && (!addNewForm.paymentterms.$pristine || showValid) && !addNewForm.paymentterms.$focus">This field should not be empty </div>
+                                    <div ng-message="pattern">Enter valid Payement Terms</div>
+                                </div>
                             </div>
+                        </div>
                         
 
                         <div class="form-group"
@@ -76,8 +81,8 @@
                                                  }">
                             <div class="form-group form-bx11-2 ">
                                 <label for="">Booking Id</label>
-                                <select ng-model="book1" ng-change="selectBooking()" name="booking"
-                                        class="dropdown form-control" id="contactpayment_paymentType">
+                                <select ng-model="bookingID" ng-change="selectBookingScheme()" name="booking"
+                                        class="dropdown form-control" id="contactpayment_paymentType" required>
                                     <option value="" selected>Select Booking Id</option>
                                     <option ng-repeat="book in booking"
                                             value="{{book.id}}">
@@ -86,10 +91,24 @@
                                 </select>
                                 <div ng-messages="addNewForm.booking.$error" style="color:maroon" role="alert">
                                     <div ng-message="required" data-ng-if="addNewForm.booking.$invalid && (!addNewForm.booking.$pristine || showValid) && !addNewForm.booking.$focus">This field should not be empty </div>
-                                    <div ng-message="pattern">Enter valid payment type</div>
+                                    <div ng-message="pattern">Enter valid Booking</div>
                                 </div>
                             </div>
                         </div>
+
+                      
+                            <div class="form-group form-bx11-2 ">
+                                <label for="">Payement Scheme</label>
+                                <select ng-model="payementScheme" ng-change="selectPayementScheme()" name="payementScheme"
+                                        class="dropdown form-control" id="contactpayment_paymentScheme">
+                                    <option value="" selected>Select Payement Scheme</option>
+                                    <option ng-repeat="booking in bookingScheme"
+                                            value="{{booking.GetSchemeTermsID}}">
+                                        {{booking.GetSchemeTerms}}
+                                    </option>                                 
+                                </select>                               
+                            </div>
+                       
                    
                         <div class="form-group form-bx form-bx11 form-bx11-1">
 
@@ -107,34 +126,6 @@
                                 <input kendo-date-picker class="form-control" cstm_height cxo-f1" data-ng-model="params.datepaid" placeholder="Pay Date" />
                             </div>                               
                             </div>
-
-
-                        
-
-                        <div class="clearfix image-upload-container">
-                            <div class="panel panel-success" uploader="uploader" nv-file-over="">
-                                <div class="image-upload-panel">
-                                    <div class="row" ng-hide="uploader.queue.length">
-
-                                        <!--<div class="col-lg-8 col-md-8 col-sm-12 col-xs-4" style="height:100%">
-                                <span class="page-center">Drag And Drop your file here</span>
-                            </div>-->
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="uploadFileName">
-                                <p ng-show="uploader.queue.length">{{uploader.queue[0]._file.name}}</p>
-                            </div>
-                            <label class="custom-file-input" id="addNewImage">
-                                <input type="file" class="image-upload-f btn btn-primary" id="contactadd_uploader1" value="Browse" accept="file/*" nv-file-select="" uploader="uploader" />
-                            </label>
-
-
-
-                        </div>
 
                     </div>
 
