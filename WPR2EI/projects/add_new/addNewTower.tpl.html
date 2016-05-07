@@ -20,7 +20,7 @@
                                                       'has-success': addNewForm.floors.$valid && !addNewForm.floors.$pristine
                                                        }">
                             <div class="form-group form-bx f-unit">
-                                <label for="">How Many Wings Are There in This Tower?</label>
+                                <label for="">How Many Wings Are There in This Tower?<span class="validationStarRed"><sup>*</sup></span></label>
                                 <input type="text" class="form-control" autofocus name="floors" placeholder="Wing No" id="addnewtowerNoOfWing"
                                        data-ng-model="params.no_of_wings"
                                        minlength="1"
@@ -33,7 +33,7 @@
                                 </div>
 
                             </div>
-                            <div class="field-md3 field-req">*</div>
+                           
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                      'has-success': addNewForm.tname.$valid && !addNewForm.tname.$pristine
                                                 }">
                     <div class="form-group form-bx form-bx3-2 ">
-                        <label for="">Enter Tower Name:</label>
+                        <label for="">Enter Tower Name<span class="validationStarRed"><sup>*</sup></span></label>
                         <input type="text" class="form-control" name="tname" placeholder="Tower A" id="addNewTowerName"
                                data-ng-model="params.tower_name"
                                minlength="1"
@@ -58,8 +58,7 @@
                             {{ 'Enter valid Tower Name' | translate }}
                         </div>
 
-                    </div>
-                    <div class="field-md2 field-req">*</div>
+                    </div> 
                 </div>
             </div>
 

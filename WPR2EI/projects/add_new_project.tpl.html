@@ -66,7 +66,7 @@
                                                                  }">
 
                     <div class="form-group form-bx form-bx8">
-                        <label for="">Project Name</label>
+                        <label for="">Project Name <span class="validationStarRed"><sup>*</sup></span></label>
                         <input type="text" class="form-control text-bold" id="addNewProjectName" autofocus name="project_name"
                                placeholder="Project Name"
                                data-ng-model="params.name"
@@ -80,7 +80,7 @@
                             <div ng-message="pattern" id="err_addNewProjectName">Enter valid project name</div>
                         </div>
                     </div>
-                    <div class="field-mdl field-req">*</div>
+                   
                 </div>
 
 
@@ -95,8 +95,8 @@
                                                         'has-success': addNewForm.ProjectNo.$valid && !addNewForm.ProjectNo.$pristine
                                                             }">
                             <div class="form-group form-bx unit-type">
-                                <label for="">Project No</label>
-                                <input type="text" class="form-control" autofocus name="ProjectNo" ng-blur ="confirmation()" id="addNewUnitType"
+                                <label for="">Project No <span class="validationStarRed"><sup>*</sup></span></label>
+                                <input type="text" class="form-control" autofocus name="ProjectNo" ng-blur ="confirmation()" id="addNewProjectNo"
                                        placeholder="Project No"
                                        data-ng-model="params.projectcode"
                                        maxlength="3"
@@ -108,7 +108,7 @@
                                     <div ng-message="pattern" id="err_addNewUnitType">Enter valid value for Confirmation No</div>
                                 </div>
                             </div>
-                            <span class="field-md5 field-req">*</span>
+                           
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
 
                     <div class="form-group form-bx form-bx8">
                         <label for="">Main Unit Configuration </label>
-                        <input type="text" class="form-control text-bold" id="addNewprojectArea" autofocus name="Area"
+                        <input type="text" class="form-control text-bold" id="addNewprojectUnitConfiguration" autofocus name="Area"
                                placeholder="Unit_Configuration"
                                data-ng-model="params.unit_confg"
                                maxlength="100"
@@ -377,8 +377,8 @@
                     </div>
 
                     <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="AddProject_uploader2" value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
-
+                        <input type="file" class="image-upload-f" id="AddProject_uploader2 value="Browse" accept="image/*" nv-file-select="" uploader="uploader2" />
+                
                     </label>
 
                 </div>
@@ -444,7 +444,7 @@
                     </div>
 
                     <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="AddProjectPodium_uploader3" value="Browse" accept="image/*" nv-file-select="" uploader="uploader4" />
+                        <input type="file" class="image-upload-f" id="AddProjectBackground_uploader4" value="Browse" accept="image/*" nv-file-select="" uploader="uploader4" />
                     </label>
 
                 </div>
@@ -477,7 +477,7 @@
                     </div>
 
                     <label class="custom-file-input">
-                        <input type="file" class="image-upload-f" id="AddProjectPodium_uploader3" value="Browse" accept="video/*" nv-file-select="" uploader="uploader5" />
+                        <input type="file" class="image-upload-f" id="AddProjectVideo_uploader5" value="Browse" accept="video/*" nv-file-select="" uploader="uploader5" />
                     </label>
 
                 </div>
@@ -776,15 +776,15 @@
                      ng-style="{ 'width': (uploader.progress+uploader1.progress+uploader2.progress+uploader3.progress++uploader4.progress)/4 + '%' }"></div>
             </div>
 
-            <div class="modal-btn-wrap5 modal-btn-wrap6 clearfix">
-                <div class="btn-f-c">
-                    <button type="submit" class="f-btn ladda-button" ladda="loadingDemo"  data-style="expand-right" id="btn_AddNewProjectSave">
-                        SAVE
+            <div class="modal-btn-wrap clearfix">
+ 
+                    <button type="submit" class="btn btn-primary ladda-button" ladda="loadingDemo"  data-style="expand-right" id="btn_AddNewProjectSave">
+                        Save
                     </button>
-                </div>
-                <div class="btn-f-c">
-                    <button type="button" class="f-btn2" id="btn_AddNewProjectCancel" ng-click="$dismiss('cancel')">CANCEL</button>
-                </div>
+             
+        
+                    <button type="button" class="btn odd_btn1" id="btn_AddNewProjectCancel" ng-click="$dismiss('cancel')">Cancel</button>
+             
             </div>
         </form>
     </div><!-- modal-body ended -->

@@ -17,7 +17,7 @@
                                                  }">
 
                             <div class="form-group form-bx f-unit">
-                                <label for="">How many units are there on this floor?</label>
+                                <label for="">How many units are there on this floor?<span class="validationStarRed"><sup>*</sup></span></label>
                                 <input type="text" autofocus name="floors" class="form-control" id="addNewFloorNoOfUnits"
                                        placeholder="Units "
                                        data-ng-model="params.no_of_units"
@@ -30,7 +30,7 @@
                                     <div ng-message="pattern" id="err_addNewFloorNoOfUnits">Enter valid value for floor number</div>
                                 </div>
                             </div>
-                           <div class="field-md6 field-req">*</div>
+                          
                         </div>
                     </div>
 
@@ -42,7 +42,7 @@
                                                  }">
 
                             <div class="form-group form-bx form-bx3-2 ">
-                                <label for="">Enter floor type name:</label>
+                                <label for="">Enter floor type name<span class="validationStarRed"><sup>*</sup></span></label>
                                 <input type="text" autofocus name="tname" class="form-control" id="addNewFloorName"
                                        placeholder="Floor Name"
                                        data-ng-model="params.unit_name"
@@ -55,7 +55,7 @@
                                     <div ng-message="pattern" id="err_addNewFloorName">Enter valid value for floor name</div>
                                 </div>
                             </div>
-                       <span class="field-md2 field-req">*</span>
+                       
                         </div>
                     </div>
 

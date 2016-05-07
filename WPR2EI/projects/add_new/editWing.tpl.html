@@ -14,7 +14,7 @@
                                                     'has-success': addNewForm.wingname.$valid && !addNewForm.wingname.$pristine
                                                  }">
                     <div class="form-group form-bx form-bx2">
-                        <label for="">Enter Wing Name:</label>
+                        <label for="">Enter Wing Name<span class="validationStarRed"><sup>*</sup></span></label>
                         <input type="text" autofocus name="wingname" class="form-control" id="editWingName"
                                placeholder="Wing Name"
                                data-ng-model="params.wing_name"
@@ -27,7 +27,7 @@
                             <div ng-message="pattern" id="err_editWingName">Enter valid value for wing name</div>
                         </div>
                     </div>
-                    <div class="field-md2 field-req">*</div>
+                   
 
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                                     'has-success': addNewForm.totalfloors.$valid && !addNewForm.totalfloors.$pristine
                                                  }">
                     <div class="form-group form-bx form-bx2">
-                        <label for="">How many floors are there in this wing?</label>
+                        <label for="">How many floors are there in this wing?<span class="validationStarRed"><sup>*</sup></span></label>
                         <input type="text" autofocus name="totalfloors" class="form-control" id="editWingNo"
                                placeholder="How many floors are there"
                                data-ng-model="params.total_no_of_floors"
@@ -52,7 +52,7 @@
                             <div ng-message="pattern" id="err_editWingNo">Enter valid value for Number of Floors </div>
                         </div>
                     </div>
-                    <div class="field-md2 field-req">*</div>
+                  
                 </div>
             </div>
 
@@ -174,7 +174,7 @@
             <!--<a ng-show="showProgress" id="iconEdit" ng-click="CanceUpload()" data-toggle="modal" style="cursor:pointer;align-content:center"><span class="edit-icon"></span></a>-->
             <div class="modal-btn-wrap3 clearfix">
                 <button type="submit" class="btn btn-primary" id="btn_editWing">
-                    <!--<span class="glyphicon glyphicon-upload"></span>--> Save
+                     Save
                 </button>
             </div>
 
