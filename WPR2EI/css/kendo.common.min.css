@@ -2098,6 +2098,7 @@ ul.k-menu-vertical .k-separator, .k-menu .k-menu-group .k-separator {
 .k-grid-header th.k-with-icon .k-link {
     margin-right: 18px;
     text-align: center;
+    text-transform:uppercase;
 }
 
 .k-grid-header th.k-header .k-icon {

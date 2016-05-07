@@ -566,40 +566,47 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="payment">
-                    <div class="tab-content-title tab-content-title-b"> <a data-toggle="modal" ng-click="openNewPaymentSchemePopup()" id="projectDetailPayment" class="btn btn-primary custom-space" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i> New Payment Schemes</a></div>
-                    <div>
-                        <label>Select Payment Scheme: </label>
-                        <select ng-model="paymentSchemeType" ng-change="selectPaymentScheme()" id="projectPaymentType">
-                            <option ng-repeat="payment in orgpayment" value={{payment.p_sch_id}}>{{payment.type_of_payment}}</option>
-                        </select>
+                <div class="leads_group" id="payment"  style="background:#EFEFEF">
+                    <div class="tab-content-title tab-content-title-b" >
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <a data-toggle=" modal" ng-click="openNewPaymentSchemePopup()" id="projectDetailPayment" class="btn btn-primary custom-space" style="cursor:pointer"><i class="fa fa-plus" aria-hidden="true"></i>New Payment Schemes</a>
+                            </div>
+                            <div class="form-group" style="float:right">
+                                <span style="font-size: 15px;color: #4f4f4f;"> Select Payment Scheme: </span>
+                                <select ng-model="paymentSchemeType" ng-change="selectPaymentScheme()" id="projectPaymentType" class="form-control actions-wrap custom-space" style="height:21px !important;margin-top: 9px;width:250px;border:none" >
+                                    <option ng-repeat="payment in orgpayment" value={{payment.p_sch_id}}>{{payment.type_of_payment}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="payment-list-wrap toggle-on" ng-repeat="user in orgpayment track by $index">
+                            <div class="payment-list-head clearfix">
+                                <div class="pull-left payment-list-title">
+                                    {{user.type_of_payment}}<a data-toggle="modal"></a>
+                                    <a ng-click="openEditPaymentSchemePopup(user.PaymentScheduleDetailsList[0].payment_schedule_id)" style="cursor:pointer" data-toggle="modal"><span class="edit-icon"></span></a>
+                                </div>
+                                <div class="pull-right">
+                                    <label ng-click="toggleClass($index)">{{isVisible[$index] ? '-' : '+'}}</label>
+                                </div>
+
+                            </div>
+                            <div ng-show="isVisible[$index]" class="payment-list-content">
+                                <div class="payment-list-row clearfix" ng-repeat="sum in user.PaymentScheduleDetailsList">
+                                    <span class="payment-c01">{{sum.description}}</span>
+
+                                    <span class="payment-c02"><a ng-click="demandletterFun(sum.Payment_Schedule_Detail_id)">Send Demand Letter</a>{{sum.percentage}}</span>
+
+                                </div>
+                                <div class="payment-list-row clearfix">
+                                    <span class="payment-c01 payment-c-b">TOTAL</span>
+                                    <span class="payment-c02 payment-c-b">100</span>
+                                </div>
+                            </div>
+                        </div>-->
+                       
                     </div>
-                    <!--<div class="payment-list-wrap toggle-on" ng-repeat="user in orgpayment track by $index">
-                        <div class="payment-list-head clearfix">
-                            <div class="pull-left payment-list-title">
-                                {{user.type_of_payment}}<a data-toggle="modal"></a>
-                                <a ng-click="openEditPaymentSchemePopup(user.PaymentScheduleDetailsList[0].payment_schedule_id)" style="cursor:pointer" data-toggle="modal"><span class="edit-icon"></span></a>
-                            </div>
-                            <div class="pull-right">
-                                <label ng-click="toggleClass($index)">{{isVisible[$index] ? '-' : '+'}}</label>
-                            </div>
-
-                        </div>
-                        <div ng-show="isVisible[$index]" class="payment-list-content">
-                            <div class="payment-list-row clearfix" ng-repeat="sum in user.PaymentScheduleDetailsList">
-                                <span class="payment-c01">{{sum.description}}</span>
-
-                                <span class="payment-c02"><a ng-click="demandletterFun(sum.Payment_Schedule_Detail_id)">Send Demand Letter</a>{{sum.percentage}}</span>
-
-                            </div>
-                            <div class="payment-list-row clearfix">
-                                <span class="payment-c01 payment-c-b">TOTAL</span>
-                                <span class="payment-c02 payment-c-b">100</span>
-                            </div>
-                        </div>
-                    </div>-->
                     <div id="paymentGrid" kendo-grid k-options="paymentGridOptions" selectable="true" k-on-change="paymentGridChange(dataItem )">
-                    </div> 
+                    </div>
                 </div><!-- payment ended -->
 
                 <div class="tab-pane fade" id="gallery">
