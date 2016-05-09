@@ -11,8 +11,10 @@ angular.module('app.guest.login')//to chnage
       })
 
 .controller('SignupBillController',
-    function ($scope, $state, $cookieStore, apiService, $filter, $rootScope, $window) {
+    function ($scope, $state, $cookieStore, apiService, $filter, $rootScope, MONTHS, $window,CARDEXPIRYYEARS) {
         $scope.breadcrumb = 2;
+        $scope.months = MONTHS;
+        $scope.years = CARDEXPIRYYEARS;
         // Init model
         $scope.Sub_Name = $cookieStore.get('Sub_Name');
         $scope.seletedCustomerId = window.sessionStorage.selectedCustomerID;
