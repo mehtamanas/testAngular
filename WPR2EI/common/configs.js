@@ -7,13 +7,13 @@ angular.module('configs', [])
 
 .constant('CONFIGS', {
     baseURL: function () {
-       return 'http://dw-webservices-dev2.azurewebsites.net/';
+        return 'http://webjobsdev2.azurewebsites.net/';
           //return 'http://dwellar-demo2.azurewebsites.net/';
         //  return 'http://dw-webservices-uat.azurewebsites.net/';
         //return 'http://localhost:3979/';
     },
     uploadURL: function () {
-        return 'http://dw-webservices-dev2.azurewebsites.net/MediaElement/upload';
+        return 'http://webjobsdev2.azurewebsites.net/MediaElement/upload';
        // return 'http://dwellar-demo2.azurewebsites.net/MediaElement/upload';
     },
     ipTraceUrl: function () {
