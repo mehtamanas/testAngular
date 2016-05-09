@@ -1,9 +1,13 @@
-﻿angular.module('project')
+﻿(function () {
+    'use strict';
 
-.controller('demandLetterCtrl',
-    function ($scope, $state, security, $cookieStore, $rootScope, $modal, $window, $stateParams,auditService, demandLetterService, templateListService) {
-               
-        var orgID = $cookieStore.get('orgID');
+    angular
+        .module('project')
+        .controller('demandLetterCtrl', demandLetterCtrl);
+
+    demandLetterCtrl.$inject = ['$scope', '$state', 'security', '$cookieStore', '$rootScope', '$modal', '$window', '$stateParams', 'auditService', 'demandLetterService', 'templateListService'];
+
+    function demandLetterCtrl($scope, $state, security, $cookieStore, $rootScope, $modal, $window, $stateParams, auditService, demandLetterService, templateListService) {
         $rootScope.title = 'Dwellar./SelectClient';
         var loggedUser = $cookieStore.get('loggedUserInfo');
         var userID = $cookieStore.get('userId');
@@ -11,6 +15,8 @@
         $scope.contactforDemandLetter = [];
         $scope.params = {};
         var custom_fields = { "{{first_name}}": 'rupa', '{{last_name}}': 'margaj', "{{my_first_name}}": loggedUser.first_name, "{{my_last_name}}": loggedUser.last_name, "{{salutation}}": 'Mr/Mrs' }
+
+        initDemandLetter();
 
         $scope.SelectClientGrid = {
             dataSource: {
@@ -55,18 +61,10 @@
            }, ]
         };
 
-        demandLetterService.getContactForPayment(payment_schedule_id).then(function (res) {
-            $scope.contactInPayScheme = res.data;
-            // Now, find out the users already in the team and mark them
-            angular.forEach($scope.contactInPayScheme, function (existingUser) {
-                existingUser.isSelected = false;
-            })
-        }, function (err) {
 
-        })
 
         $scope.goToList();//onload to go list
-        
+
         $scope.selectContact = function (contact) {
             if (!contact.isSelected) {
                 contact.isSelected = true;
@@ -92,7 +90,7 @@
         }
 
         //Select Template
-        
+
         $scope.editorOption = {
             messages: {
                 insertHtml: "Insert Variable"
@@ -141,9 +139,7 @@
             ],
         }
 
-        templateListService.getAllTemplates(orgID).then(function (response) {
-            $scope.params.templateList = response.data;
-        });
+
 
         $scope.selectTemplate = function () {
 
@@ -218,23 +214,38 @@
 
 
         //Audit log start															
-        $scope.params ={
-                device_os: $cookieStore.get('Device_os'),
-                device_type: $cookieStore.get('Device'),
-                module_id: "Project",
-                action_id: "Generated Demand Letter",
-                details: "Generate Demand Letter",
-                application: "angular",
-                browser: $cookieStore.get('browser'),
-                ip_address: $cookieStore.get('IP_Address'),
-                location: $cookieStore.get('Location'),
-                organization_id: $cookieStore.get('orgID'),
-                User_ID: $cookieStore.get('userId')
-            };
+        $scope.params = {
+            device_os: $cookieStore.get('Device_os'),
+            device_type: $cookieStore.get('Device'),
+            module_id: "Project",
+            action_id: "Generated Demand Letter",
+            details: "Generate Demand Letter",
+            application: "angular",
+            browser: $cookieStore.get('browser'),
+            ip_address: $cookieStore.get('IP_Address'),
+            location: $cookieStore.get('Location'),
+            organization_id: $cookieStore.get('orgID'),
+            User_ID: $cookieStore.get('userId')
+        };
 
         auditService.saveAuditLog(params);
 
         //Audit log end
 
+        function initDemandLetter() {
+            demandLetterService.getContactForPayment(payment_schedule_id).then(function (res) {
+                $scope.contactInPayScheme = res.data;
+                // Now, find out the users already in the team and mark them
+                angular.forEach($scope.contactInPayScheme, function (existingUser) {
+                    existingUser.isSelected = false;
+                })
+            }, function (err) {
+
+            })
+
+            templateListService.getAllTemplates(orgID).then(function (response) {
+                $scope.params.templateList = response.data;
+            });
+        }
     }
-);
+})();
