@@ -5630,7 +5630,7 @@ ul.state-bar {
             font-size: 20px;
     }
 
-        ul.state-bar li:not(:first-child):before {
+        /*ul.state-bar li:not(:first-child):before {
               content: "";
                 display: inline-block;
                 width: 222px;
@@ -5639,6 +5639,16 @@ ul.state-bar {
                 border-bottom: solid 2px #cccccc;
                 position: relative;
                 top: -4px;
+        }*/
+        ul.state-bar li:not(:first-child):before {
+            content: "";
+            display: inline-block;
+            width: 63px;
+            height: 0;
+            margin: 0 15px 0 5px;
+            border-bottom: solid 2px #cccccc;
+            position: relative;
+            top: -4px;
         }
        
 
