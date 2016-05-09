@@ -5593,6 +5593,7 @@ form.callback {
             border-bottom: solid 1px #979797;
         }
 
+
         .signup ul.state-bar li:after {
             width: 22px;
             height: 22px;
@@ -5625,25 +5626,26 @@ ul.state-bar {
         height: 40px;
         line-height: 40px;
         display: inline-block;
-        padding-right: 50px;
+        /*padding-right: 50px;*/
+            font-size: 20px;
     }
 
         ul.state-bar li:not(:first-child):before {
-            content: "";
-            display: inline-block;
-            width: 50px;
-            height: 0;
-            margin: 0 15px 0 5px;
-            border-bottom: solid 1px #cccccc;
-            position: relative;
-            top: -4px;
+              content: "";
+                display: inline-block;
+                width: 222px;
+                height: 0;
+                margin: 0 15px 0 5px;
+                border-bottom: solid 2px #cccccc;
+                position: relative;
+                top: -4px;
         }
+       
 
         ul.state-bar li:after {
             content: "";
             width: 40px;
             height: 40px;
-            background: url("../assets/icons/sprites.png") -123px 1px no-repeat;
             display: inline-block;
             position: absolute;
             top: 0;
@@ -6159,7 +6161,7 @@ select {
 
 /*Notification start*/
 .normal-message {
-    color: #444445 !important;
+    color: #BEBECA !important;
     font-size: 0.9em;
     font-style: italic;
     display: block;
@@ -10367,7 +10369,7 @@ md-radio-button {
 }
 @media only screen and (min-width :1345px) {
 .custom_class {
-        width: 70% !important;
+        width: 62% !important;
     }
 
    
@@ -10380,7 +10382,7 @@ md-radio-button {
 }
 @media only screen and (max-width :1550px) {
 .custom_class {
-        width: 60% !important;
+        width: 49% !important;
     }
 .custom_class_1 {
     width: 82% !important;
@@ -10666,7 +10668,7 @@ md-input-container label:not(.md-container-ignore) {
 .validationStarRed {
     color: red;
     margin-left: 5px;
-    font-size: 10px;
+    font-size: 14px;
 }
 #contact_followup{
     color: #ffffff;
@@ -11338,5 +11340,250 @@ input[placeholder], [placeholder], *[placeholder] {
 }
 .custom-space{
         margin-left: 15px;
+}
+
+/*signup pages*/
+.col:not(:first-child),.col:not(:last-child) {
+  padding-right:7px;
+  padding-left:7px;
+}
+
+#content-signup{
+    margin: 0;
+    padding: 35px 0 50px;
+}
+
+.E1 
+{
+    background-color:#46C1C1;
+    color:#fff;
+    text-align:center;
+    padding: 15px 5px 16px 5px;
+}
+.E1 p{
+    font-size:15px;
+    font-weight:600;
+}
+
+.E2 
+{
+    background-color:#3C8CB8;
+    color:#fff;
+    text-align:center;
+    padding: 15px 5px 16px 5px;
+}
+.E2 p{
+    font-size:15px;
+    font-weight:600;
+}
+
+
+
+.E3 
+{
+    background-color:#389C9D;
+    color:#fff;
+    text-align:center;
+    padding: 15px 5px 16px 5px;
+}
+.E3 p{
+    font-size:15px;
+    font-weight:600;
+}
+.select-plan{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #a0a0a0;
+    font-size:20px;
+}
+ul#menu li {
+        display: inline-block;    
+         padding: 5px 20px 5px 20px;
+}
+.head01{
+    color:#46C1C1;
+    font-weight:900;
+    font-size:22px;
+    margin-bottom: -5px;
+    font-family:lato;
+}
+.head01sub{
+    color:#46C1C1;
+    font-weight:600;
+    font-size: 10px;
+}
+.head02{
+    color:#3C8CB8;
+    font-weight:900;
+    font-size:22px;
+    margin-bottom: -5px;
+    font-family:lato;
+}
+.head02sub{
+    color:#3C8CB8;
+    font-weight:600;
+    font-size: 10px;
+}
+.head03{
+    color:#389C9D;
+    font-weight:900;
+    font-size:22px;
+    margin-bottom: -5px;
+    font-family:lato;
+}
+.head03sub{
+    color:#389C9D;
+    font-weight:600;
+    font-size: 10px;
+}
+.featuers{
+    background: #fff;
+    padding: 25px;
+}
+.fInfo{
+        padding-left: 37px;
+}
+.fInfo ul li{
+        font-size:15px;
+        padding-top:15px;
+        color: #a0a0a0;
+}
+.planprice{
+        padding: 10px 20px 10px 20px;
+        color:#46C1C1;
+        font-size: 35px;
+}
+.planprice02{
+        padding: 10px 20px 10px 20px;
+        color:#3C8CB8;
+        font-size: 35px;
+}
+.planprice03{
+        padding: 10px 20px 10px 20px;
+        color:#389C9D;
+        font-size: 35px;
+}
+.buynow{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.featurelist{
+    padding-left: 16px;
+}
+.featurelist ul li{
+    font-size:15px;
+    padding-top:15px;
+    color: #a0a0a0;
+    list-style:none;
+}
+.listview li{
+    color: #289ff1 !important;
+}
+
+.arrow_box {
+	position: relative;
+	border: 6px solid #fff;
+}
+.arrow_box:after, .arrow_box:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-top-color: #fff;
+	border-width:21px;
+	margin-left: -36px;
+}
+.lable-signup{
+    font-weight: 600;
+    color: #6F6F6F;
+}
+.form-body{
+    background:#fff;
+    padding:50px;
+
+}
+.form-body01{
+    background:#fff;
+    padding: 15px 50px 15px 50px;
+
+}
+.space{
+    margin-bottom:20px;
+}
+#triangle-down::after {
+	width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11px solid #fff;
+    top: 100%;
+    left: 80%;
+}
+#triangle-down2::after {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11px solid #fff;
+    top: 100%;
+    left: 38%;
+}
+#triangle-down1::after {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11px solid #fff;
+    top: 100%;
+    left: 86%;
+}
+ul#Org li {
+        display: inline-block;    
+        padding-right: 30px;
+}
+.control-label, .form-horizontal .form-group.has-error .control-label, .form-horizontal .form-group .has-error .control-label, .form-horizontal .form-group.has-success .control-label, .form-horizontal .form-group .has-success .control-label {
+    color: #3a3a3a;
+    font-size: 14px !important;
+    margin: 0 0 10px;
+    text-align: left;
+    line-height: 1.2;
+    display: block;
+}
+tr#clean td{
+    border:none;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+tr#cleanhead th{
+    border:none;
+    background: #c5c5c5;
+}
+.bill-head{
+    font-weight:600;
+    font-size:16px;
+    color:#505050;
+}
+.bill-head01 {
+    font-weight: bold;
+    color:#505050;
+    font-size: 20px;
+}
+.price-pos{
+text-align: center;
+}
+.payment-form{
+    background: #fff;
+    margin-top: 5px;
+}
+.step-active{
+    color: #289ff1;
 }
 

@@ -1,0 +1,267 @@
+﻿
+<header class="navbar navbar-default navbar-fixed-top header2">
+    <div class="container">
+
+        <div class="pull-left logo">
+            <!--<a href="/">-->
+            <img src="assets/images/logo.png" alt="" />
+            <!--</a>-->
+        </div><!-- logo ended -->
+        <!--<div class="pull-right reg-wrap">
+            <a href="#" class="h-btn">SIGN UP</a>
+            <a href="#" class="h-btn">LOGIN</a>
+        </div>-->
+        <!-- reg-btn ended -->
+
+        <nav class="navbar navbar-default pull-right main-navbar">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!--<!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li id="bill_home"><a href="#">HOME</a></li>
+                    <li id="bill_features"><a href="#">FEATURES</a></li>
+                    <li id="bill_plans"><a href="#">PLANS</a></li>
+                    <li id="bill_builder"><a ui-sref="builder_directory">BUILDER DIRECTORY</a></li>
+                    <li id="bill_contact"><a href="#">CONTACT US</a></li>
+                </ul>
+            </div>-->
+
+        </nav><!-- main-navbar ended -->
+
+    </div>
+    <style>
+        .tbody{
+            color:#505050;
+        }
+    </style>
+</header>
+<div style="margin-top: 60px;background: #fff;">
+    <div class="container">
+        <div class="pull-left">
+            <ul class="state-bar">
+                <li class="step-active">Personal Info</li>
+                <li class="step-active">Organization</li>
+                <li id="triangle-down1" class="step-active">Billing</li>
+                <li>Complete</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<section id="content-signup" class="signup-wrap">
+    <div class="container form-body01">
+        <div class="table-responsive">
+            <table class="table" style="margin-top: 25px;">
+                <thead>
+                    <tr id="cleanhead">
+                        <th>No</th>
+                        <th>PRODUCTS</th>
+                        <th>QTY</th>
+                        <th>RATE</th>
+                        <th class="price-pos">AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="clean" style="border-bottom: 1px solid #c5c5c5;">
+                        <td class="bill-head">1.</td>
+                        <!--products-->
+                        <td><span class="bill-head">ENTERPRISE E1</span><br/>
+                        <p>Pre-Sales, Interactive 3D Presentation, Apps</p>
+                        <span>Dwellar Enterprise - Annual Subscription</span><br/>
+                        <small>(10 Projects, 50 Users)</small>
+                        </td>
+                        <!--end products-->
+                        <td class="bill-head">1</td>
+                        <td class="bill-head ">50,000.00</td>
+                        <td class="bill-head price-pos">50,000.00</td>
+                    </tr>
+                    <!--taxes-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1"></td>
+                        <td>Service Tax &#64; 14%</td>
+                        <td class="bill-head price-pos">70,000.00</td>
+                    </tr>
+                    <tr id="clean">
+                        <td></td>
+                        <td></td>
+                        <td colspan="1"  style=" border-bottom: 1px solid #ddd;"></td>
+                        <td style=" border-bottom: 1px solid #ddd;">Swach Bharat Cess &#64; 0.5%</td>
+                        <td class="bill-head price-pos" style=" border-bottom: 1px solid #ddd;">2,500.00</td>
+                    </tr>
+                    <!--end taxes-->
+                    <!--Sub Total-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="1"></td>
+                        <td class="bill-head01 ">Sub Total</td>
+                        <td class="bill-head01 price-pos">&#8377; 5,72,500.00</td>
+                    </tr>
+                    <tr id="clean">
+                        <td></td>
+                        <td></td>
+                        <td colspan="1"></td>
+                        <td>Offer#1 0.5% OFF </td>
+                        <td class="bill-head price-pos">- 28,625.00</td>
+                    </tr>
+                    <tr id="clean">
+                        <td></td>
+                        <td></td>
+                        <td colspan="1" style=" border-bottom: 1px solid #ddd;"></td>
+                        <td style=" border-bottom: 1px solid #ddd;">Additional Discount </td>
+                        <td class="bill-head price-pos" style=" border-bottom: 1px solid #ddd;">- 20,000.00</td>
+                    </tr>
+                    <!--end Sub Total-->
+                    <!--Grand Total-->
+                  
+                    <tr id="clean">
+                        <td></td>
+                        <td></td>
+                        <td colspan="1" ></td>
+                        <td class="bill-head01">TOTAL </td>
+                        <td class="bill-head01 price-pos">&#8377; 5,23,875.00</td>
+                    </tr>
+                    <!--end Grand Total-->
+                    
+                </tbody>
+            </table>
+        </div>
+       
+    
+        </div>
+    <div class="container form-body01 payment-form">
+        <h4 style="color:#ADADAD">Select Card Type</h4>
+          <form name="newForm" class="form-horizontal" autocomplete="off" novalidate
+              data-ng-submit="addPersonalInfo(newForm.$valid)">
+        <div class="form-group">
+        <div class="col-md-12">
+            <ul id="Org">
+                <li>
+                    <md-radio-group ng-model="radioValue">
+                        <md-radio-button type="radio" id="debitCard" name="debit" value="1" class="md-primary"  md-checked>Debit Card</md-radio-button>
+                    </md-radio-group>
+                </li>
+                <li>
+                    <md-radio-group ng-model="radioValue">
+                        <md-radio-button type="radio" id="creditCard" name="credit" value="2"  class="md-primary">Credit Card</md-radio-button>
+                    </md-radio-group>
+                </li>
+            </ul>
+            </div>
+        <div class="col-md-12">
+           
+                <label class="control-label">Card Number <span class="validationStarRed"><sup>*</sup></span></label>
+               
+                    <div class="col-md-6">
+
+                        <label class="label-group">
+                            <input type="text" name="name" autofocus class="form-control" id="cardNumber"required />
+                        </label>
+                    </div>
+                
+            </div>
+        <div class="col-md-12">
+
+            <label class="control-label">Name on Card <span class="validationStarRed"><sup>*</sup></span></label>
+
+            <div class="col-md-6">
+
+                <label class="label-group">
+                    <input type="text" name="name" autofocus class="form-control" id="cardNumber"
+                           required />
+                </label>
+              
+            </div>
+
+        </div>
+        <div class="col-md-12">
+
+            <label class="control-label">CVV No. <span class="validationStarRed"><sup>*</sup></span></label>
+
+            <div class="col-md-2">
+
+                <label class="label-group">
+                    <input type="text" name="CVV" autofocus class="form-control" id="cvvNo" required />
+                </label>
+                
+            </div>
+
+        </div>
+            <div class="col-md-12">
+
+                <label class="control-label" style="color:#ADADAD;">Expiry Date <span class="validationStarRed"><sup>*</sup></span></label>
+
+                <div class="col-md-2">
+
+                    <label class="label-group">
+                        <select  name=country  id="months" class="dropdown form-control" required>
+                            <option value="">Select Months</option>
+                            <option ng-repeat="month in months"
+                                    value="{{month}}">
+                                {{month}}
+                            </option>
+                        </select>
+                    </label>
+
+                </div>
+                <div class="col-md-2" style="margin-left: 15px;margin-right: 15px;">
+
+                    <label class="label-group">
+                        <select name=country  id="year" class="dropdown form-control" required>
+                            <option value="">Select Year</option>
+                            <option ng-repeat="year in years"
+                                    value="{{year}}">
+                                {{year}}
+                            </option>
+                        </select>
+                    </label>
+
+                </div>
+
+           </div>
+            <div class="col-md-12" style="margin-top:15px">
+                <button class="btn btn-primary buy-now" type="button">Proceed Payment</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+</section>
+
+
+
+
+
+
+
+<footer>
+
+    <div id="footer-bottom" class="footer-bottom2">
+        <div class="container">
+
+            <!--<a href="#">Privacy Statement</a> | <a href="#">Site Map</a>-->
+
+            <div class="pull-left copyright">
+                ©Copyright 2016. Dwellar Systems Private Limited. All Rights Reserved.
+
+            </div>
+
+            <div class="pull-right footer-logo">
+                <img src="assets/images/footer-logo.png" alt="" />
+            </div>
+
+        </div>
+    </div>
+</footer>
+
