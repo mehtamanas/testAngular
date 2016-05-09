@@ -550,7 +550,12 @@
                         </div>
                         <div class="col-sm-1"></div>
                         <button class="btn btn-primary custom-space" id="btn_projectDetailInventory" ng-click="towerGrid()"> Generate Inventory</button>
-
+                        <div class="col-lg-1 col-md-1 col-sm-1 " style="width: 120px;">
+                            <select ng-model="leadAction" class="form-control serach_bar_btn sel_action" ng-change="selectBoxPrice()" id="towerGridAction">
+                                <option value='' selected>Action</option>
+                                <option value='box_price'>Box Price</option>
+                            </select>
+                        </div>
                         <!--<btn class="btn btn-generate" ng-click="showTowergrid()">Show Inventory</btn>-->
                     </div>
 

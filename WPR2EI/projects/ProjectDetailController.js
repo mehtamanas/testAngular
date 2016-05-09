@@ -964,8 +964,10 @@ angular.module('project')
                 {
                     //template: "<img height='40px' width='40px' src='#= Project_image #'/>" +
                     //"<span style='padding-left:10px' class='property-photo'> </span>",
-                    template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
-                    title: "",
+                    //template: "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
+                    //title: "",
+                    template: "<input type='checkbox' class='checkbox'  data-id='#= tower_id #', ng-click='check($event,dataItem)' />",
+                    title: "<input id='checkAll', type='checkbox', class='check-box' data-id='#= tower_id #',  ng-click='checkALL(TowerListGrid)' />",
                     width: "60px",
                     attributes: {
                         "class": "UseHand",
@@ -1319,6 +1321,65 @@ angular.module('project')
                 }
             }
         }
+
+        $scope.checkALL = function (e) {
+            if ($('.check-box:checked').length > 0)
+                $('.checkbox').prop('checked', true);
+            else
+                $('.checkbox').prop('checked', false);
+        };
+
+
+        $scope.check = function (e, data) {
+            var allListElements = $(".checkbox").toArray();
+            for (var i in allListElements) { // not all checked
+                if (!allListElements[i].checked) {
+                    $('#checkAll').prop('checked', false);
+                    break;
+                }
+                if (i == allListElements.length - 1) // if all are checked manually
+                    $('#checkAll').prop('checked', true);
+            }
+        }
+
+        $scope.selectBoxPrice=function()
+        {
+            var allGridElements = $("#gridInventory .checkbox").toArray();
+            var allCheckedElement = _.filter(allGridElements, function (o)
+            { return o.checked });
+            allCheckedIds = (_.pluck(allCheckedElement, 'dataset.id'));
+            $cookieStore.remove('checkedIds');
+            $cookieStore.put('checkedIds', allCheckedIds);
+
+            if (allCheckedIds.length > 0) {
+
+                if ($scope.boxAction === "no_action") {
+
+                }
+                else if ($scope.boxAction === "box_price") {
+                    var boxPrice = [];
+                    for (var i in allCheckedIds) {
+                        var Box = {};
+                        Box.project_service_id = allCheckedIds[i];
+                        Box.organization_id = $cookieStore.get('orgID');
+                        boxPrice.push(Box);
+                    }
+                    $cookieStore.put('boxPrice', boxPrice);
+                    $scope.openBoxPrice();
+                }
+            }
+        }
+
+        $scope.openBoxPrice = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'projects/add_new/boxPrice.html',
+                backdrop: 'static',
+                controller: AddBoxPriceController,
+                size: 'lg'
+            });
+        };
+
 
         $scope.chooseActionForService = function () {
             var allGridElements = $("#selectServices .checkbox").toArray();
